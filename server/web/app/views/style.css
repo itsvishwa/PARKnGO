@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #f6ead3;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.left-container {
+  flex: 1;
+  background-color: #f6ead3;
+}
+
+.bg-div {
+  background-color: #ffa811;
+  width: 300px;
+  height: 100vh;
+  display: fixed;
+}
+
+.right-container {
+  flex: 4;
+  background-color: #f6ead3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+}
+
+.registration-form {
+  width: 800px;
+  margin: 100px auto;
+  padding: 20px;
+}
+
+.primary-button {
+  background-image: linear-gradient(to bottom, #ffa60a, #ffba43);
+  width: 95%;
+  height: 40px;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  width: 95%;
+  height: 36px;
+  background-color: #fff4de;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+  font-size: 12px;
+  margin: 5px 0px 15px 0px;
+  padding-left: 10px;
+}
+
+.input-field-type2 {
+  width: 45%;
+  height: 36px;
+  background-color: #fff4de;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+  font-size: 12px;
+  margin: 5px 0px 15px 0px;
+  padding-left: 10px;
+}
+
+.upload-field {
+  width: 340px;
+  height: 36px;
+  background-color: #fff4de;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+}
+
+.heading {
+  font-size: 30px;
+  text-align: center;
+}
+
+.sub-heading {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sub-link-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.sub-link {
+  font-size: 12px;
+  color: #ffba43;
+  text-decoration: none;
+}
+
+.sub-link-label {
+  font-size: 12px;
+  color: #000;
+  text-decoration: none;
+  margin-left: 3px;
+}
+
+.sub-link:hover {
+  text-decoration: underline;
+}
+
+/* company registration successful page */
+
+.message {
+  width: 550px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/* sidebar  */
+
+/* Existing CSS for .left-container and .bg-div */
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.menu li {
+  margin: 25px 0;
+  display: flex;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  display: block;
+}
+
+.menu li a:hover {
+  color: #ffa811;
+}
+
+.menu-logo {
+  height: 25px;
+  display: flex;
+}
