@@ -174,3 +174,105 @@ body {
   height: 25px;
   display: flex;
 }
+
+/* Home View */
+
+.navbar {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  margin-left: 50px;
+  height: 100px;
+}
+
+.navbar a {
+  margin-right: 50px;
+}
+
+.home-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.font-primary {
+  color: #ffa811;
+}
+
+.header-text {
+  font-size: 50px;
+  font-weight: 550;
+  text-align: center;
+}
+
+.sub-header-text {
+  font-size: 16px;
+  font-weight: 550;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.p-text {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 20px;
+  width: 50%;
+}
+
+.black-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 250px;
+}
+
+.section-header {
+  font-size: 24px;
+  text-align: center;
+}
+
+.card-section {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  justify-content: space-between;
+  text-align: center;
+  margin: 40px 0px 40px 0px;
+  width: 80%;
+}
+
+.card {
+  flex: 0 0 calc(20% - 10px); /* Set the width of each card to 20% of the container width */
+  max-width: calc(20% - 10px); /* Set the max-width of each card */
+  margin-bottom: 20px; /* Add spacing between cards */
+  background-color: #fff;
+  align-items: center;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Include padding and border in card width */
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 0 0 calc(50% - 20px); /* Adjust card width for smaller screens */
+    max-width: calc(50% - 20px); /* Adjust max-width for smaller screens */
+  }
+}
