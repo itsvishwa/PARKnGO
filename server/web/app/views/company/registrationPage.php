@@ -126,7 +126,7 @@
             <div class="sub-link-div">
               <p class="sub-link-label">
                 Already have an account?
-                <a href="loginPage.html" class="sub-link">Log in</a>
+                <a href="../loginView.php" class="sub-link">Log in</a>
               </p>
             </div>
           </div>

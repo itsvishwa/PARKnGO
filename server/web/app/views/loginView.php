@@ -68,7 +68,7 @@
             <div class="sub-link-div">
               <p class="sub-link-label">
                 Don't have an account?
-                <a href="registrationPage.html" class="sub-link"
+                <a href="./company/registrationPage.php" class="sub-link"
                   >Register here</a
                 >
               </p>

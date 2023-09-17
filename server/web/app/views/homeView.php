@@ -9,7 +9,7 @@
 <body>
             <div class="navbar">
                         <img src="./assets/logo-black.png" alt="" class="navbar-logo">
-                        <a>Login</a>
+                        <a href="./loginView.php">Login</a>
             </div>
             <div class="home-body">
                         <h1 class="header-text">Revolutionize <span class="font-primary">Parking <br>Management</br></span></h1>
@@ -20,22 +20,39 @@
             <div class="main-section">
                         <h2 class="section-header">Our Services</h2>
                         <div class="card-section">
-                                    <div class="card">
-                                                <h3>Total Parking Space Domainance</h3>
+                                    <div class="card card-1">
+                                                <div>
+                                                            <h3>Total Parking Space Domainance</h3>
+                                                </div>
                                     </div>
-                                    <div class="card">
-                                                <h3>Instant Parking Officer Assignment</h3>
+                                    <div class="card card-2">
+                                                <div>
+                                                            <h3>Instant Parking Officer Assignment</h3>
+                                                </div>
+                                                
                                     </div>
-                                    <div class="card">
-                                                <h3>Real-time Space Status Insights</h3>
+                                    <div class="card card-3">
+                                                <div>
+                                                            <h3>Real-time Space Status Insights</h3>
+                                                </div>
+                                                
                                     </div>
-                                    <div class="card">
-                                                <h3>Unleash Productivity with Data</h3>
+                                    <div class="card card-4">
+                                                <div>
+                                                            <h3>Unleash Productivity with Data</h3>
+                                                </div>
                                     </div>
-                                    <div class="card">
-                                                <h3>Effortless User-Friendly Interface</h3>
+                                    <div class="card card-5">
+                                                <div>
+                                                            <h3>Effortless User-Friendly Interface</h3>
+                                                </div>
+                                                
                                     </div>
                         </div>
+                        <button class="transparent-button">Get Started</button>
+            </div>
+            <div class="footer">
+                        <p>Copyright &copy;2023 PARK'N GO. All rights reserved.</p>
             </div>
 </body>
 </html>

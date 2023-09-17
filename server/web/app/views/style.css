@@ -191,6 +191,8 @@ body {
 
 .navbar a {
   margin-right: 50px;
+  text-decoration: none;
+  color: #000;
 }
 
 .home-body {
@@ -198,9 +200,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  padding-top: 100px;
+  background-image: url("./assets/homepage/home-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-bottom: 100px;
+  width: 100%;
 }
-
 .font-primary {
   color: #ffa811;
 }
@@ -236,43 +243,177 @@ body {
   margin-bottom: 10px;
 }
 
+@media screen and (min-width: 768px) {
+  .home-body {
+    padding-bottom: 200px;
+  }
+  .header-text {
+    font-size: 60px;
+  }
+
+  .sub-header-text {
+    font-size: 18px;
+  }
+
+  .p-text {
+    font-size: 14px;
+  }
+
+  .black-button {
+    padding: 12px 25px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .home-body {
+    padding-bottom: 300px;
+  }
+  .header-text {
+    font-size: 70px;
+  }
+
+  .sub-header-text {
+    font-size: 20px;
+  }
+
+  .p-text {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1576px) {
+  .home-body {
+    padding-top: 200px;
+    padding-bottom: 350px;
+  }
+
+  .header-text {
+    font-size: 80px;
+  }
+}
+
 .main-section {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 250px;
+  background: #ffa811;
 }
 
 .section-header {
-  font-size: 24px;
   text-align: center;
+  margin-bottom: 30px;
+  color: #ffffff;
 }
 
 .card-section {
-  display: flex;
-  flex-wrap: wrap; /* Allow cards to wrap to the next row */
-  justify-content: space-between;
-  text-align: center;
-  margin: 40px 0px 40px 0px;
   width: 80%;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(200px, 1fr));
+  grid-gap: 20px;
+  place-items: center;
+  padding-bottom: 50px;
 }
 
 .card {
-  flex: 0 0 calc(20% - 10px); /* Set the width of each card to 20% of the container width */
-  max-width: calc(20% - 10px); /* Set the max-width of each card */
-  margin-bottom: 20px; /* Add spacing between cards */
-  background-color: #fff;
-  align-items: center;
+  height: 200px;
+  width: 100%;
+  max-width: 200px;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: flex;
   border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box; /* Include padding and border in card width */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-@media (max-width: 768px) {
-  .card {
-    flex: 0 0 calc(50% - 20px); /* Adjust card width for smaller screens */
-    max-width: calc(50% - 20px); /* Adjust max-width for smaller screens */
+.card div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-1 {
+  background-image: url(./assets/homepage/card1.jpg);
+}
+
+.card-2 {
+  background-image: url(./assets/homepage/card2.jpg);
+}
+.card-3 {
+  background-image: url(./assets/homepage/card3.jpg);
+}
+.card-4 {
+  background-image: url(./assets/homepage/card4.jpg);
+}
+.card-5 {
+  background-image: url(./assets/homepage/card5.jpg);
+}
+
+@media screen and (min-width: 512px) {
+  .card-section {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
   }
+}
+
+@media screen and (min-width: 768px) {
+  .card-section {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card-section {
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+  }
+}
+
+@media screen and (min-width: 1476px) {
+  .card-section {
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
+  }
+}
+@media screen and (min-width: 1700px) {
+  .card-section {
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
+  }
+  .card {
+    height: 250px;
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+.transparent-button {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 500;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+/* footer */
+
+.footer {
+  background-color: #000000;
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #999999;
+  font-size: 12px;
 }
