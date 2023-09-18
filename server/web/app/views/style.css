@@ -154,20 +154,34 @@ body {
   margin-top: 20px;
 }
 
+.menu .active {
+  background-color: #f6ead3;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .menu li {
   margin: 25px 0;
-  display: flex;
+  margin-left: 60px;
+  width: 150px;
+  padding: 8px 10px 8px 15px;
+}
+
+.menu li svg {
+  margin-right: 8px;
 }
 
 .menu li a {
   text-decoration: none;
+  display: flex;
+
+  align-items: center;
   color: #000;
   font-weight: 500;
-  display: block;
 }
 
 .menu li a:hover {
-  color: #ffa811;
+  color: #ffffff;
 }
 
 .menu-logo {

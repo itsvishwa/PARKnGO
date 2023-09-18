@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../style.css" rel="stylesheet" />
-    <title>Dashboard</title>
+    <title>Updates</title>
   </head>
   <body>
     <div class="container">
@@ -13,7 +13,7 @@
           <img src="../assets/logo-black.png" alt="logo" width="100%" />
           <div>
             <ul class="menu">
-              <li class="active">
+              <li>
                 
                 <a href="./dashboardView.php">
                   <svg
@@ -33,7 +33,7 @@
                   Dashboard
                 </a>
               </li>
-              <li>
+              <li  class="active">
                 <a href="./updateView.php">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
