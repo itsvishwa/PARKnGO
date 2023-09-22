@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
   margin: 0px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -30,7 +30,7 @@ body {
 }
 
 .right-container {
-  flex: 4;
+  flex: 5;
   background-color: #f6ead3;
 }
 
@@ -212,7 +212,7 @@ body {
   align-items: center;
   justify-content: center;
   padding-top: 100px;
-  background-image: url("./assets/homepage/home-bg.png");
+  background-image: url('./assets/homepage/home-bg.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -427,4 +427,79 @@ body {
   justify-content: center;
   color: #999999;
   font-size: 12px;
+}
+
+/* Header in dashboard, updates, parking spaces, parking officers*/
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.pageName {
+  display: flex;
+}
+
+.pageName .mr {
+  margin-right: 20px;
+}
+
+.profile {
+  display: flex;
+}
+
+.profile .mr {
+  margin-right: 20px;
+}
+
+.profile a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #ffa811;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* main colors */
+
+.bg-green {
+  background-color: #00a372;
+}
+
+.bg-light-green {
+  background-color: #00a37240;
+}
+
+.bg-red {
+  background-color: #ff4545;
+}
+
+.bg-secondary {
+  background-color: #f6ead3;
+}
+
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-black {
+  background-color: #000000;
+}
+
+.bg-primary {
+  background-color: #ffa811;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-black {
+  color: #000000;
+}
+
+.text-green {
+  color: #00a372;
 }

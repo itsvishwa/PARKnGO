@@ -1,0 +1,48 @@
+.heading {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.heading h4 {
+  font-size: 1rem;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.card-section {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  width: 95%;
+}
+
+.b-card {
+  margin-top: 20px;
+  margin-bottom: 20px 40px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  width: 90%;
+}
+
+.b-card-icon {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.b-card-content {
+  margin-left: 10px;
+}
+
+.b-card-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.b-card-content p {
+  font-size: 0.8rem;
+}
