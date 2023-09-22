@@ -32,9 +32,6 @@ body {
 .right-container {
   flex: 4;
   background-color: #f6ead3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .login-form {
