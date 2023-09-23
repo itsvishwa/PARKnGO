@@ -186,6 +186,11 @@ body {
   display: flex;
 }
 
+.button-icon {
+  height: 15px;
+  display: flex;
+}
+
 /* Home View */
 
 .navbar {

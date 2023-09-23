@@ -114,7 +114,135 @@
               <p>Earned today</p>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="dashboard-main-section">
+        <div class="update-section">
+          <div class="table-heading">
+            <div class="heading">
+              <span class="material-symbols-outlined menu-icon ">
+                update
+              </span>
+              <h4>Latest Updates</h4>
+            </div>
+            <a href="./updateView.php" class="see-more">
+              See more
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </a>
+          </div>
+          <div class="table-div">
+            <table>
+              <tr class="tr-h">
+                <th>Number Plate</th>
+                <th>Arrived at</th>
+                <th>Parked Hours</th>
+                <th>Total Price</th>
+                <th>Paid By</th>
+              </tr>
+              <tr>
+                <td>ABC-123</td>
+                <td>09:30 AM</td>
+                <td>3</td>
+                <td>$15.00</td>
+                <td>Cash</td>
+              </tr>
+              <tr>
+                <td>XYZ-789</td>
+                <td>10:15 AM</td>
+                <td>2</td>
+                <td>$10.00</td>
+                <td>Card</td>
+              </tr>
+              <tr>
+                <td>LMN-456</td>
+                <td>11:00 AM</td>
+                <td>4</td>
+                <td>$20.00</td>
+                <td>Card</td>
+              </tr>
+              <tr>
+                <td>PQR-321</td>
+                <td>12:30 PM</td>
+                <td>1</td>
+                <td>$5.00</td>
+                <td>Cash</td>
+              </tr>
+              <tr>
+                <td>EFG-654</td>
+                <td>02:00 PM</td>
+                <td>5</td>
+                <td>$25.00</td>
+                <td>Card</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="officer-section">
+          <div class="table-heading">
+            <div class="heading">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
 
+              <h4>Parking Officer</h4>
+            </div>
+            <a href="./parkingOfficerView.php" class="see-more">
+              See more
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </a>
+          </div>
+          <div class="table-div">
+            <table>
+              <div>
+                <tr class="tr-h">
+                  <th>Name</th>
+                  <th>Parking</th>
+                </tr>
+                <tr>
+                  <td>Janindu</td>
+                  <td>Parking 1</td>
+                </tr>
+                <tr>
+                  <td>Vishwa</td>
+                  <td>Parking 2</td>
+                </tr>
+                <tr>
+                  <td>Uththtara</td>
+                  <td>Parking 3</td>
+                </tr>
+                <tr>
+                  <td>Dhanushika</td>
+                  <td>Parking 4</td>
+                </tr>
+                <tr>
+                  <td>Kasun</td>
+                  <td>Parking 5</td>
+                </tr>
+              </div>
+
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-main-section">
+        <div class="table-heading">
+          <div class="heading">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+            </svg>
+
+            <h4>Parking Spaces</h4>
+          </div>
+          <a href="./parkingSpaceView.php" class="see-more">
+            See more
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </a>
         </div>
       </div>
     </div>
