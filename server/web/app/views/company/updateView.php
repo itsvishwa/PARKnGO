@@ -5,6 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="../style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/dashboardView.css" />
+  <link rel="stylesheet" href="./styles/updateView.css" />
   <title>Updates</title>
 </head>
 
@@ -70,8 +74,30 @@
           <a href="#">CMC</a>
         </div>
       </div>
+      <div class="table-div">
+        <table id="advancedUpdatesTable" class="advancedUpdatesTable">
+          <tr class="tr-h">
+            <th>Number Plate</th>
+            <th>Parking Space</th>
+            <th>Vehicle Type</th>
+            <th>Arrived at</th>
+            <th>Left at</th>
+            <th>Parked Hours</th>
+            <th>Assign By</th>
+            <th>Released By</th>
+            <th>Total Price</th>
+            <th>Paid By</th>
+          </tr>
+          <tbody>
+            <!-- Table rows will be generated dynamically using JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
+
+  <script src="./js/updateView.js"></script>
 </body>
 
 </html>
