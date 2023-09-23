@@ -131,25 +131,27 @@ tr:nth-child(4n) {
   flex: 1;
   flex-direction: column;
   width: 98%;
-  margin-bottom: 40px;
   align-items: center;
   justify-content: center;
+}
+
+.parking-header {
+  margin-bottom: 20px;
 }
 
 .parking-cards {
   display: flex;
   flex-wrap: wrap; /* Enable wrapping of flex items */
-  justify-content: center;
+  justify-content: left;
+  margin-left: 20px;
 }
 
 .parking-space-card {
   background-color: #fffbf4;
-  margin: 10px;
+  margin: 10px 30px 10px 0px;
   width: 600px;
   padding: 20px;
-  flex-basis: calc(
-    50% - 10px
-  ); /* Set each container to take up 50% of the width with some spacing */
+  flex-basis: calc(50% - 10px);
   margin-bottom: 20px;
   box-sizing: border-box;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -161,6 +163,20 @@ tr:nth-child(4n) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0px;
+  margin-bottom: 10px;
   width: 100%;
+}
+
+.parking-officer,
+.today-earning {
+  margin-bottom: 10px;
+}
+
+.parking-type {
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.parking-card-bold {
+  font-weight: 700;
 }

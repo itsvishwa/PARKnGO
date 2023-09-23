@@ -66,7 +66,7 @@ const parkingData = [
     ParkingName: 'Parking 1',
     Address: '123 Main St, City',
     CurrentFreeSlots: 15,
-    PricePerHour: 'Rs. 50',
+    PricePerHour: 50,
     TotalSlots: {
       Cars: 20,
       Vans: 10,
@@ -75,13 +75,13 @@ const parkingData = [
     },
     IsPublic: true,
     ParkingOfficerName: 'John Doe',
-    TodayEarnings: 'Rs. 2500',
+    TodayEarnings: 2500,
   },
   {
     ParkingName: 'Parking 2',
     Address: '456 Elm St, Town',
     CurrentFreeSlots: 10,
-    PricePerHour: 'Rs. 60',
+    PricePerHour: 60,
     TotalSlots: {
       Cars: 15,
       Vans: 8,
@@ -90,13 +90,13 @@ const parkingData = [
     },
     IsPublic: false,
     ParkingOfficerName: 'Jane Smith',
-    TodayEarnings: 'Rs. 1800',
+    TodayEarnings: 1800,
   },
   {
     ParkingName: 'Parking 3',
     Address: '789 Oak St, Village',
     CurrentFreeSlots: 5,
-    PricePerHour: 'Rs. 40',
+    PricePerHour: 40,
     TotalSlots: {
       Cars: 10,
       Vans: 5,
@@ -105,7 +105,7 @@ const parkingData = [
     },
     IsPublic: true,
     ParkingOfficerName: 'Robert Johnson',
-    TodayEarnings: 'Rs. 1200',
+    TodayEarnings: 1200,
   },
   // Add more parking data objects here
 ];
@@ -145,31 +145,49 @@ function populateParkingCards() {
 
   parkingData.forEach((parking) => {
     const card = document.createElement('div');
+    const total =
+      parking.TotalSlots.Cars +
+      parking.TotalSlots.Vans +
+      parking.TotalSlots.Buses +
+      parking.TotalSlots.Bicycles;
     card.className = 'parking-card';
 
     card.innerHTML = `
               <div class="parking-space-card">                    
                 <div class="parking-card-header">
-                  <h3>${parking.ParkingName}</h3>
-                  <p>${parking.Address}</p>
+                  <h3 class="parking-card-bold">${parking.ParkingName}</h3>
+                  <p class="parking-card-bold">${parking.Address}</p>
                 </div>
                 <div class="parking-card-body">
                   <div class="parking-card-info">
-                    <p>Free Slots: ${parking.CurrentFreeSlots}</p>
-                    <p>Price per Hour: ${parking.PricePerHour}</p>
+                    <p>Free Slots: <span class="parking-card-bold">${
+                      parking.CurrentFreeSlots
+                    }</span></p>
+                    <p class="parking-card-bold">Rs. ${
+                      parking.PricePerHour
+                    }/ 1H</p>
                   </div>
                   <div class="parking-card-info">
-                    <p>Total Slots:</p>
-                    <ul>
-                      <li>Cars: ${parking.TotalSlots.Cars}</li>
-                      <li>Vans: ${parking.TotalSlots.Vans}</li>
-                      <li>Buses: ${parking.TotalSlots.Buses}</li>
-                      <li>Bicycles: ${parking.TotalSlots.Bicycles}</li>
-                    </ul>
+                    <p>Total Slots: <span class="parking-card-bold">${total}</span> (Cars: <span class="parking-card-bold">${
+      parking.TotalSlots.Cars
+    }</span> | Vans: <span class="parking-card-bold">${
+      parking.TotalSlots.Vans
+    }</span> | Buses: <span class="parking-card-bold">${
+      parking.TotalSlots.Buses
+    }</span> | Bicycles: <span class="parking-card-bold">${
+      parking.TotalSlots.Bicycles
+    }</span>)</p>
+                  <p class="parking-type bg-green text-white">${
+                    parking.IsPublic ? 'Public' : 'Private'
+                  }</p>
                   </div>
-                  <p>${parking.IsPublic ? 'Public' : 'Private'}</p>
-                  <p>Parking Officer: ${parking.ParkingOfficerName}</p>
-                  <p>Today's Earnings: ${parking.TodayEarnings}</p>
+                  
+                  <p class="parking-officer">Parking Officer: <span class="parking-card-bold">${
+                    parking.ParkingOfficerName
+                  }</span></p>
+                  <p class="today-earning">Today's Earnings: <span class="parking-card-bold">Rs. ${
+                    parking.TodayEarnings
+                  }.00</span></p>
                 </div>
               </div>
               `;
