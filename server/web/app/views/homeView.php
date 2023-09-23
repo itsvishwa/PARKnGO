@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="./style.css" rel="stylesheet" />
             <title>Document</title>
 </head>
+
 <body>
             <div class="navbar">
                         <img src="./assets/logo-black.png" alt="" class="navbar-logo">
@@ -29,13 +31,13 @@
                                                 <div>
                                                             <h3>Instant Parking Officer Assignment</h3>
                                                 </div>
-                                                
+
                                     </div>
                                     <div class="card card-3">
                                                 <div>
                                                             <h3>Real-time Space Status Insights</h3>
                                                 </div>
-                                                
+
                                     </div>
                                     <div class="card card-4">
                                                 <div>
@@ -46,7 +48,7 @@
                                                 <div>
                                                             <h3>Effortless User-Friendly Interface</h3>
                                                 </div>
-                                                
+
                                     </div>
                         </div>
                         <button class="transparent-button">Get Started</button>
@@ -55,4 +57,5 @@
                         <p>Copyright &copy;2023 PARK'N GO. All rights reserved.</p>
             </div>
 </body>
+
 </html>

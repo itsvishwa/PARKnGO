@@ -14,6 +14,7 @@
 <body>
   <div class="container">
     <div class="left-container">
+
       <div class="bg-div">
         <img src="../assets/logo-black.png" alt="logo" width="100%" />
         <div>
@@ -133,7 +134,7 @@
             </a>
           </div>
           <div class="table-div">
-            <table>
+            <table id="updatesTable">
               <tr class="tr-h">
                 <th>Number Plate</th>
                 <th>Arrived at</th>
@@ -141,41 +142,9 @@
                 <th>Total Price</th>
                 <th>Paid By</th>
               </tr>
-              <tr>
-                <td>ABC-123</td>
-                <td>09:30 AM</td>
-                <td>3</td>
-                <td>$15.00</td>
-                <td>Cash</td>
-              </tr>
-              <tr>
-                <td>XYZ-789</td>
-                <td>10:15 AM</td>
-                <td>2</td>
-                <td>$10.00</td>
-                <td>Card</td>
-              </tr>
-              <tr>
-                <td>LMN-456</td>
-                <td>11:00 AM</td>
-                <td>4</td>
-                <td>$20.00</td>
-                <td>Card</td>
-              </tr>
-              <tr>
-                <td>PQR-321</td>
-                <td>12:30 PM</td>
-                <td>1</td>
-                <td>$5.00</td>
-                <td>Cash</td>
-              </tr>
-              <tr>
-                <td>EFG-654</td>
-                <td>02:00 PM</td>
-                <td>5</td>
-                <td>$25.00</td>
-                <td>Card</td>
-              </tr>
+              <tbody>
+                <!-- Table rows will be generated dynamically using JavaScript -->
+              </tbody>
             </table>
           </div>
         </div>
@@ -196,39 +165,21 @@
             </a>
           </div>
           <div class="table-div">
-            <table>
-              <div>
+            <table id="officersTable">
+              <thead>
                 <tr class="tr-h">
                   <th>Name</th>
                   <th>Parking</th>
                 </tr>
-                <tr>
-                  <td>Janindu</td>
-                  <td>Parking 1</td>
-                </tr>
-                <tr>
-                  <td>Vishwa</td>
-                  <td>Parking 2</td>
-                </tr>
-                <tr>
-                  <td>Uththtara</td>
-                  <td>Parking 3</td>
-                </tr>
-                <tr>
-                  <td>Dhanushika</td>
-                  <td>Parking 4</td>
-                </tr>
-                <tr>
-                  <td>Kasun</td>
-                  <td>Parking 5</td>
-                </tr>
-              </div>
-
+              </thead>
+              <tbody>
+                <!-- Table rows will be generated dynamically using JavaScript -->
+              </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="dashboard-main-section">
+      <div class="parking-space-section">
         <div class="table-heading">
           <div class="heading">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
@@ -244,9 +195,16 @@
             </svg>
           </a>
         </div>
+        <div id="parkingCards" class="parking-cards">
+          <!-- Parking Cards will be generated dynamically using JavaScript -->
+        </div>
+
       </div>
     </div>
   </div>
+
+
+  <script src="./js/dashboardView.js"></script>
 </body>
 
 </html>
