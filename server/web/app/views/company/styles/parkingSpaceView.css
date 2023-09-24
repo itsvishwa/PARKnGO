@@ -3,3 +3,26 @@
   cursor: default;
   opacity: 0.4;
 }
+
+/* parking form */
+
+.parking-form {
+  display: flex;
+  margin-top: 20px;
+}
+
+.form-left {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  min-height: 400px;
+  background-color: gray;
+}
+
+.form-right {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  min-height: 400px;
+  background-color: red;
+}
