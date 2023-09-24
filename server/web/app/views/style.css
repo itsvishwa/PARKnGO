@@ -507,6 +507,10 @@ body {
   background-color: #ffa811;
 }
 
+.bg-blue {
+  background-color: #0085ff;
+}
+
 .text-primary {
   color: #ffa811;
 }
@@ -525,6 +529,10 @@ body {
 
 .text-green {
   color: #00a372;
+}
+
+.text-blue {
+  color: #0085ff;
 }
 
 /* button section */

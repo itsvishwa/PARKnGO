@@ -177,6 +177,12 @@ tr:nth-child(4n) {
   border-radius: 15px;
 }
 
+.parking-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .parking-card-bold {
   font-weight: 700;
 }

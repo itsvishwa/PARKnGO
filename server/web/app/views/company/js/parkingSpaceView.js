@@ -2,8 +2,8 @@ const parkingData = [
   {
     ParkingName: 'Parking 1',
     Address: '123 Main St, City',
-    CurrentFreeSlots: 15,
-    PricePerHour: 50,
+    CurrentFreeSlots: 'N/A',
+    PricePerHour: 0,
     TotalSlots: {
       Cars: 20,
       Vans: 10,
@@ -12,7 +12,8 @@ const parkingData = [
     },
     IsPublic: true,
     ParkingOfficerName: 'John Doe',
-    TodayEarnings: 2500,
+    TodayEarnings: 'N/A',
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 2',
@@ -28,6 +29,7 @@ const parkingData = [
     IsPublic: false,
     ParkingOfficerName: 'Jane Smith',
     TodayEarnings: 1800,
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 3',
@@ -43,6 +45,7 @@ const parkingData = [
     IsPublic: true,
     ParkingOfficerName: 'Robert Johnson',
     TodayEarnings: 1200,
+    Status: 'Closed',
   },
   {
     ParkingName: 'Parking 1',
@@ -58,6 +61,7 @@ const parkingData = [
     IsPublic: true,
     ParkingOfficerName: 'John Doe',
     TodayEarnings: 2500,
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 2',
@@ -73,6 +77,7 @@ const parkingData = [
     IsPublic: false,
     ParkingOfficerName: 'Jane Smith',
     TodayEarnings: 1800,
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 3',
@@ -88,6 +93,7 @@ const parkingData = [
     IsPublic: true,
     ParkingOfficerName: 'Robert Johnson',
     TodayEarnings: 1200,
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 1',
@@ -103,6 +109,7 @@ const parkingData = [
     IsPublic: true,
     ParkingOfficerName: 'John Doe',
     TodayEarnings: 2500,
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 2',
@@ -118,6 +125,7 @@ const parkingData = [
     IsPublic: false,
     ParkingOfficerName: 'Jane Smith',
     TodayEarnings: 1800,
+    Status: 'open',
   },
   {
     ParkingName: 'Parking 3',
@@ -133,6 +141,7 @@ const parkingData = [
     IsPublic: true,
     ParkingOfficerName: 'Robert Johnson',
     TodayEarnings: 1200,
+    Status: 'open',
   },
   // Add more parking data objects here
 ];
@@ -150,11 +159,22 @@ function populateParkingCards() {
     card.className = 'parking-card';
 
     card.innerHTML = `
-                        <div class="parking-space-card">                    
+                        <div class="parking-space-card ${
+                          parking.Status
+                        }">                    
                           <div class="parking-card-header">
-                            <h3 class="parking-card-bold">${
-                              parking.ParkingName
-                            }</h3>
+                            <div class="parking-name">
+                              <h3 class="parking-card-bold">${
+                                parking.ParkingName
+                              }</h3>
+                              ${
+                                parking.Status == 'Closed'
+                                  ? '<p class="parking-type bg-red text-white">Closed</p>'
+                                  : ''
+                              }
+                              
+                            </div>
+                            
                             <p class="parking-card-bold">${parking.Address}</p>
                           </div>
                           <div class="parking-card-body">
@@ -162,9 +182,12 @@ function populateParkingCards() {
                               <p>Free Slots: <span class="parking-card-bold">${
                                 parking.CurrentFreeSlots
                               }</span></p>
-                              <p class="parking-card-bold">Rs. ${
-                                parking.PricePerHour
-                              }/ 1H</p>
+                              ${
+                                parking.PricePerHour == 0
+                                  ? '<p class="parking-type bg-blue text-white">Free</p>'
+                                  : `<p class="parking-card-bold">Rs. ${parking.PricePerHour}/ 1H</p>`
+                              }
+                              
                             </div>
                             <div class="parking-card-info">
                               <p>Total Slots: <span class="parking-card-bold">${total}</span> (Cars: <span class="parking-card-bold">${
@@ -184,9 +207,11 @@ function populateParkingCards() {
                             <p class="parking-officer">Parking Officer: <span class="parking-card-bold">${
                               parking.ParkingOfficerName
                             }</span></p>
-                            <p class="today-earning">Today's Earnings: <span class="parking-card-bold">Rs. ${
-                              parking.TodayEarnings
-                            }.00</span></p>
+                            ${
+                              typeof parking.TodayEarnings == 'number'
+                                ? `<p class="today-earning">Today's Earnings: <span class="parking-card-bold">Rs. ${parking.TodayEarnings}.00</span></p>`
+                                : `<p class="today-earning">Today's Earnings: <span class="parking-card-bold">${parking.TodayEarnings}</span></p>`
+                            }
                           </div>
                         </div>
                         `;

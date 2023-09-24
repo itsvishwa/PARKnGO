@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./styles/dashboardView.css" />
+  <link rel="stylesheet" href="./styles/parkingSpaceView.css" />
   <title>Parking Spaces</title>
 </head>
 
