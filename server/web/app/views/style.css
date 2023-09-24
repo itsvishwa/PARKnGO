@@ -18,7 +18,8 @@ body {
 }
 
 .left-container {
-  flex: 1;
+  position: fixed;
+
   background-color: #f6ead3;
 }
 
@@ -31,7 +32,11 @@ body {
 }
 
 .right-container {
-  flex: 5;
+  width: 100%;
+  margin-left: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #f6ead3;
 }
 
@@ -486,6 +491,10 @@ body {
   background-color: #f6ead3;
 }
 
+.bg-off-white {
+  background-color: #fff8ea;
+}
+
 .bg-white {
   background-color: #ffffff;
 }
@@ -498,6 +507,14 @@ body {
   background-color: #ffa811;
 }
 
+.text-primary {
+  color: #ffa811;
+}
+
+.text-red {
+  color: #ff4545;
+}
+
 .text-white {
   color: #ffffff;
 }
@@ -508,4 +525,31 @@ body {
 
 .text-green {
   color: #00a372;
+}
+
+/* button section */
+
+.btn-section {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 20px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  margin-right: 20px;
+  border: 0px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn svg {
+  margin-right: 5px;
 }

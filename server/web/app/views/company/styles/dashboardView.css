@@ -180,3 +180,27 @@ tr:nth-child(4n) {
 .parking-card-bold {
   font-weight: 700;
 }
+
+@media screen and (min-width: 768px) {
+  .right-container {
+    padding-left: 100px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .right-container {
+    padding-left: 50px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .right-container {
+    padding-left: 0px;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .right-container {
+    margin-left: 17%;
+  }
+}
