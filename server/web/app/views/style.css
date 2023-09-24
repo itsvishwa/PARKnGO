@@ -511,6 +511,14 @@ body {
   background-color: #0085ff;
 }
 
+.bg-black {
+  background-color: #000000;
+}
+
+.bg-black40 {
+  background-color: #00000040;
+}
+
 .text-primary {
   color: #ffa811;
 }
@@ -521,10 +529,6 @@ body {
 
 .text-white {
   color: #ffffff;
-}
-
-.text-black {
-  color: #000000;
 }
 
 .text-green {
@@ -558,7 +562,7 @@ body {
   font-size: 14px;
 }
 
-.btn a {
+.btn-section a {
   text-decoration: none;
   color: #000000;
 }
@@ -569,4 +573,33 @@ body {
 
 .text-md {
   font-size: 14px;
+}
+
+.map {
+  width: 98%;
+  height: 60vh;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mr-5 {
+  margin-right: 5px;
 }
