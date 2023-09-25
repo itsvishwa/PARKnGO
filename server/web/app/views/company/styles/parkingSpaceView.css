@@ -39,6 +39,7 @@
   display: flex;
   justify-content: left;
   flex-direction: column;
+  width: 100%;
 }
 
 .p-form-label {
@@ -133,4 +134,9 @@
   color: white;
   font-weight: 500;
   cursor: pointer;
+}
+
+.confirmation-card {
+  display: flex;
+  flex-direction: column;
 }

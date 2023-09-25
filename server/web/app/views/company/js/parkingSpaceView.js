@@ -186,7 +186,7 @@ function populateParkingCards() {
                                 parking.PricePerHour == 0
                                   ? '<p class="parking-type bg-blue text-white">Free</p>'
                                   : `<p class="parking-card-bold">Rs. ${parking.PricePerHour}/ 1H</p>`
-                              }
+                              } 
                               
                             </div>
                             <div class="parking-card-info">

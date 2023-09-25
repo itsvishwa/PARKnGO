@@ -584,6 +584,8 @@ body {
   margin-top: 10px;
 }
 
+/* margin */
+
 .mt-20 {
   margin-top: 20px;
 }
@@ -602,4 +604,22 @@ body {
 
 .mr-5 {
   margin-right: 5px;
+}
+
+/* font-bold */
+
+.b-400 {
+  font-weight: 400;
+}
+
+.b-500 {
+  font-weight: 500;
+}
+
+.b-600 {
+  font-weight: 600;
+}
+
+.b-700 {
+  font-weight: 700;
 }

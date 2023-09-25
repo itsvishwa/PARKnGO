@@ -1,0 +1,25 @@
+.confirmation-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 500px;
+  padding: 20px 5px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin: 20px;
+  background-color: #fffbf4;
+}
+
+.confirmation-card-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.confirmation-card-table {
+  width: 50%;
+  margin: 20px 0px;
+}

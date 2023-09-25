@@ -75,7 +75,7 @@
 			<div class="header text-md">
 				<p>Fill the following details to add a new parking space</p>
 			</div>
-			<form action="process_form.php" method="POST" class="parking-form">
+			<form action="parkingSpaceSaveView.php" method="POST" class="parking-form" onsubmit="saveFormData()">
 				<div class="form-left">
 					<label for="parkingName" class="p-form-label ">Parking Name *</label>
 					<input type="text" name="parkingName" class="p-form-input width-65" placeholder="Display name of the parking space" required>
@@ -154,141 +154,20 @@
 						</div>
 					</div>
 					<div class="p-btn-section">
-						<input type="submit" value="Discard" class="p-btn bg-black40">
+						<input type="button" value="Discard" class="p-btn bg-black40" onclick="confirmDiscard()">
 						<input type="submit" value="Continue" class="p-btn bg-black">
 					</div>
-
 				</div>
 			</form>
-
-
 		</div>
 	</div>
 
 
-	<script>
-		// Function to add a new parking slot batch form
-		function addParkingSlotBatch() {
-			// Create a new div element
-			var newParkingSlotBatch = document.createElement('div');
-
-			// Set the innerHTML of the new div to the parkingSlotBatchForm string
-			newParkingSlotBatch.innerHTML = `
-				<div id="parkingSlotBatchForm" class="p-slot-batch">
-					<input type="number" name="noOfSlots[]" class="p-form-input width-20" placeholder="No of slots" required>
-
-					<select name="vehicleType[]" class="p-form-dropdown" required>
-						<option value="" disabled selected>Vehicle Type</option>
-						<option value="Car">Car</option>
-						<option value="Van">Van</option>
-						<option value="Bus">Bus</option>
-						<option value="Bicycle">Bicycle</option>
-					</select><br>
-
-					<label for="startNumber" class="p-form-label">Start</label>
-					<input type="number" name="startNumber[]" class="p-form-input width-40" placeholder="Parking Slot Start Number" required>
-
-					<label for="endNumber" class="p-form-label">To</label>
-					<input type="number" name="endNumber[]" class="p-form-input width-30" placeholder="Parking Slot End Number" disabled required>
-
-					<button type="button" onclick="removeParkingSlotBatch(this.parentNode)" class="p-form-btn">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="button-icon text-red p-form-icon">
-							<path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
-						</svg>
-						Remove
-					</button>
-				</div>
-  		`;
-
-			// Append the new div to the 'parkingSlotBatches' element or any other container
-			document.getElementById('parkingSlotBatches').appendChild(newParkingSlotBatch);
-		}
-
-
-		// Function to remove a parking slot batch form
-		function removeParkingSlotBatch(batch) {
-			batch.remove();
-		}
-	</script>
-
+	<script src="./js/parkingSpaceFormView.js"></script>
 	<!-- Google Map API -->
 	<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcYa9qDHqK5bpg0nJiZb7FkTOFCfRuuEE&callback=initMap">
 	</script>
-	<script>
-		let map;
-		let geocoder;
-
-		function initMap() {
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: {
-					lat: 6.9271,
-					lng: 79.8612
-				},
-				zoom: 10
-			});
-
-			geocoder = new google.maps.Geocoder();
-		}
-		let marker;
-
-		function autoMarkLocation() {
-			const address = document.getElementById('address').value;
-
-			geocoder.geocode({
-				'address': address
-			}, function(results, status) {
-				if (status === 'OK') {
-					const location = results[0].geometry.location;
-					map.setCenter(location);
-					marker = new google.maps.Marker({
-						map: map,
-						position: location
-					});
-
-					// Update latitude and longitude fields
-					document.getElementById('latitude').value = location.lat();
-					document.getElementById('longitude').value = location.lng();
-				} else {
-					alert('Geocode was not successful for the following reason: ' + status);
-				}
-			});
-		}
-
-		// Declare a global marker variable
-
-		function addMarkerOnClick() {
-			google.maps.event.addListener(map, 'click', function(event) {
-				var clickedLocation = event.latLng;
-
-				// Clear the previous marker (if it exists)
-				if (marker) {
-					marker.setMap(null); // Remove the marker from the map
-				}
-
-				marker = new google.maps.Marker({
-					position: clickedLocation,
-					map: map,
-					draggable: true // Allow the user to move the marker
-				});
-
-				// Update latitude and longitude fields with the clicked location
-				document.getElementById('latitude').value = clickedLocation.lat();
-				document.getElementById('longitude').value = clickedLocation.lng();
-
-				// Add an event listener to update latitude and longitude as the marker is dragged
-				google.maps.event.addListener(marker, 'dragend', function(event) {
-					document.getElementById('latitude').value = event.latLng.lat();
-					document.getElementById('longitude').value = event.latLng.lng();
-				});
-			});
-		}
-
-		// Call the addMarkerOnClick function to enable marker placement when the page loads
-		window.onload = function() {
-			initMap();
-			addMarkerOnClick();
-		}
-	</script>
+	<script src="./js/googleMapApi.js"></script>
 </body>
 
 </html>
