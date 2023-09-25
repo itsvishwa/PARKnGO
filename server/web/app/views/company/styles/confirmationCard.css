@@ -1,7 +1,7 @@
 .confirmation-card {
   display: flex;
   flex-direction: column;
-  min-width: 500px;
+  min-width: 600px;
   padding: 20px 5px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@
   display: flex;
   justify-content: space-between;
   margin: 5px 30px 0px 30px;
-  width: 510px;
+  width: 610px;
 }
 
 .c-btn {
