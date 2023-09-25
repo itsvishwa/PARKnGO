@@ -75,18 +75,18 @@
         </div>
       </div>
       <div class="table-div">
-        <table id="advancedUpdatesTable" class="advancedUpdatesTable">
+        <table id="advancedUpdatesTable" class="advancedUpdatesTable table">
           <tr class="tr-h">
-            <th>Number Plate</th>
-            <th>Parking Space</th>
-            <th>Vehicle Type</th>
-            <th>Arrived at</th>
-            <th>Left at</th>
-            <th>Parked Hours</th>
-            <th>Assign By</th>
-            <th>Released By</th>
-            <th>Total Price</th>
-            <th>Paid By</th>
+            <th class="th">Number Plate</th>
+            <th class="th">Parking Space</th>
+            <th class="th">Vehicle Type</th>
+            <th class="th">Arrived at</th>
+            <th class="th">Left at</th>
+            <th class="th">Parked Hours</th>
+            <th class="th">Assign By</th>
+            <th class="th">Released By</th>
+            <th class="th">Total Price</th>
+            <th class="th">Paid By</th>
           </tr>
           <tbody>
             <!-- Table rows will be generated dynamically using JavaScript -->

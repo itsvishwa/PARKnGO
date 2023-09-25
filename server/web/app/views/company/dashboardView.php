@@ -135,13 +135,13 @@
             </a>
           </div>
           <div class="table-div">
-            <table id="updatesTable">
-              <tr class="tr-h">
-                <th>Number Plate</th>
-                <th>Arrived at</th>
-                <th>Parked Hours</th>
-                <th>Total Price</th>
-                <th>Paid By</th>
+            <table id="updatesTable" class="table">
+              <tr class="tr-h" class="tr">
+                <th class="th">Number Plate</th>
+                <th class="th">Arrived at</th>
+                <th class="th">Parked Hours</th>
+                <th class="th">Total Price</th>
+                <th class="th">Paid By</th>
               </tr>
               <tbody>
                 <!-- Table rows will be generated dynamically using JavaScript -->
@@ -166,11 +166,11 @@
             </a>
           </div>
           <div class="table-div">
-            <table id="officersTable">
+            <table id="officersTable" class="table">
               <thead>
                 <tr class="tr-h">
-                  <th>Name</th>
-                  <th>Parking</th>
+                  <th class="th">Name</th>
+                  <th class="th">Parking</th>
                 </tr>
               </thead>
               <tbody>

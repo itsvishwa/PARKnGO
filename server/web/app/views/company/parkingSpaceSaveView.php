@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="./styles/dashboardView.css" />
-	<link rel="stylesheet" href="./styles/parkingSpaceView.css" />
 	<link rel="stylesheet" href="./styles/confirmationCard.css" />
+	<link rel="stylesheet" href="./styles/parkingSpaceView.css" />
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 				<img src="../assets/logo-black.png" alt="logo" width="100%" />
 				<div>
 					<ul class="menu">
-						<li class="active">
+						<li>
 
 							<a href="./dashboardView.php">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
@@ -38,7 +38,7 @@
 								Updates
 							</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="./parkingSpaceView.php">
 								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
@@ -65,7 +65,7 @@
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 					</svg>
-					<h3>Parking Officer</h3>
+					<h3>Parking Spaces</h3>
 				</div>
 
 				<div class="profile">
@@ -77,77 +77,22 @@
 					<a href="#">CMC</a>
 				</div>
 			</div>
-			<div id="card-container">
-				<!-- Cards will be dynamically added here using JavaScript -->
+			<div class="center">
+				<div class="ml-20 text-center b-600 f-18">
+					Confirm the details
+				</div>
+				<div id="card-container"></div>
+
+				<div class="c-btn-section">
+					<input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
+					<input type="submit" value="Save Parking Space" class="c-btn bg-black">
+				</div>
 			</div>
+
 		</div>
-
-
 	</div>
 
-	<!-- JavaScript to populate cards from form data -->
-	<script>
-		// Get form data from local storage
-		const formData = JSON.parse(localStorage.getItem('formData'));
-
-		console.log(formData);
-
-		if (formData) {
-			createCard(formData);
-		}
-
-		// Function to create a card from form data
-		function createCard(data) {
-			const card = document.createElement('div');
-
-			card.innerHTML = `
-        <div class="confirmation-card">
-						<div class="confirmation-card-line">
-							<h3 class="b-600">${data.parkingName}</h3>
-            	<p class="b-600">${data.address}</p>
-						</div>
-						<div class="confirmation-card-line">
-					 		<p>Total Slots <span class="b-500">${
-              	data.noOfSlots - data.occupiedSlots
-							}</span></p>
-            	${
-              	data.parkingRate == 0
-              	? '<p class="parking-type bg-blue text-white">Free</p>'
-              	: `<p class="b-500">Rs.${data.parkingRate}/ 1H</p>`
-            	}
-					 	</div>
-						<div class="confirmation-card-line">
-							<h3>Parking Slots</h3>
-							<p class="parking-type bg-green text-white">${
-              	data.parkingType == "Public" ? 'Public' : 'Private'
-            	}</p>
-						</div>
-						<table class="confirmation-card-table">
-    					<thead>
-        				<tr>
-            			<th>Start</th>
-            			<th>End</th>
-            			<th>Type</th>
-            			<th>Count</th>
-        				</tr>
-    					</thead>
-    					<tbody>
-        				${data.parkingSlotBatches && data.parkingSlotBatches.length > 0 ? data.parkingSlotBatches.map((batch) => `
-            			<tr>
-                		<td>${batch.startNumber}</td>
-                		<td>${batch.endNumber}</td>
-                		<td>${batch.vehicleType}</td>
-                		<td>${batch.noOfSlots}</td>
-            			</tr>
-        				`).join('') : '<tr><td colspan="4">No parking slot batches available</td></tr>'}
-    					</tbody>
-						</table>
-        </div>
-    `;
-
-			document.getElementById('card-container').appendChild(card);
-		}
-	</script>
+	<script src="./js/confirmationCard.js"></script>
 </body>
 
 </html>

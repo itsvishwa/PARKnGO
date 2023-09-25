@@ -1,8 +1,6 @@
 .confirmation-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-width: 500px;
   padding: 20px 5px;
   border-radius: 10px;
@@ -17,9 +15,30 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
+  margin-left: 20px;
 }
 
 .confirmation-card-table {
   width: 50%;
-  margin: 20px 0px;
+  background-color: #fffbf4;
+}
+.tr-b {
+  background-color: #fffbf4;
+}
+
+.c-btn-section {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 30px 0px 30px;
+  width: 510px;
+}
+
+.c-btn {
+  width: 45%;
+  padding: 15px 20px;
+  border-radius: 5px;
+  border: 0px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
 }

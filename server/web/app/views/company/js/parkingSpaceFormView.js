@@ -33,6 +33,7 @@ function saveFormData() {
     parkingRate: document.querySelector('input[name="parkingRate"]').value,
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,
+    parkingType: document.querySelector('select[name="parkingType"]').value,
   };
 
   // Save the updated array back to localStorage
