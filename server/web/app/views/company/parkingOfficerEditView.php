@@ -63,7 +63,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <h3>Add Parking Space</h3>
+          <h3>Edit Parking Space</h3>
         </div>
         <div class="profile">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
@@ -74,6 +74,16 @@
       </div>
       <div class="header text-md">
         <p>Fill the following details to add a new parking officer</p>
+      </div>
+      <div class="ml-20 border-bottom mb-10">
+        <select id="parkingDropdown" class="p-form-dropdown width-40">
+          <option value="" disabled selected>Select Parking Officer</option>
+          <option value="officer1">Parking Officer 1</option>
+          <option value="officer2">Parking Officer 2</option>
+          <option value="officer3">Parking Officer 3</option>
+          <option value="officer4">Parking Officer 4</option>
+          <!-- Add more options with dummy parking names as needed -->
+        </select>
       </div>
       <div class="form-div">
         <form action="parkingSpaceSaveView.php" method="POST" class="officer-form" onsubmit="saveFormData()">
@@ -109,7 +119,7 @@
         </form>
         <div class="c-btn-section">
           <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
-          <input type="submit" value="Save Parking Officer" class="c-btn bg-black">
+          <input type="submit" value="Update Parking Officer" class="c-btn bg-black">
         </div>
       </div>
 
