@@ -4,22 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parking Space Cards</title>
   <link href="../style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./styles/dashboardView.css" />
+  <link rel="stylesheet" href="./styles/confirmationCard.css" />
   <link rel="stylesheet" href="./styles/parkingSpaceView.css" />
-  <title>Parking Spaces</title>
 </head>
 
 <body>
   <div class="container">
     <div class="left-container">
+
       <div class="bg-div">
         <img src="../assets/logo-black.png" alt="logo" width="100%" />
         <div>
           <ul class="menu">
             <li>
+
               <a href="./dashboardView.php">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
@@ -40,6 +43,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
                 </svg>
+
                 Parking Spaces
               </a>
             </li>
@@ -73,51 +77,53 @@
           <a href="#">CMC</a>
         </div>
       </div>
-      <div class="btn-section">
-        <a href="./parkingSpaceFromView.php">
-          <div class="btn bg-off-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo text-green">
-              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
-            </svg>
-            Add
-          </div>
-        </a>
-        <a href="./parkingSpaceEditView.php">
-          <div class="btn bg-off-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo text-primary">
-              <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
-              <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
-            </svg>
-            Edit
-          </div>
-        </a>
-        <a href="./parkingSpaceDeleteView.php">
-          <div class="btn bg-off-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo text-red">
-              <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clip-rule="evenodd" />
-            </svg>
-            Remove
-          </div>
-        </a>
-        <a>
-          <div class="btn bg-off-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
-              <path fill-rule="evenodd" d="M6.72 5.66l11.62 11.62A8.25 8.25 0 006.72 5.66zm10.56 12.68L5.66 6.72a8.25 8.25 0 0011.62 11.62zM5.105 5.106c3.807-3.808 9.98-3.808 13.788 0 3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788z" clip-rule="evenodd" />
-            </svg>
-            Close Temporarily
-          </div>
-        </a>
+      <div class="header text-md">
+        <p>Select the parking space you want to delete</p>
       </div>
-      <div class="parking-space-section">
-
-        <div id="parkingCards" class="parking-cards">
-          <!-- Parking Cards will be generated dynamically using JavaScript -->
+      <div class="ml-20">
+        <select id="parkingDropdown" class="p-form-dropdown width-40">
+          <option value="" disabled selected>Select Parking Space</option>
+          <option value="parking1">Parking Lot 1</option>
+          <option value="parking2">Parking Lot 2</option>
+          <option value="parking3">Parking Lot 3</option>
+          <option value="parking4">Parking Lot 4</option>
+          <!-- Add more options with dummy parking names as needed -->
+        </select>
+      </div>
+      <div class="center">
+        <div id="card-container mt-20"></div>
+        <div class="c-btn-section">
+          <input type="button" id="cancelButton" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
+          <input type="submit" id="deleteButton" value="Delete Parking Space" class="c-btn bg-red">
         </div>
-
       </div>
     </div>
   </div>
-  <script src="./js/parkingSpaceView.js"> </script>
+
+  <script src="./js/confirmationCard.js"></script>
+  <script>
+    // Function to hide/show buttons based on dropdown selection
+    function toggleButtons() {
+      const parkingDropdown = document.getElementById("parkingDropdown");
+      const cancelButton = document.getElementById("cancelButton");
+      const deleteButton = document.getElementById("deleteButton");
+
+      if (parkingDropdown.value === "") {
+        cancelButton.style.display = "none";
+        deleteButton.style.display = "none";
+      } else {
+        cancelButton.style.display = "inline-block"; // Show the buttons
+        deleteButton.style.display = "inline-block";
+      }
+    }
+
+    // Call the function when the dropdown selection changes
+    const parkingDropdown = document.getElementById("parkingDropdown");
+    parkingDropdown.addEventListener("change", toggleButtons);
+
+    // Initial call to set the initial button state
+    toggleButtons();
+  </script>
 </body>
 
 </html>

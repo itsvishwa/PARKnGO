@@ -70,6 +70,7 @@ function createCard(data) {
     					</tbody>
 						</table>
         </div>
+        
     `;
 
   document.getElementById('card-container').appendChild(card);

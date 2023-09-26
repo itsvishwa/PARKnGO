@@ -82,7 +82,6 @@
 					Confirm the details
 				</div>
 				<div id="card-container"></div>
-
 				<div class="c-btn-section">
 					<input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
 					<input type="submit" value="Save Parking Space" class="c-btn bg-black">
