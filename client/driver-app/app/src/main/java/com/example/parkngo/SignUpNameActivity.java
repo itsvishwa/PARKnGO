@@ -6,17 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpNameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_up_name);
     }
 
-    public void main_act_start_btn(View v){
-        Intent i = new Intent(this, HeroActivity.class);
+    public void sign_up_name_act_continue_btn_handler(View v){
+        Intent i = new Intent(this, SignupVehicleInfoActivity.class);
         startActivity(i);
     }
 }
-

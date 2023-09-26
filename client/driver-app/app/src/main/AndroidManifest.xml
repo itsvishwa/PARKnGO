@@ -13,6 +13,27 @@
         android:theme="@style/Theme.Parkngo"
         tools:targetApi="31">
         <activity
+            android:name=".SignupVehicleInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignUpNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupOtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignupMobileNumberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginOtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginMobileNumberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HeroActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

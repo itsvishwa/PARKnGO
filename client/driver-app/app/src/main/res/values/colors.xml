@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#FFA811</color>
+    <color name="textPrimary">#FF000000</color>
+    <color name="textSecondary">#35332F</color>
+    <color name="loginSignupBtnColor">#F8DAA7</color>
+    <color name="loginSignupInputFieldColor">#F9D391</color>
 </resources>
