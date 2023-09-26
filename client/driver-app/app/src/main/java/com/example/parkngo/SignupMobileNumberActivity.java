@@ -18,4 +18,9 @@ public class SignupMobileNumberActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignupOtpActivity.class);
         startActivity(i);
     }
+
+    public void signup_mobile_number_act_back_btn_handler(View v){
+        Intent i = new Intent(this, SignUpNameActivity.class);
+        startActivity(i);
+    }
 }

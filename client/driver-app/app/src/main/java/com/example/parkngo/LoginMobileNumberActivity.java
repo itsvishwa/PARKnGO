@@ -18,4 +18,9 @@ public class LoginMobileNumberActivity extends AppCompatActivity {
         Intent i = new Intent(this, LoginOtpActivity.class);
         startActivity(i);
     }
+
+    public void login_mobile_number_act_back_btn_handler(View v){
+        Intent i = new Intent(this, HeroActivity.class);
+        startActivity(i);
+    }
 }

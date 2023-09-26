@@ -18,4 +18,9 @@ public class SignUpNameActivity extends AppCompatActivity {
         Intent i = new Intent(this, SignupMobileNumberActivity.class);
         startActivity(i);
     }
+
+    public void sign_up_name_act_back_btn_handler(View v){
+        Intent i = new Intent(this, HeroActivity.class);
+        startActivity(i);
+    }
 }
