@@ -100,7 +100,7 @@
             Remove
           </div>
         </a>
-        <a href="#">
+        <a href="./parkingOfficerActivitiesView.php">
           <div class="btn bg-off-white">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo text-black">
               <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />

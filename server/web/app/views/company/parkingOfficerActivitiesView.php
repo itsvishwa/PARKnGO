@@ -57,13 +57,13 @@
         </div>
       </div>
     </div>
-    <div class="right-container">
+    <div class="right-container mb-20">
       <div class="header">
         <div class="pageName">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <h3>Delete Parking Space</h3>
+          <h3>View Activities</h3>
         </div>
         <div class="profile">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
@@ -104,15 +104,32 @@
           </div>
         </div>
 
-        <div class="c-btn-section">
-          <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
-          <input type="submit" value="Delete Parking Officer" class="c-btn bg-red">
+        <div class="table-div">
+          <table id="advancedUpdatesTable" class="advancedUpdatesTable table">
+            <tr class="tr-h">
+              <th class="th">Number Plate</th>
+              <th class="th">Parking Space</th>
+              <th class="th">Vehicle Type</th>
+              <th class="th">Arrived at</th>
+              <th class="th">Left at</th>
+              <th class="th">Parked Hours</th>
+              <th class="th">Assign By</th>
+              <th class="th">Released By</th>
+              <th class="th">Total Price</th>
+              <th class="th">Paid By</th>
+            </tr>
+            <tbody>
+              <!-- Table rows will be generated dynamically using JavaScript -->
+            </tbody>
+          </table>
         </div>
       </div>
 
     </div>
 
     <script src="./js/parkingOfficerView.js"></script>
+    <!-- this should be filter out only for the given name -->
+    <script src="./js/updateView.js"></script>
 </body>
 
 </html>
