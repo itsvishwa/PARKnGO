@@ -2,6 +2,7 @@ package com.example.parkngo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,6 +15,12 @@ public class SignupOtpActivity extends AppCompatActivity {
     }
 
     public void signup_otp_act_signup_btn_handler(View v){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 
+    public void signup_otp_act_back_btn_handler(View v){
+        Intent i = new Intent(this, SignupMobileNumberActivity.class);
+        startActivity(i);
     }
 }
