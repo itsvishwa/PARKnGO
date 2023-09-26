@@ -75,7 +75,7 @@
       <div class="header text-md">
         <p>Select the parking space you want to edit</p>
       </div>
-      <div class="ml-20">
+      <div class="ml-20 border-bottom">
         <select id="parkingDropdown" class="p-form-dropdown width-40">
           <option value="" disabled selected>Select Parking Space</option>
           <option value="parking1">Parking Lot 1</option>

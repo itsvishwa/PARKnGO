@@ -65,7 +65,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <h3>Parking Spaces</h3>
+          <h3>Close Parking Spaces</h3>
         </div>
 
         <div class="profile">
@@ -92,9 +92,19 @@
       </div>
       <div class="center">
         <div id="card-container mt-20"></div>
+        <div class="time-section">
+          <div class="time-card">
+            <h4 class="f-14 mr-10">Close from</h4>
+            <input type="datetime-local" id="closureTimeInput" class="p-form-input pr-5">
+          </div>
+          <div class="time-card">
+            <h4 class="f-14 mr-10">Until</h4>
+            <input type="datetime-local" id="untilTimeInput" class="p-form-input pr-5">
+          </div>
+        </div>
         <div class="c-btn-section">
           <input type="button" id="cancelButton" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
-          <input type="submit" id="deleteButton" value="Delete Parking Space" class="c-btn bg-red">
+          <input type="submit" id="deleteButton" value="Close the Parking" class="c-btn bg-black">
         </div>
       </div>
     </div>
@@ -102,18 +112,21 @@
 
   <script src="./js/confirmationCard.js"></script>
   <script>
-    // Function to hide/show buttons based on dropdown selection
+    // Function to hide/show buttons and time-section based on dropdown selection
     function toggleButtons() {
       const parkingDropdown = document.getElementById("parkingDropdown");
       const cancelButton = document.getElementById("cancelButton");
       const deleteButton = document.getElementById("deleteButton");
+      const timeSection = document.querySelector(".time-section");
 
       if (parkingDropdown.value === "") {
         cancelButton.style.display = "none";
         deleteButton.style.display = "none";
+        timeSection.style.display = "none"; // Hide the time-section
       } else {
         cancelButton.style.display = "inline-block"; // Show the buttons
         deleteButton.style.display = "inline-block";
+        timeSection.style.display = "flex"; // Show the time-section
       }
     }
 
@@ -121,9 +134,25 @@
     const parkingDropdown = document.getElementById("parkingDropdown");
     parkingDropdown.addEventListener("change", toggleButtons);
 
-    // Initial call to set the initial button state
+    // Initial call to set the initial button and time-section state
     toggleButtons();
+
+    function populateTimeData() {
+      const closureTimeInput = document.getElementById("closureTimeInput").value;
+      const untilTimeInput = document.getElementById("untilTimeInput").value;
+
+      // Display the input values directly
+      const closureTimeElement = document.getElementById("closureTime");
+      const untilTimeElement = document.getElementById("untilTime");
+
+      closureTimeElement.textContent = closureTimeInput;
+      untilTimeElement.textContent = untilTimeInput;
+    }
+
+    // Call the function to populate the time data
+    populateTimeData();
   </script>
+
 </body>
 
 </html>
