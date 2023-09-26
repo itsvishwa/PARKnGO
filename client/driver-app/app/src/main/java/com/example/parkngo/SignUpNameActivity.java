@@ -15,7 +15,7 @@ public class SignUpNameActivity extends AppCompatActivity {
     }
 
     public void sign_up_name_act_continue_btn_handler(View v){
-        Intent i = new Intent(this, SignupVehicleInfoActivity.class);
+        Intent i = new Intent(this, SignupMobileNumberActivity.class);
         startActivity(i);
     }
 }
