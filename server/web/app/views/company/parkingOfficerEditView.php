@@ -125,7 +125,7 @@
 
     </div>
 
-    <script src="./js/parkingSpaceFormView.js"></script>
+    <script src="./js/parkingOfficerView.js"></script>
 </body>
 
 </html>

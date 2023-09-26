@@ -118,21 +118,15 @@ function populateParkingCards() {
 
     parkingOfficerContainer.appendChild(card);
   });
-
-  const screenWidth = window.innerWidth;
-  const cardsPerRow =
-    screenWidth >= 1400
-      ? 4
-      : screenWidth >= 1000
-      ? 3
-      : screenWidth >= 600
-      ? 2
-      : 1;
-
-  if (index >= cardsPerRow) {
-    card.style.display = 'none';
-  }
 }
 
 populateParkingCards();
 window.addEventListener('resize', populateParkingCards);
+
+function cancel() {
+  if (
+    confirm('Are you sure you want to cancel? All the data will not be saved.')
+  ) {
+    window.location.href = './parkingOfficerView.php';
+  }
+}
