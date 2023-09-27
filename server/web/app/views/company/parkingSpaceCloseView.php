@@ -91,7 +91,7 @@
         </select>
       </div>
       <div class="center">
-        <div id="card-container mt-20"></div>
+        <div id="card-container" class="mt-20"></div>
         <div class="time-section">
           <div class="time-card">
             <h4 class="f-14 mr-10">Close from</h4>
@@ -110,48 +110,7 @@
     </div>
   </div>
 
-  <script src="./js/confirmationCard.js"></script>
-  <script>
-    // Function to hide/show buttons and time-section based on dropdown selection
-    function toggleButtons() {
-      const parkingDropdown = document.getElementById("parkingDropdown");
-      const cancelButton = document.getElementById("cancelButton");
-      const deleteButton = document.getElementById("deleteButton");
-      const timeSection = document.querySelector(".time-section");
-
-      if (parkingDropdown.value === "") {
-        cancelButton.style.display = "none";
-        deleteButton.style.display = "none";
-        timeSection.style.display = "none"; // Hide the time-section
-      } else {
-        cancelButton.style.display = "inline-block"; // Show the buttons
-        deleteButton.style.display = "inline-block";
-        timeSection.style.display = "flex"; // Show the time-section
-      }
-    }
-
-    // Call the function when the dropdown selection changes
-    const parkingDropdown = document.getElementById("parkingDropdown");
-    parkingDropdown.addEventListener("change", toggleButtons);
-
-    // Initial call to set the initial button and time-section state
-    toggleButtons();
-
-    function populateTimeData() {
-      const closureTimeInput = document.getElementById("closureTimeInput").value;
-      const untilTimeInput = document.getElementById("untilTimeInput").value;
-
-      // Display the input values directly
-      const closureTimeElement = document.getElementById("closureTime");
-      const untilTimeElement = document.getElementById("untilTime");
-
-      closureTimeElement.textContent = closureTimeInput;
-      untilTimeElement.textContent = untilTimeInput;
-    }
-
-    // Call the function to populate the time data
-    populateTimeData();
-  </script>
+  <script src="./js/parkingSpaceCloseCard.js"></script>
 
 </body>
 

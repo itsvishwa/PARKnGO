@@ -105,8 +105,8 @@
         </div>
 
         <div class="c-btn-section">
-          <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
-          <input type="submit" value="Delete Parking Officer" class="c-btn bg-red">
+          <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancelDelete()">
+          <input type="submit" value="Delete Parking Officer" class="c-btn bg-red" onclick="deleteMessage()">
         </div>
       </div>
 

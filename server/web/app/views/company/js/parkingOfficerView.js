@@ -130,3 +130,17 @@ function cancel() {
     window.location.href = './parkingOfficerView.php';
   }
 }
+
+function deleteMessage() {
+  if (
+    confirm(
+      'Are you sure you want to delete? All the data of the officer will be deleted.',
+    )
+  ) {
+    window.location.href = './parkingOfficerView.php';
+  }
+}
+
+function cancelDelete() {
+  window.location.href = './parkingOfficerView.php';
+}

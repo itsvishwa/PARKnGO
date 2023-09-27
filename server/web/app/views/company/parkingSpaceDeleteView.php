@@ -22,7 +22,6 @@
         <div>
           <ul class="menu">
             <li>
-
               <a href="./dashboardView.php">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
@@ -43,7 +42,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
                 </svg>
-
                 Parking Spaces
               </a>
             </li>
@@ -72,8 +70,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
           </svg>
-
-
           <a href="#">CMC</a>
         </div>
       </div>
@@ -91,7 +87,7 @@
         </select>
       </div>
       <div class="center">
-        <div id="card-container mt-20"></div>
+        <div id="card-container" class="mt-20"></div>
         <div class="c-btn-section">
           <input type="button" id="cancelButton" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
           <input type="submit" id="deleteButton" value="Delete Parking Space" class="c-btn bg-red">
@@ -100,29 +96,9 @@
     </div>
   </div>
 
-  <script src="./js/confirmationCard.js"></script>
-  <script>
-    // Function to hide/show buttons based on dropdown selection
-    function toggleButtons() {
-      const parkingDropdown = document.getElementById("parkingDropdown");
-      const cancelButton = document.getElementById("cancelButton");
-      const deleteButton = document.getElementById("deleteButton");
+  <!-- Include your JavaScript for creating parking space cards -->
+  <script src="./js/parkingSpaceViewCard.js">
 
-      if (parkingDropdown.value === "") {
-        cancelButton.style.display = "none";
-        deleteButton.style.display = "none";
-      } else {
-        cancelButton.style.display = "inline-block"; // Show the buttons
-        deleteButton.style.display = "inline-block";
-      }
-    }
-
-    // Call the function when the dropdown selection changes
-    const parkingDropdown = document.getElementById("parkingDropdown");
-    parkingDropdown.addEventListener("change", toggleButtons);
-
-    // Initial call to set the initial button state
-    toggleButtons();
   </script>
 </body>
 

@@ -101,3 +101,19 @@
   font-weight: 700;
   margin-bottom: 5px;
 }
+
+/* Assign Parking Officer */
+
+.filter {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.officer-parking-div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
