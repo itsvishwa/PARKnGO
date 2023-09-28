@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.OfficerTestApp" parent="Base.Theme.OfficerTestApp" />
+
+    <style name="loginSignupBtnStyle">
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:backgroundTint">@color/loginSignupBtnColor</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
