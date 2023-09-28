@@ -162,19 +162,18 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/login_act_send_otp_btn"
+            style="@style/loginSignupBtnStyle"
             android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:backgroundTint="@color/loginSignupBtnColor"
+            android:layout_height="wrap_content"
+            android:paddingVertical="23dp"
             android:text="Send OTP Code"
-            android:textColor="@color/textMain"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            app:cornerRadius="11dp"
+            android:onClick="login_otp_act_send_otp_btn_handler"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
