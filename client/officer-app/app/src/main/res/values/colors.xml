@@ -12,4 +12,7 @@
     <color name="loginSignupInputFieldColor">#F9D391</color>
     <color name="bottomNavUnselectedItemColor">#827E83</color>
     <color name="backgroundColor">#F6EAD3</color>
+    <color name="assignReleaseBtnBackgroundColor">#F5EAD3</color>
+    <color name="assignReleaseBtnOvalColor">#FFA811</color>
+    <color name="profileInputFieldStrokeColor">#429C968B</color>
 </resources>
