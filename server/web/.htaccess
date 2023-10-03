@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Stop processing if already /public is in the url
+RewriteRule ^public/ - [L]
+
+# if nothing provided
+RewriteRule ^$ public/ [L]
+
+# append all other to public/
+RewriteRule (.*) public/$1 [L]
+</IfModule>
