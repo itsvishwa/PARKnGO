@@ -1,5 +1,0 @@
-resource files for web app
-
-The "resources/" directory is often used for storing non-public assets or resource files that are needed by your web application but are not directly accessible to users via the web browser.
-These resource files can include configuration templates, language localization files, server-side scripts, or any other files that are used internally by the application.
-Unlike the "public/" directory, the contents of the "resources/" directory are typically not served directly by the web server to external users. Instead, they are accessed programmatically by the server-side code.
