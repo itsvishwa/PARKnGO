@@ -8,6 +8,25 @@ class Company
     $this->db = new Database;
   }
 
+  // Register company
+  public function register($data)
+  {
+    $this->db->query('INSERT INTO company (name, address, email, phone_number, password) VALUES (:company_name, :company_address, :company_email, :phone_number, :password)');
+    // Bind values
+    $this->db->bind(':company_name', $data['company_name']);
+    $this->db->bind(':company_address', $data['company_address']);
+    $this->db->bind(':company_email', $data['company_email']);
+    $this->db->bind(':phone_number', $data['phone_number']);
+    $this->db->bind(':password', $data['password']);
+
+    // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Find company by email
   public function findCompanyByEmail($email)
   {

@@ -48,12 +48,12 @@
             <div style="width: 49%">
               <label for="password" class="form-label">Password*</label><br />
               <input type="password" id="password" name="password" required class="input-field" placeholder="Enter password" value="<?php echo $data['password'] ?>" /><br />
-              <span><?php echo $data['password_err']; ?></span>
+              <span class="f-12 text-red"><?php echo $data['password_err']; ?></span>
             </div>
             <div style="width: 48%">
               <label for="confirm_password" class="form-label">Confirm Password*</label><br />
               <input type="password" id="confirm_password" name="confirm_password" required class="input-field" placeholder="Confirm password" value="<?php echo $data['confirm_password'] ?>" /><br />
-              <span><?php echo $data['confirm_password_err']; ?></span>
+              <span class="f-12 text-red"><?php echo $data['confirm_password_err']; ?></span>
             </div>
           </div>
 
