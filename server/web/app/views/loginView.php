@@ -31,7 +31,7 @@
               name="email"
               required
               class="input-field"
-              placeholder="Enter company email"
+              placeholder="Enter admin email"
             /><br />
 
             <label for="password" class="form-label">Password</label><br />
