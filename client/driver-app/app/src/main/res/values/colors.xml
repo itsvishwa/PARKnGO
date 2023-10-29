@@ -7,4 +7,6 @@
     <color name="textSecondary">#35332F</color>
     <color name="loginSignupBtnColor">#F8DAA7</color>
     <color name="loginSignupInputFieldColor">#F9D391</color>
+    <color name="bottomNavUnselectedItemColor">#827E83</color>
+    <color name="backgroundColor">#F6EAD3</color>
 </resources>

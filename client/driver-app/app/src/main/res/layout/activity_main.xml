@@ -6,15 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/main_act_start_btn"
-        android:layout_width="wrap_content"
+
+    <FrameLayout
+        android:id="@+id/framelayout_main_act"
+        android:background="@color/backgroundColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navbar"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navbar"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        app:menu="@menu/bottom_navigation_bar"
+        app:labelVisibilityMode="labeled"
+        android:background="#F4EDDE"
+        app:itemRippleColor="@color/primaryColor"
+        app:itemIconTint="@color/navbar_item"
+        app:itemTextColor="@color/navbar_item"
+        android:paddingVertical="15dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="main_act_start_btn"
-        android:text="start"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

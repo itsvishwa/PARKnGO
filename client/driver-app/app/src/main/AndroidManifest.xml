@@ -13,22 +13,22 @@
         android:theme="@style/Theme.Parkngo"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpNameActivity"
+            android:name=".signup.SignUpNameActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupOtpActivity"
+            android:name=".signup.SignupOtpActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupMobileNumberActivity"
+            android:name=".signup.SignupMobileNumberActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginOtpActivity"
+            android:name=".login.LoginOtpActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginMobileNumberActivity"
+            android:name=".login.LoginMobileNumberActivity"
             android:exported="false" />
         <activity
-            android:name=".HeroActivity"
+            android:name=".login.HeroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
