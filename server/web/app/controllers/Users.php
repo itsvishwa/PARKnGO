@@ -64,6 +64,16 @@ class Users extends Controller
         //   $this->view('company/registrationView', $data);
         // }
 
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        // Register Company
+        if ($this->userModel->register($data)) {
+          // Redirect to login
+          redirect('users/loginView');
+        } else {
+          die('Something went wrong');
+        }
+
         die('SUCCESS');
       } else {
         // Load View with errors
