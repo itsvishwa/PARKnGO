@@ -16,8 +16,6 @@ class Pages extends Controller
       'admin' => $admin
     ];
 
-
-
     $this->view('homeview');
   }
 }

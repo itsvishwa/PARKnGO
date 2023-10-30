@@ -12,4 +12,19 @@ class Companys extends Controller
   {
     $this->view('company/dashboardView');
   }
+
+  public function updateView()
+  {
+    $this->view('company/updateView');
+  }
+
+  public function parkingOfficerView()
+  {
+    $this->view('company/parkingOfficerView');
+  }
+
+  public function parkingSpaceView()
+  {
+    $this->view('company/parkingSpaceView');
+  }
 }

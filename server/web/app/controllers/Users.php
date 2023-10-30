@@ -2,9 +2,11 @@
 class Users extends Controller
 {
   private $userModel;
+  private $userModelAdmin;
   public function __construct()
   {
     $this->userModel = $this->model('Company');
+    $this->userModelAdmin = $this->model('Admin');
   }
 
   public function registrationView()
@@ -114,30 +116,52 @@ class Users extends Controller
         'password_err' => '',
       ];
 
-
-      if ($this->userModel->findCompanyByEmail($data['email'])) {
+      if ($this->userModelAdmin->findAdminByEmail($data['email'])) {
+        // Admin found
+        if (!empty($data['password']) && empty($data['email_err'])) {
+          $loggedInUser = $this->userModelAdmin->login($data['email'], $data['password']);
+          if ($loggedInUser) {
+            // Create Session
+            $this->createAdminSession($loggedInUser);
+          } else {
+            $data['password_err'] = 'Password incorrect';
+            $this->view('loginView', $data);
+          }
+        }
+      } else if ($this->userModel->findCompanyByEmail($data['email'])) {
         // Company found
+        if (!empty($data['password']) && empty($data['email_err'])) {
+          $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+          if ($loggedInUser) {
+            // Create Session
+            $this->createUserSession($loggedInUser);
+          } else {
+            $data['password_err'] = 'Password incorrect';
+            $this->view('loginView', $data);
+          }
+        }
       } else {
         // Company not found
         $data['email_err'] = 'User not found';
-      }
-
-      // Check errors are empty
-      if (!empty($data['email']) && !empty($data['password']) && empty($data['email_err'])) {
-        //validate
-        // Check and set logged in user
-        $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-        if ($loggedInUser) {
-          // Create Session
-          $this->createUserSession($loggedInUser);
-        } else {
-          $data['password_err'] = 'Password incorrect';
-          $this->view('loginView', $data);
-        }
-      } else {
-        // Load View with errors
         $this->view('loginView', $data);
       }
+
+      // // Check errors are empty
+      // if (!empty($data['email']) && !empty($data['password']) && empty($data['email_err'])) {
+      //   //validate
+      //   // Check and set logged in user
+      //   $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+      //   if ($loggedInUser) {
+      //     // Create Session
+      //     $this->createUserSession($loggedInUser);
+      //   } else {
+      //     $data['password_err'] = 'Password incorrect';
+      //     $this->view('loginView', $data);
+      //   }
+      // } else {
+      //   // Load View with errors
+      //   $this->view('loginView', $data);
+      // }
     } else {
       // Init Data
       $data = [
@@ -159,6 +183,14 @@ class Users extends Controller
     $_SESSION['user_email'] = $user->email;
     $_SESSION['user_name'] = $user->name;
     redirect('companys/dashboardView');
+  }
+
+  public function createAdminSession($user)
+  {
+    $_SESSION['user_id'] = $user->admin_id;
+    $_SESSION['user_email'] = $user->email;
+    $_SESSION['user_name'] = $user->name;
+    redirect('admins/dashboardView');
   }
 
   public function logout()
