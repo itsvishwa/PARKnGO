@@ -1,3 +1,0 @@
-Public assets accessible via the web app
-
-Common assets in the "public/" directory include JavaScript files, CSS stylesheets, images, fonts, and any other files that need to be loaded by the client-side web browser.
