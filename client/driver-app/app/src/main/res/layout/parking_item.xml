@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/radius_6_solid"
+    android:translationZ="4dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_parking_item"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/parking_space_sample"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/my_top_circular" />
+
+    <TextView
+        android:id="@+id/name_parking_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingStart="11dp"
+        android:text="Parking Name Here"
+        android:textColor="@color/textPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/image_parking_item"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/type_parking_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:paddingStart="11dp"
+        android:text="parking type"
+        android:textColor="@color/textSecondary"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/image_parking_item"
+        app:layout_constraintTop_toBottomOf="@+id/name_parking_item" />
+
+    <TextView
+        android:id="@+id/rate_parking_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:paddingStart="11dp"
+        android:text="Rate"
+        android:textColor="@color/textSecondary"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/star_layout"
+        app:layout_constraintTop_toBottomOf="@+id/type_parking_item" />
+
+    <LinearLayout
+        android:id="@+id/star_layout"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:paddingStart="11dp"
+        app:layout_constraintStart_toEndOf="@+id/image_parking_item"
+        app:layout_constraintTop_toBottomOf="@+id/rate_parking_item">
+
+        <ImageView
+            android:id="@+id/star1_parking_item"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_star_24"
+            />
+
+        <ImageView
+            android:id="@+id/star2_parking_item"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_star_24" />
+
+        <ImageView
+            android:id="@+id/star3_parking_item"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_star_24" />
+
+        <ImageView
+            android:id="@+id/star4_parking_item"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_star_24" />
+
+        <ImageView
+            android:id="@+id/star5_parking_item"
+            android:layout_width="0dp"
+            android:layout_height="14dp"
+            android:layout_weight="1"
+            android:src="@drawable/baseline_star_24" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/review_count_parking_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="@color/textSecondary"
+        android:text="(00)"
+        app:layout_constraintBottom_toBottomOf="@+id/star_layout"
+        android:layout_marginStart="11dp"
+        app:layout_constraintStart_toEndOf="@+id/star_layout"
+        app:layout_constraintTop_toTopOf="@+id/star_layout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
