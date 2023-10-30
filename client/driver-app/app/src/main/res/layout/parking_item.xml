@@ -5,6 +5,9 @@
     android:layout_height="wrap_content"
     android:background="@drawable/radius_6_solid"
     android:translationZ="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:onClick="parking_space_item_handler"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 

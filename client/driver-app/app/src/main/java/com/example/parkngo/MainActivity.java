@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.parkngo.home.HomeFragment;
 import com.example.parkngo.parking.ParkingFragment;
+import com.example.parkngo.parking.ParkingSelectedFragment;
 import com.example.parkngo.profile.ProfileFragment;
 import com.example.parkngo.scan.ScanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -50,9 +50,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void edit_profile_btn_handler(View view) {
-        Toast.makeText(this, "edit profile button clicked", Toast.LENGTH_LONG).show();
+    public void parking_space_item_handler(View view) {
+//        TextView name = view.findViewById(R.id.name_parking_item);
+//        Toast.makeText(this, "parking item clicked" + name.getText().toString(), Toast.LENGTH_LONG).show();
+        replaceFragment(new ParkingSelectedFragment());
+    }
 
+    public void back_btn_parking_selected_handler(View view){
+        replaceFragment(new ParkingFragment());
     }
 
 }
