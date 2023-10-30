@@ -30,6 +30,8 @@ class Company
   // Login company
   public function login($email, $password)
   {
+
+
     $this->db->query('SELECT * FROM company WHERE email = :email');
     $this->db->bind(':email', $email);
 
