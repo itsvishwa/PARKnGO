@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.parkngo.login.HeroActivity;
+import com.example.parkngo.home.HomeFragment;
+import com.example.parkngo.parking.ParkingFragment;
+import com.example.parkngo.profile.ProfileFragment;
+import com.example.parkngo.scan.ScanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,21 +23,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         navbar = findViewById(R.id.navbar);
         navbar.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.navbar_home){
-                Toast.makeText(getApplicationContext(), "Home Icon Clicked", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "Home Icon Clicked", Toast.LENGTH_LONG).show();
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.navbar_scan) {
-                Toast.makeText(getApplicationContext(), "Scan Icon Clicked", Toast.LENGTH_LONG).show();
                 replaceFragment(new ScanFragment());
             } else if (itemId == R.id.navbar_parking) {
-                Toast.makeText(getApplicationContext(), "Parking Icon Clicked", Toast.LENGTH_LONG).show();
                 replaceFragment(new ParkingFragment());
             }else {
-                Toast.makeText(getApplicationContext(), "Profile Icon Clicked", Toast.LENGTH_LONG).show();
                 replaceFragment(new ProfileFragment());
             }
             return true;
@@ -52,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void edit_profile_btn_handler(View view) {
+        Toast.makeText(this, "edit profile button clicked", Toast.LENGTH_LONG).show();
+
+    }
 
 }
 

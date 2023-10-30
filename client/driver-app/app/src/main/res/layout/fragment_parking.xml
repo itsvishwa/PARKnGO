@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ParkingFragment"
+    tools:context=".parking.ParkingFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -84,13 +84,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8">
+        android:layout_weight="8"
+        android:paddingTop="10dp"
+        android:paddingHorizontal="18dp">
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Parking Page"
+        <ListView
+            android:divider="#00000000"
+            android:dividerHeight="10dp"
+            android:id="@+id/listview_parking_fragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
