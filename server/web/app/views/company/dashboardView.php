@@ -16,7 +16,7 @@
     <div class="left-container">
 
       <div class="bg-div">
-        <img src="../assets/logo-black.png" alt="logo" width="100%" />
+        <img src="<?php echo URLROOT; ?>/css/assets/logo-black.png" alt="logo" width="100%" />
         <div>
           <ul class="menu">
             <li class="active">
