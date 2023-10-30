@@ -18,15 +18,21 @@
     <div class="right-container">
       <form action="<?php echo URLROOT; ?>users/loginView" method="POST" enctype="multipart/form-data" class="login-form">
         <div>
+          <?php flash('register_success') ?>
           <h2 class="heading">Welcome Back</h2>
           <p class="sub-heading">Please enter your details to sign in.</p>
 
           <label for="email" class="form-label">Email</label><br />
           <input type="email" id="email" name="email" required class="input-field" placeholder="Enter company email" value="<?php echo $data['email'] ?>" /><br />
+          <span class="f-12 text-red"><?php if (!empty($data['email_err'])) {
+                                        echo $data['email_err'] . '<br />';
+                                      } ?></span>
 
           <label for="password" class="form-label">Password</label><br />
           <input type="password" id="password" name="password" required class="input-field" placeholder="Enter password" value="<?php echo $data['password'] ?>" /><br />
-
+          <span class="f-12 text-red"><?php if (!empty($data['password_err'])) {
+                                        echo $data['password_err'] . '<br />';
+                                      } ?></span>
           <div style="
                 display: flex;
                 justify-content: space-between;

@@ -68,13 +68,12 @@ class Users extends Controller
 
         // Register Company
         if ($this->userModel->register($data)) {
+          flash('register_success', 'You are registered Successfully. You can log in');
           // Redirect to login
           redirect('users/loginView');
         } else {
           die('Something went wrong');
         }
-
-        die('SUCCESS');
       } else {
         // Load View with errors
         $this->view('company/registrationView', $data);
@@ -110,13 +109,31 @@ class Users extends Controller
       // Init Data
       $data = [
         'email' => trim($_POST['email']),
-        'password' => trim($_POST['password'])
+        'password' => trim($_POST['password']),
+        'email_err' => '',
+        'password_err' => '',
       ];
 
+
+      if ($this->userModel->findCompanyByEmail($data['email'])) {
+        // Company found
+      } else {
+        // Company not found
+        $data['email_err'] = 'User not found';
+      }
+
       // Check errors are empty
-      if (!empty($data['email']) && !empty($data['password'])) {
+      if (!empty($data['email']) && !empty($data['password']) && empty($data['email_err'])) {
         //validate
-        die('SUCCESS');
+        // Check and set logged in user
+        $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+        if ($loggedInUser) {
+          // Create Session
+          $this->createUserSession($loggedInUser);
+        } else {
+          $data['password_err'] = 'Password incorrect';
+          $this->view('loginView', $data);
+        }
       } else {
         // Load View with errors
         $this->view('loginView', $data);
@@ -126,11 +143,39 @@ class Users extends Controller
       $data = [
         'email' => '',
         'password' => '',
+        'email_err' => '',
+        'password_err' => '',
       ];
 
 
       // Load View
       $this->view('loginView', $data);
+    }
+  }
+
+  public function createUserSession($user)
+  {
+    $_SESSION['user_id'] = $user->company_id;
+    $_SESSION['user_email'] = $user->email;
+    $_SESSION['user_name'] = $user->name;
+    redirect('companys/dashboardView');
+  }
+
+  public function logout()
+  {
+    unset($_SESSION['user_id']);
+    unset($_SESSION['user_email']);
+    unset($_SESSION['user_name']);
+    session_destroy();
+    redirect('users/loginView');
+  }
+
+  public function isLoggedIn()
+  {
+    if (isset($_SESSION['user_id'])) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

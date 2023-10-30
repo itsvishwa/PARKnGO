@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
-  <title>Document</title>
+  <title>PARKnGO</title>
 </head>
 
 <body>
