@@ -47,7 +47,7 @@
           </svg>
 
 
-          <a href="#">CMC</a>
+          <a href="#" class="profile-name">CMC</a>
         </div>
       </div>
       <div class="business">

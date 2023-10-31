@@ -69,48 +69,52 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
           </svg>
-          <a href="#">CMC</a>
+          <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
+          <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="header text-md">
         <p>Fill the following details to add a new parking officer</p>
       </div>
       <div class="form-div">
-        <form action="parkingSpaceSaveView.php" method="POST" class="officer-form" onsubmit="saveFormData()">
-
-          <div class="name-line">
-            <label for="firstName" class="p-form-label">Parking Officer Name *</label>
-            <div>
-              <input type="text" name="firstName" class="p-form-input width-40" placeholder="First Name" required>
-              <input type="text" name="lastName" class="p-form-input width-40" placeholder="Last Name" required>
+        <form action="<?php echo URLROOT; ?>companys/parkingOfficerFormView" method="POST" enctype="multipart/form-data">
+          <div class="officer-form pl-10">
+            <div class="name-line">
+              <label for="first_mame" class="p-form-label">Parking Officer Name *</label>
+              <div>
+                <input type="text" name="first_name" class="p-form-input width-40" placeholder="First Name" required value="<?php echo $data['first_name'] ?>">
+                <input type="text" name="last_name" class="p-form-input width-40" placeholder="Last Name" required value="<?php echo $data['last_name'] ?>">
+              </div>
             </div>
+
+            <label for="nic" class="p-form-label">NIC *</label>
+            <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required value="<?php echo $data['nic'] ?>">
+
+
+
+            <label for="phone_number" class="p-form-label">Parking Officer Mobile Number *</label>
+            <input type="text" name="phone_number" id="phone_number" placeholder="Enter Parking Officer Phone Number" class="p-form-input width-75" required value="<?php echo $data['phone_number'] ?>">
+            <span class="f-12 text-red"><?php echo $data['phone_number_err']; ?></span>
+
+            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
+            <select id="parking_id" name="parking_id" class="p-form-dropdown width-40" value="<?php echo $data['parking_id'] ?>">
+              <option value="" disabled selected>Select Parking Space</option>
+              <option value="parking1">Parking Lot 1</option>
+              <option value="parking2">Parking Lot 2</option>
+              <option value="parking3">Parking Lot 3</option>
+              <option value="parking4">Parking Lot 4</option>
+            </select>
+
+            <label for="profile_image" class="p-form-label mb-10">Profile Photo</label>
+            <input type="file" name="profile_image" id="profile_image" accept="image/*" <?php echo $data['profile_image'] ?>>
           </div>
 
-          <label for="nic" class="p-form-label">NIC *</label>
-          <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required>
-
-          <label for="officerID" class="p-form-label">Parking Officer ID *</label>
-          <input type="text" name="officerID" id="officerID" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
-
-          <label for="officerNumber" class="p-form-label">Parking Officer Mobile Number *</label>
-          <input type="text" name="officerNumber" id="officerNumber" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
-
-          <label for="parkingType" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
-          <select id="parkingDropdown" class="p-form-dropdown width-40">
-            <option value="" disabled selected>Select Parking Space</option>
-            <option value="parking1">Parking Lot 1</option>
-            <option value="parking2">Parking Lot 2</option>
-            <option value="parking3">Parking Lot 3</option>
-            <option value="parking4">Parking Lot 4</option>
-          </select>
-
-          <label for="officerDP" class="p-form-label mb-10">Profile Photo</label>
-          <input type="file" name="photo" id="photoUpload" accept="image/*">
+          <div class="c-btn-section">
+            <input type="button" value="Cancel" class="c-btn bg-black40">
+            <input type="submit" value="Save Parking Officer" class="c-btn bg-black">
+          </div>
         </form>
-        <div class="c-btn-section">
-          <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
-          <input type="submit" value="Save Parking Officer" class="c-btn bg-black">
-        </div>
+
       </div>
 
     </div>

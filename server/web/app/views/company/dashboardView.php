@@ -72,7 +72,8 @@
           </svg>
 
 
-          <a href="#">CMC</a>
+          <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
+          <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="business">

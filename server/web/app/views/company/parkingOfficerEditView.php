@@ -69,63 +69,95 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
           </svg>
-          <a href="#">CMC</a>
+          <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
+          <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="header text-md">
         <p>Fill the following details to add a new parking officer</p>
       </div>
       <div class="ml-20 border-bottom mb-10">
-        <select id="parkingDropdown" class="p-form-dropdown width-40">
+        <select id="parkingDropdown" class="p-form-dropdown width-40 text-black" name="officer_id" onchange="populateFormFields()">
           <option value="" disabled selected>Select Parking Officer</option>
-          <option value="officer1">Parking Officer 1</option>
-          <option value="officer2">Parking Officer 2</option>
-          <option value="officer3">Parking Officer 3</option>
-          <option value="officer4">Parking Officer 4</option>
-          <!-- Add more options with dummy parking names as needed -->
+          <?php
+
+          foreach ($data as $officer) {
+            echo '<option value="' . $officer->phone_number . '">' . $officer->officer_id . " - " . $officer->first_name . " " . $officer->last_name . '</option>';
+          }
+          ?>
         </select>
       </div>
       <div class="form-div">
-        <form action="parkingSpaceSaveView.php" method="POST" class="officer-form" onsubmit="saveFormData()">
+        <form action="parkingSpaceSaveView.php" method="POST">
 
-          <div class="name-line">
-            <label for="firstName" class="p-form-label">Parking Officer Name *</label>
-            <div>
-              <input type="text" name="firstName" class="p-form-input width-40" placeholder="First Name" required>
-              <input type="text" name="lastName" class="p-form-input width-40" placeholder="Last Name" required>
+          <div class="officer-form">
+            <div class="name-line">
+              <label for="first_name" class="p-form-label">Parking Officer Name *</label>
+              <div>
+                <input type="text" name="first_name" class="p-form-input width-40" placeholder="First Name" required>
+                <input type="text" name="last_name" class="p-form-input width-40" placeholder="Last Name" required>
+              </div>
             </div>
+
+            <label for="nic" class="p-form-label">NIC *</label>
+            <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required>
+
+            <label for="officer_id" class="p-form-label">Parking Officer ID *</label>
+            <input type="text" name="officer_id" id="officer_id" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
+
+            <label for="phone_number" class="p-form-label">Parking Officer Mobile Number *</label>
+            <input type="text" name="phone_number" id="phone_number" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
+
+            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
+            <select id="parking_id" class="p-form-dropdown width-40">
+              <option value="" disabled selected>Select Parking Space</option>
+              <option value="parking 1">Parking Lot 1</option>
+              <option value="parking 2">Parking Lot 2</option>
+              <option value="parking 3">Parking Lot 3</option>
+              <option value="parking 4">Parking Lot 4</option>
+            </select>
+
+            <label for="profile_image" class="p-form-label mb-10">Profile Photo</label>
+            <input type="file" name="profile_image" id="profile_image" accept="image/*">
+          </div>
+          <div class="c-btn-section">
+            <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
+            <input type="submit" value="Update Parking Officer" class="c-btn bg-black">
           </div>
 
-          <label for="nic" class="p-form-label">NIC *</label>
-          <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required>
-
-          <label for="officerID" class="p-form-label">Parking Officer ID *</label>
-          <input type="text" name="officerID" id="officerID" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
-
-          <label for="officerNumber" class="p-form-label">Parking Officer Mobile Number *</label>
-          <input type="text" name="officerNumber" id="officerNumber" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
-
-          <label for="parkingType" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
-          <select id="parkingDropdown" class="p-form-dropdown width-40">
-            <option value="" disabled selected>Select Parking Space</option>
-            <option value="parking1">Parking Lot 1</option>
-            <option value="parking2">Parking Lot 2</option>
-            <option value="parking3">Parking Lot 3</option>
-            <option value="parking4">Parking Lot 4</option>
-          </select>
-
-          <label for="officerDP" class="p-form-label mb-10">Profile Photo</label>
-          <input type="file" name="photo" id="photoUpload" accept="image/*">
         </form>
-        <div class="c-btn-section">
-          <input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
-          <input type="submit" value="Update Parking Officer" class="c-btn bg-black">
-        </div>
+
       </div>
 
     </div>
+    <script>
+      function populateFormFields() {
+        var selectElement = document.getElementById("parkingDropdown");
+        var selectedOfficerPhoneNumber = selectElement.value;
 
-    <script src="<?php echo URLROOT; ?>/js/company/parkingOfficerView.js"></script>
+        // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
+        // For example, assuming you have a JavaScript object containing officer details:
+        var officersData = <?php echo json_encode($data); ?>;
+
+        console.log(officersData)
+
+        // Find the selected officer in the officersData array
+        var selectedOfficer = officersData.find(function(officer) {
+          return officer.phone_number == selectedOfficerPhoneNumber;
+        });
+
+        // Populate form fields with officer details
+        if (selectedOfficer) {
+          document.querySelector('input[name="first_name"]').value = selectedOfficer.first_name;
+          document.querySelector('input[name="last_name"]').value = selectedOfficer.last_name;
+          document.getElementById('nic').value = selectedOfficer.nic;
+          document.getElementById('officer_id').value = selectedOfficer.officer_id;
+          document.getElementById('phone_number').value = selectedOfficer.phone_number;
+
+
+        }
+      }
+    </script>
 </body>
 
 </html>
