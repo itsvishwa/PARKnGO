@@ -15,4 +15,5 @@
     <color name="assignReleaseBtnBackgroundColor">#F5EAD3</color>
     <color name="assignReleaseBtnOvalColor">#FFA811</color>
     <color name="profileInputFieldStrokeColor">#429C968B</color>
+    <color name="detailBoxBackground">#FFF4DF</color>
 </resources>
