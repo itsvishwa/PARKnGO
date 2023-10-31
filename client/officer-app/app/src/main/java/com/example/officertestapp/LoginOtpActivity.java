@@ -12,9 +12,13 @@ public class LoginOtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_otp);
     }
-
     public void login_otp_act_continue_btn_handler(View v){
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public void login_otp_act_back_btn_handler(View v) {
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 }

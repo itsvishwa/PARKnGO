@@ -1,6 +1,7 @@
 package com.example.officertestapp;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -35,5 +36,13 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_act_frame_layout, f);
         fragmentTransaction.commit();
+    }
+
+    public void frag_home_main_assign_vehicle_btn_handler(View v) {
+        replaceFragment(new AssignVehicle01Fragment());
+    }
+
+    public void frag_home_main_release_slot_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot01Fragment());
     }
 }
