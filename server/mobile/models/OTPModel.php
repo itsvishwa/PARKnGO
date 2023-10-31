@@ -13,7 +13,7 @@ class OTPModel
         public function add_otp($otp_data)
         {
                 // define query
-                $this->db->query("INSERT INTO otp_codes (mobile_number, otp, time_stamp) VALUES (:mobile_number, :otp, FROM_UNIXTIME(:time_stamp))");
+                $this->db->query("INSERT INTO otp_codes (mobile_number, otp, time_stamp) VALUES (:mobile_number, :otp, :time_stamp)");
                 // bind values to the query
                 $this->db->bind(":mobile_number", $otp_data["mobile_number"]);
                 $this->db->bind(":otp", $otp_data["otp"]);
@@ -61,7 +61,7 @@ class OTPModel
                                 "time_stamp" => $result->time_stamp
                         ];
                 } else {
-                        // Return null if no result is found
+                        // Return false if no mobile number is found at db
                         return false;
                 }
         }
