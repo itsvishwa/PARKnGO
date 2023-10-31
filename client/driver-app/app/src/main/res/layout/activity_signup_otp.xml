@@ -80,7 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/signup_otp_act_textView2" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/mobile_number_otp_signup_act"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textPrimary"
@@ -101,7 +101,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/mobile_number_otp_signup_act" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 app:flow_horizontalAlign="center"
@@ -114,7 +114,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/login_otp_act_textView3">
 
                 <EditText
-                    android:id="@+id/editTextNumber2"
+                    android:id="@+id/sign_up_act_otp_digit_1"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:textAlignment="center"
@@ -139,7 +139,7 @@
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
 
                 <EditText
-                    android:id="@+id/editTextNumber3"
+                    android:id="@+id/sign_up_act_otp_digit_2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:textAlignment="center"
@@ -164,7 +164,7 @@
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout3">
 
                 <EditText
-                    android:id="@+id/editTextNumber4"
+                    android:id="@+id/sign_up_act_otp_digit_3"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:textAlignment="center"
@@ -189,7 +189,7 @@
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout4">
 
                 <EditText
-                    android:id="@+id/editTextNumber5"
+                    android:id="@+id/sign_up_act_otp_digit_4"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:textAlignment="center"
@@ -215,7 +215,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/sign_up_act_resend"
+                android:onClick="sign_up_act_resend_btn_handler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Resend (59 s)"

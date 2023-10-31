@@ -2,6 +2,7 @@
 
 // Load Config
 require_once 'config/config.php';
+// set timezone to unix time stamp
 
 // Load Helpers
 // require_once 'helpers/url_helper.php';

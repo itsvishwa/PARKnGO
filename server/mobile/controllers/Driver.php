@@ -16,23 +16,6 @@ class Driver extends Controller
         {
         }
 
-        public function register()
-        {
-                // echo "register called";
-
-                $driver_data = [
-                        "first_name" => trim($_POST["first_name"]),
-                        "last_name" => trim($_POST["last_name"]),
-                        "mobile_number" => trim($_POST["mobile_number"])
-                ];
-
-                // new mobile number - confirmed by get_otp
-                // add new driver details
-                $this->driver_model->add_driver($driver_data);
-                // send the response
-                echo $this->json->make_json_200("New Driver added succefully!");
-        }
-
         // generate and store the otp code
         public function get_otp($mobile_number)
         {
@@ -44,16 +27,16 @@ class Driver extends Controller
 
                 // if mobile number has a otp assigned to it already in the OTP table
                 if ($this->otp_model->is_mobile_number_exist($mobile_number) === true) {
-
                         $result = $this->otp_model->get_otp($mobile_number);
                         // calculate the time difference
-                        $time_diff = time() - strtotime($result["time_stamp"]);
+                        date_default_timezone_set('UTC');
+                        $time_diff = time() - $result["time_stamp"];
 
                         if ($time_diff > 60) {
                                 // delete old otp if the time limit exceed
                                 $this->otp_model->delete_otp($mobile_number);
                         } else {
-                                echo $this->json->make_json_400("Wait till the time limit");
+                                echo $this->json->make_json_400("Wait " . (60 - $time_diff) . " seconds to resend");
                                 exit; // TODO :: Check this
                         }
                 }
@@ -73,19 +56,39 @@ class Driver extends Controller
                 // send the otp code to the user via SMS gateway
 
                 // response => sucessfull
-                echo $this->json->make_json_200("OTP sended " . $otp);
+                echo $this->json->make_json_200("OTP is sent " . $otp);
         }
 
-        // check otp validation
-        public function validate_otp($mobile_number, $otp)
+        // register driver
+        public function register($otp)
         {
+                // fetch POST data
+                $driver_data = [
+                        "first_name" => trim($_POST["first_name"]),
+                        "last_name" => trim($_POST["last_name"]),
+                        "mobile_number" => trim($_POST["mobile_number"])
+                ];
+
                 $otp = hash('sha256', (string)$otp);
 
-                $result = $this->otp_model->get_otp($mobile_number);
+                $result = $this->otp_model->get_otp($driver_data["mobile_number"]);
 
                 if ($result !== false && $result["otp"] == $otp) {
-                        // response =>  otp is correct
-                        echo $this->json->make_json_200("Correct OTP code!");
+                        // otp is correct
+                        // check time limit exceed or not
+                        date_default_timezone_set('UTC');
+                        $time_diff = time() - $result["time_stamp"];
+
+                        if ($time_diff > 60) {
+                                echo $this->json->make_json_400("OTP Code has been expired");
+                                exit;
+                        }
+
+                        // add driver to the database
+                        $this->driver_model->add_driver($driver_data);
+
+                        // send the response
+                        echo $this->json->make_json_200("Registration Successfull!");
                 } else {
                         // response => invalid otp
                         echo $this->json->make_json_400("Invalid OTP code!");
