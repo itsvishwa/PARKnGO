@@ -67,6 +67,15 @@ class Officer
     }
   }
 
+  public function getOfficerDetailsUsingPhoneNumber($phone_number)
+  {
+    $this->db->query('SELECT * FROM parking_officer WHERE phone_number = :phone_number');
+    $this->db->bind(':phone_number', $phone_number);
+
+    $row = $this->db->single();
+
+    return $row;
+  }
   public function getAllOfficersDetails()
   {
     $this->db->query('SELECT * FROM parking_officer');

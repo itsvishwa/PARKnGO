@@ -91,13 +91,12 @@
             <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required value="<?php echo $data['nic'] ?>">
 
 
-
             <label for="phone_number" class="p-form-label">Parking Officer Mobile Number *</label>
             <input type="text" name="phone_number" id="phone_number" placeholder="Enter Parking Officer Phone Number" class="p-form-input width-75" required value="<?php echo $data['phone_number'] ?>">
             <span class="f-12 text-red"><?php echo $data['phone_number_err']; ?></span>
 
             <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
-            <select id="parking_id" name="parking_id" class="p-form-dropdown width-40" value="<?php echo $data['parking_id'] ?>">
+            <select id="parking_id" name="parking_id" class="p-form-dropdown width-40">
               <option value="" disabled selected>Select Parking Space</option>
               <option value="parking1">Parking Lot 1</option>
               <option value="parking2">Parking Lot 2</option>
