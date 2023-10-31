@@ -71,7 +71,8 @@
           </svg>
 
 
-          <a href="#">CMC</a>
+          <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
+          <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="btn-section">
@@ -122,13 +123,36 @@
       <div class="parking-space-section">
 
         <div id="officerCards" class="officerCards">
-          <!-- Parking Cards will be generated dynamically using JavaScript -->
+          <!-- Inside your HTML file where you want to display officer cards -->
+          <?php foreach ($data as $officer) : ?>
+            <div class="officer-card">
+              <div class="officer-section-one">
+                <img src="https://funkylife.in/wp-content/uploads/2023/08/whatsapp-dp-717.jpg" alt="profile image" class="dp-image" />
+                <h3 class="officer-name"><?php echo htmlspecialchars($officer->first_name . ' ' . $officer->last_name); ?></h3>
+                <h3 class="officer-id"><?php echo htmlspecialchars($officer->officer_id); ?></h3>
+                <h3 class="allocated-parking"><?php if (empty($officer->parking_id)) {
+                                                echo "Not assigned";
+                                              } else {
+                                                echo "Parking Lot " . htmlspecialchars($officer->parking_id);
+                                              } ?></h3>
+              </div>
+              <div class="officer-section-second">
+                <p>NIC <?php echo htmlspecialchars($officer->nic); ?></p>
+                <p class="officer-number">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="button-icon mr-5">
+                    <path fill-rule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clip-rule="evenodd" />
+                  </svg>
+                  <?php echo htmlspecialchars($officer->phone_number); ?>
+                </p>
+              </div>
+            </div>
+          <?php endforeach; ?>
+
         </div>
 
       </div>
     </div>
   </div>
-  <script src="<?php echo URLROOT; ?>/js/company/parkingOfficerView.js"></script>
 </body>
 
 </html>

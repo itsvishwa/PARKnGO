@@ -6,6 +6,9 @@ class Admins extends Controller
   public function __construct()
   {
     $this->adminModel = $this->model('admin');
+    if (!isset($_SESSION['user_id'])) {
+      redirect('users/login');
+    }
   }
 
   public function dashboardView()
