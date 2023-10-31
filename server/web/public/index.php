@@ -1,9 +1,6 @@
-<!-- Main file  -->
-<?php 
-    // require_once "./../app/bootloader.php";
-    if(isset($_GET["url"])){
-        echo $_GET["url"];
-    }else{
-        echo "welcome";
-    }
-?>
+<?php
+require_once "../app/bootstrap.php";
+
+
+// Init Core Library
+$init = new Core;
