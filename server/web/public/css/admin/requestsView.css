@@ -1,0 +1,245 @@
+.business {
+    margin-top: -12px;
+  }
+
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .menu li {
+    margin: 15px 0;
+    margin-left: 30px;
+    width: 150px;
+    padding: 8px 10px 8px 15px;
+  }
+
+  .menu-logo {
+    height: 25px;
+    display: flex;
+    
+  }
+  
+  .r-menu-logo {
+    height: 35px;
+    display: flex;
+  }
+  
+  .heading {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+  }
+  
+  .heading h4 {
+    margin-top: 50px;
+    font-size: 1rem;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+  
+  .card-section {
+    display: block;
+    margin-left: 20px;
+    justify-content: space-between;
+    padding-left: 50px;
+    width: 70%;
+    height:15%;
+  }
+  
+  .b-card {
+    position: relative;
+    margin-top: 12px;
+    margin-left: -45px;
+    margin-bottom: 20px 40px;
+    padding:40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    width: 125%;
+  }
+  
+  .b-card1-icon {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .b-card2-icon {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .b-card2-content {
+    margin-left: 4px;
+  }
+  
+  .b-card2-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .b-card2-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  
+  .b-card3-icon {
+
+     position: absolute;
+     top: 5;
+     right: 20px;
+     padding: 8px;
+     border-radius: 10px;
+     display: flex;
+     align-items: center; 
+
+  }
+  
+  .b-card3-content {
+    margin-left: 4px;
+  }
+  
+  .b-card3-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .b-card3-content p {
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .b-card1-icon {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .b-card4-icon {
+    position:absolute;
+    bottom: 4px;
+    left:96px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .b-card5-icon {
+    position:absolute;
+    bottom: 0.1px;
+    left:45px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .b-card6-icon {
+    position:absolute;
+    bottom: 1px;
+    left:710px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .b-card7-icon {
+
+    position: absolute;
+    top: 5;
+    bottom: 8px;
+    left:769px;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center; 
+
+ }
+
+  
+  .b-card4-content {
+    margin-left: 4px;
+  }
+  
+  .b-card4-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .b-card4-content p {
+    font-size: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .dashboard-main-section {
+    display: flex;
+    flex: 1;
+    width: 98%;
+    margin-bottom: 40px;
+  }
+  
+  .table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0px;
+    width: 100%;
+  }
+    
+  .table-div {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  table {
+    margin-left: 20px;
+    width: 96%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    background-color: #fffbf4;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    font-size: 0.9rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: #e7dbc7;
+  }
+  tr:nth-child(2n) {
+    background-color: #e7dbc742;
+  }
+  tr:nth-child(4n) {
+    background-color: #e7dbc742;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .right-container {
+      padding-left: 100px;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .right-container {
+      padding-left: 50px;
+    }
+  }
+  
+  @media screen and (min-width: 1400px) {
+    .right-container {
+      padding-left: 0px;
+    }
+  }
+  
+  @media screen and (min-width: 1700px) {
+    .right-container {
+      margin-left: 17%;
+    }
+  }
+  
