@@ -65,4 +65,16 @@ class OTPModel
                         return false;
                 }
         }
+
+        public function delete_otp($mobile_number)
+        {
+                // Define the query to delete the OTP record for the given mobile number
+                $this->db->query("DELETE FROM otp_codes WHERE mobile_number = :mobile_number");
+
+                // Bind the mobile number parameter
+                $this->db->bind(":mobile_number", $mobile_number);
+
+                // Execute the query to delete the OTP record
+                return $this->db->execute();
+        }
 }

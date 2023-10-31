@@ -26,32 +26,38 @@ class Driver extends Controller
                         "mobile_number" => trim($_POST["mobile_number"])
                 ];
 
-                // data validation
-                if (empty($driver_data["first_name"]) || empty($driver_data["first_name"]) || empty($driver_data["first_name"]) || strlen($driver_data["mobile_number"]) != 9) {
-                        // send the response => Invalid Data
-                        echo $this->json->make_json_400("Invalid Data, Operation Failed!");
-                } else {
-                        // validation succefull
-                        // add new driver details
-                        $this->driver_model->add_driver($driver_data);
-                        // send the response
-                        echo $this->json->make_json_200("New Driver added succefully!");
-                }
-        }
-
-        // check the mobile number exist or not
-        public function is_pn_exist($mobile_number)
-        {
-                if ($this->driver_model->is_mobile_number_exist($mobile_number)) {
-                        echo $this->json->make_json_200("true");
-                } else {
-                        echo $this->json->make_json_200("false");
-                }
+                // new mobile number - confirmed by get_otp
+                // add new driver details
+                $this->driver_model->add_driver($driver_data);
+                // send the response
+                echo $this->json->make_json_200("New Driver added succefully!");
         }
 
         // generate and store the otp code
-        public function init_otp($mobile_number)
+        public function get_otp($mobile_number)
         {
+                // if mobile number is already registered
+                if ($this->driver_model->is_mobile_number_exist($mobile_number) === true) {
+                        echo $this->json->make_json_400("mobile number is already registerd!");
+                        exit; // TODO :: Check this
+                }
+
+                // if mobile number has a otp assigned to it already in the OTP table
+                if ($this->otp_model->is_mobile_number_exist($mobile_number) === true) {
+
+                        $result = $this->otp_model->get_otp($mobile_number);
+                        // calculate the time difference
+                        $time_diff = time() - strtotime($result["time_stamp"]);
+
+                        if ($time_diff > 60) {
+                                // delete old otp if the time limit exceed
+                                $this->otp_model->delete_otp($mobile_number);
+                        } else {
+                                echo $this->json->make_json_400("Wait till the time limit");
+                                exit; // TODO :: Check this
+                        }
+                }
+
                 // generate a random OTP Code
                 $otp = rand(1000, 9000);
 
