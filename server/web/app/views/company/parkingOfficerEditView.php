@@ -88,7 +88,7 @@
         </select>
       </div>
       <div class="form-div">
-        <form action="parkingSpaceSaveView.php" method="POST">
+        <form action="<?php echo URLROOT; ?>companys/parkingOfficerEditView" method="POST">
 
           <div class="officer-form">
             <div class="name-line">
@@ -103,7 +103,7 @@
             <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required>
 
             <label for="officer_id" class="p-form-label">Parking Officer ID *</label>
-            <input type="text" name="officer_id" id="officer_id" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
+            <input type="text" name="officer_id" id="officer_id" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" disabled>
 
             <label for="phone_number" class="p-form-label">Parking Officer Mobile Number *</label>
             <input type="text" name="phone_number" id="phone_number" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>

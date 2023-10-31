@@ -256,6 +256,7 @@ body {
 }
 
 .black-button {
+  text-decoration: none;
   background-color: #000;
   color: #fff;
   border: none;
@@ -418,6 +419,7 @@ body {
 }
 
 .transparent-button {
+  text-decoration: none;
   background-color: transparent;
   color: #fff;
   border: 2px solid #fff;

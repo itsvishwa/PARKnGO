@@ -89,12 +89,13 @@ class Companys extends Controller
 
       if (empty($data['phone_number_err'])) {
         if ($this->officerModel->register($data)) {
-          $this->view('company/parkingOfficerView');
+          $officers = $this->officerModel->getAllOfficersDetails();
+          $this->view('company/parkingOfficerView', $officers);
         } else {
           die('Something went wrong');
         }
       } else {
-        $this->view('company/parkingOfficerView', $data);
+        $this->view('company/parkingOfficerFormView', $data);
       }
     } else {
       // Init data
@@ -117,9 +118,6 @@ class Companys extends Controller
 
   public function parkingOfficerEditView()
   {
-
-
-
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       //Pocess form
       // Sanitize POST data
@@ -131,7 +129,7 @@ class Companys extends Controller
         'first_name' => trim($_POST['first_name']),
         'last_name' => trim($_POST['last_name']),
         'nic' => trim($_POST['nic']),
-        //'officer_id' => trim($_POST['officer_id']),
+        'officer_id' => trim($_POST['officer_id']),
         'phone_number' => trim($_POST['phone_number']),
         //'parking_id' => trim($_POST['parking_id']),
         'profile_image' => trim($_FILES['profile_image']['name']),
@@ -139,13 +137,14 @@ class Companys extends Controller
         'phone_number_err' => '',
       ];
 
-      if ($this->officerModel->findOfficerByPhoneNumber($data['phone_number'])) {
+      if ($this->officerModel->findOfficerByPhoneNumber($data['phone_number'])  && $this->officerModel->getOfficerDetailsUsingPhoneNumber($data['phone_number'])->officer_id != $_POST['officer_id']) {
         $data['phone_number_err'] = 'Phone number is already taken';
       }
 
       if (empty($data['phone_number_err'])) {
-        if ($this->officerModel->register($data)) {
-          $this->view('company/parkingOfficerView');
+        if ($this->officerModel->update($data)) {
+          $officers = $this->officerModel->getAllOfficersDetails();
+          $this->view('company/parkingOfficerView', $officers);
         } else {
           die('Something went wrong');
         }
@@ -158,7 +157,7 @@ class Companys extends Controller
         'first_name' => '',
         'last_name' => '',
         'nic' => '',
-        //'officer_id' => '',
+        'officer_id' => '',
         'phone_number' => '',
         //'parking_id' => '',
         'profile_image' => '',
@@ -175,7 +174,9 @@ class Companys extends Controller
 
   public function parkingOfficerDeleteView()
   {
-    $this->view('company/parkingOfficerDeleteView');
+
+    $officers = $this->officerModel->getAllOfficersDetails();
+    $this->view('company/parkingOfficerDeleteView', $officers);
   }
 
   public function parkingOfficerAssignView()

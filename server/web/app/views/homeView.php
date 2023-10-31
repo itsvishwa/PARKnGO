@@ -17,7 +17,7 @@
     <h1 class="header-text">Revolutionize <span class="font-primary">Parking <br>Management</br></span></h1>
     <h2 class="sub-header-text">-PARK'N GO for Companies-</h2>
     <p class="p-text">Welcome to the future of parking management in Sri Lanka! Experience a new era of efficiency and control with PARK'N GO. Unleash the power to effortlessly manage your parking spaces, supercharge your operations, and elevate the parking experience for your clients.</p>
-    <button class="black-button">Get Started</button>
+    <a class="black-button" href="./users/loginView">Get Started</a>
   </div>
   <div class="main-section">
     <h2 class="section-header">Our Services</h2>
@@ -51,7 +51,7 @@
 
       </div>
     </div>
-    <button class="transparent-button">Get Started</button>
+    <a class="transparent-button" href="./users/loginView">Get Started</a>
   </div>
   <div class="footer">
     <p>Copyright &copy;2023 PARK'N GO. All rights reserved.</p>
