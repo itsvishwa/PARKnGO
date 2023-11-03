@@ -91,7 +91,7 @@
               </svg>
             </div>
             <div class="b-card-content text-green">
-              <h3>Rs. 108, 500</h3>
+              <h3>Rs. <?php echo $data['monthlyEarned']; ?></h3>
               <p>Earned this month</p>
             </div>
           </div>
@@ -102,7 +102,7 @@
               </span>
             </div>
             <div class="b-card-content text-black">
-              <h3>3245</h3>
+              <h3><?php echo $data['numberOfUsers'] ?></h3>
               <p>Monthly Users</p>
             </div>
           </div>
@@ -113,7 +113,7 @@
               </svg>
             </div>
             <div class="b-card-content text-green">
-              <h3>Rs. 5, 500</h3>
+              <h3>Rs. <?php echo $data['todayEarned']; ?></h3>
               <p>Earned today</p>
             </div>
           </div>
