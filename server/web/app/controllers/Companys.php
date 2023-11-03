@@ -3,6 +3,7 @@ class Companys extends Controller
 {
   private $companyModel;
   private $officerModel;
+  private $paymentModel;
 
   public function __construct()
   {
@@ -12,6 +13,7 @@ class Companys extends Controller
     }
 
     $this->officerModel = $this->model('Officer');
+    $this->paymentModel = $this->model('Payment');
   }
 
   public function index()
@@ -21,7 +23,18 @@ class Companys extends Controller
 
   public function dashboardView()
   {
-    $this->view('company/dashboardView');
+    $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount();
+    $todayEarned = $this->paymentModel->getTodayEarnedAmount();
+    $numberOfUsers = $this->paymentModel->getNumberOfUsers();
+
+
+    $data = [
+      'monthlyEarned' => $monthlyEarned,
+      'todayEarned' => $todayEarned,
+      'numberOfUsers' => $numberOfUsers,
+    ];
+
+    $this->view('company/dashboardView', $data);
   }
 
   public function updateView()
