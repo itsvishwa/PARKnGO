@@ -28,7 +28,7 @@
             android:name=".login.LoginMobileNumberActivity"
             android:exported="false" />
         <activity
-            android:name=".login.HeroActivity"
+            android:name=".HeroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
