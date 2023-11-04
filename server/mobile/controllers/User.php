@@ -54,8 +54,8 @@ class User extends Controller
         // send the otp sms
         private function send_sms($code, $mobile_number)
         {
-                $sid    = "";
-                $token  = "";
+                $sid    = SID;
+                $token  = TOKEN;
                 $twilio = new Client($sid, $token);
 
                 $message = $twilio->messages
