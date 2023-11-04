@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parkngo.R;
-import com.example.parkngo.login.HeroActivity;
+import com.example.parkngo.HeroActivity;
 
 public class SignUpNameActivity extends AppCompatActivity {
 
