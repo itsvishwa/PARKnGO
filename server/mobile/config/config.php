@@ -14,7 +14,8 @@ define('URLROOT', 'http://localhost/PARKnGO/server/mobile/');
 define('SITENAME', 'PARKnGO');
 
 // Twilio Configurations
-
+define("SID", "");
+define("TOKEN", "");
 
 
 //http://localhost/newParknGo/PARKnGO/server/mobile/users/login
