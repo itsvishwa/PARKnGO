@@ -216,12 +216,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
-                    <EditText
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
                         android:background="#C2BCAE"
-                        android:hint="10.45 AM\n04JUNE2023"
                         android:inputType="time"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView11"
@@ -250,12 +249,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
 
-                    <EditText
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
                         android:background="#C2BCAE"
-                        android:hint="03 H 20 mins"
                         android:inputType="time"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView12"
@@ -284,13 +282,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
 
-                    <EditText
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="4dp"
                         android:background="#C2BCAE"
-                        android:hint="300.00"
                         android:inputType="time"
                         android:textSize="15dp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView13"
