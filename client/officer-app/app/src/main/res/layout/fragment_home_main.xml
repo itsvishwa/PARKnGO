@@ -1,124 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
-    tools:context=".HomeMainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeMainFragment"
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
 
-    <LinearLayout
+    <!--    Top App Bar Here-->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/top_app_bar"
+        android:paddingHorizontal="18dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:background="@drawable/rounded_background_app_bar">
+            android:layout_height="match_parent">
 
-
-            <LinearLayout
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_weight="2.8"
                 android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="2.8"
-                    android:layout_height="match_parent"
-                    >
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="138dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/notification_icon_background"
+                    android:text="CMC Car Park 01"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/appbar_main_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="36dp"
-                        android:text="Hi, Dhanushika"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/appbar_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Hi, Dhanushika"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-                    <TextView
-                        android:id="@+id/appbar_secondary_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Parking Officer - CMC"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.8"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/appbar_icon_home_act"
-                        app:tint="@color/backgroundColor"
-                        android:layout_width="51dp"
-                        android:layout_height="51dp"
-                        android:scaleType="centerInside"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:background="@drawable/notification_icon_background"
-                        android:src="@drawable/baseline_notifications_none_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/appbar_secondary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Parking Officer - CMC"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/appbar_icon_home_act"
+                    app:tint="@color/backgroundColor"
+                    android:layout_width="51dp"
+                    android:layout_height="51dp"
+                    android:scaleType="centerInside"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/notification_icon_background"
+                    android:src="@drawable/baseline_notifications_none_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:paddingHorizontal="18dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/assign_btn_con_lay"
+            android:layout_width="match_parent"
+            android:elevation="8dp"
+            android:layout_height="123dp"
+            android:layout_marginTop="97dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="frag_home_main_assign_vehicle_btn_handler"
+            android:background="@drawable/assign_release_btn_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/textView8_home_fragment"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/half_oval_background"
+                android:gravity="center"
+                android:text="Assign a\n vehicle"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                 />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="165dp"
+                android:layout_height="123dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/assign_btn_img" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/release_btn_con_lay"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_height="123dp"
+            android:layout_marginTop="44dp"
+            android:elevation="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="frag_home_main_release_slot_btn_handler"
+            android:background="@drawable/assign_release_btn_background"
+            app:layout_constraintEnd_toEndOf="@+id/assign_btn_con_lay"
+            app:layout_constraintStart_toStartOf="@+id/assign_btn_con_lay"
+            app:layout_constraintTop_toBottomOf="@+id/assign_btn_con_lay">
 
-            <Button
-                android:id="@+id/assign_vehicle_btn"
-                android:layout_width="246dp"
-                android:layout_height="76dp"
-                android:layout_marginTop="132dp"
-                android:onClick="frag_home_main_assign_vehicle_btn_handler"
-                android:text="Assign a vehicle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.503"
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Release a\n parking\n slot"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@drawable/half_oval_background"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/release_parking_slot_btn"
-                android:layout_width="246dp"
-                android:layout_height="76dp"
-                android:text="Release a parking slot"
-                android:onClick="frag_home_main_release_slot_btn_handler"
+            <ImageView
+                android:layout_width="165dp"
+                android:layout_height="123dp"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/release_btn_image"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/assign_vehicle_btn"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/assign_vehicle_btn"
-                app:layout_constraintTop_toBottomOf="@+id/assign_vehicle_btn"
-                app:layout_constraintVertical_bias="0.262" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

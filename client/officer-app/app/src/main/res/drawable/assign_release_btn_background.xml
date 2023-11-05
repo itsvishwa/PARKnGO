@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <solid android:color="@color/assignReleaseBtnBackgroundColor" />
-            <corners android:radius="11dp" />
-        </shape>
-    </item>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/assignReleaseBtnBackgroundColor" />
+    <corners android:radius="20dp" />
+</shape>
 
-    <item android:left="0dp" android:right="300dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/assignReleaseBtnOvalColor" />
-            <corners android:radius="11dp"
-                android:topRightRadius="94dp"
-                android:bottomRightRadius="94dp"/>
-        </shape>
-    </item>
-</layer-list>
+
+
