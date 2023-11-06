@@ -9,6 +9,30 @@ class DriverModel
                 $this->db = new Database;
         }
 
+
+
+        // get driver details
+        public function get_driver($mobile_number)
+        {
+                $this->db->query("SELECT * FROM driver WHERE mobile_number = :mobile_number");
+                $this->db->bind(":mobile_number", $mobile_number);
+
+                $result = $this->db->single();
+
+                if ($result) {
+                        return [
+                                "driver_id" => $result->driver_id,
+                                "first_name" => $result->first_name,
+                                "last_name" => $result->last_name,
+                                "mobile_number" => $result->mobile_number
+                        ];
+                } else {
+                        return false;
+                }
+        }
+
+
+
         // add a new driver
         public function add_driver($driver_data)
         {
@@ -24,6 +48,8 @@ class DriverModel
                 return $this->db->execute();
         }
 
+
+
         // check whether the mobile number is exist or not
         public function is_mobile_number_exist($mobile_number)
         {
@@ -34,6 +60,22 @@ class DriverModel
                 $this->db->bind(":mobile_number", $mobile_number);
 
                 // execute the query
+                $this->db->execute();
+
+                // check the length of the result
+                if ($this->db->rowCount() > 0) {
+                        return true;
+                } else {
+                        return false;
+                }
+        }
+
+
+        // check whether the driver exist or not using driver_id
+        public function is_driver_id_exist($id)
+        {
+                $this->db->query("SELECT * FROM driver WHERE driver_id = :driver_id");
+                $this->db->bind(":driver_id", $id);
                 $this->db->execute();
 
                 // check the length of the result
