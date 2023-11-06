@@ -2,4 +2,17 @@
     <string name="app_name">OfficerTestApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="provinces">
+        <item>CP</item>
+        <item>EP</item>
+        <item>NC</item>
+        <item>NP</item>
+        <item>NW</item>
+        <item>SG</item>
+        <item>SP</item>
+        <item>UP</item>
+        <item>WP</item>
+    </string-array>
+
 </resources>

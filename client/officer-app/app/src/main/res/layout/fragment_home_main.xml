@@ -31,7 +31,7 @@
                     android:id="@+id/textView12"
                     android:layout_width="138dp"
                     android:layout_height="32dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/notification_icon_background"
                     android:text="CMC Car Park 01"
                     android:textColor="@color/white"
