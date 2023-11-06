@@ -137,7 +137,7 @@
           </div>
           <div class="table-div">
             <table id="updatesTable" class="table">
-              <tr class="tr-h" class="tr">
+              <tr class="tr-h">
                 <th class="th">Number Plate</th>
                 <th class="th">Arrived at</th>
                 <th class="th">Parked Hours</th>
@@ -145,10 +145,22 @@
                 <th class="th">Paid By</th>
               </tr>
               <tbody>
-                <!-- Table rows will be generated dynamically using JavaScript -->
+                <?php
+                // Assuming $updates is an array of data similar to the JavaScript updates array
+                foreach ($data['latestUpdates'] as $row) {
+                  echo '<tr>';
+                  echo '<td>' . htmlspecialchars($row->vehicle_number) . '</td>';
+                  echo '<td>' . htmlspecialchars($row->start_time) . '</td>';
+                  echo '<td>' . htmlspecialchars($row->end_time) . '</td>';
+                  echo '<td>' . "Rs " . htmlspecialchars($row->amount) . '</td>';
+                  echo '<td>' . htmlspecialchars($row->payment_method) . '</td>';
+                  echo '</tr>';
+                }
+                ?>
               </tbody>
             </table>
           </div>
+
         </div>
         <div class="officer-section">
           <div class="table-heading">
@@ -175,7 +187,15 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Table rows will be generated dynamically using JavaScript -->
+                <?php
+                // Assuming $updates is an array of data similar to the JavaScript updates array
+                foreach ($data['parkingOfficers'] as $row) {
+                  echo '<tr>';
+                  echo '<td>' . htmlspecialchars($row->officer_name) . '</td>';
+                  echo '<td>' . htmlspecialchars($row->parking_details) . '</td>';
+                  echo '</tr>';
+                }
+                ?>
               </tbody>
             </table>
           </div>
@@ -198,15 +218,37 @@
           </a>
         </div>
         <div id="parkingCards" class="parking-cards">
-          <!-- Parking Cards will be generated dynamically using JavaScript -->
+          <?php foreach ($data['parkingSpaces'] as $parking) : ?>
+            <div class="parking-card">
+              <div class="parking-space-card">
+                <div class="parking-card-header">
+                  <h3 class="parking-card-bold"><?= htmlspecialchars($parking->parking_name) ?></h3>
+                  <p class="parking-card-bold"><?= htmlspecialchars($parking->parking_address) ?></p>
+                </div>
+                <div class="parking-card-body">
+                  <div class="parking-card-info">
+                    <p>Free Slots: <span class="parking-card-bold">
+                        <?= htmlspecialchars($parking['CurrentFreeSlots']) ?></span></p>
+                    <p class="parking-card-bold">Rs. <?= htmlspecialchars($parking['PricePerHour']) ?>/ 1H</p>
+                  </div>
+                  <div class="parking-card-info">
+                    <p>Total Slots: <span class="parking-card-bold"><?= htmlspecialchars(array_sum($parking->total_slots)) ?></span> (Cars: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Cars']) ?></span> | Vans: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Vans']) ?></span> | Buses: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Buses']) ?></span> | Bicycles: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Bicycles']) ?></span>)</p>
+                    <p class="parking-type bg-green text-white"><?= $parking->is_public ? 'Public' : 'Private' ?></p>
+                  </div>
+                  <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?= htmlspecialchars($parking->officer_name) ?></span></p>
+                  <p class="today-earning">Today's Earnings: <span class="parking-card-bold">Rs. <?= htmlspecialchars($parking->today_earnings) ?>.00</span></p>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
         </div>
+
 
       </div>
     </div>
   </div>
 
 
-  <script src="<?php echo URLROOT; ?>/js/company/dashboardView.js"></script>
 </body>
 
 </html>
