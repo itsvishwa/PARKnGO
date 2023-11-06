@@ -9,9 +9,4 @@ class Driver extends Controller
         {
                 $driver_model = $this->model("DriverModel");
         }
-
-        // view driver's profile
-        public function view_profile()
-        {
-        }
 }

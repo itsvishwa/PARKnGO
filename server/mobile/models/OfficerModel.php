@@ -45,6 +45,7 @@ class OfficerModel
 
                 if ($result) {
                         return [
+                                "_id" => $result->_id,
                                 "officer_id" => $result->officer_id,
                                 "nic" => $result->nic,
                                 "mobile_number" => $result->mobile_number,
@@ -62,8 +63,8 @@ class OfficerModel
         // check whether the driver exist or not using driver_id
         public function is_officer_id_exist($id)
         {
-                $this->db->query("SELECT * FROM officer WHERE officer_id = :officer_id");
-                $this->db->bind(":officer_id", $id);
+                $this->db->query("SELECT * FROM parking_officer WHERE _id = :_id");
+                $this->db->bind(":_id", $id);
                 $this->db->execute();
 
                 // check the length of the result

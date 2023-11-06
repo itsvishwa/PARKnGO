@@ -235,7 +235,7 @@ class User extends Controller
 
 
                         $token_data = [
-                                "user_id" => $driver_data["driver_id"],
+                                "user_id" => $driver_data["_id"],
                                 "user_type" => "driver",
                                 "time_stamp" => time()
                         ];
@@ -252,12 +252,13 @@ class User extends Controller
 
 
                         $token_data = [
-                                "user_id" => $officer_data["officer_id"],
+                                "user_id" => $officer_data["_id"],
                                 "user_type" => "officer",
                                 "time_stamp" => time()
                         ];
 
                         $user_data = [
+                                "officer_id" => $officer_data["officer_id"],
                                 "nic" => $officer_data["nic"],
                                 "first_name" => $officer_data["first_name"],
                                 "last_name" => $officer_data["last_name"],
@@ -330,34 +331,34 @@ class User extends Controller
 
 
 
-        // logout
-        public function logout()
-        {
-                if (isset($_SERVER['HTTP_TOKEN'])) {
-                        $token = $_SERVER['HTTP_TOKEN'];
+        // // logout
+        // public function logout()
+        // {
+        //         if (isset($_SERVER['HTTP_TOKEN'])) {
+        //                 $token = $_SERVER['HTTP_TOKEN'];
 
-                        $token_data = $this->decode_token($token);
+        //                 $token_data = $this->decode_token($token);
 
-                        if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
-                        {
-                                $this->send_json_400("Invalid Token");
-                        } elseif ($token_data["user_type"] !== null and $token_data["user_type"] === "driver") // user is a driver
-                        {
-                                if ($this->driver_model->is_driver_id_exist($token_data["user_id"])) {
-                                        $this->send_json_200("Logout Successfull");
-                                } else {
-                                        $this->send_json_400("Invalid Token");
-                                }
-                        } else // user is a parking officer
-                        {
-                                if ($this->officer_model->is_officer_id_exist($token_data["user_id"])) {
-                                        $this->send_json_200("Logout Successfull");
-                                } else {
-                                        $this->send_json_400("Invalid Token");
-                                }
-                        }
-                } else {
-                        $this->send_json_404("Token Not Found");
-                }
-        }
+        //                 if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
+        //                 {
+        //                         $this->send_json_400("Invalid Token");
+        //                 } elseif ($token_data["user_type"] !== null and $token_data["user_type"] === "driver") // user is a driver
+        //                 {
+        //                         if ($this->driver_model->is_driver_id_exist($token_data["user_id"])) {
+        //                                 $this->send_json_200("Logout Successfull");
+        //                         } else {
+        //                                 $this->send_json_400("Invalid Token");
+        //                         }
+        //                 } else // user is a parking officer
+        //                 {
+        //                         if ($this->officer_model->is_officer_id_exist($token_data["user_id"])) {
+        //                                 $this->send_json_200("Logout Successfull");
+        //                         } else {
+        //                                 $this->send_json_400("Invalid Token");
+        //                         }
+        //                 }
+        //         } else {
+        //                 $this->send_json_404("Token Not Found");
+        //         }
+        // }
 }
