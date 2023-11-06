@@ -82,7 +82,7 @@
           <?php
 
           foreach ($data as $officer) {
-            echo '<option value="' . $officer->phone_number . '">' . $officer->officer_id . " - " . $officer->first_name . " " . $officer->last_name . '</option>';
+            echo '<option value="' . $officer->mobile_number . '">' . $officer->officer_id . " - " . $officer->first_name . " " . $officer->last_name . '</option>';
           }
           ?>
         </select>
@@ -105,8 +105,8 @@
             <label for="officer_id" class="p-form-label">Parking Officer ID *</label>
             <input type="text" name="officer_id" id="officer_id" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" disabled>
 
-            <label for="phone_number" class="p-form-label">Parking Officer Mobile Number *</label>
-            <input type="text" name="phone_number" id="phone_number" placeholder="Enter Parking Officer ID Number" class="p-form-input width-75" required>
+            <label for="mobile_number" class="p-form-label">Parking Officer Mobile Number *</label>
+            <input type="text" name="mobile_number" id="mobile_number" placeholder="Enter Parking Officer Mobile Number" class="p-form-input width-75" required>
 
             <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
             <select id="parking_id" class="p-form-dropdown width-40">
@@ -133,7 +133,7 @@
     <script>
       function populateFormFields() {
         var selectElement = document.getElementById("parkingDropdown");
-        var selectedOfficerPhoneNumber = selectElement.value;
+        var selectedOfficerMobileNumber = selectElement.value;
 
         // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
         // For example, assuming you have a JavaScript object containing officer details:
@@ -143,7 +143,7 @@
 
         // Find the selected officer in the officersData array
         var selectedOfficer = officersData.find(function(officer) {
-          return officer.phone_number == selectedOfficerPhoneNumber;
+          return officer.mobile_number == selectedOfficerMobileNumber;
         });
 
         // Populate form fields with officer details
@@ -152,7 +152,7 @@
           document.querySelector('input[name="last_name"]').value = selectedOfficer.last_name;
           document.getElementById('nic').value = selectedOfficer.nic;
           document.getElementById('officer_id').value = selectedOfficer.officer_id;
-          document.getElementById('phone_number').value = selectedOfficer.phone_number;
+          document.getElementById('mobile_number').value = selectedOfficer.mobile_number;
 
 
         }

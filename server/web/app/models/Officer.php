@@ -52,10 +52,10 @@ class Officer
 
 
   // Find Parking Officer by Phone number
-  public function findOfficerByPhoneNumber($phone_number)
+  public function findOfficerByPhoneNumber($mobile_number)
   {
-    $this->db->query('SELECT * FROM parking_officer WHERE phone_number = :phone_number');
-    $this->db->bind(':phone_number', $phone_number);
+    $this->db->query('SELECT * FROM parking_officer WHERE mobile_number = :mobile_number');
+    $this->db->bind(':mobile_number', $mobile_number);
 
     $row = $this->db->single();
 
@@ -67,10 +67,10 @@ class Officer
     }
   }
 
-  public function getOfficerDetailsUsingPhoneNumber($phone_number)
+  public function getOfficerDetailsUsingPhoneNumber($mobile_number)
   {
-    $this->db->query('SELECT * FROM parking_officer WHERE phone_number = :phone_number');
-    $this->db->bind(':phone_number', $phone_number);
+    $this->db->query('SELECT * FROM parking_officer WHERE mobile_number = :mobile_number');
+    $this->db->bind(':mobile_number', $mobile_number);
 
     $row = $this->db->single();
 
@@ -79,6 +79,16 @@ class Officer
   public function getAllOfficersDetails()
   {
     $this->db->query('SELECT * FROM parking_officer');
+    $results = $this->db->resultSet();
+    return $results;
+  }
+
+  public function getOfficerDetails()
+  {
+    $this->db->query("SELECT CONCAT(po.first_name, ' ', po.last_name) AS officer_name, 
+      IFNULL(CONCAT(ps._id, ' ', ps.name), 'Not Assigned') AS parking_details
+      FROM parking_officer po
+      LEFT JOIN parking_spaces ps ON po._id = ps._id LIMIT 10");
     $results = $this->db->resultSet();
     return $results;
   }

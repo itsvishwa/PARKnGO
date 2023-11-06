@@ -26,12 +26,17 @@ class Companys extends Controller
     $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount();
     $todayEarned = $this->paymentModel->getTodayEarnedAmount();
     $numberOfUsers = $this->paymentModel->getNumberOfUsers();
+    $latestUpdates = $this->companyModel->getLatestUpdates();
+    $parkingOfficers = $this->officerModel->getOfficerDetails();
+    //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
 
 
     $data = [
       'monthlyEarned' => $monthlyEarned,
       'todayEarned' => $todayEarned,
       'numberOfUsers' => $numberOfUsers,
+      'latestUpdates' => $latestUpdates,
+      'parkingOfficers' => $parkingOfficers,
     ];
 
     $this->view('company/dashboardView', $data);
@@ -89,18 +94,18 @@ class Companys extends Controller
         'last_name' => trim($_POST['last_name']),
         'nic' => trim($_POST['nic']),
         //'officer_id' => trim($_POST['officer_id']),
-        'phone_number' => trim($_POST['phone_number']),
+        'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
         'profile_image' => trim($_FILES['profile_image']['name']),
         'company_id' => $_SESSION['user_id'],
-        'phone_number_err' => '',
+        'mobile_number_err' => '',
       ];
 
-      if ($this->officerModel->findOfficerByPhoneNumber($data['phone_number'])) {
-        $data['phone_number_err'] = 'Phone number is already taken';
+      if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])) {
+        $data['mobile_number_err'] = 'Mobile Number is already taken';
       }
 
-      if (empty($data['phone_number_err'])) {
+      if (empty($data['mobile_number_err'])) {
         if ($this->officerModel->register($data)) {
           $officers = $this->officerModel->getAllOfficersDetails();
           $this->view('company/parkingOfficerView', $officers);
@@ -117,11 +122,11 @@ class Companys extends Controller
         'last_name' => '',
         'nic' => '',
         //'officer_id' => '',
-        'phone_number' => '',
+        'mobile_number' => '',
         //'parking_id' => '',
         'profile_image' => '',
         'company_id' => $_SESSION['user_id'],
-        'phone_number_err' => '',
+        'mobile_number_err' => '',
       ];
 
       // Load view
@@ -143,18 +148,18 @@ class Companys extends Controller
         'last_name' => trim($_POST['last_name']),
         'nic' => trim($_POST['nic']),
         'officer_id' => trim($_POST['officer_id']),
-        'phone_number' => trim($_POST['phone_number']),
+        'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
         'profile_image' => trim($_FILES['profile_image']['name']),
         'company_id' => $_SESSION['user_id'],
-        'phone_number_err' => '',
+        'mobile_number_err' => '',
       ];
 
-      if ($this->officerModel->findOfficerByPhoneNumber($data['phone_number'])  && $this->officerModel->getOfficerDetailsUsingPhoneNumber($data['phone_number'])->officer_id != $_POST['officer_id']) {
-        $data['phone_number_err'] = 'Phone number is already taken';
+      if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])  && $this->officerModel->getOfficerDetailsUsingPhoneNumber($data['phone_number'])->officer_id != $_POST['officer_id']) {
+        $data['mobile_number_err'] = 'Mobile Number is already taken';
       }
 
-      if (empty($data['phone_number_err'])) {
+      if (empty($data['mobile_number_err'])) {
         if ($this->officerModel->update($data)) {
           $officers = $this->officerModel->getAllOfficersDetails();
           $this->view('company/parkingOfficerView', $officers);
@@ -171,11 +176,11 @@ class Companys extends Controller
         'last_name' => '',
         'nic' => '',
         'officer_id' => '',
-        'phone_number' => '',
+        'mobile_number' => '',
         //'parking_id' => '',
         'profile_image' => '',
         'company_id' => $_SESSION['user_id'],
-        'phone_number_err' => '',
+        'mobile_number_err' => '',
       ];
 
       $officers = $this->officerModel->getAllOfficersDetails();

@@ -110,23 +110,6 @@ const parkingData = [
   // Add more parking data objects here
 ];
 
-// Function to populate the table with JSON data
-function populateUpdateTable() {
-  const tableBody = document.querySelector('#updatesTable tbody');
-
-  updates.forEach((row) => {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-                    <td>${row.NumberPlate}</td>
-                    <td>${row.ArrivedAt}</td>
-                    <td>${row.ParkedHours}</td>
-                    <td>${row.TotalPrice}</td>
-                    <td>${row.PaidBy}</td>
-                `;
-    tableBody.appendChild(newRow);
-  });
-}
-
 function populateOfficerTable() {
   const tableBody = document.querySelector('#officersTable tbody');
 
