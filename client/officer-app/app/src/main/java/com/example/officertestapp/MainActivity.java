@@ -2,6 +2,9 @@ package com.example.officertestapp;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -10,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,4 +48,9 @@ public class MainActivity extends AppCompatActivity {
     public void frag_home_main_release_slot_btn_handler(View v) {
         replaceFragment(new ReleaseASlot01Fragment());
     }
+
+    public void assign_vehicle_01_back_btn_handler(View v) {
+        replaceFragment(new HomeMainFragment());
+    }
+
 }
