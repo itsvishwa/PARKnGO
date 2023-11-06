@@ -21,7 +21,7 @@ class DriverModel
 
                 if ($result) {
                         return [
-                                "driver_id" => $result->driver_id,
+                                "_id" => $result->_id,
                                 "first_name" => $result->first_name,
                                 "last_name" => $result->last_name,
                                 "mobile_number" => $result->mobile_number
@@ -74,8 +74,8 @@ class DriverModel
         // check whether the driver exist or not using driver_id
         public function is_driver_id_exist($id)
         {
-                $this->db->query("SELECT * FROM driver WHERE driver_id = :driver_id");
-                $this->db->bind(":driver_id", $id);
+                $this->db->query("SELECT * FROM driver WHERE _id = :_id");
+                $this->db->bind(":_id", $id);
                 $this->db->execute();
 
                 // check the length of the result
