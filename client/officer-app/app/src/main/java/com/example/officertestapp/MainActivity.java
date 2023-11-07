@@ -61,6 +61,18 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new AssignVehicle01Fragment());
     }
 
+    public void frag_home_assign_vehicle03_main_menu_btn_handler(View v) {
+        replaceFragment(new HomeMainFragment());
+    }
+
+    public void assign_vehicle_02_yes_btn_handler(View v) {
+        replaceFragment(new AssignVehicle03Fragment());
+    }
+
+    public void assign_vehicle_02_back_btn_handler(View v) {
+        replaceFragment(new AssignVehicle01Fragment());
+    }
+
     public void release_vehicle_01_back_btn_handler(View v) {
         replaceFragment(new HomeMainFragment());
     }

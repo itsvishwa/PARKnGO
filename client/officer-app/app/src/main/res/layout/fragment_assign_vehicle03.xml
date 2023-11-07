@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Hi, Dhanushika"
+                    android:text="Parking Slot Reserved"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Parking Officer - CMC"
+                    android:text="Press the button to visit menu"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -100,86 +100,52 @@
         android:paddingHorizontal="18dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/assign_btn_con_lay"
+            android:id="@+id/constraintLayout12"
             android:layout_width="match_parent"
-            android:elevation="8dp"
-            android:layout_height="123dp"
-            android:layout_marginTop="97dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="frag_home_main_assign_vehicle_btn_handler"
-            android:background="@drawable/assign_release_btn_background"
+            android:layout_height="300dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/rounded_background_detail_box"
+            android:elevation="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <TextView
-                android:id="@+id/textView8_home_fragment"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/half_oval_background"
-                android:gravity="center"
-                android:text="Assign a\n vehicle"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                 />
-
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="165dp"
-                android:layout_height="123dp"
-                android:layout_marginEnd="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/success_green_check_mark_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/assign_btn_img" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/release_btn_con_lay"
-            android:layout_width="match_parent"
-            android:layout_height="123dp"
-            android:layout_marginTop="44dp"
-            android:elevation="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="frag_home_main_release_slot_btn_handler"
-            android:background="@drawable/assign_release_btn_background"
-            app:layout_constraintEnd_toEndOf="@+id/assign_btn_con_lay"
-            app:layout_constraintStart_toStartOf="@+id/assign_btn_con_lay"
-            app:layout_constraintTop_toBottomOf="@+id/assign_btn_con_lay">
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:text="Release a\n parking\n slot"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:background="@drawable/half_oval_background"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="165dp"
-                android:layout_height="123dp"
-                android:layout_marginEnd="25dp"
-                android:src="@drawable/release_btn_image"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="Parking slot successfully \nreserved!"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/green"
+                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Main Menu"
+            app:cornerRadius="11dp"
+            android:layout_marginTop="32dp"
+            android:onClick="frag_home_assign_vehicle03_main_menu_btn_handler"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout12"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
