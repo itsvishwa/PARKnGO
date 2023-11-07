@@ -53,4 +53,8 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new HomeMainFragment());
     }
 
+    public void release_vehicle_01_back_btn_handler(View v) {
+        replaceFragment(new HomeMainFragment());
+    }
+
 }

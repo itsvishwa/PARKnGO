@@ -32,7 +32,7 @@
                     android:layout_width="138dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/app_bar_info_box"
                     android:text="CMC Car Park 01"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -156,6 +156,7 @@
                         android:layout_weight="3"
                         android:background="#DCD6C7"
                         android:hint="0000"
+                        android:ems="4"
                         android:letterSpacing="0.25"
                         android:textAlignment="center" />
 
@@ -276,6 +277,7 @@
             android:layout_height="62dp"
             android:gravity="center"
             android:text="Reserve the slot"
+            app:cornerRadius="11dp"
             android:layout_marginTop="75dp"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
