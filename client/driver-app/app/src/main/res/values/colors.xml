@@ -9,4 +9,7 @@
     <color name="loginSignupInputFieldColor">#F9D391</color>
     <color name="bottomNavUnselectedItemColor">#827E83</color>
     <color name="backgroundColor">#F6EAD3</color>
+    <color name="inputFieldColor">#FFF3DD</color>
+    <color name="green">#00A372</color>
+    <color name="red">#FF4545</color>
 </resources>

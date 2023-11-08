@@ -36,7 +36,7 @@ public class ParkingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_parking, container, false);
-        listView = view.findViewById(R.id.listview_parking_fragment);
+        listView = view.findViewById(R.id.parking_frag_listview);
         CustomAdapter adapter = new CustomAdapter(getContext(), parkingNames, images, parkingTypes, parkingRates, noOfReviews, noOfStars);
         listView.setAdapter(adapter);
         return view;
