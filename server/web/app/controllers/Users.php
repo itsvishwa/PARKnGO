@@ -179,7 +179,8 @@ class Users extends Controller
 
   public function createUserSession($user)
   {
-    $_SESSION['user_id'] = $user->company_id;
+
+    $_SESSION['user_id'] = $user->_id;
     $_SESSION['user_email'] = $user->email;
     $_SESSION['user_name'] = $user->name;
     redirect('companys/dashboardView');
@@ -187,7 +188,7 @@ class Users extends Controller
 
   public function createAdminSession($user)
   {
-    $_SESSION['user_id'] = $user->admin_id;
+    $_SESSION['user_id'] = $user->_id;
     $_SESSION['user_email'] = $user->email;
     $_SESSION['user_name'] = $user->name;
     redirect('admins/dashboardView');
