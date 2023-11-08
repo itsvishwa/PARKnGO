@@ -139,9 +139,8 @@
                     android:layout_height="wrap_content"
                     android:text="OF00004"
                     android:textSize="16sp"
+                    android:layout_marginLeft="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewID"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.120"
                     app:layout_constraintStart_toEndOf="@+id/imageViewID"
                     app:layout_constraintTop_toTopOf="@+id/imageViewID" />
 
@@ -157,7 +156,7 @@
                 android:id="@+id/textViewID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:paddingHorizontal="5dp"
                 android:text="Officer ID"
                 android:textSize="16sp"
@@ -203,10 +202,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="John"
+                    android:layout_marginLeft="20dp"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.120"
                     app:layout_constraintStart_toEndOf="@+id/imageViewName"
                     app:layout_constraintTop_toTopOf="@+id/imageViewName" />
 
@@ -222,7 +220,7 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="Name"
@@ -269,9 +267,8 @@
                     android:layout_height="wrap_content"
                     android:text="+94 71 234 56 77"
                     android:textSize="16sp"
+                    android:layout_marginLeft="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewPN"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.120"
                     app:layout_constraintStart_toEndOf="@+id/imageViewPN"
                     app:layout_constraintTop_toTopOf="@+id/imageViewPN" />
 
@@ -288,7 +285,7 @@
                 android:id="@+id/textViewPN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="Phone Number"
@@ -335,9 +332,8 @@
                     android:layout_height="wrap_content"
                     android:text="200144227722"
                     android:textSize="16sp"
+                    android:layout_marginLeft="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewNIC"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.120"
                     app:layout_constraintStart_toEndOf="@+id/imageViewNIC"
                     app:layout_constraintTop_toTopOf="@+id/imageViewNIC" />
 
@@ -354,7 +350,7 @@
                 android:id="@+id/textViewNIC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="NIC Number"
@@ -401,9 +397,8 @@
                     android:layout_height="wrap_content"
                     android:text="CMC | Car Park 01"
                     android:textSize="16sp"
+                    android:layout_marginLeft="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewParking"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.120"
                     app:layout_constraintStart_toEndOf="@+id/imageViewParking"
                     app:layout_constraintTop_toTopOf="@+id/imageViewParking" />
 
@@ -420,7 +415,7 @@
                 android:id="@+id/textViewParking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="14dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="Allocated Parking"
