@@ -16,14 +16,20 @@ import com.example.parkngo.home.HomeFragment;
 import com.example.parkngo.home.NavigateFragment;
 import com.example.parkngo.parking.ParkingFragment;
 import com.example.parkngo.parking.ParkingSelectedFragment;
+import com.example.parkngo.profile.PaymentHistoryFragment;
 import com.example.parkngo.profile.ProfileFragment;
+import com.example.parkngo.scan.PaymentFragment;
 import com.example.parkngo.scan.ScanFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.net.URI;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
+    // nav bar
     BottomNavigationView navbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
 //        set initial fragment
         replaceFragment(new HomeFragment());
+
+
     }
 
     private void replaceFragment(Fragment f){
@@ -80,6 +88,14 @@ public class MainActivity extends AppCompatActivity {
         intent.setPackage("com.google.android.apps.maps");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void profile_frag_payment_btn_handler(View view){
+        replaceFragment(new PaymentHistoryFragment());
+    }
+
+    public void scan_frag_qr_btn_handler(View view){
+        replaceFragment(new PaymentFragment());
     }
 
     // back buttons
