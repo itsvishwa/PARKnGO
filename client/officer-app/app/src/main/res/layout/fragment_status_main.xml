@@ -231,72 +231,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout14"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/status_frag_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/status_main_detail_box"
-            android:elevation="5dp"
-            android:paddingHorizontal="25dp"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout13"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout13"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PA001"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.516" />
-
-            <TextView
-                android:id="@+id/editText7"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:background="@drawable/red_rounded_bg"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="5dp"
-                android:text="Filled"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView18"
-                app:layout_constraintStart_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toTopOf="@+id/textView18"
-                app:layout_constraintVertical_bias="0.444" />
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:text="CAR 1565"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/editText7"
-                app:layout_constraintStart_toEndOf="@+id/editText7"
-                app:layout_constraintTop_toTopOf="@+id/editText7"
-                app:layout_constraintVertical_bias="0.333" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/baseline_arrow_forward_ios_20"
-                app:layout_constraintBottom_toBottomOf="@+id/textView19"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView19"
-                app:layout_constraintTop_toTopOf="@+id/textView19"
-                app:layout_constraintVertical_bias="1.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
