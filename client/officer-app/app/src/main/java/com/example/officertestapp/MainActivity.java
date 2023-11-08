@@ -73,8 +73,30 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new AssignVehicle01Fragment());
     }
 
+
+
     public void release_vehicle_01_back_btn_handler(View v) {
         replaceFragment(new HomeMainFragment());
+    }
+
+    public void release_vehicle_01_continue_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot02Fragment());
+    }
+
+    public void release_slot_02_back_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot01Fragment());
+    }
+
+    public void release_slot_02_yes_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot03Fragment());
+    }
+
+    public void release_slot_03_receive_cash_payment_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot04Fragment());
+    }
+
+    public void release_slot_04_payment_confirm_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot06Fragment());
     }
 
 }

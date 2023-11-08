@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Free a Parking Slot"
+                    android:text="P00A1 Status"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Please enter details"
+                    android:text="Status - Filled"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +81,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="release_vehicle_01_back_btn_handler"
+                    android:onClick="status_01_back_btn_handler"
                     android:background="@drawable/notification_icon_background"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +103,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
-            android:layout_height="425dp"
+            android:layout_height="325dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/rounded_background_detail_box"
             android:elevation="2dp"
@@ -191,9 +191,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Spinner
+                <TextView
                     android:id="@+id/spinner_slots"
-                    android:layout_width="136dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
                     android:background="@drawable/vehicle_details_input_feild_bg"
@@ -202,26 +202,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
                     app:layout_constraintVertical_bias="1.0" />
 
-                <Button
-                    android:layout_width="128dp"
-                    android:layout_height="42dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/spinner_slots"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/spinner_slots"
-                    app:layout_constraintTop_toTopOf="@+id/spinner_slots"
-                    android:text="Search"
-                    android:drawableRight="@drawable/baseline_search_24"
-                    android:drawableTint="@color/white"
-                    android:onClick="release_vehicle_01_search_btn_handler"/>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="17dp"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout9"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
@@ -251,88 +238,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout10"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout10"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Duration"
-                    android:textSize="17dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="174dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="156dp"
-                    android:background="@drawable/release_slot_info_box"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout12"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
-
-                <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Amount"
-                    android:textSize="17dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="174dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="156dp"
-                    android:background="@drawable/release_slot_info_box"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/textView13" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:gravity="center"
-            android:text="Continue"
-            android:backgroundTint="#86837B61"
-            app:cornerRadius="11dp"
-            android:layout_marginTop="20dp"
-            android:onClick="release_vehicle_01_continue_btn_handler"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
