@@ -4,17 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".parking.ParkingFragment"
     android:orientation="vertical"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    tools:context=".home.AvailableParkingSpacesFragment">
 
-<!--    Top app bar here-->
+
+    <!--    top app bar here -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_weight="2"
         android:background="@drawable/top_app_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingHorizontal="18dp">
+
 
         <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Parking Spaces"
+                    android:text="Select A Parking"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -46,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Here is the list of all parking spaces"
+                    android:text="Updated 1 minute ago pull down to refresh again"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,8 +71,9 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
+                    android:onClick="ava_frag_back_btn_handler"
                     android:background="@drawable/notification_icon_background"
-                    android:src="@drawable/baseline_notifications_none_24"
+                    android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -78,26 +81,85 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    Body Content here-->
+    <!--    body content here-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
-        android:paddingTop="10dp"
-        android:paddingHorizontal="18dp">
+        android:paddingHorizontal="18dp"
+        android:layout_weight="8">
 
-        <ListView
-            android:divider="#00000000"
-            android:dividerHeight="10dp"
-            android:id="@+id/parking_frag_listview"
+
+        <!--  Search Bar    -->
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/search_view_bg"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search Here..." />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            style="@style/Widget.MaterialComponents.ChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:chipSpacingVertical="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip5"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Min.Distance"
+                app:chipEndPadding="10dp"
+                app:chipStartPadding="10dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip4"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max.Free Slots" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip3"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Public" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip2"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min.Rate" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ava_recycle_view"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
