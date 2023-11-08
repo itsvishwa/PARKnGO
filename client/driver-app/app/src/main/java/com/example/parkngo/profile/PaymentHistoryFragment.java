@@ -3,6 +3,8 @@ package com.example.parkngo.profile;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,57 +12,47 @@ import android.view.ViewGroup;
 
 import com.example.parkngo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PaymentHistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class PaymentHistoryFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ArrayList<PaymentHistoryModel> paymentHistoryModels = new ArrayList<>();
 
     public PaymentHistoryFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaymentHistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PaymentHistoryFragment newInstance(String param1, String param2) {
-        PaymentHistoryFragment fragment = new PaymentHistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_payment_history, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_history, container, false);
+
+        // set the models array
+        setupPaymentHistoryModels();
+
+        // get reference to the recycle view
+        RecyclerView recyclerView = view.findViewById(R.id.payment_frag_recycle_view);
+
+        PHRecycleViewAdapter adapter = new PHRecycleViewAdapter(getContext(), paymentHistoryModels);
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
+    }
+
+    public void setupPaymentHistoryModels(){
+        String[] dateTimes = {"10.30 AM | 04 July", "10.40 AM | 10 July", "8.30 AM | 14 July", "10.20 AM | 09 July", "08.30 AM | 09 July"};
+        String[] amount = {"425.00", "300.00", "970.00", "150.00", "200.00"};
+        String[] duration = {"03 Hours 25 Minutes", "03 Hours 25 Minutes", "03 Hours 25 Minutes", "03 Hours 25 Minutes", "03 Hours 25 Minutes"};
+        String[] vehicleType = {"Car", "Van", "Bike", "Car", "Car"};
+
+        for(int i=0; i<dateTimes.length; i++){
+            paymentHistoryModels.add(new PaymentHistoryModel(dateTimes[i], amount[i], duration[i], vehicleType[i]));
+        }
+
     }
 }
