@@ -11,12 +11,13 @@ class Company
   // Register company
   public function register($data)
   {
-    $this->db->query('INSERT INTO company (name, address, email, phone_number, password) VALUES (:company_name, :company_address, :company_email, :phone_number, :password)');
+    $this->db->query('INSERT INTO company (name, address, email, phone_number, documents, password) VALUES (:company_name, :company_address, :company_email, :phone_number, :documents, :password)');
     // Bind values
     $this->db->bind(':company_name', $data['company_name']);
     $this->db->bind(':company_address', $data['company_address']);
     $this->db->bind(':company_email', $data['company_email']);
     $this->db->bind(':phone_number', $data['phone_number']);
+    $this->db->bind(':documents', $data['file_upload']);
     $this->db->bind(':password', $data['password']);
 
     // Execute

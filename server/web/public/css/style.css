@@ -786,3 +786,11 @@ body {
   color: #383d41;
   border-color: #d6d8db;
 }
+
+.reg-submission {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}

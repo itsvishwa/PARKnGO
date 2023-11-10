@@ -21,6 +21,8 @@ class Companys extends Controller
     $this->dashboardView();
   }
 
+
+
   public function dashboardView()
   {
     $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount();

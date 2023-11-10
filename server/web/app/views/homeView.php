@@ -9,8 +9,8 @@
 </head>
 
 <body>
-  <div class="navbar">
-    <img src="./assets/logo-black.png" alt="" class="navbar-logo">
+  <div class="navbar mt-20">
+    <a href="./"><img src="./assets/logo-black.png" alt="" class="navbar-logo"></a>
     <a href="./users/loginView">Login</a>
   </div>
   <div class="home-body">

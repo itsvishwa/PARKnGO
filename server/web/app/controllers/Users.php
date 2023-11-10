@@ -9,6 +9,16 @@ class Users extends Controller
     $this->userModelAdmin = $this->model('Admin');
   }
 
+  public function index()
+  {
+    $this->loginView();
+  }
+
+  public function registrationSuccussfulView()
+  {
+    $this->view('company/registrationSuccussfulView');
+  }
+
   public function registrationView()
   {
     // Check for POST
@@ -18,6 +28,9 @@ class Users extends Controller
       // Sanitize POST data
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+      $fileData = $_FILES['file_upload'];
+      $fileContent = file_get_contents($fileData['tmp_name']);
+
       // Init Data
       $data = [
         'company_name' => trim($_POST['company_name']),
@@ -26,7 +39,7 @@ class Users extends Controller
         'phone_number' => trim($_POST['phone_number']),
         'password' => trim($_POST['password']),
         'confirm_password' => trim($_POST['confirm_password']),
-        'file_upload' => trim($_FILES['file_upload']['name']),
+        'file_upload' => $fileContent,
         'company_email_err' => '',
         'password_err' => '',
         'confirm_password_err' => ''
@@ -134,7 +147,11 @@ class Users extends Controller
           $loggedInUser = $this->userModel->login($data['email'], $data['password']);
           if ($loggedInUser) {
             // Create Session
-            $this->createUserSession($loggedInUser);
+            if ($loggedInUser->is_approved) {
+              $this->createUserSession($loggedInUser);
+            } else {
+              redirect('users/registrationSuccussfulView');
+            }
           } else {
             $data['password_err'] = 'Password incorrect';
             $this->view('loginView', $data);
