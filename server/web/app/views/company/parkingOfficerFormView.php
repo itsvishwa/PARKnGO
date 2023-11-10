@@ -78,9 +78,9 @@
       </div>
       <div class="form-div">
         <form action="<?php echo URLROOT; ?>companys/parkingOfficerFormView" method="POST" enctype="multipart/form-data">
-          <div class="officer-form pl-10">
+          <div class="officer-form ml-40">
             <div class="name-line">
-              <label for="first_mame" class="p-form-label">Parking Officer Name *</label>
+              <label for="first_mame" class="p-form-label">Officer Name *</label>
               <div>
                 <input type="text" name="first_name" class="p-form-input width-40" placeholder="First Name" required value="<?php echo $data['first_name'] ?>">
                 <input type="text" name="last_name" class="p-form-input width-40" placeholder="Last Name" required value="<?php echo $data['last_name'] ?>">
@@ -91,11 +91,16 @@
             <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required value="<?php echo $data['nic'] ?>">
 
 
-            <label for="mobile_number" class="p-form-label">Parking Officer Mobile Number *</label>
+            <label for="mobile_number" class="p-form-label">Officer Mobile Number *</label>
             <input type="text" name="mobile_number" id="mobile_number" placeholder="Enter Parking Officer Mobile Number" class="p-form-input width-75" required value="<?php echo $data['mobile_number'] ?>">
             <span class="f-12 text-red"><?php echo $data['mobile_number_err']; ?></span>
 
-            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
+            <label for="officer_id" class="p-form-label">Officer ID *</label>
+            <span class="f-12 text-green">Recently added ID: <?php echo $data['recently_added_officer_id']; ?></span>
+            <input type="text" name="officer_id" id="officer_id" placeholder="Enter Parking Officer ID" class="p-form-input width-75" required value="<?php echo $data['mobile_number'] ?>">
+
+
+            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space</label>
             <select id="parking_id" name="parking_id" class="p-form-dropdown width-40">
               <option value="" disabled selected>Select Parking Space</option>
               <option value="parking1">Parking Lot 1</option>

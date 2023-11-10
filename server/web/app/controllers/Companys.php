@@ -25,11 +25,11 @@ class Companys extends Controller
 
   public function dashboardView()
   {
-    $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount();
-    $todayEarned = $this->paymentModel->getTodayEarnedAmount();
-    $numberOfUsers = $this->paymentModel->getNumberOfUsers();
-    $latestUpdates = $this->companyModel->getLatestUpdates();
-    $parkingOfficers = $this->officerModel->getOfficerDetails();
+    $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount($_SESSION['user_id']);
+    $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
+    $numberOfUsers = $this->paymentModel->getNumberOfUsers($_SESSION['user_id']);
+    $latestUpdates = $this->companyModel->getLatestUpdates($_SESSION['user_id']);
+    $parkingOfficers = $this->officerModel->getOfficerDetails($_SESSION['user_id']);
     //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
 
 
@@ -78,7 +78,7 @@ class Companys extends Controller
   {
 
     // Inside your controller or wherever you're processing the request
-    $officers = $this->officerModel->getAllOfficersDetails();
+    $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
     $this->view('./company/parkingOfficerView', $officers);
   }
 
@@ -95,7 +95,8 @@ class Companys extends Controller
         'first_name' => trim($_POST['first_name']),
         'last_name' => trim($_POST['last_name']),
         'nic' => trim($_POST['nic']),
-        //'officer_id' => trim($_POST['officer_id']),
+        'officer_id' => trim($_POST['officer_id']),
+        'recently_added_officer_id' => $this->officerModel->getRecentlyAddedOfficerId()->officer_id,
         'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
         'profile_image' => trim($_FILES['profile_image']['name']),
@@ -109,7 +110,7 @@ class Companys extends Controller
 
       if (empty($data['mobile_number_err'])) {
         if ($this->officerModel->register($data)) {
-          $officers = $this->officerModel->getAllOfficersDetails();
+          $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
           $this->view('company/parkingOfficerView', $officers);
         } else {
           die('Something went wrong');
@@ -123,7 +124,8 @@ class Companys extends Controller
         'first_name' => '',
         'last_name' => '',
         'nic' => '',
-        //'officer_id' => '',
+        'officer_id' => '',
+        'recently_added_officer_id' => $this->officerModel->getRecentlyAddedOfficer()->officer_id,
         'mobile_number' => '',
         //'parking_id' => '',
         'profile_image' => '',
@@ -163,7 +165,7 @@ class Companys extends Controller
 
       if (empty($data['mobile_number_err'])) {
         if ($this->officerModel->update($data)) {
-          $officers = $this->officerModel->getAllOfficersDetails();
+          $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
           $this->view('company/parkingOfficerView', $officers);
         } else {
           die('Something went wrong');
@@ -185,7 +187,7 @@ class Companys extends Controller
         'mobile_number_err' => '',
       ];
 
-      $officers = $this->officerModel->getAllOfficersDetails();
+      $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
 
       // Load view
       $this->view('company/parkingOfficerEditView', $officers);
@@ -195,7 +197,7 @@ class Companys extends Controller
   public function parkingOfficerDeleteView()
   {
 
-    $officers = $this->officerModel->getAllOfficersDetails();
+    $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
     $this->view('company/parkingOfficerDeleteView', $officers);
   }
 

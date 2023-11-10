@@ -600,6 +600,14 @@ body {
 
 /* margin */
 
+.ml-40 {
+  margin-left: 40px;
+}
+
+.ml-30 {
+  margin-left: 30px;
+}
+
 .ml-20 {
   margin-left: 20px;
 }
@@ -636,6 +644,14 @@ body {
   margin-bottom: 5px;
 }
 
+.mr-40 {
+  margin-right: 40px;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
 .mr-10 {
   margin-right: 10px;
 }
@@ -645,6 +661,10 @@ body {
 }
 
 /* padding */
+
+.pr-30 {
+  padding-right: 30px;
+}
 
 .pr-20 {
   padding-right: 20px;

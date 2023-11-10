@@ -90,7 +90,7 @@
       <div class="form-div">
         <form action="<?php echo URLROOT; ?>companys/parkingOfficerEditView" method="POST">
 
-          <div class="officer-form">
+          <div class="officer-form ml-40">
             <div class="name-line">
               <label for="first_name" class="p-form-label">Parking Officer Name *</label>
               <div>
@@ -108,7 +108,7 @@
             <label for="mobile_number" class="p-form-label">Parking Officer Mobile Number *</label>
             <input type="text" name="mobile_number" id="mobile_number" placeholder="Enter Parking Officer Mobile Number" class="p-form-input width-75" required>
 
-            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
+            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space</label>
             <select id="parking_id" class="p-form-dropdown width-40">
               <option value="" disabled selected>Select Parking Space</option>
               <option value="parking 1">Parking Lot 1</option>
