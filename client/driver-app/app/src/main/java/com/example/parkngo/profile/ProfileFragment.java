@@ -14,13 +14,15 @@ import android.widget.Toast;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ProfileFragment extends Fragment {
 
 
     // floating action button
-    FloatingActionButton mainFab, paymentFab, editProfileFab;
+    FloatingActionButton mainFab;
+    ExtendedFloatingActionButton paymentFab, editProfileFab;
     Boolean isAllFabVisible;
 
     @Override

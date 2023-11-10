@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".scan.PaymentFailedFragment"
     android:orientation="vertical"
-    android:background="@color/backgroundColor"
-    tools:context=".home.AvailableParkingSpacesFragment">
-
+    android:background="@color/backgroundColor">
 
     <!--    top app bar here -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Select A Parking"
+                    android:text="Transaction Failed !"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -48,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Updated 1 minute ago pull down to refresh again"
+                    android:text="Ahh, Something went wrong"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -93,73 +92,61 @@
         android:layout_weight="8">
 
 
-        <!--  Search Bar    -->
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/search_view_bg"
-            app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryBackground="@android:color/transparent"
-            app:queryHint="Search Here..." />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            style="@style/Widget.MaterialComponents.ChipGroup"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:chipSpacingVertical="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip5"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Min.Distance"
-                app:chipEndPadding="10dp"
-                app:chipStartPadding="10dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip4"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Max.Free Slots" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip3"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Public" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip2"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Min.Rate" />
-        </com.google.android.material.chip.ChipGroup>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ava_recycle_view"
-            android:layout_marginTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/radius_6_with_outline"
+            android:paddingHorizontal="28dp"
+            android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+            app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/transaction_failed" />
 
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Payment Failed !"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Something went wrong please try again."
+                android:textAlignment="center"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Try Again"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

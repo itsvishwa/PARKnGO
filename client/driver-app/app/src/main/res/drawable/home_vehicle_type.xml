@@ -2,4 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="#FFF3DD" /> <!-- Circle fill color -->
     <corners android:radius="23dp" /> <!-- Radius defines a circle, make it half of the width/height -->
+    <stroke
+        android:width="2dp"
+        android:color="#ADA28E" />
 </shape>
