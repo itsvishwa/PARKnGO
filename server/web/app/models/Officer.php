@@ -76,20 +76,32 @@ class Officer
 
     return $row;
   }
-  public function getAllOfficersDetails()
+  public function getAllOfficersDetails($company_id)
   {
-    $this->db->query('SELECT * FROM parking_officer');
+    $this->db->query('SELECT * FROM parking_officer WHERE company_id = :company_id');
+    $this->db->bind(':company_id', $company_id);
     $results = $this->db->resultSet();
     return $results;
   }
 
-  public function getOfficerDetails()
+  public function getOfficerDetails($company_id)
   {
     $this->db->query("SELECT CONCAT(po.first_name, ' ', po.last_name) AS officer_name, 
       IFNULL(CONCAT(ps._id, ' ', ps.name), 'Not Assigned') AS parking_details
       FROM parking_officer po
-      LEFT JOIN parking_spaces ps ON po._id = ps._id LIMIT 10");
+      LEFT JOIN parking_spaces ps ON po._id = ps._id 
+      WHERE po.company_id = :company_id
+      LIMIT 10");
+    $this->db->bind(':company_id', $company_id);
     $results = $this->db->resultSet();
     return $results;
+  }
+
+  //get resently added officer
+  public function getRecentlyAddedOfficer()
+  {
+    $this->db->query("SELECT * FROM parking_officer ORDER BY _id DESC LIMIT 1");
+    $row = $this->db->single();
+    return $row;
   }
 }

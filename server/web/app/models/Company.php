@@ -62,13 +62,30 @@ class Company
   }
 
   //get the latest updates from data base
-  public function getLatestUpdates()
+  public function getLatestUpdates($company_id)
   {
-    $this->db->query('SELECT ps.vehicle_number, ps.start_time, ps.end_time, p.amount, p.payment_method
-        FROM parking_session ps
-        INNER JOIN payment p ON ps._id = p._id
-        ORDER BY p.time_stamp DESC
-        LIMIT 10');
+    $this->db->query(
+      'SELECT 
+                        ps.vehicle_number, 
+                        ps.start_time, 
+                        ps.end_time, 
+                        p.amount, 
+                        p.payment_method
+                      FROM 
+                        parking_session ps
+                      JOIN 
+                        payment p ON ps._id = p._id
+                      JOIN 
+                        parking_spaces pspace ON ps.parking_id = pspace._id
+                      JOIN 
+                        company c ON pspace.company_id = c._id
+                      WHERE 
+                        c._id = :company_id
+                      ORDER BY 
+                        p.time_stamp DESC
+                      LIMIT 10;'
+    );
+    $this->db->bind(':company_id', $company_id);
     $row = $this->db->resultSet();
     return $row;
   }
