@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="17dp"
     android:background="@drawable/radius_6_solid"
-    android:translationZ="4dp"
+    android:elevation="3dp"
     android:clickable="true"
     android:focusable="true"
-    android:onClick="parking_space_item_handler"
-    android:layout_marginBottom="21dp"
+    android:onClick="parking_space_frag_parking_space_item_handler"
+    android:layout_marginBottom="12dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

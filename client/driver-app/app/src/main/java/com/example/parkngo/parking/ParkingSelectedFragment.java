@@ -3,6 +3,8 @@ package com.example.parkngo.parking;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,57 +12,44 @@ import android.view.ViewGroup;
 
 import com.example.parkngo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ParkingSelectedFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class ParkingSelectedFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ParkingSelectedFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment parkingSelectedFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ParkingSelectedFragment newInstance(String param1, String param2) {
-        ParkingSelectedFragment fragment = new ParkingSelectedFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    ArrayList<ReviewModel> reviewModels = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_parking_selected, container, false);
+        View view =  inflater.inflate(R.layout.fragment_parking_selected, container, false);
+
+        // setup the model arraylist
+        setupReviewModels();
+
+        // get a reference to the recycle view
+        RecyclerView recyclerView = view.findViewById(R.id.ps_frag_recycle_view);
+
+        RMRecycleViewAdapter adapter = new RMRecycleViewAdapter(reviewModels, getContext());
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
     }
+
+    public void setupReviewModels(){
+        String[] names = {"Harry Potter", "Hermione Granger", "Ron Weasley", "Albus Dumbledore", "Severus Snape", "Luna Lovegood", "Nymphadora Tonks", "Sirius Black", "Remus Lupin", "Ginny Weasley"};
+        int[] noOfStars = {4, 5, 3, 2, 4, 5, 3, 4, 4, 3};
+        String[] msg = {"Oh, joy. Another parking adventure.", "Simply magical parking experience.", "Parking level: Weasley's flying car.", "Managed to park, but it was no magic.", "Parked with Snape's level of enthusiasm.", "Luna would approve of this parking space.", "Tonks would shape-shift into a better spot.", "Black-worthy parking spot.", "Lupin would find this parking howl-worthy.", "Ginny would hit this parking out of the park."};
+        String[] dates = {"2023/09/10", "2023/09/11", "2023/09/12", "2023/09/13", "2023/09/14", "2023/09/15", "2023/09/16", "2023/09/17", "2023/09/18", "2023/09/19"};
+
+        for(int i=0; i< names.length; i++){
+            reviewModels.add(new ReviewModel(names[i], noOfStars[i], msg[i], dates[i]));
+        }
+
+    }
+
+
 }

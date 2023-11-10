@@ -18,11 +18,13 @@ public class HeroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hero);
     }
 
+    // login button
     public void hero_act_login_btn_handler(View v){
         Intent i = new Intent(this, LoginMobileNumberActivity.class);
         startActivity(i);
     }
 
+    // signup button
     public void hero_act_signup_btn_handler(View v){
         Intent i = new Intent(this, SignUpNameActivity.class);
         startActivity(i);

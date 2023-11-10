@@ -20,4 +20,8 @@
         <item name="android:textColor">@color/chip_text</item>
     </style>
 
+    <style name="SpinnerTextStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:textSize">25sp</item> <!-- Adjust the text size as needed -->
+    </style>
+
 </resources>

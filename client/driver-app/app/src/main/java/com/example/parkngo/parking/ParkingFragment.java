@@ -104,7 +104,6 @@ class CustomAdapter extends ArrayAdapter<String>{
             ImageViewCompat.setImageTintList(starView, ColorStateList.valueOf(mainColor));
         }
 
-
         return parkingItem;
     }
 }

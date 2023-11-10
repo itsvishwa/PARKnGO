@@ -1,4 +1,4 @@
-package com.example.parkngo.scan;
+package com.example.parkngo.home;
 
 import android.os.Bundle;
 
@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import com.example.parkngo.R;
 
-public class ScanFragment extends Fragment {
+public class NoAvailableParkingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scan, container, false);
+        return inflater.inflate(R.layout.fragment_no_available_parking, container, false);
     }
 }

@@ -90,19 +90,22 @@
         android:layout_weight="8">
 
 <!--        Name here -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_btn_edit_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:clickable="true"
             android:backgroundTint="@color/primaryColor"
-            app:tint="@color/white"
-            android:src="@android:drawable/ic_menu_edit"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="profile_frag_edit_profile_btn_handler"
+            android:text="Edit Profile"
+            app:iconTint="@color/white"
+            android:textColor="@color/white"
+            app:icon="@android:drawable/ic_menu_edit"
             app:layout_constraintBottom_toTopOf="@+id/fab_btn_main"
             app:layout_constraintEnd_toEndOf="@+id/fab_btn_main"
-            app:layout_constraintStart_toStartOf="@+id/fab_btn_main"
-            android:focusable="true" />
+            />
 
         <TextView
             android:id="@+id/name_title"
@@ -188,20 +191,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:focusable="true" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_btn_payment_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:backgroundTint="@color/primaryColor"
             android:clickable="true"
+            android:focusable="true"
             android:onClick="profile_frag_payment_btn_handler"
-            android:src="@drawable/baseline_payment_24"
+            android:text="Payment History"
+            android:textColor="@color/white"
+            app:icon="@drawable/baseline_payment_24"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/fab_btn_edit_profile"
             app:layout_constraintEnd_toEndOf="@+id/fab_btn_edit_profile"
-            app:layout_constraintStart_toStartOf="@+id/fab_btn_edit_profile"
-            app:tint="@color/white"
-            android:focusable="true" />
+            app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

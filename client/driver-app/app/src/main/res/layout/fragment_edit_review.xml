@@ -4,10 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".parking.editReviewFragment"
     android:orientation="vertical"
-    android:background="@color/backgroundColor"
-    tools:context=".home.AvailableParkingSpacesFragment">
-
+    android:background="@color/backgroundColor">
 
     <!--    top app bar here -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Select A Parking"
+                    android:text="Edit your review"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -48,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Updated 1 minute ago pull down to refresh again"
+                    android:text="CMC CAR PARK 01"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -93,71 +92,63 @@
         android:layout_weight="8">
 
 
-        <!--  Search Bar    -->
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:progressTint="@color/primaryColor"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/search_view_bg"
-            app:iconifiedByDefault="false"
+            android:layout_marginTop="35dp"
+            android:rating="3"
+            android:isIndicator="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout12"
+            android:layout_width="match_parent"
+            android:layout_height="138dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryBackground="@android:color/transparent"
-            app:queryHint="Search Here..." />
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar2">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            style="@style/Widget.MaterialComponents.ChipGroup"
-            android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/editTextTextMultiLine2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/radius_9_solid"
+                android:ems="10"
+                android:gravity="start|top"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="13dp"
+                android:hint="Type your review here"
+                android:text="Convenient and well-located parking space, though a bit tight for larger vehicles"
+                android:inputType="textMultiLine"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:chipSpacingVertical="0dp"
+            android:text="Discard"
+            android:backgroundTint="@color/bottomNavUnselectedItemColor"
+            app:layout_constraintBottom_toBottomOf="@+id/button9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView">
+            app:layout_constraintTop_toTopOf="@+id/button9" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip5"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Min.Distance"
-                app:chipEndPadding="10dp"
-                app:chipStartPadding="10dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip4"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Max.Free Slots" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip3"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Public" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip2"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Min.Rate" />
-        </com.google.android.material.chip.ChipGroup>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ava_recycle_view"
-            android:layout_marginTop="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Confirm Changes"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
