@@ -64,7 +64,7 @@
                     android:id="@+id/login_otp_act_imageView1"
                     android:layout_width="51dp"
                     android:layout_height="51dp"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="backBtnHandler"

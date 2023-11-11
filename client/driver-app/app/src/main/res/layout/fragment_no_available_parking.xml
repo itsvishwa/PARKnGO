@@ -70,7 +70,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

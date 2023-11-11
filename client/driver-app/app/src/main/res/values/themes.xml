@@ -21,7 +21,7 @@
     </style>
 
     <style name="SpinnerTextStyle" parent="Widget.AppCompat.Spinner">
-        <item name="android:textSize">25sp</item> <!-- Adjust the text size as needed -->
+        <item name="android:textSize">25sp</item>
     </style>
 
 </resources>

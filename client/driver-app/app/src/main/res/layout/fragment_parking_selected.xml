@@ -71,7 +71,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +187,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/review_count_parking_item"
+                    android:id="@+id/pi_noofreviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="11dp"
@@ -202,7 +202,7 @@
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/green_rounded_triangle"
+                    android:background="@drawable/radius_36_green"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
                     android:text="Public"

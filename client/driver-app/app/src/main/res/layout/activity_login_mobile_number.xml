@@ -119,7 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:background="@drawable/rounded_background_input_feild"
+                android:background="@drawable/radius_11"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="20dp"
                 app:layout_constraintEnd_toEndOf="parent"

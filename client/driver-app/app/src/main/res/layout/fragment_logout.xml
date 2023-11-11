@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".parking.editReviewFragment"
+    tools:context=".logout.LogoutFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingHorizontal="18dp">
-
 
         <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Edit your review"
+                    android:text="Hi, Vishwa"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -47,11 +46,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="CMC CAR PARK 01"
+                    android:text="Your are about to logout "
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,6 +63,7 @@
                 >
 
                 <ImageView
+                    android:onClick="backBtnHandler"
                     android:id="@+id/login_otp_act_imageView1"
                     app:tint="@color/backgroundColor"
                     android:layout_width="51dp"
@@ -70,7 +71,6 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="backBtnHandler"
                     android:background="@drawable/appbar_icon_bg"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -81,74 +81,74 @@
 
         </LinearLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    body content here-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:paddingHorizontal="18dp"
+        android:layout_height="0dp"
         android:layout_weight="8">
 
-
-        <RatingBar
-            android:id="@+id/ratingBar2"
-            style="?android:attr/ratingBarStyleIndicator"
-            android:progressTint="@color/primaryColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:rating="3"
-            android:isIndicator="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout12"
+            android:id="@+id/constraintLayout11"
             android:layout_width="match_parent"
-            android:layout_height="138dp"
-            android:layout_marginTop="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/radius_6_with_outline"
+            android:paddingHorizontal="28dp"
+            android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar2">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <EditText
-                android:id="@+id/editTextTextMultiLine2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/radius_9_solid"
-                android:ems="10"
-                android:gravity="start|top"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="13dp"
-                android:hint="Type your review here"
-                android:text="Convenient and well-located parking space, though a bit tight for larger vehicles"
-                android:inputType="textMultiLine"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/question" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Are you sure you want to log out?"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/button13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Discard"
-            android:backgroundTint="@color/bottomNavUnselectedItemColor"
-            app:layout_constraintBottom_toBottomOf="@+id/button9"
+            android:layout_marginStart="50dp"
+            android:text="No"
+            app:cornerRadius="6dp"
+            app:layout_constraintBottom_toBottomOf="@+id/button14"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button9" />
+            app:layout_constraintTop_toTopOf="@+id/button14" />
 
         <Button
-            android:id="@+id/button9"
+            android:onClick="logout_frag_yes_btn_handler"
+            android:id="@+id/button14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Confirm Changes"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="50dp"
+            android:text="Yes"
+            android:backgroundTint="@color/bottomNavUnselectedItemColor"
+            app:cornerRadius="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@
     android:background="@drawable/radius_6_solid"
     android:elevation="4dp"
     android:layout_marginHorizontal="2dp"
+    android:layout_marginBottom="10dp"
     android:clickable="true"
     android:focusable="true"
     android:onClick="parking_space_frag_parking_space_item_handler"
@@ -13,7 +14,7 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/image_parking_item"
+        android:id="@+id/pi_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:scaleType="centerCrop"
@@ -23,7 +24,7 @@
         app:shapeAppearanceOverlay="@style/my_top_circular" />
 
     <TextView
-        android:id="@+id/name_parking_item"
+        android:id="@+id/pi_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -32,23 +33,26 @@
         android:textColor="@color/textPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/image_parking_item"
+        app:layout_constraintStart_toEndOf="@+id/pi_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/type_parking_item"
+        android:id="@+id/pi_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:paddingStart="11dp"
+        android:layout_marginStart="11dp"
         android:text="parking type"
-        android:textColor="@color/textSecondary"
+        android:textColor="@color/white"
+        android:background="@drawable/radius_36_green"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/image_parking_item"
-        app:layout_constraintTop_toBottomOf="@+id/name_parking_item" />
+        app:layout_constraintStart_toEndOf="@+id/pi_image"
+        app:layout_constraintTop_toBottomOf="@+id/pi_name" />
 
     <TextView
-        android:id="@+id/rate_parking_item"
+        android:id="@+id/pi_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -56,66 +60,32 @@
         android:text="Rate"
         android:textColor="@color/textSecondary"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@+id/star_layout"
-        app:layout_constraintTop_toBottomOf="@+id/type_parking_item" />
-
-    <LinearLayout
-        android:id="@+id/star_layout"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:paddingStart="11dp"
-        app:layout_constraintStart_toEndOf="@+id/image_parking_item"
-        app:layout_constraintTop_toBottomOf="@+id/rate_parking_item">
-
-        <ImageView
-            android:id="@+id/star1_parking_item"
-            android:layout_width="0dp"
-            android:layout_height="14dp"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_star_24"
-            />
-
-        <ImageView
-            android:id="@+id/star2_parking_item"
-            android:layout_width="0dp"
-            android:layout_height="14dp"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_star_24" />
-
-        <ImageView
-            android:id="@+id/star3_parking_item"
-            android:layout_width="0dp"
-            android:layout_height="14dp"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_star_24" />
-
-        <ImageView
-            android:id="@+id/star4_parking_item"
-            android:layout_width="0dp"
-            android:layout_height="14dp"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_star_24" />
-
-        <ImageView
-            android:id="@+id/star5_parking_item"
-            android:layout_width="0dp"
-            android:layout_height="14dp"
-            android:layout_weight="1"
-            android:src="@drawable/baseline_star_24" />
-    </LinearLayout>
+        app:layout_constraintStart_toEndOf="@+id/pi_image"
+        app:layout_constraintTop_toBottomOf="@+id/pi_type" />
 
     <TextView
-        android:id="@+id/review_count_parking_item"
+        android:id="@+id/pi_noofreviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="@color/textSecondary"
-        android:text="(00)"
-        app:layout_constraintBottom_toBottomOf="@+id/star_layout"
         android:layout_marginStart="11dp"
-        app:layout_constraintStart_toEndOf="@+id/star_layout"
-        app:layout_constraintTop_toTopOf="@+id/star_layout" />
+        android:text="(00)"
+        android:textColor="@color/textSecondary"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/pi_ratingbar"
+        app:layout_constraintStart_toEndOf="@+id/pi_ratingbar"
+        app:layout_constraintTop_toTopOf="@+id/pi_ratingbar" />
+
+    <RatingBar
+        android:id="@+id/pi_ratingbar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="7dp"
+        android:progressTint="@color/primaryColor"
+        android:rating="3"
+        app:layout_constraintStart_toEndOf="@+id/pi_image"
+        app:layout_constraintTop_toBottomOf="@+id/pi_rate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
