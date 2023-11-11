@@ -63,6 +63,7 @@
                 >
 
                 <ImageView
+                    android:onClick="profile_frag_logout_btn_handler"
                     android:id="@+id/login_otp_act_imageView1"
                     app:tint="@color/backgroundColor"
                     android:layout_width="51dp"
@@ -70,7 +71,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:src="@drawable/baseline_logout_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

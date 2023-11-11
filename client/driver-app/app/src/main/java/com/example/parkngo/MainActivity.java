@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.example.parkngo.home.AvailableParkingSpacesFragment;
 import com.example.parkngo.home.HomeFragment;
+import com.example.parkngo.logout.LogoutFragment;
 import com.example.parkngo.parking.AddReviewFragment;
 import com.example.parkngo.parking.ParkingFragment;
 import com.example.parkngo.parking.ParkingSelectedFragment;
@@ -130,6 +131,17 @@ public class MainActivity extends AppCompatActivity {
     // scan qr
     public void scan_frag_qr_btn_handler(View view){
         replaceFragment(new PaymentFragment());
+    }
+
+    // logout btn handlers
+    public void profile_frag_logout_btn_handler(View view){
+        replaceFragment(new LogoutFragment());
+    }
+
+    // logout confirm btn handler
+    public void logout_frag_yes_btn_handler(View view){
+        Intent i = new Intent(this, HeroActivity.class);
+        startActivity(i);
     }
 }
 

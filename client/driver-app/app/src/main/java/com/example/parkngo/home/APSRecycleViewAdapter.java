@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkngo.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAdapter.MyViewHolder>{
 
@@ -47,10 +44,10 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
         holder.rateView.setText("Rs. " + availableParkingSpaceModels.get(position).getRate() + "/1h");
         holder.parkingTypeView.setText(availableParkingSpaceModels.get(position).getParkingType());
         if(availableParkingSpaceModels.get(position).getParkingType() !="Public"){
-            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.failed_red_round);
+            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_red_circle);
             holder.parkingTypeView.setBackground(drawable);
         }else{
-            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.success_green_rounded);
+            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_green_circle);
             holder.parkingTypeView.setBackground(drawable);
         }
         holder.distanceView.setText(availableParkingSpaceModels.get(position).getDistance() + " m");

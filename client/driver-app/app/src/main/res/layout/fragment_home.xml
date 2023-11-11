@@ -64,7 +64,7 @@
                     android:id="@+id/appbar_icon_home_act"
                     android:layout_width="51dp"
                     android:layout_height="51dp"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:clickable="true"
                     android:focusable="true"
                     android:scaleType="centerInside"
@@ -87,37 +87,13 @@
         android:layout_weight="8"
         android:paddingHorizontal="18dp">
 
-<!--        vehicle type selector-->
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:background="@drawable/home_vehicle_type"-->
-<!--            android:translationZ="15dp"-->
-<!--            android:paddingVertical="10dp"-->
-<!--            android:paddingHorizontal="25dp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="21dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/textView15"-->
-<!--                android:textStyle="bold"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                android:text="CAR" />-->
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-
 
 <!--        parking space find button-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/home_frag_cons_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/home_icon_background_2"
+            android:background="@drawable/home_icon_circle"
             android:elevation="8dp"
             android:padding="10dp"
             android:translationZ="4dp"
@@ -151,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/home_vehicle_type"
+            android:background="@drawable/radius_23_with_stroke"
             android:paddingVertical="10dp"
             android:paddingHorizontal="10dp"
             app:layout_constraintStart_toStartOf="parent"
