@@ -1,4 +1,4 @@
-package com.example.officertestapp;
+package com.example.officertestapp.Status;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.officertestapp.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ReleaseASlot06Fragment#newInstance} factory method to
+ * Use the {@link StatusView01Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ReleaseASlot06Fragment extends Fragment {
+public class StatusView01Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class ReleaseASlot06Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ReleaseASlot06Fragment() {
+    public StatusView01Fragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class ReleaseASlot06Fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ReleaseASlot06Fragment.
+     * @return A new instance of fragment StatusView01Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ReleaseASlot06Fragment newInstance(String param1, String param2) {
-        ReleaseASlot06Fragment fragment = new ReleaseASlot06Fragment();
+    public static StatusView01Fragment newInstance(String param1, String param2) {
+        StatusView01Fragment fragment = new StatusView01Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class ReleaseASlot06Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_release_a_slot06, container, false);
+        return inflater.inflate(R.layout.fragment_status_view01, container, false);
     }
 }
