@@ -2,15 +2,23 @@ package com.example.officertestapp;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.officertestapp.Home.AssignVehicle01Fragment;
+import com.example.officertestapp.Home.AssignVehicle02Fragment;
+import com.example.officertestapp.Home.AssignVehicle03Fragment;
+import com.example.officertestapp.Home.HomeMainFragment;
+import com.example.officertestapp.Home.ReleaseASlot01Fragment;
+import com.example.officertestapp.Home.ReleaseASlot02Fragment;
+import com.example.officertestapp.Home.ReleaseASlot03Fragment;
+import com.example.officertestapp.Home.ReleaseASlot04Fragment;
+import com.example.officertestapp.Home.ReleaseASlot06Fragment;
+import com.example.officertestapp.Profile.ProfileMainFragment;
+import com.example.officertestapp.Status.StatusMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{
