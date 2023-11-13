@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.parkngo.helpers.ParkngoStorage;
 import com.example.parkngo.home.AvailableParkingSpacesFragment;
 import com.example.parkngo.home.HomeFragment;
 import com.example.parkngo.logout.LogoutFragment;
@@ -140,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
 
     // logout confirm btn handler
     public void logout_frag_yes_btn_handler(View view){
+        ParkngoStorage parkngoStorage = new ParkngoStorage(getApplicationContext());
+        parkngoStorage.clearData();
         Intent i = new Intent(this, HeroActivity.class);
         startActivity(i);
     }

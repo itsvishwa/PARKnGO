@@ -138,7 +138,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextNumber"
+                    android:id="@+id/login_mobile_number_act_mobile_number_input"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
