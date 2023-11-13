@@ -31,21 +31,20 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), item, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getContext(), item, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
         ArrayList<String> vehicleTypes = new ArrayList<>();
-        vehicleTypes.add("Car");
-        vehicleTypes.add("Bike");
-        vehicleTypes.add("Van");
-        vehicleTypes.add("Lorry");
-        vehicleTypes.add("Bus");
+        String[] vTypes = {"Car", "Bike", "Van", "Lorry", "Bus"};
+
+        for (int i=0; i<vTypes.length; i++){
+            vehicleTypes.add(vTypes[i]);
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, vehicleTypes);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);

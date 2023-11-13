@@ -95,7 +95,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:background="@drawable/radius_6_with_outline"
             android:paddingHorizontal="28dp"
             android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,49 +105,53 @@
                 android:id="@+id/imageView5"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
+                android:layout_marginTop="10dp"
                 android:scaleType="centerCrop"
+                android:src="@drawable/question"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/question" />
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
             <TextView
                 android:id="@+id/textView39"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:text="Are you sure you want to log out?"
-                android:textSize="16sp"
+                android:textSize="19sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="@color/bottomNavUnselectedItemColor"
+                android:onClick="logout_frag_yes_btn_handler"
+                android:text="Yes"
+                app:cornerRadius="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:paddingHorizontal="40dp"
+                android:paddingVertical="12dp"
+                android:text="No"
+                app:cornerRadius="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/button14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/button14" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:text="No"
-            app:cornerRadius="6dp"
-            app:layout_constraintBottom_toBottomOf="@+id/button14"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button14" />
-
-        <Button
-            android:onClick="logout_frag_yes_btn_handler"
-            android:id="@+id/button14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="50dp"
-            android:text="Yes"
-            android:backgroundTint="@color/bottomNavUnselectedItemColor"
-            app:cornerRadius="6dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
