@@ -96,19 +96,30 @@ class Companys extends Controller
         'last_name' => trim($_POST['last_name']),
         'nic' => trim($_POST['nic']),
         'officer_id' => trim($_POST['officer_id']),
-        'recently_added_officer_id' => $this->officerModel->getRecentlyAddedOfficerId()->officer_id,
+        'recently_added_officer_id' => $this->officerModel->getRecentlyAddedOfficer()->officer_id,
         'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
         'profile_image' => trim($_FILES['profile_image']['name']),
         'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
+        'officer_id_err' => '',
       ];
 
       if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])) {
         $data['mobile_number_err'] = 'Mobile Number is already taken';
       }
 
-      if (empty($data['mobile_number_err'])) {
+      //if mobile number length > 9 
+      if (strlen($data['mobile_number']) != 9) {
+        $data['mobile_number_err'] = 'Mobile Number should be 9 numbers';
+      }
+
+      //check officer id is valid
+      if ($this->officerModel->findOfficerByOfficerId($data['officer_id'])) {
+        $data['officer_id_err'] = 'Officer ID is already taken';
+      }
+
+      if (empty($data['mobile_number_err']) && empty($data['officer_id_err'])) {
         if ($this->officerModel->register($data)) {
           $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
           $this->view('company/parkingOfficerView', $officers);
@@ -131,6 +142,7 @@ class Companys extends Controller
         'profile_image' => '',
         'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
+        'officer_id_err' => '',
       ];
 
       // Load view
@@ -138,8 +150,9 @@ class Companys extends Controller
     }
   }
 
-  public function parkingOfficerEditView()
+  public function parkingOfficerEditView($officer_id)
   {
+    $officer = $this->officerModel->findOfficerByOfficerId($officer_id);
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       //Pocess form
       // Sanitize POST data
@@ -151,16 +164,20 @@ class Companys extends Controller
         'first_name' => trim($_POST['first_name']),
         'last_name' => trim($_POST['last_name']),
         'nic' => trim($_POST['nic']),
-        'officer_id' => trim($_POST['officer_id']),
+        'officer_id' => $officer->officer_id,
         'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
         'profile_image' => trim($_FILES['profile_image']['name']),
-        'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
+        'company_id' => $_SESSION['user_id'],
       ];
 
-      if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])  && $this->officerModel->getOfficerDetailsUsingPhoneNumber($data['phone_number'])->officer_id != $_POST['officer_id']) {
+      if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])) {
         $data['mobile_number_err'] = 'Mobile Number is already taken';
+      }
+
+      if (strlen($data['mobile_number']) != 9) {
+        $data['mobile_number_err'] = 'Mobile Number should be 9 numbers';
       }
 
       if (empty($data['mobile_number_err'])) {
@@ -176,21 +193,19 @@ class Companys extends Controller
     } else {
       // Init data
       $data = [
-        'first_name' => '',
-        'last_name' => '',
-        'nic' => '',
-        'officer_id' => '',
-        'mobile_number' => '',
+        'first_name' => $officer->first_name,
+        'last_name' => $officer->last_name,
+        'nic' => $officer->nic,
+        'officer_id' => $officer->officer_id,
+        'mobile_number' => $officer->mobile_number,
         //'parking_id' => '',
         'profile_image' => '',
-        'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
+        'company_id' => $_SESSION['user_id'],
       ];
 
-      $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
-
       // Load view
-      $this->view('company/parkingOfficerEditView', $officers);
+      $this->view('company/parkingOfficerEditView', $data);
     }
   }
 
@@ -203,11 +218,29 @@ class Companys extends Controller
 
   public function parkingOfficerAssignView()
   {
+
+
     $this->view('company/parkingOfficerAssignView');
   }
 
-  public function parkingOfficerActivitiesView()
+  public function parkingOfficerActivitiesView($officer_id)
   {
-    $this->view('company/parkingOfficerActivitiesView');
+
+    $officer = $this->officerModel->getAllOfficersCardDetails($officer_id, $_SESSION['user_id']);
+    $officerActivities = $this->officerModel->getOfficerActivities($officer_id, $_SESSION['user_id']);
+
+    $data = [
+      'officer_id' => $officer->officer_id,
+      'first_name' => $officer->first_name,
+      'last_name' => $officer->last_name,
+      'nic' => $officer->nic,
+      'mobile_number' => $officer->mobile_number,
+      //'profile_image' => $officer->profile_image,
+      'company_id' => $_SESSION['user_id'],
+      'parking_space' => $officer->parking_space,
+      'activities' => $officerActivities,
+    ];
+
+    $this->view('company/parkingOfficerActivitiesView', $data);
   }
 }
