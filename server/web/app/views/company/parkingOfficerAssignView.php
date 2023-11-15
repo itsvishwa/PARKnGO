@@ -1,3 +1,15 @@
+<?php $selectedParkingSpaceId = null;
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Check if the selected parking space is set in the POST data
+  if (isset($_POST['parkingDropdown'])) {
+    // Assign the selected parking space ID to $selectedParkingSpaceId
+    $selectedParkingSpaceId = $_POST['parkingDropdown'];
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,22 +85,17 @@
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <div class="filter">
-
-        <div class="filter-parking">
-          <div class="header text-md">
-            <p>Select the parking space you want to delete</p>
-          </div>
-          <div class="ml-20">
-            <select id="parkingDropdown" class="p-form-dropdown width-80">
-              <option value="" disabled selected>Select Parking Space</option>
-              <option value="parking1">Parking Lot 1</option>
-              <option value="parking2">Parking Lot 2</option>
-              <option value="parking3">Parking Lot 3</option>
-              <option value="parking4">Parking Lot 4</option>
-              <!-- Add more options with dummy parking names as needed -->
-            </select>
-          </div>
+      <div class="filter-parking">
+        <div class="header text-md">
+          <p>Select the parking space you want to delete</p>
+        </div>
+        <div class="ml-20">
+          <select id="parkingDropdown" class="p-form-dropdown" onchange="populateFormFields()">
+            <option value="" disabled selected>Select Parking Space</option>
+            <?php foreach ($data['parking_spaces'] as $parking_space) {
+              echo "<option value='" . $parking_space->_id . "'>" . $parking_space->name . "</option>";
+            } ?>
+          </select>
         </div>
       </div>
 
@@ -111,25 +118,99 @@
               </p>
             </div>
           </div>
-          <div id="card-container" class="parking-card mt-20"></div>
+          <div id="card-container" class="parking-card mt-20">
+            <div class="confirmation-card" id="confirmationCard"></div>
+            <div class=" c-btn-section">
+              <input type="button" value="Cancel" class="c-btn bg-black40" id="cancelButton">
+              <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
+            </div>
+          </div>
+
         </div>
+        <script>
+          function populateFormFields() {
+            var selectElement = document.getElementById("parkingDropdown");
+            var confirmationCard = document.getElementById('confirmationCard');
+            var selectedParkingSpaceId = selectElement.value;
 
+            // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
+            // For example, assuming you have a JavaScript object containing officer details:
+            var parking_spaces = <?php echo json_encode($data['parking_spaces']); ?>;
+            var parking_spaces_status = <?php echo json_encode($data['parking_spaces_status']); ?>;
 
-        <div class=" c-btn-section">
-          <input type="button" value="Cancel" class="c-btn bg-black40" id="cancelButton">
-          <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
+            // console.table(parking_spaces)
+            // console.table(parking_spaces_status)
+
+            // Find the selected officer in the officersData array
+            var selectedParkingSpace = parking_spaces.find(function(parking_space) {
+              return parking_space._id == selectedParkingSpaceId;
+            });
+
+            var selectedParkingSpaceStatus = parking_spaces_status.filter(function(parking_space_status) {
+              return parking_space_status.parking_id == selectedParkingSpaceId;
+            });
+            console.log(selectedParkingSpace);
+            console.log(selectedParkingSpaceStatus);
+            // Populate form fields with officer details
+
+            if (selectedParkingSpace) {
+              // Update the confirmation card content dynamically
+              confirmationCard.innerHTML = `
+        <div class='confirmation-card-line mb-10'>
+            <h3 class='b-600'>${selectedParkingSpace.name}</h3>
+            <p class='b-600'>${selectedParkingSpace.address}</p>
         </div>
-      </div>
+        <div class='confirmation-card-line mb-10'>
+            <p class='f-14'>Total Slots <span class='b-500'>${selectedParkingSpace.no_of_slots}</span></p>
+            ${
+              selectedParkingSpaceStatus[0].rate == 0
+          ? '<p class="parking-type bg-blue text-white">Free</p>'
+          : `<p class="b-500 f-14">For ${capitalizeFirstLetter(selectedParkingSpaceStatus[0].vehicle_type)} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
+          }
+        </div>
+        <div class='confirmation-card-line'>
+            <h3 class='f-14'>Parking Slots</h3>
+            <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
+        </div>
+        <table class='confirmation-card-table'>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+              ${selectedParkingSpaceStatus.length > 0 ?
+                selectedParkingSpaceStatus.map(function(vehicle) {
+                  return `
+                    <tr class='tr-b'>
+                      <td>${capitalizeFirstLetter(vehicle.vehicle_type)}</td>
+                      <td>${vehicle.total_slots}</td>
+                    </tr>
+                  `;
+                }).join('') :
+                "<tr><td colspan='2'>No data available for the selected parking space.</td></tr>"
+              }
+            </tbody>
+        </table>`;
+            } else {
+              // Display a message if no matching parking space is found
+              confirmationCard.innerHTML = "<p>No data available for the selected parking space.</p>";
+            }
+          }
 
-    </div>
+          function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+          }
+        </script>
 
-    <script>
-      document.getElementById('cancelButton').addEventListener('click', function() {
-        window.history.back();
-      });
-    </script>
-    <script src="<?php echo URLROOT; ?>/js/company/parkingOfficerView.js"></script>
-    <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceViewCard.js"></script>
+        <script>
+          //cancel button
+          document.getElementById('cancelButton').addEventListener('click', function() {
+            window.history.back();
+          });
+        </script>
+        <script src="<?php echo URLROOT; ?>/js/company/parkingOfficerView.js"></script>
 </body>
 
 </html>

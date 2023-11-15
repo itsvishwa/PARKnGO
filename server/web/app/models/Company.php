@@ -90,6 +90,37 @@ class Company
     return $row;
   }
 
+  //get all the parking spaces that related to that company
+  public function getParkingSpaces($company_id)
+  {
+    $this->db->query('SELECT * FROM parking_spaces WHERE company_id = :company_id');
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
+  public function getParkingSpaceStatusDetails($company_id)
+  {
+    $this->db->query('SELECT 
+      pss._id AS status_id,
+      pss.vehicle_type AS vehicle_type,
+      pss.free_slots AS free_slots,
+      pss.total_slots AS total_slots,
+      pss.rate AS rate,
+      ps._id AS parking_id,
+      ps.company_id AS company_id
+    FROM 
+      parking_space_status pss
+    LEFT JOIN 
+      parking_spaces ps ON pss.parking_id = ps._id
+    WHERE 
+      ps.company_id = :company_id;
+');
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
   // get parking spaces details
   // public function getParkingSpacesDetails()
   // {
