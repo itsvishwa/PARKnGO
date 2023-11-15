@@ -891,3 +891,7 @@ body {
   justify-content: center;
   height: 90vh;
 }
+
+.text-center {
+  text-align: center;
+}
