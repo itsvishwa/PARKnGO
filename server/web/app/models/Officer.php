@@ -138,7 +138,7 @@ class Officer
   }
 
   //Details for parking officer card details using officer id and company id
-  public function getAllOfficersCardDetails($officer_id, $company_id)
+  public function getOfficerCardDetails($officer_id, $company_id)
   {
     $this->db->query('SELECT po.*, IFNULL(CONCAT(ps._id, " ", ps.name), "Not Assigned") AS parking_space
     FROM parking_officer po

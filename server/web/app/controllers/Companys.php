@@ -216,17 +216,30 @@ class Companys extends Controller
     $this->view('company/parkingOfficerDeleteView', $officers);
   }
 
-  public function parkingOfficerAssignView()
+  public function parkingOfficerAssignView($officer_id)
   {
 
+    $officer = $this->officerModel->getOfficerCardDetails($officer_id, $_SESSION['user_id']);
 
-    $this->view('company/parkingOfficerAssignView');
+
+    $data = [
+      'officer_id' => $officer->officer_id,
+      'first_name' => $officer->first_name,
+      'last_name' => $officer->last_name,
+      'nic' => $officer->nic,
+      'mobile_number' => $officer->mobile_number,
+      //'profile_image' => $officer->profile_image,
+      'company_id' => $_SESSION['user_id'],
+      'parking_space' => $officer->parking_space,
+    ];
+
+    $this->view('company/parkingOfficerAssignView', $data);
   }
 
   public function parkingOfficerActivitiesView($officer_id)
   {
 
-    $officer = $this->officerModel->getAllOfficersCardDetails($officer_id, $_SESSION['user_id']);
+    $officer = $this->officerModel->getOfficerCardDetails($officer_id, $_SESSION['user_id']);
     $officerActivities = $this->officerModel->getOfficerActivities($officer_id, $_SESSION['user_id']);
 
     $data = [
