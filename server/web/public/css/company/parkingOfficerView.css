@@ -132,6 +132,10 @@
   justify-content: center;
 }
 
+.filter-parking {
+  width: 400px;
+}
+
 .officer-parking-div {
   width: 100%;
   display: flex;

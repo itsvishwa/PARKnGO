@@ -21,8 +21,6 @@ class Companys extends Controller
     $this->dashboardView();
   }
 
-
-
   public function dashboardView()
   {
     $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount($_SESSION['user_id']);
@@ -220,7 +218,8 @@ class Companys extends Controller
   {
 
     $officer = $this->officerModel->getOfficerCardDetails($officer_id, $_SESSION['user_id']);
-
+    $parkingSpaces = $this->companyModel->getParkingSpaces($_SESSION['user_id']);
+    $parkingSpacesStatus = $this->companyModel->getParkingSpaceStatusDetails($_SESSION['user_id']);
 
     $data = [
       'officer_id' => $officer->officer_id,
@@ -231,6 +230,8 @@ class Companys extends Controller
       //'profile_image' => $officer->profile_image,
       'company_id' => $_SESSION['user_id'],
       'parking_space' => $officer->parking_space,
+      'parking_spaces' => $parkingSpaces,
+      'parking_spaces_status' => $parkingSpacesStatus,
     ];
 
     $this->view('company/parkingOfficerAssignView', $data);
