@@ -58,6 +58,26 @@ class Officer
     }
   }
 
+  public function delete($officer_id, $company_id)
+  {
+    $this->db->query(
+      'DELETE FROM 
+        parking_officer 
+      WHERE officer_id = :officer_id AND company_id = :company_id'
+    );
+
+    // Bind values
+    $this->db->bind(':officer_id', $officer_id);
+    $this->db->bind(':company_id', $company_id);
+
+    // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 
   // Find Parking Officer by Phone number

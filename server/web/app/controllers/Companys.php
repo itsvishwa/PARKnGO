@@ -210,20 +210,30 @@ class Companys extends Controller
   public function parkingOfficerDeleteView($officer_id)
   {
 
-    $officer = $this->officerModel->getOfficerCardDetails($officer_id, $_SESSION['user_id']);
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $data = [
-      'officer_id' => $officer->officer_id,
-      'first_name' => $officer->first_name,
-      'last_name' => $officer->last_name,
-      'nic' => $officer->nic,
-      'mobile_number' => $officer->mobile_number,
-      //'profile_image' => $officer->profile_image,
-      'company_id' => $_SESSION['user_id'],
-      'parking_space' => $officer->parking_space,
-    ];
 
-    $this->view('company/parkingOfficerDeleteView', $data);
+      if ($this->officerModel->delete($officer_id, $_SESSION['user_id'])) {
+        redirect('companys/parkingOfficerView');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
+      $officer = $this->officerModel->getOfficerCardDetails($officer_id, $_SESSION['user_id']);
+
+      $data = [
+        'officer_id' => $officer->officer_id,
+        'first_name' => $officer->first_name,
+        'last_name' => $officer->last_name,
+        'nic' => $officer->nic,
+        'mobile_number' => $officer->mobile_number,
+        //'profile_image' => $officer->profile_image,
+        'company_id' => $_SESSION['user_id'],
+        'parking_space' => $officer->parking_space,
+      ];
+
+      $this->view('company/parkingOfficerDeleteView', $data);
+    }
   }
 
   public function parkingOfficerAssignView($officer_id)
@@ -232,6 +242,7 @@ class Companys extends Controller
     $officer = $this->officerModel->getOfficerCardDetails($officer_id, $_SESSION['user_id']);
     $parkingSpaces = $this->companyModel->getParkingSpaces($_SESSION['user_id']);
     $parkingSpacesStatus = $this->companyModel->getParkingSpaceStatusDetails($_SESSION['user_id']);
+
 
     $data = [
       'officer_id' => $officer->officer_id,

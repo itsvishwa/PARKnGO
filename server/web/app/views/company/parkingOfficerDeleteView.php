@@ -73,7 +73,7 @@
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <form action="<?php echo URLROOT; ?>companys/parkingOfficerDeleteView">
+      <form action="<?php echo URLROOT; ?>companys/parkingOfficerDeleteView/<?php echo $data['officer_id'] ?>" method="POST" enctype="multipart/form-data">
         <div class="form-div mt-50">
           <div class="officer-card mt-10">
             <div class="officer-section-one">
@@ -95,7 +95,7 @@
 
           <div class="c-btn-section">
             <input type="button" value="Cancel" class="c-btn bg-black40" id="cancelButton">
-            <input type=" submit" value="Delete Parking Officer" class="c-btn bg-red text-center">
+            <input type="submit" value="Delete Parking Officer" class="c-btn bg-red text-center">
           </div>
         </div>
       </form>
