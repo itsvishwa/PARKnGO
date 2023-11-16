@@ -119,10 +119,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
           </div>
           <div id="card-container" class="parking-card mt-20">
+
             <div class="confirmation-card" id="confirmationCard"></div>
-            <div class=" c-btn-section">
+            <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>" class=" c-btn-section">
               <input type="button" value="Cancel" class="c-btn bg-black40" id="cancelButton">
               <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
+            </form>
+            <div>
+
             </div>
           </div>
 
@@ -163,10 +167,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class='confirmation-card-line mb-10'>
             <p class='f-14'>Total Slots <span class='b-500'>${selectedParkingSpace.no_of_slots}</span></p>
             ${
-              selectedParkingSpaceStatus[0].rate == 0
-          ? '<p class="parking-type bg-blue text-white">Free</p>'
-          : `<p class="b-500 f-14">For ${capitalizeFirstLetter(selectedParkingSpaceStatus[0].vehicle_type)} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
-          }
+              selectedParkingSpaceStatus && selectedParkingSpaceStatus.length > 0
+                ? selectedParkingSpaceStatus[0].rate == 0
+                  ? '<p class="parking-type bg-blue text-white">Free</p>'
+                  : `<p class="b-500 f-14">For ${selectedParkingSpaceStatus[0].vehicle_type} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
+                : ''
+            }
         </div>
         <div class='confirmation-card-line'>
             <h3 class='f-14'>Parking Slots</h3>
@@ -184,12 +190,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 selectedParkingSpaceStatus.map(function(vehicle) {
                   return `
                     <tr class='tr-b'>
-                      <td>${capitalizeFirstLetter(vehicle.vehicle_type)}</td>
+                      <td>${vehicle.vehicle_type}</td>
                       <td>${vehicle.total_slots}</td>
                     </tr>
                   `;
                 }).join('') :
-                "<tr><td colspan='2'>No data available for the selected parking space.</td></tr>"
+                "<tr><td colspan='2'>No data available for the parking space.</td></tr>"
               }
             </tbody>
         </table>`;
@@ -197,10 +203,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               // Display a message if no matching parking space is found
               confirmationCard.innerHTML = "<p>No data available for the selected parking space.</p>";
             }
-          }
-
-          function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
           }
         </script>
 
