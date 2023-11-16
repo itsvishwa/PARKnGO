@@ -96,6 +96,22 @@ class Officer
     }
   }
 
+  //Find parking officer by nic
+  public function findOfficerByNic($nic)
+  {
+    $this->db->query('SELECT * FROM parking_officer WHERE nic = :nic');
+    $this->db->bind(':nic', $nic);
+
+    $row = $this->db->single();
+
+    // Check roww
+    if ($this->db->rowCount() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   //Find parking officer by officer id
   public function findOfficerByOfficerId($officer_id)
   {

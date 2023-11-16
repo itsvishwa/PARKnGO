@@ -101,6 +101,7 @@ class Companys extends Controller
         'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
         'officer_id_err' => '',
+        'nic_err' => '',
       ];
 
       if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])) {
@@ -112,12 +113,17 @@ class Companys extends Controller
         $data['mobile_number_err'] = 'Mobile Number should be 9 numbers';
       }
 
+      //check officer nic is valid
+      if ($this->officerModel->findOfficerByNic($data['nic'])) {
+        $data['nic_err'] = 'NIC is already taken';
+      }
+
       //check officer id is valid
       if ($this->officerModel->findOfficerByOfficerId($data['officer_id'])) {
         $data['officer_id_err'] = 'Officer ID is already taken';
       }
 
-      if (empty($data['mobile_number_err']) && empty($data['officer_id_err'])) {
+      if (empty($data['mobile_number_err']) && empty($data['officer_id_err']) && empty($data['nic_err'])) {
         if ($this->officerModel->register($data)) {
           $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
           $this->view('company/parkingOfficerView', $officers);
@@ -141,6 +147,7 @@ class Companys extends Controller
         'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
         'officer_id_err' => '',
+        'nic_err' => '',
       ];
 
       // Load view
