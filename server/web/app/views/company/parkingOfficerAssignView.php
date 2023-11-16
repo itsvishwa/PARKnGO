@@ -120,11 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
           <div id="card-container" class="parking-card mt-20">
 
-            <div class="confirmation-card" id="confirmationCard"></div>
-            <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>" class=" c-btn-section">
-              <input type="button" value="Cancel" class="c-btn bg-black40" id="cancelButton">
-              <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
-            </form>
+            <div id="confirmationCard"></div>
+
             <div>
 
             </div>
@@ -160,45 +157,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (selectedParkingSpace) {
               // Update the confirmation card content dynamically
               confirmationCard.innerHTML = `
-        <div class='confirmation-card-line mb-10'>
-            <h3 class='b-600'>${selectedParkingSpace.name}</h3>
-            <p class='b-600'>${selectedParkingSpace.address}</p>
-        </div>
-        <div class='confirmation-card-line mb-10'>
-            <p class='f-14'>Total Slots <span class='b-500'>${selectedParkingSpace.no_of_slots}</span></p>
-            ${
-              selectedParkingSpaceStatus && selectedParkingSpaceStatus.length > 0
-                ? selectedParkingSpaceStatus[0].rate == 0
-                  ? '<p class="parking-type bg-blue text-white">Free</p>'
-                  : `<p class="b-500 f-14">For ${selectedParkingSpaceStatus[0].vehicle_type} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
-                : ''
-            }
-        </div>
-        <div class='confirmation-card-line'>
-            <h3 class='f-14'>Parking Slots</h3>
-            <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
-        </div>
-        <table class='confirmation-card-table'>
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Count</th>
-                </tr>
-            </thead>
-            <tbody>
-              ${selectedParkingSpaceStatus.length > 0 ?
-                selectedParkingSpaceStatus.map(function(vehicle) {
-                  return `
-                    <tr class='tr-b'>
-                      <td>${vehicle.vehicle_type}</td>
-                      <td>${vehicle.total_slots}</td>
-                    </tr>
-                  `;
-                }).join('') :
-                "<tr><td colspan='2'>No data available for the parking space.</td></tr>"
-              }
-            </tbody>
-        </table>`;
+              <div class="confirmation-card">
+                <div class='confirmation-card-line mb-10'>
+                    <h3 class='b-600'>${selectedParkingSpace.name}</h3>
+                    <p class='b-600'>${selectedParkingSpace.address}</p>
+                </div>
+                <div class='confirmation-card-line mb-10'>
+                    <p class='f-14'>Total Slots <span class='b-500'>${selectedParkingSpace.no_of_slots}</span></p>
+                    ${
+                      selectedParkingSpaceStatus && selectedParkingSpaceStatus.length > 0
+                        ? selectedParkingSpaceStatus[0].rate == 0
+                          ? '<p class="parking-type bg-blue text-white">Free</p>'
+                          : `<p class="b-500 f-14">For ${selectedParkingSpaceStatus[0].vehicle_type} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
+                        : ''
+                    }
+                </div>
+                <div class='confirmation-card-line'>
+                    <h3 class='f-14'>Parking Slots</h3>
+                    <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
+                </div>
+                <table class='confirmation-card-table'>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      ${selectedParkingSpaceStatus.length > 0 ?
+                        selectedParkingSpaceStatus.map(function(vehicle) {
+                          return `
+                            <tr class='tr-b'>
+                              <td>${vehicle.vehicle_type}</td>
+                              <td>${vehicle.total_slots}</td>
+                            </tr>
+                          `;
+                        }).join('') :
+                        "<tr><td colspan='2'>No data available for the parking space.</td></tr>"
+                      }
+                    </tbody>
+                </table>
+              </div>
+              <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>/${selectedParkingSpace._id}" class=" c-btn-section" method="POST" enctype="multipart/form-data">
+                <input type="button" value="Cancel" class="c-btn bg-black40" onclick="window.history.back()">
+                <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
+              </form>
+              `;
             } else {
               // Display a message if no matching parking space is found
               confirmationCard.innerHTML = "<p>No data available for the selected parking space.</p>";

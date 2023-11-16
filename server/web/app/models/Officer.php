@@ -78,6 +78,28 @@ class Officer
     }
   }
 
+  public function assignParkingSpace($officer_id, $parking_id, $company_id)
+  {
+    $this->db->query(
+      'UPDATE 
+        parking_officer 
+      SET parking_id = :parking_id 
+      WHERE officer_id = :officer_id AND company_id = :company_id'
+    );
+
+    // Bind values
+    $this->db->bind(':parking_id', $parking_id);
+    $this->db->bind(':officer_id', $officer_id);
+    $this->db->bind(':company_id', $company_id);
+
+    // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 
   // Find Parking Officer by Phone number
