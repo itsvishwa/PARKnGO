@@ -89,7 +89,7 @@
 
             <label for="nic" class="p-form-label">NIC *</label>
             <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required value="<?php echo $data['nic'] ?>">
-
+            <span class="f-12 text-red"><?php echo $data['nic_err']; ?></span>
 
             <label for="mobile_number" class="p-form-label">Officer Mobile Number *</label>
             <span class="f-12 text-green">Number should be 9 digits. Eg: 771234567</span>
