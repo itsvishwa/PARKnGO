@@ -7,17 +7,13 @@
 
 class Core
 {
-        protected $currentController = 'driver';
-        protected $currentMethod = 'login'; // TODO:: fix
+        protected $currentController;
+        protected $currentMethod;
         protected $params = [];
 
         public function __construct()
         {
-                // print_r($this->getURL());
-
                 $url = $this->getURL();
-                // var_dump($url);
-                // exit; TODO:: Delete after
 
                 // Look in controllers for first value
                 if (isset($url[0]) && file_exists('./controllers/' . ucwords($url[0]) . '.php')) {

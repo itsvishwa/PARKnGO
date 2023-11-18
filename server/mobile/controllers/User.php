@@ -26,6 +26,8 @@ class User extends Controller
         private $officer_model;
         private $otp_model;
 
+
+
         public function __construct()
         {
                 $this->driver_model = $this->model("DriverModel");
@@ -108,7 +110,7 @@ class User extends Controller
                                 $this->send_otp($mobile_number);
                         } else // mobile number is not exist 
                         {
-                                $this->send_json_400("Your mobile number is not yet registered by your company");
+                                $this->send_json_400("Mobile number is not a registered one");
                         }
                 }
         }
@@ -280,85 +282,63 @@ class User extends Controller
 
 
 
-        // encode a token
-        private function encode_token($token_data)
+        // validate the token when start of the app => decide user is already logged in or not
+        public function validate_token()
         {
-                // Serialize the data into a JSON string
-                $data_json = json_encode($token_data);
+                if (isset($_SERVER['HTTP_TOKEN'])) {
+                        $token = $_SERVER['HTTP_TOKEN'];
 
-                // Generate a random 16-byte IV (Initialization Vector)
-                $iv = openssl_random_pseudo_bytes(16);
+                        $token_data = $this->decode_token($token);
 
-                // Encrypt the compressed data with AES-128-CBC and the IV
-                $encrypted_string = openssl_encrypt($data_json, 'aes-128-cbc', TOKEN_KEY, 0, $iv);
-
-                // Combine the IV and ciphertext to create the final token
-                $token = $iv . $encrypted_string;
-
-                // Encode the binary token as a Base64 string
-                $token = base64_encode($token);
-
-                return $token;
-        }
-
-
-
-        // decode a token
-        private function decode_token($token_string)
-        {
-                // Decode the Base64-encoded token to get the binary token
-                $binary_token = base64_decode($token_string);
-
-                // Extract the IV from the first 16 bytes of the binary token
-                $iv = substr($binary_token, 0, 16);
-
-                // Extract the ciphertext from the rest of the binary token
-                $ciphertext = substr($binary_token, 16);
-
-                // Decrypt the ciphertext with AES-128-CBC and the IV
-                $decrypted_data = openssl_decrypt($ciphertext, 'aes-128-cbc', TOKEN_KEY, 0, $iv);
-
-                if ($decrypted_data === false) {
-                        // Decryption error, you can log or return an error message
-                        return "Decryption error: " . openssl_error_string();
+                        if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
+                        {
+                                $this->send_json_400("Invalid Token");
+                        } else // token has correct keys
+                        {
+                                if ($token_data["user_type"] === "driver" and $this->driver_model->is_driver_id_exist($token_data["user_id"])) // token valid => user id valid
+                                {
+                                        $this->token_life_time_handler($token_data);
+                                } elseif ($token_data["user_type"] === "officer" and $this->officer_model->is_officer_id_exist($token_data["user_id"])) // token valid => user id valid
+                                {
+                                        $this->token_life_time_handler($token_data);
+                                } else // token invalid
+                                {
+                                        $this->send_json_400("Invalid Token");
+                                }
+                        }
+                } else // token not found in the request
+                {
+                        $this->send_json_404("token not found");
                 }
-
-                // Parse the JSON data to obtain the original array
-                $token_data = json_decode($decrypted_data, true);
-
-                return $token_data;
         }
 
 
 
-        // // logout
-        // public function logout()
-        // {
-        //         if (isset($_SERVER['HTTP_TOKEN'])) {
-        //                 $token = $_SERVER['HTTP_TOKEN'];
 
-        //                 $token_data = $this->decode_token($token);
+        // handle token's life cycle. 
+        // Invalid token if token older than 2 month (5184000)
+        // token will be refreshed with new timestamp if it older than 3weeks (1814400)
+        // otherwise token will be consider as a new one.
+        private function token_life_time_handler($token_data)
+        {
+                if (time() - $token_data["time_stamp"] > 5184000) // token has been expired(too old to refresh)
+                {
+                        $this->send_json_400("Invalid Token");
+                } elseif (time() - $token_data["time_stamp"] > 1814400) // token need to be refreshed
+                {
+                        $new_token_data = [
+                                "user_id" => $token_data["user_id"],
+                                "user_type" => $token_data["user_type"],
+                                "time_stamp" => time()
+                        ];
 
-        //                 if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
-        //                 {
-        //                         $this->send_json_400("Invalid Token");
-        //                 } elseif ($token_data["user_type"] !== null and $token_data["user_type"] === "driver") // user is a driver
-        //                 {
-        //                         if ($this->driver_model->is_driver_id_exist($token_data["user_id"])) {
-        //                                 $this->send_json_200("Logout Successfull");
-        //                         } else {
-        //                                 $this->send_json_400("Invalid Token");
-        //                         }
-        //                 } else // user is a parking officer
-        //                 {
-        //                         if ($this->officer_model->is_officer_id_exist($token_data["user_id"])) {
-        //                                 $this->send_json_200("Logout Successfull");
-        //                         } else {
-        //                                 $this->send_json_400("Invalid Token");
-        //                         }
-        //                 }
-        //         } else {
-        //                 $this->send_json_404("Token Not Found");
-        //         }
-        // }
+                        // generate a token string
+                        $token = $this->encode_token($new_token_data);
+
+                        $this->send_json_200_with_token("Token Refreshed", $token);
+                } else // token is valid and a new one
+                {
+                        $this->send_json_200("Valid Token");
+                }
+        }
 }
