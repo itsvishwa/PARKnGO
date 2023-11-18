@@ -314,7 +314,6 @@ class User extends Controller
 
 
 
-
         // handle token's life cycle. 
         // Invalid token if token older than 2 month (5184000)
         // token will be refreshed with new timestamp if it older than 3weeks (1814400)
