@@ -86,7 +86,7 @@
       </div>
       <div class="b-card bg-white">
         <div class="b-card-content p text-grey">
-          <p>Search a company</p>
+         <p> Search a company</p>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="search-logo">
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
@@ -134,11 +134,12 @@
                   <div class="contact-card2-content text-black">
                     <p>011-1561567</p>
                   </div>
-                  <div class="b-view-more bg-grey">
-                    <div class="b-view-more-card2-content text-black">
-                      <p>View More</p>
-                    </div>
+                  
+                  <button class="b-view-more bg-grey" type="button">
+                  <div class="b-view-more-card2-content text-black"> 
+                    <p>View More</p>
                   </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -187,11 +188,12 @@
                   <div class="contact-card2-content text-black">
                     <p>011-1561567</p>
                   </div>
-                  <div class="b-view-more bg-grey">
+                  <button class="b-view-more bg-grey" type="button">
                     <div class="b-view-more-card2-content text-black">
                       <p>View More</p>
-                    </div>
+                    
                   </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -242,11 +244,11 @@
                   <div class="contact-card2-content text-black">
                     <p>011-1561567</p>
                   </div>
-                  <div class="b-view-more bg-grey">
+                  <button class="b-view-more bg-grey" type="button">
                     <div class="b-view-more-card2-content text-black">
                       <p>View More</p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -295,11 +297,11 @@
                   <div class="contact-card2-content text-black">
                     <p>011-1561567</p>
                   </div>
-                  <div class="b-view-more bg-grey">
+                  <button class="b-view-more bg-grey" type="button">
                     <div class="b-view-more-card2-content text-black">
                       <p>View More</p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -351,11 +353,11 @@
                   <div class="contact-card2-content text-black">
                     <p>011-1561567</p>
                   </div>
-                  <div class="b-view-more bg-grey">
+                  <button class="b-view-more bg-grey" type="button">
                     <div class="b-view-more-card2-content text-black">
                       <p>View More</p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -404,11 +406,11 @@
                   <div class="contact-card2-content text-black">
                     <p>011-1561567</p>
                   </div>
-                  <div class="b-view-more bg-grey">
+                  <button class="b-view-more bg-grey" type="button">
                     <div class="b-view-more-card2-content text-black">
                       <p>View More</p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>

@@ -22,7 +22,7 @@
     
   }
   .search-logo {
-
+    margin-top: -12px;
     display: flex;
     margin-left: 760px; 
     width: 25px;
@@ -81,6 +81,7 @@
     justify-content: space-between;
     padding-left: 150px;
     margin-top: 10px;
+    margin-bottom:50px;
     margin-left: 25px;
     width: 81%;
     height: 200psx;
@@ -100,6 +101,7 @@
   }
 
   .b-card-content {
+    height:300%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -112,6 +114,11 @@
   }
   
   .b-card-content p {
+    margin-top:-12px;
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Hides overflow */
+    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate overflow */
+   /* margin: 0; /* Removes default margin */ 
     font-size: 1.0rem;
     font-weight: 415;
   }
@@ -273,12 +280,12 @@
   right: 0;
   border-radius:0px 0px 10px 10px;
   height: 40px;
-  
+  width: 100%;
 }
 
 .b-view-more-card2-content {
   margin-top: 10px;
-  margin-left: 200px; 
+  margin-left: 2px; 
   padding:1px; 
   font-weight: 450;
   font-size: 0.8rem;
