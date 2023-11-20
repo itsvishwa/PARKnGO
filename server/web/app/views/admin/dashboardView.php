@@ -77,7 +77,6 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
           </svg>
 
-
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
 
@@ -99,7 +98,11 @@
 
             </div>
             <div class="b-card-content text-black">
-              <h3>13</h3>
+
+              <!-- Check if $companyCount is defined before using it -->
+              <?php if (isset($data['companiesCount'])) : ?>
+                <p> <?php echo $data['companiesCount']; ?></p>
+              <?php endif; ?>
               <p>Companies</p>
             </div>
           </div>
@@ -110,7 +113,11 @@
               </svg>
             </div>
             <div class="b-card-content text-black">
-              <h3>112</h3>
+
+              <!-- Check if $parkingOfficersCount is defined before using it -->
+              <?php if (isset($data['parkingOfficersCount'])) : ?>
+                <p> <?php echo $data['parkingOfficersCount'];; ?></p>
+              <?php endif; ?>
               <p>Parking Officers</p>
             </div>
           </div>
@@ -122,7 +129,11 @@
               </svg>
             </div>
             <div class="b-card-content text-black">
-              <h3>13,235</h3>
+
+              <!-- Check if $userCount is defined before using it -->
+              <?php if (isset($data['userCount'])) : ?>
+                <p> <?php echo $data['userCount']; ?></p>
+              <?php endif; ?>
               <p>Users</p>
             </div>
           </div>
@@ -132,10 +143,12 @@
         <div class="update-section">
           <div class="table-heading">
             <div class="heading">
-
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 

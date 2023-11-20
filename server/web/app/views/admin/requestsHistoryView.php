@@ -99,13 +99,15 @@
                 <p>ABC PVT LTD</p>
               </div>
             </div>
-            <div class="b-card3-icon bg-green">
+            <div>
+            <button class="b-card3-icon bg-green" type="button">               
               <div class="b-card3-content text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-              </div>
+                </svg>                
+              </div>              
             </div>
+            </button> 
             <div>
               <div class="b-card5-icon bg-grey">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
@@ -146,13 +148,16 @@
                 <p>ABC PVT LTD</p>
               </div>
             </div>
-            <div class="b-card3-icon bg-red">
+            <div>
+            <button class="b-card3-icon bg-red" type="button">  
               <div class="b-card3-content text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
               </div>
+              
             </div>
+            </button> 
             <div>
               <div class="b-card5-icon bg-grey">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
@@ -193,13 +198,15 @@
                 <p>ABC PVT LTD</p>
               </div>
             </div>
-            <div class="b-card3-icon bg-green">
+            <div>
+            <button class="b-card3-icon bg-green" type="button"> 
               <div class="b-card3-content text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
               </div>
             </div>
+          </button>
             <div>
               <div class="b-card5-icon bg-grey">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
@@ -240,13 +247,15 @@
                 <p>ABC PVT LTD</p>
               </div>
             </div>
-            <div class="b-card3-icon bg-green">
+            <div> 
+            <button class="b-card3-icon bg-green" type="button"> 
               <div class="b-card3-content text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
               </div>
             </div>
+          </button>
             <div>
               <div class="b-card5-icon bg-grey">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
@@ -287,13 +296,15 @@
                 <p>ABC PVT LTD</p>
               </div>
             </div>
-            <div class="b-card3-icon bg-red">
+            <div>
+            <button class="b-card3-icon bg-red" type="button"> 
               <div class="b-card3-content text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
               </div>
             </div>
+           </button>
             <div>
               <div class="b-card5-icon bg-grey">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
