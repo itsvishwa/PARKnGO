@@ -104,4 +104,17 @@ class Controller
 
                 return $token_data;
         }
+
+
+        // return false if token is invalid(dosen't have proper keys), 
+        public function is_token_valid($token_data)
+        {
+
+                if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
+                {
+                        return false;
+                } else {
+                        return true;
+                }
+        }
 }
