@@ -13,6 +13,7 @@ function saveFormData() {
     ).value;
     const startNumber = form.querySelector('input[name="startNumber[]"]').value;
     const endNumber = form.querySelector('input[name="endNumber[]"]').value;
+    const parkingRate = form.querySelector('input[name="parkingRate[]"]').value;
 
     // Create an object for each parking slot batch
     const parkingSlotBatch = {
@@ -20,6 +21,7 @@ function saveFormData() {
       vehicleType,
       startNumber,
       endNumber,
+      parkingRate,
     };
 
     // Push the object to the formDataArray
@@ -27,14 +29,15 @@ function saveFormData() {
   });
 
   const formData = {
-    parkingName: document.querySelector('input[name="parkingName"]').value,
+    name: document.querySelector('input[name="name"]').value,
     address: document.querySelector('input[name="address"]').value,
     parkingSlotBatches: formDataArray,
-    parkingRate: document.querySelector('input[name="parkingRate"]').value,
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,
     parkingType: document.querySelector('select[name="parkingType"]').value,
   };
+
+  console.log(formData);
 
   // Save the updated array back to localStorage
   localStorage.setItem('formData', JSON.stringify(formData));
@@ -46,7 +49,7 @@ function confirmDiscard() {
       'Are you sure you want to discard? All the field data will not be saved.',
     )
   ) {
-    window.location.href = './parkingSpaceView.php';
+    window.location.href = './parkingSpaceView';
   }
 }
 
@@ -72,6 +75,9 @@ function addParkingSlotBatch() {
 
 					<label for="endNumber" class="p-form-label">To</label>
 					<input type="number" name="endNumber[]" class="p-form-input width-30" placeholder="Parking Slot End Number" disabled required>
+
+          <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
+							<span class="p-form-label">Rs. <input type="number" name="parkingRate[]" placeholder="Price" class="p-form-input width-20" required> per Hour</span>
 
 					<button type="button" onclick="removeParkingSlotBatch(this.parentNode)" class="p-form-btn">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="button-icon text-red p-form-icon">

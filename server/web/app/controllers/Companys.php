@@ -4,6 +4,7 @@ class Companys extends Controller
   private $companyModel;
   private $officerModel;
   private $paymentModel;
+  private $parkingSpaceModel;
 
   public function __construct()
   {
@@ -14,6 +15,7 @@ class Companys extends Controller
 
     $this->officerModel = $this->model('Officer');
     $this->paymentModel = $this->model('Payment');
+    $this->parkingSpaceModel = $this->model('ParkingSpace');
   }
 
   public function index()
@@ -49,12 +51,53 @@ class Companys extends Controller
 
   public function parkingSpaceView()
   {
-    $this->view('company/parkingSpaceView');
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'parking_name' => trim($_POST['name']),
+        'parking_address' => trim($_POST['address']),
+        'parking_latitude' => trim($_POST['latitude']),
+        'parking_longitude' => trim($_POST['longitude']),
+        'parking_type' => trim($_POST['parkingType']),
+      ];
+    } else {
+      $data = [
+        'parking_name' => '',
+        'parking_address' => '',
+        'parking_latitude' => '',
+        'parking_longitude' => '',
+        'parking_type' => '',
+      ];
+
+      $this->view('company/parkingSpaceView', $data);
+    }
   }
 
   public function parkingSpaceFormView()
   {
-    $this->view('company/parkingSpaceFormView');
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+      // Get the raw POST data
+      $json_data = file_get_contents('php://input');
+
+      // Decode the JSON data into an associative array
+      $data = json_decode($json_data, true);
+
+      $this->parkingSpaceModel->registerParking($data);
+
+      echo json_encode($data);
+    } else {
+      $this->view('company/parkingSpaceFormView');
+    }
+  }
+
+  public function parkingSpaceSaveView()
+  {
+    $this->view('company/parkingSpaceSaveView');
   }
 
   public function parkingSpaceEditView()

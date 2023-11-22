@@ -78,18 +78,46 @@
 			</div>
 			<div class="center">
 				<div class="ml-20 text-center b-600 f-18">
-					Confirm the details
+					Confirm the Details
 				</div>
 				<div id="card-container"></div>
-				<div class="c-btn-section">
+				<form action="./parkingSpaceView" class="c-btn-section" onsubmit="saveData()">
 					<input type="button" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
 					<input type="submit" value="Save Parking Space" class="c-btn bg-black">
-				</div>
+				</form>
 			</div>
 
 		</div>
 	</div>
 
+	<script>
+		function saveData() {
+			const formData = JSON.parse(localStorage.getItem('formData'));
+
+			if (formData) {
+				// Assuming you have the correct endpoint for registering parking on your server
+				const apiUrl = '<?php echo URLROOT; ?>/companys/parkingSpaceView';
+
+				// Make sure to adjust the method and headers based on your server's requirements
+				fetch(apiUrl, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(formData),
+					})
+					.then((response) => response.json())
+					.then((data) => {
+						console.log('Success:', data);
+						// Optionally, you can handle success here, e.g., show a success message
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+						// Optionally, you can handle errors here, e.g., show an error message
+					});
+			}
+		};
+	</script>
 	<script src="<?php echo URLROOT; ?>/js/company/confirmationCard.js"></script>
 </body>
 
