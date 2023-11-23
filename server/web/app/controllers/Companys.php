@@ -220,23 +220,18 @@ class Companys extends Controller
         'company_id' => $_SESSION['user_id'],
       ];
 
-      if ($this->officerModel->findOfficerByPhoneNumber($data['mobile_number'])) {
-        $data['mobile_number_err'] = 'Mobile Number is already taken';
-      }
-
       if (strlen($data['mobile_number']) != 9) {
         $data['mobile_number_err'] = 'Mobile Number should be 9 numbers';
       }
 
       if (empty($data['mobile_number_err'])) {
         if ($this->officerModel->update($data)) {
-          $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
-          $this->view('company/parkingOfficerView', $officers);
+          redirect('companys/parkingOfficerView');
         } else {
           die('Something went wrong');
         }
       } else {
-        $this->view('company/parkingOfficerView', $data);
+        $this->view('company/parkingOfficerEditView', $data);
       }
     } else {
       // Init data

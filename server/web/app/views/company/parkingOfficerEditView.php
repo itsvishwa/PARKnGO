@@ -93,6 +93,7 @@
 
             <label for="mobile_number" class="p-form-label">Parking Officer Mobile Number *</label>
             <input type="text" name="mobile_number" id="mobile_number" placeholder="Enter Parking Officer Mobile Number" class="p-form-input width-75" required value="<?php echo $data['mobile_number'] ?>">
+            <span class="f-12 text-red"><?php echo $data['mobile_number_err']; ?></span>
 
             <label for="profile_image" class="p-form-label mb-10">Profile Photo</label>
             <input type="file" name="profile_image" id="profile_image" accept="image/*">
