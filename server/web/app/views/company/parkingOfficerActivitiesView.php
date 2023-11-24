@@ -99,7 +99,6 @@
             <tr class="tr-h">
               <th class="th">Number Plate</th>
               <th class="th">Parking Space</th>
-              <th class="th">Slot Number</th>
               <th class="th">Vehicle Type</th>
               <th class="th">Arrived at</th>
               <th class="th">Left at</th>
@@ -111,22 +110,20 @@
             <tbody>
               <?php
               foreach ($data['activities'] as $row) {
-                $startTime = new DateTime($row->session_start_time);
-                $endTime = new DateTime($row->session_end_time);
+                $startTime = strtotime($row->session_start_time);
+                $endTime = strtotime($row->session_end_time);
 
                 // Calculate the difference in hours
-                $interval = $endTime->diff($startTime);
-                $parkedHours = ceil($interval->h + ($interval->i / 60));
+                $parkedHours = round(($endTime - $startTime) / 3600, 2);
 
                 echo '<tr>
                     <td>' . htmlspecialchars($row->session_vehicle_number) . '</td>
                     <td>' . htmlspecialchars($row->parking_space_name) . '</td>
-                    <td>' . htmlspecialchars($row->session_slot_number) . '</td>
-                    <td>' . htmlspecialchars($row->parking_slot_vehicle_type) . '</td>
+                    <td>' . htmlspecialchars($row->parking_space_status_vehicle_type) . '</td>
                     <td>' . htmlspecialchars($row->session_start_time) . '</td>
                     <td>' . htmlspecialchars($row->session_end_time) . '</td>
                     <td>' . htmlspecialchars($parkedHours) . '</td>
-                    <td>Rs: ' . htmlspecialchars($row->parking_slot_rate) . '</td>
+                    <td>Rs: ' . htmlspecialchars($row->parking_space_status_rate) . '</td>
                     <td>Rs: ' .  htmlspecialchars($row->payment_amount) . '</td>
                     <td>' . htmlspecialchars($row->payment_method) . '</td>
                   </tr>';
