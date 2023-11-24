@@ -8,11 +8,12 @@
 .officerCards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   width: 100%;
   gap: 20px;
   margin-top: 20px;
+  margin-left: 40px;
 }
 
 .officer-card {
