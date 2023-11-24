@@ -218,12 +218,9 @@ class Officer
     sess.start_time AS session_start_time,
     sess.end_time AS session_end_time,
     sess.vehicle_number AS session_vehicle_number,
-    sess.slot_number AS session_slot_number,
     sess.parking_id AS session_parking_id,
-    slot.slot_number AS parking_slot_number,
-    slot.vehicle_type AS parking_slot_vehicle_type,
-    slot.rate AS parking_slot_rate,
-    slot.is_free AS parking_slot_is_free,
+    pss.vehicle_type AS parking_space_status_vehicle_type,
+    pss.rate AS parking_space_status_rate,
     pay.amount AS payment_amount,
     pay.is_complete AS payment_is_complete,
     pay.payment_method AS payment_method,
@@ -232,12 +229,13 @@ FROM
     officer_activity oa
 JOIN 
     parking_officer po ON oa.officer_id = po._id
-JOIN 
-    parking_spaces ps ON po.parking_id = ps._id
+
 LEFT JOIN 
     parking_session sess ON oa.session_id = sess._id
-LEFT JOIN 
-    parking_slot slot ON sess.slot_number = slot.slot_number AND sess.parking_id = slot.parking_id
+LEFT JOIN
+    parking_spaces ps ON sess.parking_id = ps._id
+LEFT JOIN
+    parking_space_status pss ON sess.parking_id = pss.parking_id
 LEFT JOIN 
     payment pay ON sess._id = pay.session_id
 WHERE 
