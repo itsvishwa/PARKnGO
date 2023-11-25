@@ -4,10 +4,14 @@ class ParkingSpace extends Controller
 {
 
     private $parking_space_model;
+    private $review_model;
+    private $driver_model;
 
     public function __construct()
     {
         $this->parking_space_model = $this->model("ParkingSpaceModel");
+        $this->review_model = $this->model("ReviewModel");
+        $this->driver_model = $this->model("DriverModel");
     }
 
 
@@ -78,67 +82,92 @@ class ParkingSpace extends Controller
 
 
     // show all details of the selected parking space
-    public function view($_id)
+    public function view_one($_id)
     {
-        $parking_space_data = $this->parking_space_model->get_parking_space_details($_id);
-        $parking_slot_data = $this->parking_space_model->get_parking_space_status_details($_id);
-        $reviews_data = $this->parking_space_model->get_reviews_of_a_parking_space($_id);
 
+        $token_data = $this->verify_token_for_drivers();
 
-        if ($parking_space_data === false || $parking_slot_data === false) // no parking space for a given _id
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
         {
-            $this->send_json_404("Parking Space Not Found");
-        } else // parking space found
-        {
-            $result = [
-                "name" => $parking_space_data->name,
-                "address" => $parking_space_data->address,
-                "latitude" => $parking_space_data->latitude,
-                "longitude" => $parking_space_data->longitude,
-                "is_public" => $parking_space_data->is_public,
-                "is_closed" => $parking_space_data->is_closed,
-                "avg_star_count" => $parking_space_data->avg_star_count,
-                "total_review_count" => $parking_space_data->total_review_count,
-                "slot_status" => null,
-                "reviews" => null
-            ];
+            $parking_space_data = $this->parking_space_model->get_parking_space_details($_id);
+            $parking_slot_data = $this->parking_space_model->get_parking_space_status_details($_id);
+            $reviews_data = $this->review_model->get_reviews_of_a_parking_space($_id);
 
-            $new_parking_slot_data = [];
 
-            foreach ($parking_slot_data as $slot_data) {
-                // add a slot to the new assosiative array
-                $new_parking_slot_data[] = [
-                    "vehicle_type" => $slot_data->vehicle_type,
-                    "free_slots" => $slot_data->free_slots,
-                    "total_slots" => $slot_data->total_slots,
-                    "rate" => $slot_data->rate
+            if ($parking_space_data === false || $parking_slot_data === false) // no parking space for a given _id
+            {
+                $this->send_json_404("Parking Space Not Found");
+            } else // parking space found
+            {
+                $result = [
+                    "_id" => $parking_space_data->_id,
+                    "name" => $parking_space_data->name,
+                    "address" => $parking_space_data->address,
+                    "latitude" => $parking_space_data->latitude,
+                    "longitude" => $parking_space_data->longitude,
+                    "is_public" => $parking_space_data->is_public,
+                    "is_closed" => $parking_space_data->is_closed,
+                    "avg_star_count" => $parking_space_data->avg_star_count,
+                    "total_review_count" => $parking_space_data->total_review_count,
+                    "slot_status" => null,
+                    "reviews" => null,
+                    "user_own_reviews" => null
                 ];
-            }
 
-            // add new parking slot data array to final result array
-            $result["slot_status"] = $new_parking_slot_data;
+                $new_parking_slot_data = [];
 
-            if ($reviews_data === false) // no reviews yet
-            {
-                $result["reviews"] = "N/A";
-            } else // reviews found
-            {
-                $new_reviews_data = [];
-
-                foreach ($reviews_data as $review_data) {
-                    // add a review to the new assosiative array
-                    $new_reviews_data[] = [
-                        "name" => $review_data->first_name . " " . $review_data->last_name,
-                        "time_stamp" => $review_data->time_stamp,
-                        "no_of_stars" => $review_data->no_of_stars,
-                        "content" => $review_data->content,
+                foreach ($parking_slot_data as $slot_data) {
+                    // add a slot to the new assosiative array
+                    $new_parking_slot_data[] = [
+                        "vehicle_type" => $slot_data->vehicle_type,
+                        "free_slots" => $slot_data->free_slots,
+                        "total_slots" => $slot_data->total_slots,
+                        "rate" => $slot_data->rate
                     ];
                 }
 
-                $result["reviews"] = $new_reviews_data;
-            }
+                // add new parking slot data array to final result array
+                $result["slot_status"] = $new_parking_slot_data;
 
-            $this->send_json_200($result);
+                if ($reviews_data === false) // no reviews yet
+                {
+                    $result["reviews"] = "N/A";
+                } else // reviews found
+                {
+                    $new_reviews_data = [];
+                    $new_user_review_data = "User hasn't written any reviews yet";
+
+                    foreach ($reviews_data as $review_data) {
+                        // add a review to the new assosiative array
+                        if ($review_data->driver_id === $token_data["user_id"]) // user's review
+                        {
+                            $new_user_review_data = [
+                                "_id" => $review_data->_id,
+                                "name" => $review_data->first_name . " " . $review_data->last_name,
+                                "time_stamp" => $review_data->time_stamp,
+                                "no_of_stars" => $review_data->no_of_stars,
+                                "content" => $review_data->content,
+                            ];
+                        } else {
+                            $new_reviews_data[] = [
+                                "name" => $review_data->first_name . " " . $review_data->last_name,
+                                "time_stamp" => $review_data->time_stamp,
+                                "no_of_stars" => $review_data->no_of_stars,
+                                "content" => $review_data->content,
+                            ];
+                        }
+                    }
+
+                    $result["reviews"] = $new_reviews_data;
+                    $result["user_own_reviews"] = $new_user_review_data;
+                }
+
+                $this->send_json_200($result);
+            }
         }
     }
 }

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-//        set initial fragment
+//      set initial fragment
         replaceFragment(new HomeFragment());
     }
 
@@ -122,10 +122,12 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new AvailableParkingSpacesFragment());
     }
 
+
     // profile fragment -> edit profile details
     public void profile_frag_edit_profile_btn_handler(View view){
         replaceFragment(new EditProfileFragment());
     }
+
 
     // proceed to navigation
     public void available_parking_space_item_handler(View view){
@@ -144,10 +146,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     // payment history
     public void profile_frag_payment_btn_handler(View view){
         replaceFragment(new PaymentHistoryFragment());
     }
+
 
     //  card payment
     public void payment_frag_pay_btn_handler(View view){
@@ -180,25 +184,30 @@ public class MainActivity extends AppCompatActivity {
 //        replaceFragment(new PaymentFailedFragment());
     }
 
+
     // edit mobile number
     public void edit_profile_frag_change_mobile_number_btn_handler(View view){
         replaceFragment(new EditMobileNumberFragment());
     }
+
 
     // add a review
     public void parking_selected_frag_add_review_btn_handler(View view){
         replaceFragment(new AddReviewFragment());
     }
 
+
     // scan qr
     public void scan_frag_qr_btn_handler(View view){
         replaceFragment(new PaymentFragment());
     }
 
+
     // logout btn handlers
     public void profile_frag_logout_btn_handler(View view){
         replaceFragment(new LogoutFragment());
     }
+
 
     // logout confirm btn handler
     public void logout_frag_yes_btn_handler(View view){
