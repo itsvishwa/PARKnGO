@@ -71,6 +71,7 @@ class DriverModel
         }
 
 
+
         // check whether the driver exist or not using driver_id
         public function is_driver_id_exist($id)
         {

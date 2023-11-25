@@ -34,6 +34,18 @@ class Controller
                 echo $response;
         }
 
+
+        // not found request response
+        public function send_json_401($msg)
+        {
+                header('HTTP/1.1 401 Unauthorized');
+                $response = ["response" => $msg];
+                $response = json_encode($response);
+                header('Content-Type: application/json');
+                echo $response;
+        }
+
+
         // not found request response
         public function send_json_404($msg)
         {
@@ -107,7 +119,7 @@ class Controller
 
 
         // return false if token is invalid(dosen't have proper keys), 
-        public function is_token_valid($token_data)
+        public function is_token_key_valid($token_data)
         {
 
                 if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
@@ -115,6 +127,70 @@ class Controller
                         return false;
                 } else {
                         return true;
+                }
+        }
+
+
+        // fully verify the token 
+        // return the bad status code if the token is invalid
+        // otherwise return the decoded token data
+        public function verify_token_for_drivers()
+        {
+                if (isset($_SERVER['HTTP_TOKEN'])) // token recieved from the request
+                {
+                        $token = $_SERVER['HTTP_TOKEN'];
+
+                        $token_data =  $this->decode_token($token);
+
+                        if ($this->is_token_key_valid($token_data)) // token has valid keys
+                        {
+                                $driver_model = $this->model("DriverModel");
+                                if ($token_data["user_type"] === "driver" and $driver_model->is_driver_id_exist($token_data["user_id"])) // token has valid values
+                                {
+                                        return $token_data;
+                                } else // invalid values 
+                                {
+                                        return 400;
+                                }
+                        } else // token is invalid
+                        {
+                                return 400;
+                        }
+                } else // there is no token setted
+                {
+                        return 404;
+                }
+        }
+
+
+        // fully verify the token 
+        // return the bad status code if the token is invalid
+        // otherwise return the decoded token data
+        public function verify_token_for_officers()
+        {
+                if (isset($_SERVER['HTTP_TOKEN'])) // token recieved from the request
+                {
+                        $token = $_SERVER['HTTP_TOKEN'];
+
+                        $token_data =  $this->decode_token($token);
+
+                        if ($this->is_token_key_valid($token_data)) // token has valid keys
+                        {
+                                $officer_model = $this->model("OfficerModel");
+                                if ($token_data["user_type"] === "officer" and $officer_model->is_officer_id_exist($token_data["user_id"])) // token has valid values
+                                {
+                                        return $token_data;
+                                } else // invalid values 
+                                {
+                                        return 400;
+                                }
+                        } else // token is invalid
+                        {
+                                return 400;
+                        }
+                } else // there is no token setted
+                {
+                        return 404;
                 }
         }
 }

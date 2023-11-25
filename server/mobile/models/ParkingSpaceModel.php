@@ -95,35 +95,4 @@ class ParkingSpaceModel
                         return false;
                 }
         }
-
-
-        // get all details of a parking space status(slots) for a given parking _id
-        public function get_reviews_of_a_parking_space($_id)
-        {
-                $this->db->query("SELECT 
-                        review.time_stamp, 
-                        review.no_of_stars,
-                        review.content,
-                        driver.first_name,
-                        driver.last_name
-                FROM 
-                        review
-                JOIN
-                        driver
-                ON
-                        review.driver_id = driver._id
-                WHERE 
-                        review.parking_id = :_id");
-
-                $this->db->bind(":_id", $_id);
-
-                $result = $this->db->resultSet();
-
-                if ($result) {
-                        return $result;
-                } else // no parking space for given id
-                {
-                        return false;
-                }
-        }
 }
