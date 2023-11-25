@@ -24,7 +24,7 @@ class ReviewModel
                 $this->db->execute();
         }
 
-        // get all details of a parking space status(slots) for a given parking _id
+        // get all the reviews of a parking space for a given parking _id
         public function get_reviews_of_a_parking_space($_id)
         {
                 $this->db->query("SELECT 
