@@ -6,7 +6,6 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 
@@ -41,32 +40,6 @@ The **PARK'N GO** parking management system is a state-of-the-art solution desig
 - **Registration Verification:** Review and approve or deny company registration forms to maintain the system's trustworthiness.
 - **Complaint Monitoring:** Receive alerts about companies receiving an excessive number of complaints over a specified time period.
 - **Ban or Removal Authority:** Administrators can temporarily ban or permanently remove companies that exhibit unsatisfactory performance or behavior, preserving the system's quality.
-
-## Installation
-
-The installation process for **PARK'N GO** involves setting up the required components. Follow these steps to get started:
-
-1. **Front-End Implementation:**
-
-   - Web App: Utilizes HTML, CSS, and JavaScript for the front-end.
-   - Mobile App: Developed for Android using the Android Development Kit with JAVA.
-
-2. **Database Implementation:**
-
-   - MySQL database hosted on Microsoft Azure.
-
-3. **Backend Implementation:**
-
-   - PHP powers the backend, with separate systems for mobile and web apps.
-
-4. **Special Features Implementations:**
-   - Map Navigation: Integrates Google Map SDK and Google Map API for JavaScript.
-   - Email Service: Configured for email communications.
-   - SMS Service: Utilizes Twilio for SMS communication.
-   - QR Code generator and scanner: Provides QR code functionality.
-   - Card Payments: Implemented using "PayHere."
-
-Please ensure that you have the necessary components and dependencies in place before proceeding with the installation.
 
 ## Usage
 
@@ -114,3 +87,5 @@ To use **PARK'N GO**, follow these general steps:
   - Card Payments: "PayHere"
 
 Ensure that you have the necessary technologies and services available to deploy and use **PARK'N GO** effectively.
+
+!["border image](./tests/border.png)
