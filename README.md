@@ -1,4 +1,4 @@
-!["border image](./tests/border.png)
+!["border image](./tests/newborder.png)
 
 # PARK'N GO - Parking Management System
 
@@ -88,4 +88,4 @@ To use **PARK'N GO**, follow these general steps:
 
 Ensure that you have the necessary technologies and services available to deploy and use **PARK'N GO** effectively.
 
-!["border image](./tests/border.png)
+!["border image](./tests/footer.png)
