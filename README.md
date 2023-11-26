@@ -1,4 +1,4 @@
-!["border image](./tests/border.jpg)
+!["border image](./tests/new_border.jpg)
 
 # PARK'N GO - Parking Management System
 
