@@ -63,7 +63,7 @@
                 >
 
                 <ImageView
-                    android:onClick="back_btn_parking_selected_handler"
+                    android:onClick="backBtnHandler"
                     android:id="@+id/login_otp_act_imageView1"
                     app:tint="@color/backgroundColor"
                     android:layout_width="51dp"
@@ -71,7 +71,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -113,10 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:background="@drawable/radius_6_solid"
-                android:elevation="4dp"
+                android:background="@drawable/radius_6_with_outline"
                 android:padding="17dp"
-                android:translationZ="2dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
@@ -126,10 +124,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CMC CAR PARK"
-                    android:textStyle="bold"
-
                     android:textColor="@color/textSecondary"
+
                     android:textSize="17sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -189,7 +187,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/review_count_parking_item"
+                    android:id="@+id/pi_noofreviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="11dp"
@@ -204,11 +202,11 @@
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Public"
+                    android:background="@drawable/radius_36_green"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="5dp"
+                    android:text="Public"
                     android:textColor="@color/white"
-                    android:background="@drawable/green_rounded_triangle"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -239,38 +237,14 @@
             <!--reviews here-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginTop="14dp"
+                android:layout_height="530dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.971"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toBottomOf="@+id/button12">
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="Add Review"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/chip"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chip" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    app:checkedIconTint="@color/primaryColor"
-                    app:chipIconTint="@color/primaryColor"
-                    app:rippleColor="@color/primaryColor"
-                    app:chipStrokeColor="@color/primaryColor"
-                    android:text="My Reviews"
-                    app:layout_constraintEnd_toStartOf="@+id/button4"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView19"
@@ -280,12 +254,57 @@
                     android:text="Reviews"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/chip"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chip" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip4"
+                    style="@style/testChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:text="Only My Reviews"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                <Button
+                    android:id="@+id/button"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="parking_selected_frag_add_review_btn_handler"
+                    android:text="Add A Review"
+
+                    app:cornerRadius="50dp"
+                    app:icon="@drawable/baseline_add_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/chip4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/chip4" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ps_frag_recycle_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="18dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chip4" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginVertical="15dp"
+                android:text="Navigate"
+                app:cornerRadius="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

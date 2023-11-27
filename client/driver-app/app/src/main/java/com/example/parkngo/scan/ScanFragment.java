@@ -11,11 +11,6 @@ import android.view.ViewGroup;
 import com.example.parkngo.R;
 
 public class ScanFragment extends Fragment {
-
-    public ScanFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
