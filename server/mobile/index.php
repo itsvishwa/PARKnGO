@@ -3,5 +3,5 @@
 require_once "./bootstrap.php";
 
 // Init Core Library
-session_start();
+// session_start();
 $init = new Core;

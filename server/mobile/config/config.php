@@ -17,5 +17,8 @@ define('SITENAME', 'PARKnGO');
 define("SID", "");
 define("TOKEN", "");
 
+// Token Secret Key
+define("TOKEN_KEY", "81g135w");
+
 
 //http://localhost/newParknGo/PARKnGO/server/mobile/users/login
