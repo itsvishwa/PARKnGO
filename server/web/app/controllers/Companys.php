@@ -52,28 +52,38 @@ class Companys extends Controller
   public function parkingSpaceView()
   {
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    //   $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      $data = [
-        'parking_name' => trim($_POST['name']),
-        'parking_address' => trim($_POST['address']),
-        'parking_latitude' => trim($_POST['latitude']),
-        'parking_longitude' => trim($_POST['longitude']),
-        'parking_type' => trim($_POST['parkingType']),
-      ];
-    } else {
-      $data = [
-        'parking_name' => '',
-        'parking_address' => '',
-        'parking_latitude' => '',
-        'parking_longitude' => '',
-        'parking_type' => '',
-      ];
+    //   $data = [
+    //     'parking_name' => trim($_POST['name']),
+    //     'parking_address' => trim($_POST['address']),
+    //     'parking_latitude' => trim($_POST['latitude']),
+    //     'parking_longitude' => trim($_POST['longitude']),
+    //     'parking_type' => trim($_POST['parkingType']),
+    //   ];
+    // } else {
+    //   $data = [
+    //     'parking_name' => '',
+    //     'parking_address' => '',
+    //     'parking_latitude' => '',
+    //     'parking_longitude' => '',
+    //     'parking_type' => '',
+    //   ];
 
-      $this->view('company/parkingSpaceView', $data);
-    }
+    //   $this->view('company/parkingSpaceView', $data);
+    // }
+
+    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
+    $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
+    $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
+    $data = [
+      'parking_spaces' => $parkingSpaces,
+      'parking_spaces_status' => $parkingSpacesStatus,
+      'todayEarned' => $todayEarned,
+    ];
+    $this->view('company/parkingSpaceView', $data);
   }
 
   public function parkingSpaceFormView()

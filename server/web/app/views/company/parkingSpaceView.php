@@ -110,13 +110,89 @@
       <div class="parking-space-section">
 
         <div id="parkingCards" class="parking-cards">
-          <!-- Parking Cards will be generated dynamically using JavaScript -->
+          <?php foreach ($data['parking_spaces'] as $parking) : ?>
+            <div class="parking-space-card ${
+                          parking.Status
+                        }">
+              <div class="parking-card-header">
+                <div class="parking-name">
+                  <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
+                  <?php if ($parking->parking_is_closed) {
+                    echo '<p class="parking-type bg-red text-white">Closed</p>';
+                  } else {
+                    echo "";
+                  } ?>
+
+                </div>
+
+                <p class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_address) ?></p>
+              </div>
+              <div class="parking-card-body">
+                <div class="parking-card-info">
+                  <p>Total Slots: <span class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_total_slots) ?></span></p>
+
+                  <?php if ($parking->parking_is_public) {
+                    echo '<p class="parking-type bg-green text-white">Public</p>';
+                  } else {
+                    echo '<p class="parking-type bg-green text-white">Private</p>';
+                  } ?>
+
+                </div>
+                <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?php if ($parking->officer_first_name != "") {
+                                                                                              echo htmlspecialchars($parking->officer_first_name . ' ' . $parking->officer_last_name);
+                                                                                            } else {
+                                                                                              echo "Not Assigned";
+                                                                                            } ?></span></p>
+
+                <table>
+                  <thead>
+                    <th>Type</th>
+                    <th>Free Slots</th>
+                    <th>Total Slots</th>
+                    <th>Rate</th>
+                  </thead>
+                  <tbody>
+
+                    <?php foreach ($data['parking_spaces_status'] as $parking_status) : ?>
+                      <tr>
+                        <?php if ($parking_status->parking_space_id == $parking->parking_id) {
+
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->vehicle_type);
+                          echo '</td>';
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->each_type_free_slots);
+                          echo '</td>';
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->each_type_total_slots);
+                          echo '</td>';
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->each_type_rate);
+                          echo '</td>';
+                        }
+
+                        ?>
+                      </tr>
+                    <?php endforeach; ?>
+
+
+                  </tbody>
+                </table>
+
+
+                ${
+                typeof parking.TodayEarnings == 'number'
+                ? `<p class="today-earning">Today's Earnings: <span class="parking-card-bold">Rs. ${parking.TodayEarnings}.00</span></p>`
+                : `<p class="today-earning">Today's Earnings: <span class="parking-card-bold">${parking.TodayEarnings}</span></p>`
+                }
+              </div>
+            </div>
+          <?php endforeach; ?>
         </div>
 
       </div>
     </div>
   </div>
-  <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceView.js"> </script>
 </body>
 
 </html>
