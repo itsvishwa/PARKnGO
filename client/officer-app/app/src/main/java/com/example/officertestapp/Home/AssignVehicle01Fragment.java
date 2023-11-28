@@ -18,8 +18,7 @@ import java.util.ArrayList;
 
 public class AssignVehicle01Fragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_assign_vehicle01, container, false);
 
@@ -49,9 +48,41 @@ public class AssignVehicle01Fragment extends Fragment {
         provinceTypes.add("SG");
         provinceTypes.add("UP");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
-        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        spinnerProvinces.setAdapter(adapter);
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
+        provinceAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerProvinces.setAdapter(provinceAdapter);
+
+
+
+        Spinner spinnerSlots = view.findViewById(R.id.spinner_slots);
+        spinnerSlots.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), item + "selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+        ArrayList<String> parkingSlots = new ArrayList<>();
+        parkingSlots.add("P00A1");
+        parkingSlots.add("P00A2");
+        parkingSlots.add("P00A3");
+        parkingSlots.add("P00B1");
+        parkingSlots.add("P00B2");
+        parkingSlots.add("P00B3");
+        parkingSlots.add("P00C1");
+        parkingSlots.add("P00C2");
+        parkingSlots.add("P00C3");
+
+        ArrayAdapter<String> slotsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, parkingSlots);
+        slotsAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerSlots.setAdapter(slotsAdapter);
 
         return view;
     }
