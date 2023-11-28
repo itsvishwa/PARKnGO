@@ -232,6 +232,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="25dp"
             android:id="@+id/status_frag_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -20,7 +20,7 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
     ArrayList<ParkingStatusModel> parkingStatusModels;
     Context context;
 
-    public PSRecycleViewAdapter(ArrayList<ParkingStatusModel> parkingStatusModels, Context context) {
+    public PSRecycleViewAdapter( ArrayList<ParkingStatusModel> parkingStatusModels, Context context) {
         this.parkingStatusModels = parkingStatusModels;
         this.context = context;
     }
@@ -28,6 +28,7 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
     @NonNull
     @Override
     public PSRecycleViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //inflate the layout(Giving a look to our rows)
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.parking_status_item, parent, false);
         return new PSRecycleViewAdapter.MyViewHolder(view);
@@ -35,6 +36,9 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull PSRecycleViewAdapter.MyViewHolder holder, int position) {
+        // assigning values to the views we created in the item layout file
+        // based on the position of the recycler view
+
         holder.parkingIDView.setText(parkingStatusModels.get(position).getParkingID());
         holder.parkingStatusView.setText(parkingStatusModels.get(position).getParkingStatus());
         holder.vehicleNumberView.setText(parkingStatusModels.get(position).getVehicleNumber());
@@ -54,6 +58,8 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
 
     @Override
     public int getItemCount() {
+        // number of items that want to display
+
         return parkingStatusModels.size();
     }
 
@@ -67,6 +73,7 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
             parkingIDView = itemView.findViewById(R.id.ps_parking_id);
             parkingStatusView = itemView.findViewById(R.id.ps_status);
             vehicleNumberView = itemView.findViewById(R.id.ps_vehicle_number);
+
         }
     }
 }

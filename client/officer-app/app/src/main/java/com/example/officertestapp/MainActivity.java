@@ -17,8 +17,11 @@ import com.example.officertestapp.Home.ReleaseASlot02Fragment;
 import com.example.officertestapp.Home.ReleaseASlot03Fragment;
 import com.example.officertestapp.Home.ReleaseASlot04Fragment;
 import com.example.officertestapp.Home.ReleaseASlot06Fragment;
+import com.example.officertestapp.Profile.ProfileLogoutFragment;
 import com.example.officertestapp.Profile.ProfileMainFragment;
+import com.example.officertestapp.Profile.ProfilePaymentHistoryFragment;
 import com.example.officertestapp.Status.StatusMainFragment;
+import com.example.officertestapp.Status.StatusView01Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{
@@ -91,6 +94,10 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new ReleaseASlot02Fragment());
     }
 
+    public void release_vehicle_02_back_notify_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot01Fragment());
+    }
+
     public void release_slot_02_back_btn_handler(View v) {
         replaceFragment(new ReleaseASlot01Fragment());
     }
@@ -106,5 +113,53 @@ public class MainActivity extends AppCompatActivity{
     public void release_slot_04_payment_confirm_btn_handler(View v) {
         replaceFragment(new ReleaseASlot06Fragment());
     }
+
+    public void release_vehicle_04_payment_cancel_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot03Fragment());
+    }
+
+    public void frag_home_release_vehicle05_main_menu_btn_handler(View v) {
+        replaceFragment(new HomeMainFragment());
+    }
+
+    public void frag_home_release_vehicle06_main_menu_btn_handler(View v) {
+        replaceFragment(new HomeMainFragment());
+    }
+
+    public void frag_profile_main_payment_history_btn_handler(View v) {
+        replaceFragment(new ProfilePaymentHistoryFragment());
+    }
+
+    public void frag_profile_payment_history_back_btn_handler(View v) {
+        replaceFragment(new ProfileMainFragment());
+    }
+
+
+
+    public void frag_profile_main_logout_btn_handler(View v) {
+        replaceFragment(new ProfileLogoutFragment());
+    }
+
+    public void parking_status_btn_handler(View v) {
+        replaceFragment(new StatusView01Fragment());
+    }
+
+    public void status_01_back_btn_handler(View v) {
+        replaceFragment(new StatusMainFragment());
+    }
+
+
+
+    public void frag_profile_logout_back_btn_handler(View v) {
+        replaceFragment(new ProfileMainFragment());
+    }
+
+    public void frag_profile_logout_no_btn_handler(View v) {
+        replaceFragment(new ProfileMainFragment());
+    }
+
+    /*public void frag_profile_logout_yes_btn_handler(View v) {
+        replaceFragment(new );
+    }*/
 
 }

@@ -143,7 +143,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                     <EditText
-                        android:layout_width="74dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.5"
                         android:background="#C7C7C7"
@@ -151,7 +151,7 @@
                         android:textAlignment="center" />
 
                     <EditText
-                        android:layout_width="122dp"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
                         android:background="#DCD6C7"
@@ -160,12 +160,21 @@
                         android:letterSpacing="0.25"
                         android:textAlignment="center" />
 
-                    <Spinner
-                        android:id="@+id/spinner_provinces"
-                        android:layout_width="74dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:background="#C7C7C7" />
+                        android:background="#C7C7C7">
+
+                        <Spinner
+                            android:id="@+id/spinner_provinces"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
 
@@ -191,8 +200,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Spinner
-                    android:id="@+id/spinner_slots"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout14"
                     android:layout_width="136dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
@@ -200,20 +209,28 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView9"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintVertical_bias="1.0">
+
+                    <Spinner
+                        android:id="@+id/spinner_slots"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:layout_width="128dp"
                     android:layout_height="42dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/spinner_slots"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/spinner_slots"
-                    app:layout_constraintTop_toTopOf="@+id/spinner_slots"
-                    android:text="Search"
                     android:drawableRight="@drawable/baseline_search_24"
                     android:drawableTint="@color/white"
-                    android:onClick="release_vehicle_01_search_btn_handler"/>
+                    android:onClick="release_vehicle_01_search_btn_handler"
+                    android:text="Search"
+                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout14" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
