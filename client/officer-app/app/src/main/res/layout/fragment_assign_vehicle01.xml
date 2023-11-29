@@ -246,6 +246,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/reserve_time_txt"
                     android:layout_width="125dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
@@ -278,6 +279,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/reserve_date_txt"
                     android:layout_width="125dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
