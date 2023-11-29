@@ -128,7 +128,6 @@ tr:nth-child(4n) {
 
 .parking-space-section {
   display: flex;
-  flex: 1;
   flex-direction: column;
   width: 98%;
   align-items: center;

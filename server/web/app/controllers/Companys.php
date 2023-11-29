@@ -30,6 +30,8 @@ class Companys extends Controller
     $numberOfUsers = $this->paymentModel->getNumberOfUsers($_SESSION['user_id']);
     $latestUpdates = $this->companyModel->getLatestUpdates($_SESSION['user_id']);
     $parkingOfficers = $this->officerModel->getOfficerDetails($_SESSION['user_id']);
+    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
+    $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
 
 
@@ -39,6 +41,8 @@ class Companys extends Controller
       'numberOfUsers' => $numberOfUsers,
       'latestUpdates' => $latestUpdates,
       'parkingOfficers' => $parkingOfficers,
+      'parking_spaces' => $parkingSpaces,
+      'parking_spaces_status' => $parkingSpacesStatus,
     ];
 
     $this->view('company/dashboardView', $data);
