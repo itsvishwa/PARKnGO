@@ -193,4 +193,49 @@ class Controller
                         return 404;
                 }
         }
+
+
+        // return a encrypted string when pass the id
+        public function encrypt_payment_id($payment_id)
+        {
+                // Generate a new random 16-byte IV (Initialization Vector)
+                $iv = openssl_random_pseudo_bytes(16);
+
+                // Encrypt the payment_id with AES-128-CBC and the IV
+                $encrypted_data = openssl_encrypt($payment_id, 'aes-128-cbc', PAYMENT_KEY, 0, $iv);
+
+                // Combine the IV and modified ciphertext to create the final encoded string
+                $encoded_string = $iv . $encrypted_data;
+
+                // Encode the binary data as a Base64 string
+                $encoded_string = base64_encode($encoded_string);
+
+                // Send the Base64-encoded string as a JSON response
+                return $encoded_string;
+        }
+
+        // return the decrypted data when pass the encoded string
+        public function decrypt_payment_id($encoded_string)
+        {
+                // Decode the Base64-encoded string to get the binary data
+                $binary_data = base64_decode($encoded_string);
+
+                // Extract the IV from the first 16 bytes of the binary data
+                $iv = substr($binary_data, 0, 16);
+
+                // Extract the modified ciphertext from the rest of the binary data
+                $ciphertext = substr($binary_data, 16);
+
+                // Decrypt the modified ciphertext with AES-128-CBC and the IV
+                $decrypted_payment_id = openssl_decrypt($ciphertext, 'aes-128-cbc', PAYMENT_KEY, 0, $iv);
+
+                if ($decrypted_payment_id === false) {
+                        // Decryption error, send an error message as a JSON response
+                        // $this->send_json_200("Decryption error: " . openssl_error_string());
+                        return false;
+                }
+
+                // Send the decrypted payment_id as a JSON response
+                return $decrypted_payment_id;
+        }
 }
