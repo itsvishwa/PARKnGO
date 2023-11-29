@@ -20,5 +20,5 @@ define("TOKEN", "");
 // Token Secret Key
 define("TOKEN_KEY", "81g135w");
 
-
-//http://localhost/newParknGo/PARKnGO/server/mobile/users/login
+// Payment secret key
+define("PAYMENT_KEY", "1h3sh65");
