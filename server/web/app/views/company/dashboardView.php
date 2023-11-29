@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/dashboardView.css" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/parkingSpaceView.css" />
   <title>Dashboard</title>
 </head>
 
@@ -218,26 +219,74 @@
           </a>
         </div>
         <div id="parkingCards" class="parking-cards">
-          <?php foreach ($data['parkingSpaces'] as $parking) : ?>
-            <div class="parking-card">
-              <div class="parking-space-card">
-                <div class="parking-card-header">
-                  <h3 class="parking-card-bold"><?= htmlspecialchars($parking->parking_name) ?></h3>
-                  <p class="parking-card-bold"><?= htmlspecialchars($parking->parking_address) ?></p>
+          <?php foreach ($data['parking_spaces'] as $parking) : ?>
+            <div class="parking-space-card <?php if ($parking->parking_is_closed) {
+                                              echo 'closed';
+                                            } ?>">
+              <div class="parking-card-header">
+                <div class="parking-name">
+                  <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
+                  <?php if ($parking->parking_is_closed) {
+                    echo '<p class="parking-type bg-red text-white">Closed</p>';
+                  } else {
+                    echo "";
+                  } ?>
+
                 </div>
-                <div class="parking-card-body">
-                  <div class="parking-card-info">
-                    <p>Free Slots: <span class="parking-card-bold">
-                        <?= htmlspecialchars($parking['CurrentFreeSlots']) ?></span></p>
-                    <p class="parking-card-bold">Rs. <?= htmlspecialchars($parking['PricePerHour']) ?>/ 1H</p>
-                  </div>
-                  <div class="parking-card-info">
-                    <p>Total Slots: <span class="parking-card-bold"><?= htmlspecialchars(array_sum($parking->total_slots)) ?></span> (Cars: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Cars']) ?></span> | Vans: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Vans']) ?></span> | Buses: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Buses']) ?></span> | Bicycles: <span class="parking-card-bold"><?= htmlspecialchars($parking['TotalSlots']['Bicycles']) ?></span>)</p>
-                    <p class="parking-type bg-green text-white"><?= $parking->is_public ? 'Public' : 'Private' ?></p>
-                  </div>
-                  <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?= htmlspecialchars($parking->officer_name) ?></span></p>
-                  <p class="today-earning">Today's Earnings: <span class="parking-card-bold">Rs. <?= htmlspecialchars($parking->today_earnings) ?>.00</span></p>
+
+                <p class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_address) ?></p>
+              </div>
+              <div class="parking-card-body">
+                <div class="parking-card-info">
+                  <p>Total Slots: <span class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_total_slots) ?></span></p>
+
+                  <?php if ($parking->parking_is_public) {
+                    echo '<p class="parking-type bg-green text-white">Public</p>';
+                  } else {
+                    echo '<p class="parking-type bg-green text-white">Private</p>';
+                  } ?>
+
                 </div>
+                <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?php if ($parking->officer_first_name != "") {
+                                                                                              echo htmlspecialchars($parking->officer_first_name . ' ' . $parking->officer_last_name);
+                                                                                            } else {
+                                                                                              echo "Not Assigned";
+                                                                                            } ?></span></p>
+
+                <table>
+                  <thead>
+                    <th>Type</th>
+                    <th>Free Slots</th>
+                    <th>Total Slots</th>
+                    <th>Rate</th>
+                  </thead>
+                  <tbody>
+
+                    <?php foreach ($data['parking_spaces_status'] as $parking_status) : ?>
+                      <tr>
+                        <?php if ($parking_status->parking_space_id == $parking->parking_id) {
+
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->vehicle_type);
+                          echo '</td>';
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->each_type_free_slots);
+                          echo '</td>';
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->each_type_total_slots);
+                          echo '</td>';
+                          echo '<td>';
+                          echo htmlspecialchars($parking_status->each_type_rate);
+                          echo '</td>';
+                        }
+
+                        ?>
+                      </tr>
+                    <?php endforeach; ?>
+
+
+                  </tbody>
+                </table>
               </div>
             </div>
           <?php endforeach; ?>

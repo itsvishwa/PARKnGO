@@ -1,7 +1,7 @@
-.Closed {
+.closed {
   pointer-events: none;
   cursor: default;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 /* parking form */
