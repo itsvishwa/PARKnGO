@@ -1,0 +1,1 @@
+{"name":"test name","address":"test address","parkingSlotBatches":[{"noOfSlots":"10","vehicleType":"Car","startNumber":"1","endNumber":"","parkingRate":"100"},{"noOfSlots":"5","vehicleType":"Van","startNumber":"11","endNumber":"","parkingRate":"118"}],"latitude":"6.950831173636038","longitude":"79.94774828416183","parkingType":"public"}

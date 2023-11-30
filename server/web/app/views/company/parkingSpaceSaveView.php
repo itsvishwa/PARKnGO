@@ -95,10 +95,8 @@
 			const formData = JSON.parse(localStorage.getItem('formData'));
 
 			if (formData) {
-				// Assuming you have the correct endpoint for registering parking on your server
 				const apiUrl = '<?php echo URLROOT; ?>/companys/parkingSpaceView';
 
-				// Make sure to adjust the method and headers based on your server's requirements
 				fetch(apiUrl, {
 						method: 'POST',
 						headers: {
@@ -106,17 +104,20 @@
 						},
 						body: JSON.stringify(formData),
 					})
-					.then((response) => response.json())
-					.then((data) => {
+					.then(response => response.json())
+					.then(data => {
 						console.log('Success:', data);
 						// Optionally, you can handle success here, e.g., show a success message
+
+						// Redirect to a success page or perform any other actions as needed
+						window.location.href = '<?php echo URLROOT; ?>/companys/parkingSpaceView';
 					})
-					.catch((error) => {
+					.catch(error => {
 						console.error('Error:', error);
 						// Optionally, you can handle errors here, e.g., show an error message
 					});
 			}
-		};
+		}
 	</script>
 	<script src="<?php echo URLROOT; ?>/js/company/confirmationCard.js"></script>
 </body>

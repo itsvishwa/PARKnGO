@@ -96,4 +96,33 @@ class Database
     $this->execute();
     return $this->stmt->fetch(PDO::FETCH_ASSOC);
   }
+
+  public function fetch()
+  {
+    return $this->stmt->fetch(PDO::FETCH_OBJ);
+  }
+
+  // Begin a transaction
+  public function beginTransaction()
+  {
+    return $this->dbh->beginTransaction();
+  }
+
+  // Commit a transaction
+  public function commit()
+  {
+    return $this->dbh->commit();
+  }
+
+  // Roll back a transaction
+  public function rollBack()
+  {
+    return $this->dbh->rollBack();
+  }
+
+  // Returns the ID of the last inserted row or sequence value
+  public function lastInsertId()
+  {
+    return $this->dbh->lastInsertId();
+  }
 }
