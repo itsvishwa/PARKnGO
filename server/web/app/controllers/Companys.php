@@ -56,28 +56,28 @@ class Companys extends Controller
   public function parkingSpaceView()
   {
 
-    // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Get the raw POST data
+      $json_data = file_get_contents('php://input');
 
-    //   $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      // Log the received JSON data
+      file_put_contents('received_data.log', $json_data);
 
-    //   $data = [
-    //     'parking_name' => trim($_POST['name']),
-    //     'parking_address' => trim($_POST['address']),
-    //     'parking_latitude' => trim($_POST['latitude']),
-    //     'parking_longitude' => trim($_POST['longitude']),
-    //     'parking_type' => trim($_POST['parkingType']),
-    //   ];
-    // } else {
-    //   $data = [
-    //     'parking_name' => '',
-    //     'parking_address' => '',
-    //     'parking_latitude' => '',
-    //     'parking_longitude' => '',
-    //     'parking_type' => '',
-    //   ];
+      // Decode the JSON data into an associative array
+      $data = json_decode($json_data, true);
 
-    //   $this->view('company/parkingSpaceView', $data);
-    // }
+      // Call registerParking method
+      $result = $this->parkingSpaceModel->registerParking($data);
+
+      if ($result) {
+        // Successfully registered parking
+        echo json_encode(['message' => 'Parking space saved successfully']);
+      } else {
+        // Error in registering parking
+        http_response_code(500);
+        echo json_encode(['message' => 'Error saving parking space']);
+      }
+    }
 
     $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
@@ -92,27 +92,14 @@ class Companys extends Controller
 
   public function parkingSpaceFormView()
   {
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-      // Get the raw POST data
-      $json_data = file_get_contents('php://input');
-
-      // Decode the JSON data into an associative array
-      $data = json_decode($json_data, true);
-
-      $this->parkingSpaceModel->registerParking($data);
-
-      echo json_encode($data);
-    } else {
-      $this->view('company/parkingSpaceFormView');
-    }
+    $this->view('company/parkingSpaceFormView');
   }
 
   public function parkingSpaceSaveView()
   {
     $this->view('company/parkingSpaceSaveView');
   }
+
 
   public function parkingSpaceEditView()
   {

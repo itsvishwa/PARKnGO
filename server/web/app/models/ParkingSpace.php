@@ -11,32 +11,75 @@ class ParkingSpace
   // Register company
   public function registerParking($data)
   {
-    $this->db->query('INSERT INTO parking_spaces (name, address, latitude, longitude, no_of_slots, is_public, company_id) VALUES (:name, :address, :latitude, :longitude, :no_of_slots, :is_public, :company_id)');
-    // Bind values
-    $this->db->bind(':name', $data['name']);
-    $this->db->bind(':address', $data['address']);
-    $this->db->bind(':latitude', $data['latitude']);
-    $this->db->bind(':longitude', $data['longitude']);
-    $this->db->bind(':is_public', ($data['parkingType'] == 'public' ? 1 : 0));
-    $this->db->bind(':company_id', $_SESSION['user_id']);
+    // Check if required keys are present
+    if (
+      isset($data['name'], $data['address'], $data['latitude'], $data['longitude'], $data['parkingType'], $data['parkingSlotBatches'])
+    ) {
+      // Start a transaction to ensure data consistency
+      $this->db->beginTransaction();
 
-    $totalSlots = 0;
+      try {
+        // Insert into parking_spaces table
+        $this->db->query('INSERT INTO parking_spaces (name, address, latitude, longitude, no_of_slots, is_public, company_id) VALUES (:name, :address, :latitude, :longitude, :no_of_slots, :is_public, :company_id)');
 
-    if ($data['parkingSlotBatches'] && count($data['parkingSlotBatches']) > 0) {
-      // Use array_reduce to sum up the noOfSlots
-      $totalSlots = array_reduce($data['parkingSlotBatches'], function ($acc, $batch) {
-        return $acc + intval($batch['noOfSlots']);
-      }, 0);
-    }
-    $this->db->bind(':no_of_slots', $totalSlots);
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':latitude', $data['latitude']);
+        $this->db->bind(':longitude', $data['longitude']);
+        $this->db->bind(':is_public', ($data['parkingType'] == 'public' ? 1 : 0));
+        $this->db->bind(':company_id', $_SESSION['user_id']);
 
-    // Execute
-    if ($this->db->execute()) {
-      return true;
+        $totalSlots = 0;
+
+        if ($data['parkingSlotBatches'] && count($data['parkingSlotBatches']) > 0) {
+          // Use array_reduce to sum up the noOfSlots
+          $totalSlots = array_reduce($data['parkingSlotBatches'], function ($acc, $batch) {
+            return $acc + intval($batch['noOfSlots']);
+          }, 0);
+        }
+        $this->db->bind(':no_of_slots', $totalSlots);
+
+        // Execute
+        $this->db->execute();
+
+        // Get the last inserted parking space ID
+        $parkingSpaceId = $this->db->lastInsertId();
+
+        // Insert into parking_space_status table
+        foreach ($data['parkingSlotBatches'] as $batch) {
+          $this->db->query('INSERT INTO parking_space_status (vehicle_type, free_slots, total_slots, rate, parking_id) VALUES (:vehicle_type, :free_slots, :total_slots, :rate, :parking_id)');
+
+          // Bind values
+          $this->db->bind(':vehicle_type', $batch['vehicleType']);
+          $this->db->bind(':free_slots', $batch['noOfSlots']);
+          $this->db->bind(':total_slots', $batch['noOfSlots']);
+          $this->db->bind(':rate', $batch['parkingRate']);
+          $this->db->bind(':parking_id', $parkingSpaceId);
+
+          // Execute for each batch
+          $this->db->execute();
+        }
+
+        // Commit the transaction
+        $this->db->commit();
+
+        return true;
+      } catch (PDOException $e) {
+        // Rollback the transaction on error
+        $this->db->rollBack();
+        // Log the error
+        error_log('Error saving parking space: ' . $e->getMessage());
+        return false;
+      }
     } else {
+      // Handle missing keys
+      error_log('Invalid data format. Missing required keys.');
       return false;
     }
   }
+
+
 
   public function getCardDetailsFromParkingOfficer($company_id)
   {
