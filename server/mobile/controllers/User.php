@@ -74,7 +74,7 @@ class User extends Controller
 
 
         // check otp is correct or not
-        private function check_otp($code, $mobile_number)
+        public function check_otp($code, $mobile_number)
         {
                 // mobile number is always exist for this function call, thus data will be returned
                 $otp_data = $this->otp_model->is_mobile_number_exist($mobile_number);
