@@ -11,16 +11,12 @@ function saveFormData() {
     const vehicleType = form.querySelector(
       'select[name="vehicleType[]"]',
     ).value;
-    const startNumber = form.querySelector('input[name="startNumber[]"]').value;
-    const endNumber = form.querySelector('input[name="endNumber[]"]').value;
     const parkingRate = form.querySelector('input[name="parkingRate[]"]').value;
 
     // Create an object for each parking slot batch
     const parkingSlotBatch = {
       noOfSlots,
       vehicleType,
-      startNumber,
-      endNumber,
       parkingRate,
     };
 
@@ -60,21 +56,17 @@ function addParkingSlotBatch() {
   // Set the innerHTML of the new div to the parkingSlotBatchForm string
   newParkingSlotBatch.innerHTML = `
 				<div id="parkingSlotBatchForm" class="p-slot-batch">
+          <label for="noOfSlots" class="p-form-label">Slots* </label>
 					<input type="number" name="noOfSlots[]" class="p-form-input width-20" placeholder="No of slots" required>
 
+          <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
 					<select name="vehicleType[]" class="p-form-dropdown" required>
 						<option value="" disabled selected>Vehicle Type</option>
 						<option value="Car">Car</option>
 						<option value="Van">Van</option>
 						<option value="Bus">Bus</option>
-						<option value="Bicycle">Bicycle</option>
+						<option value="Motorcycle">Motorcycle</option>
 					</select><br>
-
-					<label for="startNumber" class="p-form-label">Start</label>
-					<input type="number" name="startNumber[]" class="p-form-input width-40" placeholder="Parking Slot Start Number" required>
-
-					<label for="endNumber" class="p-form-label">To</label>
-					<input type="number" name="endNumber[]" class="p-form-input width-30" placeholder="Parking Slot End Number" disabled required>
 
           <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
 							<span class="p-form-label">Rs. <input type="number" name="parkingRate[]" placeholder="Price" class="p-form-input width-20" required> per Hour</span>

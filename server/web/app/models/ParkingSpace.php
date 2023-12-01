@@ -81,7 +81,7 @@ class ParkingSpace
 
 
 
-  public function getCardDetailsFromParkingOfficer($company_id)
+  public function getCardDetailsFromParkingOfficer($company_id, $parking_id = null)
   {
     $this->db->query('SELECT
                         ps._id AS parking_id,
@@ -90,6 +90,8 @@ class ParkingSpace
                         ps.no_of_slots AS parking_total_slots,
                         ps.is_public AS parking_is_public,
                         ps.is_closed AS parking_is_closed,
+                        ps.latitude AS parking_latitude,
+                        ps.longitude AS parking_longitude,
                         ps.avg_star_count AS parking_avg_star_count,
                         ps.total_review_count AS parking_total_review_count,
                         ps.company_id AS parking_space_company_id,
@@ -99,14 +101,18 @@ class ParkingSpace
                         parking_spaces ps
                       LEFT JOIN
                         parking_officer po ON ps._id = po.parking_id
-                      WHERE ps.company_id = :company_id');
+                      WHERE ps.company_id = :company_id' . ($parking_id != null ? ' AND ps._id = :parking_id' : ''));
     $this->db->bind(':company_id', $company_id);
-
-    $row = $this->db->resultSet();
+    if ($parking_id !== null) {
+      $this->db->bind(':parking_id', $parking_id);
+      $row = $this->db->single();
+    } else {
+      $row = $this->db->resultSet();
+    }
     return $row;
   }
 
-  public function getCardDetailsFromParkingSpaceStatus($company_id)
+  public function getCardDetailsFromParkingSpaceStatus($company_id, $parking_id = null)
   {
     $this->db->query('SELECT
                         ps._id AS parking_space_id,
@@ -118,9 +124,13 @@ class ParkingSpace
                         parking_spaces ps
                       LEFT JOIN
                         parking_space_status pss ON ps._id = pss.parking_id
-                      WHERE ps.company_id = :company_id');
+                      WHERE ps.company_id = :company_id' . ($parking_id != null ? ' AND ps._id = :parking_id' : ''));
     $this->db->bind(':company_id', $company_id);
+    if ($parking_id !== null) {
+      $this->db->bind(':parking_id', $parking_id);
+    }
     $row = $this->db->resultSet();
+
     return $row;
   }
 }

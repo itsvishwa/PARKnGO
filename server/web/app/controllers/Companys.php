@@ -101,9 +101,17 @@ class Companys extends Controller
   }
 
 
-  public function parkingSpaceEditView()
+  public function parkingSpaceEditView($parking_id)
   {
-    $this->view('company/parkingSpaceEditView');
+    $parkingSpace = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id'], $parking_id);
+    $parkingSpaceStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id'], $parking_id);
+
+    $data = [
+      'parking_space' => $parkingSpace,
+      'parking_space_status' => $parkingSpaceStatus,
+    ];
+
+    $this->view('company/parkingSpaceEditView', $data);
   }
 
   public function parkingSpaceDeleteView()
