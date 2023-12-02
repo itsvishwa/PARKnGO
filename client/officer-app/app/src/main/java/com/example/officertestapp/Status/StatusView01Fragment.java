@@ -1,9 +1,4 @@
-<<<<<<<< HEAD:client/officer-app/app/src/main/java/com/example/officertestapp/Status/StatusView01Fragment.java
 package com.example.officertestapp.Status;
-========
-package com.example.officertestapp.status;
->>>>>>>> 22d497590bee195024bce84735caf13fa6e7079a:client/officer-app/app/src/main/java/com/example/officertestapp/status/StatusView01Fragment.java
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
