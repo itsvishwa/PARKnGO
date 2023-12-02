@@ -74,32 +74,95 @@
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <div class="header text-md">
-        <p>Select the parking space you want to delete</p>
-      </div>
-      <div class="ml-20 border-bottom">
-        <select id="parkingDropdown" class="p-form-dropdown width-40">
-          <option value="" disabled selected>Select Parking Space</option>
-          <option value="parking1">Parking Lot 1</option>
-          <option value="parking2">Parking Lot 2</option>
-          <option value="parking3">Parking Lot 3</option>
-          <option value="parking4">Parking Lot 4</option>
-          <!-- Add more options with dummy parking names as needed -->
-        </select>
-      </div>
+
       <div class="center">
-        <div id="card-container" class="mt-20"></div>
-        <div class="c-btn-section">
+        <div class="parking-space-card <?php if ($data['parking_space']->parking_is_closed) {
+                                          echo 'closed';
+                                        } ?>">
+          <div class="parking-card-header">
+            <div class="parking-name">
+              <h3 class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_name); ?></h3>
+              <?php if ($data['parking_space']->parking_is_closed) {
+                echo '<p class="parking-type bg-red text-white">Closed</p>';
+              } else {
+                echo "";
+              } ?>
+
+            </div>
+
+            <p class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_address) ?></p>
+          </div>
+          <div class="parking-card-body">
+            <div class="parking-card-info">
+              <p>Total Slots: <span class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_total_slots) ?></span></p>
+
+              <?php if ($data['parking_space']->parking_is_public) {
+                echo '<p class="parking-type bg-green text-white">Public</p>';
+              } else {
+                echo '<p class="parking-type bg-green text-white">Private</p>';
+              } ?>
+
+            </div>
+            <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?php if ($data['parking_space']->officer_first_name != "") {
+                                                                                          echo htmlspecialchars($data['parking_space']->officer_first_name . ' ' . $data['parking_space']->officer_last_name);
+                                                                                        } else {
+                                                                                          echo "Not Assigned";
+                                                                                        } ?></span></p>
+
+            <table>
+              <thead>
+                <th>Type</th>
+                <th>Free Slots</th>
+                <th>Total Slots</th>
+                <th>Rate</th>
+              </thead>
+              <tbody>
+
+                <?php foreach ($data['parking_space_status'] as $parking_status) : ?>
+                  <tr>
+                    <?php if ($parking_status->parking_space_id == $data['parking_space']->parking_id) {
+
+                      echo '<td>';
+                      echo htmlspecialchars($parking_status->vehicle_type);
+                      echo '</td>';
+                      echo '<td>';
+                      echo htmlspecialchars($parking_status->each_type_free_slots);
+                      echo '</td>';
+                      echo '<td>';
+                      echo htmlspecialchars($parking_status->each_type_total_slots);
+                      echo '</td>';
+                      echo '<td>';
+                      echo htmlspecialchars($parking_status->each_type_rate);
+                      echo '</td>';
+                    }
+
+                    ?>
+                  </tr>
+                <?php endforeach; ?>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <form class="c-btn-section" action="<?php echo URLROOT; ?>companys/parkingSpaceDeleteView/<?php echo $data['parking_space']->parking_id ?>" method="POST" enctype="multipart/form-data">
           <input type="button" id="cancelButton" value="Cancel" class="c-btn bg-black40" onclick="cancel()">
           <input type="submit" id="deleteButton" value="Delete Parking Space" class="c-btn bg-red">
-        </div>
+        </form>
       </div>
     </div>
   </div>
 
   <!-- Include your JavaScript for creating parking space cards -->
-  <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceViewCard.js">
-
+  <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceViewCard.js"></script>
+  <script>
+    function cancel() {
+      if (
+        confirm('Are you sure you want to cancel? All the data will not be saved.')
+      ) {
+        window.location.href = '<?php echo URLROOT; ?>companys/parkingSpaceView';
+      }
+    }
   </script>
 </body>
 

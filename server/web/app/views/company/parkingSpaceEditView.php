@@ -71,7 +71,7 @@
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <form action="parkingSpaceSaveView" method="POST" class="parking-form" onsubmit="saveFormData()">
+      <form action="../parkingSpaceSaveView/<?php echo $data['parking_space']->parking_id ?>" method="POST" class="parking-form" onsubmit="saveFormData()">
         <div class="form-left">
           <label for="name" class="p-form-label ">Parking Name *</label>
           <input type="text" name="name" class="p-form-input width-65" placeholder="Display name of the parking space" required value="<?php echo $data['parking_space']->parking_name ?>">
