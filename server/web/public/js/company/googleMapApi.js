@@ -77,8 +77,6 @@ function updateMapWithCoordinates() {
     const location = new google.maps.LatLng(latitude, longitude);
     map.setCenter(location);
     updateMarker(location);
-  } else {
-    alert('Invalid latitude or longitude values');
   }
 }
 

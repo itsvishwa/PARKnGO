@@ -133,4 +133,23 @@ class ParkingSpace
 
     return $row;
   }
+
+  public function deleteParkingSpace($parking_id)
+  {
+    $this->db->query(
+      'DELETE FROM 
+        parking_spaces 
+      WHERE _id = :parking_id'
+    );
+
+    // Bind values
+    $this->db->bind(':parking_id', $parking_id);
+
+    // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

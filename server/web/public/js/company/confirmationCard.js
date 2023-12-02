@@ -34,8 +34,6 @@ function createCard(data) {
 						<table class="confirmation-card-table">
     					<thead>
         				<tr>
-            			<th>Start</th>
-            			<th>End</th>
             			<th>Type</th>
             			<th>Count</th>
                   <th>Rate</th>
@@ -48,12 +46,6 @@ function createCard(data) {
                         .map(
                           (batch) => `
             			<tr class="tr-b">
-                		<td>PS${batch.vehicleType[0]}${batch.startNumber}</td>
-                		<td>PS${batch.vehicleType[0]}${
-                            parseInt(batch.startNumber) +
-                            parseInt(batch.noOfSlots) -
-                            1
-                          }</td>
                 		<td>${batch.vehicleType}</td>
                 		<td>${batch.noOfSlots}</td>
                     <td>Rs.${batch.parkingRate}/ 1H</td>
@@ -77,6 +69,6 @@ function cancel() {
   if (
     confirm('Are you sure you want to cancel? All the data will not be saved.')
   ) {
-    window.location.href = './parkingSpaceView.php';
+    window.location.href = './parkingSpaceView';
   }
 }
