@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
     /*
     * Base Controller
     * Load models
@@ -13,22 +12,6 @@
 
             // Instantiate model
             return new $model();
-=======
-/*
-   * Base Controller
-   */
-
-class Controller
-{
-        // Load model
-        public function model($model)
-        {
-                // Require model file
-                require_once './models/' . $model . '.php';
-
-                // Instantiate model
-                return new $model();
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
         }
 
         // sucess response
@@ -40,10 +23,7 @@ class Controller
                 echo $response;
         }
 
-<<<<<<< HEAD
         
-=======
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
         // bad request response
         public function send_json_400($msg)
         {
@@ -54,11 +34,7 @@ class Controller
                 echo $response;
         }
 
-<<<<<<< HEAD
         
-=======
-
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
         // not found request response
         public function send_json_401($msg)
         {
@@ -81,147 +57,7 @@ class Controller
         }
 
 
-<<<<<<< HEAD
 
     }
 
 ?>
-=======
-        // sucess response with the token
-        public function send_json_200_with_token($msg, $token)
-        {
-                header('HTTP/1.1 404 Not Found');
-                $response = ["response" => $msg, "token" => $token];
-                $response = json_encode($response);
-                header('Content-Type: application/json');
-                echo $response;
-        }
-
-
-        // encode a token
-        public function encode_token($token_data)
-        {
-                // Serialize the data into a JSON string
-                $data_json = json_encode($token_data);
-
-                // Generate a random 16-byte IV (Initialization Vector)
-                $iv = openssl_random_pseudo_bytes(16);
-
-                // Encrypt the compressed data with AES-128-CBC and the IV
-                $encrypted_string = openssl_encrypt($data_json, 'aes-128-cbc', TOKEN_KEY, 0, $iv);
-
-                // Combine the IV and ciphertext to create the final token
-                $token = $iv . $encrypted_string;
-
-                // Encode the binary token as a Base64 string
-                $token = base64_encode($token);
-
-                return $token;
-        }
-
-
-
-        // decode a token
-        public function decode_token($token_string)
-        {
-                // Decode the Base64-encoded token to get the binary token
-                $binary_token = base64_decode($token_string);
-
-                // Extract the IV from the first 16 bytes of the binary token
-                $iv = substr($binary_token, 0, 16);
-
-                // Extract the ciphertext from the rest of the binary token
-                $ciphertext = substr($binary_token, 16);
-
-                // Decrypt the ciphertext with AES-128-CBC and the IV
-                $decrypted_data = openssl_decrypt($ciphertext, 'aes-128-cbc', TOKEN_KEY, 0, $iv);
-
-                if ($decrypted_data === false) {
-                        // Decryption error, you can log or return an error message
-                        return "Decryption error: " . openssl_error_string();
-                }
-
-                // Parse the JSON data to obtain the original array
-                $token_data = json_decode($decrypted_data, true);
-
-                return $token_data;
-        }
-
-
-        // return false if token is invalid(dosen't have proper keys), 
-        public function is_token_key_valid($token_data)
-        {
-
-                if (!isset($token_data["user_type"]) || !isset($token_data["user_id"]) || !isset($token_data["time_stamp"])) // token is invalid 
-                {
-                        return false;
-                } else {
-                        return true;
-                }
-        }
-
-
-        // fully verify the token 
-        // return the bad status code if the token is invalid
-        // otherwise return the decoded token data
-        public function verify_token_for_drivers()
-        {
-                if (isset($_SERVER['HTTP_TOKEN'])) // token recieved from the request
-                {
-                        $token = $_SERVER['HTTP_TOKEN'];
-
-                        $token_data =  $this->decode_token($token);
-
-                        if ($this->is_token_key_valid($token_data)) // token has valid keys
-                        {
-                                $driver_model = $this->model("DriverModel");
-                                if ($token_data["user_type"] === "driver" and $driver_model->is_driver_id_exist($token_data["user_id"])) // token has valid values
-                                {
-                                        return $token_data;
-                                } else // invalid values 
-                                {
-                                        return 400;
-                                }
-                        } else // token is invalid
-                        {
-                                return 400;
-                        }
-                } else // there is no token setted
-                {
-                        return 404;
-                }
-        }
-
-
-        // fully verify the token 
-        // return the bad status code if the token is invalid
-        // otherwise return the decoded token data
-        public function verify_token_for_officers()
-        {
-                if (isset($_SERVER['HTTP_TOKEN'])) // token recieved from the request
-                {
-                        $token = $_SERVER['HTTP_TOKEN'];
-
-                        $token_data =  $this->decode_token($token);
-
-                        if ($this->is_token_key_valid($token_data)) // token has valid keys
-                        {
-                                $officer_model = $this->model("OfficerModel");
-                                if ($token_data["user_type"] === "officer" and $officer_model->is_officer_id_exist($token_data["user_id"])) // token has valid values
-                                {
-                                        return $token_data;
-                                } else // invalid values 
-                                {
-                                        return 400;
-                                }
-                        } else // token is invalid
-                        {
-                                return 400;
-                        }
-                } else // there is no token setted
-                {
-                        return 404;
-                }
-        }
-}
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
