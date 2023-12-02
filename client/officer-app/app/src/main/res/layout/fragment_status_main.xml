@@ -103,137 +103,21 @@
             android:id="@+id/constraintLayout13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:padding="10dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rounded_background_detail_box"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Free Slots"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-<<<<<<< HEAD
-                    android:layout_width="60dp"
-=======
-                    android:padding="5dp"
-                    android:layout_width="wrap_content"
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/green_rounded_bg"
-                    android:padding="10dp"
-                    android:text="06"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toTopOf="@+id/textView14"
-                    app:layout_constraintVertical_bias="0.454" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingHorizontal="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/constraintLayout23"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout23"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout23">
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Payment Due"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-<<<<<<< HEAD
-                    android:layout_width="60dp"
-=======
-                    android:padding="5dp"
-                    android:layout_width="wrap_content"
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/yellow_rounded_bg"
-                    android:padding="10dp"
-                    android:text="01"
-<<<<<<< HEAD
-                    android:textAlignment="center"
-=======
-                    android:textSize="15dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView15"
-                    app:layout_constraintStart_toStartOf="@+id/textView15"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:text="Filled Slots"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                    app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toTopOf="@+id/textView14"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <TextView
-                    android:padding="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="#FF4545"
-                    android:text="05"
->>>>>>> a8b31085702c9871b643b87521f605f432cb3fb7
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView15"
-                    app:layout_constraintTop_toTopOf="@+id/textView15"
-                    app:layout_constraintVertical_bias="0.454" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout23"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout14"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.975"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout23"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout23"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout14">
 
                 <TextView
                     android:id="@+id/textView17"
@@ -264,11 +148,86 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="18dp">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Free Slots"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/green_rounded_bg"
+                    android:padding="10dp"
+                    android:text="06"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView20"
+                    app:layout_constraintTop_toTopOf="@+id/textView20"
+                    app:layout_constraintVertical_bias="0.454" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout14"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout14"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout14">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Payment Due"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/yellow_rounded_bg"
+                    android:padding="10dp"
+                    android:text="01"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView25"
+                    app:layout_constraintTop_toTopOf="@+id/textView25"
+                    app:layout_constraintVertical_bias="0.454" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-<<<<<<< HEAD
             android:layout_marginTop="25dp"
             android:id="@+id/status_frag_recycle_view"
             android:layout_width="match_parent"
@@ -276,17 +235,6 @@
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout13"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout13"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
-=======
-            android:id="@+id/status_frag_recycle_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
-
->>>>>>> 22d497590bee195024bce84735caf13fa6e7079a
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

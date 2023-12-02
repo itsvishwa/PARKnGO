@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-<<<<<<< HEAD
 import com.example.officertestapp.Home.AssignVehicle01Fragment;
 import com.example.officertestapp.Home.AssignVehicle02Fragment;
 import com.example.officertestapp.Home.AssignVehicle03Fragment;
@@ -23,9 +21,6 @@ import com.example.officertestapp.Profile.ProfileMainFragment;
 import com.example.officertestapp.Profile.ProfilePaymentHistoryFragment;
 import com.example.officertestapp.Status.StatusMainFragment;
 import com.example.officertestapp.Status.StatusView01Fragment;
-=======
-import com.example.officertestapp.status.StatusMainFragment;
->>>>>>> 22d497590bee195024bce84735caf13fa6e7079a
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{

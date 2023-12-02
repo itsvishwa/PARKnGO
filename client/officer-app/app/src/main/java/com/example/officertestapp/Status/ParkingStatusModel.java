@@ -1,4 +1,4 @@
-package com.example.officertestapp.status;
+package com.example.officertestapp.Status;
 
 public class ParkingStatusModel {
     String parkingID;
