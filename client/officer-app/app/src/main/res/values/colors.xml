@@ -13,7 +13,8 @@
     <color name="bottomNavUnselectedItemColor">#827E83</color>
     <color name="backgroundColor">#F6EAD3</color>
     <color name="assignReleaseBtnBackgroundColor">#F5EAD3</color>
-    <color name="assignReleaseBtnOvalColor">#FFA811</color>
     <color name="profileInputFieldStrokeColor">#429C968B</color>
     <color name="detailBoxBackground">#FFF4DF</color>
+    <color name="green">#00A372</color>
+    <color name="red">#FF4545</color>
 </resources>

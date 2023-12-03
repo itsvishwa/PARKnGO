@@ -1,24 +1,17 @@
 <?php
 
-// DB Params
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'parkngo');
+    //Database Parameters
+    define ("DB_HOST", "localhost");
+    define ("DB_USER", "root");
+    define ("DB_PASS", "");
+    define ("DB_NAME", "parkngo");
 
-// App Root
-define('APPROOT', dirname(dirname(__FILE__)));
-// URL Root
-define('URLROOT', 'http://localhost/PARKnGO/server/mobile/');
-// Site Name
-define('SITENAME', 'PARKnGO');
+    //App Root "http://localhost/parkngo/server/mobile/"
+    define ("APPROOT", dirname(dirname(__FILE__)));
 
-// Twilio Configurations
-define("SID", "");
-define("TOKEN", "");
+    //URL Root
+    define ("URLROOT", "http://localhost/PARKnGO/server/mobile/");
 
-// Token Secret Key
-define("TOKEN_KEY", "81g135w");
-
-
-//http://localhost/newParknGo/PARKnGO/server/mobile/users/login
+    //Site Name
+    define ("SITENAME", "PARKnGo");
+?>

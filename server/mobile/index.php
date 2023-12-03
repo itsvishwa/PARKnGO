@@ -1,7 +1,6 @@
 <?php
+    require_once "./bootstrap.php";
 
-require_once "./bootstrap.php";
-
-// Init Core Library
-// session_start();
-$init = new Core;
+    // Init Core Library
+    $init = new Core;
+?>

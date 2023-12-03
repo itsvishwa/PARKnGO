@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Home.HomeMainFragment"
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
+
+    <!--    Top App Bar Here-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/top_app_bar"
+        android:paddingHorizontal="18dp">
+
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_weight="2.8"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="138dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/app_bar_info_box"
+                    android:text="CMC Car Park 01"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/appbar_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Payment History"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Last Payment"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/appbar_main_text"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="10.30 AM | 04 July"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView19"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView19"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/appbar_icon_home_act"
+                    app:tint="@color/backgroundColor"
+                    android:layout_width="51dp"
+                    android:layout_height="51dp"
+                    android:scaleType="centerInside"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="frag_profile_payment_history_back_btn_handler"
+                    android:background="@drawable/notification_icon_background"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:paddingHorizontal="18dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_payment_frag_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
