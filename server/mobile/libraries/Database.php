@@ -24,6 +24,9 @@ class Database
         // Set DSN
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = array(
+            // uncomment if use azure server
+            PDO::MYSQL_ATTR_SSL_CA     => 'C:/wamp64/bin/php/DigiCertGlobalRootCA.crt.pem',
+
             PDO::ATTR_PERSISTENT => true, // Persistent connection
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION // Throw exceptions
         );
