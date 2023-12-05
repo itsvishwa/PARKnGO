@@ -8,6 +8,15 @@ class ParkingSpace
     $this->db = new Database;
   }
 
+  public function parkingSave($data)
+  {
+    if (isset($data['parking_id'])) {
+      return $this->updateParking($data);
+    } else {
+      return $this->registerParking($data);
+    }
+  }
+
   // Register company
   public function registerParking($data)
   {
@@ -78,6 +87,93 @@ class ParkingSpace
       return false;
     }
   }
+
+  public function updateParking($data)
+  {
+    // Check if required keys are present
+    if (isset($data['name'], $data['address'], $data['latitude'], $data['longitude'], $data['parkingType'], $data['parkingSlotBatches'])) {
+      // Start a transaction to ensure data consistency
+      $this->db->beginTransaction();
+
+      try {
+        // Check if parking space with the given ID exists
+        $existingParkingSpace = $this->getParkingSpaceById($data['parking_id']);
+
+        if (!$existingParkingSpace) {
+          // Parking space not found
+          error_log('Parking space with ID ' . $data['parking_id'] . ' not found.');
+          return false;
+        }
+
+        // Update parking_spaces table
+        $this->db->query('UPDATE parking_spaces SET name = :name, address = :address, latitude = :latitude, longitude = :longitude, is_public = :is_public WHERE _id = :parking_id');
+
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':address', $data['address']);
+        $this->db->bind(':latitude', $data['latitude']);
+        $this->db->bind(':longitude', $data['longitude']);
+        $this->db->bind(':is_public', ($data['parkingType'] == 'public' ? 1 : 0));
+        $this->db->bind(':parking_id', $data['parking_id']);
+
+        // Execute
+        $this->db->execute();
+
+        // Delete existing parking space status entries
+        $this->deleteParkingSpaceStatusByParkingId($data['parking_id']);
+
+        // Update parking_space_status table
+        foreach ($data['parkingSlotBatches'] as $batch) {
+          // Insert new entries
+          $this->db->query('INSERT INTO parking_space_status (vehicle_type, free_slots, total_slots, rate, parking_id) VALUES (:vehicle_type, :free_slots, :total_slots, :rate, :parking_id)');
+
+          // Bind values
+          $this->db->bind(':vehicle_type', $batch['vehicleType']);
+          $this->db->bind(':free_slots', $batch['noOfSlots']);
+          $this->db->bind(':total_slots', $batch['noOfSlots']);
+          $this->db->bind(':rate', $batch['parkingRate']);
+          $this->db->bind(':parking_id', $data['parking_id']);
+
+          // Execute for each batch
+          $this->db->execute();
+        }
+
+        // Commit the transaction
+        $this->db->commit();
+
+        return true;
+      } catch (PDOException $e) {
+        // Rollback the transaction on error
+        $this->db->rollBack();
+        // Log the error
+        error_log('Error updating parking space: ' . $e->getMessage() . ' ' . $e->getTraceAsString());
+        return false;
+      }
+    } else {
+      // Handle missing keys
+      error_log('Invalid data format. Missing required keys.');
+      return false;
+    }
+  }
+
+  // Helper function to get parking space by ID
+  private function getParkingSpaceById($parking_id)
+  {
+    $this->db->query('SELECT * FROM parking_spaces WHERE _id = :parking_id');
+    $this->db->bind(':parking_id', $parking_id);
+    $result = $this->db->single(); // Assuming you have a method like this to retrieve a single row
+
+    return $result;
+  }
+
+  // Helper function to delete parking space status entries by parking_id
+  private function deleteParkingSpaceStatusByParkingId($parking_id)
+  {
+    $this->db->query('DELETE FROM parking_space_status WHERE parking_id = :parking_id');
+    $this->db->bind(':parking_id', $parking_id);
+    $this->db->execute();
+  }
+
 
 
 

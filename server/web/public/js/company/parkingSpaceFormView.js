@@ -27,6 +27,7 @@ function saveFormData() {
   const formData = {
     name: document.querySelector('input[name="name"]').value,
     address: document.querySelector('input[name="address"]').value,
+    parking_id: null,
     parkingSlotBatches: formDataArray,
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,

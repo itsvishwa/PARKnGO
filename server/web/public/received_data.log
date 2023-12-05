@@ -1,1 +1,1 @@
-{"name":"test name","address":"test address","parkingSlotBatches":[{"noOfSlots":"10","vehicleType":"Car","parkingRate":"100"},{"noOfSlots":"5","vehicleType":"Van","parkingRate":"120"}],"latitude":"6.889180297575742","longitude":"79.91222623952552","parkingType":"public"}
+{"name":"CMC CAR PARK 001","address":"WV87+4QR, Colombo 00700","parking_id":7,"parkingSlotBatches":[{"noOfSlots":"25","vehicleType":"Car","parkingRate":"150"},{"noOfSlots":"100","vehicleType":"Van","parkingRate":"100"}],"latitude":"6.9153625","longitude":"79.8643906","parkingType":"public"}
