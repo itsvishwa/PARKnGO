@@ -88,4 +88,4 @@ To use **PARK'N GO**, follow these general steps:
 
 Ensure that you have the necessary technologies and services available to deploy and use **PARK'N GO** effectively.
 
-!["border image](./tests/footer.png)
+!["border image](./tests/footer_2.png)
