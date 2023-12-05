@@ -93,6 +93,7 @@
 	<script>
 		function saveData() {
 			const formData = JSON.parse(localStorage.getItem('formData'));
+			formData['parking_id'] = <?php echo $data ?>;
 
 			if (formData) {
 				const apiUrl = '<?php echo URLROOT; ?>/companys/parkingSpaceView';

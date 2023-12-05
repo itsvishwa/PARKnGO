@@ -164,6 +164,17 @@
   <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcYa9qDHqK5bpg0nJiZb7FkTOFCfRuuEE&callback=initMap">
   </script>
   <script src="<?php echo URLROOT; ?>/js/company/googleMapApi.js"></script>
+  <script>
+    function confirmDiscard() {
+      if (
+        confirm(
+          'Are you sure you want to discard? All the field data will not be saved.',
+        )
+      ) {
+        window.location.href = '../parkingSpaceView';
+      }
+    }
+  </script>
 </body>
 
 </html>

@@ -150,6 +150,7 @@
 
                         ?>
                       </tr>
+
                     <?php endforeach; ?>
 
 
