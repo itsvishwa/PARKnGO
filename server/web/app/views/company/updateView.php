@@ -82,21 +82,34 @@
             <th class="th">Arrived at</th>
             <th class="th">Left at</th>
             <th class="th">Parked Hours</th>
-            <th class="th">Assign By</th>
+            <th class="th">Officer ID</th>
             <th class="th">Released By</th>
             <th class="th">Total Price</th>
             <th class="th">Paid By</th>
           </tr>
           <tbody>
-            <!-- Table rows will be generated dynamically using JavaScript -->
+            <?php foreach ($data as $update) : ?>
+
+
+              <tr>
+                <td><?php echo htmlspecialchars($update->vehicle_number) ?></td>
+                <td><?php echo htmlspecialchars($update->name) ?></td>
+                <td><?php echo htmlspecialchars($update->vehicle_type) ?></td>
+                <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', $update->start_time)) ?></td>
+                <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', $update->end_time)) ?></td>
+                <td><?php echo htmlspecialchars($update->name) ?></td>
+                <td><?php echo htmlspecialchars($update->officer_id) ?></td>
+                <td><?php echo htmlspecialchars($update->first_name . ' ' . $update->last_name) ?></td>
+                <td><?php echo htmlspecialchars($update->amount) ?></td>
+                <td><?php echo htmlspecialchars($update->payment_method) ?></td>
+              </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>
 
     </div>
   </div>
-
-  <script src="<?php echo URLROOT; ?>/js/company/updateView.js"></script>
 </body>
 
 </html>

@@ -50,7 +50,9 @@ class Companys extends Controller
 
   public function updateView()
   {
-    $this->view('company/updateView');
+    $updates = $this->paymentModel->getUpdates($_SESSION['user_id']);
+
+    $this->view('company/updateView', $updates);
   }
 
   public function parkingSpaceView()
