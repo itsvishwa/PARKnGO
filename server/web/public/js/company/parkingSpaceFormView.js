@@ -40,16 +40,6 @@ function saveFormData() {
   localStorage.setItem('formData', JSON.stringify(formData));
 }
 
-function confirmDiscard() {
-  if (
-    confirm(
-      'Are you sure you want to discard? All the field data will not be saved.',
-    )
-  ) {
-    window.location.href = './parkingSpaceView';
-  }
-}
-
 function addParkingSlotBatch() {
   // Create a new div element
   var newParkingSlotBatch = document.createElement('div');

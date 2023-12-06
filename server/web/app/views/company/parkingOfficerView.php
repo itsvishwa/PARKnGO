@@ -99,7 +99,7 @@
                 <h3 class="allocated-parking"><?php if (empty($officer->parking_id)) {
                                                 echo "Not assigned";
                                               } else {
-                                                echo htmlspecialchars($officer->parking_id) . htmlspecialchars(' - ' . $officer->parking_name);
+                                                echo htmlspecialchars($officer->parking_name);
                                               } ?></h3>
               </div>
               <div class="officer-section-second">

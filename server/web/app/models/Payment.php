@@ -77,4 +77,33 @@ class Payment
     $result = $this->db->calcData();
     return $result['totalUsers'];
   }
+
+  public function getUpdates($company_id)
+  {
+    $this->db->query("SELECT
+                        p.amount,
+                        p.payment_method,
+                        ps.start_time,
+                        ps.end_time,
+                        ps.vehicle_number,
+                        ps.vehicle_type,
+                        ps.parking_id,
+                        pspace.name,
+                        po.officer_id,
+                        po.first_name,
+                        po.last_name
+                      FROM
+                          payment p
+                      LEFT JOIN
+                          parking_session ps ON p.session_id = ps._id
+                      LEFT JOIN
+                          parking_spaces pspace ON ps.parking_id = pspace._id
+                      LEFT JOIN
+                          parking_officer po ON ps.parking_id = po.parking_id
+                      WHERE pspace.company_id = :company_id 
+                      ORDER BY p.time_stamp DESC");
+    $this->db->bind(':company_id', $company_id);
+    $rows = $this->db->resultSet();
+    return $rows;
+  }
 }
