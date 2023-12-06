@@ -100,7 +100,7 @@
                 <td><?php echo htmlspecialchars(ceil(($update->end_time - $update->start_time) / 3600)) . ' Hours' ?></td>
                 <td><?php echo htmlspecialchars($update->officer_id) ?></td>
                 <td><?php echo htmlspecialchars($update->first_name . ' ' . $update->last_name) ?></td>
-                <td><?php echo htmlspecialchars('Rs.' . $update->amount) . '.00' ?></td>
+                <td><?php echo htmlspecialchars('Rs: ' . $update->amount) . '.00' ?></td>
                 <td><?php echo htmlspecialchars($update->payment_method) ?></td>
               </tr>
             <?php endforeach; ?>

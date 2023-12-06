@@ -92,7 +92,11 @@
               </svg>
             </div>
             <div class="b-card-content text-green">
-              <h3>Rs. <?php echo $data['monthlyEarned']; ?></h3>
+              <h3>Rs: <?php if ($data['monthlyEarned'] != 0) {
+                        echo $data['monthlyEarned'];
+                      } else {
+                        echo "0";
+                      } ?>.00</h3>
               <p>Earned this month</p>
             </div>
           </div>
@@ -114,7 +118,11 @@
               </svg>
             </div>
             <div class="b-card-content text-green">
-              <h3>Rs. <?php echo $data['todayEarned']; ?></h3>
+              <h3>Rs: <?php if ($data['todayEarned'] != 0) {
+                        echo $data['todayEarned'];
+                      } else {
+                        echo "0";
+                      } ?>.00</h3>
               <p>Earned today</p>
             </div>
           </div>
