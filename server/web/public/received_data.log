@@ -1,1 +1,1 @@
-{"name":"CMC CAR PARK 001","address":"WV87+4QR, Colombo 00700","parking_id":7,"parkingSlotBatches":[{"noOfSlots":"25","vehicleType":"Car","parkingRate":"150"},{"noOfSlots":"100","vehicleType":"Van","parkingRate":"100"}],"latitude":"6.9153625","longitude":"79.8643906","parkingType":"public"}
+{"name":"CMC CAR PARK 04","address":"ZZ99+4PR, Colombo 00700","parking_id":9,"parkingSlotBatches":[{"noOfSlots":"50","vehicleType":"Motorcycle","parkingRate":"150"}],"latitude":"2.90895","longitude":"65.65481","parkingType":"public"}
