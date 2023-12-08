@@ -1,0 +1,97 @@
+.hero-section {
+  height: 100vh;
+  background-image: url(../assets/heroBG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.login-btn {
+  border: 3px solid transparent;
+  background-color: transparent;
+  padding: 13px 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  border-image: linear-gradient(to right, #ffa811, #ffffff);
+  border-image-slice: 1;
+  border-radius: 5px;
+  color: #ffa811;
+}
+
+.hero-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.hero-body-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  font-weight: 700;
+}
+
+.hero-sub-header-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 40px;
+}
+
+.hero-p {
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 30px;
+  text-align: center;
+  width: 30%;
+}
+
+.hero-btn {
+  margin-top: 40px;
+  padding: 13px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-image: linear-gradient(to right, #ffa811, #ffffff);
+  border: none;
+  border-radius: 30px;
+}
+
+.hero-btn:hover {
+  background-image: linear-gradient(to right, #ffa811, #ffa811);
+}
+a .hero-btn {
+  color: #000000;
+}
+
+.mid-section {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  height: 25vh;
+  background-color: #3a3839;
+  margin-top: -2px;
+}
+
+.mid-section-text {
+  font-size: 36px;
+  font-weight: 700;
+  margin-left: 80px;
+}
