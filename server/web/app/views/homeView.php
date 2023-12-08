@@ -5,57 +5,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
+  <link href="<?php echo URLROOT; ?>/css/company/homePage.css" rel="stylesheet" />
   <title>PARKnGO</title>
 </head>
 
 <body>
-  <div class="navbar mt-20">
-    <a href="./"><img src="./assets/logo-black.png" alt="" class="navbar-logo"></a>
-    <a href="./users/loginView">Login</a>
-  </div>
-  <div class="home-body">
-    <h1 class="header-text">Revolutionize <span class="font-primary">Parking <br>Management</br></span></h1>
-    <h2 class="sub-header-text">-PARK'N GO for Companies-</h2>
-    <p class="p-text">Welcome to the future of parking management in Sri Lanka! Experience a new era of efficiency and control with PARK'N GO. Unleash the power to effortlessly manage your parking spaces, supercharge your operations, and elevate the parking experience for your clients.</p>
-    <a class="black-button" href="./users/loginView">Get Started</a>
-  </div>
-  <div class="main-section">
-    <h2 class="section-header">Our Services</h2>
-    <div class="card-section">
-      <div class="card card-1">
-        <div>
-          <h3>Total Parking Space Domainance</h3>
-        </div>
-      </div>
-      <div class="card card-2">
-        <div>
-          <h3>Instant Parking Officer Assignment</h3>
-        </div>
-
-      </div>
-      <div class="card card-3">
-        <div>
-          <h3>Real-time Space Status Insights</h3>
-        </div>
-
-      </div>
-      <div class="card card-4">
-        <div>
-          <h3>Unleash Productivity with Data</h3>
-        </div>
-      </div>
-      <div class="card card-5">
-        <div>
-          <h3>Effortless User-Friendly Interface</h3>
-        </div>
-
-      </div>
+  <div class="hero-section">
+    <div class="hero-header">
+      <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-white.png" alt="logo" width="200px" /></a>
+      <a href="./users/loginView">
+        <button class="login-btn">
+          Login
+        </button>
+      </a>
     </div>
-    <a class="transparent-button" href="./users/loginView">Get Started</a>
+    <div class="hero-body">
+      <h1 class="hero-body-text">
+        <div>
+          <span class="text-white">Revolutionize</span>
+          <span class="font-primary">Parking</span>
+        </div>
+
+        <span class="font-primary">Management.</span>
+      </h1>
+      <h2 class="hero-sub-header-text text-white">-PARK'N GO for Companies-</h2>
+      <p class="hero-p text-white">
+        Welcome to the future of parking management in Sri Lanka! Experience a new era of efficiency and control with PARK'N GO. Unleash the power to effortlessly manage your parking spaces, supercharge your operations, and elevate the parking experience for your clients.
+      </p>
+      <a href="./users/loginView">
+        <button class="hero-btn">
+          Get Started
+        </button>
+      </a>
+    </div>
   </div>
-  <div class="footer">
-    <p>Copyright &copy;2023 PARK'N GO. All rights reserved.</p>
+  <div class="mid-section">
+    <h1 class="font-primary mid-section-text">
+      Sri Lanka's <span class="text-white">Number 1</span> All-In-One Parking </br>Management System
+    </h1>
   </div>
+
 </body>
 
 </html>
