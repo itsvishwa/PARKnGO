@@ -44,6 +44,26 @@
       Sri Lanka's <span class="text-white">Number 1</span> All-In-One Parking </br>Management System
     </h1>
   </div>
+  <div class="overview-section">
+    <h1 class="overview-text">
+      <span class="font-primary">Total Parking Space</span><br> Dominance.
+    </h1>
+    <img src="<?php echo URLROOT; ?>/css/assets/systemOverview.png" alt="overview of the system">
+  </div>
+  <div class="feature-section">
+    <div class="feature-sub-section left">
+      <div class="feature-img">
+        <img src="" alt="">
+      </div>
+      <div class="feature-text">
+        <h1>Real Time Parking Space Management</h1>
+        <p></p>
+      </div>
+    </div>
+    <div class="feature-sub-section right">
+
+    </div>
+  </div>
 
 </body>
 

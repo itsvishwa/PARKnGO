@@ -1,3 +1,7 @@
+body {
+  background-color: #f6ead3;
+}
+
 .hero-section {
   height: 100vh;
   background-image: url(../assets/heroBG.png);
@@ -97,4 +101,40 @@ a .hero-btn {
   font-size: 42px;
   font-weight: 700;
   margin-left: 80px;
+}
+
+.overview-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background-image: url(../assets/overviewBG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.overview-text {
+  font-size: 72px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  margin-top: -40px;
+}
+
+.feature-section {
+  background-color: #363636;
+}
+
+.feature-sub .feature-img {
+  width: 300px;
+  height: 300px;
+  rotate: 40deg;
+  background-image: url(../assets/overviewBG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1.5px solid #ffffff;
+  border-radius: 15px;
 }
