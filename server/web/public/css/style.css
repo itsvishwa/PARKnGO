@@ -653,6 +653,10 @@ body {
 
 /* margin */
 
+.ml-60 {
+  margin-left: 60px;
+}
+
 .ml-40 {
   margin-left: 40px;
 }
@@ -709,6 +713,10 @@ body {
   margin-bottom: 5px;
 }
 
+.mr-60 {
+  margin-right: 60px;
+}
+
 .mr-40 {
   margin-right: 40px;
 }
@@ -753,6 +761,10 @@ body {
 
 .pb-20 {
   padding-bottom: 20px;
+}
+
+.pb-40 {
+  padding-bottom: 40px;
 }
 
 .pl-10 {

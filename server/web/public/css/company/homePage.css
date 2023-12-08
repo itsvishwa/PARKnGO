@@ -88,6 +88,7 @@ a .hero-btn {
   background-image: url(../assets/midBG.png);
   background-repeat: no-repeat;
   background-position: right bottom;
+  background-size: 550px;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -125,16 +126,58 @@ a .hero-btn {
 
 .feature-section {
   background-color: #363636;
+  padding: 0px 100px 50px 100px;
 }
 
-.feature-sub .feature-img {
-  width: 300px;
-  height: 300px;
-  rotate: 40deg;
+.feature-sub-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #363636;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.feature-img {
+  width: 380px;
+  height: 380px;
+  rotate: 68deg;
   background-image: url(../assets/overviewBG.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border: 1.5px solid #ffffff;
   border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-img img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+  width: 350px;
+  overflow: hidden;
+  rotate: -68deg;
+}
+
+.feature-text {
+  width: 50%;
+  text-align: right;
+}
+
+.feature-text h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.feature-text p {
+  font-size: 18px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  color: #ffffff;
 }

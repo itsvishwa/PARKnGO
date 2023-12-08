@@ -51,18 +51,47 @@
     <img src="<?php echo URLROOT; ?>/css/assets/systemOverview.png" alt="overview of the system">
   </div>
   <div class="feature-section">
-    <div class="feature-sub-section left">
-      <div class="feature-img">
-        <img src="" alt="">
+    <div class="feature-sub-section">
+      <div class="feature-img ml-60">
+        <img src="<?php echo URLROOT; ?>/css/assets/features/realtime.png" alt="realtime parking space management">
       </div>
       <div class="feature-text">
-        <h1>Real Time Parking Space Management</h1>
-        <p></p>
+        <h1 class="font-primary">Real Time Parking Space Management</h1>
+        <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
+        <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
       </div>
     </div>
-    <div class="feature-sub-section right">
-
+    <div class="feature-sub-section">
+      <div class="feature-text">
+        <h1 class="font-primary">Real Time Parking Space Management</h1>
+        <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
+        <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
+      </div>
+      <div class="feature-img mr-60">
+        <img src="<?php echo URLROOT; ?>/css/assets/features/realtime.png" alt="realtime parking space management">
+      </div>
     </div>
+    <div class="feature-sub-section">
+      <div class="feature-img ml-60">
+        <img src="<?php echo URLROOT; ?>/css/assets/features/realtime.png" alt="realtime parking space management">
+      </div>
+      <div class="feature-text">
+        <h1 class="font-primary">Real Time Parking Space Management</h1>
+        <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
+        <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
+      </div>
+    </div>
+    <div class="feature-sub-section">
+      <div class="feature-text">
+        <h1 class="font-primary">Real Time Parking Space Management</h1>
+        <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
+        <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
+      </div>
+      <div class="feature-img mr-60">
+        <img src="<?php echo URLROOT; ?>/css/assets/features/realtime.png" alt="realtime parking space management">
+      </div>
+    </div>
+
   </div>
 
 </body>
