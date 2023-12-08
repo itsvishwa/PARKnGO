@@ -81,6 +81,9 @@ a .hero-btn {
 }
 
 .mid-section {
+  background-image: url(../assets/midBG.png);
+  background-repeat: no-repeat;
+  background-position: right bottom;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -91,7 +94,7 @@ a .hero-btn {
 }
 
 .mid-section-text {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 700;
   margin-left: 80px;
 }
