@@ -68,14 +68,7 @@ class Companys extends Controller
       // Decode the JSON data into an associative array
       $data = json_decode($json_data, true);
 
-      // if ($data['parking_id'] == 0) {
-      //   $result = $this->parkingSpaceModel->registerParking($data);
-      // }
-
       $result = $this->parkingSpaceModel->parkingSave($data);
-
-      // Call registerParking method
-
 
       if ($result) {
         // Successfully registered parking

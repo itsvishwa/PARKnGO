@@ -106,7 +106,7 @@ class ParkingSpace
         }
 
         // Update parking_spaces table
-        $this->db->query('UPDATE parking_spaces SET name = :name, address = :address, latitude = :latitude, longitude = :longitude, is_public = :is_public WHERE _id = :parking_id');
+        $this->db->query('UPDATE parking_spaces SET name = :name, address = :address, latitude = :latitude, no_of_slots = :no_of_slots, longitude = :longitude, is_public = :is_public WHERE _id = :parking_id');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -115,6 +115,16 @@ class ParkingSpace
         $this->db->bind(':longitude', $data['longitude']);
         $this->db->bind(':is_public', ($data['parkingType'] == 'public' ? 1 : 0));
         $this->db->bind(':parking_id', $data['parking_id']);
+
+        $totalSlots = 0;
+
+        if ($data['parkingSlotBatches'] && count($data['parkingSlotBatches']) > 0) {
+          // Use array_reduce to sum up the noOfSlots
+          $totalSlots = array_reduce($data['parkingSlotBatches'], function ($acc, $batch) {
+            return $acc + intval($batch['noOfSlots']);
+          }, 0);
+        }
+        $this->db->bind(':no_of_slots', $totalSlots);
 
         // Execute
         $this->db->execute();

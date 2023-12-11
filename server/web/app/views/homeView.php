@@ -55,14 +55,14 @@
       <div class="feature-img ml-60">
         <img src="<?php echo URLROOT; ?>/css/assets/features/realtime.png" alt="realtime parking space management">
       </div>
-      <div class="feature-text">
+      <div class="feature-text right">
         <h1 class="font-primary">Real Time Parking Space Management</h1>
         <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
         <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
       </div>
     </div>
     <div class="feature-sub-section">
-      <div class="feature-text">
+      <div class="feature-text left">
         <h1 class="font-primary">Real Time Parking Space Management</h1>
         <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
         <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
@@ -75,14 +75,14 @@
       <div class="feature-img ml-60">
         <img src="<?php echo URLROOT; ?>/css/assets/features/realtime.png" alt="realtime parking space management">
       </div>
-      <div class="feature-text">
+      <div class="feature-text right">
         <h1 class="font-primary">Real Time Parking Space Management</h1>
         <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
         <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
       </div>
     </div>
     <div class="feature-sub-section">
-      <div class="feature-text">
+      <div class="feature-text left">
         <h1 class="font-primary">Real Time Parking Space Management</h1>
         <p>Experience the power to monitor and control your parking spaces dynamically. Instantly view the occupancy status, track parking-officer activities in real time and many more.</p>
         <p>Say goodbye to manual reporting with our cutting-edge Park'n Go system.</p>
@@ -93,7 +93,36 @@
     </div>
 
   </div>
+  <div class="package-section ">
+    <h1 class="center package-header">Flexible pricing<br>
+      for companies of all sizes</h1>
+    <div class="package-cards">
+      <div class="package-card">
+        <h1>Rs.399/<span>mon</span></h1>
+        <h2>Plus</h2>
 
+        <div class="includes">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="verified">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+            up to 2 Parking Spaces
+          </h3>
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="verified">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+            up to 5 Parking Officers
+          </h3>
+        </div>
+
+
+        <a href=""><button>Get Started</button></a>
+      </div>
+      <div class="package-card"></div>
+      <div class="package-card"></div>
+    </div>
+  </div>
 </body>
 
 </html>

@@ -93,7 +93,10 @@
 	<script>
 		function saveData() {
 			const formData = JSON.parse(localStorage.getItem('formData'));
-			formData['parking_id'] = <?php echo $data ?>;
+
+			<?php if (isset($data)) : ?>
+				formData['parking_id'] = <?php echo $data ?>;
+			<?php endif; ?>
 
 			if (formData) {
 				const apiUrl = '<?php echo URLROOT; ?>/companys/parkingSpaceView';
@@ -120,6 +123,7 @@
 			}
 		}
 	</script>
+
 	<script src="<?php echo URLROOT; ?>/js/company/confirmationCard.js"></script>
 </body>
 
