@@ -113,4 +113,16 @@ class PaymentModel
             return $result;
         }
     }
+
+
+    // close a payement for a given payment_id
+    public function close_payment($payment_data)
+    {
+        $this->db->query("UPDATE payment SET is_complete = 1, payment_method = :payment_method, time_stamp = :time_stamp, driver_id = :driver_id WHERE _id = :payment_id");
+        $this->db->bind(":payment_method", $payment_data["payment_method"]);
+        $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
+        $this->db->bind(":driver_id", $payment_data["driver_id"]);
+        $this->db->bind(":payment_id", $payment_data["payment_id"]);
+        $this->db->execute();
+    }
 }

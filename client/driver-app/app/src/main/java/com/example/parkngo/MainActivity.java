@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         // start............................................................................................................
         // Display the message here
         InitRequest req = new InitRequest();
-        req.setMerchantId("1224851");       // Merchant ID
+        req.setMerchantId("");       // Merchant ID
         req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
         req.setAmount(250);             // Final Amount to be charged
         req.setOrderId("13265");        // Unique Reference ID
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         req.getCustomer().getAddress().setCountry("Sri Lanka");
 
         //Optional Params
-//        req.setNotifyUrl("");
+        req.setNotifyUrl("http://192.168.56.1/PARKnGO/server/mobile/payment/notify");
 
 
         Intent intent = new Intent(this, PHMainActivity.class);

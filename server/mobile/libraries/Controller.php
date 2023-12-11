@@ -140,22 +140,7 @@ class Controller
                 {
                         $token = $_SERVER['HTTP_TOKEN'];
 
-                        $token_data =  $this->decode_token($token);
-
-                        if ($this->is_token_key_valid($token_data)) // token has valid keys
-                        {
-                                $driver_model = $this->model("DriverModel");
-                                if ($token_data["user_type"] === "driver" and $driver_model->is_driver_id_exist($token_data["user_id"])) // token has valid values
-                                {
-                                        return $token_data;
-                                } else // invalid values 
-                                {
-                                        return 400;
-                                }
-                        } else // token is invalid
-                        {
-                                return 400;
-                        }
+                        return $this->verify_token_for_driver_from_para($token);
                 } else // there is no token setted
                 {
                         return 404;
@@ -172,22 +157,7 @@ class Controller
                 {
                         $token = $_SERVER['HTTP_TOKEN'];
 
-                        $token_data =  $this->decode_token($token);
-
-                        if ($this->is_token_key_valid($token_data)) // token has valid keys
-                        {
-                                $officer_model = $this->model("OfficerModel");
-                                if ($token_data["user_type"] === "officer" and $officer_model->is_officer_id_exist($token_data["user_id"])) // token has valid values
-                                {
-                                        return $token_data;
-                                } else // invalid values 
-                                {
-                                        return 400;
-                                }
-                        } else // token is invalid
-                        {
-                                return 400;
-                        }
+                        return $this->verify_token_for_officer_from_para($token);
                 } else // there is no token setted
                 {
                         return 404;
@@ -195,14 +165,62 @@ class Controller
         }
 
 
+        // pass the token as a parameter
+        // pass the usertype as a parameter
+        // return the decoded data if everything is ok, or return status code if there is a error
+        public function verify_token_for_driver_from_para($token)
+        {
+                $token_data =  $this->decode_token($token);
+
+                if ($this->is_token_key_valid($token_data)) // token has valid keys
+                {
+                        $driver_model = $this->model("DriverModel");
+                        if ($token_data["user_type"] === "driver" and $driver_model->is_driver_id_exist($token_data["user_id"])) // token has valid values
+                        {
+                                return $token_data;
+                        } else // invalid values 
+                        {
+                                return 400;
+                        }
+                } else // token is invalid
+                {
+                        return 400;
+                }
+        }
+
+
+        // pass the token as a parameter
+        // pass the usertype as a parameter
+        // return the decoded data if everything is ok, or return status code if there is a error
+        public function verify_token_for_officer_from_para($token)
+        {
+                $token_data =  $this->decode_token($token);
+
+                if ($this->is_token_key_valid($token_data)) // token has valid keys
+                {
+                        $officer_model = $this->model("OfficerModel");
+                        if ($token_data["user_type"] === "officer" and $officer_model->is_officer_id_exist($token_data["user_id"])) // token has valid values
+                        {
+                                return $token_data;
+                        } else // invalid values 
+                        {
+                                return 400;
+                        }
+                } else // token is invalid
+                {
+                        return 400;
+                }
+        }
+
+
         // return a encrypted string when pass the id
-        public function encrypt_payment_id($payment_id)
+        public function encrypt_id($payment_id)
         {
                 // Generate a new random 16-byte IV (Initialization Vector)
                 $iv = openssl_random_pseudo_bytes(16);
 
                 // Encrypt the payment_id with AES-128-CBC and the IV
-                $encrypted_data = openssl_encrypt($payment_id, 'aes-128-cbc', PAYMENT_KEY, 0, $iv);
+                $encrypted_data = openssl_encrypt($payment_id, 'aes-128-cbc', ID_KEY, 0, $iv);
 
                 // Combine the IV and modified ciphertext to create the final encoded string
                 $encoded_string = $iv . $encrypted_data;
@@ -215,7 +233,7 @@ class Controller
         }
 
         // return the decrypted data when pass the encoded string
-        public function decrypt_payment_id($encoded_string)
+        public function decrypt_id($encoded_string)
         {
                 // Decode the Base64-encoded string to get the binary data
                 $binary_data = base64_decode($encoded_string);
@@ -227,7 +245,7 @@ class Controller
                 $ciphertext = substr($binary_data, 16);
 
                 // Decrypt the modified ciphertext with AES-128-CBC and the IV
-                $decrypted_payment_id = openssl_decrypt($ciphertext, 'aes-128-cbc', PAYMENT_KEY, 0, $iv);
+                $decrypted_payment_id = openssl_decrypt($ciphertext, 'aes-128-cbc', ID_KEY, 0, $iv);
 
                 if ($decrypted_payment_id === false) {
                         // Decryption error, send an error message as a JSON response

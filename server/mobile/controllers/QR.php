@@ -13,7 +13,7 @@ class QR extends Controller
 
     public function get_qr($payment_id)
     {
-        $encoded_payment_id = $this->encrypt_payment_id($payment_id);
+        $encoded_payment_id = $this->encrypt_id($payment_id);
         $this->send_json_200($encoded_payment_id);
 
         // should implement rest 
