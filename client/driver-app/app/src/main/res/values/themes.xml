@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+<!-- Base application theme. -->
+<style name="Base.Theme.Parkngo" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Customize your light theme here. -->
+    <item name="colorPrimary">@color/primaryColor</item>
+</style>
+
+<style name="Theme.Parkngo" parent="Base.Theme.Parkngo" />
+
+<style name="loginSignupBtnStyle">
+    <item name="android:textColor">@color/textPrimary</item>
+    <item name="android:backgroundTint">@color/loginSignupBtnColor</item>
+    <item name="android:textSize">16sp</item>
+</style>
+
+    <style name="testChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="checkedIconTint">@color/white</item>
+        <item name="chipBackgroundColor">@color/chip_back</item>
+        <item name="rippleColor">@color/primaryColor</item>
+        <item name="android:textColor">@color/chip_text</item>
+    </style>
+
+    <style name="SpinnerTextStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+</resources>
