@@ -126,7 +126,7 @@ a .hero-btn {
 
 .feature-section {
   background-color: #363636;
-  padding: 0px 100px 50px 100px;
+  padding: 0px 150px 50px 150px;
 }
 
 .feature-sub-section {
@@ -166,7 +166,18 @@ a .hero-btn {
 
 .feature-text {
   width: 50%;
+}
+
+.right {
   text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
 }
 
 .feature-text h1 {
@@ -180,4 +191,53 @@ a .hero-btn {
   font-weight: 300;
   margin-bottom: 30px;
   color: #ffffff;
+}
+
+.package-section {
+  background-color: #ffa811;
+  padding-top: 50px;
+}
+
+.package-header {
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.package-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 150px 50px 150px;
+}
+
+.package-card {
+  width: 360px;
+  height: 450px;
+  background-image: url(../assets/cardBG.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 15px;
+}
+
+.package-card h1 {
+  font-size: 48px;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, #ff5981, #44a4fd);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.includes h3 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.verified {
+  width: 20px;
+  height: 20px;
 }
