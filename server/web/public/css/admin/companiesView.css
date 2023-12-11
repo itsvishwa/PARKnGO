@@ -1,0 +1,381 @@
+.business {
+    margin-top: 10px;
+  }
+
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .menu li {
+    margin: 15px 0;
+    margin-left: 30px;
+    width: 150px;
+    padding: 8px 10px 8px 15px;
+  }
+
+  .menu-logo {
+    height: 25px;
+    display: flex;
+
+    
+  }
+  .search-logo {
+
+    display: flex;
+    margin-left: 760px; 
+    width: 25px;
+    height: 25px;
+  }
+
+
+  .r-menu-logo {
+
+    height: 35px;
+    display: flex;
+  }
+
+  .ur-menu-logo {
+
+    height: 24px;
+    display: flex;
+  }
+  
+  .heading {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+  
+  .heading h4 {
+    font-size: 1rem;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+  
+  .card-section1 {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 150px;
+    margin-top: 20px;
+    margin-left: 25px;
+    width: 81%;
+    height: 200psx;
+    
+  }
+
+  .card-section2 {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 150px;
+    margin-top: 10px;
+    margin-left: 25px;
+    width: 81%;
+    height: 200psx;
+    
+  }
+
+  .card-section3{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 150px;
+    margin-top: 10px;
+    margin-left: 25px;
+    width: 81%;
+    height: 200psx;
+    
+  }
+  
+  .b-card {
+    
+    margin-top: 1px;
+    margin-left: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    height: 1%;
+    width: 91%;
+  }
+
+  .b-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+  
+  .b-card-content {
+    margin-left: 10px;
+    
+  }
+  
+  .b-card-content p {
+    font-size: 1.0rem;
+    font-weight: 415;
+  }
+
+  .b-card1{
+    position: relative;
+    margin-block-start: 1px;
+    margin-left :-147px;
+    padding: 75px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    width: 90%;
+    height:95px;
+    
+  }
+
+  .b-card1-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .b-card1-content {
+    margin-left: 5px;    
+  }
+
+  .b-card2{
+    position: relative;
+    margin-block-start: 1px;
+    margin-left: 30px;
+    padding: 75px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    width: 90%;
+    height:95px;
+    
+  }
+
+  .b-card2-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+  }
+
+  .company-card2-content {
+    margin-top: -1px;
+    margin-left: 0px; 
+    padding:1px; 
+    font-weight: 700;
+    
+  }
+
+  .company-card3-content {
+    margin-top: -5px;
+    margin-left: 0px; 
+    padding:1px; 
+    font-weight: 450;
+    font-size: 0.8rem;  
+  }
+
+  .company-icon {
+    margin-top: -50px;
+    margin-left: -50px;
+    height:40px;
+    width:40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.company-content {
+  margin-left: 4px;
+}
+.company-card2-icon {
+  margin-top: -40px;
+  margin-left: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 23%;
+}
+
+.location-icon {
+  
+  margin-left: -90px;
+  left:96px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.location-card2-icon {
+  margin-top: -40px;
+  margin-left: -34px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 23%;
+}
+
+.location-card2-content {
+  margin-top: -1px;
+  margin-left: -10px; 
+  padding:1px; 
+  font-weight: 450;
+  font-size: 0.8rem;
+}
+
+.mail-icon {
+  
+  margin-left: -66px;
+  left:96px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.mail-card2-icon {
+  margin-top: -32px;
+  margin-left: -10px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 23%;
+}
+
+.mail-card2-content {
+  margin-top: -5px;
+  margin-left: -9px; 
+  padding:1px; 
+  font-weight: 450;
+  font-size: 0.8rem;
+}
+
+.contact-icon {
+  
+  margin-left: -66px;
+  left:96px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.contact-card2-icon {
+  margin-top: -32px;
+  margin-left: -10px;
+  padding: 10px;
+  border-radius: 10px;
+  height: 23%;
+}
+.contact-card2-content {
+  margin-top: -5px;
+  margin-left: -9px; 
+  padding:1px; 
+  font-weight: 450;
+  font-size: 0.8rem;
+}
+
+.b-view-more{
+   
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius:0px 0px 10px 10px;
+  height: 40px;
+  
+}
+
+.b-view-more-card2-content {
+  margin-top: 10px;
+  margin-left: 200px; 
+  padding:1px; 
+  font-weight: 450;
+  font-size: 0.8rem;
+}
+
+
+.b-card5-icon {
+  position:absolute;
+  bottom: 0.1px;
+  left:45px;
+  padding: 10px;
+  border-radius: 10px;
+}
+  
+  .dashboard-main-section {
+    display: flex;
+    flex: 1;
+    width: 98%;
+    margin-bottom: 40px;
+  }
+  
+  .table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0px;
+    width: 100%;
+  }
+   
+  .table-div {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  table {
+    margin-left: 20px;
+    width: 96%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    background-color: #fffbf4;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-grey {
+    color: #727272;
+  }
+
+  .bg-grey {
+    background-color: #E3DED7;
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    font-size: 0.9rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: #e7dbc7;
+  }
+  tr:nth-child(2n) {
+    background-color: #e7dbc742;
+  }
+  tr:nth-child(4n) {
+    background-color: #e7dbc742;
+  }
+  
+  
+  @media screen and (min-width: 768px) {
+    .right-container {
+      padding-left: 100px;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .right-container {
+      padding-left: 50px;
+    }
+  }
+  
+  @media screen and (min-width: 1400px) {
+    .right-container {
+      padding-left: 0px;
+    }
+  }
+  
+  @media screen and (min-width: 1700px) {
+    .right-container {
+      margin-left: 17%;
+    }
+  }
+  
