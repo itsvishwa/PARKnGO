@@ -2,6 +2,8 @@
 
 # PARK'N GO - Parking Management System
 
+> Email Us: parkngo.email@gmail.com
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -88,4 +90,3 @@ To use **PARK'N GO**, follow these general steps:
 
 Ensure that you have the necessary technologies and services available to deploy and use **PARK'N GO** effectively.
 
-!["border image](./tests/footer_2.png)
