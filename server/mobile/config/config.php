@@ -27,4 +27,4 @@ define("TOKEN", "");
 define("TOKEN_KEY", "81g135w");
 
 // Payment secret key
-define("PAYMENT_KEY", "1h3sh65");
+define("ID_KEY", "1h3sh65");
