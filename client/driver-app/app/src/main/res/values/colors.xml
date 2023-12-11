@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#FFA811</color>
+    <color name="textPrimary">#FF000000</color>
+    <color name="textSecondary">#35332F</color>
+    <color name="loginSignupBtnColor">#F8DAA7</color>
+    <color name="loginSignupInputFieldColor">#F9D391</color>
+    <color name="bottomNavUnselectedItemColor">#827E83</color>
+    <color name="backgroundColor">#F6EAD3</color>
+    <color name="inputFieldColor">#FFF3DD</color>
+    <color name="green">#00A372</color>
+    <color name="red">#FF4545</color>
+</resources>
