@@ -12,7 +12,7 @@ class Payment extends Controller
     }
 
 
-    public function view()
+    public function view_payment()
     {
         $token_data = $this->verify_token_for_drivers();
 
