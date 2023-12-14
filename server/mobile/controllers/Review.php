@@ -72,7 +72,7 @@ class Review extends Controller
                                 $this->send_json_200("Update Successfull!");
                         } else // they don't match
                         {
-                                $this->send_json_401("Delete operation failed, Unauthrized access");
+                                $this->send_json_401("Update operation failed, Unauthrized access");
                         }
                 }
         }
