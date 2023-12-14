@@ -29,7 +29,7 @@ class ProfileModel
         $this->db->query("UPDATE driver SET mobile_number = :mobile_number WHERE _id = :_id");
 
         $this->db->bind(":_id", $driver_id);
-        $this->db->bind(":_mobile_number", $mobile_number);
+        $this->db->bind(":mobile_number", $mobile_number);
 
         $this->db->execute();
     }

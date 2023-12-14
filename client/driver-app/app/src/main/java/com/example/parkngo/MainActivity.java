@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         req.getCustomer().getAddress().setCountry("Sri Lanka");
 
         //Optional Params
-//        req.setNotifyUrl("");
+        req.setNotifyUrl("http://192.168.56.1/PARKnGO/server/mobile/payment/notify");
 
 
         Intent intent = new Intent(this, PHMainActivity.class);
