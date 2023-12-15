@@ -87,13 +87,15 @@
 
         <div id="parkingCards" class="parking-cards">
           <?php foreach ($data['parking_spaces'] as $parking) : ?>
-            <div class="parking-space-card <?php if ($parking->parking_is_closed) {
+            <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
+                                            if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                                               echo "closed";
                                             } ?>">
               <div class="parking-card-header">
                 <div class="parking-name">
                   <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
-                  <?php if ($parking->parking_is_closed) {
+                  <?php $currentUnixTime = time() + 16200;
+                  if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                     echo '<p class="parking-type bg-red text-white">Closed</p>';
                   } else {
                     echo "";

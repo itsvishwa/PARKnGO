@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="30" />
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -228,13 +229,15 @@
         </div>
         <div id="parkingCards" class="parking-cards">
           <?php foreach ($data['parking_spaces'] as $parking) : ?>
-            <div class="parking-space-card <?php if ($parking->parking_is_closed) {
-                                              echo 'closed';
+            <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
+                                            if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
+                                              echo "closed";
                                             } ?>">
               <div class="parking-card-header">
                 <div class="parking-name">
                   <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
-                  <?php if ($parking->parking_is_closed) {
+                  <?php $currentUnixTime = time() + 16200;
+                  if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                     echo '<p class="parking-type bg-red text-white">Closed</p>';
                   } else {
                     echo "";

@@ -661,8 +661,16 @@ body {
   margin-left: 40px;
 }
 
+.ml-35 {
+  margin-left: 35px;
+}
+
 .ml-30 {
   margin-left: 30px;
+}
+
+.ml-25 {
+  margin-left: 25px;
 }
 
 .ml-20 {
