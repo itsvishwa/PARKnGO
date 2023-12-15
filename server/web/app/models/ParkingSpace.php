@@ -196,6 +196,8 @@ class ParkingSpace
                         ps.no_of_slots AS parking_total_slots,
                         ps.is_public AS parking_is_public,
                         ps.is_closed AS parking_is_closed,
+                        ps.closed_start_time AS parking_closed_start_time,
+                        ps.closed_end_time AS parking_closed_end_time,
                         ps.latitude AS parking_latitude,
                         ps.longitude AS parking_longitude,
                         ps.avg_star_count AS parking_avg_star_count,
@@ -252,6 +254,32 @@ class ParkingSpace
     $this->db->bind(':parking_id', $parking_id);
 
     // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function updateClosedTime($data)
+  {
+    $this->db->query(
+      'UPDATE parking_spaces 
+            SET is_closed = 1, closed_start_time = :closed_start_time, closed_end_time = :closed_end_time
+            WHERE _id = :parking_id'
+    );
+
+    $startTime = new DateTime($data['closed_start_time']);
+    $unixStartTime = $startTime->getTimestamp();
+
+    $endTime = new DateTime($data['closed_end_time']);
+    $unixEndTime = $endTime->getTimestamp();
+
+
+    $this->db->bind(':closed_start_time', $unixStartTime);
+    $this->db->bind(':closed_end_time', $unixEndTime);
+    $this->db->bind(':parking_id', $data['parking_id']);
+
     if ($this->db->execute()) {
       return true;
     } else {

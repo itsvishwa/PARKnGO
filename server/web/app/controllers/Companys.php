@@ -136,9 +136,36 @@ class Companys extends Controller
     }
   }
 
-  public function parkingSpaceCloseView()
+  public function parkingSpaceCloseView($parking_id)
   {
-    $this->view('company/parkingSpaceCloseView');
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'parking_id' => $parking_id,
+        'closed_start_time' => trim($_POST['closed_start_time']),
+        'closed_end_time' => trim($_POST['closed_end_time']),
+      ];
+
+      if ($this->parkingSpaceModel->updateClosedTime($data)) {
+        redirect('companys/parkingSpaceView');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
+      $parkingSpace = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id'], $parking_id);
+      $parkingSpaceStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id'], $parking_id);
+
+      $data = [
+        'parking_space' => $parkingSpace,
+        'parking_space_status' => $parkingSpaceStatus,
+        'closed_start_time' => '',
+        'closed_end_time' => '',
+      ];
+
+      $this->view('company/parkingSpaceCloseView', $data);
+    }
   }
 
   public function parkingOfficerView()
