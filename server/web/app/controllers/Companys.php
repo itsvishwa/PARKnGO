@@ -184,6 +184,11 @@ class Companys extends Controller
 
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+      ini_set('upload_max_filesize', '32M');
+      ini_set('post_max_size', '32M');
+      $fileData = $_FILES['profile_image'];
+      $fileContent = file_get_contents($fileData['tmp_name']);
+
       // Init data
       $data = [
         'first_name' => trim($_POST['first_name']),
@@ -193,7 +198,7 @@ class Companys extends Controller
         'recently_added_officer_id' => $this->officerModel->getRecentlyAddedOfficer()->officer_id,
         'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
-        'profile_image' => trim($_FILES['profile_image']['name']),
+        'profile_image' => $fileContent,
         'company_id' => $_SESSION['user_id'],
         'mobile_number_err' => '',
         'officer_id_err' => '',
@@ -227,6 +232,8 @@ class Companys extends Controller
           die('Something went wrong');
         }
       } else {
+        // Load view
+        $data['profiel_image'] = '';
         $this->view('company/parkingOfficerFormView', $data);
       }
     } else {
@@ -260,6 +267,16 @@ class Companys extends Controller
 
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+      if (!empty($_FILES['profile_image']['tmp_name']) && is_uploaded_file($_FILES['profile_image']['tmp_name'])) {
+        ini_set('upload_max_filesize', '32M');
+        ini_set('post_max_size', '32M');
+        $fileData = $_FILES['profile_image'];
+        $fileContent = file_get_contents($fileData['tmp_name']);
+      } else {
+        // Handle the case where no file was uploaded
+        $fileContent = $officer->profile_photo; // Use the existing image or set a default value
+      }
+
       // Init data
       $data = [
         'first_name' => trim($_POST['first_name']),
@@ -268,7 +285,7 @@ class Companys extends Controller
         'officer_id' => $officer->officer_id,
         'mobile_number' => trim($_POST['mobile_number']),
         //'parking_id' => trim($_POST['parking_id']),
-        'profile_image' => trim($_FILES['profile_image']['name']),
+        'profile_image' => $fileContent,
         'mobile_number_err' => '',
         'company_id' => $_SESSION['user_id'],
       ];
@@ -295,7 +312,7 @@ class Companys extends Controller
         'officer_id' => $officer->officer_id,
         'mobile_number' => $officer->mobile_number,
         //'parking_id' => '',
-        'profile_image' => '',
+        'profile_image' => $officer->profile_photo,
         'mobile_number_err' => '',
         'company_id' => $_SESSION['user_id'],
       ];
