@@ -102,7 +102,7 @@
             <span class="f-12 text-red"><?php echo $data['officer_id_err']; ?></span>
 
             <label for="profile_image" class="p-form-label mb-10">Profile Photo</label>
-            <input type="file" name="profile_image" id="profile_image" accept="image/*" <?php echo $data['profile_image'] ?>>
+            <input type="file" name="profile_image" id="profile_image" accept="image/*" value="<?php echo $data['profile_image'] ?>">
           </div>
 
           <div class="c-btn-section pt-50">

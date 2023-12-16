@@ -13,8 +13,8 @@ class Officer
   {
     $this->db->query(
       'INSERT INTO 
-        parking_officer (nic, mobile_number, first_name, last_name, company_id, officer_id) 
-      VALUES (:nic, :mobile_number, :first_name, :last_name, :company_id, :officer_id)'
+        parking_officer (nic, mobile_number, first_name, last_name, company_id, officer_id, profile_photo ) 
+      VALUES (:nic, :mobile_number, :first_name, :last_name, :company_id, :officer_id, :profile_photo)'
     );
     // Bind values
     $this->db->bind(':nic', $data['nic']);
@@ -23,6 +23,7 @@ class Officer
     $this->db->bind(':last_name', $data['last_name']);
     $this->db->bind(':company_id', $data['company_id']);
     $this->db->bind(':officer_id', $data['officer_id']);
+    $this->db->bind(':profile_photo', $data['profile_image']);
     //$this->db->bind(':parking_id', $data['parking_id']);
 
     // Execute
@@ -38,7 +39,7 @@ class Officer
     $this->db->query(
       'UPDATE 
         parking_officer 
-      SET nic = :nic, mobile_number = :mobile_number, first_name = :first_name, last_name = :last_name 
+      SET nic = :nic, mobile_number = :mobile_number, first_name = :first_name, last_name = :last_name, profile_photo = :profile_photo
       WHERE officer_id = :officer_id AND company_id = :company_id'
     );
 
@@ -49,6 +50,7 @@ class Officer
     $this->db->bind(':last_name', $data['last_name']);
     $this->db->bind(':officer_id', $data['officer_id']);
     $this->db->bind(':company_id', $data['company_id']);
+    $this->db->bind(':profile_photo', $data['profile_image']);
 
     // Execute
     if ($this->db->execute()) {
