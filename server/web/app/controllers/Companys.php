@@ -83,10 +83,17 @@ class Companys extends Controller
     $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
+    $reviews = $this->parkingSpaceModel->getReviewDetails();
+
+    foreach ($reviews as &$review) {
+      $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
+    }
+
     $data = [
       'parking_spaces' => $parkingSpaces,
       'parking_spaces_status' => $parkingSpacesStatus,
       'todayEarned' => $todayEarned,
+      'reviews' => $reviews,
     ];
     $this->view('company/parkingSpaceView', $data);
   }

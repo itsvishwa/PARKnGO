@@ -571,6 +571,14 @@ body {
   background-color: #00000040;
 }
 
+.bg-dark-gray {
+  background-color: #363636;
+}
+
+.bg-light-gray {
+  background-color: #4e4e4e;
+}
+
 .text-black {
   color: #000000;
 }
@@ -599,8 +607,20 @@ body {
   color: #22283190;
 }
 
+.text-light-yellow {
+  color: #fff5e3;
+}
+
 .text-light-blue {
   color: #00adb5;
+}
+
+.text-light-blue {
+  color: #97c8f5;
+}
+
+.text-light-gray {
+  color: #d1d1d1;
 }
 /* button section */
 
@@ -703,6 +723,10 @@ body {
 
 .mt--10 {
   margin-top: -10px;
+}
+
+.mt--30 {
+  margin-top: -30px;
 }
 
 .mt--5 {

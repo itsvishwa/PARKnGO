@@ -286,4 +286,28 @@ class ParkingSpace
       return false;
     }
   }
+
+  public function getReviewDetails()
+  {
+    $this->db->query(
+      'SELECT
+        review._id AS review_id,
+        review.parking_id AS parking_id,
+        parking_spaces.name AS parking_name,
+        parking_spaces.address AS parking_address,
+        driver.first_name AS driver_first_name, 
+        driver.last_name AS driver_last_name,
+        review.content,
+        review.time_stamp,
+        review.no_of_stars
+      FROM
+        review
+      LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
+      LEFT JOIN driver ON review.driver_id = driver._id'
+    );
+
+    $row = $this->db->resultSet();
+
+    return $row;
+  }
 }
