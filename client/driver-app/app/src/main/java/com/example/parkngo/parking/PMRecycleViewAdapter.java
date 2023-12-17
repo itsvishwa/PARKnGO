@@ -39,10 +39,10 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
     public void onBindViewHolder(@NonNull PMRecycleViewAdapter.MyViewHolder holder, int position) {
         holder.parkingNameView.setText(parkingModels.get(position).getParkingName());
         holder.parkingTypeView.setText(parkingModels.get(position).getParkingType());
-        holder.parkingRateView.setText(parkingModels.get(position).getParkingRate());
+        holder.parkingAddressView.setText(parkingModels.get(position).getParkingAddress());
         holder.noOfReviewsView.setText("(" + parkingModels.get(position).getNoOfReviews() + ")");
         holder.ratingBarView.setRating(parkingModels.get(position).getNoOfStars());
-        holder.imageView.setImageResource(parkingModels.get(position).getImage());
+        holder.parkingStatusView.setText(parkingModels.get(position).getParkingStatus());
 
         if(parkingModels.get(position).getParkingType() !="Public"){
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_red_circle);
@@ -50,6 +50,14 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
         }else{
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_green_circle);
             holder.parkingTypeView.setBackground(drawable);
+        }
+
+        if(parkingModels.get(position).getParkingStatus() !="Open"){
+            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_red_circle);
+            holder.parkingStatusView.setBackground(drawable);
+        }else{
+            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_green_circle);
+            holder.parkingStatusView.setBackground(drawable);
         }
     }
 
@@ -60,21 +68,22 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imageView;
         TextView parkingNameView;
         TextView parkingTypeView;
-        TextView parkingRateView;
+        TextView parkingAddressView;
         TextView noOfReviewsView;
         RatingBar ratingBarView;
 
+        TextView parkingStatusView;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.pi_image);
             parkingNameView = itemView.findViewById(R.id.pi_name);
             parkingTypeView = itemView.findViewById(R.id.pi_type);
-            parkingRateView = itemView.findViewById(R.id.pi_rate);
+            parkingAddressView = itemView.findViewById(R.id.pi_address);
             noOfReviewsView = itemView.findViewById(R.id.pi_noofreviews);
             ratingBarView = itemView.findViewById(R.id.pi_ratingbar);
+            parkingStatusView = itemView.findViewById(R.id.pi_status);
         }
     }
 }
