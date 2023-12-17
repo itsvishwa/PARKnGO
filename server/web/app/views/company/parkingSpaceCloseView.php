@@ -165,6 +165,15 @@
 
 
   <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceCloseCard.js"></script>
+  <script>
+    function cancel() {
+      if (
+        confirm('Are you sure you want to cancel? All the data will not be saved.')
+      ) {
+        window.location.href = '<?php echo URLROOT; ?>companys/parkingSpaceView';
+      }
+    }
+  </script>
 
 </body>
 
