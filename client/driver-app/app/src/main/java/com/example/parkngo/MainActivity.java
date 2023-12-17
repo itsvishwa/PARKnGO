@@ -92,10 +92,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     // replace main frame layout by given fragment
-    private void replaceFragment(Fragment f){
+    public void replaceFragment(Fragment f){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout_main_act, f);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceFragment(Fragment fragment, Bundle data) {
+        fragment.setArguments(data); // Set the data as arguments for the fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.framelayout_main_act, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

@@ -97,7 +97,7 @@
             <!--        parking space image here -->
             <com.google.android.material.imageview.ShapeableImageView
                 app:shapeAppearanceOverlay="@style/radius_6"
-                android:id="@+id/imageView3"
+                android:id="@+id/parking_Selected_frag_image"
                 android:layout_width="match_parent"
                 android:layout_height="173dp"
                 android:scaleType="centerCrop"
@@ -116,11 +116,11 @@
                 android:background="@drawable/radius_6_with_outline"
                 android:padding="17dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3">
+                app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_image">
 
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/parking_Selected_frag_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CMC CAR PARK"
@@ -132,7 +132,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/parking_Selected_frag_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -140,66 +140,34 @@
                     android:textColor="@color/textSecondary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_name" />
 
-                <LinearLayout
-                    android:id="@+id/star_layout"
-                    android:layout_width="90dp"
+                <RatingBar
+                    android:id="@+id/parking_Selected_frag_star_rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="4dp"
+                    android:progressTint="@color/primaryColor"
+                    android:rating="3"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14">
-
-                    <ImageView
-                        android:id="@+id/star1_parking_item"
-                        android:layout_width="0dp"
-                        android:layout_height="18dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/baseline_star_24" />
-
-                    <ImageView
-                        android:id="@+id/star2_parking_item"
-                        android:layout_width="0dp"
-                        android:layout_height="18dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/baseline_star_24" />
-
-                    <ImageView
-                        android:id="@+id/star3_parking_item"
-                        android:layout_width="0dp"
-                        android:layout_height="18dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/baseline_star_24" />
-
-                    <ImageView
-                        android:id="@+id/star4_parking_item"
-                        android:layout_width="0dp"
-                        android:layout_height="18dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/baseline_star_24" />
-
-                    <ImageView
-                        android:id="@+id/star5_parking_item"
-                        android:layout_width="0dp"
-                        android:layout_height="18dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/baseline_star_24" />
-                </LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_address" />
 
                 <TextView
-                    android:id="@+id/pi_noofreviews"
+                    android:id="@+id/parking_Selected_frag_review_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="11dp"
                     android:text="(00)"
                     android:textColor="@color/textSecondary"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/star_layout"
-                    app:layout_constraintStart_toEndOf="@+id/star_layout"
-                    app:layout_constraintTop_toTopOf="@+id/star_layout" />
+                    app:layout_constraintBottom_toBottomOf="@+id/parking_Selected_frag_star_rating"
+                    app:layout_constraintStart_toEndOf="@+id/parking_Selected_frag_star_rating"
+                    app:layout_constraintTop_toTopOf="@+id/parking_Selected_frag_star_rating" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/parking_selected_frag_is_public"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/radius_36_green"
@@ -212,24 +180,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/parking_Selected_frag_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Rs. 40/ 1H"
+                    android:background="@drawable/radius_36_green"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:layout_marginTop="11dp"
+                    android:text="Open"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="30 Parking Slots"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                    app:layout_constraintTop_toBottomOf="@+id/parking_selected_frag_is_public" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

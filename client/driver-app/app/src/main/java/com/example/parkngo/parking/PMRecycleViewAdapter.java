@@ -2,17 +2,19 @@ package com.example.parkngo.parking;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
     public PMRecycleViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.parking_item, parent, false);
-        return new PMRecycleViewAdapter.MyViewHolder(view);
+        return new PMRecycleViewAdapter.MyViewHolder(view, parkingModels, (MainActivity) context);
     }
 
     @Override
@@ -66,24 +68,60 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
         return parkingModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView parkingNameView;
-        TextView parkingTypeView;
-        TextView parkingAddressView;
-        TextView noOfReviewsView;
-        RatingBar ratingBarView;
+        private TextView parkingNameView;
+        private TextView parkingTypeView;
+        private TextView parkingAddressView;
+        private TextView noOfReviewsView;
+        private RatingBar ratingBarView;
+        private TextView parkingStatusView;
+        private ArrayList<ParkingModel> parkingModels; // Add a reference to parkingModels
+        private Context context;
 
-        TextView parkingStatusView;
+        private MainActivity mainActivity;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, ArrayList<ParkingModel> parkingModels, MainActivity mainActivity) {
             super(itemView);
+            this.parkingModels = parkingModels; // Assign parkingModels
             parkingNameView = itemView.findViewById(R.id.pi_name);
             parkingTypeView = itemView.findViewById(R.id.pi_type);
             parkingAddressView = itemView.findViewById(R.id.pi_address);
-            noOfReviewsView = itemView.findViewById(R.id.pi_noofreviews);
+            noOfReviewsView = itemView.findViewById(R.id.parking_Selected_frag_review_count);
             ratingBarView = itemView.findViewById(R.id.pi_ratingbar);
             parkingStatusView = itemView.findViewById(R.id.pi_status);
+
+            // Set the OnClickListener for the entire item view
+            itemView.setOnClickListener(this);
+
+            // Set the context
+            context = itemView.getContext();
+
+            this.mainActivity = mainActivity;
+        }
+
+        @Override
+        public void onClick(View view) {
+            // Get the position of the clicked item
+            int position = getAdapterPosition();
+
+            // Ensure the position is valid
+            if (position != RecyclerView.NO_POSITION) {
+                // Retrieve the ParkingModel associated with the clicked item
+                ParkingModel clickedItem = parkingModels.get(position);
+
+                // Get the ID from the ParkingModel
+                int _id = clickedItem.get_id();
+
+                // Create a Bundle to pass data to the fragment
+                Bundle data = new Bundle();
+                data.putInt("_id", _id);
+
+                // Show a toast message with the ID
+                Toast.makeText(context, "Item ID: " + _id, Toast.LENGTH_LONG).show();
+
+                mainActivity.replaceFragment(new ParkingSelectedFragment(), data);
+            }
         }
     }
 }

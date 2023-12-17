@@ -136,6 +136,7 @@
                 android:layout_height="wrap_content"
                 app:tint="#7D7D7D" />
             <TextView
+                android:id="@+id/profile_frag_name"
                 android:layout_weight="2"
                 android:text="Vishwa Sandaruwan"
                 android:textColor="#7D7D7D"
@@ -171,6 +172,7 @@
                 android:layout_height="wrap_content"
                 app:tint="#7D7D7D"/>
             <TextView
+                android:id="@+id/profile_frag_mobile_number"
                 android:layout_weight="2"
                 android:text="+94 71 1111 111"
                 android:textSize="18sp"
