@@ -3458,7 +3458,6 @@ int id ignore 0x7f090120
 int id ignoreRequest 0x7f090121
 int id image 0x7f090122
 int id imageView 0x7f090123
-int id imageView3 0x7f090124
 int id imageView4 0x7f090125
 int id imageView5 0x7f090126
 int id img_result_done 0x7f090127
@@ -3605,7 +3604,14 @@ int id parent 0x7f0901b3
 int id parentPanel 0x7f0901b4
 int id parentRelative 0x7f0901b5
 int id parent_matrix 0x7f0901b6
+int id parking_Selected_frag_address 0x7f0902c6
+int id parking_Selected_frag_image 0x7f0902c7
+int id parking_Selected_frag_name 0x7f0902c8
+int id parking_Selected_frag_review_count 0x7f0902c9
+int id parking_Selected_frag_star_rating 0x7f0902ca
+int id parking_Selected_frag_status 0x7f0902cb
 int id parking_frag_recycle_view 0x7f0901b7
+int id parking_selected_frag_is_public 0x7f0902cc
 int id password_toggle 0x7f0901b8
 int id path 0x7f0901b9
 int id pathRelative 0x7f0901ba
@@ -3623,7 +3629,6 @@ int id ph_webview 0x7f0901c5
 int id phn_number_title 0x7f0901c6
 int id pi_address 0x7f0902c2
 int id pi_name 0x7f0901c8
-int id pi_noofreviews 0x7f0901c9
 int id pi_ratingbar 0x7f0901cb
 int id pi_status 0x7f0902c3
 int id pi_type 0x7f0901cc
@@ -3631,6 +3636,8 @@ int id pin 0x7f0901cd
 int id position 0x7f0901ce
 int id postLayout 0x7f0901cf
 int id pressed 0x7f0901d0
+int id profile_frag_mobile_number 0x7f0902c4
+int id profile_frag_name 0x7f0902c5
 int id progressBar 0x7f0901d1
 int id progressBar2 0x7f0902c1
 int id progress_circular 0x7f0901d2
@@ -3739,12 +3746,6 @@ int id src_atop 0x7f090238
 int id src_in 0x7f090239
 int id src_over 0x7f09023a
 int id standard 0x7f09023b
-int id star1_parking_item 0x7f09023c
-int id star2_parking_item 0x7f09023d
-int id star3_parking_item 0x7f09023e
-int id star4_parking_item 0x7f09023f
-int id star5_parking_item 0x7f090240
-int id star_layout 0x7f090241
 int id start 0x7f090242
 int id startHorizontal 0x7f090243
 int id startToEnd 0x7f090244
@@ -3782,11 +3783,6 @@ int id textView 0x7f090263
 int id textView10 0x7f090264
 int id textView11 0x7f090265
 int id textView12 0x7f090266
-int id textView13 0x7f090267
-int id textView14 0x7f090268
-int id textView16 0x7f090269
-int id textView17 0x7f09026a
-int id textView18 0x7f09026b
 int id textView19 0x7f09026c
 int id textView2 0x7f09026d
 int id textView20 0x7f09026e

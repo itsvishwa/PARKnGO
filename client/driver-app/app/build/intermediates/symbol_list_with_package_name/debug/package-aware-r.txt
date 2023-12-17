@@ -3459,7 +3459,6 @@ id ignore
 id ignoreRequest
 id image
 id imageView
-id imageView3
 id imageView4
 id imageView5
 id img_result_done
@@ -3606,7 +3605,14 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id parking_Selected_frag_address
+id parking_Selected_frag_image
+id parking_Selected_frag_name
+id parking_Selected_frag_review_count
+id parking_Selected_frag_star_rating
+id parking_Selected_frag_status
 id parking_frag_recycle_view
+id parking_selected_frag_is_public
 id password_toggle
 id path
 id pathRelative
@@ -3624,7 +3630,6 @@ id ph_webview
 id phn_number_title
 id pi_address
 id pi_name
-id pi_noofreviews
 id pi_ratingbar
 id pi_status
 id pi_type
@@ -3632,6 +3637,8 @@ id pin
 id position
 id postLayout
 id pressed
+id profile_frag_mobile_number
+id profile_frag_name
 id progressBar
 id progressBar2
 id progress_circular
@@ -3740,12 +3747,6 @@ id src_atop
 id src_in
 id src_over
 id standard
-id star1_parking_item
-id star2_parking_item
-id star3_parking_item
-id star4_parking_item
-id star5_parking_item
-id star_layout
 id start
 id startHorizontal
 id startToEnd
@@ -3783,11 +3784,6 @@ id textView
 id textView10
 id textView11
 id textView12
-id textView13
-id textView14
-id textView16
-id textView17
-id textView18
 id textView19
 id textView2
 id textView20

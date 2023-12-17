@@ -115,7 +115,8 @@ class ParkingSpace extends Controller
                     "total_review_count" => $parking_space_data->total_review_count,
                     "slot_status" => null,
                     "reviews" => null,
-                    "user_own_reviews" => null
+                    "user_own_reviews" => null,
+                    "image" => base64_encode($parking_space_data->image)
                 ];
 
                 $new_parking_slot_data = [];

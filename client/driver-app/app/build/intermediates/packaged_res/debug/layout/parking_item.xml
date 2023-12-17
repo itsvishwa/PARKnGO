@@ -9,7 +9,6 @@
     android:layout_marginBottom="10dp"
     android:clickable="true"
     android:focusable="true"
-    android:onClick="parking_space_frag_parking_space_item_handler"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -70,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pi_type" />
 
     <TextView
-        android:id="@+id/pi_noofreviews"
+        android:id="@+id/parking_Selected_frag_review_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="11dp"
