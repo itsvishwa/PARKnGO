@@ -18,11 +18,6 @@ public class AvailableParkingSpacesFragment extends Fragment {
 
 
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModels = new ArrayList<>(); // will hold all the models
-
-    public AvailableParkingSpacesFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         // start............................................................................................................
         // Display the message here
         InitRequest req = new InitRequest();
-        req.setMerchantId("");       // Merchant ID
+        req.setMerchantId("1224851");       // Merchant ID
         req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
         req.setAmount(250);             // Final Amount to be charged
         req.setOrderId("13265");        // Unique Reference ID

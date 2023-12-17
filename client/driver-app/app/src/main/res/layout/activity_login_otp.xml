@@ -218,14 +218,17 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Resend (59 s)"
+                android:layout_marginStart="15dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="login_otp_act_resend_btn"
+                android:text="Resend OTP Code"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintTop_toTopOf="@+id/textView5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -235,7 +238,6 @@
             android:layout_weight="2"
             android:paddingHorizontal="24dp"
             >
-
             <Button
                 android:id="@+id/login_otp_act_login_btn"
                 style="@style/loginSignupBtnStyle"

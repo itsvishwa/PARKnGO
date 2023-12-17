@@ -41,6 +41,10 @@ public class LoginOtpActivity extends AppCompatActivity {
 
     }
 
+
+    // send the user entered OTP to server and get the response
+    // if succeed redirect to main activity
+    // otherwise state the error
     public void login_otp_act_login_btn_handler(View view) {
         // getting user data
         EditText optDigit1View = findViewById(R.id.login_act_otp_digit_1);
@@ -92,7 +96,7 @@ public class LoginOtpActivity extends AppCompatActivity {
                             ParkngoStorage parkngoStorage = new ParkngoStorage(LoginOtpActivity.this);
                             parkngoStorage.addData(dataArr);
 
-                            Toast.makeText(LoginOtpActivity.this, firstName, Toast.LENGTH_LONG).show();
+                            // redirect to main page
                             Intent i = new Intent(LoginOtpActivity.this, MainActivity.class);
                             startActivity(i);
                         } catch (JSONException e) {
@@ -121,6 +125,49 @@ public class LoginOtpActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+
+    // resend btn handler
+    // request the server to send the OTP again
+    public void login_otp_act_resend_btn(View view){
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/user/send_otp/"  + mobileNumber;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String responseData = jsonObject.getString("response");
+                            Toast.makeText(LoginOtpActivity.this, responseData, Toast.LENGTH_LONG).show();
+                        }catch (JSONException e){
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String errorResponse;
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            errorResponse = new String(error.networkResponse.data);
+                            try {
+                                JSONObject jsonObject = new JSONObject(errorResponse);
+                                String response = jsonObject.getString("response");
+                                Toast.makeText(LoginOtpActivity.this, response, Toast.LENGTH_LONG).show(); // print the error
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+        );
+        queue.add(stringRequest);
+    }
+
 
     public void login_otp_act_back_btn_handler(View v){
         Intent i = new Intent(this, LoginMobileNumberActivity.class);
