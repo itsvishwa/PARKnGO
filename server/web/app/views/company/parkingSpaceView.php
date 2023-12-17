@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/dashboardView.css" />
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/parkingSpaceView.css" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/reviewPopup.css" />
   <title>Parking Spaces</title>
 </head>
 
@@ -181,21 +182,141 @@
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
                         <path fill-rule="evenodd" d="M6.72 5.66l11.62 11.62A8.25 8.25 0 006.72 5.66zm10.56 12.68L5.66 6.72a8.25 8.25 0 0011.62 11.62zM5.105 5.106c3.807-3.808 9.98-3.808 13.788 0 3.808 3.807 3.808 9.98 0 13.788-3.807 3.808-9.98 3.808-13.788 0-3.808-3.807-3.808-9.98 0-13.788z" clip-rule="evenodd" />
                       </svg>
-                      Close Temporarily
+                      Close
                     </div>
                   </a>
+                  <a class="text-decoration-none text-black review-btn" data-parking-id="<?php echo $parking->parking_id ?>">
+                    <div class="btn ">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-blue">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                      </svg>
+                      Reviews
+                    </div>
+                  </a>
+
                 </div>
 
 
 
               </div>
             </div>
+
           <?php endforeach; ?>
+          <div id="popupContainer" class="popup-container">
+
+            <div class="popup-content">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="close text-red" id="closePopup" width="30px">
+                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
+              </svg>
+              <h1 class="popup-parking-name"></h1>
+              <h2 class="popup-parking-address"></h2>
+              <div class="content-body">
+
+              </div>
+              <!-- Add your review form or content here -->
+            </div>
+          </div>
         </div>
 
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Get all elements with the class 'review-btn'
+      const reviewButtons = document.querySelectorAll('.review-btn');
+      const closePopupButton = document.getElementById('closePopup');
+      const popupContainer = document.getElementById('popupContainer');
+      const popupContent = document.querySelector('.popup-content');
+      const popupContentBody = document.querySelector('.content-body');
+      const parkingName = document.querySelector('.popup-parking-name');
+      const parkingAddress = document.querySelector('.popup-parking-address');
+      const reviewsData = <?php echo json_encode($data['reviews']); ?>; // Assuming $data['reviews'] is a PHP variable containing the reviews data
+
+      // Add event listener to each review button
+      reviewButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          // Get the parking_id from the data attribute
+          const parkingId = this.getAttribute('data-parking-id');
+
+          // Filter reviews based on parkingId
+          const filteredReviews = reviewsData.filter(review => review.parking_id == parkingId);
+
+          function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const emptyStars = 5 - fullStars;
+
+            const stars = Array(fullStars).fill(`
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary" width="30px">
+                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+              </svg>
+            `);
+
+            stars.push(...Array(emptyStars).fill(`
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-light-gray" width="30px">
+                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+              </svg>
+            `));
+
+            return stars.join('');
+          }
+
+          parkingName.innerHTML = '';
+          parkingName.innerHTML = `${filteredReviews[0].parking_name}`;
+
+          parkingAddress.innerHTML = '';
+          parkingAddress.innerHTML = `${filteredReviews[0].parking_address}`;
+
+          // Clear the popup content body
+          popupContentBody.innerHTML = '';
+
+
+          // Create cards for each review and append them to the popup
+          filteredReviews.forEach(review => {
+            const card = document.createElement('div');
+            card.classList.add('review-card');
+
+            const starsSVG = generateStars(review.no_of_stars);
+            // Customize the card content based on your review structure
+            card.innerHTML = `
+            <div class="review-head">
+              <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
+              <p>${review.time_stamp}</p>
+            </div>
+            <div class="review-body">
+              ${review.content}
+            </div>
+            <div class="stars-container">
+              ${starsSVG}
+            </div>
+          `;
+
+            // Append the card to the popup
+            popupContentBody.appendChild(card);
+          });
+
+          // Show the popup
+          popupContainer.style.display = 'block';
+        });
+      });
+
+      closePopupButton.addEventListener('click', function() {
+        popupContainer.style.display = 'none';
+      });
+
+      // Close the popup if the user clicks outside the content
+      window.addEventListener('click', function(event) {
+        if (event.target === popupContainer) {
+          popupContainer.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+
+
+
 </body>
 
 </html>

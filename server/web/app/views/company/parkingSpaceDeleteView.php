@@ -76,9 +76,7 @@
       </div>
 
       <div class="center">
-        <div class="parking-space-card <?php if ($data['parking_space']->parking_is_closed) {
-                                          echo 'closed';
-                                        } ?>">
+        <div class="parking-space-card">
           <div class="parking-card-header">
             <div class="parking-name">
               <h3 class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_name); ?></h3>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="30" />
+  <meta http-equiv="refresh" content="15" />
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -86,13 +86,13 @@
           <h4>Business Analysis</h4>
         </div>
         <div class="card-section">
-          <div class="b-card bg-light-green">
-            <div class="b-card-icon bg-green">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-white">
+          <div class="b-card bg-dark-gray">
+            <div class="b-card-icon bg-light-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <div class="b-card-content text-green">
+            <div class="b-card-content text-light-yellow">
               <h3>Rs: <?php if ($data['monthlyEarned'] != 0) {
                         echo $data['monthlyEarned'];
                       } else {
@@ -101,24 +101,24 @@
               <p>Earned this month</p>
             </div>
           </div>
-          <div class="b-card bg-white">
-            <div class="b-card-icon bg-secondary">
-              <span class="material-symbols-outlined menu-logo">
+          <div class="b-card bg-dark-gray">
+            <div class="b-card-icon bg-light-gray">
+              <span class="material-symbols-outlined menu-logo text-light-yellow">
                 group
               </span>
             </div>
-            <div class="b-card-content text-black">
+            <div class="b-card-content text-light-yellow">
               <h3><?php echo $data['numberOfUsers'] ?></h3>
               <p>Monthly Users</p>
             </div>
           </div>
-          <div class="b-card bg-light-green">
-            <div class="b-card-icon bg-green">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-white">
+          <div class="b-card bg-dark-gray">
+            <div class="b-card-icon bg-light-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <div class="b-card-content text-green">
+            <div class="b-card-content text-light-yellow">
               <h3>Rs: <?php if ($data['todayEarned'] != 0) {
                         echo $data['todayEarned'];
                       } else {
@@ -129,186 +129,177 @@
           </div>
         </div>
       </div>
-      <div class="dashboard-main-section">
-        <div class="update-section">
-          <div class="table-heading">
-            <div class="heading">
-              <span class="material-symbols-outlined menu-icon ">
-                update
-              </span>
-              <h4>Latest Updates</h4>
-            </div>
-            <a href="./updateView" class="see-more">
-              See more
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </a>
-          </div>
-          <div class="table-div">
-            <table id="updatesTable" class="table">
-              <tr class="tr-h">
-                <th class="th">Number Plate</th>
-                <th class="th">Arrived at</th>
-                <th class="th">Parked Hours</th>
-                <th class="th">Total Price</th>
-                <th class="th">Paid By</th>
-              </tr>
-              <tbody>
-                <?php
-                // Assuming $updates is an array of data similar to the JavaScript updates array
-                foreach ($data['latestUpdates'] as $row) {
-                  echo '<tr>';
-                  echo '<td>' . htmlspecialchars($row->vehicle_number) . '</td>';
-                  echo '<td>' . htmlspecialchars($row->start_time) . '</td>';
-                  echo '<td>' . htmlspecialchars($row->end_time) . '</td>';
-                  echo '<td>' . "Rs " . htmlspecialchars($row->amount) . '</td>';
-                  echo '<td>' . htmlspecialchars($row->payment_method) . '</td>';
-                  echo '</tr>';
-                }
-                ?>
-              </tbody>
-            </table>
-          </div>
-
+      <div class="section-one">
+        <div class="section-one-left bar-graph mt--30">
+          <canvas id="parkingSessions"></canvas>
         </div>
-        <div class="officer-section">
-          <div class="table-heading">
-            <div class="heading">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-              </svg>
-
-              <h4>Parking Officer</h4>
-            </div>
-            <a href="./parkingOfficerView" class="see-more">
-              See more
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </a>
-          </div>
-          <div class="table-div">
-            <table id="officersTable" class="table">
-              <thead>
-                <tr class="tr-h">
-                  <th class="th">Name</th>
-                  <th class="th">Parking</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                // Assuming $updates is an array of data similar to the JavaScript updates array
-                foreach ($data['parkingOfficers'] as $row) {
-                  echo '<tr>';
-                  echo '<td>' . htmlspecialchars($row->officer_name) . '</td>';
-                  echo '<td>' . htmlspecialchars($row->parking_details) . '</td>';
-                  echo '</tr>';
-                }
-                ?>
-              </tbody>
-            </table>
-          </div>
+        <div class="section-one-right pie-chart mt--30">
+          <canvas id="myPieChart"></canvas>
         </div>
+
       </div>
-      <div class="parking-space-section">
-        <div class="table-heading parking-header">
-          <div class="heading">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-            </svg>
-
-            <h4>Parking Spaces</h4>
-          </div>
-          <a href="./parkingSpaceView" class="see-more">
-            See more
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </a>
+      <div class="section-two">
+        <div class="section-two-left bar-graph">
+          <canvas id="revenue"></canvas>
         </div>
-        <div id="parkingCards" class="parking-cards">
-          <?php foreach ($data['parking_spaces'] as $parking) : ?>
-            <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
-                                            if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
-                                              echo "closed";
-                                            } ?>">
-              <div class="parking-card-header">
-                <div class="parking-name">
-                  <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
-                  <?php $currentUnixTime = time() + 16200;
-                  if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
-                    echo '<p class="parking-type bg-red text-white">Closed</p>';
-                  } else {
-                    echo "";
-                  } ?>
-
-                </div>
-
-                <p class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_address) ?></p>
-              </div>
-              <div class="parking-card-body">
-                <div class="parking-card-info">
-                  <p>Total Slots: <span class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_total_slots) ?></span></p>
-
-                  <?php if ($parking->parking_is_public) {
-                    echo '<p class="parking-type bg-green text-white">Public</p>';
-                  } else {
-                    echo '<p class="parking-type bg-green text-white">Private</p>';
-                  } ?>
-
-                </div>
-                <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?php if ($parking->officer_first_name != "") {
-                                                                                              echo htmlspecialchars($parking->officer_first_name . ' ' . $parking->officer_last_name);
-                                                                                            } else {
-                                                                                              echo "Not Assigned";
-                                                                                            } ?></span></p>
-
-                <table>
-                  <thead>
-                    <th>Type</th>
-                    <th>Free Slots</th>
-                    <th>Total Slots</th>
-                    <th>Rate</th>
-                  </thead>
-                  <tbody>
-
-                    <?php foreach ($data['parking_spaces_status'] as $parking_status) : ?>
-                      <tr>
-                        <?php if ($parking_status->parking_space_id == $parking->parking_id) {
-
-                          echo '<td>';
-                          echo htmlspecialchars($parking_status->vehicle_type);
-                          echo '</td>';
-                          echo '<td>';
-                          echo htmlspecialchars($parking_status->each_type_free_slots);
-                          echo '</td>';
-                          echo '<td>';
-                          echo htmlspecialchars($parking_status->each_type_total_slots);
-                          echo '</td>';
-                          echo '<td>';
-                          echo htmlspecialchars($parking_status->each_type_rate);
-                          echo '</td>';
-                        }
-
-                        ?>
-                      </tr>
-                    <?php endforeach; ?>
-
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-
-
       </div>
     </div>
   </div>
+  </div>
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fetch data for the last 30 days (replace with your actual data fetching logic)
+      const data = generateRandomData(30);
+
+      // Create a bar chart
+      const ctx = document.getElementById('parkingSessions').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.dates,
+          datasets: [{
+            label: 'Number of Parking Sessions Last 30 Days',
+            data: data.values,
+            backgroundColor: '#363636',
+            borderColor: '#363636',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // Function to generate random data (replace with your actual data fetching logic)
+      function generateRandomData(days) {
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - days + 1);
+
+        const dates = [];
+        const values = [];
+
+        for (let i = 0; i < days; i++) {
+          const date = new Date(startDate);
+          date.setDate(startDate.getDate() + i);
+
+          // Format the date to show only the day
+          const formattedDate = date.getDate();
+          dates.push(formattedDate);
+
+          // Generate random values for demonstration purposes
+          values.push(Math.floor(Math.random() * 100));
+        }
+
+        return {
+          dates,
+          values
+        };
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fetch data for the last 30 days (replace with your actual data fetching logic)
+      const data = generateRandomData(30);
+
+      // Create a bar chart
+      const ctx = document.getElementById('revenue').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: data.dates,
+          datasets: [{
+            label: 'Revenue from Parking Spaces Last 30 Days',
+            data: data.values,
+            backgroundColor: '#363636',
+            borderColor: '#363636',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // Function to generate random data (replace with your actual data fetching logic)
+      function generateRandomData(days) {
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - days + 1);
+
+        const dates = [];
+        const values = [];
+
+        for (let i = 0; i < days; i++) {
+          const date = new Date(startDate);
+          date.setDate(startDate.getDate() + i);
+
+          // Format the date to show only the day
+          const formattedDate = date.getDate();
+          dates.push(formattedDate);
+
+          // Generate random values for demonstration purposes
+          values.push(Math.floor(Math.random() * 100));
+        }
+
+        return {
+          dates,
+          values
+        };
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fetch data for the pie chart (replace with your actual data fetching logic)
+      const data = generateRandomData();
+
+      // Create a pie chart
+      const ctx = document.getElementById('myPieChart').getContext('2d');
+      const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: data.labels,
+          datasets: [{
+            data: data.values,
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#4CAF50',
+              '#9C27B0',
+              '#FF9800',
+              '#795548'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+
+      // Function to generate random data (replace with your actual data fetching logic)
+      function generateRandomData() {
+        const labels = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
+        const values = labels.map(() => Math.floor(Math.random() * 100));
+        return {
+          labels,
+          values
+        };
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>
