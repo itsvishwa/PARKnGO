@@ -14,7 +14,9 @@
         }
 
         public function start() { 
+
             $token_data = $this->verify_token_for_officers();
+            
             if ($token_data === 400) {
                 $this->send_json_400("Invalid Token");
             } elseif ($token_data === 404) {
