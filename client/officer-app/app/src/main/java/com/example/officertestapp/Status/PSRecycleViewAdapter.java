@@ -37,18 +37,17 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
     // bind values to the views in item
     @Override
     public void onBindViewHolder(@NonNull PSRecycleViewAdapter.MyViewHolder holder, int position) {
-        holder.parkingIDView.setText(parkingStatusModels.get(position).getParkingID());
-        holder.parkingStatusView.setText(parkingStatusModels.get(position).getParkingStatus());
         holder.vehicleNumberView.setText(parkingStatusModels.get(position).getVehicleNumber());
+        holder.vehicleTypeView.setText(parkingStatusModels.get(position).getVehicleType());
+        holder.dateTimeView.setText(parkingStatusModels.get(position).getDateTime());
+        holder.parkingStatusView.setText(parkingStatusModels.get(position).getParkingStatus());
 
-        if(parkingStatusModels.get(position).getParkingStatus() == "Filled"){
+
+        if(parkingStatusModels.get(position).getParkingStatus() == "Payment Due"){
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.red_rounded_bg);
             holder.parkingStatusView.setBackground(drawable);
-        } else if (parkingStatusModels.get(position).getParkingStatus() == "Payment Due") {
+        } else if (parkingStatusModels.get(position).getParkingStatus() == "In Progress") {
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.yellow_rounded_bg);
-            holder.parkingStatusView.setBackground(drawable);
-        }else{
-            Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.green_rounded_bg);
             holder.parkingStatusView.setBackground(drawable);
         }
     }
@@ -62,15 +61,17 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
     // hold view of the layout (item)
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView parkingIDView;
-        TextView parkingStatusView;
         TextView vehicleNumberView;
+        TextView vehicleTypeView;
+        TextView dateTimeView;
+        TextView parkingStatusView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            parkingIDView = itemView.findViewById(R.id.ps_parking_id);
-            parkingStatusView = itemView.findViewById(R.id.ps_status);
             vehicleNumberView = itemView.findViewById(R.id.ps_vehicle_number);
+            vehicleTypeView = itemView.findViewById(R.id.ps_vehicle_type);
+            dateTimeView = itemView.findViewById(R.id.ps_date_time);
+            parkingStatusView = itemView.findViewById(R.id.ps_status);
         }
     }
 }

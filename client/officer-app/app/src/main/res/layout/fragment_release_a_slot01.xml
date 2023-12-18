@@ -180,70 +180,31 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout9"
-                android:layout_width="136dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Parking Slot"
-                    android:textSize="17dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/vehicle_details_input_feild_bg"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9">
-
-                    <Spinner
-                        android:id="@+id/spinner_slots"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <Button
                 android:id="@+id/button3"
-                android:layout_width="128dp"
+                android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_marginStart="64dp"
+                android:layout_marginTop="20dp"
                 android:drawableRight="@drawable/baseline_search_24"
                 android:drawableTint="@color/white"
                 android:onClick="release_vehicle_01_search_btn_handler"
                 android:text="Search"
-                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout9"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout9"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout9"
-                app:layout_constraintVertical_bias="0.488" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout8"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 app:layout_constraintEnd_toEndOf="@+id/button3"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/button3"
+                app:layout_constraintTop_toBottomOf="@+id/button3">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -259,7 +220,7 @@
                     android:layout_width="130dp"
                     android:layout_height="49dp"
                     android:layout_marginStart="137dp"
-                    android:background="#C2BCAE"
+                    android:background="@drawable/input_txt_background"
                     app:layout_constraintBottom_toBottomOf="@+id/textView11"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -281,7 +242,7 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="49dp"
-                    android:background="#C2BCAE"
+                    android:background="@drawable/input_txt_background"
                     android:inputType="time"
                     android:textSize="15dp"
                     app:layout_constraintBottom_toBottomOf="@+id/duration_txt"
@@ -311,8 +272,8 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="49dp"
-                    android:background="#C2BCAE"
                     android:textSize="15dp"
+                    android:background="@drawable/input_txt_background"
                     app:layout_constraintBottom_toBottomOf="@+id/amount_txt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/amount_txt" />
