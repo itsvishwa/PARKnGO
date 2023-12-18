@@ -172,10 +172,9 @@ class Controller
                 if (isset($_SERVER['HTTP_TOKEN'])) // token recieved from the request
                 {
                         $token = $_SERVER['HTTP_TOKEN'];
-                        
-                        $token_data =  $this->decode_token($token);
-                        //print_r ($token_data);
 
+                        $token_data =  $this->decode_token($token);
+                        
                         if ($this->is_token_key_valid($token_data)) // token has valid keys
                         {
 
