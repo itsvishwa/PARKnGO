@@ -12,12 +12,14 @@
 
         public function __construct() {
             
+            //print_r($this->getURL());
             $url = $this->getURL();
 
             // Look in controllers for first value
             if (isset($url[0]) && file_exists('./controllers/' . ucwords($url[0]) . '.php')) {
                 // If exists, set as controller
                 $this->currentController = ucwords($url[0]);
+
                 // Unset 0 Index
                 unset($url[0]);
             }
@@ -42,18 +44,19 @@
             // Get params
             $this->params = $url ? array_values($url) : [];
 
-            // Call a callback with array of params
+            // Call method and pass the parameter list
             call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
         }
 
-        // http://localhost/parkngo/server/mobile/test
+        
+        // http://localhost/parkngo/server/mobile/controller/method/params
         public function getURL() {
             if(isset($_GET["url"])) {
                 $url = rtrim($_GET["url"], "/");
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $url = explode("/", $url);
                 return $url; 
-            } 
+            }  
         }
     }
 
