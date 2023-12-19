@@ -335,13 +335,11 @@
           datasets: [{
             data: data.values,
             backgroundColor: [
-              '#FF6384',
-              '#36A2EB',
-              '#FFCE56',
-              '#4CAF50',
-              '#9C27B0',
-              '#FF9800',
-              '#795548'
+              '#cb99c9',
+              '#77dd77',
+              '#fdfd96',
+              '#ffb347',
+              '#ff6961'
             ]
           }]
         },
@@ -353,8 +351,10 @@
 
       // Function to generate random data (replace with your actual data fetching logic)
       function generateRandomData() {
-        const labels = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5', 'Category 6', 'Category 7'];
-        const values = labels.map(() => Math.floor(Math.random() * 100));
+        const data = <?php echo json_encode($data['activities']); ?>;
+
+        const labels = data.map(officer => officer.first_name + ' ' + officer.last_name);
+        const values = data.map(officer => officer.no_of_activities);
         return {
           labels,
           values

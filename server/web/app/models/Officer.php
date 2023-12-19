@@ -250,4 +250,29 @@ ORDER BY
     $row = $this->db->resultSet();
     return $row;
   }
+
+  public function getOfficerActivitiesCount($company_id)
+  {
+    $this->db->query("SELECT 
+    po._id AS officer_id,
+    po.first_name,
+    po.last_name,
+    COUNT(oa._id) AS no_of_activities
+FROM 
+    officer_activity AS oa
+LEFT JOIN 
+    parking_officer AS po ON oa.officer_id = po._id
+WHERE 
+    DATE(FROM_UNIXTIME(oa.time_stamp)) = CURDATE() AND po.company_id = :company_id
+GROUP BY 
+    po._id, po.first_name, po.last_name
+ORDER BY 
+    no_of_activities DESC
+LIMIT 5;
+
+");
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
 }
