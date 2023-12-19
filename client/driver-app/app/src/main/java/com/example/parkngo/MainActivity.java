@@ -201,9 +201,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     // add a review
-    public void parking_selected_frag_add_review_btn_handler(View view){
-        replaceFragment(new AddReviewFragment());
-    }
+//    public void parking_selected_frag_add_review_btn_handler(View view){
+//        replaceFragment(new AddReviewFragment());
+//    }
 
 
     // scan qr

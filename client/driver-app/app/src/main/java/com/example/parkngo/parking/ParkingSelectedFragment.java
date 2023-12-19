@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
 import com.example.parkngo.login.LoginOtpActivity;
@@ -55,6 +56,22 @@ public class ParkingSelectedFragment extends Fragment {
         // Inflate the layout for this fragment
         parkingSelectedView =  inflater.inflate(R.layout.fragment_parking_selected, container, false);
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
+
+        //set write review btn handler
+        Button addReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
+        addReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a Bundle to pass data to the fragment
+                Bundle data = new Bundle();
+                data.putInt("_id", _id);
+
+
+                MainActivity mainActivity = (MainActivity)requireContext();
+                mainActivity.replaceFragment(new AddReviewFragment(), data);
+            }
+        }
+        );
 
         ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
         token = parkngoStorage.getData("token");
