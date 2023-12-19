@@ -24,6 +24,8 @@ class Database
     // Set DSN
     $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
     $options = array(
+      // PDO::MYSQL_ATTR_SSL_CA     => 'C:/certificate/DigiCertGlobalRootCA.crt.pem',
+
       PDO::ATTR_PERSISTENT => true, // Persistent connection
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION // Throw exceptions
     );

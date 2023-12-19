@@ -241,3 +241,76 @@ tr:nth-child(4n) {
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
+
+.section-two {
+  display: flex;
+}
+
+.section-two-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 59%;
+  background-color: #fff5e3;
+  padding: 10px 22px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.section-two-right {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: #fff5e3;
+  padding: 0px 2px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.review-heading {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px 20px 0px 20px;
+}
+
+.content-body {
+  padding: 0px 20px;
+}
+
+.dashboard-review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dashboard-driver-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.star-rating {
+  margin-top: 12px;
+}
+
+.review-parking-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.review-content {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.horizontal-line {
+  border: 0.5px solid #e7dbc7;
+  width: 100%;
+  margin-top: 10px;
+}
