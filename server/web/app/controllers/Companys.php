@@ -33,7 +33,11 @@ class Companys extends Controller
     $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
+    $reviews = $this->parkingSpaceModel->getLatestReviews($_SESSION['user_id']);
 
+    foreach ($reviews as &$review) {
+      $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
+    }
 
     $data = [
       'monthlyEarned' => $monthlyEarned,
@@ -43,6 +47,7 @@ class Companys extends Controller
       'parkingOfficers' => $parkingOfficers,
       'parking_spaces' => $parkingSpaces,
       'parking_spaces_status' => $parkingSpacesStatus,
+      'reviews' => $reviews,
     ];
 
     $this->view('company/dashboardView', $data);
