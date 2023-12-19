@@ -95,19 +95,21 @@
             android:paddingHorizontal="18dp">
 
             <!--        parking space image here -->
+
+            <!--        parking space details here-->
             <com.google.android.material.imageview.ShapeableImageView
-                app:shapeAppearanceOverlay="@style/radius_6"
                 android:id="@+id/parking_Selected_frag_image"
                 android:layout_width="match_parent"
                 android:layout_height="173dp"
+                android:layout_marginTop="44dp"
                 android:scaleType="centerCrop"
-                android:layout_marginTop="16dp"
                 android:src="@drawable/parking_space_sample"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.514"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/radius_6" />
 
-            <!--        parking space details here-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
@@ -197,62 +199,175 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--reviews here-->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="530dp"
                 android:layout_marginTop="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.971"
+                app:layout_constraintHorizontal_bias="0.542"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button12">
+                app:layout_constraintTop_toBottomOf="@+id/button12"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical"
+                        android:text="Reviews"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <Button
+                        android:id="@+id/parking_Selected_frag_add_review_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:onClick="parking_selected_frag_add_review_btn_handler"
+                        android:text="Write a Review"
+                        android:visibility="visible"
+                        app:cornerRadius="50dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_no_review_text" />
+
+                    <TextView
+                        android:id="@+id/parking_Selected_frag_no_review_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="You havn't made any review yet"
+                        android:textSize="16dp"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/parking_selected_frag_review_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/radius_6_primary_yellow"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingHorizontal="17dp"
+                        android:paddingVertical="15dp"
+                        android:visibility="invisible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+
+                        <TextView
+                            android:id="@+id/parking_Selected_frag_ri_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Vishwa Sandaruwan"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <RatingBar
+                            android:id="@+id/parking_Selected_frag_ri_rating_bar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:progressTint="@color/primaryColor"
+                            android:rating="3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_ri_name" />
+
+                        <TextView
+                            android:id="@+id/parking_Selected_frag_ri_msg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="13dp"
+                            android:text="Convenient and well-located parking space, though a bit tight for larger vehicles"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_ri_rating_bar" />
+
+                        <TextView
+                            android:id="@+id/parking_Selected_frag_ri_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2023/09/10"
+                            app:layout_constraintBottom_toBottomOf="@+id/parking_Selected_frag_ri_name"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/parking_Selected_frag_ri_name" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <Button
+                        android:id="@+id/parking_Selected_frag_edit_review_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:text="Edit Review"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/parking_selected_frag_review_layout" />
+
+                    <Button
+                        android:id="@+id/parking_Selected_frag_delete_review_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="21dp"
+                        android:visibility="invisible"
+                        android:text="Delete Review"
+                        app:layout_constraintBottom_toBottomOf="@+id/parking_Selected_frag_edit_review_btn"
+                        app:layout_constraintStart_toEndOf="@+id/parking_Selected_frag_edit_review_btn"
+                        app:layout_constraintTop_toTopOf="@+id/parking_Selected_frag_edit_review_btn" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center_vertical"
-                    android:text="Reviews"
-                    android:textSize="17sp"
+                    android:id="@+id/parking_selected_frag_no_others_review_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This parking space dosen't has any reviews yet !"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip4"
-                    style="@style/testChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:elevation="2dp"
-                    android:text="Only My Reviews"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-                <Button
-                    android:id="@+id/button"
-                    style="@style/Widget.MaterialComponents.Button.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="parking_selected_frag_add_review_btn_handler"
-                    android:text="Add A Review"
-
-                    app:cornerRadius="50dp"
-                    app:icon="@drawable/baseline_add_24"
-                    app:layout_constraintBottom_toBottomOf="@+id/chip4"
+                    android:visibility="visible"
+                    android:layout_marginTop="11dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chip4" />
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ps_frag_recycle_view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginTop="18dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="11dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chip4" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="374dp"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="11dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

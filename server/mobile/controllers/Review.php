@@ -5,11 +5,13 @@ class Review extends Controller
 
         private $review_model;
         private $driver_model;
+        private $parking_space_model;
 
         public function __construct()
         {
                 $this->review_model = $this->model("ReviewModel");
                 $this->driver_model = $this->model("DriverModel");
+                $this->parking_space_model = $this->model("ParkingSpaceModel");
         }
 
         // add a new review
@@ -40,8 +42,14 @@ class Review extends Controller
                                 $this->send_json_400("User has already a review on the parking space");
                         } else {
                                 $this->review_model->add_review($review_data);
+                                $total_star_count = $this->review_model->get_total_star_count($review_data["parking_id"]);
+                                $current_review_count = $this->parking_space_model->get_review_count($review_data["parking_id"]);
 
-                                $this->send_json_200("Review Added Successfully!");
+                                $new_review_count = intval($current_review_count + 1);
+                                $new_avg_star_count = intval($total_star_count / $new_review_count);
+
+                                $this->parking_space_model->update_review_details($new_avg_star_count, $new_review_count, $review_data["parking_id"]);
+                                $this->send_json_200("success");
                         }
                 }
         }

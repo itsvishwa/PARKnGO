@@ -3147,6 +3147,7 @@ drawable question
 drawable radius_11
 drawable radius_23_with_stroke
 drawable radius_36_green
+drawable radius_6_primary_yellow
 drawable radius_6_solid
 drawable radius_6_with_outline
 drawable radius_9_solid
@@ -3237,6 +3238,10 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_review_frag_add_review_btn
+id add_review_frag_content
+id add_review_frag_discard_btn
+id add_review_frag_rating_bar
 id adjust_height
 id adjust_width
 id alertTitle
@@ -3282,7 +3287,6 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
-id button
 id button10
 id button11
 id button12
@@ -3333,6 +3337,7 @@ id constraintLayout
 id constraintLayout10
 id constraintLayout11
 id constraintLayout12
+id constraintLayout13
 id constraintLayout2
 id constraintLayout3
 id constraintLayout4
@@ -3374,6 +3379,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id divider
 id done_txt
 id dragAnticlockwise
 id dragClockwise
@@ -3605,14 +3611,24 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id parking_Selected_frag_add_review_btn
 id parking_Selected_frag_address
+id parking_Selected_frag_delete_review_btn
+id parking_Selected_frag_edit_review_btn
 id parking_Selected_frag_image
 id parking_Selected_frag_name
+id parking_Selected_frag_no_review_text
 id parking_Selected_frag_review_count
+id parking_Selected_frag_ri_date
+id parking_Selected_frag_ri_msg
+id parking_Selected_frag_ri_name
+id parking_Selected_frag_ri_rating_bar
 id parking_Selected_frag_star_rating
 id parking_Selected_frag_status
 id parking_frag_recycle_view
 id parking_selected_frag_is_public
+id parking_selected_frag_no_others_review_text
+id parking_selected_frag_review_layout
 id password_toggle
 id path
 id pathRelative

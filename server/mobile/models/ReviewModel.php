@@ -1,5 +1,7 @@
 <?php
 
+use LDAP\Result;
+
 class ReviewModel
 {
 
@@ -125,6 +127,22 @@ class ReviewModel
                         return true;
                 } else {
                         return false;
+                }
+        }
+
+
+        // return the sum of all star count for a given parking id
+        public function get_total_star_count($parking_id)
+        {
+                $this->db->query("SELECT SUM(no_of_stars) AS total_star_count FROM review WHERE parking_id = :parking_id");
+                $this->db->bind(":parking_id", $parking_id);
+
+                $result = $this->db->single();
+
+                if ($result->total_star_count) {
+                        return $result->total_star_count;
+                } else {
+                        return 0;
                 }
         }
 }
