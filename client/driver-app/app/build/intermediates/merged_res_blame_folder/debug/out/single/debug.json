@@ -128,10 +128,6 @@
         "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_parking.xml"
     },
     {
-        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_add_review.xml.flat",
-        "source": "com.example.parkngo.app-main-35:/layout/fragment_add_review.xml"
-    },
-    {
         "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\ic_launcher_foreground.xml"
     },
@@ -154,6 +150,10 @@
     {
         "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_star_24.xml.flat",
         "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_star_24.xml"
+    },
+    {
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_parking_selected.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_parking_selected.xml"
     },
     {
         "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_round_red_circle.xml.flat",

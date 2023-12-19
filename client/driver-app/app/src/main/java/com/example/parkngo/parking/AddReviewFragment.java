@@ -3,6 +3,7 @@ package com.example.parkngo.parking;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
 
@@ -31,11 +33,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddReviewFragment extends Fragment {
+    int _id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_add_review, container, false);
+        // Retrieve data from arguments
+
+        if (getArguments() != null) {
+            _id = getArguments().getInt("_id", -1);
+        }
+        Toast.makeText(getContext(), "" + _id, Toast.LENGTH_SHORT).show();
 
         // getting references to the button
         Button  reviewAddBtn = view.findViewById(R.id.add_review_frag_add_review_btn);
@@ -66,11 +75,15 @@ public class AddReviewFragment extends Fragment {
                     RequestQueue queue = Volley.newRequestQueue(requireContext());
                     String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/review/add";
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     Toast.makeText(getContext(), "Review Added Successfully", Toast.LENGTH_SHORT).show();
+
+                                    // Navigate back to the previous fragment
+                                    FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                                    fragmentManager.popBackStack();
                                 }
                             },
                             new Response.ErrorListener() {
@@ -105,7 +118,7 @@ public class AddReviewFragment extends Fragment {
                             params.put("time_stamp", "" + unixTimestamp);
                             params.put("no_of_stars", "" + starCount);
                             params.put("content", content);
-                            params.put("parking_id", "" + 9);
+                            params.put("parking_id", "" + _id);
 
                             return params;
                         }

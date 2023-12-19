@@ -101,7 +101,7 @@
                 android:id="@+id/parking_Selected_frag_image"
                 android:layout_width="match_parent"
                 android:layout_height="173dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="11dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/parking_space_sample"
                 app:layout_constraintEnd_toEndOf="parent"
