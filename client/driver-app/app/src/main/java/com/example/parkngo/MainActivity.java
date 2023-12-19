@@ -225,8 +225,5 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, HeroActivity.class);
         startActivity(i);
     }
-
-
-    // card payment btn handler
 }
 

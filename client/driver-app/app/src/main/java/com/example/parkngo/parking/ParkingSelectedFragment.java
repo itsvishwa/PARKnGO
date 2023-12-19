@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -46,7 +48,6 @@ public class ParkingSelectedFragment extends Fragment {
     private int _id;
 
     private String token;
-//    ArrayList<ReviewModel> reviewModels = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,36 +63,12 @@ public class ParkingSelectedFragment extends Fragment {
         if (getArguments() != null) {
             _id = getArguments().getInt("_id", -1);
         }
-
-        // setup the model arraylist
-//        setupReviewModels();
-
-        // get a reference to the recycle view
-//        RecyclerView recyclerView = parkingSelectedView.findViewById(R.id.ps_frag_recycle_view);
-//
-//        RMRecycleViewAdapter adapter = new RMRecycleViewAdapter(reviewModels, getContext());
-//
-//        recyclerView.setAdapter(adapter);
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         // Perform data loading in the background
         fetchDataFromAPI();
 
         return loadingView;
     }
 
-
-//    public void setupReviewModels(){
-//        String[] names = {"Harry Potter", "Hermione Granger", "Ron Weasley", "Albus Dumbledore", "Severus Snape", "Luna Lovegood", "Nymphadora Tonks", "Sirius Black", "Remus Lupin", "Ginny Weasley"};
-//        int[] noOfStars = {4, 5, 3, 2, 4, 5, 3, 4, 4, 3};
-//        String[] msg = {"Oh, joy. Another parking adventure.", "Simply magical parking experience.", "Parking level: Weasley's flying car.", "Managed to park, but it was no magic.", "Parked with Snape's level of enthusiasm.", "Luna would approve of this parking space.", "Tonks would shape-shift into a better spot.", "Black-worthy parking spot.", "Lupin would find this parking howl-worthy.", "Ginny would hit this parking out of the park."};
-//        String[] dates = {"2023/09/10", "2023/09/11", "2023/09/12", "2023/09/13", "2023/09/14", "2023/09/15", "2023/09/16", "2023/09/17", "2023/09/18", "2023/09/19"};
-//
-//        for(int i=0; i< names.length; i++){
-//            reviewModels.add(new ReviewModel(names[i], noOfStars[i], msg[i], dates[i]));
-//        }
-//    }
 
     private void fetchDataFromAPI() {
         RequestQueue queue = Volley.newRequestQueue(requireContext());
@@ -154,7 +131,7 @@ public class ParkingSelectedFragment extends Fragment {
         RatingBar ratingBar = parkingSelectedView.findViewById(R.id.parking_Selected_frag_star_rating);
         TextView reviewCount = parkingSelectedView.findViewById(R.id.parking_Selected_frag_review_count);
 
-
+        // setting basic parking space details
         nameView.setText(jsonObject.getString("name"));
         addressView.setText(jsonObject.getString("address"));
         isPublicView.setText(jsonObject.getString("is_public").equals("1") ? "Public" : "Customer Only");
@@ -187,11 +164,72 @@ public class ParkingSelectedFragment extends Fragment {
         }
 
 
-//        // Inflate the parking fragment once data is loaded
-//        RecyclerView recyclerView = parkingView.findViewById(R.id.parking_frag_recycle_view);
-//        PMRecycleViewAdapter pmRecycleViewAdapter = new PMRecycleViewAdapter(parkingModels, requireContext());
-//        recyclerView.setAdapter(pmRecycleViewAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        // setting user own review details
+        JSONObject userOwnReview = jsonObject.getJSONObject("user_own_reviews");
+        Boolean isUserOwnReviewExist = userOwnReview.getString("availability").equals("N/A") ? false : true;
+
+        // getting views references
+        Button writeReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
+        Button editReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_edit_review_btn);
+        Button deleteReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_delete_review_btn);
+        ConstraintLayout reviewLayout = parkingSelectedView.findViewById(R.id.parking_selected_frag_review_layout);
+        TextView noReviewTextView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_no_review_text);
+
+        if(isUserOwnReviewExist){
+            writeReviewBtn.setVisibility(View.GONE);
+            noReviewTextView.setVisibility(View.GONE);
+            editReviewBtn.setVisibility(View.VISIBLE);
+            deleteReviewBtn.setVisibility(View.VISIBLE);
+            reviewLayout.setVisibility(View.VISIBLE);
+
+            // getting views references
+            TextView userNameView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_ri_name);
+            TextView userDateView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_ri_date);
+            TextView userContentView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_ri_msg);
+            RatingBar userRatingBar1 = parkingSelectedView.findViewById(R.id.parking_Selected_frag_ri_rating_bar);
+
+            userNameView.setText(userOwnReview.getString("name"));
+            userDateView.setText(userOwnReview.getString("time_stamp"));
+            userContentView.setText(userOwnReview.getString("content"));
+            userRatingBar1.setRating(Integer.parseInt(userOwnReview.getString("no_of_stars")));
+
+        }else{
+            writeReviewBtn.setVisibility(View.VISIBLE);
+            noReviewTextView.setVisibility(View.VISIBLE);
+            editReviewBtn.setVisibility(View.GONE);
+            deleteReviewBtn.setVisibility(View.GONE);
+            reviewLayout.setVisibility(View.GONE);
+        }
+
+        // setting other's review details
+        JSONObject reviewObject = jsonObject.getJSONObject("reviews");
+        Boolean isReviewExist = reviewObject.getString("availability").equals("N/A") ? false : true;
+        RecyclerView recyclerView = parkingSelectedView.findViewById(R.id.ps_frag_recycle_view);
+        TextView otherNoReviewView = parkingSelectedView.findViewById(R.id.parking_selected_frag_no_others_review_text);
+
+        if(isReviewExist){
+            recyclerView.setVisibility(View.VISIBLE);
+            otherNoReviewView.setVisibility(View.INVISIBLE);
+            ArrayList<ReviewModel> reviewModels = new ArrayList<>();
+            JSONArray reviewDataArr = reviewObject.getJSONArray("data");
+            for (int i = 0; i<reviewDataArr.length(); i++)
+            {
+                JSONObject reviewData = reviewDataArr.getJSONObject(i);
+                String name = reviewData.getString("name");
+                String timeStamp = reviewData.getString("time_stamp");
+                String content = reviewData.getString("content");
+                int no_of_stars = Integer.parseInt(reviewData.getString("no_of_stars"));
+
+                reviewModels.add(new ReviewModel(name, no_of_stars, content, timeStamp));
+            }
+
+            RMRecycleViewAdapter adapter = new RMRecycleViewAdapter(reviewModels, getContext());
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }else{
+            recyclerView.setVisibility(View.INVISIBLE);
+            otherNoReviewView.setVisibility(View.VISIBLE);
+        }
 
         // Replace the loading view with the parking view
         ViewGroup parent = (ViewGroup) loadingView.getParent();
@@ -206,6 +244,4 @@ public class ParkingSelectedFragment extends Fragment {
         // TODO:: Handle error response
         Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
     }
-
-
 }

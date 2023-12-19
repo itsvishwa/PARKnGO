@@ -136,27 +136,38 @@ class ParkingSpace extends Controller
 
                 if ($reviews_data === false) // no reviews yet
                 {
-                    $result["reviews"] = "N/A";
+                    $result["reviews"] = [
+                        "availability" => "N/A"
+                    ];
+                    $result["user_own_reviews"] = [
+                        "availability" => "N/A"
+                    ];
                 } else // reviews found
                 {
-                    $new_reviews_data = [];
-                    $new_user_review_data = "User hasn't written any reviews yet";
+                    $new_reviews_data = [
+                        "availability" => "AV",
+                        "data" => []
+                    ];
+                    $new_user_review_data = [
+                        "availability" => "N/A"
+                    ];
 
                     foreach ($reviews_data as $review_data) {
                         // add a review to the new assosiative array
                         if ($review_data->driver_id === $token_data["user_id"]) // user's review
                         {
                             $new_user_review_data = [
+                                "availability" => "AV",
                                 "_id" => $review_data->_id,
                                 "name" => $review_data->first_name . " " . $review_data->last_name,
-                                "time_stamp" => $review_data->time_stamp,
+                                "time_stamp" => date("h:i A | d/m/y", $review_data->time_stamp),
                                 "no_of_stars" => $review_data->no_of_stars,
                                 "content" => $review_data->content,
                             ];
                         } else {
-                            $new_reviews_data[] = [
+                            $new_reviews_data["data"][] = [
                                 "name" => $review_data->first_name . " " . $review_data->last_name,
-                                "time_stamp" => $review_data->time_stamp,
+                                "time_stamp" => date("h:i A | d/m/y", $review_data->time_stamp),
                                 "no_of_stars" => $review_data->no_of_stars,
                                 "content" => $review_data->content,
                             ];

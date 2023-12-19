@@ -3146,6 +3146,7 @@ int drawable question 0x7f07011e
 int drawable radius_11 0x7f07011f
 int drawable radius_23_with_stroke 0x7f070120
 int drawable radius_36_green 0x7f070121
+int drawable radius_6_primary_yellow 0x7f070133
 int drawable radius_6_solid 0x7f070122
 int drawable radius_6_with_outline 0x7f070123
 int drawable radius_9_solid 0x7f070124
@@ -3236,6 +3237,10 @@ int id action_text 0x7f090043
 int id actions 0x7f090044
 int id activity_chooser_view_content 0x7f090045
 int id add 0x7f090046
+int id add_review_frag_add_review_btn 0x7f0902d9
+int id add_review_frag_content 0x7f0902da
+int id add_review_frag_discard_btn 0x7f0902db
+int id add_review_frag_rating_bar 0x7f0902dc
 int id adjust_height 0x7f090047
 int id adjust_width 0x7f090048
 int id alertTitle 0x7f090049
@@ -3281,7 +3286,6 @@ int id bounce 0x7f090070
 int id bounceBoth 0x7f090071
 int id bounceEnd 0x7f090072
 int id bounceStart 0x7f090073
-int id button 0x7f090074
 int id button10 0x7f090075
 int id button11 0x7f090076
 int id button12 0x7f090077
@@ -3332,6 +3336,7 @@ int id constraintLayout 0x7f0900a3
 int id constraintLayout10 0x7f0900a4
 int id constraintLayout11 0x7f0900a5
 int id constraintLayout12 0x7f0900a6
+int id constraintLayout13 0x7f0902cd
 int id constraintLayout2 0x7f0900a7
 int id constraintLayout3 0x7f0900a8
 int id constraintLayout4 0x7f0900a9
@@ -3373,6 +3378,7 @@ int id disableIntraAutoTransition 0x7f0900cc
 int id disablePostScroll 0x7f0900cd
 int id disableScroll 0x7f0900ce
 int id disjoint 0x7f0900cf
+int id divider 0x7f0902d8
 int id done_txt 0x7f0900d0
 int id dragAnticlockwise 0x7f0900d1
 int id dragClockwise 0x7f0900d2
@@ -3604,14 +3610,24 @@ int id parent 0x7f0901b3
 int id parentPanel 0x7f0901b4
 int id parentRelative 0x7f0901b5
 int id parent_matrix 0x7f0901b6
+int id parking_Selected_frag_add_review_btn 0x7f0902ce
 int id parking_Selected_frag_address 0x7f0902c6
+int id parking_Selected_frag_delete_review_btn 0x7f0902cf
+int id parking_Selected_frag_edit_review_btn 0x7f0902d0
 int id parking_Selected_frag_image 0x7f0902c7
 int id parking_Selected_frag_name 0x7f0902c8
+int id parking_Selected_frag_no_review_text 0x7f0902d6
 int id parking_Selected_frag_review_count 0x7f0902c9
+int id parking_Selected_frag_ri_date 0x7f0902d1
+int id parking_Selected_frag_ri_msg 0x7f0902d2
+int id parking_Selected_frag_ri_name 0x7f0902d3
+int id parking_Selected_frag_ri_rating_bar 0x7f0902d4
 int id parking_Selected_frag_star_rating 0x7f0902ca
 int id parking_Selected_frag_status 0x7f0902cb
 int id parking_frag_recycle_view 0x7f0901b7
 int id parking_selected_frag_is_public 0x7f0902cc
+int id parking_selected_frag_no_others_review_text 0x7f0902d7
+int id parking_selected_frag_review_layout 0x7f0902d5
 int id password_toggle 0x7f0901b8
 int id path 0x7f0901b9
 int id pathRelative 0x7f0901ba
