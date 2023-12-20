@@ -3025,6 +3025,7 @@ int drawable common_google_signin_btn_text_light 0x7f0700a5
 int drawable common_google_signin_btn_text_light_focused 0x7f0700a6
 int drawable common_google_signin_btn_text_light_normal 0x7f0700a7
 int drawable common_google_signin_btn_text_light_normal_background 0x7f0700a8
+int drawable delete_img 0x7f070135
 int drawable design_fab_background 0x7f0700a9
 int drawable design_ic_visibility 0x7f0700aa
 int drawable design_ic_visibility_off 0x7f0700ab
@@ -3148,6 +3149,7 @@ int drawable radius_23_with_stroke 0x7f070120
 int drawable radius_36_green 0x7f070121
 int drawable radius_6_primary_yellow 0x7f070133
 int drawable radius_6_solid 0x7f070122
+int drawable radius_6_upper_bar 0x7f070134
 int drawable radius_6_with_outline 0x7f070123
 int drawable radius_9_solid 0x7f070124
 int drawable round_green_circle 0x7f070125
@@ -3363,6 +3365,8 @@ int id decelerate 0x7f0900bd
 int id decelerateAndComplete 0x7f0900be
 int id decor_content_parent 0x7f0900bf
 int id default_activity_button 0x7f0900c0
+int id delete_review_frag_delete_btn 0x7f0902dd
+int id delete_review_frag_discard_btn 0x7f0902de
 int id deltaRelative 0x7f0900c1
 int id dependency_ordering 0x7f0900c2
 int id design_bottom_sheet 0x7f0900c3
@@ -3464,6 +3468,7 @@ int id ignore 0x7f090120
 int id ignoreRequest 0x7f090121
 int id image 0x7f090122
 int id imageView 0x7f090123
+int id imageView2 0x7f0902df
 int id imageView4 0x7f090125
 int id imageView5 0x7f090126
 int id img_result_done 0x7f090127
@@ -3799,6 +3804,8 @@ int id textView 0x7f090263
 int id textView10 0x7f090264
 int id textView11 0x7f090265
 int id textView12 0x7f090266
+int id textView13 0x7f090267
+int id textView14 0x7f090268
 int id textView19 0x7f09026c
 int id textView2 0x7f09026d
 int id textView20 0x7f09026e

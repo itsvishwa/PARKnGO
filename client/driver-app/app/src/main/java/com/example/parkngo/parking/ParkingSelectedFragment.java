@@ -48,11 +48,20 @@ public class ParkingSelectedFragment extends Fragment {
     private View loadingView;
     private int _id;
 
+    private String user_review_id;
+
     private String token;
+
+    MainActivity mainActivity;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // get main activity context
+        mainActivity = (MainActivity)requireContext();
+
         // Inflate the layout for this fragment
         parkingSelectedView =  inflater.inflate(R.layout.fragment_parking_selected, container, false);
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
@@ -67,12 +76,28 @@ public class ParkingSelectedFragment extends Fragment {
                 data.putInt("_id", _id);
 
 
-                MainActivity mainActivity = (MainActivity)requireContext();
+
                 mainActivity.replaceFragment(new AddReviewFragment(), data);
             }
         }
         );
 
+        // set delete review btn handler
+        Button deleteReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_delete_review_btn);
+
+        deleteReviewBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+//                Toast.makeText(getContext(), "hello", Toast.LENGTH_LONG).show();
+                // Create a Bundle to pass data to the fragment
+                Bundle data = new Bundle();
+                data.putString("_id", user_review_id);
+
+                mainActivity.replaceFragment(new DeleteReviewFragment(), data);
+            }
+        });
+
+        // access storage
         ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
         token = parkngoStorage.getData("token");
 
@@ -209,6 +234,8 @@ public class ParkingSelectedFragment extends Fragment {
             userDateView.setText(userOwnReview.getString("time_stamp"));
             userContentView.setText(userOwnReview.getString("content"));
             userRatingBar1.setRating(Integer.parseInt(userOwnReview.getString("no_of_stars")));
+
+            user_review_id = userOwnReview.getString("_id");
 
         }else{
             writeReviewBtn.setVisibility(View.VISIBLE);
