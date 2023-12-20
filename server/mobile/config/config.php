@@ -28,3 +28,6 @@ define("TOKEN_KEY", "81g135w");
 
 // // Payment secret key
 // define("PAYMENT_KEY", "1h3sh65");
+
+// session secret key
+define("SESSION_KEY", "21nbgfh");

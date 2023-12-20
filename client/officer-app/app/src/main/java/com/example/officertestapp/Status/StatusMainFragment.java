@@ -46,9 +46,10 @@ public class StatusMainFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
+        // Vehicle type Spinner
 
-        Spinner spinnerSlots = view.findViewById(R.id.vehicleTypeSpinner);
-        spinnerSlots.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner spinnerVehicleType = view.findViewById(R.id.vehicleTypeSpinner);
+        spinnerVehicleType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
@@ -63,7 +64,7 @@ public class StatusMainFragment extends Fragment {
         });
 
         ArrayList<String> vehicleTypes = new ArrayList<>();
-        String[] vTypes = {"Car", "Bike", "Van", "Lorry", "Bus"};
+        String[] vTypes = {"Vehicle Type", "Car", "Bike", "Van", "Lorry", "Bus"};
 
         for (int i=0; i<vTypes.length; i++){
             vehicleTypes.add(vTypes[i]);
@@ -71,8 +72,36 @@ public class StatusMainFragment extends Fragment {
 
         ArrayAdapter<String> vTypeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, vehicleTypes);
         vTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        spinnerSlots.setAdapter(vTypeAdapter);
+        spinnerVehicleType.setAdapter(vTypeAdapter);
 
+
+
+        // Status Spinner
+        Spinner spinnerStatus = view.findViewById(R.id.statusTypeSpinner);
+        spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), item + "selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+        ArrayList<String> statusTypes = new ArrayList<>();
+        String[] sTypes = {"Status", "Payment Due", "In Progress"};
+
+        for (int i=0; i<sTypes.length; i++){
+            statusTypes.add(sTypes[i]);
+        }
+
+        ArrayAdapter<String> sTypeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, statusTypes);
+        sTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerStatus.setAdapter(sTypeAdapter);
 
 
         return view;
