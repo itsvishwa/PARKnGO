@@ -69,13 +69,28 @@ class Profile extends Controller
 
 
     // send profile details of the driver
-    public function get_officer_details($mobile_number) {
-        if($this->officer_model->is_mobile_number_exist($mobile_number)) {
-            $details = $this->officer_model->get_officer($mobile_number);
-            print_r($details);
+    public function get_officer_details() {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
         } else {
-            $this->send_json_400("Mobile number is not exists");
+            $details = $this->officer_model->get_officer($token_data["user_id"]);
+            print_r($details);
         }
+
+
+
+
+
+        // if($this->officer_model->is_mobile_number_exist($mobile_number)) {
+        //     $details = $this->officer_model->get_officer($mobile_number);
+        //     print_r($details);
+        // } else {
+        //     $this->send_json_400("Mobile number is not exists");
+        // }
     }
 
 

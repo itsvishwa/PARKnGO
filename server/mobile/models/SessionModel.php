@@ -28,8 +28,48 @@
             return $result->_id;
         }
 
-        public function end_session() {
-            $this->db->query("UPDATE parking_session SET end_time = ");
+
+        public function search_session($vehicle_number) {
+            $this->db->query("SELECT * FROM parking_session WHERE vehicle_number = :vehicle_number");
+            $this->db->bind(":vehicle_number", $vehicle_number);
+
+            $result = $this->db->single();
+
+            if($result){
+                return $result;
+            } else {
+                return false;
+            }
+        }
+
+
+        public function get_session_data($_id) {
+            $this->db->query("SELECT * FROM parking_session WHERE _id = :_id");
+            $this->db->bind(":_id", $_id);
+
+            $result = $this->db->single();
+            
+            if ($result) {
+                $session_data = [
+                    'vehicle_type' => $result->vehicle_type,
+                    'parking_id' => $result->parking_id
+                ];
+                
+                return $session_data;
+            } else {
+                return false;
+            }
+        }
+
+
+        public function end_session($_id) {
+            $current_time_stamp = time();
+
+            $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp WHERE _id = :_id");
+
+            $this->db->bind(":_id", $_id);
+
+            $this->db->execute();
         }
     }
 ?>

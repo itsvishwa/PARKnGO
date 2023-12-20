@@ -27,10 +27,10 @@
         }
 
         // get officer details
-        public function get_officer ($mobile_number) {
-            $this->db->query("SELECT * FROM parking_officer WHERE mobile_number = :mobile_number");
+        public function get_officer ($_id) {
+            $this->db->query("SELECT * FROM parking_officer WHERE _id = :_id");
 
-            $this->db->bind(":mobile_number", $mobile_number);
+            $this->db->bind(":_id", $_id);
 
             $result = $this->db->single();
 
