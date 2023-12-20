@@ -3026,6 +3026,7 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable delete_img
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3149,6 +3150,7 @@ drawable radius_23_with_stroke
 drawable radius_36_green
 drawable radius_6_primary_yellow
 drawable radius_6_solid
+drawable radius_6_upper_bar
 drawable radius_6_with_outline
 drawable radius_9_solid
 drawable round_green_circle
@@ -3364,6 +3366,8 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id delete_review_frag_delete_btn
+id delete_review_frag_discard_btn
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -3465,6 +3469,7 @@ id ignore
 id ignoreRequest
 id image
 id imageView
+id imageView2
 id imageView4
 id imageView5
 id img_result_done
@@ -3800,6 +3805,8 @@ id textView
 id textView10
 id textView11
 id textView12
+id textView13
+id textView14
 id textView19
 id textView2
 id textView20

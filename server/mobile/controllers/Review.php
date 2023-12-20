@@ -99,8 +99,27 @@ class Review extends Controller
                 } else {
                         if ($this->review_model->get_driver_id_by_review_id($review_id) == $token_data["user_id"]) // review id and driver id is matching
                         {
+
+                                $parking_id = $this->review_model->get_parking_id_by_review_id($review_id);
+
                                 // delete the review
                                 $this->review_model->delete_review($review_id);
+
+                                // $this->send_json_200($parking_id);
+                                $total_star_count = $this->review_model->get_total_star_count($parking_id);
+                                $current_review_count = $this->parking_space_model->get_review_count($parking_id);
+
+                                $new_review_count = intval($current_review_count - 1);
+                                $new_avg_star_count = 0;
+
+                                if ($new_review_count == 0) {
+                                        $new_avg_star_count = 0;
+                                } else {
+                                        $new_avg_star_count = intval($total_star_count / $new_review_count);
+                                }
+
+                                $this->parking_space_model->update_review_details($new_avg_star_count, $new_review_count, $parking_id);
+
                                 $this->send_json_200("Review is sucessfully deleted");
                         } else // they don't match
                         {

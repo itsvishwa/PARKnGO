@@ -145,4 +145,20 @@ class ReviewModel
                         return 0;
                 }
         }
+
+
+        // return the parking_id of a relevent review
+        public function get_parking_id_by_review_id($review_id)
+        {
+                $this->db->query("SELECT parking_id FROM review WHERE _id = :_id");
+                $this->db->bind(":_id", $review_id);
+
+                $result = $this->db->single();
+
+                if ($result->parking_id) {
+                        return $result->parking_id;
+                } else {
+                        return false;
+                }
+        }
 }

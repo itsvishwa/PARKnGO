@@ -34,6 +34,7 @@ drawable baseline_qr_code_scanner_24
 drawable baseline_rate_review_24
 drawable baseline_settings_24
 drawable baseline_star_24
+drawable delete_img
 drawable hero_background
 drawable home_find_parking_icon
 drawable home_icon_circle
@@ -48,6 +49,7 @@ drawable radius_23_with_stroke
 drawable radius_36_green
 drawable radius_6_primary_yellow
 drawable radius_6_solid
+drawable radius_6_upper_bar
 drawable radius_6_with_outline
 drawable radius_9_solid
 drawable round_green_circle
@@ -103,6 +105,8 @@ id constraintLayout5
 id constraintLayout6
 id constraintLayout8
 id constraintLayout9
+id delete_review_frag_delete_btn
+id delete_review_frag_discard_btn
 id divider
 id editTextText
 id editTextText2
@@ -122,6 +126,7 @@ id home_frag_main_img
 id home_frag_spinner
 id home_frag_user_name
 id imageView
+id imageView2
 id imageView4
 id imageView5
 id lienar_layout_name
@@ -211,6 +216,8 @@ id textView
 id textView10
 id textView11
 id textView12
+id textView13
+id textView14
 id textView19
 id textView2
 id textView20
