@@ -206,7 +206,6 @@
                 android:layout_marginTop="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.542"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/button12"
                 app:layout_constraintVertical_bias="0.0">
@@ -239,7 +238,7 @@
                         android:layout_marginTop="11dp"
                         android:onClick="parking_selected_frag_add_review_btn_handler"
                         android:text="Write a Review"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:cornerRadius="50dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/parking_Selected_frag_no_review_text" />
@@ -265,7 +264,7 @@
                         android:focusable="true"
                         android:paddingHorizontal="17dp"
                         android:paddingVertical="15dp"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView19">
@@ -316,7 +315,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
                         android:text="Edit Review"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/parking_selected_frag_review_layout" />
 
@@ -325,7 +324,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="21dp"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         android:text="Delete Review"
                         app:layout_constraintBottom_toBottomOf="@+id/parking_Selected_frag_edit_review_btn"
                         app:layout_constraintStart_toEndOf="@+id/parking_Selected_frag_edit_review_btn"
@@ -338,13 +337,12 @@
                     android:id="@+id/parking_selected_frag_no_others_review_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This parking space dosen't has any reviews yet !"
+                    android:text="Parking space dosen't has any reviews yet !"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:visibility="visible"
                     android:layout_marginTop="11dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -352,7 +350,7 @@
                     android:id="@+id/ps_frag_recycle_view"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     android:layout_marginTop="11dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

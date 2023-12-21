@@ -271,7 +271,7 @@ public class ParkingSelectedFragment extends Fragment {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         }else{
-            recyclerView.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.GONE);
             otherNoReviewView.setVisibility(View.VISIBLE);
         }
 
