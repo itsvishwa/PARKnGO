@@ -35,6 +35,8 @@ class Companys extends Controller
     //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
     $reviews = $this->parkingSpaceModel->getLatestReviews($_SESSION['user_id']);
     $activities = $this->officerModel->getOfficerActivitiesCount($_SESSION['user_id']);
+    //$parkingSessions = $this->parkingSpaceModel->dailyParkingSessionCount($_SESSION['user_id']);
+    //echo json_encode($parkingSessions);
 
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
