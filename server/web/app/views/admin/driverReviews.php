@@ -7,9 +7,8 @@
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/requestsView.css" />
-
-  <title>Requests</title>
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/driverReviews.css" />
+  <title>Driver Reviews</title>
  
 </head>
 
@@ -28,7 +27,7 @@
                 Dashboard
               </a>
             </li>
-            <li class="active">
+            <li>
               <a href="./requestsView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
@@ -60,7 +59,8 @@
                 Suspend
               </a>
             </li>
-            <li>
+
+            <li class="active">
               <a href="./driverReviews">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
@@ -68,6 +68,7 @@
                 Driver Reviews
               </a>
             </li>
+            
           </ul>
         </div>
       </div>
@@ -78,7 +79,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
           </svg>
-          <h3>Pending Requests</h3>
+          <h3>Driver Reviews</h3>
         </div>
         <div class="profile">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
@@ -89,59 +90,114 @@
         </div>
       </div>
       <div class="business">
-        <div class="heading">
-          <h4>You have 03 pending applications to review</h4>
-        </div>       
+               
        <div class="card-section">
        
-       <?php foreach ($data['pendingApplications'] as $application) : ?>
-          <div class="b-card bg-red">         
-            <div class="b-card1-icon ">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo">
-                <path fillRule="evenodd" d="M3 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5H15v-18a.75.75 0 000-1.5H3zM6.75 19.5v-2.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75zM6 6.75A.75.75 0 016.75 6h.75a.75.75 0 010 1.5h-.75A.75.75 0 016 6.75zM6.75 9a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM6 12.75a.75.75 0 01.75-.75h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 6a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zm-.75 3.75A.75.75 0 0110.5 9h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 12a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM16.5 6.75v15h5.25a.75.75 0 000-1.5H21v-12a.75.75 0 000-1.5h-4.5zm1.5 4.5a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 2.25a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75v-.008a.75.75 0 00-.75-.75h-.008zM18 17.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div class="b-card2-icon bg-pink">
-              <div class="b-card2-content text-black">
-              <p><?php echo $application->name; ?></p>
-              </div>
-            </div>
-            <div>
-              <div class="b-card5-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-              </div>
-              <div class="b-card4-icon  b-card4-content text-black">
-              <p><?php echo $application->address; ?></p>
-              </div>
-            </div>
-            <div class="b-card6-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-              </svg>
-            </div>
-            <div class="b-card7-icon  b-card7-content text-black">             
-              <p><?php $timestamp = $application->registered_time_stamp ; 
-              $dateTime = date("M d, Y | h:i:s A", $timestamp);
-              echo "<p>{$dateTime}</p>";
-              ?></p>
-            </div>
+       <div class="b-card-content ">
+    <table class="review-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Parking Space</th>
+          <th>Date & Time</th>
+          <th>Review</th>
+          <th>Star Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will go here -->
+        <tr>
+          <td>Vishwa Sandaruwan</td>
+          <td>7 - CMC CAR PARK 01</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+          </td>
 
-            <!-- Example button inside the foreach loop to handle each card -->
-          
-            <button class="proceed-button" onclick="window.location.href='./proceedView.php?name=<?php echo urlencode($application->name); ?>&address=<?php echo urlencode($application->address); ?>&datetime=<?php echo urlencode($application->registered_time_stamp); ?>'">Proceed <span>&gt;</span></button>
+        </tr>
+        <tr>
+          <td>Vishwa Sandaruwan</td>
+          <td>7 - CMC CAR PARK 01</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          </td>
 
+        </tr>
+        <tr>
+          <td>Dhanushika Nayomi</td>
+          <td>7 - CMC CAR PARK 04</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+          </td>
 
+        </tr>        
+        <tr>
+          <td>Janindu Kulathilaka</td>
+          <td>7 - CMC CAR PARK 03</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+          </td>
 
-            
-         <!--<button class="proceed-button" onclick="window.location.href='./proceedView.php'">Proceed <span>&gt;</span></button> -->
-         
-         
+        </tr>
+        <tr>
+          <td>Vishwa Sandaruwan</td>
+          <td>7 - CMC CAR PARK 04</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          </td>
 
-          </div>      
-          <?php endforeach; ?> 
+        </tr>
+        <tr>
+          <td>Dhanushika Nayomi</td>
+          <td>7 - CMC CAR PARK 01</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+          </td>
+
+        </tr>
+        <tr>
+          <td>Janindu Kulathilaka</td>
+          <td>7 - CMC CAR PARK 04</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was dirty <br>  and contributing to a negative<br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+          </td>
+
+        </tr>
+        <tr>
+          <td>Uththara Jayawardana</td>
+          <td>7 - CMC CAR PARK 01</td>
+          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
+          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
+          <!--<td>★★★★☆</td> -->
+          <td>
+          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+          </td>
+
+        </tr>
+        <!-- More rows as needed -->
+      </tbody>
+    </table>
+  </div>
           <div class="b-card-content text-black">
           </div>         
         </div>        
@@ -151,10 +207,6 @@
   </div>  
   </div>  
   
-
-
-
-
     
 </body>
 

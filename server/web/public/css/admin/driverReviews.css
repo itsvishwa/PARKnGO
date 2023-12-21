@@ -39,24 +39,7 @@
     margin-left: 20px;
     font-weight: 500;
   }
-  .b-card8-icon {
-    
-    width: 15px;   
-    height: 15px;
-    border-radius: 50%;
-    background-color: text-green;
-    margin-left: 788px;
-
-}
-
-.b-card9-icon {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: text-green;
-    margin-left: 120px;
-
-}
+  
   .card-section {
    /* display: block;
     margin-left: 20px;
@@ -178,49 +161,17 @@
   background-color: #e2e2e2;
 }
 
-/* Style for the status cell with 'Rejected' text */
-.status1-cell {
-    background-color: #FF4545;
-    
-    color: white;
-    padding: 5px;
-    border-radius: 5px; /* Optional: Adds rounded corners to the box */
-    /*display: inline-block;*/
+/* Set the default color of stars */
+.star-ratings {
+  color: #ffa811; /* Yellow color for stars */
+}
 
-    display: flex; /* Changed to flex */
-    align-items: center; /* Vertically aligns the content */
-    justify-content: center;
-
-    margin-top: 14px;
-
-    height: 6px; 
-    width: 60px; 
-
-    line-height: 30px; 
-   
-  }
-  
-  .status2-cell {
-    background-color: #00A372;
-    
-    color: white;
-    padding: 5px;
-    border-radius: 5px; /* Optional: Adds rounded corners to the box */
-    /*display: inline-block;*/
-
-    display: flex; /* Changed to flex */
-    align-items: center; /* Vertically aligns the content */
-    justify-content: center;
-
-    margin-top: 14px;
-
-    height: 6px; 
-    width: 60px; 
-
-    line-height: 30px; 
-   
-  }
-
-
+/* Set color based on data-rating */
+.star-ratings[data-rating='1']::before { content: "\2605\2606\2606\2606\2606"; }
+/*.star-ratings[data-rating='2']::before { content: "\2605\2605\2606\2606\2606"; }
+.star-ratings[data-rating='3']::before { content: "\2605\2605\2605\2606\2606"; }
+.star-ratings[data-rating='4']::before { content: "\2605\2605\2605\2605\2606"; }
+.star-ratings[data-rating='5']::before { content: "\2605\2605\2605\2605\2605"; }
+*/
 
   
