@@ -93,7 +93,7 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     display: flex;
     height: 1%;
-    width: 34%;
+    width: 39%;
   }
   .delete-card1-content p {
     margin-top: 3px;
@@ -111,7 +111,7 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     display: flex;
     height: 1%;
-    width: 30%;
+    width: 34%;
   }
   .delete-card2-content p {
     margin-top: 3px;
@@ -161,6 +161,7 @@
     display: flex;
     height: 2%;
     width: 15%;
+    background-color: #FFF8EB;
   }
   .select-card-content p {
     margin-top: -2px;
@@ -216,6 +217,7 @@
     align-items: center;
     height:40px;
     width:40px;
+    background-color:#FFF5E3;
     
     
   }
@@ -281,6 +283,7 @@
 
 .colombo{
     position: relative;
+    background: linear-gradient(to right, #FFC45E, #F6EAD3);
     margin-top: 5px;
     margin-left :30px;
     padding: 50px;
@@ -383,8 +386,8 @@
   }
 
   .sus-content{
-    margin-top: 5px;
-    margin-left: 400px;
+    margin-top: 3px;
+    margin-left: -7px;
     font-size: 0.9rem;
     font-weight: 510;
   }
@@ -423,6 +426,7 @@
     display: flex;
     height: 2%;
     width: 15%;
+    background-color: #FFF8EB;
   }
   .time-card-content p {
     margin-top: -2px;
@@ -436,12 +440,12 @@
     margin-top: 15px;
     margin-left: 30px;
     margin-bottom: 70px;
-    padding: 5px;
+    padding: 6px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     align-items: center;
     width: 93%;
-    height:5%;
+    height:8%;
     
   }
 
@@ -536,4 +540,8 @@
       margin-left: 17%;
     }
   }
+  
+
+ 
+
   

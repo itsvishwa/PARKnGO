@@ -60,11 +60,8 @@
   }
   
   .b-card {
-    position: relative;
-    /* Add the gradient background from left to right */
-    background-color:  #FFF5E3;
-
-    /* Ensure text is visible on the gradient background */
+    position: relative;   
+    background: linear-gradient(90deg, #FFA811 2.01%, #FFCC68 100%);
     color: #000;
     margin-top: 1px;
     margin-left: -30px;
@@ -100,8 +97,13 @@
     border-radius: 10px;
   }
 
-  
-  
+  /*.b-card_d-icon {
+    margin-top: 5px;
+    margin-left: 350px;
+    padding: 10px;
+    border-radius: 10px;
+  }*/
+ 
   .b-card2-content {
     margin-left: 4px;
   }
@@ -177,6 +179,39 @@
     padding: 10px;
     border-radius: 10px;
   }
+
+  .b-card_d-icon {
+    position:absolute;
+    margin-top: -40px;
+    margin-left: 690px;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #363636; 
+  }
+
+  .b-card_down-icon {
+    position:absolute;
+    bottom: 1px;
+    left:500px;
+    top: 22px;
+    /*left:42px;*/
+    margin-top:-25px;
+    margin-left:-500px;
+    padding: 10px;
+    height: 20px; 
+    width: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .b-card_d-content p {
+    margin-top: -2px;
+    margin-left: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
 
   .b-card7-icon {
 
@@ -290,19 +325,87 @@
     }
   }
 
+ 
+
   .buttons {
     display: flex;
     /*justify-content: space-between;*/
     margin-top: 10px;
   }
   
+  .b-card-ar-content p {
+    margin-left: -20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    
+  }
+
+  .b-card-p-content p {
+    
+    margin-left: 40px;
+    font-size: 1.0rem;
+    font-weight: 600;
+  }
+
+  .card-content12 {
+    margin-top: 15px;
+    margin-left: 25px;
+    font-size: 0.9rem;
+    font-weight: 410;
+  }
+
+  .b-card3 {
+    margin-top: -5px;
+    /*margin-bottom: 20px 40px;*/
+    margin-bottom: 5px;  
+   /* padding: 30px;*/
+    margin-left: -28px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    /*display: block;*/
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 965px;
+    height: 230px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
+  }
+
+  .b-card-ar {
+    margin-top: -5px;
+    /*margin-bottom: 20px 40px;*/
+    margin-bottom: 2px;  
+   /* padding: 30px;*/
+    margin-left: -28px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    /*display: block;*/
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 965px;
+    height: 50px;
+
+    /************/
+    /* Add the vertical gradient background */
+    
+    /* Ensure text is visible on the gradient background */
+     
+  }
+
   
   .reject-button{
     
     position:absolute;
-    bottom:20px;
-    right:50px;
-    padding: 8px 16px;
+    bottom:60px;
+    right:558px;
+    padding: 10px 170px;
     /*margin-top: 100px;*/
    /* margin-left: 35px;  */ 
     border: none;
@@ -317,9 +420,9 @@
   .approve-button {
     
     position:absolute;
-    bottom:20px;
-    right:150px;
-    padding: 8px 16px;
+    bottom:60px;
+    right:58px;
+    padding: 10px 170px;
    /* margin-top: 100px;
     margin-left: 320px;*/
     border: none;
@@ -342,7 +445,7 @@
   }
   
   .approve-button {
-    background-color: #00a372;
+    background-color: #00A372;
     color: white;
   }
   
@@ -390,11 +493,17 @@
 
 /* Hover effect for the button */
 .proceed-button:hover {
-  background-color: #b8b5b5; /* Change hover background color as needed */
+  background-color: #dda131; /* Change hover background color as needed */
 }
 
 .bg-pink {
-  background-color: #f1e2c6;;
+  background-color: #F6EAD3;
+  
+}
+
+.text-gray {
+  color: #727272;
+  
 }
 
 
