@@ -78,9 +78,9 @@
       </div>
       <div class="form-div">
         <form action="<?php echo URLROOT; ?>companys/parkingOfficerFormView" method="POST" enctype="multipart/form-data">
-          <div class="officer-form pl-10">
+          <div class="officer-form ml-40">
             <div class="name-line">
-              <label for="first_mame" class="p-form-label">Parking Officer Name *</label>
+              <label for="first_mame" class="p-form-label">Officer Name *</label>
               <div>
                 <input type="text" name="first_name" class="p-form-input width-40" placeholder="First Name" required value="<?php echo $data['first_name'] ?>">
                 <input type="text" name="last_name" class="p-form-input width-40" placeholder="Last Name" required value="<?php echo $data['last_name'] ?>">
@@ -89,27 +89,24 @@
 
             <label for="nic" class="p-form-label">NIC *</label>
             <input type="text" name="nic" id="nic" placeholder="Enter Parking Officer NIC Number" class="p-form-input width-75" required value="<?php echo $data['nic'] ?>">
+            <span class="f-12 text-red"><?php echo $data['nic_err']; ?></span>
 
+            <label for="mobile_number" class="p-form-label">Officer Mobile Number *</label>
+            <span class="f-12 text-green">Number should be 9 digits. Eg: 771234567</span>
+            <input type="text" name="mobile_number" id="mobile_number" placeholder="Enter Parking Officer Mobile Number" class="p-form-input width-75" required value="<?php echo $data['mobile_number'] ?>">
+            <span class="f-12 text-red"><?php echo $data['mobile_number_err']; ?></span>
 
-            <label for="phone_number" class="p-form-label">Parking Officer Mobile Number *</label>
-            <input type="text" name="phone_number" id="phone_number" placeholder="Enter Parking Officer Phone Number" class="p-form-input width-75" required value="<?php echo $data['phone_number'] ?>">
-            <span class="f-12 text-red"><?php echo $data['phone_number_err']; ?></span>
-
-            <label for="parking_id" class="p-form-label mt-10 mb-5">Assigned Parking Space *</label>
-            <select id="parking_id" name="parking_id" class="p-form-dropdown width-40">
-              <option value="" disabled selected>Select Parking Space</option>
-              <option value="parking1">Parking Lot 1</option>
-              <option value="parking2">Parking Lot 2</option>
-              <option value="parking3">Parking Lot 3</option>
-              <option value="parking4">Parking Lot 4</option>
-            </select>
+            <label for="officer_id" class="p-form-label">Officer ID *</label>
+            <span class="f-12 text-green">Recently added ID: <?php echo $data['recently_added_officer_id']; ?></span>
+            <input type="text" name="officer_id" id="officer_id" placeholder="Enter Parking Officer ID" class="p-form-input width-75" required value="<?php echo $data['officer_id'] ?>">
+            <span class="f-12 text-red"><?php echo $data['officer_id_err']; ?></span>
 
             <label for="profile_image" class="p-form-label mb-10">Profile Photo</label>
-            <input type="file" name="profile_image" id="profile_image" accept="image/*" <?php echo $data['profile_image'] ?>>
+            <input type="file" name="profile_image" id="profile_image" accept="image/*" value="<?php echo $data['profile_image'] ?>">
           </div>
 
-          <div class="c-btn-section">
-            <input type="button" value="Cancel" class="c-btn bg-black40">
+          <div class="c-btn-section pt-50">
+            <input type="button" value="Cancel" class="c-btn bg-black40" id="cancelButton">
             <input type="submit" value="Save Parking Officer" class="c-btn bg-black">
           </div>
         </form>
@@ -118,6 +115,11 @@
 
     </div>
 
+    <script>
+      document.getElementById('cancelButton').addEventListener('click', function() {
+        window.history.back();
+      });
+    </script>
     <script src="<?php echo URLROOT; ?>/js/company/parkingOfficerView.js"></script>
 </body>
 

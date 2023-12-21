@@ -11,15 +11,13 @@ function saveFormData() {
     const vehicleType = form.querySelector(
       'select[name="vehicleType[]"]',
     ).value;
-    const startNumber = form.querySelector('input[name="startNumber[]"]').value;
-    const endNumber = form.querySelector('input[name="endNumber[]"]').value;
+    const parkingRate = form.querySelector('input[name="parkingRate[]"]').value;
 
     // Create an object for each parking slot batch
     const parkingSlotBatch = {
       noOfSlots,
       vehicleType,
-      startNumber,
-      endNumber,
+      parkingRate,
     };
 
     // Push the object to the formDataArray
@@ -27,27 +25,20 @@ function saveFormData() {
   });
 
   const formData = {
-    parkingName: document.querySelector('input[name="parkingName"]').value,
+    name: document.querySelector('input[name="name"]').value,
     address: document.querySelector('input[name="address"]').value,
+    parking_id: null,
     parkingSlotBatches: formDataArray,
-    parkingRate: document.querySelector('input[name="parkingRate"]').value,
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,
     parkingType: document.querySelector('select[name="parkingType"]').value,
+    // parkingImage: document.querySelector('input[name="parkingImage"]').value,
   };
+
+  console.log(formData);
 
   // Save the updated array back to localStorage
   localStorage.setItem('formData', JSON.stringify(formData));
-}
-
-function confirmDiscard() {
-  if (
-    confirm(
-      'Are you sure you want to discard? All the field data will not be saved.',
-    )
-  ) {
-    window.location.href = './parkingSpaceView.php';
-  }
 }
 
 function addParkingSlotBatch() {
@@ -57,21 +48,20 @@ function addParkingSlotBatch() {
   // Set the innerHTML of the new div to the parkingSlotBatchForm string
   newParkingSlotBatch.innerHTML = `
 				<div id="parkingSlotBatchForm" class="p-slot-batch">
+          <label for="noOfSlots" class="p-form-label">Slots* </label>
 					<input type="number" name="noOfSlots[]" class="p-form-input width-20" placeholder="No of slots" required>
 
+          <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
 					<select name="vehicleType[]" class="p-form-dropdown" required>
 						<option value="" disabled selected>Vehicle Type</option>
 						<option value="Car">Car</option>
 						<option value="Van">Van</option>
 						<option value="Bus">Bus</option>
-						<option value="Bicycle">Bicycle</option>
+						<option value="Motorcycle">Motorcycle</option>
 					</select><br>
 
-					<label for="startNumber" class="p-form-label">Start</label>
-					<input type="number" name="startNumber[]" class="p-form-input width-40" placeholder="Parking Slot Start Number" required>
-
-					<label for="endNumber" class="p-form-label">To</label>
-					<input type="number" name="endNumber[]" class="p-form-input width-30" placeholder="Parking Slot End Number" disabled required>
+          <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
+							<span class="p-form-label">Rs. <input type="number" name="parkingRate[]" placeholder="Price" class="p-form-input width-20" required> per Hour</span>
 
 					<button type="button" onclick="removeParkingSlotBatch(this.parentNode)" class="p-form-btn">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="button-icon text-red p-form-icon">
