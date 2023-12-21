@@ -118,7 +118,7 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
                 data.putInt("_id", _id);
 
                 // Show a toast message with the ID
-                Toast.makeText(context, "Item ID: " + _id, Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Item ID: " + _id, Toast.LENGTH_LONG).show();
 
                 mainActivity.replaceFragment(new ParkingSelectedFragment(), data);
             }

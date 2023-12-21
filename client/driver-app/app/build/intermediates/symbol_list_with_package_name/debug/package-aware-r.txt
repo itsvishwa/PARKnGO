@@ -3660,6 +3660,7 @@ id postLayout
 id pressed
 id profile_frag_mobile_number
 id profile_frag_name
+id profile_frag_name_text
 id progressBar
 id progressBar2
 id progress_circular
