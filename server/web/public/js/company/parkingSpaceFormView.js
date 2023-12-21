@@ -32,6 +32,7 @@ function saveFormData() {
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,
     parkingType: document.querySelector('select[name="parkingType"]').value,
+    // parkingImage: document.querySelector('input[name="parkingImage"]').value,
   };
 
   console.log(formData);
