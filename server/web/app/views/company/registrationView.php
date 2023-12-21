@@ -12,7 +12,7 @@
   <div class="container">
     <div class="left-container">
       <div class="bg-div">
-        <img src="<?php echo URLROOT; ?>/css/assets/logo-black.png" alt="logo" width="100%" />
+        <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-black.png" alt="logo" width="100%" /></a>
       </div>
     </div>
     <div class="right-container">

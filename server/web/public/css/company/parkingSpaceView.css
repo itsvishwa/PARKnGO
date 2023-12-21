@@ -1,7 +1,5 @@
-.Closed {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.4;
+.closed {
+  opacity: 0.6;
 }
 
 /* parking form */
@@ -139,4 +137,33 @@
 .confirmation-card {
   display: flex;
   flex-direction: column;
+}
+
+.popup-parking-name {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.popup-parking-address {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-body {
+  margin-bottom: 10px;
+  width: 75%;
 }
