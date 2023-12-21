@@ -185,6 +185,7 @@ id pi_status
 id pi_type
 id profile_frag_mobile_number
 id profile_frag_name
+id profile_frag_name_text
 id progressBar2
 id ps_frag_recycle_view
 id ratingBar2

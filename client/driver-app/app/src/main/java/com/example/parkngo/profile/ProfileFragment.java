@@ -42,6 +42,8 @@ public class ProfileFragment extends Fragment {
         // add fetched data to the views
         TextView nameView = view.findViewById(R.id.profile_frag_name);
         TextView mobileNumberView = view.findViewById(R.id.profile_frag_mobile_number);
+        TextView nameTopBarView = view.findViewById(R.id.profile_frag_name_text);
+        nameTopBarView.setText(firstName);
         nameView.setText(firstName + " " + lastName);
         mobileNumberView.setText("(+94) " + mobileNumber);
 

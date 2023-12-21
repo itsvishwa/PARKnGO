@@ -3659,6 +3659,7 @@ int id postLayout 0x7f0901cf
 int id pressed 0x7f0901d0
 int id profile_frag_mobile_number 0x7f0902c4
 int id profile_frag_name 0x7f0902c5
+int id profile_frag_name_text 0x7f0902e0
 int id progressBar 0x7f0901d1
 int id progressBar2 0x7f0902c1
 int id progress_circular 0x7f0901d2
