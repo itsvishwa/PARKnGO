@@ -21,7 +21,21 @@
   }
 
   .r-menu-logo {
-    height: 58px;
+    height: 52px;
+    margin-left: 43px;
+    display: flex;
+  }
+
+  .db-menu-logo {
+    margin-top: 20px;
+    height: 25px;
+    /*width:30px;*/
+    margin-left: 7px;
+   
+  }
+  .revenue-menu-logo {
+    height: 52px;
+    margin-left: 80px;
     display: flex;
   }
   
@@ -39,29 +53,201 @@
   
   .card-section {
     display: flex;
-    justify-content: space-between;
-    padding-left: 150px;
-    width: 70%;
+   /* justify-content: space-between;*/
+    margin-top: -10px;
+    padding-left: 30px;
+    height:55%;
+    width: 90%;
     
   }
+
+  .card-section2 {
+    display: flex;
+   /* justify-content: space-between;*/
+    margin-top: -67px;
+    padding-left: 30px;
+    height:250%;
+    width: 90%;
+    
+  }
+  .card-section3 {
+    display: flex;
+   /* justify-content: space-between;*/
+    margin-top: 5px;
+    padding-left: 30px;
+    height:250%;
+    width: 90%;
+    
+  }
+
   
   .b-card {
-    margin-top: 25px;
+    margin-top: 40px;
     margin-bottom: 20px 40px; 
-    padding: 55px;
+   /* padding: 30px;*/
+    margin-left: 8px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     display: block;
-    align-items: center;
-    width: 90%;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 165px;
+    height: 165px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
   }
+
+  .b-card2 {
+    margin-top: 40px;
+    margin-bottom: 20px 40px; 
+   /* padding: 30px;*/
+    margin-left: 3px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: block;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 250px;
+    height: 165px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
+  }
+
+  .b-card3 {
+    margin-top: 2px;
+    /*margin-bottom: 20px 40px;*/
+    margin-bottom: 2px;  
+   /* padding: 30px;*/
+    margin-left: 6px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: block;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 552px;
+    height: 300px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
+  }
+
+  .b-card4 {
+    margin-top: 2px;
+    margin-bottom: 20px 40px; 
+   /* padding: 30px;*/
+    margin-left: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: block;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 250px;
+    height: 140px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
+  }
+  .b-card5 {
+    margin-top: 160px;
+    margin-bottom: 2px; 
+   /* padding: 30px;*/
+    margin-left: -250px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: block;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 250px;
+    height: 140px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
+  }
+  .b-card6 {
+    margin-top: 2px;
+    margin-bottom:80px; 
+   /* padding: 30px;*/
+    margin-left: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: block;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 250px;
+    height: 300px;
+
+    /************/
+    /* Add the vertical gradient background */
+    background-color:#FFF5E3;
+
+    /* Ensure text is visible on the gradient background */
+    color: #000; /* Change the text color as needed */
+  }
+
+  .b-card-small {
+    margin-top: 20px;
+    margin-bottom: 20px 40px; 
+   /* padding: 30px;*/
+    margin-left: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: block;
+   /* align-items: center;*/
+   /* width: 70%;
+    height: 70%;*/
+    width: 220px;
+    height: 60px;
+
+    /************/
+    background-color: #363636; 
+
+    /* Ensure text is visible on the gradient background */
+    /*color: #000; /* Change the text color as needed */
+  }
+
+  .material-symbols-outlined {
+
+    color: red; /* Change the color to red */
+    margin-top: 20px;
+    margin-left: 7px;
+  }
+  
+
 
   .b-card-content {
     text-align: center;
   }
   
   .b-card-icon {
-    padding: 25px;
+    padding: 17px;
     border-radius: 10px;
   }
 
@@ -77,8 +263,93 @@
   }
   
   .b-card-content p {
+    margin-left: -5px;
+    margin-top: -8px;
     font-size: 0.9rem;
+    font-weight: 500;
   }
+
+  .b2-card-content {
+    margin-left: 15px;
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 1.0rem;
+     
+  }
+
+  .b3-card-content {
+    margin-left: 40px;
+    margin-top: -30px;
+    font-weight: 500;
+    font-size: 0.8rem;
+     
+  }
+
+  .b-card-content2 p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+
+  /* CSS file to change font sizes */
+
+/* Targeting the driver name */
+.dashboard-driver-name {
+
+  margin-top: 5px;
+  
+  margin-left: 25px;
+  font-size: 0.9em; /* Adjust the font size as desired */
+  font-weight: bold;
+  display: inline-block; 
+}
+
+/* Targeting the driver rating container */
+.driver-rating {
+  display: inline-block; /* Ensure inline display for alignment */
+  vertical-align: middle; /* Align the container vertically */
+}
+
+/* Targeting the parking name */
+.review-parking-name {
+  font-size: 0.9em; /* Adjust the font size as desired */
+  font-weight: bold;
+  margin-left: 25px;
+  margin-top: -33px;
+}
+
+/* Targeting the star rating */
+.star-rating {
+ 
+  width: 90px; /* Adjust the width of the stars as desired */
+  height: 90px; /* Adjust the height of the stars as desired */
+  display: flex; /* Ensure inline display for alignment */
+  vertical-align: middle; /* Align the stars vertically */
+  gap: 3px;
+  margin-left: 25px;
+}
+.review-content {
+  
+  margin-left: 25px;
+  font-size: 13px; /* Adjust the font size as desired */
+}
+
+/* Optionally, if you want to adjust the star rating size */
+/*.star-rating svg {
+
+  width: 80px;  Adjust the width of the stars as desired 
+  height: 80px;  Adjust the height of the stars as desired 
+}*/
+
+.custom-line {
+  margin-top: 12px;
+  margin-left: 7px;
+  width: 95%;
+  height:5px; 
+      
+}
+
   
   .dashboard-main-section {
     display: flex;
@@ -114,6 +385,9 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  .text-bla {
+    color: #222831;;
   }
   
   th,
@@ -162,3 +436,6 @@
     }
   }
   
+
+
+
