@@ -1,4 +1,5 @@
 <?php
+
 class Users extends Controller
 {
   private $userModel;
@@ -234,3 +235,4 @@ class Users extends Controller
     }
   }
 }
+

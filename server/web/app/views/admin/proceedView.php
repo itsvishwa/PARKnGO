@@ -7,10 +7,10 @@
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/requestsView.css" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/proceedView.css" />
 
-  <title>Requests</title>
- 
+  <title>proceedView</title>
+
 </head>
 
 <body>
@@ -78,7 +78,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
           </svg>
-          <h3>Pending Requests</h3>
+          <h3>Verify Application</h3>
         </div>
         <div class="profile">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
@@ -89,13 +89,8 @@
         </div>
       </div>
       <div class="business">
-        <div class="heading">
-          <h4>You have 03 pending applications to review</h4>
-        </div>       
-       <div class="card-section">
-       
-       <?php foreach ($data['pendingApplications'] as $application) : ?>
-          <div class="b-card bg-red">         
+        <div class="card-section">
+          <div class="b-card ">
             <div class="b-card1-icon ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo">
                 <path fillRule="evenodd" d="M3 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5H15v-18a.75.75 0 000-1.5H3zM6.75 19.5v-2.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75zM6 6.75A.75.75 0 016.75 6h.75a.75.75 0 010 1.5h-.75A.75.75 0 016 6.75zM6.75 9a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM6 12.75a.75.75 0 01.75-.75h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 6a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zm-.75 3.75A.75.75 0 0110.5 9h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 12a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM16.5 6.75v15h5.25a.75.75 0 000-1.5H21v-12a.75.75 0 000-1.5h-4.5zm1.5 4.5a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 2.25a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75v-.008a.75.75 0 00-.75-.75h-.008zM18 17.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clipRule="evenodd" />
@@ -103,18 +98,27 @@
             </div>
             <div class="b-card2-icon bg-pink">
               <div class="b-card2-content text-black">
-              <p><?php echo $application->name; ?></p>
+                <p><?php
+                    $applicationName = $_GET['name'] ?? '';
+                    echo "" . $applicationName . "<br/>";
+                    ?>
+                </p>
               </div>
             </div>
             <div>
-              <div class="b-card5-icon">
+              <div class="b-card5-icon ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="r-menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
               </div>
-              <div class="b-card4-icon  b-card4-content text-black">
-              <p><?php echo $application->address; ?></p>
+              <div class="b-card4-icon b-card4-content text-black">
+                <p>
+                  <?php
+                  $applicationAddress = $_GET['address'] ?? '';
+                  echo "" . $applicationAddress . "<br/>";
+                  ?>
+                </p>
               </div>
             </div>
             <div class="b-card6-icon">
@@ -122,40 +126,57 @@
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
               </svg>
             </div>
-            <div class="b-card7-icon  b-card7-content text-black">             
-              <p><?php $timestamp = $application->registered_time_stamp ; 
-              $dateTime = date("M d, Y | h:i:s A", $timestamp);
-              echo "<p>{$dateTime}</p>";
-              ?></p>
+            <div class="b-card7-icon  b-card7-content text-black">
+              <p>
+                <?php
+                $dateTime = $_GET['datetime'] ?? '';
+                $dateTime = date("M d, Y | h:i:s A", $dateTime);
+                echo $dateTime . "<br/>";
+                ?>
+              </p>
             </div>
+            <button class="b-card_d-icon">
+              <div class="b-card_down-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="r-menu-logo">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+              </div>
+              <div class="b-card_d-content text-white">
+                <p>Download the Document</p>
+</div>
+            </div>
+</button>
 
-            <!-- Example button inside the foreach loop to handle each card -->
-          
-            <button class="proceed-button" onclick="window.location.href='./proceedView.php?name=<?php echo urlencode($application->name); ?>&address=<?php echo urlencode($application->address); ?>&datetime=<?php echo urlencode($application->registered_time_stamp); ?>'">Proceed <span>&gt;</span></button>
+        <div class="b-card-ar-content text-black">              
+        <p>Approve or Reject?<p>
+        
+        </div>
+        <div class="b-card3 ">
+        <div class="card-content12 text-gray">
+        <p>Write the reason to reject....</p>
+        </div>
+        </div>
+        
 
+        
+              
+              
+    <button class="reject-button" type="button">Reject Application</button> 
+    <button class="approve-button" type="button">Approve Application</button>
+   
 
+        
+        </div> 
+        
 
-            
-         <!--<button class="proceed-button" onclick="window.location.href='./proceedView.php'">Proceed <span>&gt;</span></button> -->
-         
-         
-
-          </div>      
-          <?php endforeach; ?> 
           <div class="b-card-content text-black">
-          </div>         
-        </div>        
+          </div>
+        </div>
       </div>
-      </div>      
-  </div>  
-  </div>  
-  </div>  
-  
-
-
-
-
-    
+    </div>
+  </div>
+  </div>
+  </div>
 </body>
 
 </html>
