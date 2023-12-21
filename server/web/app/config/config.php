@@ -3,8 +3,14 @@
 // DB Params
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', 'J@nidu2001');
 define('DB_NAME', 'parkngo');
+
+// Azure server
+// define('DB_HOST', 'azure-mysql-server-parkngo.mysql.database.azure.com');
+// define('DB_USER', 'admin_parkngo');
+// define('DB_PASS', 'YqDvCN55pTyaDvJ');
+// define('DB_NAME', 'parkngo');
 
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));

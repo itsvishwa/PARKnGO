@@ -19,30 +19,24 @@ function createCard(data) {
   card.innerHTML = `
         <div class="confirmation-card">
 						<div class="confirmation-card-line mb-10">
-							<h3 class="b-600">${data.parkingName}</h3>
+							<h3 class="b-600">${data.name}</h3>
             	<p class="b-600">${data.address}</p>
 						</div>
 						<div class="confirmation-card-line mb-10">
 					 		<p class="f-14">Total Slots <span class="b-500">${totalSlots}</span></p>
-            	${
-                data.parkingRate == 0
-                  ? '<p class="parking-type bg-blue text-white">Free</p>'
-                  : `<p class="b-500 f-14">Rs.${data.parkingRate}/ 1H</p>`
-              }
+               <p class="parking-type bg-green text-white">${
+                 data.parkingType == 'public' ? 'Public' : 'Private'
+               }</p>
 					 	</div>
 						<div class="confirmation-card-line">
 							<h3 class="f-14">Parking Slots</h3>
-							<p class="parking-type bg-green text-white">${
-                data.parkingType == 'public' ? 'Public' : 'Private'
-              }</p>
 						</div>
 						<table class="confirmation-card-table">
     					<thead>
         				<tr>
-            			<th>Start</th>
-            			<th>End</th>
             			<th>Type</th>
             			<th>Count</th>
+                  <th>Rate</th>
         				</tr>
     					</thead>
     					<tbody>
@@ -52,14 +46,9 @@ function createCard(data) {
                         .map(
                           (batch) => `
             			<tr class="tr-b">
-                		<td>PS${batch.vehicleType[0]}${batch.startNumber}</td>
-                		<td>PS${batch.vehicleType[0]}${
-                            parseInt(batch.startNumber) +
-                            parseInt(batch.noOfSlots) -
-                            1
-                          }</td>
                 		<td>${batch.vehicleType}</td>
                 		<td>${batch.noOfSlots}</td>
+                    <td>Rs.${batch.parkingRate}/ 1H</td>
             			</tr>
 
         				`,
@@ -80,6 +69,6 @@ function cancel() {
   if (
     confirm('Are you sure you want to cancel? All the data will not be saved.')
   ) {
-    window.location.href = './parkingSpaceView.php';
+    window.location.href = './parkingSpaceView';
   }
 }

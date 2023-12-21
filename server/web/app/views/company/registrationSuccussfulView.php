@@ -12,11 +12,11 @@
   <div class="container">
     <div class="left-container">
       <div class="bg-div">
-        <img src="../assets/logo-black.png" alt="logo" width="100%" />
+        <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-black.png" alt="logo" width="100%" /></a>
       </div>
     </div>
     <div class="right-container">
-      <div>
+      <div class="reg-submission">
         <h2 class="heading">Registration Submission<br />Successful!</h2>
         <p class="message">
           Thank you for submiting your registration form to PARK'n GO. We're
