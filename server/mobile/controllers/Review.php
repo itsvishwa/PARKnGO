@@ -77,6 +77,24 @@ class Review extends Controller
                         if ($this->review_model->get_driver_id_by_review_id($review_id) == $token_data["user_id"]) // they match
                         {
                                 $this->review_model->update_review($review_id, $review_data);
+
+                                $parking_id = $this->review_model->get_parking_id_by_review_id($review_id);
+
+                                $total_star_count = $this->review_model->get_total_star_count($parking_id);
+                                $current_review_count = $this->parking_space_model->get_review_count($parking_id);
+
+                                $new_review_count = $current_review_count;
+                                $new_avg_star_count = 0;
+
+                                if ($new_review_count == 0) {
+                                        $new_avg_star_count = 0;
+                                } else {
+                                        $new_avg_star_count = intval($total_star_count / $new_review_count);
+                                }
+
+                                $this->parking_space_model->update_review_details($new_avg_star_count, $new_review_count, $parking_id);
+
+
                                 $this->send_json_200("Update Successfull!");
                         } else // they don't match
                         {

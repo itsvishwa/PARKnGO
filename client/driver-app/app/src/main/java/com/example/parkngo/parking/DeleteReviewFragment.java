@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,14 +45,10 @@ public class DeleteReviewFragment extends Fragment {
 
         if (getArguments() != null) {
             _id = getArguments().getString("_id", "-1");
-//            Toast.makeText(getContext(), _id, Toast.LENGTH_SHORT).show();
         }
-
-//        Toast.makeText(getContext(), _id + "", Toast.LENGTH_SHORT).show();
 
         // set button listeners - delete review btn
         Button deleteBtn = view.findViewById(R.id.delete_review_frag_delete_btn);
-
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +98,19 @@ public class DeleteReviewFragment extends Fragment {
                 queue.add(stringRequest);
             }
         });
+
+
+        // set button listeners - discard button
+        Button discardBtn = view.findViewById(R.id.delete_review_frag_discard_btn);
+
+        discardBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack();
+            }
+        });
+
         return view;
     }
 }
