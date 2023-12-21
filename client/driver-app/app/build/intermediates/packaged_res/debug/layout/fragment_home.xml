@@ -10,6 +10,7 @@
 
 <!--    Top App Bar Here-->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/home_"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
@@ -17,24 +18,23 @@
         android:paddingHorizontal="18dp">
 
         <LinearLayout
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-<!--            1st segment here-->
+            <!--            1st segment here-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_weight="2.8"
                 android:layout_height="match_parent"
-                >
+                android:layout_weight="2.8">
 
                 <TextView
                     android:id="@+id/appbar_main_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Hi, Vishwa"
+                    android:text="Hi,"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -52,29 +52,41 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
+                <TextView
+                    android:id="@+id/home_frag_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appbar_main_text"
+                    app:layout_constraintStart_toEndOf="@+id/appbar_main_text"
+                    app:layout_constraintTop_toTopOf="@+id/appbar_main_text" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--            2nd segment here -->
+            <!--            2nd segment here -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_weight="0.8"
                 android:layout_height="match_parent"
-                >
+                android:layout_weight="0.8">
 
                 <ImageView
                     android:id="@+id/appbar_icon_home_act"
-                    app:tint="@color/backgroundColor"
                     android:layout_width="51dp"
                     android:layout_height="51dp"
-                    android:scaleType="centerInside"
+                    android:background="@drawable/appbar_icon_bg"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
+                    android:scaleType="centerInside"
                     android:src="@drawable/baseline_notifications_none_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/backgroundColor" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -88,35 +100,13 @@
         android:layout_weight="8"
         android:paddingHorizontal="18dp">
 
-<!--        vehicle type selector-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/home_vehicle_type"
-            android:translationZ="15dp"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/textView15"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="CAR" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--        parking space find button-->
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout7"
+            android:id="@+id/home_frag_cons_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/home_icon_background_2"
+            android:background="@drawable/home_icon_circle"
             android:elevation="8dp"
             android:padding="10dp"
             android:translationZ="4dp"
@@ -126,20 +116,44 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/home_frag_main_img"
                 android:layout_width="173dp"
                 android:layout_height="173dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="home_frag_view_available_spaces_btn_handler"
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/home_find_parking_icon"
                 android:translationZ="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 app:shapeAppearanceOverlay="@style/my_circular" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/radius_23_with_stroke"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/home_frag_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

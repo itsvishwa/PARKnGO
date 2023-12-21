@@ -31,7 +31,6 @@ public class HeroActivity extends AppCompatActivity {
         }
     }
 
-
     // login button
     public void hero_act_login_btn_handler(View v){
         Intent i = new Intent(this, LoginMobileNumberActivity.class);

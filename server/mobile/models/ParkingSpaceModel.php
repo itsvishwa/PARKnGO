@@ -95,4 +95,32 @@ class ParkingSpaceModel
                         return false;
                 }
         }
+
+        // return the current review count of a given parking_id
+        public function get_review_count($parking_id)
+        {
+                $this->db->query("SELECT total_review_count FROM parking_spaces WHERE _id = :_id");
+
+                $this->db->bind(":_id", $parking_id);
+
+                $result = $this->db->single();
+
+                if ($result->total_review_count) {
+                        return $result->total_review_count;
+                } else {
+                        return 0;
+                }
+        }
+
+        // update the new review count and avg star count for a given parking_id
+        public function update_review_details($avg_star_count, $review_count,  $parking_id)
+        {
+                $this->db->query("UPDATE parking_spaces SET avg_star_count=:avg_star_count, total_review_count=:total_review_count WHERE _id=:_id");
+
+                $this->db->bind(":avg_star_count", $avg_star_count);
+                $this->db->bind(":total_review_count", $review_count);
+                $this->db->bind(":_id", $parking_id);
+
+                $this->db->execute();
+        }
 }
