@@ -10,6 +10,8 @@ class Profile extends Controller
 
     private $officer_model;
 
+    private $officer_activity_model;
+
     private $payment_model;
 
     public function __construct()
@@ -19,6 +21,7 @@ class Profile extends Controller
         $this->otp_model = $this->model("OTPModel");
         $this->officer_model = $this->model("OfficerModel");
         $this->payment_model = $this->model("PaymentModel");
+        $this->officer_activity_model = $this->model("OfficerActivityModel");
     }
 
     // update name
@@ -95,7 +98,7 @@ class Profile extends Controller
 
 
 
-    // // send payment history of the officer
+    // send payment history of the officer
     // public function officer_payment_history()
     // {
     //     $token_data = $this->verify_token_for_officers();
@@ -106,29 +109,28 @@ class Profile extends Controller
     //         $this->send_json_404("Token Not Found");
     //     } else // token is valid
     //     {
-    //         $payments_data = $this->payment_model->get_all_driver_payments_by_id($token_data["user_id"]);
+    //         // fetch all session_ids for the given officer_id from officer_activity table where type is end
+    //         $sessionIds = $this->officer_activity_model->get_session_id($token_data["user_id"]);
 
-    //         if ($payments_data === false) // not payments yet
+    //         if ($sessionIds === false) // not payments yet
     //         {
-    //             $this->send_json_400("No Payments has been made yet");
-    //         } else // there are payments data
+    //             $this->send_json_400("No ended sessions for this officer yet");
+    //         } else // there are ended sessions
     //         {
-    //             $result_data = [];
-
-    //             foreach ($payments_data as $payment_data) {
-    //                 $temp = [
-    //                     "amount" => $payment_data->amount,
-    //                     "time_duration" =>  $payment_data->end_time - $payment_data->start_time,
-    //                     "vehicle_number" => $payment_data->vehicle_number,
-    //                     "parking_space_name" => $payment_data->name,
-    //                     "payment_time_stamp" => $payment_data->time_stamp,
-    //                     "payment_method" => $payment_data->payment_method
-    //                 ];
-    //                 $result_data[] = $temp;
-    //             }
-
-    //             $this->send_json_200($result_data);
+    //             echo"There are ended sessions";
     //         }
+
+    //         // if ($sessionIds) {
+    //         //     foreach ($sessionIds as $session) {
+    //         //         echo $session->session_id . "<br>";
+    //         //         // get the payment details from the payment table where payment_method is cash and is_complete = 1 according to the fetched session_id s.
+    //         //         $this->payment_model->get_all_officer_payments_by_session_id($session->session_id);
+    //         //     }
+    //         //  } else {
+    //         //      echo "No session IDs found for this officer.";
+    //         //  }
+            
+            
     //     }
     // }
 }

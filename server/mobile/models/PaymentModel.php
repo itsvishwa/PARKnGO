@@ -113,4 +113,25 @@ class PaymentModel
     //     }
     // }
 
+
+    public function start_payment_session($session_id, $amount) {
+        $this->db->query("INSERT INTO payment (amount, session_id) VALUES (:amount, :session_id)");
+
+        $this->db->bind(":session_id", $session_id);
+        $this->db->bind(":amount", $amount);
+
+        $this->db->execute();
+    }
+
+
+    public function get_all_officer_payments_by_session_id($session_id) {
+        $this->db->query("SELECT * FROM payment WHERE payment_method = 'cash' AND is_complete = 1 AND session_id = :session_id");
+
+        $this->db->bind(":sessionID", $session_id);
+
+        $result = $this->db->resultSet();
+
+        print_r($result);
+    }
+
 }

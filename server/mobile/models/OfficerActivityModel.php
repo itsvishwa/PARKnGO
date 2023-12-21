@@ -31,5 +31,15 @@
 
             $this->db->execute();
         }
+
+        public function get_session_id($officer_id) {
+            $this->db->query("SELECT DISTINCT session_id FROM officer_activity WHERE type = 'end' AND officer_id = :officer_id");
+
+            $this->db->bind(":officer_id", $officer_id);
+
+            $results = $this->db->resultSet();
+
+            return $results;
+        }
     }
 ?>
