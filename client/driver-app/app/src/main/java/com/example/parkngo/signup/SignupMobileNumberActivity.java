@@ -57,7 +57,7 @@ public class SignupMobileNumberActivity extends AppCompatActivity {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/driver/get_otp/" + mobileNumber;
+        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/user/send_otp_register/" + mobileNumber;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
