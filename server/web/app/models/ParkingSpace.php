@@ -338,4 +338,28 @@ class ParkingSpace
 
     return $row;
   }
+  // public function dailyParkingSessionCount($company_id)
+  // {
+  //   $this->db->query(
+  //     'SELECT
+  //     DATE(FROM_UNIXTIME(ps.start_time)) AS session_date,
+  //     COUNT(ps._id) AS session_count
+  // FROM
+  //     parking_session ps
+  // LEFT JOIN
+  //     parking_spaces pspace ON ps.parking_id = pspace._id
+  // WHERE
+  //     FROM_UNIXTIME(ps.start_time) >= CURDATE() - INTERVAL 30 DAY
+  // GROUP BY
+  //     session_date
+  // ORDER BY
+  //     session_date;
+  // '
+  //   );
+
+  //   $this->db->bind(':company_id', $company_id);
+  //   $row = $this->db->resultSet();
+
+  //   return $row;
+  // }
 }
