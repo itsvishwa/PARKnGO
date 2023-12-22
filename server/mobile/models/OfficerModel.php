@@ -54,7 +54,7 @@ class OfficerModel
     }
 
     // check whether the officer exist or not using driver_id
-    public function is_officer_id_exists($_id)
+    public function is_officer_id_exist($_id)
     {
         $this->db->query("SELECT * FROM parking_officer WHERE _id = :_id");
         $this->db->bind(":_id", $_id);
