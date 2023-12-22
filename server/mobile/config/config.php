@@ -1,6 +1,6 @@
 <?php
 
-// DB Params - local
+// DB Params - local server
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
@@ -20,14 +20,14 @@ define('URLROOT', 'http://localhost/PARKnGO/server/mobile/');
 define('SITENAME', 'PARKnGO');
 
 // Twilio Configurations
-// define("SID", "");
-// define("TOKEN", "");
+define("SID", "");
+define("TOKEN", "");
 
 // Token Secret Key
 define("TOKEN_KEY", "81g135w");
 
-// // Payment secret key
-// define("PAYMENT_KEY", "1h3sh65");
+// Payment secret key
+define("ID_KEY", "1h3sh65");
 
 // session secret key
 define("SESSION_KEY", "21nbgfh");

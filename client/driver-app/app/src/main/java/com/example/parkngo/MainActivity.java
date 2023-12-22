@@ -92,10 +92,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     // replace main frame layout by given fragment
-    private void replaceFragment(Fragment f){
+    public void replaceFragment(Fragment f){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.framelayout_main_act, f);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceFragment(Fragment fragment, Bundle data) {
+        fragment.setArguments(data); // Set the data as arguments for the fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.framelayout_main_act, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -159,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         // start............................................................................................................
         // Display the message here
         InitRequest req = new InitRequest();
-        req.setMerchantId("");       // Merchant ID
+        req.setMerchantId("1224851");       // Merchant ID
         req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
         req.setAmount(250);             // Final Amount to be charged
         req.setOrderId("13265");        // Unique Reference ID
@@ -173,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         req.getCustomer().getAddress().setCountry("Sri Lanka");
 
         //Optional Params
-//        req.setNotifyUrl("");
+        req.setNotifyUrl("http://192.168.56.1/PARKnGO/server/mobile/payment/notify");
 
 
         Intent intent = new Intent(this, PHMainActivity.class);
@@ -192,9 +201,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     // add a review
-    public void parking_selected_frag_add_review_btn_handler(View view){
-        replaceFragment(new AddReviewFragment());
-    }
+//    public void parking_selected_frag_add_review_btn_handler(View view){
+//        replaceFragment(new AddReviewFragment());
+//    }
 
 
     // scan qr
@@ -216,8 +225,5 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, HeroActivity.class);
         startActivity(i);
     }
-
-
-    // card payment btn handler
 }
 
