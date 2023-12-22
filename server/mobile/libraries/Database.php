@@ -25,7 +25,7 @@ class Database
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
         $options = array(
             // uncomment if use azure server
-            // PDO::MYSQL_ATTR_SSL_CA => 'C:/wamp64/bin/php/DigiCertGlobalRootCA.crt.pem',
+            // PDO::MYSQL_ATTR_SSL_CA     => 'C:/wamp64/bin/php/DigiCertGlobalRootCA.crt.pem',
             PDO::ATTR_PERSISTENT => true, // Persistent connection
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION // Throw exceptions
         );
@@ -73,7 +73,7 @@ class Database
         return $this->stmt->execute();
     }
 
-    // Get result set as array of objects(multiple records as the result)
+    // Get result set as array of objects
     public function resultSet()
     {
         $this->execute();

@@ -3,20 +3,23 @@ package com.example.parkngo.parking;
 import com.example.parkngo.R;
 
 public class ParkingModel {
+
+    int _id;
     String parkingName;
     String parkingType;
-    String parkingRate;
+    String parkingAddress;
     int noOfStars;
     int noOfReviews;
-    int image;
+    String parkingStatus;
 
-    public ParkingModel(String parkingName, String parkingType, String parkingRate, int noOfStars, int noOfReviews, int image) {
+    public ParkingModel(int _id, String parkingName, String parkingType, String parkingAddress, int noOfStars, int noOfReviews, String parkingStatus) {
+        this._id = _id;
         this.parkingName = parkingName;
         this.parkingType = parkingType;
-        this.parkingRate = parkingRate;
+        this.parkingAddress = parkingAddress;
         this.noOfStars = noOfStars;
         this.noOfReviews = noOfReviews;
-        this.image = image;
+        this.parkingStatus = parkingStatus;
     }
 
     public String getParkingName() {
@@ -27,8 +30,8 @@ public class ParkingModel {
         return parkingType;
     }
 
-    public String getParkingRate() {
-        return parkingRate;
+    public String getParkingAddress() {
+        return parkingAddress;
     }
 
     public int getNoOfStars() {
@@ -39,7 +42,9 @@ public class ParkingModel {
         return noOfReviews;
     }
 
-    public int getImage() {
-        return image;
+    public String getParkingStatus() {
+        return parkingStatus;
     }
+
+    public int get_id(){return _id;}
 }

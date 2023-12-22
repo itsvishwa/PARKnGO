@@ -17,6 +17,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.login.LoginOtpActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,7 +71,7 @@ public class SignupOtpActivity extends AppCompatActivity {
         // check otp and register the driver
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/driver/register/" + otp;
+        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/user/register/" + otp;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiUrl,
@@ -79,8 +81,24 @@ public class SignupOtpActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
-                            String responseJSON = jsonResponse.getString("response");
-                            Toast.makeText(SignupOtpActivity.this, responseJSON, Toast.LENGTH_LONG).show();
+
+                            // fetching response's data
+                            String responseData = jsonResponse.getString("response");
+                            String token = jsonResponse.getString("token");
+                            JSONObject userData = jsonResponse.getJSONObject("user_data");
+
+                            String firstName = userData.getString("first_name");
+                            String lastName = userData.getString("last_name");
+                            String mobileNumber = userData.getString("mobile_number");
+
+                            // structuring data inorder to store
+                            String dataArr[][] = {{"token", token}, {"firstName", firstName}, {"lastName", lastName}, {"mobileNumber", mobileNumber}};
+
+                            // store data in shared preference
+                            ParkngoStorage parkngoStorage = new ParkngoStorage(SignupOtpActivity.this);
+                            parkngoStorage.addData(dataArr);
+
+                            // redirect to main page
                             Intent i = new Intent(SignupOtpActivity.this, MainActivity.class);
                             startActivity(i);
                         } catch (JSONException e) {
