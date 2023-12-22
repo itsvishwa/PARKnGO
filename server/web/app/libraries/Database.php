@@ -24,6 +24,8 @@ class Database
     // Set DSN
     $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
     $options = array(
+      // PDO::MYSQL_ATTR_SSL_CA     => 'C:/certificate/DigiCertGlobalRootCA.crt.pem',
+
       PDO::ATTR_PERSISTENT => true, // Persistent connection
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION // Throw exceptions
     );
@@ -89,5 +91,40 @@ class Database
   public function rowCount()
   {
     return $this->stmt->rowCount();
+  }
+
+  public function calcData()
+  {
+    $this->execute();
+    return $this->stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function fetch()
+  {
+    return $this->stmt->fetch(PDO::FETCH_OBJ);
+  }
+
+  // Begin a transaction
+  public function beginTransaction()
+  {
+    return $this->dbh->beginTransaction();
+  }
+
+  // Commit a transaction
+  public function commit()
+  {
+    return $this->dbh->commit();
+  }
+
+  // Roll back a transaction
+  public function rollBack()
+  {
+    return $this->dbh->rollBack();
+  }
+
+  // Returns the ID of the last inserted row or sequence value
+  public function lastInsertId()
+  {
+    return $this->dbh->lastInsertId();
   }
 }

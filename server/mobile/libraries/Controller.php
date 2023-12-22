@@ -1,8 +1,7 @@
 <?php
 /*
-    * Base Controller
-    * Load models
-    */
+   * Base Controller
+   */
 
 class Controller
 {
@@ -141,22 +140,7 @@ class Controller
                 {
                         $token = $_SERVER['HTTP_TOKEN'];
 
-                        $token_data =  $this->decode_token($token);
-
-                        if ($this->is_token_key_valid($token_data)) // token has valid keys
-                        {
-                                $driver_model = $this->model("DriverModel");
-                                if ($token_data["user_type"] === "driver" and $driver_model->is_driver_id_exist($token_data["user_id"])) // token has valid values
-                                {
-                                        return $token_data;
-                                } else // invalid values 
-                                {
-                                        return 400;
-                                }
-                        } else // token is invalid
-                        {
-                                return 400;
-                        }
+                        return $this->verify_token_for_driver_from_para($token);
                 } else // there is no token setted
                 {
                         return 404;
@@ -173,24 +157,7 @@ class Controller
                 {
                         $token = $_SERVER['HTTP_TOKEN'];
 
-                        $token_data =  $this->decode_token($token);
-                        
-                        if ($this->is_token_key_valid($token_data)) // token has valid keys
-                        {
-
-                                $officer_model = $this->model("OfficerModel");
-
-                                if ($token_data["user_type"] === "officer" and $officer_model->is_officer_id_exists($token_data["user_id"])) // token has valid values
-                                {
-                                        return $token_data;
-                                } else // invalid values 
-                                {
-                                        return 400;
-                                }
-                        } else // token is invalid
-                        {
-                                return 400;
-                        }
+                        return $this->verify_token_for_officer_from_para($token);
                 } else // there is no token setted
                 {
                         return 404;
@@ -198,88 +165,95 @@ class Controller
         }
 
 
-        //     // return a encrypted string when pass the id
-        //     public function encrypt_payment_id($payment_id)
-        //     {
-        //             // Generate a new random 16-byte IV (Initialization Vector)
-        //             $iv = openssl_random_pseudo_bytes(16);
+        // pass the token as a parameter
+        // pass the usertype as a parameter
+        // return the decoded data if everything is ok, or return status code if there is a error
+        public function verify_token_for_driver_from_para($token)
+        {
+                $token_data =  $this->decode_token($token);
 
-        //             // Encrypt the payment_id with AES-128-CBC and the IV
-        //             $encrypted_data = openssl_encrypt($payment_id, 'aes-128-cbc', PAYMENT_KEY, 0, $iv);
-
-        //             // Combine the IV and modified ciphertext to create the final encoded string
-        //             $encoded_string = $iv . $encrypted_data;
-
-        //             // Encode the binary data as a Base64 string
-        //             $encoded_string = base64_encode($encoded_string);
-
-        //             // Send the Base64-encoded string as a JSON response
-        //             return $encoded_string;
-        //     }
-
-        //     // return the decrypted data when pass the encoded string
-        //     public function decrypt_payment_id($encoded_string)
-        //     {
-        //             // Decode the Base64-encoded string to get the binary data
-        //             $binary_data = base64_decode($encoded_string);
-
-        //             // Extract the IV from the first 16 bytes of the binary data
-        //             $iv = substr($binary_data, 0, 16);
-
-        //             // Extract the modified ciphertext from the rest of the binary data
-        //             $ciphertext = substr($binary_data, 16);
-
-        //             // Decrypt the modified ciphertext with AES-128-CBC and the IV
-        //             $decrypted_payment_id = openssl_decrypt($ciphertext, 'aes-128-cbc', PAYMENT_KEY, 0, $iv);
-
-        //             if ($decrypted_payment_id === false) {
-        //                     // Decryption error, send an error message as a JSON response
-        //                     // $this->send_json_200("Decryption error: " . openssl_error_string());
-        //                     return false;
-        //             }
-
-        //             // Send the decrypted payment_id as a JSON response
-        //             return $decrypted_payment_id;
-        //     }
-
-        // return a encrypted string when pass the id
-        public function encrypt_session_id($session_id) {
-                // Create an initialization vector
-                $iv = openssl_random_pseudo_bytes(16);
-
-                // Encrypt the session ID using the chosen cipher method and encryption key
-                $encoded_session_id = openssl_encrypt($session_id, 'aes-128-cbc', SESSION_KEY, 0, $iv);
-
-                // Combine the IV and modified ciphertext to create the final encoded string
-                $encrypted_session_id = $iv . $encoded_session_id;
-                
-                // Encode the binary data as a Base64 string
-                $encrypted_session_id = base64_encode($encrypted_session_id);
-
-                echo($encrypted_session_id);
-                //return $encrypted_session_id;
+                if ($this->is_token_key_valid($token_data)) // token has valid keys
+                {
+                        $driver_model = $this->model("DriverModel");
+                        if ($token_data["user_type"] === "driver" and $driver_model->is_driver_id_exist($token_data["user_id"])) // token has valid values
+                        {
+                                return $token_data;
+                        } else // invalid values 
+                        {
+                                return 400;
+                        }
+                } else // token is invalid
+                {
+                        return 400;
+                }
         }
 
-        public function decrypt_session_id($encrypted_session_id) {
-                // Decode the Base64 string back to binary data
-                $encrypted_session_id = base64_decode($encrypted_session_id);
-            
-                // Extract the initialization vector (IV) from the beginning of the string
-                $iv = substr($encrypted_session_id, 0, 16);
-                
-                // Get the encrypted data (ciphertext) after the IV
-                $encoded_session_id = substr($encrypted_session_id, 16);
-            
-                // Decrypt the encoded session ID using the provided IV, cipher method, and decryption key
-                $decrypted_session_id = openssl_decrypt($encoded_session_id, 'aes-128-cbc', SESSION_KEY, 0, $iv);
 
-                if($decrypted_session_id === false) {
+        // pass the token as a parameter
+        // pass the usertype as a parameter
+        // return the decoded data if everything is ok, or return status code if there is a error
+        public function verify_token_for_officer_from_para($token)
+        {
+                $token_data =  $this->decode_token($token);
+
+                if ($this->is_token_key_valid($token_data)) // token has valid keys
+                {
+                        $officer_model = $this->model("OfficerModel");
+                        if ($token_data["user_type"] === "officer" and $officer_model->is_officer_id_exist($token_data["user_id"])) // token has valid values
+                        {
+                                return $token_data;
+                        } else // invalid values 
+                        {
+                                return 400;
+                        }
+                } else // token is invalid
+                {
+                        return 400;
+                }
+        }
+
+
+        // return a encrypted string when pass the id
+        public function encrypt_id($payment_id)
+        {
+                // Generate a new random 16-byte IV (Initialization Vector)
+                $iv = openssl_random_pseudo_bytes(16);
+
+                // Encrypt the payment_id with AES-128-CBC and the IV
+                $encrypted_data = openssl_encrypt($payment_id, 'aes-128-cbc', ID_KEY, 0, $iv);
+
+                // Combine the IV and modified ciphertext to create the final encoded string
+                $encoded_string = $iv . $encrypted_data;
+
+                // Encode the binary data as a Base64 string
+                $encoded_string = base64_encode($encoded_string);
+
+                // Send the Base64-encoded string as a JSON response
+                return $encoded_string;
+        }
+
+        // return the decrypted data when pass the encoded string
+        public function decrypt_id($encoded_string)
+        {
+                // Decode the Base64-encoded string to get the binary data
+                $binary_data = base64_decode($encoded_string);
+
+                // Extract the IV from the first 16 bytes of the binary data
+                $iv = substr($binary_data, 0, 16);
+
+                // Extract the modified ciphertext from the rest of the binary data
+                $ciphertext = substr($binary_data, 16);
+
+                // Decrypt the modified ciphertext with AES-128-CBC and the IV
+                $decrypted_payment_id = openssl_decrypt($ciphertext, 'aes-128-cbc', ID_KEY, 0, $iv);
+
+                if ($decrypted_payment_id === false) {
                         // Decryption error, send an error message as a JSON response
-                        $this->send_json_200("Decryption error: " . openssl_error_string());
+                        // $this->send_json_200("Decryption error: " . openssl_error_string());
                         return false;
                 }
-            
+
                 // Send the decrypted payment_id as a JSON response
-                return $decrypted_session_id;
-            }
+                return $decrypted_payment_id;
+        }
 }

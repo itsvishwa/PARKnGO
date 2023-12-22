@@ -1,23 +1,3 @@
-const parkingData = [
-  {
-    ParkingName: 'Parking 1',
-    Address: '123 Main St, City',
-    CurrentFreeSlots: 'N/A',
-    PricePerHour: 0,
-    TotalSlots: {
-      Cars: 20,
-      Vans: 10,
-      Buses: 5,
-      Bicycles: 30,
-    },
-    IsPublic: true,
-    ParkingOfficerName: 'John Doe',
-    TodayEarnings: 'N/A',
-    Status: 'open',
-  },
-  // Add more parking data objects as needed
-];
-
 if (parkingData) {
   createCard(parkingData[0]);
 }

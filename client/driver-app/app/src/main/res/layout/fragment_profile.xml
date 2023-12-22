@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Hi, Vishwa"
+                    android:text="Hi,"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -51,6 +51,19 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+
+                <TextView
+                    android:id="@+id/profile_frag_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="Name"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/appbar_main_text"
+                    app:layout_constraintStart_toEndOf="@+id/appbar_main_text"
+                    app:layout_constraintTop_toTopOf="@+id/appbar_main_text" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -136,6 +149,7 @@
                 android:layout_height="wrap_content"
                 app:tint="#7D7D7D" />
             <TextView
+                android:id="@+id/profile_frag_name"
                 android:layout_weight="2"
                 android:text="Vishwa Sandaruwan"
                 android:textColor="#7D7D7D"
@@ -171,6 +185,7 @@
                 android:layout_height="wrap_content"
                 app:tint="#7D7D7D"/>
             <TextView
+                android:id="@+id/profile_frag_mobile_number"
                 android:layout_weight="2"
                 android:text="+94 71 1111 111"
                 android:textSize="18sp"

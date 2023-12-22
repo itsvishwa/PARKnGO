@@ -69,7 +69,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
+                    android:background="@drawable/appbar_icon_bg"
                     android:src="@drawable/baseline_notifications_none_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -85,19 +85,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:paddingTop="10dp"
-        android:paddingHorizontal="18dp">
+        android:paddingHorizontal="18dp"
+        android:paddingTop="10dp">
 
-        <ListView
-            android:divider="#00000000"
-            android:dividerHeight="10dp"
-            android:id="@+id/listview_parking_fragment"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/search_view_bg"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="Search Here..." />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/parking_frag_recycle_view"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
