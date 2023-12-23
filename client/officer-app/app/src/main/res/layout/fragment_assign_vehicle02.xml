@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:gravity="center_horizontal"
-                    android:text="Are you sure you want to reserve the"
+                    android:text="Are you sure you want to reserve"
                     android:textSize="17sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -151,70 +151,57 @@
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Parking Slot"
+                    android:layout_marginTop="12dp"
+                    android:text="a parking slot"
                     android:textSize="17sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView17"
-                    app:layout_constraintHorizontal_bias="0.885"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
                     app:layout_constraintStart_toStartOf="@+id/textView13"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="60dp"
-                    android:background="@drawable/red_rounded_bg"
-                    android:paddingHorizontal="5dp"
-                    android:text="P00A5"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/textView16"
-                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="for"
+                    android:text="for the Vehicle"
                     android:textSize="17sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView17"
+                    app:layout_constraintEnd_toEndOf="@+id/textView16"
                     app:layout_constraintStart_toStartOf="@+id/textView16"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Vehicle"
-                    android:textSize="17sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ps_parking_id"
-                    app:layout_constraintHorizontal_bias="0.921"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23"
-                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/ps_parking_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="104dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/red_rounded_bg"
                     android:paddingHorizontal="5dp"
                     android:text="CAA 1010"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                    app:layout_constraintEnd_toStartOf="@+id/textView17"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="112dp"
+                    android:background="@drawable/blue_rounded_bg"
+                    android:paddingHorizontal="5dp"
+                    android:text="CAR"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView24"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

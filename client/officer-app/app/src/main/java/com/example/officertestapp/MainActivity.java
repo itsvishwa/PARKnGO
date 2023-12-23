@@ -20,7 +20,6 @@ import com.example.officertestapp.Profile.ProfileLogoutFragment;
 import com.example.officertestapp.Profile.ProfileMainFragment;
 import com.example.officertestapp.Profile.ProfilePaymentHistoryFragment;
 import com.example.officertestapp.Status.StatusMainFragment;
-import com.example.officertestapp.Status.StatusView01Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{
@@ -139,9 +138,6 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new ProfileLogoutFragment());
     }
 
-    public void parking_status_btn_handler(View v) {
-        replaceFragment(new StatusView01Fragment());
-    }
 
     public void status_01_back_btn_handler(View v) {
         replaceFragment(new StatusMainFragment());

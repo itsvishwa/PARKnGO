@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.officertestapp.R;
 
@@ -41,17 +45,78 @@ public class StatusMainFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+        // Vehicle type Spinner
+
+        Spinner spinnerVehicleType = view.findViewById(R.id.vehicleTypeSpinner);
+        spinnerVehicleType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), item + "selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+        ArrayList<String> vehicleTypes = new ArrayList<>();
+        String[] vTypes = {"Vehicle Type", "Car", "Bike", "Van", "Lorry", "Bus"};
+
+        for (int i=0; i<vTypes.length; i++){
+            vehicleTypes.add(vTypes[i]);
+        }
+
+        ArrayAdapter<String> vTypeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, vehicleTypes);
+        vTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerVehicleType.setAdapter(vTypeAdapter);
+
+
+
+        // Status Spinner
+        Spinner spinnerStatus = view.findViewById(R.id.statusTypeSpinner);
+        spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+                Toast.makeText(getContext(), item + "selected", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+        });
+
+        ArrayList<String> statusTypes = new ArrayList<>();
+        String[] sTypes = {"Status", "Payment Due", "In Progress"};
+
+        for (int i=0; i<sTypes.length; i++){
+            statusTypes.add(sTypes[i]);
+        }
+
+        ArrayAdapter<String> sTypeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, statusTypes);
+        sTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerStatus.setAdapter(sTypeAdapter);
+
+
         return view;
     }
 
     // setting up the parkingStatusModels Array
     public void setupParkingStatusModels(){
-        String[] parkingIDs = {"PA001", "PA002", "PA003", "PA004", "PA005"};
-        String[] parkingStatus = {"Filled", "Payment Due", "Free", "Free", "Free"};
-        String[] vehicleNumbers = {"CAR 1565", "CAR 1565", "", "", ""};
+       String[] vehicleNumbers = {"CAF 6565 WP", "CAF 6565 WP", "CAF 6565 WP", "CAF 6565 WP", "CAF 6565 WP"};
+       String[] vehicleTypes = {"CAR", "CAR", "CAR", "CAR", "CAR"};
+        String[] dateAndTime = {"07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM"};
+       String[] parkingStatus = {"Payment Due", "In Progress", "Payment Due", "Payment Due", "Payment Due"};
 
-        for(int i=0; i<parkingIDs.length; i++){
-            parkingStatusModels.add(new ParkingStatusModel(parkingIDs[i], parkingStatus[i], vehicleNumbers[i]));
-        }
+
+       for(int i=0; i<vehicleNumbers.length; i++){
+           parkingStatusModels.add(new ParkingStatusModel(vehicleNumbers[i], vehicleTypes[i], dateAndTime[i], parkingStatus[i]));
+       }
     }
 }
