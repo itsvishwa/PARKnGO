@@ -103,7 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="officer-parking-div">
           <div class="officer-card mt-10">
             <div class="officer-section-one">
-              <img src='https://www.sfmta.com/sites/default/files/styles/gallery-image/public/gallery-images/2021/07/pcoblog2.jpg?itok=zPTYf4sC' alt="profile image" class="dp-image" />
+              <img src="data:<?php $encodedImage = base64_encode($data['profile_photo']);
+                              $imageMimeType = "image/jpeg";
+                              echo $imageMimeType; ?>;base64,<?php echo $encodedImage; ?>" alt="profile image" class="dp-image" />
               <h3 class="officer-name"><?php echo ($data['first_name'] . " " . $data['last_name']) ?></h3>
               <h3 class="officer-id"><?php echo $data['officer_id'] ?></h3>
               <h3 class="allocated-parking"><?php echo $data['parking_space'] ?></h3>
