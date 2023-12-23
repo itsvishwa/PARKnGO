@@ -40,19 +40,15 @@ public class ReleaseASlot01Fragment extends Fragment {
         });
 
         ArrayList<String> provinceTypes = new ArrayList<>();
-        provinceTypes.add("WP");
-        provinceTypes.add("SP");
-        provinceTypes.add("CP");
-        provinceTypes.add("EP");
-        provinceTypes.add("NC");
-        provinceTypes.add("NP");
-        provinceTypes.add("NW");
-        provinceTypes.add("SG");
-        provinceTypes.add("UP");
+        String[] pTypes = {"WP", "SP", "CP", "EP", "NC", "NP", "NW", "SG", "UP"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
-        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        spinnerProvinces.setAdapter(adapter);
+        for (int i=0; i<pTypes.length; i++){
+            provinceTypes.add(pTypes[i]);
+        }
+
+        ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
+        provinceAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerProvinces.setAdapter(provinceAdapter);
 
         return view;
     }

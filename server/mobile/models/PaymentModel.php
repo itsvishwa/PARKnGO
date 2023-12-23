@@ -79,28 +79,28 @@ class PaymentModel
     {
         $this->db->query(
             "SELECT 
-            payment.amount,
-            payment.payment_method,
-            payment.time_stamp,
-            parking_session.start_time, 
-            parking_session.end_time,
-            parking_session.vehicle_number,
-            parking_session.vehicle_type,
-            parking_spaces.name
-            FROM 
-                payment
-            JOIN 
-                parking_session
-            ON
-                payment.session_id = parking_session._id 
-            JOIN
-                parking_spaces
-            ON
-                parking_session.parking_id = parking_spaces._id 
-            WHERE 
-                payment.driver_id = :driver_id
-                AND
-                payment.is_complete = 1"
+         payment.amount,
+         payment.payment_method,
+         payment.time_stamp,
+         parking_session.start_time, 
+         parking_session.end_time,
+         parking_session.vehicle_number,
+         parking_session.vehicle_type,
+         parking_spaces.name
+         FROM 
+             payment
+         JOIN 
+             parking_session
+         ON
+             payment.session_id = parking_session._id 
+         JOIN
+             parking_spaces
+         ON
+             parking_session.parking_id = parking_spaces._id 
+         WHERE 
+             payment.driver_id = :driver_id
+             AND
+             payment.is_complete = 1"
         );
 
         $this->db->bind(":driver_id", $driver_id);
@@ -114,6 +114,28 @@ class PaymentModel
         }
     }
 
+
+    public function start_payment_session($session_id, $amount)
+    {
+        $this->db->query("INSERT INTO payment (amount, session_id) VALUES (:amount, :session_id)");
+
+        $this->db->bind(":session_id", $session_id);
+        $this->db->bind(":amount", $amount);
+
+        $this->db->execute();
+    }
+
+
+    public function get_all_officer_payments_by_session_id($session_id)
+    {
+        $this->db->query("SELECT * FROM payment WHERE payment_method = 'cash' AND is_complete = 1 AND session_id = :session_id");
+
+        $this->db->bind(":sessionID", $session_id);
+
+        $result = $this->db->resultSet();
+
+        print_r($result);
+    }
 
     // close a payement for a given payment_id
     public function close_payment($payment_data)
