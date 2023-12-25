@@ -41,6 +41,7 @@ drawable home_icon_circle
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable logo_white
+drawable not_available
 drawable parking_space_sample
 drawable payment_successfull
 drawable question
@@ -75,6 +76,7 @@ id ava_rating_count
 id ava_recycle_view
 id ava_total_slots
 id ava_type
+id button
 id button10
 id button11
 id button12
@@ -127,6 +129,7 @@ id home_frag_spinner
 id home_frag_user_name
 id imageView
 id imageView2
+id imageView3
 id imageView4
 id imageView5
 id lienar_layout_name
@@ -219,6 +222,8 @@ id textView11
 id textView12
 id textView13
 id textView14
+id textView15
+id textView16
 id textView19
 id textView2
 id textView20
