@@ -92,7 +92,7 @@ public class SignupOtpActivity extends AppCompatActivity {
                             String mobileNumber = userData.getString("mobile_number");
 
                             // structuring data inorder to store
-                            String dataArr[][] = {{"token", token}, {"firstName", firstName}, {"lastName", lastName}, {"mobileNumber", mobileNumber}};
+                            String dataArr[][] = {{"token", token}, {"firstName", Character.toUpperCase(firstName.charAt(0)) + firstName.substring(1)}, {"lastName", Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1)}, {"mobileNumber", mobileNumber}};
 
                             // store data in shared preference
                             ParkngoStorage parkngoStorage = new ParkngoStorage(SignupOtpActivity.this);
