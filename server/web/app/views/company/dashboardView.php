@@ -209,18 +209,25 @@
   <!-- bar graph for number of parking sessions -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Fetch data for the last 30 days (replace with your actual data fetching logic)
-      const data = generateRandomData(30);
+      // Replace this with your actual server response data
+      const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
+
+      // Extract dates and values from the response
+      const dates = Object.keys(responseData);
+      const values = Object.values(responseData);
+
+      // Format dates to show only the day
+      const formattedDates = dates.map(date => new Date(date).getDate());
 
       // Create a bar chart
       const ctx = document.getElementById('parkingSessions').getContext('2d');
       const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: data.dates,
+          labels: formattedDates,
           datasets: [{
             label: 'Number of Parking Sessions Last 30 Days',
-            data: data.values,
+            data: values,
             backgroundColor: '#363636',
             borderColor: '#363636',
             borderWidth: 1
@@ -234,50 +241,36 @@
           }
         }
       });
-
-      // Function to generate random data (replace with your actual data fetching logic)
-      function generateRandomData(days) {
-        const startDate = new Date();
-        startDate.setDate(startDate.getDate() - days + 1);
-
-        const dates = [];
-        const values = [];
-
-        for (let i = 0; i < days; i++) {
-          const date = new Date(startDate);
-          date.setDate(startDate.getDate() + i);
-
-          // Format the date to show only the day
-          const formattedDate = date.getDate();
-          dates.push(formattedDate);
-
-          // Generate random values for demonstration purposes
-          values.push(Math.floor(Math.random() * 100));
-        }
-
-        return {
-          dates,
-          values
-        };
-      }
     });
   </script>
 
   <!-- bar graph for revenue -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Fetch data for the last 30 days (replace with your actual data fetching logic)
-      const data = generateRandomData(30);
+      // Replace the data variable with your actual data
+      const rawData = <?php echo json_encode($data['revenues']); ?>;
+
+      // Convert raw data to an array of objects
+      const data = Object.entries(rawData).map(([date, value]) => ({
+        date,
+        value
+      }));
+
+      // Extract dates and values from the data
+      const dates = data.map(entry => entry.date);
+      const values = data.map(entry => entry.value);
+
+      const formattedDates = dates.map(date => new Date(date).getDate());
 
       // Create a bar chart
       const ctx = document.getElementById('revenue').getContext('2d');
       const myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: data.dates,
+          labels: formattedDates,
           datasets: [{
             label: 'Revenue from Parking Spaces Last 30 Days',
-            data: data.values,
+            data: values,
             backgroundColor: '#363636',
             borderColor: '#363636',
             borderWidth: 1
@@ -291,32 +284,6 @@
           }
         }
       });
-
-      // Function to generate random data (replace with your actual data fetching logic)
-      function generateRandomData(days) {
-        const startDate = new Date();
-        startDate.setDate(startDate.getDate() - days + 1);
-
-        const dates = [];
-        const values = [];
-
-        for (let i = 0; i < days; i++) {
-          const date = new Date(startDate);
-          date.setDate(startDate.getDate() + i);
-
-          // Format the date to show only the day
-          const formattedDate = date.getDate();
-          dates.push(formattedDate);
-
-          // Generate random values for demonstration purposes
-          values.push(Math.floor(Math.random() * 100));
-        }
-
-        return {
-          dates,
-          values
-        };
-      }
     });
   </script>
 

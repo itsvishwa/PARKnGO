@@ -362,4 +362,21 @@ class ParkingSpace
 
   //   return $row;
   // }
+
+  public function parkingSession($company_id)
+  {
+    $this->db->query(
+      'SELECT parking_session._id,
+        parking_session.start_time,
+        parking_session.parking_id,
+        parking_spaces.company_id
+      FROM parking_session
+      LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id;
+      WHERE parking_spaces.company_id = :company_id'
+    );
+
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
 }
