@@ -3125,6 +3125,7 @@ drawable mtrl_switch_track
 drawable mtrl_switch_track_decoration
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
+drawable not_available
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -3289,6 +3290,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id button
 id button10
 id button11
 id button12
@@ -3470,6 +3472,7 @@ id ignoreRequest
 id image
 id imageView
 id imageView2
+id imageView3
 id imageView4
 id imageView5
 id img_result_done
@@ -3808,6 +3811,8 @@ id textView11
 id textView12
 id textView13
 id textView14
+id textView15
+id textView16
 id textView19
 id textView2
 id textView20
