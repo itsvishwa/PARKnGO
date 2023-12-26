@@ -94,7 +94,7 @@ public class APSSearchFetchData {
                 String rate = "Rs. " + dataObj.getString("rate");
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, "450 m"));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, "450 m", latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view

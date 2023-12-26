@@ -67,6 +67,10 @@ id add_review_frag_rating_bar
 id appbar_icon_home_act
 id appbar_main_text
 id appbar_secondary_text
+id aps_frag_max_free_slots_chip
+id aps_frag_min_dis_chip
+id aps_frag_min_rate_chip
+id aps_frag_public_chip
 id ava_distance
 id ava_free_slots
 id ava_parking_name
@@ -76,6 +80,7 @@ id ava_rating_count
 id ava_recycle_view
 id ava_total_slots
 id ava_type
+id available_parking_spaces_frag_chip_group
 id available_parking_spaces_frag_search_bar
 id button
 id button10
@@ -91,11 +96,6 @@ id button6
 id button7
 id button8
 id button9
-id chip2
-id chip3
-id chip4
-id chip5
-id chipGroup
 id constraintLayout
 id constraintLayout10
 id constraintLayout11
