@@ -139,40 +139,62 @@ class Session extends Controller
 
 
 
-    // public function end() {
-    //     $token_data = $this->verify_token_for_officers();
+    public function end() {
+        $token_data = $this->verify_token_for_officers();
 
-    //     if ($token_data === 400) {
-    //         $this->send_json_400("Invalid Token");
-    //     } elseif ($token_data === 404) {
-    //         $this->send_json_404("Token Not Found");
-    //     } else // token is valid
-    //     {
-    //         $encrypted_session_id = trim($_POST["session_id"]);
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $encrypted_session_id = trim($_POST["session_id"]);
 
-    //         $session_id = $this->decrypt_session_id($encrypted_session_id);
+            $session_id = $this->decrypt_session_id($encrypted_session_id);
+        
+            // //end time is update in the parking_session
+            $this->session_model->end_session($session_id);
 
-    //         // //end is update in the parking_session
-    //         $this->session_model->end_session($session_id);
+            // add new officer activity to the officer_activity (type as end)
+            $this->officer_activity_model->end_officer_activity($session_id, $token_data);
 
-    //         // add new officer activity to the officer_activity (type as end)
-    //         $this->officer_activity_model->end_officer_activity($session_id, $token_data);
+            // Fetch vehicle_type and parking_id based on the given _id from parking_session
+            $session_details = $this->session_model->get_session_data($session_id);
 
-    //         // Fetch vehicle_type and parking_id based on the given _id from parking_session
-    //         $session_details = $this->session_model->get_session_data($session_id);
+            // update the parking_space_status
+            $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
 
-    //         // update the parking_space_status
-    //         $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
+            //start payment session
+            
+            //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
+            $rate = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
+            
+            // Check if $rate exists and contains the 'rate' property
+            if ($rate && property_exists($rate, 'rate') && is_numeric($rate->rate)) {
+                $hourly_rate = $rate->rate;
 
-    //         //get amount
-    //         $amount = $this->pay
+                // Calculate duration
+                $start_timestamp = $session_details["start_time"];
+                $end_timestamp = $session_details["end_time"];
 
-    //         //start payment session
-    //         $this->payment_model->start_payment_session($session_id, $amount);
+                $duration = $end_timestamp - $start_timestamp;
 
-    //     }
-    // }
+                // Convert duration to hours and minutes
+                $hours = floor($duration / 3600);
+                $minutes = floor(($duration % 3600) / 60);
 
+                $total_duration_hours = $hours + ($minutes / 60);
 
+                $total_amount = $total_duration_hours * $hourly_rate;
+                $amount = round($total_amount, 2);
+
+                // Start payment session
+                $this->payment_model->start_payment_session($session_id, $amount);
+            } else {
+                // Handle cases where the rate is missing or not a valid numeric value
+                $this->send_json_404("Invalid rate or rate not available");
+            }
+        }
+    }
 
 }

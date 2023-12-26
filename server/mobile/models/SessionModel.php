@@ -64,6 +64,8 @@
             
             if ($result) {
                 $session_data = [
+                    'start_time' => $result->start_time,
+                    'end_time' => $result->end_time,
                     'vehicle_type' => $result->vehicle_type,
                     'parking_id' => $result->parking_id
                 ];
@@ -75,14 +77,14 @@
         }
 
 
-        // public function end_session($_id) {
-        //     $current_time_stamp = time();
+        public function end_session($_id) {
+            $current_time_stamp = time();
 
-        //     $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp WHERE _id = :_id");
+            $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp WHERE _id = :_id");
 
-        //     $this->db->bind(":_id", $_id);
+            $this->db->bind(":_id", $_id);
 
-        //     $this->db->execute();
-        // }
+            $this->db->execute();
+        }
     }
 ?>
