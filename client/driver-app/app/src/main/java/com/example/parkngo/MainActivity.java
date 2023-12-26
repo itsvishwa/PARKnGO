@@ -134,18 +134,18 @@ public class MainActivity extends AppCompatActivity {
     // proceed to navigation
     public void available_parking_space_item_handler(View view){
     //        replaceFragment(new NavigateFragment()); TODO:: Google MAP SDK
-        double sourceLatitude = 6.902727395785716;
-        double sourceLongitude = 79.86126018417747;
-        double destinationLatitude = 6.915615411846493; // Replace with the actual destination latitude
-        double destinationLongitude = 79.86440085336942; // Replace with the actual destination longitude
-
-        String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude +
-                "&destination=" + destinationLatitude + "," + destinationLongitude;
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setPackage("com.google.android.apps.maps");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+//        double sourceLatitude = 6.902727395785716;
+//        double sourceLongitude = 79.86126018417747;
+//        double destinationLatitude = 6.915615411846493; // Replace with the actual destination latitude
+//        double destinationLongitude = 79.86440085336942; // Replace with the actual destination longitude
+//
+//        String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude +
+//                "&destination=" + destinationLatitude + "," + destinationLongitude;
+//
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//        intent.setPackage("com.google.android.apps.maps");
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
     }
 
 

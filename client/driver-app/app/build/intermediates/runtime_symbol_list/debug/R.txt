@@ -3258,6 +3258,10 @@ int id anticipate 0x7f090055
 int id appbar_icon_home_act 0x7f090056
 int id appbar_main_text 0x7f090057
 int id appbar_secondary_text 0x7f090058
+int id aps_frag_max_free_slots_chip 0x7f0902d8
+int id aps_frag_min_dis_chip 0x7f0902d9
+int id aps_frag_min_rate_chip 0x7f0902da
+int id aps_frag_public_chip 0x7f0902db
 int id arc 0x7f090059
 int id asConfigured 0x7f09005a
 int id async 0x7f09005b
@@ -3274,6 +3278,7 @@ int id ava_rating_count 0x7f090065
 int id ava_recycle_view 0x7f090066
 int id ava_total_slots 0x7f090067
 int id ava_type 0x7f090068
+int id available_parking_spaces_frag_chip_group 0x7f0902d7
 int id available_parking_spaces_frag_search_bar 0x7f090069
 int id bank_account_subtitle_txt 0x7f09006a
 int id barrier 0x7f09006b
@@ -3321,11 +3326,6 @@ int id chain2 0x7f090094
 int id chains 0x7f090095
 int id checkbox 0x7f090096
 int id checked 0x7f090097
-int id chip2 0x7f090098
-int id chip3 0x7f090099
-int id chip4 0x7f09009a
-int id chip5 0x7f09009b
-int id chipGroup 0x7f09009c
 int id chronometer 0x7f09009d
 int id circle_center 0x7f09009e
 int id clear_text 0x7f09009f

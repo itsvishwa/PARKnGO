@@ -110,7 +110,7 @@
             app:queryHint="Search Here..." />
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
+            android:id="@+id/available_parking_spaces_frag_chip_group"
             style="@style/Widget.MaterialComponents.ChipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@+id/available_parking_spaces_frag_search_bar">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip5"
+                android:id="@+id/aps_frag_min_dis_chip"
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,21 +130,21 @@
                 app:chipStartPadding="10dp" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip4"
+                android:id="@+id/aps_frag_max_free_slots_chip"
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Maximum Free Slots" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip3"
+                android:id="@+id/aps_frag_public_chip"
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Public" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip2"
+                android:id="@+id/aps_frag_min_rate_chip"
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/available_parking_spaces_frag_chip_group" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
