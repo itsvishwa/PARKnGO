@@ -28,13 +28,15 @@ public class APSFetchData {
     View noAvailableParkingView;
     Context context;
     String vehicleType;
+    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
-    public APSFetchData(View view, View loadingView, View noAvailableParkingView, Context context, String vehicleType) {
+    public APSFetchData(View view, View loadingView, View noAvailableParkingView, Context context, String vehicleType, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr) {
         this.view = view;
         this.loadingView = loadingView;
         this.noAvailableParkingView = noAvailableParkingView;
         this.context = context;
         this.vehicleType = vehicleType;
+        this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
         fetchData();
     }
 
@@ -72,8 +74,6 @@ public class APSFetchData {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray resultDataArr = jsonObject.getJSONArray("response");
 
-            ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr = new ArrayList<>();
-
             for (int i=0; i<resultDataArr.length(); i++){
                 JSONObject dataObj = resultDataArr.getJSONObject(i);
                 String _id = dataObj.getString("_id");
@@ -87,7 +87,7 @@ public class APSFetchData {
                 String rate = "Rs. " + dataObj.getString("rate");
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, "450 m"));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, "450 m", latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view

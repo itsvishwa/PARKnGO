@@ -3259,6 +3259,10 @@ id anticipate
 id appbar_icon_home_act
 id appbar_main_text
 id appbar_secondary_text
+id aps_frag_max_free_slots_chip
+id aps_frag_min_dis_chip
+id aps_frag_min_rate_chip
+id aps_frag_public_chip
 id arc
 id asConfigured
 id async
@@ -3275,6 +3279,7 @@ id ava_rating_count
 id ava_recycle_view
 id ava_total_slots
 id ava_type
+id available_parking_spaces_frag_chip_group
 id available_parking_spaces_frag_search_bar
 id bank_account_subtitle_txt
 id barrier
@@ -3322,11 +3327,6 @@ id chain2
 id chains
 id checkbox
 id checked
-id chip2
-id chip3
-id chip4
-id chip5
-id chipGroup
 id chronometer
 id circle_center
 id clear_text
