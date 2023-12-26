@@ -76,6 +76,7 @@ id ava_rating_count
 id ava_recycle_view
 id ava_total_slots
 id ava_type
+id available_parking_spaces_frag_search_bar
 id button
 id button10
 id button11
