@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Please wait"
+                    android:text="Please wait a moment"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,23 +68,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.8">
-
-                <ImageView
-                    android:id="@+id/appbar_icon_home_act"
-                    android:layout_width="51dp"
-                    android:layout_height="51dp"
-                    android:background="@drawable/appbar_icon_bg"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/baseline_notifications_none_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/backgroundColor" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_weight="0.8"/>
 
         </LinearLayout>
 
