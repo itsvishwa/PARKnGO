@@ -1,4 +1,4 @@
-package com.example.parkngo.home;
+package com.example.parkngo.home.helpers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -19,10 +19,10 @@ import java.util.ArrayList;
 public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAdapter.MyViewHolder>{
 
     Context context;
-    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModels;
+    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
     public APSRecycleViewAdapter(Context context, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModels) {
         this.context = context;
-        this.availableParkingSpaceModels = availableParkingSpaceModels;
+        this.availableParkingSpaceModelsArr = availableParkingSpaceModels;
     }
 
     @NonNull
@@ -38,27 +38,27 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
     public void onBindViewHolder(@NonNull APSRecycleViewAdapter.MyViewHolder holder, int position) {
         // assign values to the view
         // based on the position of recycler view
-        holder.parkingNameView.setText(availableParkingSpaceModels.get(position).getParkingName());
-        holder.freeSlotsView.setText(availableParkingSpaceModels.get(position).getFreeSlots() + "");
-        holder.totalSlotsView.setText(availableParkingSpaceModels.get(position).getTotalSlots() + "");
-        holder.rateView.setText("Rs. " + availableParkingSpaceModels.get(position).getRate() + "/1h");
-        holder.parkingTypeView.setText(availableParkingSpaceModels.get(position).getParkingType());
-        if(availableParkingSpaceModels.get(position).getParkingType() !="Public"){
+        holder.parkingNameView.setText(availableParkingSpaceModelsArr.get(position).getParkingName());
+        holder.freeSlotsView.setText(availableParkingSpaceModelsArr.get(position).getFreeSlots());
+        holder.totalSlotsView.setText(availableParkingSpaceModelsArr.get(position).getTotalSlots());
+        holder.rateView.setText(availableParkingSpaceModelsArr.get(position).getRate());
+        holder.parkingTypeView.setText(availableParkingSpaceModelsArr.get(position).getParkingType());
+        if(availableParkingSpaceModelsArr.get(position).getParkingType() !="Public"){
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_red_circle);
             holder.parkingTypeView.setBackground(drawable);
         }else{
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_green_circle);
             holder.parkingTypeView.setBackground(drawable);
         }
-        holder.distanceView.setText(availableParkingSpaceModels.get(position).getDistance() + " m");
-        holder.ratingBarView.setRating(availableParkingSpaceModels.get(position).getNoOfStars() * 1.0f);
-        holder.noOfReviewsView.setText("(" + availableParkingSpaceModels.get(position).getNoOfReviews() + ")");
+        holder.distanceView.setText(availableParkingSpaceModelsArr.get(position).getDistance());
+        holder.ratingBarView.setRating(availableParkingSpaceModelsArr.get(position).getNoOfStars());
+        holder.noOfReviewsView.setText(availableParkingSpaceModelsArr.get(position).getNoOfReviews());
     }
 
     @Override
     public int getItemCount() {
         // number of items you want to display
-        return availableParkingSpaceModels.size();
+        return availableParkingSpaceModelsArr.size();
     }
 
     public static class MyViewHolder extends  RecyclerView.ViewHolder{
