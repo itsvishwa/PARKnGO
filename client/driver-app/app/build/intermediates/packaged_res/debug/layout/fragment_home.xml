@@ -121,7 +121,6 @@
                 android:layout_height="173dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="home_frag_view_available_spaces_btn_handler"
                 android:padding="8dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/home_find_parking_icon"

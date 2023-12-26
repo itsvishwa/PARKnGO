@@ -125,13 +125,6 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new ParkingSelectedFragment());
     }
 
-
-    // home fragment -> view all available parking spaces viewer
-    public void home_frag_view_available_spaces_btn_handler(View view) {
-        replaceFragment(new AvailableParkingSpacesFragment());
-    }
-
-
     // profile fragment -> edit profile details
     public void profile_frag_edit_profile_btn_handler(View view){
         replaceFragment(new EditProfileFragment());
@@ -198,13 +191,6 @@ public class MainActivity extends AppCompatActivity {
     public void edit_profile_frag_change_mobile_number_btn_handler(View view){
         replaceFragment(new EditMobileNumberFragment());
     }
-
-
-    // add a review
-//    public void parking_selected_frag_add_review_btn_handler(View view){
-//        replaceFragment(new AddReviewFragment());
-//    }
-
 
     // scan qr
     public void scan_frag_qr_btn_handler(View view){
