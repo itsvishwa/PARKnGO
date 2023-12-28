@@ -138,19 +138,27 @@ class Profile extends Controller
             $this->send_json_404("Token Not Found");
         } else {
             $details = $this->officer_model->get_officer($token_data["user_id"]);
-            print_r($details);
+            
+            if ($details) {
+
+                // Concatenate first name and last name
+                $full_name = $details["first_name"] . " " . $details["last_name"]; 
+    
+                $officer_details = [
+                    "officer_id" => $details["officer_id"],
+                    "full_name" => $full_name,
+                    "mobile_number" => $details["mobile_number"],
+                    "nic" => $details["nic"],
+                    "parking_id" => $details["parking_id"]
+                ];
+    
+                $this->send_json_200($officer_details);
+            } else {
+                $this->send_json_404("Officer details not found");
+            }
+
         }
 
-
-
-
-
-        // if($this->officer_model->is_mobile_number_exist($mobile_number)) {
-        //     $details = $this->officer_model->get_officer($mobile_number);
-        //     print_r($details);
-        // } else {
-        //     $this->send_json_400("Mobile number is not exists");
-        // }
     }
 
 
