@@ -34,14 +34,16 @@ public class APSSearchFetchData {
     String vehicleType;
     String keyword;
     MainActivity mainActivity;
+    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
-    public APSSearchFetchData(View view, View loadingView, Context context, String vehicleType, String keyword, MainActivity mainActivity){
+    public APSSearchFetchData(View view, View loadingView, Context context, String vehicleType, String keyword, MainActivity mainActivity, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr){
         this.view = view;
         this.loadingView = loadingView;
         this.context = context;
         this.vehicleType = vehicleType;
         this.keyword = keyword;
         this.mainActivity = mainActivity;
+        this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
         fetchData();
     }
 
@@ -79,7 +81,7 @@ public class APSSearchFetchData {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray resultDataArr = jsonObject.getJSONArray("response");
 
-            ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr = new ArrayList<>();
+            availableParkingSpaceModelsArr.clear();
 
             for (int i=0; i<resultDataArr.length(); i++){
                 JSONObject dataObj = resultDataArr.getJSONObject(i);
@@ -89,12 +91,12 @@ public class APSSearchFetchData {
                 String latitude = dataObj.getString("latitude");
                 String longitude = dataObj.getString("longitude");
                 String publicOrPrivate = dataObj.getString("is_public").equals("1") ? "Public" : "Customer Only";
-                String free_slots = dataObj.getString("free_slots");
+                int free_slots = Integer.parseInt(dataObj.getString("free_slots"));
                 String total_slots = dataObj.getString("total_slots");
-                String rate = "Rs. " + dataObj.getString("rate");
+                int rate = Integer.parseInt(dataObj.getString("rate"));
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, "450 m", latitude, longitude));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view

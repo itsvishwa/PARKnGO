@@ -46,9 +46,9 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
         // assign values to the view
         // based on the position of recycler view
         holder.parkingNameView.setText(availableParkingSpaceModelsArr.get(position).getParkingName());
-        holder.freeSlotsView.setText(availableParkingSpaceModelsArr.get(position).getFreeSlots());
+        holder.freeSlotsView.setText(availableParkingSpaceModelsArr.get(position).getFreeSlots() + "");
         holder.totalSlotsView.setText(availableParkingSpaceModelsArr.get(position).getTotalSlots());
-        holder.rateView.setText(availableParkingSpaceModelsArr.get(position).getRate());
+        holder.rateView.setText("Rs. " + availableParkingSpaceModelsArr.get(position).getRate());
         holder.parkingTypeView.setText(availableParkingSpaceModelsArr.get(position).getParkingType());
         if(availableParkingSpaceModelsArr.get(position).getParkingType() !="Public"){
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_red_circle);
@@ -57,7 +57,7 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_green_circle);
             holder.parkingTypeView.setBackground(drawable);
         }
-        holder.distanceView.setText(availableParkingSpaceModelsArr.get(position).getDistance());
+        holder.distanceView.setText(availableParkingSpaceModelsArr.get(position).getDistance() + " KM");
         holder.ratingBarView.setRating(availableParkingSpaceModelsArr.get(position).getNoOfStars());
         holder.noOfReviewsView.setText(availableParkingSpaceModelsArr.get(position).getNoOfReviews());
     }
