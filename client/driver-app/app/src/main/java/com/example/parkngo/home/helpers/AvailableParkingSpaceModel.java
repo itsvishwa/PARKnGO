@@ -2,17 +2,17 @@ package com.example.parkngo.home.helpers;
 
 public class AvailableParkingSpaceModel {
     String parkingName;
-    String freeSlots;
+    int freeSlots;
     String totalSlots;
-    String rate;
+    int rate;
     String parkingType;
     int noOfStars;
     String noOfReviews;
-    String distance;
+    Double distance;
     String latitude;
     String longitude;
 
-    public AvailableParkingSpaceModel(String parkingName, String freeSlots, String totalSlots, String rate, String parkingType, int noOfStars, String noOfReviews, String distance, String latitude, String longitude) {
+    public AvailableParkingSpaceModel(String parkingName, int freeSlots, String totalSlots, int rate, String parkingType, int noOfStars, String noOfReviews, Double distance, String latitude, String longitude) {
         this.parkingName = parkingName;
         this.freeSlots = freeSlots;
         this.totalSlots = totalSlots;
@@ -29,7 +29,7 @@ public class AvailableParkingSpaceModel {
         return parkingName;
     }
 
-    public String getFreeSlots() {
+    public int getFreeSlots() {
         return freeSlots;
     }
 
@@ -37,7 +37,7 @@ public class AvailableParkingSpaceModel {
         return totalSlots;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
@@ -53,7 +53,7 @@ public class AvailableParkingSpaceModel {
         return noOfReviews;
     }
 
-    public String getDistance() {
+    public Double getDistance() {
         return distance;
     }
 

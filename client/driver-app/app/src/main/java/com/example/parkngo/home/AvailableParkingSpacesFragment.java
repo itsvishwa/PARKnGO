@@ -64,7 +64,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
                     parent.removeView(view);
                     parent.addView(loadingView, index);
                 }
-                new APSSearchFetchData(view, loadingView, getContext(), vehicleType, query, mainActivity);
+                new APSSearchFetchData(view, loadingView, getContext(), vehicleType, query, mainActivity, availableParkingSpaceModelsArr);
                 return false;
             }
 
@@ -76,8 +76,6 @@ public class AvailableParkingSpacesFragment extends Fragment {
 
         // sorting and filtering
         ChipGroup chipGroup = view.findViewById(R.id.available_parking_spaces_frag_chip_group);
-
-        // Set a listener for chip selection changes
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
             public void onCheckedChanged(@NonNull ChipGroup group, @NonNull List<Integer> checkedIds) {
@@ -103,7 +101,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
                         min_rate = true;
                     }
                 }
-                Toast.makeText(getContext(), " " + min_distance + max_free_slots + is_public + min_rate, Toast.LENGTH_SHORT).show();
+
                 // switch back to loading view until the data is get fetched
                 ViewGroup parent = (ViewGroup) view.getParent();
                 if (parent != null) {
