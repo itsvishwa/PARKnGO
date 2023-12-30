@@ -1,4 +1,4 @@
-package com.example.parkngo.home.helpers;
+package com.example.parkngo.parking.helpers;
 
 import android.content.Context;
 import android.view.View;
@@ -22,39 +22,31 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class APSFetchData {
-    View view;
+public class ParkingFetchData {
+
     View loadingView;
+    View parkingView;
     View noAvailableParkingView;
     Context context;
-    String vehicleType;
-    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
-    public APSFetchData(View view, View loadingView, View noAvailableParkingView, Context context, String vehicleType, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr) {
-        this.view = view;
+    public ParkingFetchData(View loadingView, View parkingView, View noAvailableParkingView, Context context){
         this.loadingView = loadingView;
+        this.parkingView = parkingView;
         this.noAvailableParkingView = noAvailableParkingView;
         this.context = context;
-        this.vehicleType = vehicleType;
-        this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
         fetchData();
     }
 
-
-    // call the API and fetch data
     private void fetchData(){
-
         RequestQueue queue = Volley.newRequestQueue(context);
-
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_available/" + vehicleType;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_all";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        successResponseHandler(response);
+                            successResponseHandler(response);
                     }
-
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -64,36 +56,32 @@ public class APSFetchData {
                 }
         );
 
+        // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
 
-
     // response-success handler
     private void successResponseHandler(String response){
-        try{
+        try {
             JSONObject jsonObject = new JSONObject(response);
-            JSONArray resultDataArr = jsonObject.getJSONArray("response");
-
-            for (int i=0; i<resultDataArr.length(); i++){
-                JSONObject dataObj = resultDataArr.getJSONObject(i);
-                String _id = dataObj.getString("_id");
-                String name = dataObj.getString("name");
-                String address = dataObj.getString("address");
-                String latitude = dataObj.getString("latitude");
-                String longitude = dataObj.getString("longitude");
-                String publicOrPrivate = dataObj.getString("is_public").equals("1") ? "Public" : "Customer Only";
-                int free_slots = Integer.parseInt(dataObj.getString("free_slots"));
-                String total_slots = dataObj.getString("total_slots");
-                int rate = Integer.parseInt(dataObj.getString("rate"));
-                int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
-                String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
+            JSONArray parkingSpacesDataArr = jsonObject.getJSONArray("response");
+            ArrayList<ParkingModel> parkingModels = new ArrayList<>();
+            for (int i = 0; i < parkingSpacesDataArr.length(); i++) {
+                JSONObject parkingSpaceData = parkingSpacesDataArr.getJSONObject(i);
+                int _id = parkingSpaceData.getInt("_id");
+                String name = parkingSpaceData.getString("name");
+                String address = parkingSpaceData.getString("address");
+                String type = parkingSpaceData.getString("is_public").equals("1") ? "Public" : "Customer Only";
+                String status = parkingSpaceData.getString("is_closed").equals("1") ? "Closed" :  "Open";
+                int avg_star_count = parkingSpaceData.getInt("avg_star_count");
+                int total_review_count = parkingSpaceData.getInt("total_review_count");
+                parkingModels.add(new ParkingModel(_id, name, type, address, avg_star_count, total_review_count, status));
             }
 
-            // setting up the available parking spaces recycle view
-            RecyclerView recyclerView = view.findViewById(R.id.ava_recycle_view);
-            APSRecycleViewAdapter adapter = new APSRecycleViewAdapter(context, availableParkingSpaceModelsArr);
-            recyclerView.setAdapter(adapter);
+            // Inflate the parking fragment once data is loaded
+            RecyclerView recyclerView = parkingView.findViewById(R.id.parking_frag_recycle_view);
+            PMRecycleViewAdapter pmRecycleViewAdapter = new PMRecycleViewAdapter(parkingModels, context);
+            recyclerView.setAdapter(pmRecycleViewAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             // Replace the loading view with the parking view
@@ -101,23 +89,22 @@ public class APSFetchData {
             if (parent != null) {
                 int index = parent.indexOfChild(loadingView);
                 parent.removeView(loadingView);
-                parent.addView(view, index);
+                parent.addView(parkingView, index);
             }
         }catch (JSONException e){
             throw new RuntimeException(e);
         }
     }
 
-
     // response-error handler
-    private void errorResponseHandler(VolleyError error){
+    private void errorResponseHandler(VolleyError error) {
         String errorResponse;
         if (error.networkResponse != null && error.networkResponse.data != null) {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
                 String response = jsonResponse.getString("response");
-                if(response.equals("0")) // 0 => means no parking available
+                if(response.equals("N/A")) // "N/A" if there are no parking spaces
                 {
                     // Replace the loading view with the parking view
                     ViewGroup parent = (ViewGroup) loadingView.getParent();
@@ -127,7 +114,7 @@ public class APSFetchData {
                         parent.addView(noAvailableParkingView, index);
                     }
                 }else{
-                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
