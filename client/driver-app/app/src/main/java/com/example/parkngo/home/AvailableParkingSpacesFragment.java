@@ -47,6 +47,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
             vehicleType = getArguments().getString("vehicleType", "none");
         }
 
+
         // fetch data via api and set to the views
         new APSFetchData(view, loadingView, noAvailableParkingView, getContext(), vehicleType, availableParkingSpaceModelsArr);
 
@@ -74,7 +75,8 @@ public class AvailableParkingSpacesFragment extends Fragment {
             }
         });
 
-        // sorting and filtering
+
+        // sorting and filtering buttons
         ChipGroup chipGroup = view.findViewById(R.id.available_parking_spaces_frag_chip_group);
         chipGroup.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
             @Override
