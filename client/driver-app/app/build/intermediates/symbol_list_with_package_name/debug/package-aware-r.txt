@@ -3308,8 +3308,6 @@ id button4
 id button5
 id button6
 id button7
-id button8
-id button9
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3404,9 +3402,12 @@ id east
 id edge
 id editTextText
 id editTextText2
-id editTextTextMultiLine2
 id editText_mobile_number_signup
 id edit_query
+id edit_review_frag_confirm_btn
+id edit_review_frag_content
+id edit_review_frag_discard_btn
+id edit_review_frag_rating_bar
 id elastic
 id embed
 id end
@@ -3672,7 +3673,6 @@ id progress_horizontal
 id progress_view
 id ps_frag_recycle_view
 id radio
-id ratingBar2
 id ratio
 id rectangles
 id retry_btn

@@ -42,7 +42,9 @@ public class ParkingSelectedFetchData {
     View loadingView;
     int _id;
     Context context;
-    String user_review_id;
+    String userReviewId;
+    String userReviewContent;
+    int userReviewRating;
 
     public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, int _id, Context context){
         this.parkingSelectedView = parkingSelectedView;
@@ -51,6 +53,7 @@ public class ParkingSelectedFetchData {
         this.context = context;
         fetchData();
     }
+
 
     private void fetchData(){
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -84,6 +87,7 @@ public class ParkingSelectedFetchData {
         queue.add(stringRequest);
     }
 
+
     // response-success handler
     private void successResponseHandler(String response){
         try {
@@ -105,6 +109,7 @@ public class ParkingSelectedFetchData {
             throw new RuntimeException(e);
         }
     }
+
 
     // response-error handler
     private void errorResponseHandler(VolleyError error) {
@@ -200,7 +205,9 @@ public class ParkingSelectedFetchData {
             userContentView.setText(userOwnReview.getString("content"));
             userRatingBar1.setRating(Integer.parseInt(userOwnReview.getString("no_of_stars")));
 
-            this.user_review_id = userOwnReview.getString("_id");
+            this.userReviewId = userOwnReview.getString("_id");
+            this.userReviewContent = userOwnReview.getString("content");
+            this.userReviewRating = Integer.parseInt(userOwnReview.getString("no_of_stars"));
 
         }else{
             writeReviewBtn.setVisibility(View.VISIBLE);
@@ -248,7 +255,13 @@ public class ParkingSelectedFetchData {
 
 
     // return user_review_id
-    public String getUser_review_id(){
-        return user_review_id;
+    public String getUserReviewId(){
+        return userReviewId;
     }
+
+    // return user review content
+    public String getUserReviewContent(){return userReviewContent;}
+
+    // return user review rating
+    public int getUserReviewRating(){return userReviewRating;}
 }
