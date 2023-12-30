@@ -127,7 +127,7 @@ public class APSFetchData {
                         parent.addView(noAvailableParkingView, index);
                     }
                 }else{
-                Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
