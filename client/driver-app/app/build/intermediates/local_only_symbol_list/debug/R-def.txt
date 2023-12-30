@@ -94,8 +94,6 @@ id button4
 id button5
 id button6
 id button7
-id button8
-id button9
 id constraintLayout
 id constraintLayout10
 id constraintLayout11
@@ -113,8 +111,11 @@ id delete_review_frag_discard_btn
 id divider
 id editTextText
 id editTextText2
-id editTextTextMultiLine2
 id editText_mobile_number_signup
+id edit_review_frag_confirm_btn
+id edit_review_frag_content
+id edit_review_frag_discard_btn
+id edit_review_frag_rating_bar
 id fab_btn_edit_profile
 id fab_btn_main
 id fab_btn_payment_history
@@ -192,7 +193,6 @@ id profile_frag_name
 id profile_frag_name_text
 id progressBar2
 id ps_frag_recycle_view
-id ratingBar2
 id ri_date
 id ri_msg
 id ri_name

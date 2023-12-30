@@ -1,54 +1,24 @@
 package com.example.parkngo.parking;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ParkngoStorage;
 import com.example.parkngo.parking.helpers.ParkingSelectedFetchData;
-import com.example.parkngo.parking.helpers.RMRecycleViewAdapter;
-import com.example.parkngo.parking.helpers.ReviewModel;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ParkingSelectedFragment extends Fragment {
 
     private View parkingSelectedView;
     private View loadingView;
     private int _id;
-    private String user_review_id;
+    private String userReviewId;
 
     MainActivity mainActivity;
 
@@ -74,7 +44,7 @@ public class ParkingSelectedFragment extends Fragment {
 
         // onclick listeners ......................................................................................................
 
-        //set write review btn handler
+        //set add review btn handler
         Button addReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
         addReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,9 +62,23 @@ public class ParkingSelectedFragment extends Fragment {
             @Override
             public void onClick(View view){
                 Bundle data = new Bundle();
-                data.putString("_id", parkingSelectedFetchData.getUser_review_id());
+                data.putString("_id", parkingSelectedFetchData.getUserReviewId());
 
                 mainActivity.replaceFragment(new DeleteReviewFragment(), data);
+            }
+        });
+
+        // set edit review btn handler
+        Button editReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_edit_review_btn);
+        editReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString("_id", parkingSelectedFetchData.getUserReviewId());
+                data.putString("content", parkingSelectedFetchData.getUserReviewContent());
+                data.putInt("rating", parkingSelectedFetchData.getUserReviewRating());
+
+                mainActivity.replaceFragment(new EditReviewFragment(), data);
             }
         });
         // onclick listeners ......................................................................................................

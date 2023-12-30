@@ -3307,8 +3307,6 @@ int id button4 0x7f090081
 int id button5 0x7f090082
 int id button6 0x7f090083
 int id button7 0x7f090084
-int id button8 0x7f090085
-int id button9 0x7f090086
 int id buttonPanel 0x7f090087
 int id cache_measures 0x7f090088
 int id callMeasure 0x7f090089
@@ -3403,9 +3401,12 @@ int id east 0x7f0900e6
 int id edge 0x7f0900e7
 int id editTextText 0x7f0900e8
 int id editTextText2 0x7f0900e9
-int id editTextTextMultiLine2 0x7f0900ea
 int id editText_mobile_number_signup 0x7f0900eb
 int id edit_query 0x7f0900ec
+int id edit_review_frag_confirm_btn 0x7f0902dc
+int id edit_review_frag_content 0x7f0902dd
+int id edit_review_frag_discard_btn 0x7f0902de
+int id edit_review_frag_rating_bar 0x7f0902df
 int id elastic 0x7f0900ed
 int id embed 0x7f0900ee
 int id end 0x7f0900ef
@@ -3671,7 +3672,6 @@ int id progress_horizontal 0x7f0901f2
 int id progress_view 0x7f0901f3
 int id ps_frag_recycle_view 0x7f0901f4
 int id radio 0x7f0901f5
-int id ratingBar2 0x7f0901f6
 int id ratio 0x7f0901f7
 int id rectangles 0x7f0901f8
 int id retry_btn 0x7f0901f9
