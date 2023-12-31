@@ -3302,11 +3302,8 @@ int id button11 0x7f090080
 int id button12 0x7f090081
 int id button13 0x7f090082
 int id button14 0x7f090083
-int id button2 0x7f090084
 int id button3 0x7f090085
-int id button4 0x7f090086
 int id button5 0x7f090087
-int id button6 0x7f090088
 int id button7 0x7f090089
 int id buttonPanel 0x7f09008a
 int id cache_measures 0x7f09008b
@@ -3400,9 +3397,12 @@ int id easeInOut 0x7f0900e2
 int id easeOut 0x7f0900e3
 int id east 0x7f0900e4
 int id edge 0x7f0900e5
-int id editTextText 0x7f0900e6
-int id editTextText2 0x7f0900e7
 int id editText_mobile_number_signup 0x7f0900e8
+int id edit_prof_frag_change_mobile_btn 0x7f0902e3
+int id edit_prof_frag_discard_btn 0x7f0902e4
+int id edit_prof_frag_first_name 0x7f0902e5
+int id edit_prof_frag_last_name 0x7f0902e6
+int id edit_prof_frag_save_btn 0x7f0902e7
 int id edit_query 0x7f0900e9
 int id edit_review_frag_confirm_btn 0x7f0900ea
 int id edit_review_frag_content 0x7f0900eb
@@ -3820,6 +3820,8 @@ int id textView11 0x7f090286
 int id textView12 0x7f090287
 int id textView13 0x7f090288
 int id textView14 0x7f090289
+int id textView15 0x7f0902e8
+int id textView16 0x7f0902e9
 int id textView17 0x7f09028a
 int id textView19 0x7f09028b
 int id textView2 0x7f09028c
