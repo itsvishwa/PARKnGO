@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
@@ -27,7 +26,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
 
     View view;
     View loadingView;
-    View noAvailableParkingView;
+    View errorView;
     String vehicleType;
     MainActivity mainActivity;
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr  = new ArrayList<>();;
@@ -38,7 +37,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
 
         view  = inflater.inflate(R.layout.fragment_available_parking_spaces, container, false);
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
-        noAvailableParkingView = inflater.inflate(R.layout.fragment_no_available_parking, container, false);
+        errorView = inflater.inflate(R.layout.fragment_error, container, false);
         mainActivity = (MainActivity)requireContext();
 
 
@@ -49,7 +48,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
 
 
         // fetch data via api and set to the views
-        new APSFetchData(view, loadingView, noAvailableParkingView, getContext(), vehicleType, availableParkingSpaceModelsArr);
+        new APSFetchData(view, loadingView, errorView, getContext(), vehicleType, availableParkingSpaceModelsArr);
 
 
         // onclick listeners.......................................................................
@@ -65,7 +64,7 @@ public class AvailableParkingSpacesFragment extends Fragment {
                     parent.removeView(view);
                     parent.addView(loadingView, index);
                 }
-                new APSSearchFetchData(view, loadingView, getContext(), vehicleType, query, mainActivity, availableParkingSpaceModelsArr);
+                new APSSearchFetchData(view, loadingView, errorView, getContext(), vehicleType, query, mainActivity, availableParkingSpaceModelsArr);
                 return false;
             }
 

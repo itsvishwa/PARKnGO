@@ -53,6 +53,7 @@ drawable radius_6_solid
 drawable radius_6_upper_bar
 drawable radius_6_with_outline
 drawable radius_9_solid
+drawable round_blue_circle
 drawable round_green_circle
 drawable round_outline
 drawable round_red_circle
@@ -116,6 +117,11 @@ id edit_review_frag_confirm_btn
 id edit_review_frag_content
 id edit_review_frag_discard_btn
 id edit_review_frag_rating_bar
+id error_frag_appbar_main_title
+id error_frag_appbar_sub_title
+id error_frag_body_main_text
+id error_frag_body_sub_text
+id error_frag_img
 id fab_btn_edit_profile
 id fab_btn_main
 id fab_btn_payment_history
@@ -131,7 +137,6 @@ id home_frag_spinner
 id home_frag_user_name
 id imageView
 id imageView2
-id imageView3
 id imageView4
 id imageView5
 id lienar_layout_name
@@ -180,8 +185,12 @@ id parking_selected_frag_review_layout
 id payment_frag_recycle_view
 id ph_frag_datetime
 id ph_frag_duration
+id ph_frag_parking_space
+id ph_frag_payment_type
 id ph_frag_rate
-id ph_frag_type
+id ph_frag_vehicle_number
+id ph_frag_vehicle_type
+id ph_item_parking_space_title
 id phn_number_title
 id pi_address
 id pi_name
@@ -223,8 +232,7 @@ id textView11
 id textView12
 id textView13
 id textView14
-id textView15
-id textView16
+id textView17
 id textView19
 id textView2
 id textView20
@@ -269,10 +277,10 @@ layout fragment_delete_review
 layout fragment_edit_mobile_number
 layout fragment_edit_profile
 layout fragment_edit_review
+layout fragment_error
 layout fragment_home
 layout fragment_logout
 layout fragment_navigate
-layout fragment_no_available_parking
 layout fragment_parking
 layout fragment_parking_selected
 layout fragment_payment

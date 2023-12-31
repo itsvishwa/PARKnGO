@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.R;
+import com.example.parkngo.helpers.ErrorFragmentHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,13 +27,13 @@ public class ParkingFetchData {
 
     View loadingView;
     View parkingView;
-    View noAvailableParkingView;
+    View errorView;
     Context context;
 
-    public ParkingFetchData(View loadingView, View parkingView, View noAvailableParkingView, Context context){
+    public ParkingFetchData(View loadingView, View parkingView, View errorView, Context context){
         this.loadingView = loadingView;
         this.parkingView = parkingView;
-        this.noAvailableParkingView = noAvailableParkingView;
+        this.errorView = errorView;
         this.context = context;
         fetchData();
     }
@@ -107,11 +108,20 @@ public class ParkingFetchData {
                 if(response.equals("N/A")) // "N/A" if there are no parking spaces
                 {
                     // Replace the loading view with the parking view
+                    String appBarMainText = "No Available Parking Spaces";
+                    String appBarSubText = "Please try again later";
+                    int bodyImg = R.drawable.not_available;
+                    String bodyMainText = "Parking spaces not available for selected vehicle type!";
+                    String bodySubText = "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options";
+
+                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
+                    View newErrorView = errorFragmentHandler.setupView();
+
                     ViewGroup parent = (ViewGroup) loadingView.getParent();
                     if (parent != null) {
                         int index = parent.indexOfChild(loadingView);
                         parent.removeView(loadingView);
-                        parent.addView(noAvailableParkingView, index);
+                        parent.addView(newErrorView, index);
                     }
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
