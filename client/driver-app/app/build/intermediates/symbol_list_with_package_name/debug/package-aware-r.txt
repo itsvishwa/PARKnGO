@@ -3303,11 +3303,8 @@ id button11
 id button12
 id button13
 id button14
-id button2
 id button3
-id button4
 id button5
-id button6
 id button7
 id buttonPanel
 id cache_measures
@@ -3401,9 +3398,12 @@ id easeInOut
 id easeOut
 id east
 id edge
-id editTextText
-id editTextText2
 id editText_mobile_number_signup
+id edit_prof_frag_change_mobile_btn
+id edit_prof_frag_discard_btn
+id edit_prof_frag_first_name
+id edit_prof_frag_last_name
+id edit_prof_frag_save_btn
 id edit_query
 id edit_review_frag_confirm_btn
 id edit_review_frag_content
@@ -3821,6 +3821,8 @@ id textView11
 id textView12
 id textView13
 id textView14
+id textView15
+id textView16
 id textView17
 id textView19
 id textView2
