@@ -82,6 +82,7 @@ class PaymentModel
          payment.amount,
          payment.payment_method,
          payment.time_stamp,
+         payment.payment_method,
          parking_session.start_time, 
          parking_session.end_time,
          parking_session.vehicle_number,

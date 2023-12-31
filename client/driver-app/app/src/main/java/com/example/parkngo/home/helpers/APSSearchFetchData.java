@@ -16,8 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.home.AvailableParkingSpacesFragment;
-import com.example.parkngo.home.NoAvailableParkingFragment;
+import com.example.parkngo.helpers.ErrorFragmentHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,16 +28,17 @@ public class APSSearchFetchData {
 
     View view;
     View loadingView;
-    View noAvailableParkingView;
+    View errorView;
     Context context;
     String vehicleType;
     String keyword;
     MainActivity mainActivity;
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
-    public APSSearchFetchData(View view, View loadingView, Context context, String vehicleType, String keyword, MainActivity mainActivity, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr){
+    public APSSearchFetchData(View view, View loadingView, View errorView, Context context, String vehicleType, String keyword, MainActivity mainActivity, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr){
         this.view = view;
         this.loadingView = loadingView;
+        this.errorView = errorView;
         this.context = context;
         this.vehicleType = vehicleType;
         this.keyword = keyword;
@@ -128,7 +128,21 @@ public class APSSearchFetchData {
                 String response = jsonResponse.getString("response");
                 if(response.equals("0")) // 0 => means no parking available
                 {
-                    mainActivity.replaceFragment(new NoAvailableParkingFragment());
+                    String appBarMainText = "No Available Parking Spaces";
+                    String appBarSubText = "Please try again later";
+                    int bodyImg = R.drawable.not_available;
+                    String bodyMainText = "Parking spaces not available for selected vehicle type!";
+                    String bodySubText = "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options";
+
+                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
+                    View newErrorView = errorFragmentHandler.setupView();
+
+                    ViewGroup parent = (ViewGroup) loadingView.getParent();
+                    if (parent != null) {
+                        int index = parent.indexOfChild(loadingView);
+                        parent.removeView(loadingView);
+                        parent.addView(newErrorView, index);
+                    }
                 }else{
                     Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                 }

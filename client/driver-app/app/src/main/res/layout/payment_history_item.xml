@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:onClick="parking_space_frag_parking_space_item_handler"
-    android:layout_marginBottom="12dp"
+    android:layout_marginBottom="20dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -43,6 +43,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
+        android:id="@+id/ph_frag_payment_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="CASH"
+        app:layout_constraintStart_toEndOf="@+id/textView22"
+        app:layout_constraintTop_toTopOf="@+id/ph_frag_rate" />
+
+    <TextView
         android:id="@+id/ph_frag_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,6 +59,17 @@
         android:text="Rs. 425.00"
         app:layout_constraintStart_toStartOf="@+id/ph_frag_datetime"
         app:layout_constraintTop_toBottomOf="@+id/ph_frag_datetime" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="|"
+
+        app:layout_constraintBottom_toBottomOf="@+id/ph_frag_rate"
+        app:layout_constraintStart_toEndOf="@+id/ph_frag_rate"
+        app:layout_constraintTop_toTopOf="@+id/ph_frag_rate" />
 
     <TextView
         android:id="@+id/textView33"
@@ -81,13 +101,43 @@
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <TextView
-        android:id="@+id/ph_frag_type"
+        android:id="@+id/ph_frag_vehicle_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Car"
+        android:text="CAF 6556 WP"
         app:layout_constraintStart_toStartOf="@+id/ph_frag_duration"
         app:layout_constraintTop_toBottomOf="@+id/ph_frag_duration" />
+
+    <TextView
+        android:id="@+id/ph_frag_vehicle_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Car"
+        app:layout_constraintBottom_toBottomOf="@+id/ph_frag_vehicle_number"
+        app:layout_constraintStart_toEndOf="@+id/ph_frag_vehicle_number"
+        app:layout_constraintTop_toTopOf="@+id/ph_frag_vehicle_number"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/ph_item_parking_space_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Parking Space"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+    <TextView
+        android:id="@+id/ph_frag_parking_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="CMC CAR PARK"
+        app:layout_constraintStart_toStartOf="@+id/ph_frag_vehicle_number"
+        app:layout_constraintTop_toBottomOf="@+id/ph_frag_vehicle_number" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -97,5 +147,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|"
+        app:layout_constraintBottom_toBottomOf="@+id/ph_frag_vehicle_number"
+        app:layout_constraintEnd_toStartOf="@+id/ph_frag_vehicle_type"
+        app:layout_constraintStart_toEndOf="@+id/ph_frag_vehicle_number"
+        app:layout_constraintTop_toTopOf="@+id/ph_frag_vehicle_number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
