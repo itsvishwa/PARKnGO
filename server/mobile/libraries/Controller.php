@@ -297,5 +297,5 @@ class Controller
             
                 // Send the decrypted session_id as a JSON response
                 return $decrypted_session_id;
-            }
+        }
 }
