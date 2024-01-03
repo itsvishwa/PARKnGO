@@ -166,6 +166,7 @@
                         <p>10 Parking Spaces</p>
                       </div>
                     </div>
+                    
                     <div class="parking-ofi-card2-icon ">
                       <div class="parking-ofi-icon">
                         <span class="material-symbols-outlined">
@@ -174,8 +175,10 @@
                       </div>
                       <div class="parking-ofi-card2-content text-black">
                         <p>5 Parking Officers</p>
+                        
                       </div>
                     </div>
+                    
                     <button class="b-view-more bg-black" type="button">
                       <div class="b-card_down-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="rd-menu-logo">
@@ -186,17 +189,29 @@
                         <p>Download the document</p>
                       </div>
                     </button>
-                    <button class="b-delete-more bg-black" type="button">
+
+
+                    
+                    
+                      
+                    <button class="b-delete-more bg-black">
+                    <form action="<?php echo URLROOT; ?>/admins/delete/<?php echo $data['admins']->id; ?>" method="post">
                       <div class="b-card_del-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
                           <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
                         </svg>
                       </div>
+                      
                       <div class="b-delete-more-card2-content text-white">
                         <p>Delete</p>
                       </div>
+                     
+                      </form>
                     </button>
-                  </div>
+                    
+                    
+
+                 </div>
                 </div>
               </div>
               <div>
@@ -241,44 +256,76 @@
           }
         });
       </script>
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const deleteButtons = document.querySelectorAll('.b-delete-more');
+      
 
-          deleteButtons.forEach(button => {
-            button.addEventListener('click', async (event) => {
-              event.preventDefault();
+<!--      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+  const deleteButtons = document.querySelectorAll('.b-delete-more');
 
-              // Assuming the ID of the card to be deleted is present as data attribute
-              const cardId = button.dataset.cardId;
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const companyId = this.dataset.companyId;
 
-              try {
-                const response = await fetch(`/deleteCard/${cardId}`, {
-                  method: 'DELETE', // Assuming you're using DELETE HTTP method
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  // You can send additional data if required
-                  body: JSON.stringify({
-                    cardId: cardId
-                  })
-                });
+      // Perform deletion action using the company ID via fetch or other methods
+      // Example: Call a function to handle the deletion
+      handleDelete(companyId);
+    });
+  });
 
-                if (response.ok) {
-                  // If deletion was successful, remove the card from the UI
-                  const card = button.closest('.b-card1');
-                  card.remove();
-                } else {
-                  // Handle error scenarios
-                  console.error('Failed to delete card');
-                }
-              } catch (error) {
-                console.error('Error deleting card:', error);
-              }
-            });
-          });
-        });
-      </script>
+  // Function to handle deletion
+  function handleDelete(companyId) {
+    // Use fetch or other means to send a request to the server to delete the company with the given ID
+    // Example using fetch:
+    fetch(`/Admins/delete/${companyId}`, {
+      method: 'POST'
+      // Additional headers or data can be added if needed
+    })
+    .then(response => {
+      if (response.ok) {
+        // If deletion is successful, you might want to update the UI or remove the deleted company's card
+        console.log('Company deleted successfully');
+        // Perform necessary UI updates like removing the card or reloading the list
+      } else {
+        console.error('Failed to delete company');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+});
+
+      </script>-->
+
+   <!--   <script>
+        // JavaScript code inside your HTML or in an external file
+document.querySelectorAll('.b-delete-more').forEach(button => {
+  button.addEventListener('click', function() {
+    const companyId = this.dataset.companyId; // Fetch the unique ID associated with the card
+
+    // Send an AJAX request to delete the card
+    fetch(`/admins/delete/${companyId}`, {
+      method: 'DELETE', // Use the appropriate HTTP method (e.g., DELETE)
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        // If deletion is successful, remove the card from the UI
+        this.closest('.b-card1').remove(); // Remove the deleted card from the UI
+        console.log('Company deleted successfully');
+      } else {
+        console.error('Failed to delete company');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+});
+
+      </script>-->
 </body>
 
 </html>

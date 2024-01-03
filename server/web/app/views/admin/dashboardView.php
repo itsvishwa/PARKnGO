@@ -178,8 +178,8 @@
         <div class="b-card3 ">
           <div class="b2-card-content text-bla">
             <p>Number of parking sessions</p>
-            <canvas id="parkingSessionsChart" width="400" height="200"></canvas>  
-            
+            <canvas id="parkingSessionsChart" width="400" height="200"></canvas>
+
           </div>
         </div>
 
@@ -193,13 +193,24 @@
 
               error
             </span>
-<!--<p>You have 03 new company applications to review</p> -->
-<div class="b3-card-content text-white">
+            <!--<p>You have 03 new company applications to review</p> -->
+            <div class="b3-card-content text-white">
 
-<p>You have 04 new company applications to review</p> 
+            <?php if (isset($data['totalPendingApplications'])) : ?>
+    <?php if ($data['totalPendingApplications'] === 0) : ?>
+        <p>You have no new company applications to review</p>
+    <?php elseif ($data['totalPendingApplications'] === 1) : ?>
+        <p>You have 1 new company application to review</p>
+    <?php else : ?>
+        <p>You have <?php echo $data['totalPendingApplications'];?> new company applications to review</p>
+    <?php endif; ?>
+<?php endif; ?>
 
 
-</div>
+            <!--  <p>You have 04 new company applications to review</p>-->
+
+
+            </div>
 
           </div>
         </div>
@@ -214,10 +225,20 @@
             </svg>
             <div class="b3-card-content text-white">
 
-<p>Currently, no company has been suspended</p> 
+            <?php if (isset($data['totalSuspendApplications'])) : ?>
+    <?php if ($data['totalSuspendApplications'] === 0) : ?>
+        <p>Currently, no company has been suspended</p>
+    <?php elseif ($data['totalSuspendApplications'] === 1) : ?>
+        <p>Currently, one company has been suspended</p>
+    <?php else : ?>
+        <p>Currently<?php echo $data['totalSuspendApplications'];?> companies have been suspended</p>
+    <?php endif; ?>
+<?php endif; ?>
+
+            <!--  <p>Currently, no company has been suspended</p>-->
 
 
-</div>
+            </div>
 
 
           </div>
@@ -229,7 +250,7 @@
         <div class="b-card3 ">
           <div class="b2-card-content text-bla">
             <p>Subscription revenue for last 30 days</p>
-            <canvas id="revenueChart" width="400" height="200"></canvas>  
+            <canvas id="revenueChart" width="400" height="200"></canvas>
           </div>
 
         </div>
@@ -239,141 +260,141 @@
           </div>
 
           <!-- Include the reviews here -->
-  <div class="content-body">
-    <!-- Reviews script will populate content here -->
-     <!-- Reviews -->
-  <div class="latest-reviews">
-    <div class="dashboard-review-head">
-      <p class="dashboard-driver-name">John Doe</p>
-      <div class="driver-rating">
-      <div class="star-rating" id="starRating">
-        <!-- Stars SVG -->
-        <!-- Sample: Full stars -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <!-- Sample: Empty stars -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-         <!-- Sample: Empty stars -->
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-         <!-- Sample: Empty stars -->
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-         <!-- Sample: Empty stars -->
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        
-        <!-- Adjust stars based on rating -->
-        <!-- Add or remove these SVG elements dynamically using JavaScript -->
-      </div>
-    </div>
-    </div>
-    <p class="review-parking-name">CMC CAR PARK 01</p>
-    <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
-    <div class="horizontal-line"></div>
-  </div>
+          <div class="content-body">
+            <!-- Reviews script will populate content here -->
+            <!-- Reviews -->
+            <div class="latest-reviews">
+              <div class="dashboard-review-head">
+                <p class="dashboard-driver-name">John Doe</p>
+                <div class="driver-rating">
+                  <div class="star-rating" id="starRating">
+                    <!-- Stars SVG -->
+                    <!-- Sample: Full stars -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
+                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                    </svg>
+                    <!-- Sample: Empty stars -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
+                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                    </svg>
+                    <!-- Sample: Empty stars -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
+                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                    </svg>
+                    <!-- Sample: Empty stars -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
+                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                    </svg>
+                    <!-- Sample: Empty stars -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
+                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                    </svg>
 
-  <div class="custom-line">
-                    <hr style="border: 1px solid #00000045;">
+                    <!-- Adjust stars based on rating -->
+                    <!-- Add or remove these SVG elements dynamically using JavaScript -->
+                  </div>
                 </div>
-  
-  <!-- Add more reviews following the same structure -->
-  <div class="content-body">
-    <!-- Reviews script will populate content here -->
-     <!-- Reviews -->
-  <div class="latest-reviews">
-    <div class="dashboard-review-head">
-      <p class="dashboard-driver-name">Ross Geller</p>
-      <div class="driver-rating">
-      <div class="star-rating" id="starRating">
-        <!-- Stars SVG -->
-        <!-- Sample: Full stars -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        <!-- Sample: Empty stars -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-         <!-- Sample: Empty stars -->
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-         <!-- Sample: Empty stars -->
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-         <!-- Sample: Empty stars -->
-         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-        </svg>
-        
-        <!-- Adjust stars based on rating -->
-        <!-- Add or remove these SVG elements dynamically using JavaScript -->
-      </div>
-    </div>
-    </div>
-    <p class="review-parking-name">CMC CAR PARK 01</p>
-    <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
-    <div class="horizontal-line"></div>
-  </div>
-    
-  </div>  
+              </div>
+              <p class="review-parking-name">CMC CAR PARK 01</p>
+              <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
+              <div class="horizontal-line"></div>
+            </div>
 
+            <div class="custom-line">
+              <hr style="border: 1px solid #00000045;">
+            </div>
+
+            <!-- Add more reviews following the same structure -->
+            <div class="content-body">
+              <!-- Reviews script will populate content here -->
+              <!-- Reviews -->
+              <div class="latest-reviews">
+                <div class="dashboard-review-head">
+                  <p class="dashboard-driver-name">Ross Geller</p>
+                  <div class="driver-rating">
+                    <div class="star-rating" id="starRating">
+                      <!-- Stars SVG -->
+                      <!-- Sample: Full stars -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
+                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                      </svg>
+                      <!-- Sample: Empty stars -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
+                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                      </svg>
+                      <!-- Sample: Empty stars -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
+                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                      </svg>
+                      <!-- Sample: Empty stars -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
+                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                      </svg>
+                      <!-- Sample: Empty stars -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
+                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                      </svg>
+
+                      <!-- Adjust stars based on rating -->
+                      <!-- Add or remove these SVG elements dynamically using JavaScript -->
+                    </div>
+                  </div>
+                </div>
+                <p class="review-parking-name">CMC CAR PARK 01</p>
+                <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
+                <div class="horizontal-line"></div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
-      </div>
-      <div class="dashboard-main-section">
-        <div class="update-section">
-          <div class="table-heading">
-            <div class="heading">
+        <div class="dashboard-main-section">
+          <div class="update-section">
+            <div class="table-heading">
+              <div class="heading">
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- reviews -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    <!-- reviews -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
 
-      const popupContentBody = document.querySelector('.content-body');
-      const reviewsData = <?php echo json_encode($data['reviews']); ?>;
+        const popupContentBody = document.querySelector('.content-body');
+        const reviewsData = <?php echo json_encode($data['reviews']); ?>;
 
-      function generateStars(rating) {
-        const fullStars = Math.floor(rating);
-        const emptyStars = 5 - fullStars;
+        function generateStars(rating) {
+          const fullStars = Math.floor(rating);
+          const emptyStars = 5 - fullStars;
 
-        const stars = Array(fullStars).fill(`
+          const stars = Array(fullStars).fill(`
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary" width="15px">
           <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
         </svg>
       `);
 
-        stars.push(...Array(emptyStars).fill(`
+          stars.push(...Array(emptyStars).fill(`
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-light-gray" width="15px">
           <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
         </svg>
       `));
 
-        return stars.join('');
-      }
+          return stars.join('');
+        }
 
 
-      popupContentBody.innerHTML = '';
+        popupContentBody.innerHTML = '';
 
-      reviewsData.forEach(review => {
-        const card = document.createElement('div');
-        card.classList.add('latest-reviews');
+        reviewsData.forEach(review => {
+          const card = document.createElement('div');
+          card.classList.add('latest-reviews');
 
-        const starsSVG = generateStars(review.no_of_stars);
+          const starsSVG = generateStars(review.no_of_stars);
 
-        card.innerHTML = `
+          card.innerHTML = `
             <div class="dashboard-review-head">
               <h2 class="dashboard-driver-name">${review.driver_first_name} ${review.driver_last_name}</h2>
               <div class="star-rating" id="starRating">
@@ -385,11 +406,11 @@
             <div class="horizontal-line"></div>
           `;
 
-        popupContentBody.appendChild(card);
+          popupContentBody.appendChild(card);
+        });
       });
-    });
-  </script>
-<!--  <script>
+    </script>
+    <!--  <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Fetch data for the last 30 days (replace with your actual data fetching logic)
     const data = generateRandomData(30);
@@ -434,101 +455,107 @@
     }
   });
 </script>-->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Fetch data for the last 24 hours
-    const data = generateRandomData(24);
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Fetch data for the last 24 hours
+        const data = generateRandomData(24);
 
-    // Create a bar chart for the last 24 hours
-    const ctx = document.getElementById('parkingSessionsChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: data.hours,
-        datasets: [{
-          label: 'Number of Parking Sessions (Past 24 Hours)',
-          data: data.values,
-          backgroundColor: '#363636',
-          borderColor: '#363636',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
-    // Function to generate random data for the last 24 hours
-    function generateRandomData(hours) {
-      const hoursData = [];
-      const values = [];
-      const currentDate = new Date();
-      currentDate.setHours(currentDate.getHours() - hours + 1);
-
-      for (let i = 0; i < hours; i++) {
-        hoursData.push(currentDate.getHours());
-        values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
-        currentDate.setHours(currentDate.getHours() + 1);
-      }
-
-      return { hours: hoursData, values };
-    }
-  });
-</script>
-
-
-<script>
-            document.addEventListener('DOMContentLoaded', function() {
-              // Fetch data for the last 30 days (replace with your actual data fetching logic)
-              const data = generateRandomData(30);
-
-              // Create a bar chart
-              const ctx = document.getElementById('revenueChart').getContext('2d');
-              const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                  labels: data.dates,
-                  datasets: [{
-                    label: 'Revenue from Parking Spaces Last 30 Days',
-                    data: data.values,
-                    backgroundColor: '#363636',
-                    borderColor: '#363636',
-                    borderWidth: 1
-                  }]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              });
-
-              // Function to generate random data for testing purposes
-              function generateRandomData(days) {
-                const dates = [];
-                const values = [];
-                const currentDate = new Date();
-                currentDate.setDate(currentDate.getDate() - days);
-
-                for (let i = 0; i < days; i++) {
-                  dates.push(currentDate.toLocaleDateString());
-                  values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
-                  currentDate.setDate(currentDate.getDate() + 1);
-                }
-
-                return { dates, values };
+        // Create a bar chart for the last 24 hours
+        const ctx = document.getElementById('parkingSessionsChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.hours,
+            datasets: [{
+              label: 'Number of Parking Sessions (Past 24 Hours)',
+              data: data.values,
+              backgroundColor: '#363636',
+              borderColor: '#363636',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
               }
-            });
-          </script>
+            }
+          }
+        });
 
-  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        // Function to generate random data for the last 24 hours
+        function generateRandomData(hours) {
+          const hoursData = [];
+          const values = [];
+          const currentDate = new Date();
+          currentDate.setHours(currentDate.getHours() - hours + 1);
+
+          for (let i = 0; i < hours; i++) {
+            hoursData.push(currentDate.getHours());
+            values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
+            currentDate.setHours(currentDate.getHours() + 1);
+          }
+
+          return {
+            hours: hoursData,
+            values
+          };
+        }
+      });
+    </script>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Fetch data for the last 30 days (replace with your actual data fetching logic)
+        const data = generateRandomData(30);
+
+        // Create a bar chart
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.dates,
+            datasets: [{
+              label: 'Revenue from Parking Spaces Last 30 Days',
+              data: data.values,
+              backgroundColor: '#363636',
+              borderColor: '#363636',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+
+        // Function to generate random data for testing purposes
+        function generateRandomData(days) {
+          const dates = [];
+          const values = [];
+          const currentDate = new Date();
+          currentDate.setDate(currentDate.getDate() - days);
+
+          for (let i = 0; i < days; i++) {
+            dates.push(currentDate.toLocaleDateString());
+            values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
+            currentDate.setDate(currentDate.getDate() + 1);
+          }
+
+          return {
+            dates,
+            values
+          };
+        }
+      });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 

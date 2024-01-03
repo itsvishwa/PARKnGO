@@ -403,8 +403,10 @@
   .reject-button{
     
     position:absolute;
-    bottom:60px;
-    right:558px;
+   /* bottom:60px;*/
+    margin-top: 5px;
+   /* right:558px;*/
+    margin-left: 0px;
     padding: 10px 170px;
     /*margin-top: 100px;*/
    /* margin-left: 35px;  */ 
@@ -415,13 +417,16 @@
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
+    display: flex;
   }
 
   .approve-button {
     
     position:absolute;
-    bottom:60px;
-    right:58px;
+    /*bottom:60px;*/
+    margin-top: 5px;
+   /* right:58px;*/
+    margin-left:482px ;
     padding: 10px 170px;
    /* margin-top: 100px;
     margin-left: 320px;*/
@@ -432,6 +437,7 @@
     font-weight: bold;
     text-transform: uppercase;
     transition: background-color 0.3s ease;
+    display: flex;
   }
   
   .download-button {
@@ -507,4 +513,27 @@
 }
 
 
+.b-card-apre{
+  margin-top: -5px;
+  /*margin-bottom: 20px 40px;*/
+  margin-bottom: 5px;  
+ /* padding: 30px;*/
+  margin-left: -28px;
+  border-radius: 10px;
+  /*box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);*/
+  /*display: block;*/
+ /* align-items: center;*/
+ /* width: 70%;
+  height: 70%;*/
+  width: 965px;
+  height: 60px;
   
+
+  /************/
+  /* Add the vertical gradient background */
+  background-color:#f6ead3;
+
+  /* Ensure text is visible on the gradient background */
+  color: #000; /* Change the text color as needed */
+  display: flex;
+}
