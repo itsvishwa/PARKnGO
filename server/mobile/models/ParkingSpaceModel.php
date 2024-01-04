@@ -46,6 +46,48 @@ class ParkingSpaceModel
         }
 
 
+        // get only available parking spaces by search
+        public function get_available_parking_spaces_by_search($vehicle_type, $keyword)
+        {
+                $this->db->query(
+                        "SELECT
+                parking_spaces._id,
+                parking_spaces.name,
+                parking_spaces.address,
+                parking_spaces.latitude,
+                parking_spaces.longitude,
+                parking_spaces.is_public,
+                parking_spaces.avg_star_count,
+                parking_spaces.total_review_count,
+                parking_space_status.free_slots,
+                parking_space_status.total_slots,
+                parking_space_status.rate
+                FROM
+                        parking_spaces
+                JOIN
+                        parking_space_status ON parking_spaces._id = parking_space_status.parking_id
+                WHERE
+                        is_closed = 0
+                        AND 
+                        parking_space_status.vehicle_type = :vehicle_type
+                        AND
+                        parking_spaces.name LIKE :keyword"
+                );
+
+                $this->db->bind(":vehicle_type", $vehicle_type);
+                $this->db->bind(":keyword", "%$keyword%", PDO::PARAM_STR);
+
+                $result = $this->db->resultSet();
+
+                if ($result and $this->db->rowCount() > 0) {
+                        return $result;
+                } else // no open parking spaces
+                {
+                        return false;
+                }
+        }
+
+
         // get all parking spaces
         public function get_all_parking_spaces()
         {

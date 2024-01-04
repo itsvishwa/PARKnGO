@@ -1,4 +1,4 @@
-package com.example.parkngo.parking;
+package com.example.parkngo.parking.helpers;
 
 import com.example.parkngo.R;
 

@@ -38,6 +38,7 @@
 <!--        TODO:: Check whether the "true" value is valid or not for main activity-->
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
         </activity>
     </application>
