@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.R;
+import com.example.parkngo.helpers.ErrorFragmentHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,16 +26,18 @@ import java.util.ArrayList;
 public class APSFetchData {
     View view;
     View loadingView;
-    View noAvailableParkingView;
+    View errorView;
     Context context;
     String vehicleType;
+    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
-    public APSFetchData(View view, View loadingView, View noAvailableParkingView, Context context, String vehicleType) {
+    public APSFetchData(View view, View loadingView, View errorView, Context context, String vehicleType, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr) {
         this.view = view;
         this.loadingView = loadingView;
-        this.noAvailableParkingView = noAvailableParkingView;
+        this.errorView = errorView;
         this.context = context;
         this.vehicleType = vehicleType;
+        this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
         fetchData();
     }
 
@@ -72,8 +75,6 @@ public class APSFetchData {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray resultDataArr = jsonObject.getJSONArray("response");
 
-            ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr = new ArrayList<>();
-
             for (int i=0; i<resultDataArr.length(); i++){
                 JSONObject dataObj = resultDataArr.getJSONObject(i);
                 String _id = dataObj.getString("_id");
@@ -82,12 +83,12 @@ public class APSFetchData {
                 String latitude = dataObj.getString("latitude");
                 String longitude = dataObj.getString("longitude");
                 String publicOrPrivate = dataObj.getString("is_public").equals("1") ? "Public" : "Customer Only";
-                String free_slots = dataObj.getString("free_slots");
+                int free_slots = Integer.parseInt(dataObj.getString("free_slots"));
                 String total_slots = dataObj.getString("total_slots");
-                String rate = "Rs. " + dataObj.getString("rate");
+                int rate = Integer.parseInt(dataObj.getString("rate"));
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, "450 m"));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view
@@ -119,15 +120,23 @@ public class APSFetchData {
                 String response = jsonResponse.getString("response");
                 if(response.equals("0")) // 0 => means no parking available
                 {
-                    // Replace the loading view with the parking view
+                    String appBarMainText = "No Available Parking Spaces";
+                    String appBarSubText = "Please try again later";
+                    int bodyImg = R.drawable.not_available;
+                    String bodyMainText = "Parking spaces not available for selected vehicle type!";
+                    String bodySubText = "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options";
+
+                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
+                    View newErrorView = errorFragmentHandler.setupView();
+
                     ViewGroup parent = (ViewGroup) loadingView.getParent();
                     if (parent != null) {
                         int index = parent.indexOfChild(loadingView);
                         parent.removeView(loadingView);
-                        parent.addView(noAvailableParkingView, index);
+                        parent.addView(newErrorView, index);
                     }
                 }else{
-                Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
