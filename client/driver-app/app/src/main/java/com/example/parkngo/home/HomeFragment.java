@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,7 +39,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 vehicleType = adapterView.getItemAtPosition(i).toString();
-                //Toast.makeText(getContext(), item, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
                 mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
             }
         });
+
 
         return view;
     }
