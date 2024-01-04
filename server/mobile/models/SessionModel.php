@@ -64,6 +64,8 @@
             
             if ($result) {
                 $session_data = [
+                    'start_time' => $result->start_time,
+                    'end_time' => $result->end_time,
                     'vehicle_type' => $result->vehicle_type,
                     'parking_id' => $result->parking_id
                 ];
@@ -75,14 +77,28 @@
         }
 
 
-        // public function end_session($_id) {
-        //     $current_time_stamp = time();
+        public function is_session_already_ended($_id) {
+            $this->db->query("SELECT * FROM parking_session WHERE _id = :_id AND start_time IS NOT NULL AND end_time IS NOT NULL");
 
-        //     $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp WHERE _id = :_id");
+            $this->db->bind(":_id", $_id);
 
-        //     $this->db->bind(":_id", $_id);
+            $this->db->execute();
 
-        //     $this->db->execute();
-        // }
+            $rowCount = $this->db->rowCount();
+
+            return $rowCount > 0;
+
+        }
+
+
+        public function end_session($_id) {
+            $current_time_stamp = time();
+
+            $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp WHERE _id = :_id");
+
+            $this->db->bind(":_id", $_id);
+
+            $this->db->execute();
+        }
     }
 ?>
