@@ -26,6 +26,7 @@ import com.example.parkngo.profile.ProfileFragment;
 import com.example.parkngo.scan.PaymentFailedFragment;
 import com.example.parkngo.scan.PaymentFragment;
 import com.example.parkngo.scan.ScanFragment;
+import com.example.parkngo.session.SessionMainFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import lk.payhere.androidsdk.PHConfigs;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             if (itemId == R.id.navbar_home){
                 replaceFragment(new HomeFragment());
             } else if (itemId == R.id.navbar_scan) {
-                replaceFragment(new ScanFragment());
+                replaceFragment(new SessionMainFragment());
             } else if (itemId == R.id.navbar_parking) {
                 replaceFragment(new ParkingFragment());
             }else {
