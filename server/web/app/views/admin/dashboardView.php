@@ -171,7 +171,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <div class="card-section2 ">
@@ -182,18 +181,14 @@
 
           </div>
         </div>
-
         <div class="b-card4">
           <div class="b2-card-content text-bla">
             <p>Application Requests</p>
           </div>
           <div class="b-card-small">
-
             <span class="material-symbols-outlined">
-
-              error
-            </span>
-            <!--<p>You have 03 new company applications to review</p> -->
+             error
+            </span>           
             <div class="b3-card-content text-white">
 
             <?php if (isset($data['totalPendingApplications'])) : ?>
@@ -205,10 +200,6 @@
         <p>You have <?php echo $data['totalPendingApplications'];?> new company applications to review</p>
     <?php endif; ?>
 <?php endif; ?>
-
-
-            <!--  <p>You have 04 new company applications to review</p>-->
-
 
             </div>
 
@@ -234,16 +225,9 @@
         <p>Currently<?php echo $data['totalSuspendApplications'];?> companies have been suspended</p>
     <?php endif; ?>
 <?php endif; ?>
-
-            <!--  <p>Currently, no company has been suspended</p>-->
-
-
             </div>
-
-
           </div>
         </div>
-
       </div>
 
       <div class="card-section3 ">
@@ -254,101 +238,65 @@
           </div>
 
         </div>
-        <div class="b-card6 ">
+       <div class="b-card6 ">
           <div class="b2-card-content text-bla">
             <p>Recent Driver Reviews</p>
           </div>
-
-          <!-- Include the reviews here -->
+        <!--  <div class="section-two-right latest-reviews">
+          <h1 class="review-heading">Recent Driver Reviews</h1>-->
+          
           <div class="content-body">
+         
+         
+</div>
+     
             <!-- Reviews script will populate content here -->
             <!-- Reviews -->
             <div class="latest-reviews">
-              <div class="dashboard-review-head">
-                <p class="dashboard-driver-name">John Doe</p>
+              <div class="dashboard-review-head">              
+               <p class="dashboard-driver-name">John Doe</p>
+
                 <div class="driver-rating">
                   <div class="star-rating" id="starRating">
-                    <!-- Stars SVG -->
-                    <!-- Sample: Full stars -->
+                     
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
                       <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                     </svg>
-                    <!-- Sample: Empty stars -->
+                   
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
                       <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                     </svg>
-                    <!-- Sample: Empty stars -->
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
                       <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                     </svg>
-                    <!-- Sample: Empty stars -->
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                    </svg>
-                    <!-- Sample: Empty stars -->
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
                       <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                     </svg>
 
-                    <!-- Adjust stars based on rating -->
-                    <!-- Add or remove these SVG elements dynamically using JavaScript -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
+                      <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                    </svg>
+
+                    
+                   
                   </div>
                 </div>
               </div>
               <p class="review-parking-name">CMC CAR PARK 01</p>
-              <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
-              <div class="horizontal-line"></div>
+           <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p> 
+            <!--  <div class="horizontal-line"></div>-->
             </div>
-
-            <div class="custom-line">
+           
+           <div class="custom-line">
               <hr style="border: 1px solid #00000045;">
-            </div>
+    </div>
+            <!----->
+    </div>
 
-            <!-- Add more reviews following the same structure -->
-            <div class="content-body">
-              <!-- Reviews script will populate content here -->
-              <!-- Reviews -->
-              <div class="latest-reviews">
-                <div class="dashboard-review-head">
-                  <p class="dashboard-driver-name">Ross Geller</p>
-                  <div class="driver-rating">
-                    <div class="star-rating" id="starRating">
-                      <!-- Stars SVG -->
-                      <!-- Sample: Full stars -->
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                      </svg>
-                      <!-- Sample: Empty stars -->
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                      </svg>
-                      <!-- Sample: Empty stars -->
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                      </svg>
-                      <!-- Sample: Empty stars -->
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                      </svg>
-                      <!-- Sample: Empty stars -->
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-                        <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                      </svg>
-
-                      <!-- Adjust stars based on rating -->
-                      <!-- Add or remove these SVG elements dynamically using JavaScript -->
-                    </div>
-                  </div>
-                </div>
-                <p class="review-parking-name">CMC CAR PARK 01</p>
-                <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
-                <div class="horizontal-line"></div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
+  </div>
         <div class="dashboard-main-section">
           <div class="update-section">
             <div class="table-heading">
@@ -410,51 +358,7 @@
         });
       });
     </script>
-    <!--  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Fetch data for the last 30 days (replace with your actual data fetching logic)
-    const data = generateRandomData(30);
 
-    // Create a bar chart
-    const ctx = document.getElementById('parkingSessionsChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: data.dates,
-        datasets: [{
-          label: 'Number of Parking Sessions Last 30 Days',
-          data: data.values,
-          backgroundColor: '#363636',
-          borderColor: '#363636',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-
-    // Function to generate random data for testing purposes
-    function generateRandomData(days) {
-      const dates = [];
-      const values = [];
-      const currentDate = new Date();
-      currentDate.setDate(currentDate.getDate() - days);
-
-      for (let i = 0; i < days; i++) {
-        dates.push(currentDate.toLocaleDateString());
-        values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-
-      return { dates, values };
-    }
-  });
-</script>-->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         // Fetch data for the last 24 hours

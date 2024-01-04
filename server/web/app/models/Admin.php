@@ -243,5 +243,76 @@ public function deleteCompany($id){
   }
 }
 
+  // Method to fetch top two reviews with specific fields
+  public function getTopTwoReviewsData() {
+    $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
+   // return $this->db->resultSet(); // Assuming resultSet() fetches all rows
+
+  // $rows = $this->db->resultSet(); 
+
+ // return $rows;
+ try {
+  $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
+  return $rows;
+} catch (Exception $e) {
+  // Handle database query error
+  error_log('Database error: ' . $e->getMessage());
+  return false;
+}
+}
+
+public function getReviewDetails()
+{
+  $this->db->query(
+    'SELECT
+      review._id AS review_id,
+      review.parking_id AS parking_id,
+      parking_spaces.name AS parking_name,
+      parking_spaces.address AS parking_address,
+      driver.first_name AS driver_first_name, 
+      driver.last_name AS driver_last_name,
+      review.content,
+      review.time_stamp,
+      review.no_of_stars
+    FROM
+      review
+    LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
+    LEFT JOIN driver ON review.driver_id = driver._id'
+  );
+
+  $row = $this->db->resultSet();
+
+  return $row;
+}
+
+
+public function getLatestReviews($company_id)
+{
+  $this->db->query(
+    'SELECT
+      review._id AS review_id,
+      review.parking_id AS parking_id,
+      parking_spaces.name AS parking_name,
+      parking_spaces.address AS parking_address,
+      driver.first_name AS driver_first_name, 
+      driver.last_name AS driver_last_name,
+      review.content,
+      review.time_stamp,
+      review.no_of_stars
+    FROM
+      review
+    LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
+    LEFT JOIN driver ON review.driver_id = driver._id
+    WHERE parking_spaces.company_id = :company_id
+    ORDER BY review.time_stamp DESC
+    LIMIT 5'
+  );
+
+  $this->db->bind(':company_id', $company_id);
+  $row = $this->db->resultSet();
+
+  return $row;
+}
+
 }
 
