@@ -106,4 +106,25 @@ class Payment
     $rows = $this->db->resultSet();
     return $rows;
   }
+
+  public function getRevenue($company_id)
+  {
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    $this->db->query(
+      'SELECT payment._id, payment.time_stamp, payment.amount
+        FROM payment
+        LEFT JOIN parking_session ON payment.session_id = parking_session._id
+        LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id
+        WHERE parking_spaces.company_id = :company_id
+        AND payment.time_stamp >= :thirty_days_ago
+        ORDER BY payment.time_stamp DESC'
+    );
+
+    $this->db->bind(':company_id', $company_id);
+    $this->db->bind(':thirty_days_ago', $thirtyDaysAgo);
+
+    $row = $this->db->resultSet();
+    return $row;
+  }
 }
