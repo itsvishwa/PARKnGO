@@ -14,7 +14,7 @@
     <div class="hero-header">
       <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-white.png" alt="logo" width="200px" /></a>
       <a href="./users/loginView">
-        <button class="get-started-btn btn2">
+        <button class="login-btn btn2">
           Login
         </button>
       </a>
