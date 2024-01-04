@@ -2,11 +2,13 @@
 class Admins extends Controller
 {
   private $adminModel;
+  
 
 
   public function __construct()
   {
     $this->adminModel = $this->model('admin');
+   
     if (!isset($_SESSION['user_id'])) {
       redirect('users/login');
     }
@@ -19,12 +21,20 @@ class Admins extends Controller
     // Get counts of users, parking officers, and companies from the model
     $adminModel = $this->model('Admin');
 
+   
+    $topTwoReviews = $adminModel->getTopTwoReviewsData();
     $userCount = $this->adminModel->getUsersCount($_SESSION['user_id']);
     $parkingOfficersCount = $this->adminModel->getParkingOfficersCount($_SESSION['user_id']);
     $companiesCount = $this->adminModel->getCompaniesCount($_SESSION['user_id']);
     $totalRevenue = $this->adminModel->getTotalRevenue();
     $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
     $totalSuspendApplications = $this->adminModel->getSuspendCompanyCount()['totalSuspendApplications'];
+    $reviews = $this->adminModel->getLatestReviews($_SESSION['user_id']);
+
+    
+    foreach ($reviews as &$review) {
+      $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
+    }
 
     // Prepare data for the view
     $data = [
@@ -33,7 +43,9 @@ class Admins extends Controller
       'companiesCount' => $companiesCount !== false ? $companiesCount : 0,
       'totalRevenue' => $totalRevenue !== false ? $totalRevenue : 0,
       'totalPendingApplications' => $totalPendingApplications,
-      'totalSuspendApplications' => $totalSuspendApplications
+      'totalSuspendApplications' => $totalSuspendApplications,
+      'topTwoReviews' => $topTwoReviews,
+      'reviews' => $reviews
     ];
 
     // Pass the data to the view
@@ -217,7 +229,25 @@ public function delete($id){
     redirect('admins');
   }
 }
-  
+
+/****************************** */
+/*public function getTopTwoReviews() {
+  $adminModel = new Admin();
+  $topTwoReviews = $adminModel->getTopTwoReviewsData();
+
+  // Pass data to the view
+  // Assuming a method to load the view
+ // $this->view('admin/dashboardView', ['topTwoReviews' => $topTwoReviews]);
+
+ if ($topTwoReviews !== null && !empty($topTwoReviews)) {
+  // Pass data to the view if it's not null or empty
+  $this->view('admin/dashboardView', ['topTwoReviews' => $topTwoReviews]);
+} else {
+  // Handle the case when no reviews are available
+  error_log("No reviews fetched or issue with data retrieval."); // Log an error message
+  $this->view('admin/dashboardView', ['topTwoReviews' => []]); // Passing an empty array
+}
+}*/
   
 }
 
