@@ -241,75 +241,87 @@ class Session extends Controller
 
                 $session_id = $this->decrypt_session_id($encrypted_session_id);
 
+                $session_exists = $this->session_model->is_session_exists($session_id);
 
-                $already_ended_session = $this->session_model->is_session_already_ended($session_id);
 
-                // check whether the given vehicle number has an open session
-                if ($already_ended_session) {
+                if (!$session_exists) {
                     $result = [
-                        "response_code" => "409",
-                        "message" => "This parking session is already ended"
+                        "response_code" => "204",
+                        "message" => "This parking session does not exist"
                     ];
-
+                
                     $this->send_json_404($result);
                 } else {
+                    
+                    $already_ended_session = $this->session_model->is_session_already_ended($session_id);
 
-                    //end time is update in the parking_session
-                    $this->session_model->end_session($session_id);
-
-                    // add new officer activity to the officer_activity (type as end)
-                    $this->officer_activity_model->end_officer_activity($session_id, $token_data);
-
-                    // Fetch vehicle_type and parking_id based on the given _id from parking_session
-                    $session_details = $this->session_model->get_session_data($session_id);
-
-                    // update the parking_space_status
-                    $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
-
-                    //start payment session
-            
-                    //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
-                    $rate = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
-            
-                    // Check if $rate exists and contains the 'rate' property
-                    if ($rate && property_exists($rate, 'rate') && is_numeric($rate->rate)) {
-                        $hourly_rate = $rate->rate;
-
-                        // Calculate duration
-                        $start_timestamp = $session_details["start_time"];
-                        $end_timestamp = $session_details["end_time"];
-
-                        $duration = $end_timestamp - $start_timestamp;
-
-                        // Convert duration to hours and minutes
-                        $hours = floor($duration / 3600);
-                        $minutes = floor(($duration % 3600) / 60);
-
-                        $total_duration_hours = $hours + ($minutes / 60);
-
-                        $total_amount = $total_duration_hours * $hourly_rate;
-                        $amount = round($total_amount, 2);
-
-                        // Start payment session
-                        $this->payment_model->start_payment_session($session_id, $amount);
-
+                    // check whether the given vehicle number has an open session
+                    if ($already_ended_session) {
                         $result = [
-                            "response_code" => "800",
-                            "message" => "parking session is ended successfully!"
+                            "response_code" => "409",
+                            "message" => "This parking session is already ended"
                         ];
-    
-                        $this->send_json_200($result);
 
-                    } else {
-                        $result = [
-                            "response_code" => "204",
-                            "message" => "Invalid rate or rate not available"
-                        ];
-                        
                         $this->send_json_404($result);
+                    } else {
+
+                        //end time is update in the parking_session
+                        $this->session_model->end_session($session_id);
+
+                        // add new officer activity to the officer_activity (type as end)
+                        $this->officer_activity_model->end_officer_activity($session_id, $token_data);
+
+                        // Fetch vehicle_type and parking_id based on the given _id from parking_session
+                        $session_details = $this->session_model->get_session_data($session_id);
+
+                        // update the parking_space_status
+                        $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
+
+                        //start payment session
+            
+                        //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
+                        $rate = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
+            
+                        // Check if $rate exists and contains the 'rate' property
+                        if ($rate && property_exists($rate, 'rate') && is_numeric($rate->rate)) {
+                            $hourly_rate = $rate->rate;
+
+                            // Calculate duration
+                            $start_timestamp = $session_details["start_time"];
+                            $end_timestamp = $session_details["end_time"];
+
+                            $duration = $end_timestamp - $start_timestamp;
+
+                            // Convert duration to hours and minutes
+                            $hours = floor($duration / 3600);
+                            $minutes = floor(($duration % 3600) / 60);
+
+                            $total_duration_hours = $hours + ($minutes / 60);
+
+                            $total_amount = $total_duration_hours * $hourly_rate;
+                            $amount = round($total_amount, 2);
+
+                            // Start payment session
+                            $this->payment_model->start_payment_session($session_id, $amount);
+
+                            $result = [
+                                "response_code" => "800",
+                                "message" => "parking session is ended successfully!"
+                            ];
+    
+                            $this->send_json_200($result);
+
+                        } else {
+                            $result = [
+                                "response_code" => "204",
+                                "message" => "Invalid rate or rate not available"
+                            ];
+                        
+                            $this->send_json_404($result);
+                        }
                     }
                 }
-            
+
             } else { //parking_id is not similar to the assigned parking
                 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);

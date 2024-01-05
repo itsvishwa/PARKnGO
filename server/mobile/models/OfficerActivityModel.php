@@ -39,7 +39,11 @@
 
             $results = $this->db->resultSet();
 
-            return $results;
+            if ($results === []) {
+                return false;
+            } else {
+                return $results;
+            }
         }
     }
 ?>

@@ -126,16 +126,40 @@ class PaymentModel
     }
 
 
-    public function get_all_officer_payments_by_session_id($session_id)
+    public function get_all_officer_payments_history_by_officer_id($officer_id)
     {
-        $this->db->query("SELECT * FROM payment WHERE payment_method = 'cash' AND is_complete = 1 AND session_id = :session_id");
+        $this->db->query(
+            "SELECT 
+            payment.time_stamp,
+            payment.amount,
+            parking_session.vehicle_number,
+            payment.payment_method
+         
+            FROM 
+                officer_activity
+            JOIN 
+                payment
+            ON
+                officer_activity.session_id = payment.session_id 
+            JOIN
+                parking_session
+            ON
+                officer_activity.session_id = parking_session._id 
+            WHERE 
+                officer_activity.officer_id = :officer_id AND officer_activity.type = 'end' AND payment.is_complete = 1 AND payment.payment_method = 'cash'"
+        );
 
-        $this->db->bind(":sessionID", $session_id);
+        $this->db->bind(":officer_id", $officer_id);
 
         $result = $this->db->resultSet();
 
-        print_r($result);
+        if ($result === []) {
+            return false;
+        } else {
+            return $result;
+        }
     }
+
 
     // close a payement for a given payment_id
     public function close_payment($payment_data)
