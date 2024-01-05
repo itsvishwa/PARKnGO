@@ -77,6 +77,19 @@
         }
 
 
+        public function is_session_exists($_id) {
+            $this->db->query("SELECT * FROM parking_session WHERE _id = :_id");
+
+            $this->db->bind(":_id", $_id);
+
+            $this->db->execute();
+
+            $rowCount = $this->db->rowCount();
+
+            return $rowCount > 0;
+
+        }
+
         public function is_session_already_ended($_id) {
             $this->db->query("SELECT * FROM parking_session WHERE _id = :_id AND start_time IS NOT NULL AND end_time IS NOT NULL");
 
