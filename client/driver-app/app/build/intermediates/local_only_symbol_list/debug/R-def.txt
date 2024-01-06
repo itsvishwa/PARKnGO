@@ -222,6 +222,7 @@ id ri_msg
 id ri_name
 id ri_rating_bar
 id searchView
+id session_payment_pay_btn
 id sign_up_act_otp_digit_1
 id sign_up_act_otp_digit_2
 id sign_up_act_otp_digit_3
@@ -277,6 +278,7 @@ id textView39
 id textView4
 id textView40
 id textView41
+id textView42
 id textView43
 id textView44
 id textView45
@@ -304,7 +306,11 @@ id textView65
 id textView66
 id textView67
 id textView7
+id textView70
+id textView71
 id textView8
+id textView80
+id textView81
 id textView9
 layout activity_hero
 layout activity_login_mobile_number
