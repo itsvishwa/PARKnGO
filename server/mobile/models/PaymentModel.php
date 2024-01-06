@@ -126,6 +126,17 @@ class PaymentModel
     }
 
 
+    // close a payement for a given payment_id
+    public function close_payment($payment_data)
+    {
+        $this->db->query("UPDATE payment SET is_complete = 1, payment_method = :payment_method, time_stamp = :time_stamp, driver_id = :driver_id WHERE _id = :payment_id");
+        $this->db->bind(":payment_method", $payment_data["payment_method"]);
+        $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
+        $this->db->bind(":driver_id", $payment_data["driver_id"]);
+        $this->db->bind(":payment_id", $payment_data["payment_id"]);
+        $this->db->execute();
+    }
+
     public function get_all_officer_payments_history_by_officer_id($officer_id)
     {
         $this->db->query(
@@ -161,14 +172,39 @@ class PaymentModel
     }
 
 
-    // close a payement for a given payment_id
-    public function close_payment($payment_data)
-    {
-        $this->db->query("UPDATE payment SET is_complete = 1, payment_method = :payment_method, time_stamp = :time_stamp, driver_id = :driver_id WHERE _id = :payment_id");
-        $this->db->bind(":payment_method", $payment_data["payment_method"]);
-        $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
-        $this->db->bind(":driver_id", $payment_data["driver_id"]);
-        $this->db->bind(":payment_id", $payment_data["payment_id"]);
+    public function is_payment_session_exists($session_id) {
+        $this->db->query("SELECT * FROM payment WHERE session_id = :session_id");
+
+        $this->db->bind(":session_id", $session_id);
+
         $this->db->execute();
+
+        $rowCount = $this->db->rowCount();
+
+        return $rowCount > 0;
     }
+
+    public function get_payment_details($session_id) {
+        $this->db->query(
+            "SELECT  
+            parking_session.vehicle_number,
+            parking_session.vehicle_type,
+            parking_session.start_time, 
+            parking_session.end_time,
+            payment.amount  
+            FROM 
+                payment
+            JOIN 
+                parking_session
+            ON
+                payment.session_id = parking_session._id 
+            WHERE 
+                payment.session_id = :session_id"
+        );
+
+        $this->db->bind(":session_id", $session_id);
+
+        return $this->db->single();
+    }
+
 }
