@@ -108,8 +108,9 @@ class Payment extends Controller
         }
     }
 
-    // View payment details of the given session in the officer mobile app
-    public function view_payment_details_of_session($parking_id, $encrypted_session_id) {
+
+
+    public function cash() {
         $token_data = $this->verify_token_for_officers();
 
         if ($token_data === 400) {
@@ -119,65 +120,58 @@ class Payment extends Controller
         } else // token is valid
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+            
+            $parking_id = trim($_POST["parking_id"]);
 
             if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
-
-                $session_id = $this->decrypt_session_id($encrypted_session_id);
-
-                $payment_session_exists = $this->payment_model->is_payment_session_exists($session_id);
-
+                $encrypted_payment_id = trim($_POST["payment_id"]);
                 
-                if (!$payment_session_exists) {
+                $payment_id = $this->decrypt_id($encrypted_payment_id);
+               
+                $is_payment_session = $this->payment_model->is_payment_session_id_exist($payment_id);
+
+                if(!$is_payment_session) {
                     $result = [
                         "response_code" => "204",
-                        "message" => "No payment details for the session"
+                        "message" => "No payment session found"
                     ];
-                
+
                     $this->send_json_404($result);
                 } else {
-                    $payment_details = $this->payment_model->get_payment_details($session_id);
+                    $is_ended_payment_session = $this->payment_model->is_payment_session_ended($payment_id);
 
-                    $uppercase_vehicle_type = strtoupper($payment_details->vehicle_type);
+                    if($is_ended_payment_session) {
+                        $result = [
+                            "response_code" => "409",
+                            "message" => "This payment session is already ended"
+                        ];
 
-                    // Calculate duration between start_time and end_time
-                    $start_timestamp = $payment_details->start_time;
-                    $end_timestamp = $payment_details->end_time;
+                        $this->send_json_404($result);
+                        
+                    } else {
+                        $time_stamp = time();
 
-                    $duration = $end_timestamp - $start_timestamp;
+                        $payment_data = [
+                            "payment_id" => $payment_id,
+                            "payment_method" => "Cash",
+                            "time_stamp" => $time_stamp
+                        ];
 
-                    // Convert duration to hours and minutes
-                    $hours = floor($duration / 3600);
-                    $minutes = floor(($duration % 3600) / 60);
+                        // update the payment table
+                        $this->payment_model->close_cash_payment($payment_data);
 
-                    // Format the duration
-                    $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
-
-                    $formatted_amount = 'Rs. ' . number_format($payment_details->amount, 2);
-
-                    if($payment_details) {
                         $result = [
                             "response_code" => "800",
-                            "vehicle_number" => $payment_details->vehicle_number, 
-                            "vehicle_type" => $uppercase_vehicle_type, 
-                            "start_time" => date('h:i A',$start_timestamp), 
-                            "end_time" => date('h:i A', $end_timestamp),
-                            "time_went" => $formatted_duration, 
-                            "amount" => $formatted_amount 
+                            "message" => "Payment is successfully closed"
                         ];
 
                         $this->send_json_200($result);
-                    } else {
-                        $result = [
-                            "response_code" => "204",
-                            "message" => "No payment details for the session"
-                        ];
-                    
-                        $this->send_json_404($result);
-                    }                 
+                    }
                 }
 
-            } else { //parking_id is not similar to the assigned parking
                 
+
+            } else {  //parking_id is not similar to the assigned parking
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
                 if ($assigned_parking_details) {
@@ -192,6 +186,7 @@ class Payment extends Controller
                     $this->send_json_200($result);
                     
                 } else {
+
                     $result = [
                         "response_code" => "204",
                         "message" => "parking details not found"
@@ -199,8 +194,8 @@ class Payment extends Controller
 
                     $this->send_json_404($result);
                 }
+    
             }
         }
-
     }
 }

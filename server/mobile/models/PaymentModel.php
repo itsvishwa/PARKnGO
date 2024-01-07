@@ -126,6 +126,21 @@ class PaymentModel
     }
 
 
+    public function get_payment_id($session_id) {
+        $this->db->query("SELECT _id FROM payment WHERE session_id = :session_id");
+    
+        $this->db->bind(":session_id", $session_id);
+    
+        $result = $this->db->single();
+    
+        if ($result) {
+            return $result->_id;
+        } else {
+            return false;
+        }
+    }
+
+
     // close a payement for a given payment_id
     public function close_payment($payment_data)
     {
@@ -134,6 +149,19 @@ class PaymentModel
         $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
         $this->db->bind(":driver_id", $payment_data["driver_id"]);
         $this->db->bind(":payment_id", $payment_data["payment_id"]);
+        $this->db->execute();
+    }
+
+
+    // close a cash payement for a given payment_id
+    public function close_cash_payment($payment_data)
+    {
+        $this->db->query("UPDATE payment SET is_complete = 1, payment_method = :payment_method, time_stamp = :time_stamp WHERE _id = :payment_id");
+
+        $this->db->bind(":payment_method", $payment_data["payment_method"]);
+        $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
+        $this->db->bind(":payment_id", $payment_data["payment_id"]);
+        
         $this->db->execute();
     }
 
@@ -171,20 +199,8 @@ class PaymentModel
         }
     }
 
-
-    public function is_payment_session_exists($session_id) {
-        $this->db->query("SELECT * FROM payment WHERE session_id = :session_id");
-
-        $this->db->bind(":session_id", $session_id);
-
-        $this->db->execute();
-
-        $rowCount = $this->db->rowCount();
-
-        return $rowCount > 0;
-    }
-
-    public function get_payment_details($session_id) {
+    // get payment details by payment_id
+    public function get_payment_details($_id) {
         $this->db->query(
             "SELECT  
             parking_session.vehicle_number,
@@ -199,10 +215,10 @@ class PaymentModel
             ON
                 payment.session_id = parking_session._id 
             WHERE 
-                payment.session_id = :session_id"
+                payment._id = :_id"
         );
 
-        $this->db->bind(":session_id", $session_id);
+        $this->db->bind(":_id", $_id);
 
         return $this->db->single();
     }
