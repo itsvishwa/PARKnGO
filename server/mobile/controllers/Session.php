@@ -39,10 +39,10 @@ class Session extends Controller
                 "start_time" => trim($_POST["start_time"]),
                 "officer_id" => $token_data["user_id"],
                 "parking_id" => trim($_POST["parking_id"]),
+                "driver_id" => trim($_POST["driver_id"])
             ];
 
-            if($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking {
-
+            if($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking 
 
                 $open_session = $this->session_model->is_open_session_exists($session_data["vehicle_number"]);
                
@@ -56,6 +56,10 @@ class Session extends Controller
                     $this->send_json_404($result);
 
                 } else {    // No open session exists for the vehicle number
+                    if ($session_data["driver_id"] === "-1") {
+                        // If driver_id is -1, set it to null before adding session data
+                        $session_data["driver_id"] = null;
+                    } 
 
                     // add new session data to the parking_session table
                     $this->session_model->add_session($session_data);
@@ -149,6 +153,8 @@ class Session extends Controller
                         $this->send_json_404($result);
                     } else // parking space found
                     {
+                        $encrypted_session_id = $this->encrypt_session_id($parking_session_data->_id);
+
                         $start_timestamp = $parking_session_data->start_time;
                         $readable_date_time = date("h.i A  d M Y", $start_timestamp);
 
@@ -162,6 +168,7 @@ class Session extends Controller
                         // Format the duration
                         $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
 
+                       
                         // calculate amount
 
                         if (isset($parking_session_data->vehicle_type) && isset($parking_session_data->parking_id)) {
@@ -171,26 +178,22 @@ class Session extends Controller
                             $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type, $parking_id);
                             $hourly_rate = $hourly_rate_value->rate;
 
-                            // Validate if $hourly_rate is a valid number
-                            if (is_numeric($hourly_rate)) {
-                                $total_parked_time = $hours + ($minutes / 60);
-                                $amount = $hourly_rate * $total_parked_time;
-                                $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
-                            } else {
-                                $formatted_amount = 'Invalid rate';
-                            }
-                        } else {
-                            $formatted_amount = 'Rate or parking data not available'; // Handle missing data scenario
+                            $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
+
+                            $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
+                       
+
+                            $result = [
+                                "response_code" => "800",
+                                "session_id" => $encrypted_session_id,
+                                "Parked Time/ Date" => $readable_date_time,
+                                "Duration" => $formatted_duration,
+                                "Amount" => $formatted_amount,
+                                "end_timestamp" => $end_timestamp
+                            ];
+
+                            $this->send_json_200($result);
                         }
-
-                        $result = [
-                            "response_code" => "800",
-                            "Parked Time/ Date" => $readable_date_time,
-                            "Duration" => $formatted_duration,
-                            "Amount" => $formatted_amount
-                        ];
-
-                        $this->send_json_200($result);
                     }
                 }
 
@@ -241,75 +244,61 @@ class Session extends Controller
 
                 $session_id = $this->decrypt_session_id($encrypted_session_id);
 
+                $session_exists = $this->session_model->is_session_exists($session_id);
 
-                $already_ended_session = $this->session_model->is_session_already_ended($session_id);
 
-                // check whether the given vehicle number has an open session
-                if ($already_ended_session) {
+                if (!$session_exists) {
                     $result = [
-                        "response_code" => "409",
-                        "message" => "This parking session is already ended"
+                        "response_code" => "204",
+                        "message" => "This parking session does not exist"
                     ];
-
+                
                     $this->send_json_404($result);
                 } else {
+                    
+                    $already_ended_session = $this->session_model->is_session_already_ended($session_id);
 
-                    //end time is update in the parking_session
-                    $this->session_model->end_session($session_id);
+                    // check whether the given vehicle number has an open session
+                    if ($already_ended_session) {
+                        $result = [
+                            "response_code" => "409",
+                            "message" => "This parking session is already ended"
+                        ];
 
-                    // add new officer activity to the officer_activity (type as end)
-                    $this->officer_activity_model->end_officer_activity($session_id, $token_data);
+                        $this->send_json_404($result);
+                    } else {
+                        $end_timestamp = trim($_POST["timestamp"]);
 
-                    // Fetch vehicle_type and parking_id based on the given _id from parking_session
-                    $session_details = $this->session_model->get_session_data($session_id);
+                        //end time is update in the parking_session
+                        $this->session_model->end_session($session_id, $end_timestamp);
 
-                    // update the parking_space_status
-                    $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
+                        // add new officer activity to the officer_activity (type as end)
+                        $this->officer_activity_model->end_officer_activity($session_id, $token_data, $end_timestamp);
 
-                    //start payment session
+                        // Fetch vehicle_type and parking_id based on the given _id from parking_session
+                        $session_details = $this->session_model->get_session_data($session_id);
+
+                        // update the parking_space_status
+                        $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
             
-                    //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
-                    $rate = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
-            
-                    // Check if $rate exists and contains the 'rate' property
-                    if ($rate && property_exists($rate, 'rate') && is_numeric($rate->rate)) {
-                        $hourly_rate = $rate->rate;
+                        //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
+                        $hourly_rate_value = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
+                        $hourly_rate = $hourly_rate_value->rate;
 
-                        // Calculate duration
                         $start_timestamp = $session_details["start_time"];
-                        $end_timestamp = $session_details["end_time"];
+                        $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
 
-                        $duration = $end_timestamp - $start_timestamp;
-
-                        // Convert duration to hours and minutes
-                        $hours = floor($duration / 3600);
-                        $minutes = floor(($duration % 3600) / 60);
-
-                        $total_duration_hours = $hours + ($minutes / 60);
-
-                        $total_amount = $total_duration_hours * $hourly_rate;
-                        $amount = round($total_amount, 2);
-
-                        // Start payment session
+                        // Start payment session 
                         $this->payment_model->start_payment_session($session_id, $amount);
 
-                        $result = [
-                            "response_code" => "800",
-                            "message" => "parking session is ended successfully!"
-                        ];
-    
-                        $this->send_json_200($result);
-
-                    } else {
-                        $result = [
-                            "response_code" => "204",
-                            "message" => "Invalid rate or rate not available"
-                        ];
-                        
-                        $this->send_json_404($result);
+                        // Fetch payment id
+                        $payment_id = $this->payment_model->get_payment_id($session_id);
+                
+                        //view payment details
+                        $this->view_payment_details_of_session($payment_id);
                     }
                 }
-            
+
             } else { //parking_id is not similar to the assigned parking
                 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
@@ -336,4 +325,89 @@ class Session extends Controller
             }
         }
     }
+
+    
+
+    // View payment details of the given session in the officer mobile app
+    public function view_payment_details_of_session($payment_id) {
+       
+        $payment_session_exists = $this->payment_model->is_payment_session_id_exist($payment_id);
+
+                
+        if (!$payment_session_exists) {
+            $result = [
+                "response_code" => "204",
+                "message" => "No payment details for the session"
+            ];
+                
+            $this->send_json_404($result);
+
+        } else {
+            $payment_details = $this->payment_model->get_payment_details($payment_id);
+
+            $uppercase_vehicle_type = strtoupper($payment_details->vehicle_type);
+
+            // Calculate duration between start_time and end_time
+            $start_timestamp = $payment_details->start_time;
+            $end_timestamp = $payment_details->end_time;
+
+            $duration = $end_timestamp - $start_timestamp;
+
+            // Convert duration to hours and minutes
+            $hours = floor($duration / 3600);
+            $minutes = floor(($duration % 3600) / 60);
+
+            // Format the duration
+            $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
+
+            $formatted_amount = 'Rs. ' . number_format($payment_details->amount, 2);
+
+            $encrypted_payment_id = $this->encrypt_id($payment_id);
+
+            if($payment_details) {
+                $result = [
+                    "response_code" => "800",
+                    "message" => "parking session is ended successfully!",
+                    "payment_id" => $encrypted_payment_id,
+                    "vehicle_number" => $payment_details->vehicle_number, 
+                    "vehicle_type" => $uppercase_vehicle_type, 
+                    "start_time" => date('h:i A',$start_timestamp), 
+                    "end_time" => date('h:i A', $end_timestamp),
+                    "time_went" => $formatted_duration, 
+                    "amount" => $formatted_amount 
+                ];
+
+                $this->send_json_200($result);
+            } else {
+                $result = [
+                    "response_code" => "204",
+                    "message" => "No payment details for the session"
+                ];
+                    
+                $this->send_json_404($result);
+            }                 
+        }
+    }
+
+
+    //calculate Amount
+    public function calculate_amount($start_timestamp, $end_timestamp, $hourly_rate)
+    {
+        // Validate if $hourly_rate is a valid number
+        if (is_numeric($hourly_rate)) {
+            $duration = $end_timestamp - $start_timestamp;
+
+            // Convert duration to hours and minutes
+            $hours = floor($duration / 3600);
+            $minutes = floor(($duration % 3600) / 60);
+
+            $total_parked_time = $hours + ($minutes / 60);
+            $amount = $hourly_rate * $total_parked_time;
+
+            return $amount;
+        } else {
+            return 'Invalid rate';
+        }
+    }
+
 }
