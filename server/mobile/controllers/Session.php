@@ -178,7 +178,7 @@ class Session extends Controller
                             $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type, $parking_id);
                             $hourly_rate = $hourly_rate_value->rate;
 
-                            $amount = $this->calculateAmount($start_timestamp, $end_timestamp, $hourly_rate);
+                            $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
 
                             $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
                        
@@ -286,7 +286,7 @@ class Session extends Controller
                         $hourly_rate = $hourly_rate_value->rate;
 
                         $start_timestamp = $session_details["start_time"];
-                        $amount = $this->calculateAmount($start_timestamp, $end_timestamp, $hourly_rate);
+                        $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
 
                         // Start payment session 
                         $this->payment_model->start_payment_session($session_id, $amount);
@@ -391,7 +391,7 @@ class Session extends Controller
 
 
     //calculate Amount
-    public function calculateAmount($start_timestamp, $end_timestamp, $hourly_rate)
+    public function calculate_amount($start_timestamp, $end_timestamp, $hourly_rate)
     {
         // Validate if $hourly_rate is a valid number
         if (is_numeric($hourly_rate)) {
