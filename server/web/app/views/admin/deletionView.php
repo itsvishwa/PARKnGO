@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/deletionView.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.arrow-logo').click(function(e) {
+                e.stopPropagation();
+                $(this).closest('.time-dropdown').toggleClass('show');
+            });
+
+            $(document).click(function() {
+                $('.time-dropdown').removeClass('show');
+            });
+        });
+    </script>
     <title>Suspend</title>
 </head>
 
@@ -220,15 +233,24 @@
                     <p>Select the time duration for the suspend</p>
                 </div>
                 <div class="time-card">
-                    <div class="time-card-content p text-grey">
-                        <p>Time Duration</p>
-                    </div>
-                    <div class="arrow-icon2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="grey" class="arrow-logo">
-                            <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clipRule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
+    <div class="time-card-content p text-grey">
+        <p>Time Duration</p>
+        <div class="time-dropdown">
+           <!-- <div class="arrow-icon2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="grey" class="arrow-logo">
+                    <path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z" clip-rule="evenodd" />
+                </svg>
+            </div>-->
+            <select class="time-select">
+                <option value="1">1 month</option>
+                <option value="2">2 months</option>
+                <option value="3">3 months</option>
+                <option value="3">1 year</option>
+            </select>
+        </div>
+    </div>
+</div>
+            </div>
                 <button class="sus bg-red" type="button">
                 
                     <div class="sus-content text-white">
@@ -239,6 +261,7 @@
                 </button>
         
     </div>
+
 
 </body>
 

@@ -151,22 +151,31 @@
         <p>Approve or Reject?<p>
         
         </div>
-        <div class="b-card3 ">
+       <div class="b-card3 ">
         <div class="card-content12 text-gray">
         <p>Write the reason to reject....</p>
         </div>
         </div>
+      <!--   <textarea class="b-card3">
+   <div class="card-content12 text-gray">
         
+            <textarea name="rejection_reason" placeholder="Write the reason to reject..." required></textarea>
+            
+       
+    </div>
+</textarea>-->
+
 
         
               
-              
+        <div class="b-card-apre">       
     <button class="reject-button" type="button">Reject Application</button> 
-    <button class="approve-button" type="button">Approve Application</button>
-   
+    <!--<button class="approve-button" type="button">-->
+    <button class="approve-button" data-application-id="<?php echo $application['id']; ?>">Approve Application</button>
+        </div>
 
         
-        </div> 
+       
         
 
           <div class="b-card-content text-black">
@@ -177,6 +186,44 @@
   </div>
   </div>
   </div>
+  <script>
+    
+document.addEventListener('DOMContentLoaded', function () {
+    const approveButtons = document.querySelectorAll('.approve-button');
+
+    approveButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const applicationId = this.dataset.applicationId;
+
+            fetch('app/conrollers/Admins.php?action=approveApplication', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    application_id: applicationId,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        // Update UI or show success message
+                        console.log('Application approved successfully');
+                        // Reload the page or perform necessary UI updates
+                        window.location.reload();
+                    } else {
+                        // Handle error scenario
+                        console.error('Failed to approve application');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+});
+
+  </script>
 </body>
 
 </html>

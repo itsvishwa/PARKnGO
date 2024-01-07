@@ -1,4 +1,4 @@
-package com.example.parkngo.parking;
+package com.example.parkngo.parking.helpers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.parking.ParkingSelectedFragment;
 
 import java.util.ArrayList;
 
@@ -116,9 +116,6 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
                 // Create a Bundle to pass data to the fragment
                 Bundle data = new Bundle();
                 data.putInt("_id", _id);
-
-                // Show a toast message with the ID
-//                Toast.makeText(context, "Item ID: " + _id, Toast.LENGTH_LONG).show();
 
                 mainActivity.replaceFragment(new ParkingSelectedFragment(), data);
             }
