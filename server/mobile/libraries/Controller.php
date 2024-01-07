@@ -275,8 +275,7 @@ class Controller
                 // Make the Base64 string URL safe by replacing certain characters
                 $url_safe_encrypted_session_id = strtr($base64_encoded, '+/', '-_'); // Replace '+' with '-' and '/' with '_'
 
-                echo $url_safe_encrypted_session_id;
-                //return $url_safe_encrypted_session_id;
+                return $url_safe_encrypted_session_id;
         }
 
         public function decrypt_session_id($url_safe_encrypted_session_id) {
