@@ -22,16 +22,16 @@ a {
 }
 
 .login-btn {
-  border: 3px solid transparent;
-  background-color: transparent;
+  border: 3px solid #ffa811;
+  /* background-color: transparent; */
   padding: 13px 40px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
 
-  border-image: linear-gradient(to right, #ffa811, #ffffff);
-  border-image-slice: 1;
-  border-radius: 5px;
+  /* border-image: linear-gradient(to right, #ffa811, #ffffff); */
+  /* border-image-slice: 1; */
+  border-radius: 35px;
   color: #ffa811;
 }
 

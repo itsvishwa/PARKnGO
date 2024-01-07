@@ -62,7 +62,7 @@ class ParkingSpace extends Controller
 
         if ($result === false) // no parking spaces 
         {
-            $this->send_json_400("Sorry, No parking spaces available");
+            $this->send_json_400("N/A");
         } else // have parking spaces
         {
             $spaces_data = [];
@@ -188,5 +188,4 @@ class ParkingSpace extends Controller
             }
         }
     }
-
 }

@@ -20,6 +20,11 @@ public class ParkngoStorage {
         editorObject.apply();
     }
 
+    public void updateData(String key, String value) {
+        editorObject.putString(key, value);
+        editorObject.apply();
+    }
+
     public String getData(String key){
         return preferencesObject.getString(key, "empty");
     }
