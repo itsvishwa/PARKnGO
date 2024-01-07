@@ -127,16 +127,20 @@ class PaymentModel
     }
 
 
-    public function get_all_officer_payments_by_session_id($session_id)
-    {
-        $this->db->query("SELECT * FROM payment WHERE payment_method = 'cash' AND is_complete = 1 AND session_id = :session_id");
-
-        $this->db->bind(":sessionID", $session_id);
-
-        $result = $this->db->resultSet();
-
-        print_r($result);
+    public function get_payment_id($session_id) {
+        $this->db->query("SELECT _id FROM payment WHERE session_id = :session_id");
+    
+        $this->db->bind(":session_id", $session_id);
+    
+        $result = $this->db->single();
+    
+        if ($result) {
+            return $result->_id;
+        } else {
+            return false;
+        }
     }
+
 
     // close a payement for a given payment_id
     public function close_payment($payment_data)
@@ -148,4 +152,76 @@ class PaymentModel
         $this->db->bind(":payment_id", $payment_data["payment_id"]);
         $this->db->execute();
     }
+
+
+    // close a cash payement for a given payment_id
+    public function close_cash_payment($payment_data)
+    {
+        $this->db->query("UPDATE payment SET is_complete = 1, payment_method = :payment_method, time_stamp = :time_stamp WHERE _id = :payment_id");
+
+        $this->db->bind(":payment_method", $payment_data["payment_method"]);
+        $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
+        $this->db->bind(":payment_id", $payment_data["payment_id"]);
+        
+        $this->db->execute();
+    }
+
+    public function get_all_officer_payments_history_by_officer_id($officer_id)
+    {
+        $this->db->query(
+            "SELECT 
+            payment.time_stamp,
+            payment.amount,
+            parking_session.vehicle_number,
+            payment.payment_method
+         
+            FROM 
+                officer_activity
+            JOIN 
+                payment
+            ON
+                officer_activity.session_id = payment.session_id 
+            JOIN
+                parking_session
+            ON
+                officer_activity.session_id = parking_session._id 
+            WHERE 
+                officer_activity.officer_id = :officer_id AND officer_activity.type = 'end' AND payment.is_complete = 1 AND payment.payment_method = 'cash'"
+        );
+
+        $this->db->bind(":officer_id", $officer_id);
+
+        $result = $this->db->resultSet();
+
+        if ($result === []) {
+            return false;
+        } else {
+            return $result;
+        }
+    }
+
+    // get payment details by payment_id
+    public function get_payment_details($_id) {
+        $this->db->query(
+            "SELECT  
+            parking_session.vehicle_number,
+            parking_session.vehicle_type,
+            parking_session.start_time, 
+            parking_session.end_time,
+            payment.amount  
+            FROM 
+                payment
+            JOIN 
+                parking_session
+            ON
+                payment.session_id = parking_session._id 
+            WHERE 
+                payment._id = :_id"
+        );
+
+        $this->db->bind(":_id", $_id);
+
+        return $this->db->single();
+    }
+
 }

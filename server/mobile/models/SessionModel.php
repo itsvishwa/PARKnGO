@@ -7,12 +7,13 @@
         }
 
         public function add_session($session_data) {
-            $this->db->query("INSERT INTO parking_session (start_time, vehicle_number, vehicle_type, parking_id) VALUES (:start_time, :vehicle_number, :vehicle_type, :parking_id)");
+            $this->db->query("INSERT INTO parking_session (start_time, vehicle_number, vehicle_type, parking_id, driver_id) VALUES (:start_time, :vehicle_number, :vehicle_type, :parking_id, :driver_id)");
 
             $this->db->bind(":start_time", $session_data["start_time"]);
             $this->db->bind(":vehicle_number", $session_data["vehicle_number"]);
             $this->db->bind(":vehicle_type", $session_data["vehicle_type"]);
             $this->db->bind(":parking_id", $session_data["parking_id"]);
+            $this->db->bind(":driver_id", $session_data["driver_id"]);
 
             $this->db->execute();
 
@@ -67,7 +68,7 @@
                     'start_time' => $result->start_time,
                     'end_time' => $result->end_time,
                     'vehicle_type' => $result->vehicle_type,
-                    'parking_id' => $result->parking_id
+                    'parking_id' => $result->parking_id,
                 ];
                 
                 return $session_data;
@@ -76,6 +77,19 @@
             }
         }
 
+
+        public function is_session_exists($_id) {
+            $this->db->query("SELECT * FROM parking_session WHERE _id = :_id");
+
+            $this->db->bind(":_id", $_id);
+
+            $this->db->execute();
+
+            $rowCount = $this->db->rowCount();
+
+            return $rowCount > 0;
+
+        }
 
         public function is_session_already_ended($_id) {
             $this->db->query("SELECT * FROM parking_session WHERE _id = :_id AND start_time IS NOT NULL AND end_time IS NOT NULL");
@@ -91,14 +105,21 @@
         }
 
 
-        public function end_session($_id) {
-            $current_time_stamp = time();
-
-            $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp WHERE _id = :_id");
+        public function end_session($_id, $end_timestamp) {
+       
+            $this->db->query("UPDATE parking_session SET end_time = $end_timestamp WHERE _id = :_id");
 
             $this->db->bind(":_id", $_id);
 
             $this->db->execute();
         }
+
+        // public function update_payment_id($_id, $payment_id) {
+        //     $this->db->query("UPDATE parking_session SET payment_id = $payment_id WHERE _id = :_id");
+
+        //     $this->db->bind(":_id", $_id);
+
+        //     $this->db->execute();
+        // }
     }
 ?>

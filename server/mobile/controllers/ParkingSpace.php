@@ -6,12 +6,18 @@ class ParkingSpace extends Controller
     private $parking_space_model;
     private $review_model;
     private $driver_model;
+    private $officer_model;
+    private $session_model;
+    private $payment_model;
 
     public function __construct()
     {
         $this->parking_space_model = $this->model("ParkingSpaceModel");
         $this->review_model = $this->model("ReviewModel");
         $this->driver_model = $this->model("DriverModel");
+        $this->officer_model = $this->model("OfficerModel");
+        $this->session_model = $this->model("SessionModel");
+        $this->payment_model = $this->model("PaymentModel");
     }
 
 
@@ -180,40 +186,6 @@ class ParkingSpace extends Controller
 
                 $this->send_json_200($result);
             }
-        }
-    }
-
-
-    // show all available parking spaces respect to the given vehicle type and given keyword
-    public function search_available($vehicle_type, $keyword)
-    {
-        $result = $this->parking_space_model->get_available_parking_spaces_by_search($vehicle_type, $keyword);
-
-        if ($result === false)  // no open parking spaces available for selected vehicle type 
-        {
-            $this->send_json_400("0");
-        } else // there are open parking spaces
-        {
-            $spaces_data = []; // final array to send as a response
-
-            foreach ($result as $space_data) {
-                $temp = [
-                    "_id" => $space_data->_id,
-                    "name" => $space_data->name,
-                    "address" => $space_data->address,
-                    "latitude" => $space_data->latitude,
-                    "longitude" => $space_data->longitude,
-                    "is_public" => $space_data->is_public,
-                    "free_slots" => $space_data->free_slots,
-                    "total_slots" => $space_data->total_slots,
-                    "rate" => $space_data->rate,
-                    "avg_star_count" => $space_data->avg_star_count,
-                    "total_review_count" => $space_data->total_review_count
-                ];
-                $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
-            }
-
-            $this->send_json_200($spaces_data);
         }
     }
 }
