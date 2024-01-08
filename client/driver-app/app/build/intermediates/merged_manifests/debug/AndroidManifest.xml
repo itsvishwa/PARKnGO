@@ -38,6 +38,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/Theme.Parkngo" >
         <activity
             android:name="com.example.parkngo.signup.SignUpNameActivity"
@@ -66,7 +67,8 @@
         <!-- TODO:: Check whether the "true" value is valid or not for main activity -->
         <activity
             android:name="com.example.parkngo.MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="lk.payhere.androidsdk.PHMainActivity"

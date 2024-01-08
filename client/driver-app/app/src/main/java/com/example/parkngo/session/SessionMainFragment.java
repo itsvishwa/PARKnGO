@@ -1,4 +1,4 @@
-package com.example.parkngo.home;
+package com.example.parkngo.session;
 
 import android.os.Bundle;
 
@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import com.example.parkngo.R;
 
-public class NoAvailableParkingFragment extends Fragment {
+public class SessionMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_no_available_parking, container, false);
+        return inflater.inflate(R.layout.fragment_session_main, container, false);
     }
 }

@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.parking.helpers.DeleteReviewData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,70 +40,25 @@ public class DeleteReviewFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_delete_review, container, false);
 
-        // get the token
-        ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
-        String token = parkngoStorage.getData("token");
-
         if (getArguments() != null) {
             _id = getArguments().getString("_id", "-1");
         }
 
+        DeleteReviewData deleteReviewData = new DeleteReviewData(view, getContext(), requireActivity().getSupportFragmentManager());
+
+        // onclick listeners ......................................................................................................
         // set button listeners - delete review btn
         Button deleteBtn = view.findViewById(R.id.delete_review_frag_delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestQueue queue = Volley.newRequestQueue(requireContext());
-                String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/review/delete/" + _id;
-
-                StringRequest stringRequest = new StringRequest(Request.Method.DELETE, apiURL,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    JSONObject jsonResponse = new JSONObject(response);
-                                    Toast.makeText(getContext(), jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                // Navigate back to the previous fragment
-                                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                                fragmentManager.popBackStack();
-                            }
-                        },
-                        new Response.ErrorListener(){
-                            @Override
-                            public void onErrorResponse(VolleyError error){
-                                String errorResponse;
-                                if (error.networkResponse != null && error.networkResponse.data != null) {
-                                    errorResponse = new String(error.networkResponse.data);
-                                    try {
-                                        JSONObject jsonResponse = new JSONObject(errorResponse);
-                                        Toast.makeText(getContext(), jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
-                                        // Handle specific errors
-                                    } catch (JSONException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                }
-                            }
-                        }
-                ) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> headers = new HashMap<>();
-                        // Add your custom header key-value pair here
-                        headers.put("token", token);
-                        return headers;
-                    }
-                };
-                queue.add(stringRequest);
+                deleteReviewData.deleteReview(_id);
             }
         });
 
 
         // set button listeners - discard button
         Button discardBtn = view.findViewById(R.id.delete_review_frag_discard_btn);
-
         discardBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -110,6 +66,7 @@ public class DeleteReviewFragment extends Fragment {
                 fragmentManager.popBackStack();
             }
         });
+        // onclick listeners ......................................................................................................
 
         return view;
     }

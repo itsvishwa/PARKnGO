@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".parking.editReviewFragment"
+    tools:context=".parking.EditReviewFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -93,13 +93,14 @@
 
 
         <RatingBar
-            android:id="@+id/ratingBar2"
+            android:id="@+id/edit_review_frag_rating_bar"
             style="?android:attr/ratingBarStyleIndicator"
             android:progressTint="@color/primaryColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:rating="3"
+            android:rating="0"
+            android:stepSize="1"
             android:isIndicator="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -111,10 +112,10 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar2">
+            app:layout_constraintTop_toBottomOf="@+id/edit_review_frag_rating_bar">
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/edit_review_frag_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/radius_9_solid"
@@ -123,7 +124,7 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="13dp"
                 android:hint="Type your review here"
-                android:text="Convenient and well-located parking space, though a bit tight for larger vehicles"
+                android:text=""
                 android:inputType="textMultiLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -132,17 +133,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/edit_review_frag_discard_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Discard"
             android:backgroundTint="@color/bottomNavUnselectedItemColor"
-            app:layout_constraintBottom_toBottomOf="@+id/button9"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_review_frag_confirm_btn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button9" />
+            app:layout_constraintTop_toTopOf="@+id/edit_review_frag_confirm_btn" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/edit_review_frag_confirm_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"

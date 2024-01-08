@@ -1,4 +1,4 @@
-package com.example.parkngo.profile;
+package com.example.parkngo.profile.helpers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkngo.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -35,10 +37,12 @@ public class PHRecycleViewAdapter extends RecyclerView.Adapter<PHRecycleViewAdap
     @Override
     public void onBindViewHolder(@NonNull PHRecycleViewAdapter.MyViewHolder holder, int position) {
         holder.dateTimeView.setText(paymentHistoryModels.get(position).getDataTime());
-        holder.amountView.setText(paymentHistoryModels.get(position).getAmount());
+        holder.amountView.setText("Rs. " + paymentHistoryModels.get(position).getAmount());
         holder.durationView.setText(paymentHistoryModels.get(position).getDuration());
         holder.vehicleTypeView.setText(paymentHistoryModels.get(position).getVehicleType());
-
+        holder.vehicleNumberView.setText(paymentHistoryModels.get(position).getVehicleNumber());
+        holder.parkingSpaceView.setText(paymentHistoryModels.get(position).getParkingSpaceName());
+        holder.paymentTypeView.setText(paymentHistoryModels.get(position).getPaymentType());
     }
 
     @Override
@@ -52,14 +56,19 @@ public class PHRecycleViewAdapter extends RecyclerView.Adapter<PHRecycleViewAdap
         TextView amountView;
         TextView durationView;
         TextView vehicleTypeView;
-
+        TextView vehicleNumberView;
+        TextView parkingSpaceView;
+        TextView paymentTypeView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.dateTimeView = itemView.findViewById(R.id.ph_frag_datetime);
             this.amountView = itemView.findViewById(R.id.ph_frag_rate);
             this.durationView = itemView.findViewById(R.id.ph_frag_duration);
-            this.vehicleTypeView = itemView.findViewById(R.id.ph_frag_type);
+            this.vehicleTypeView = itemView.findViewById(R.id.ph_frag_vehicle_type);
+            this.vehicleNumberView = itemView.findViewById(R.id.ph_frag_vehicle_number);
+            this.parkingSpaceView = itemView.findViewById(R.id.ph_frag_parking_space);
+            this.paymentTypeView = itemView.findViewById(R.id.ph_frag_payment_type);
         }
     }
 }
