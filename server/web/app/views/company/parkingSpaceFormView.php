@@ -146,9 +146,7 @@
 						Auto Mark Location
 					</button>
 					<div>
-						<div id="map" class="map">
-
-						</div>
+						<div id="map" class="map"></div>
 					</div>
 					<div class="p-btn-section">
 						<input type="button" value="Discard" class="p-btn bg-black40" onclick="confirmDiscard()">

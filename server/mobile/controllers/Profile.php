@@ -106,19 +106,28 @@ class Profile extends Controller
 
             if ($payments_data === false) // not payments yet
             {
-                $this->send_json_400("No Payments has been made yet");
+                $this->send_json_400("ERROR_6001"); // ERROR_6001 => No payments have been made yet
             } else // there are payments data
             {
                 $result_data = [];
 
                 foreach ($payments_data as $payment_data) {
+                    $time_duration = $payment_data->end_time - $payment_data->start_time;
+                    // Calculate hours, minutes, and seconds
+                    $hours = floor($time_duration / 3600);
+                    $minutes = floor(($time_duration % 3600) / 60);
+
+                    // Format the result as a string
+                    $time_duration = sprintf("%02d hours %02d minutes", $hours, $minutes);
+
                     $temp = [
                         "amount" => $payment_data->amount,
-                        "time_duration" =>  $payment_data->end_time - $payment_data->start_time,
+                        "payment_method" => strtoupper($payment_data->payment_method),
+                        "time_duration" =>  $time_duration,
                         "vehicle_type" => $payment_data->vehicle_type,
                         "vehicle_number" => $payment_data->vehicle_number,
                         "parking_space_name" => $payment_data->name,
-                        "payment_time_stamp" => $payment_data->time_stamp
+                        "payment_time_stamp" =>  date("h:i A | d/m/y", $payment_data->time_stamp)
                     ];
                     $result_data[] = $temp;
                 }
