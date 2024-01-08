@@ -40,4 +40,39 @@ class ParkingSpaceStatusModel
 
         return  $this->db->single();
     }
+
+
+    // return total number of slots available in a given parking
+    public function get_no_of_total_slots($parking_id)
+    {
+        $this->db->query("SELECT SUM(total_slots) AS total_slots FROM parking_space_status WHERE parking_id = :parking_id");
+
+        $this->db->bind(":parking_id", $parking_id);
+
+        $result = $this->db->single();
+
+        if ($result) {
+            return $result->total_slots;
+        } else {
+            return false;
+        }
+    }
+
+
+    // return total number of free slots available in a given parking
+    public function get_no_of_free_slots($parking_id)
+    {
+        $this->db->query("SELECT SUM(free_slots) AS free_slots FROM parking_space_status WHERE parking_id = :parking_id");
+
+        $this->db->bind(":parking_id", $parking_id);
+
+        $result = $this->db->single();
+
+        if ($result) {
+            return $result->free_slots;
+        } else {
+            return false;
+        }
+    }
 }
+

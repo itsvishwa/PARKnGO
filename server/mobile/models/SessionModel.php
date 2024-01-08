@@ -114,12 +114,20 @@
             $this->db->execute();
         }
 
-        // public function update_payment_id($_id, $payment_id) {
-        //     $this->db->query("UPDATE parking_session SET payment_id = $payment_id WHERE _id = :_id");
+        // return in progress session details of a given parking
+        public function get_in_progress_session_details($parking_id)    
+        {
+            $this->db->query("SELECT * FROM parking_session WHERE parking_id = :parking_id AND end_time IS NULL");
 
-        //     $this->db->bind(":_id", $_id);
+            $this->db->bind(":parking_id", $parking_id);
 
-        //     $this->db->execute();
-        // }
+            $result = $this->db->resultSet();
+
+            if ($this->db->rowCount() > 0) {
+                return $result;
+            } else {
+                return false;
+            }
+        }
     }
 ?>
