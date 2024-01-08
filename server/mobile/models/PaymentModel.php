@@ -224,4 +224,66 @@ class PaymentModel
         return $this->db->single();
     }
 
+    // return no of payment due session for a given parking
+    public function get_no_of_payment_due_sessions($parking_id)
+    {
+        $this->db->query(
+            "SELECT 
+                  COUNT(payment._id) AS payment_due_count
+                FROM 
+                    payment 
+                JOIN
+                    parking_session
+                ON
+                    payment.session_id = parking_session._id
+                WHERE 
+                    parking_session.parking_id = :parking_id
+                AND
+                    payment.is_complete = 0"
+        );
+
+        $this->db->bind(":parking_id", $parking_id);
+
+        $result = $this->db->single();
+
+        if ($result) {
+            return $result->payment_due_count;
+        } else {
+            return false;
+        }
+    }
+
+
+    // return the payment due session's details of a given parking - retrun false if there is no such session
+    public function get_payment_due_session_details($parking_id)
+    {
+        $this->db->query(
+            "SELECT 
+                payment._id,
+                parking_session.end_time,
+                parking_session.vehicle_number,
+                parking_session.vehicle_type
+            FROM
+                payment
+            JOIN
+                parking_session
+            ON
+                payment.session_id = parking_session._id
+            WHERE 
+                payment.is_complete = 0
+            AND
+                parking_session.parking_id = :parking_id"
+        );
+
+        $this->db->bind(":parking_id", $parking_id);
+
+        $result = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
 }
