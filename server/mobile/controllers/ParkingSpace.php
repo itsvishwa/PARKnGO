@@ -188,5 +188,4 @@ class ParkingSpace extends Controller
             }
         }
     }
-
 }

@@ -410,4 +410,139 @@ class Session extends Controller
         }
     }
 
+
+
+    // Officer - show all details of the parking sessions
+    public function view_status($parking_id)
+    {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+            if ($assigned_parking === $parking_id) //parking_id is similar to the assigned parking
+            {
+                // get status of parking session 
+                $total_no_of_slots = $this->parking_space_status_model->get_no_of_total_slots($parking_id);
+                $no_of_free_slots = $this->parking_space_status_model->get_no_of_free_slots($parking_id);
+                $no_of_payment_due_sessions = $this->payment_model->get_no_of_payment_due_sessions($parking_id);
+                $no_of_ongoing_sessions = $total_no_of_slots - $no_of_free_slots;
+
+                $final_session_stat_arr = [
+                    "free_slots" => $no_of_free_slots,
+                    "in_progress" => strval($no_of_ongoing_sessions),
+                    "payment_due" => $no_of_payment_due_sessions
+                ];
+
+                // get payment_due parking sessions details
+                $final_payment_due_session_arr = $this->get_payment_due_session_data($parking_id);
+
+                // get payment_due parking sessions details
+                $final_in_progress_session_arr = $this->get_in_progress_session_data($parking_id);
+
+                $result = [
+                    "response_code" => "800",
+                    "session_stat" => $final_session_stat_arr,
+                    "payment_due_sessions" => $final_payment_due_session_arr,
+                    "in_progress_sessions" => $final_in_progress_session_arr
+                ];
+
+                $this->send_json_200($result);
+            } else // parking_id is not similar to the assigned parking
+            {
+
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+                if ($assigned_parking_details) {
+                    $assigned_parking_name = $assigned_parking_details->name;
+
+                    $result = [
+                        "response_code" => "101",
+                        "updated parking_id" => $assigned_parking,
+                        "updated parking_name" => $assigned_parking_name,
+                    ];
+
+                    $this->send_json_200($result);
+                } else {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "parking details not found"
+                    ];
+
+                    $this->send_json_404($result);
+                }
+            }
+        }
+    }
+
+    // return a array of payment due session data 
+    private function get_payment_due_session_data($parking_id)
+    {
+        $result_data = $this->payment_model->get_payment_due_session_details($parking_id);
+
+        $final_arr = [];
+
+        if ($result_data === false) // 0 payment due sessions
+        {
+            $final_arr = [
+                "is_available" => false
+            ];
+        } else // payment due sessions exists
+        {
+            $final_arr = [
+                "is_available" => true,
+                "data" => []
+            ];
+
+            foreach ($result_data as $data) {
+                $temp_arr = [
+                    "payment_id" => $data->_id,
+                    "session_end_time" => $data->end_time,
+                    "vehicle_number" => $data->vehicle_number,
+                    "vehicle_type" => $data->vehicle_type
+                ];
+                $final_arr["data"][] = $temp_arr;
+            }
+        }
+
+        return $final_arr;
+    }
+
+
+    // return a array of in progress session data 
+    private function get_in_progress_session_data($parking_id)
+    {
+        $result_data = $this->session_model->get_in_progress_session_details($parking_id);
+
+        $final_arr = [];
+
+        if ($result_data === false) // 0 in progress sessions
+        {
+            $final_arr = [
+                "is_available" => false
+            ];
+        } else // in progress sessions exists
+        {
+            $final_arr = [
+                "is_available" => true,
+                "data" => []
+            ];
+
+            foreach ($result_data as $data) {
+                $temp_arr = [
+                    "session_start_time" => $data->start_time,
+                    "vehicle_number" => $data->vehicle_number,
+                    "vehicle_type" => $data->vehicle_type
+                ];
+                $final_arr["data"][] = $temp_arr;
+            }
+        }
+
+        return $final_arr;
+    }
 }
+
