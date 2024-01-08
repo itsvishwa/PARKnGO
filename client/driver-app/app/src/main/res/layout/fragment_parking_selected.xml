@@ -135,7 +135,7 @@
 
                 <TextView
                     android:id="@+id/parking_Selected_frag_address"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="WV87+F7V, Colombo 00700"
