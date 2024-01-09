@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:background="@drawable/top_app_bar"
-        android:paddingHorizontal="18dp">
+        android:paddingHorizontal="25dp">
 
         <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +28,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/profile_frag_app_bar_parking_name"
                     android:layout_width="138dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
@@ -49,21 +49,22 @@
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_frag_app_bar_parking_name"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintTop_toBottomOf="@+id/profile_frag_app_bar_parking_name" />
 
                 <Button
                     android:layout_width="wrap_content"
-                    android:layout_height="37dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="1dp"
                     android:backgroundTint="@color/detailBoxBackground"
-                    app:cornerRadius="7dp"
-                    android:text="Payment History"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="10dp"
                     android:onClick="frag_profile_main_payment_history_btn_handler"
+                    android:text="Payment History"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:cornerRadius="7dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/appbar_main_text"

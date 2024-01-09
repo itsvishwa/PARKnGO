@@ -17,7 +17,7 @@ public class ParkingStatusModel {
     public String getVehicleNumber() {return vehicleNumber;}
 
     public String getVehicleType() {
-        return vehicleType;
+        return vehicleType.toUpperCase();
     }
 
     public String getDateTime() {return dateTime;}
