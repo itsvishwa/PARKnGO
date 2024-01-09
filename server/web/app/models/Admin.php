@@ -91,7 +91,7 @@ class Admin
   // Function to get pending company applications
   public function getPendingCompanyApplications()
   {
-    $this->db->query('SELECT name, registered_time_stamp , address FROM company WHERE is_approved = 0 AND is_reviewd = 0');
+    $this->db->query('SELECT _id ,name, registered_time_stamp , address , documents FROM company WHERE is_approved = 0 AND is_reviewd = 0');
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
     
@@ -106,7 +106,7 @@ class Admin
   // Function to get pending, approved, or rejected company applications
 public function getCompanyApplications($isApproved, $isReviewed)
 {
-    $this->db->query('SELECT name, _id , registered_time_stamp, address FROM company WHERE is_approved = :approved AND is_reviewd = :reviewed');
+    $this->db->query('SELECT name, _id , registered_time_stamp, review_message , documents ,address FROM company WHERE is_approved = :approved AND is_reviewd = :reviewed');
     $this->db->bind(':approved', $isApproved);
     $this->db->bind(':reviewed', $isReviewed);
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
@@ -285,8 +285,7 @@ public function getReviewDetails()
   return $row;
 }
 
-
-public function getLatestReviews($company_id)
+public function getLatestReviews($driver_id)
 {
   $this->db->query(
     'SELECT
@@ -308,10 +307,32 @@ public function getLatestReviews($company_id)
     LIMIT 5'
   );
 
-  $this->db->bind(':company_id', $company_id);
-  $row = $this->db->resultSet();
+  $this->db->bind(':company_id', $driver_id);
+  $rows = $this->db->resultSet();
 
-  return $row;
+ 
+
+  return $rows;
+}
+
+public function getAllReviews() {
+  
+
+  //$this->db->query('SELECT _id , time_stamp , no_of_stars , content , driver_id , parking_id FROM review');
+  $this->db->query('
+  SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+         driver.first_name, driver.last_name , parking_spaces.name AS parking_name
+  FROM review
+  INNER JOIN driver ON review.driver_id = driver._id
+  INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+  
+');
+
+  $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
+
+  return $rows;
+
+  
 }
 
 }

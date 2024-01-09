@@ -31,6 +31,9 @@ class Admins extends Controller
     $totalSuspendApplications = $this->adminModel->getSuspendCompanyCount()['totalSuspendApplications'];
     $reviews = $this->adminModel->getLatestReviews($_SESSION['user_id']);
 
+   
+
+
     
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
@@ -47,6 +50,7 @@ class Admins extends Controller
       'topTwoReviews' => $topTwoReviews,
       'reviews' => $reviews
     ];
+   
 
     // Pass the data to the view
     $this->view('admin/dashboardView', $data);
@@ -113,11 +117,27 @@ class Admins extends Controller
 
   public function driverReviews()
   {
-    $this->view('admin/driverReviews');
+     // Instantiate the ReviewModel
+    // $adminModel = $this->model('Admin');
+     
+
+     // Call the method to get all reviews
+     //$reviews = $adminModel->getAllReviews();
+
+     // Call the method to get all reviews using the existing model instance
+    $reviews = $this->adminModel->getAllReviews();
+
+     // Prepare data to pass to the view
+     $data = [
+         'reviews' => $reviews
+     ];
+
+    $this->view('admin/driverReviews', $data);
   }
 
   public function index() {
 
+    
     // Fetch pending company applications
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
 
@@ -131,6 +151,34 @@ class Admins extends Controller
   
     
 }
+
+public function downloadDocument($_id)
+{
+    // Retrieve document content from the database based on an ID or any other identifier
+    $documentContent = ''; // Initialize the variable
+
+    // Fetch the document content from the database
+    // Example: Assuming you fetch the content from your model
+    $documentContent = $this->adminModel->getDocumentContentById($_id);
+
+    if ($documentContent !== false) {
+        // Set headers for PDF content
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="document.pdf"');
+
+        // Output the retrieved document content as a PDF file
+        echo $documentContent;
+
+        // Terminate script execution
+        exit();
+    } else {
+        // Handle the case when the document content retrieval fails
+        echo "Failed to retrieve document content.";
+        // Optionally, you can redirect or show an error message
+    }
+}
+
+
 /**************** */
 public function approveApplication()
     {
@@ -248,6 +296,8 @@ public function delete($id){
   $this->view('admin/dashboardView', ['topTwoReviews' => []]); // Passing an empty array
 }
 }*/
+
+
   
 }
 
