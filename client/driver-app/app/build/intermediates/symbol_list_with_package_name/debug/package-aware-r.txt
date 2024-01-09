@@ -3303,13 +3303,12 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id button
-id button10
-id button11
 id button12
 id button13
 id button14
 id button2
 id button3
+id button4
 id button5
 id button7
 id buttonPanel
@@ -3349,6 +3348,7 @@ id constraintLayout14
 id constraintLayout15
 id constraintLayout16
 id constraintLayout17
+id constraintLayout18
 id constraintLayout2
 id constraintLayout3
 id constraintLayout4
@@ -3410,6 +3410,14 @@ id easeOut
 id east
 id edge
 id editText_mobile_number_signup
+id edit_mobile_number_frag_change_mobile_number_btn
+id edit_mobile_number_frag_digit_1
+id edit_mobile_number_frag_digit_2
+id edit_mobile_number_frag_digit_3
+id edit_mobile_number_frag_digit_4
+id edit_mobile_number_frag_mobile_number
+id edit_mobile_number_frag_resend_btn
+id edit_mobile_number_frag_send_otp_btn
 id edit_prof_frag_change_mobile_btn
 id edit_prof_frag_discard_btn
 id edit_prof_frag_first_name
@@ -3495,6 +3503,7 @@ id imageView3
 id imageView4
 id imageView5
 id imageView6
+id imageView7
 id img_result_done
 id immediateStop
 id included
@@ -3872,6 +3881,7 @@ id textView43
 id textView44
 id textView45
 id textView46
+id textView47
 id textView48
 id textView49
 id textView5
@@ -3894,6 +3904,7 @@ id textView64
 id textView65
 id textView66
 id textView67
+id textView68
 id textView7
 id textView70
 id textView71
@@ -4115,6 +4126,8 @@ layout fragment_scan
 layout fragment_session_main
 layout fragment_session_on_going
 layout fragment_session_payment
+layout fragment_session_payment_error
+layout fragment_session_payment_successfull
 layout fragment_session_qr
 layout loading_frag
 layout m3_alert_dialog
