@@ -129,7 +129,7 @@
 /* Add this CSS to your existing CSS file or create a new one */
 
 .review-table {
-  width: 110%;
+  width: 103%;
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: -24px;
@@ -161,17 +161,11 @@
   background-color: #e2e2e2;
 }
 
-/* Set the default color of stars */
-.star-ratings {
-  color: #ffa811; /* Yellow color for stars */
-}
 
-/* Set color based on data-rating */
-.star-ratings[data-rating='1']::before { content: "\2605\2606\2606\2606\2606"; }
-/*.star-ratings[data-rating='2']::before { content: "\2605\2605\2606\2606\2606"; }
-.star-ratings[data-rating='3']::before { content: "\2605\2605\2605\2606\2606"; }
-.star-ratings[data-rating='4']::before { content: "\2605\2605\2605\2605\2606"; }
-.star-ratings[data-rating='5']::before { content: "\2605\2605\2605\2605\2605"; }
-*/
+
+
+
+
+
 
   
