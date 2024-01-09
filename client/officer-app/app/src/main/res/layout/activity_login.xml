@@ -132,7 +132,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/login_mobile_number_act_mobile_number_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="75dp"
@@ -165,9 +165,9 @@
             style="@style/loginSignupBtnStyle"
             android:layout_width="match_parent"
             android:layout_height="62dp"
+            android:onClick="login_mobile_number_act_otp_btn_handler"
             android:text="Send OTP Code"
             app:cornerRadius="11dp"
-            android:onClick="login_otp_act_send_otp_btn_handler"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
