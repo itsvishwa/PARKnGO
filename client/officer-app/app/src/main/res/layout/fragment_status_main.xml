@@ -132,6 +132,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/status_main_farg_filled_slots"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -169,6 +170,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/status_main_farg_free_slots"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -207,6 +209,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/status_main_farg_payment_due"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -276,8 +279,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/status_frag_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
+            android:layout_height="0dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16" />
