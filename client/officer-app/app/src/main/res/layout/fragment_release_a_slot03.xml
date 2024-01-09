@@ -99,7 +99,7 @@
         android:layout_height="0dp"
         android:layout_weight="8"
         android:paddingVertical="20dp"
-        android:paddingHorizontal="18dp">
+        android:paddingHorizontal="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout17"
