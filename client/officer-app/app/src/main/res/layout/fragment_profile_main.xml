@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Home.HomeMainFragment"
+    tools:context=".Profile.ProfileMainFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -136,7 +136,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textID"
+                    android:id="@+id/profile_main_frag_officer_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="OF00004"
@@ -200,7 +200,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textName"
+                    android:id="@+id/profile_main_frag_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="John"
@@ -264,7 +264,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textPN"
+                    android:id="@+id/profile_main_frag_mobile_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+94 71 234 56 77"
@@ -329,7 +329,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textNIC"
+                    android:id="@+id/profile_main_frag_nic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="200144227722"
@@ -394,7 +394,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textParking"
+                    android:id="@+id/profile_main_frag_parking_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CMC | Car Park 01"

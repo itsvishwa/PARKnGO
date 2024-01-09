@@ -42,10 +42,10 @@ class Session extends Controller
                 "driver_id" => trim($_POST["driver_id"])
             ];
 
-            if($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking 
+            if ($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking 
 
                 $open_session = $this->session_model->is_open_session_exists($session_data["vehicle_number"]);
-               
+
                 // check whether the given vehicle number has an open session
                 if ($open_session) {
                     $result = [
@@ -54,12 +54,11 @@ class Session extends Controller
                     ];
 
                     $this->send_json_404($result);
-
                 } else {    // No open session exists for the vehicle number
                     if ($session_data["driver_id"] === "-1") {
                         // If driver_id is -1, set it to null before adding session data
                         $session_data["driver_id"] = null;
-                    } 
+                    }
 
                     // add new session data to the parking_session table
                     $this->session_model->add_session($session_data);
@@ -81,9 +80,8 @@ class Session extends Controller
 
                     $this->send_json_200($result);
                 }
-
             } else {    //parking_id is not similar to the assigned parking
-                
+
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
                 if ($assigned_parking_details) {
@@ -96,7 +94,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
 
                     $result = [
@@ -106,7 +103,6 @@ class Session extends Controller
 
                     $this->send_json_404($result);
                 }
-    
             }
         }
     }
@@ -123,13 +119,13 @@ class Session extends Controller
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
-            
+
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $open_session = $this->session_model->is_open_session_exists($vehicle_number);
-    
+
                 // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
@@ -168,7 +164,7 @@ class Session extends Controller
                         // Format the duration
                         $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
 
-                       
+
                         // calculate amount
 
                         if (isset($parking_session_data->vehicle_type) && isset($parking_session_data->parking_id)) {
@@ -181,7 +177,7 @@ class Session extends Controller
                             $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
 
                             $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
-                       
+
 
                             $result = [
                                 "response_code" => "800",
@@ -196,7 +192,6 @@ class Session extends Controller
                         }
                     }
                 }
-
             } else {    //parking_id is not similar to the assigned parking
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
@@ -211,7 +206,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
                     $result = [
                         "response_code" => "204",
@@ -225,7 +219,8 @@ class Session extends Controller
     }
 
 
-    public function end() {
+    public function end()
+    {
         $token_data = $this->verify_token_for_officers();
 
         if ($token_data === 400) {
@@ -238,7 +233,7 @@ class Session extends Controller
 
             $parking_id = trim($_POST["parking_id"]);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $encrypted_session_id = trim($_POST["session_id"]);
 
@@ -252,10 +247,10 @@ class Session extends Controller
                         "response_code" => "204",
                         "message" => "This parking session does not exist"
                     ];
-                
+
                     $this->send_json_404($result);
                 } else {
-                    
+
                     $already_ended_session = $this->session_model->is_session_already_ended($session_id);
 
                     // check whether the given vehicle number has an open session
@@ -280,7 +275,7 @@ class Session extends Controller
 
                         // update the parking_space_status
                         $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
-            
+
                         //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
                         $hourly_rate_value = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
                         $hourly_rate = $hourly_rate_value->rate;
@@ -293,14 +288,15 @@ class Session extends Controller
 
                         // Fetch payment id
                         $payment_id = $this->payment_model->get_payment_id($session_id);
-                
+
+                        $payment_id = $this->encrypt_id($payment_id);
+
                         //view payment details
                         $this->view_payment_details_of_session($payment_id);
                     }
                 }
-
             } else { //parking_id is not similar to the assigned parking
-                
+
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
                 if ($assigned_parking_details) {
@@ -313,7 +309,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
                     $result = [
                         "response_code" => "204",
@@ -326,22 +321,23 @@ class Session extends Controller
         }
     }
 
-    
+
 
     // View payment details of the given session in the officer mobile app
-    public function view_payment_details_of_session($payment_id) {
-       
+    public function view_payment_details_of_session($payment_id)
+    {
+
+        $payment_id = $this->decrypt_id($payment_id);
         $payment_session_exists = $this->payment_model->is_payment_session_id_exist($payment_id);
 
-                
+
         if (!$payment_session_exists) {
             $result = [
                 "response_code" => "204",
                 "message" => "No payment details for the session"
             ];
-                
-            $this->send_json_404($result);
 
+            $this->send_json_404($result);
         } else {
             $payment_details = $this->payment_model->get_payment_details($payment_id);
 
@@ -364,17 +360,17 @@ class Session extends Controller
 
             $encrypted_payment_id = $this->encrypt_id($payment_id);
 
-            if($payment_details) {
+            if ($payment_details) {
                 $result = [
                     "response_code" => "800",
                     "message" => "parking session is ended successfully!",
                     "payment_id" => $encrypted_payment_id,
-                    "vehicle_number" => $payment_details->vehicle_number, 
-                    "vehicle_type" => $uppercase_vehicle_type, 
-                    "start_time" => date('h:i A',$start_timestamp), 
+                    "vehicle_number" => $payment_details->vehicle_number,
+                    "vehicle_type" => $uppercase_vehicle_type,
+                    "start_time" => date('h:i A', $start_timestamp),
                     "end_time" => date('h:i A', $end_timestamp),
-                    "time_went" => $formatted_duration, 
-                    "amount" => $formatted_amount 
+                    "time_went" => $formatted_duration,
+                    "amount" => $formatted_amount
                 ];
 
                 $this->send_json_200($result);
@@ -383,9 +379,9 @@ class Session extends Controller
                     "response_code" => "204",
                     "message" => "No payment details for the session"
                 ];
-                    
+
                 $this->send_json_404($result);
-            }                 
+            }
         }
     }
 
@@ -466,7 +462,7 @@ class Session extends Controller
                         "updated parking_name" => $assigned_parking_name,
                     ];
 
-                    $this->send_json_200($result);
+                    $this->send_json_400($result);
                 } else {
                     $result = [
                         "response_code" => "204",
@@ -489,19 +485,19 @@ class Session extends Controller
         if ($result_data === false) // 0 payment due sessions
         {
             $final_arr = [
-                "is_available" => false
+                "is_available" => "0"
             ];
         } else // payment due sessions exists
         {
             $final_arr = [
-                "is_available" => true,
+                "is_available" => "1",
                 "data" => []
             ];
 
             foreach ($result_data as $data) {
                 $temp_arr = [
-                    "payment_id" => $data->_id,
-                    "session_end_time" => $data->end_time,
+                    "payment_id" => $this->encrypt_id($data->_id),
+                    "session_end_time" => date("h:i A | d/m/y", $data->end_time),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
                 ];
@@ -523,18 +519,18 @@ class Session extends Controller
         if ($result_data === false) // 0 in progress sessions
         {
             $final_arr = [
-                "is_available" => false
+                "is_available" => "0"
             ];
         } else // in progress sessions exists
         {
             $final_arr = [
-                "is_available" => true,
+                "is_available" => "1",
                 "data" => []
             ];
 
             foreach ($result_data as $data) {
                 $temp_arr = [
-                    "session_start_time" => $data->start_time,
+                    "session_start_time" => date("h:i A | d/m/y", $data->start_time),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
                 ];
@@ -545,4 +541,3 @@ class Session extends Controller
         return $final_arr;
     }
 }
-
