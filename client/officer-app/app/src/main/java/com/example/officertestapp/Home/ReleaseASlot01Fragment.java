@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.R;
 
 import java.util.ArrayList;
@@ -49,6 +50,11 @@ public class ReleaseASlot01Fragment extends Fragment {
         ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
         provinceAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerProvinces.setAdapter(provinceAdapter);
+
+
+        // Use the helper class to set app bar details
+        HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
+
 
         return view;
     }

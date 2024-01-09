@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.officertestapp.Profile.Helpers.ProfileFragmentHelper;
 import com.example.officertestapp.R;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 
@@ -38,6 +39,13 @@ public class ProfileMainFragment extends Fragment {
         phoneNumberView.setText("(+94) " + mobileNumber);
         nicView.setText(nic);
         parkingNameView.setText(parkingName);
+
+        // top app bar
+        TextView parkingNameAppBarView = view.findViewById(R.id.profile_frag_app_bar_parking_name);
+        parkingNameAppBarView.setText(parkingName);
+
+        // Use the helper class to set app bar details
+        ProfileFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
 
         return view;
     }

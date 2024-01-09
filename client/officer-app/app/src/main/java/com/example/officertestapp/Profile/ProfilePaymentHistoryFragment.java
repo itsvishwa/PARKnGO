@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.officertestapp.Profile.Helpers.ProfileFragmentHelper;
 import com.example.officertestapp.R;
 
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class ProfilePaymentHistoryFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Use the helper class to set app bar details
+        ProfileFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
 
         return view;
     }
