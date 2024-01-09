@@ -435,6 +435,16 @@
       margin-left: 17%;
     }
   }
+  .parking-type {
+    padding: 5px 10px;
+    border-radius: 15px;
+  }
+  
+  .parking-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   
 
   .section-two-right {
@@ -457,6 +467,8 @@
   
   .content-body {
     padding: 0px 20px;
+    background-color: #ffa909;
+
   }
 
   .dashboard-review-head {
@@ -492,3 +504,22 @@
     margin-top: 10px;
   }
   
+/*********************************/
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-body {
+  margin-bottom: 10px;
+  width: 75%;
+}
