@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.R;
 import com.example.officertestapp.Status.Helpers.StatusFetchData;
 import com.example.officertestapp.Status.Helpers.StatusMainSpinner;
@@ -20,8 +22,7 @@ public class StatusMainFragment extends Fragment {
     ArrayList<ParkingStatusModel> parkingStatusModels = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_status_main, container, false);
         View loadingView = inflater.inflate(R.layout.loading_frag, container, false);
@@ -29,6 +30,21 @@ public class StatusMainFragment extends Fragment {
         // init spinners
         new StatusMainSpinner(view, getContext());
         new StatusFetchData(getContext(),view, loadingView);
+
+        //Create an instance of ParkngoStorage using the Fragment's context
+        ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
+
+        // Get data from storage
+        String firstName = parkngoStorage.getData("firstName");
+        String parkingName = parkngoStorage.getData("parkingName");
+
+        // Find the TextView by its ID
+        TextView officerNameTextView = view.findViewById(R.id.status_frag_officer_name);
+        TextView parkingNameView = view.findViewById(R.id.status_frag_parking_name);
+
+        // Set the officer's name in the TextView
+        officerNameTextView.setText(firstName);
+        parkingNameView.setText(parkingName);
 
         return loadingView;
     }
