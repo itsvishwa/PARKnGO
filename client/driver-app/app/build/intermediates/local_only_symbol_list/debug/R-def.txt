@@ -57,6 +57,7 @@ drawable radius_6_primary
 drawable radius_6_primary_yellow
 drawable radius_6_solid
 drawable radius_6_upper_bar
+drawable radius_6_white
 drawable radius_6_with_outline
 drawable radius_9_solid
 drawable round_blue_circle
@@ -159,6 +160,7 @@ id fragment_session_main_tap_to_add_btn_3
 id fragment_session_main_vehicle_1
 id fragment_session_main_vehicle_2
 id fragment_session_main_vehicle_3
+id fragment_session_qr_imageView
 id framelayout_main_act
 id hero_background_img
 id hero_login_btn
@@ -175,9 +177,9 @@ id imageView2
 id imageView3
 id imageView4
 id imageView5
-id imageView6
 id imageView7
 id imageView9
+id imageViewConstraintLayout
 id lienar_layout_name
 id linearLayout
 id linearLayout2
@@ -249,6 +251,7 @@ id ri_name
 id ri_rating_bar
 id searchView
 id session_payment_pay_btn
+id session_qr_fragment_imageLayout
 id sign_up_act_otp_digit_1
 id sign_up_act_otp_digit_2
 id sign_up_act_otp_digit_3

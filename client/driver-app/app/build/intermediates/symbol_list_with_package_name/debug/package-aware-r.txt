@@ -3158,6 +3158,7 @@ drawable radius_6_primary
 drawable radius_6_primary_yellow
 drawable radius_6_solid
 drawable radius_6_upper_bar
+drawable radius_6_white
 drawable radius_6_with_outline
 drawable radius_9_solid
 drawable round_blue_circle
@@ -3475,6 +3476,7 @@ id fragment_session_main_tap_to_add_btn_3
 id fragment_session_main_vehicle_1
 id fragment_session_main_vehicle_2
 id fragment_session_main_vehicle_3
+id fragment_session_qr_imageView
 id frame_main_fragment_container
 id framelayout_main_act
 id frost
@@ -3518,9 +3520,9 @@ id imageView2
 id imageView3
 id imageView4
 id imageView5
-id imageView6
 id imageView7
 id imageView9
+id imageViewConstraintLayout
 id img_result_done
 id immediateStop
 id included
@@ -3778,6 +3780,7 @@ id select_dialog_listview
 id selected
 id selection_type
 id session_payment_pay_btn
+id session_qr_fragment_imageLayout
 id sharedValueSet
 id sharedValueUnset
 id shortcut
