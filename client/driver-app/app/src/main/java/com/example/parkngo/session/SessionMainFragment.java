@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.session.helpers.SessionMainButtonHandlers;
 
@@ -35,7 +36,10 @@ public class SessionMainFragment extends Fragment {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "clicked " + sessionMainButtonHandlers.getSelectedVehicle(), Toast.LENGTH_SHORT).show();
+                MainActivity mainActivity = (MainActivity)getContext();
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", sessionMainButtonHandlers.getSelectedVehicle());
+                mainActivity.replaceFragment(new SessionQRFragment(), data);
             }
         });
         // onclick listeners.................................................................................

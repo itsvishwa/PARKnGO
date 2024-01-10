@@ -3157,6 +3157,7 @@ int drawable radius_6_primary 0x7f07013d
 int drawable radius_6_primary_yellow 0x7f070129
 int drawable radius_6_solid 0x7f07012a
 int drawable radius_6_upper_bar 0x7f07012b
+int drawable radius_6_white 0x7f07013e
 int drawable radius_6_with_outline 0x7f07012c
 int drawable radius_9_solid 0x7f07012d
 int drawable round_blue_circle 0x7f07012e
@@ -3474,6 +3475,7 @@ int id fragment_session_main_tap_to_add_btn_3 0x7f090324
 int id fragment_session_main_vehicle_1 0x7f090325
 int id fragment_session_main_vehicle_2 0x7f090326
 int id fragment_session_main_vehicle_3 0x7f090327
+int id fragment_session_qr_imageView 0x7f09032c
 int id frame_main_fragment_container 0x7f090116
 int id framelayout_main_act 0x7f090117
 int id frost 0x7f090118
@@ -3517,9 +3519,9 @@ int id imageView2 0x7f09013c
 int id imageView3 0x7f09013d
 int id imageView4 0x7f09013e
 int id imageView5 0x7f09013f
-int id imageView6 0x7f090140
 int id imageView7 0x7f090141
 int id imageView9 0x7f090329
+int id imageViewConstraintLayout 0x7f09032d
 int id img_result_done 0x7f090142
 int id immediateStop 0x7f090143
 int id included 0x7f090144
@@ -3777,6 +3779,7 @@ int id select_dialog_listview 0x7f09023f
 int id selected 0x7f090240
 int id selection_type 0x7f090241
 int id session_payment_pay_btn 0x7f090242
+int id session_qr_fragment_imageLayout 0x7f09032b
 int id sharedValueSet 0x7f090243
 int id sharedValueUnset 0x7f090244
 int id shortcut 0x7f090245
