@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new HomeMainFragment());
     }
 
+    public void frag_home_assign_vehicle01_scan_QR_btn_handler(View v) {
+
+    }
+
     public void frag_home_assign_vehicle01_reserve_slot_btn_handler(View v) {
         replaceFragment(new AssignVehicle02Fragment());
     }
