@@ -1,7 +1,9 @@
-package com.example.officertestapp;
+package com.example.officertestapp.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.MainActivity;
+import com.example.officertestapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,9 +37,44 @@ public class LoginOtpActivity extends AppCompatActivity {
 
         TextView mobileNumberView = findViewById(R.id.mobile_number_otp_act_mobile_number_text);
         mobileNumberView.setText("(+94)" + mobileNumber);
+
+
+        EditText otpDigit1View = findViewById(R.id.login_act_otp_digit_1);
+        EditText otpDigit2View = findViewById(R.id.login_act_otp_digit_2);
+        EditText otpDigit3View = findViewById(R.id.login_act_otp_digit_3);
+        EditText otpDigit4View = findViewById(R.id.login_act_otp_digit_4);
+
+        setEditTextListener(otpDigit1View, otpDigit2View);
+        setEditTextListener(otpDigit2View, otpDigit3View);
+        setEditTextListener(otpDigit3View, otpDigit4View);
+        setEditTextListener(otpDigit4View, null);
+
     }
+
+    // cursor move to the next EditText
+    private void setEditTextListener (final EditText currentEditText, final EditText nextEditText) {
+        currentEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 1 && nextEditText != null) {
+                    nextEditText.requestFocus();
+                }
+            }
+        });
+    }
+
+
     public void login_otp_act_continue_btn_handler(View v){
-// getting user data
+
+        // getting user data
         EditText optDigit1View = findViewById(R.id.login_act_otp_digit_1);
         EditText optDigit2View = findViewById(R.id.login_act_otp_digit_2);
         EditText optDigit3View = findViewById(R.id.login_act_otp_digit_3);
@@ -81,8 +120,10 @@ public class LoginOtpActivity extends AppCompatActivity {
                             String officer_id = userData.getString("officer_id");
                             String parking_id = userData.getString("parking_id");
                             String parking_name = userData.getString("parking_name");
+                            String company_name = userData.getString("company_name");
+
                             // structuring data inorder to store
-                            String dataArr[][] = {{"token", token}, {"firstName", Character.toUpperCase(firstName.charAt(0)) + firstName.substring(1)}, {"lastName", Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1)}, {"mobileNumber", mobileNumber}, {"nic", nic}, {"officerID", officer_id}, {"parkingID", parking_id}, {"parkingName", parking_name}};
+                            String dataArr[][] = {{"token", token}, {"firstName", Character.toUpperCase(firstName.charAt(0)) + firstName.substring(1)}, {"lastName", Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1)}, {"mobileNumber", mobileNumber}, {"nic", nic}, {"officerID", officer_id}, {"parkingID", parking_id}, {"parkingName", parking_name}, {"companyName", company_name}};
 
                             // store data in shared preference
                             ParkngoStorage parkngoStorage = new ParkngoStorage(LoginOtpActivity.this);

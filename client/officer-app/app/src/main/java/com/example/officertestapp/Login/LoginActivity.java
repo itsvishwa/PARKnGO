@@ -1,4 +1,4 @@
-package com.example.officertestapp;
+package com.example.officertestapp.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.officertestapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

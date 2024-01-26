@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,16 +29,22 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".Login.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name=".LoginOtpActivity"
+            android:name=".Login.LoginOtpActivity"
             android:exported="false" />
 
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Home.CaptureAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/zxing_CaptureTheme"/>
+
 
     </application>
 

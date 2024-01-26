@@ -42,13 +42,18 @@ class OfficerModel
             parking_officer.last_name, 
             parking_officer.company_id, 
             parking_officer.parking_id, 
-            parking_spaces.name 
+            parking_spaces.name, 
+            company.name AS company_name
             FROM 
             parking_officer 
             JOIN 
             parking_spaces 
             ON 
-            parking_officer.parking_id = parking_spaces._id 
+            parking_officer.parking_id = parking_spaces._id
+            JOIN
+            company
+            ON
+            parking_officer.company_id = company._id
             WHERE 
             parking_officer.mobile_number = :mobile_number"
         );
@@ -67,7 +72,8 @@ class OfficerModel
                 "last_name" => $result->last_name,
                 "company_id" => $result->company_id,
                 "parking_id" => $result->parking_id,
-                "parking_name" => $result->name
+                "parking_name" => $result->name,
+                "company_name" => $result->company_name
             ];
         } else {
             return false;
