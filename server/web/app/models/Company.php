@@ -161,4 +161,22 @@ class Company
   //   $row = $this->db->resultSet();
   //   return $row;
   // }
+
+  public function getCompanySuspendDetails($company_id)
+  {
+    $this->db->query('SELECT 
+      cs.time_stamp AS start_time,
+      cs.time_stamp + cs.duration AS end_time,
+      cs.message
+    FROM 
+      company_suspend cs
+    WHERE 
+      cs.company_id = :company_id
+    ORDER BY
+      cs.time_stamp DESC
+    LIMIT 1;');
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->single();
+    return $row;
+  }
 }
