@@ -2,13 +2,16 @@ package com.example.parkngo.session.helpers;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.session.SessionQRFragment;
 
 public class SessionMainButtonHandlers {
     boolean is1Selected;
@@ -91,7 +94,18 @@ public class SessionMainButtonHandlers {
             }
         });
     }
-
+    public void initContinueBtnHandler(){
+        Button continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", getSelectedVehicle());
+                mainActivity.replaceFragment(new SessionQRFragment(), data);
+            }
+        });
+    }
     public int getSelectedVehicle(){
         if(is1Selected){
             return 1;
