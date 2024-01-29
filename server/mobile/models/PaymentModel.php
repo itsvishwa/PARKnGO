@@ -99,7 +99,7 @@ class PaymentModel
          ON
              parking_session.parking_id = parking_spaces._id 
          WHERE 
-             payment.driver_id = :driver_id
+            parking_session.driver_id = :driver_id
              AND
              payment.is_complete = 1"
         );

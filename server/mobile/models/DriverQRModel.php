@@ -31,4 +31,17 @@ class DriverQRModel
 
         $this->db->execute();
     }
+
+    public function get_all($driver_id)
+    {
+        $this->db->query("SELECT * FROM driver_qr WHERE driver_id = :driver_id");
+        $this->db->bind(":driver_id", $driver_id);
+
+        $result = $this->db->resultSet();
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
