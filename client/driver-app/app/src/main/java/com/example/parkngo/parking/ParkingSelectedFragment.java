@@ -42,8 +42,8 @@ public class ParkingSelectedFragment extends Fragment {
         // Perform data loading in the background
         ParkingSelectedFetchData parkingSelectedFetchData = new ParkingSelectedFetchData(parkingSelectedView, loadingView, _id, getContext());
 
-        // onclick listeners ......................................................................................................
 
+        // onclick listeners ......................................................................................................
         //set add review btn handler
         Button addReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
         addReviewBtn.setOnClickListener(new View.OnClickListener() {
