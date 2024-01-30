@@ -74,17 +74,11 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new AssignVehicle02Fragment());
     }
 
-    public void release_vehicle_02_back_btn_handler(View v) {
-        replaceFragment(new AssignVehicle01Fragment());
-    }
 
     public void frag_home_assign_vehicle03_main_menu_btn_handler(View v) {
         replaceFragment(new HomeMainFragment());
     }
 
-    public void assign_vehicle_02_yes_btn_handler(View v) {
-        replaceFragment(new AssignVehicle03Fragment());
-    }
 
     public void assign_vehicle_02_back_btn_handler(View v) {
         replaceFragment(new AssignVehicle01Fragment());
@@ -147,9 +141,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    public void status_01_back_btn_handler(View v) {
-        replaceFragment(new StatusMainFragment());
-    }
+
 
 
 

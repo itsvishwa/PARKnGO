@@ -41,6 +41,8 @@ public class StatusFetchData {
     }
 
     public void fetchData(){
+
+
         RequestQueue queue = Volley.newRequestQueue(context);
         String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/view_status/7";
 

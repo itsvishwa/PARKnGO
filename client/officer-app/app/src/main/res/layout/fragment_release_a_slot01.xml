@@ -146,9 +146,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.5"
-                        android:background="#C7C7C7"
+                        android:background="@drawable/vehicle_num_details_inp_field_left"
                         android:hint="AAA"
-                        android:textAlignment="center" />
+                        android:gravity="center" />
 
                     <EditText
                         android:layout_width="0dp"
@@ -158,13 +158,13 @@
                         android:hint="0000"
                         android:ems="4"
                         android:letterSpacing="0.25"
-                        android:textAlignment="center" />
+                        android:gravity="center" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:background="#C7C7C7">
+                        android:background="@drawable/vehicle_num_details_inp_field_right">
 
                         <Spinner
                             android:id="@+id/spinner_provinces"
@@ -219,6 +219,8 @@
                     android:id="@+id/parked_Date_Time_txt"
                     android:layout_width="130dp"
                     android:layout_height="49dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
                     android:layout_marginStart="137dp"
                     android:background="@drawable/input_txt_background"
                     app:layout_constraintBottom_toBottomOf="@+id/textView11"
@@ -244,7 +246,8 @@
                     android:layout_height="49dp"
                     android:background="@drawable/input_txt_background"
                     android:inputType="time"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="@+id/duration_txt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/duration_txt" />
@@ -272,7 +275,8 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="49dp"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
                     android:background="@drawable/input_txt_background"
                     app:layout_constraintBottom_toBottomOf="@+id/amount_txt"
                     app:layout_constraintEnd_toEndOf="parent"
