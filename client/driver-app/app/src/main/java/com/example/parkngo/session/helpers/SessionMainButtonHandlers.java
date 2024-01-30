@@ -5,12 +5,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.session.AddVehicle;
 import com.example.parkngo.session.SessionQRFragment;
 
 public class SessionMainButtonHandlers {
@@ -93,6 +95,42 @@ public class SessionMainButtonHandlers {
                 }
             }
         });
+    }
+
+    public void initTaptoAddBtnHandlers(){
+        View tapToAdd1View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_1);
+        View tapToAdd2View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_2);
+        View tapToAdd3View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_3);
+
+        tapToAdd1View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 1);
+                mainActivity.replaceFragment(new AddVehicle(), data);
+            }
+        });
+
+        tapToAdd2View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 2);
+                mainActivity.replaceFragment(new AddVehicle(), data);
+            }
+        });
+        tapToAdd3View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 3);
+                mainActivity.replaceFragment(new AddVehicle(), data);
+            }
+        });
+
     }
     public void initContinueBtnHandler(){
         Button continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);

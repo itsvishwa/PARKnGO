@@ -48,4 +48,32 @@ class Driver extends Controller
                         }
                 }
         }
+
+        public function add_vehicle()
+        {
+                $vehicle_data = [
+                        "vehicle_name" => trim($_POST["vehicle_name"]),
+                        "vehicle_number" => trim($_POST["vehicle_number"]),
+                        "vehicle_type" => trim($_POST["vehicle_type"])
+                ];
+
+                $token_data = $this->verify_token_for_drivers();
+
+                if ($token_data === 400) {
+                        $this->send_json_400("Invalid Token");
+                } else if ($token_data === 404) {
+                        $this->send_json_404("Token not found");
+                } else {
+                        $selected_vehicle = $this->driver_qr_model->get_selected_vehicle_number($token_data["user_id"]);
+
+                        $this->driver_qr_model->add_new_vehicle(
+                                $vehicle_data["vehicle_name"],
+                                $vehicle_data["vehicle_number"],
+                                strtolower($vehicle_data["vehicle_type"]),
+                                $selected_vehicle,
+                                $token_data["user_id"]
+                        );
+                        $this->send_json_200("Vehicle details are added successfully!");
+                }
+        }
 }

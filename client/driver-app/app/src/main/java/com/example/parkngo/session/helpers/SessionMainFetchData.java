@@ -34,7 +34,6 @@ public class SessionMainFetchData {
     private Context context;
 
     public SessionMainFetchData(View sessionMainView, View loadingView, View errorView, Context context){
-        // start from here
         this.sessionMainView = sessionMainView;
         this.loadingView = loadingView;
         this.errorView = errorView;
@@ -83,6 +82,7 @@ public class SessionMainFetchData {
 
             if(statusCode.equals("S_DR_2031")) // has stored data
             {
+                // setting user data to corresponding views
                 JSONArray jsonDataArr = jsonDataObject.getJSONArray("data");
                 lenOfArr = jsonDataArr.length();
                 for (int i=0; i < lenOfArr; i++) {
@@ -115,12 +115,6 @@ public class SessionMainFetchData {
                     vehicleTypeView.setText(vehicleType);
                 }
             }
-
-            if (statusCode.equals("E_DR_2032")) // has no stored data
-            {
-                lenOfArr = 0;
-            }
-
 
             ConstraintLayout car1View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_1);
             ConstraintLayout car2View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_2);
