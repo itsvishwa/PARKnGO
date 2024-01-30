@@ -10,27 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/HeroActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/HeroActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/AssignVehicle01Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/AssignVehicle01Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/HomeMainFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/HomeMainFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Login/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/LoginOtpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Login/LoginOtpActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/activity_login_otp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/activity_login_otp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/Helpers/HomeFragmentHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/Helpers/HomeFragmentHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Status/Helpers/StatusFetchData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Status/Helpers/StatusFetchData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_assign_vehicle01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_assign_vehicle01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot03.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot03.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../server/mobile/models/OfficerModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/models/OfficerModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot01.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
