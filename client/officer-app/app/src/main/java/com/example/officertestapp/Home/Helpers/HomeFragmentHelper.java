@@ -7,6 +7,10 @@ import android.widget.TextView;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class HomeFragmentHelper {
     public static void setTopAppBarDetailsInFragment(View view, Context context) {
         //Create an instance of ParkngoStorage using the Context
@@ -23,5 +27,15 @@ public class HomeFragmentHelper {
         // Set the officer's name and parking name in the TextViews
         //officerNameTextView.setText(firstName);
         parkingNameView.setText(parkingName);
+    }
+
+    public static String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy", Locale.getDefault());
+        return dateFormat.format(new Date());
+    }
+
+    public static String getCurrentTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        return dateFormat.format(new Date());
     }
 }

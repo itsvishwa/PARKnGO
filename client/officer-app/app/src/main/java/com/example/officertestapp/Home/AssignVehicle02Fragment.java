@@ -3,60 +3,22 @@ package com.example.officertestapp.Home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.officertestapp.Home.Helpers.AddVehicleDetails;
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AssignVehicle02Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AssignVehicle02Fragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AssignVehicle02Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AssignVehicle02.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AssignVehicle02Fragment newInstance(String param1, String param2) {
-        AssignVehicle02Fragment fragment = new AssignVehicle02Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +27,60 @@ public class AssignVehicle02Fragment extends Fragment {
 
         // Use the helper class to set app bar details
         HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
+
+        TextView vehicleNumberTextView = view.findViewById(R.id.frag_assign_vehicle_01_vehicle_number_txt_view);
+        TextView vehicleTypeTextView = view.findViewById(R.id.frag_assign_vehicle_01_vehicle_type_txt_view);
+
+
+        // Retrieve values from the Bundle
+        Bundle args = getArguments();
+        if (args != null) {
+            String vehicleNumberWithoutProvince = args.getString("vehicle_number_without_province");
+            String selectedVehicleTypeCaps = args.getString("vehicle_type_caps");
+
+            // Update TextViews with the retrieved values
+            vehicleNumberTextView.setText(vehicleNumberWithoutProvince);
+            vehicleTypeTextView.setText(selectedVehicleTypeCaps);
+        } else {
+            Log.e("AssignVehicle02Fragment", "Arguments (Bundle) is null");
+        }
+
+        // Handle back button click
+        Button backButton = view.findViewById(R.id.assign_vehicle_02_back_btn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to the previous fragment
+                requireActivity().onBackPressed();
+            }
+        });
+
+
+        // Handle reserve slot confirmation Yes button click
+        Button reserveSlotConfirmationYesBtn = view.findViewById(R.id.assign_vehicle_02_yes_btn);
+        reserveSlotConfirmationYesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("AssignVehicle02Fragment", "Yes button clicked");
+
+                // Retrieve values from the Bundle
+                Bundle args = getArguments();
+                if (args != null) {
+                    String token = args.getString("token");
+                    String vehicleNumber = args.getString("vehicle_number");
+                    String selectedVehicleType = args.getString("vehicle_type");
+                    String startTimeStamp = args.getString("start_time");
+                    String parkingId = args.getString("parking_id");
+                    String driverId = args.getString("driver_id");
+
+                    // Invoke the AddVehicleDetails helper to add vehicle details
+                    AddVehicleDetails addVehicleDetailsHelper = new AddVehicleDetails(view, requireContext(), getFragmentManager());
+                    addVehicleDetailsHelper.addDetails(token, vehicleNumber, selectedVehicleType, startTimeStamp, parkingId, driverId);
+                } else {
+                    Log.e("AssignVehicle02Fragment", "Arguments (Bundle) is null");
+                }
+            }
+        });
 
         return view;
     }

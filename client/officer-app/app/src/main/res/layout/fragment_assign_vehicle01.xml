@@ -116,13 +116,13 @@
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
             android:layout_height="340dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_background_detail_box"
             android:elevation="2dp"
             android:paddingHorizontal="20dp"
             android:paddingTop="30dp"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scan_qr_btn">
 
@@ -156,14 +156,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                     <EditText
+                        android:id="@+id/vehicle_num_letters"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.5"
-                        android:background="#C7C7C7"
+                        android:background="@drawable/vehicle_num_details_inp_field_left"
                         android:hint="AAA"
-                        android:textAlignment="center" />
+                        android:gravity="center" />
 
                     <EditText
+                        android:id="@+id/vehicle_num_digits"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -171,13 +173,13 @@
                         android:ems="4"
                         android:hint="0000"
                         android:letterSpacing="0.25"
-                        android:textAlignment="center" />
+                        android:gravity="center" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:background="#C7C7C7">
+                        android:background="@drawable/vehicle_num_details_inp_field_right">
 
                         <Spinner
                             android:id="@+id/spinner_provinces"
@@ -263,6 +265,8 @@
                     android:layout_width="125dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
                     android:background="@drawable/vehicle_details_input_feild_bg"
                     app:layout_constraintEnd_toEndOf="@+id/textView10"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -296,6 +300,8 @@
                     android:layout_width="125dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="14dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
                     android:background="@drawable/vehicle_details_input_feild_bg"
                     app:layout_constraintEnd_toEndOf="@+id/textView11"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -307,6 +313,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/frag_home_assign_vehicle01_reserve_slot_btn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:gravity="center"

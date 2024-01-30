@@ -42,6 +42,13 @@ class Session extends Controller
                 "driver_id" => trim($_POST["driver_id"])
             ];
 
+            // Decrypt the parking_id
+            $decrypted_parking_id = $this->decrypt_id($session_data["parking_id"]);
+
+            // Replace the encrypted parking_id with the decrypted value
+            $session_data["parking_id"] = $decrypted_parking_id;
+
+
             if ($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking 
 
                 $open_session = $this->session_model->is_open_session_exists($session_data["vehicle_number"]);
