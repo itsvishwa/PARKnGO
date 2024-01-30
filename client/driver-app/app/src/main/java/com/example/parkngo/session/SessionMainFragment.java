@@ -34,12 +34,12 @@ public class SessionMainFragment extends Fragment {
         errorView = inflater.inflate(R.layout.fragment_error, container, false);
 
         
-        // call this http://localhost/PARKnGO/server/mobile/driver/view_vehicle_info fetch the data here
+        // call this http://localhost/PARKnGO/server/mobile/driver/view_vehicle_info fetch the data here - DONE
         
         
-        // until fetching data load the loading screen
+        // until fetching data load the loading screen - DONE
         
-        // change visible to GONE appropriately
+        // change visible to GONE appropriately - DONE
         SessionMainFetchData sessionMainFetchData = new SessionMainFetchData(sessionMainView, loadingView, errorView, getContext());
         sessionMainFetchData.fetchData();
         // have to make sure that the backend is always send the "selected" property in the correct order
@@ -50,8 +50,10 @@ public class SessionMainFragment extends Fragment {
 
 
         SessionMainButtonHandlers sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView);
+
         // onclick listeners.................................................................................
         sessionMainButtonHandlers.initVehicleBtnHandlers();
+        sessionMainButtonHandlers.initTaptoAddBtnHandlers();
         sessionMainButtonHandlers.initContinueBtnHandler();
         // onclick listeners.................................................................................
 

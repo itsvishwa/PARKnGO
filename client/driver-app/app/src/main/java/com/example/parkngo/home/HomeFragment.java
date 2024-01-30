@@ -56,8 +56,6 @@ public class HomeFragment extends Fragment {
                 mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
             }
         });
-
-
         return view;
     }
 }
