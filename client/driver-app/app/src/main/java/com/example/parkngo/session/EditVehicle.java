@@ -32,8 +32,17 @@ public class EditVehicle extends Fragment {
             // TODO :: has to fix default values
         }
 
-        EditVehicleHelper editVehicleHelper = new EditVehicleHelper(selected, vehicleName, vehicleNumber, vehicleType, editVehicleView, getContext());
+        EditVehicleHelper editVehicleHelper = new EditVehicleHelper(selected, vehicleName, vehicleNumber, vehicleType, editVehicleView, getContext(), requireActivity().getSupportFragmentManager());
         editVehicleHelper.initLayout();
+
+        // btn listeners ...............................................
+        editVehicleHelper.initVehicleProvinceSpinnerBtnListener();
+        editVehicleHelper.initVehicleTypeSpinnerBtnListener();
+        editVehicleHelper.initEditBtnHandler();
+        editVehicleHelper.initDiscardBtnHandler();
+        editVehicleHelper.initDeleteBtnHandler();
+        // btn listeners ...............................................
+
         return editVehicleView;
     }
 }
