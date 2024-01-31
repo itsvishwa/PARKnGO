@@ -74,7 +74,6 @@ id add_review_frag_discard_btn
 id add_review_frag_rating_bar
 id add_vehicle_frag_add_btn
 id add_vehicle_frag_province_spinner
-id add_vehicle_frag_selected_vehicle
 id add_vehicle_frag_type_spinner
 id add_vehicle_frag_vehicle_name
 id add_vehicle_frag_vehicle_number_digits
@@ -101,12 +100,10 @@ id button
 id button12
 id button13
 id button14
-id button2
 id button3
 id button4
 id button5
 id button7
-id button8
 id constraintLayout
 id constraintLayout10
 id constraintLayout11
@@ -145,6 +142,13 @@ id edit_review_frag_confirm_btn
 id edit_review_frag_content
 id edit_review_frag_discard_btn
 id edit_review_frag_rating_bar
+id edit_vehicle_frag_discard_btn
+id edit_vehicle_frag_edit_btn
+id edit_vehicle_frag_province_spinner
+id edit_vehicle_frag_type_spinner
+id edit_vehicle_frag_vehicle_name
+id edit_vehicle_frag_vehicle_number_digits
+id edit_vehicle_frag_vehicle_number_letters
 id error_frag_appbar_main_title
 id error_frag_appbar_sub_title
 id error_frag_body_main_text
@@ -325,7 +329,6 @@ id textView47
 id textView48
 id textView49
 id textView5
-id textView50
 id textView51
 id textView52
 id textView53
@@ -349,6 +352,8 @@ id textView69
 id textView7
 id textView70
 id textView71
+id textView72
+id textView73
 id textView8
 id textView80
 id textView81
