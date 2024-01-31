@@ -3254,7 +3254,6 @@ int id add_review_frag_discard_btn 0x7f090049
 int id add_review_frag_rating_bar 0x7f09004a
 int id add_vehicle_frag_add_btn 0x7f090335
 int id add_vehicle_frag_province_spinner 0x7f09004b
-int id add_vehicle_frag_selected_vehicle 0x7f090334
 int id add_vehicle_frag_type_spinner 0x7f09004c
 int id add_vehicle_frag_vehicle_name 0x7f090331
 int id add_vehicle_frag_vehicle_number_digits 0x7f090332
@@ -3314,12 +3313,10 @@ int id button 0x7f090080
 int id button12 0x7f090081
 int id button13 0x7f090082
 int id button14 0x7f090083
-int id button2 0x7f090084
 int id button3 0x7f090085
 int id button4 0x7f090086
 int id button5 0x7f090087
 int id button7 0x7f090088
-int id button8 0x7f090330
 int id buttonPanel 0x7f090089
 int id cache_measures 0x7f09008a
 int id callMeasure 0x7f09008b
@@ -3436,6 +3433,13 @@ int id edit_review_frag_confirm_btn 0x7f0900f9
 int id edit_review_frag_content 0x7f0900fa
 int id edit_review_frag_discard_btn 0x7f0900fb
 int id edit_review_frag_rating_bar 0x7f0900fc
+int id edit_vehicle_frag_discard_btn 0x7f090336
+int id edit_vehicle_frag_edit_btn 0x7f090337
+int id edit_vehicle_frag_province_spinner 0x7f090338
+int id edit_vehicle_frag_type_spinner 0x7f090339
+int id edit_vehicle_frag_vehicle_name 0x7f09033a
+int id edit_vehicle_frag_vehicle_number_digits 0x7f09033b
+int id edit_vehicle_frag_vehicle_number_letters 0x7f09033c
 int id elastic 0x7f0900fd
 int id embed 0x7f0900fe
 int id end 0x7f0900ff
@@ -3913,7 +3917,6 @@ int id textView47 0x7f0902d6
 int id textView48 0x7f0902d7
 int id textView49 0x7f0902d8
 int id textView5 0x7f0902d9
-int id textView50 0x7f0902da
 int id textView51 0x7f0902db
 int id textView52 0x7f0902dc
 int id textView53 0x7f0902dd
@@ -3937,6 +3940,8 @@ int id textView69 0x7f0902ee
 int id textView7 0x7f0902ef
 int id textView70 0x7f0902f0
 int id textView71 0x7f0902f1
+int id textView72 0x7f09033d
+int id textView73 0x7f09033e
 int id textView8 0x7f0902f2
 int id textView80 0x7f0902f3
 int id textView81 0x7f0902f4

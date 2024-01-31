@@ -34,7 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="Edit a Vehicle"
+                    android:text="Edit vehicle information"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -90,28 +90,15 @@
         android:layout_weight="8">
 
         <TextView
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3rd"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="45dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/textView51"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:textSize="19sp"
+            android:layout_marginTop="32dp"
             android:text="Vehicle Information"
-            android:layout_marginLeft="8dp"
             android:textColor="@color/black"
+            android:textSize="19sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/textView50"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -133,6 +120,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <EditText
+                android:id="@+id/edit_vehicle_frag_vehicle_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -180,6 +168,7 @@
                 android:id="@+id/vehicleTypeLinearlayout"
                 android:orientation="horizontal">
                 <EditText
+                    android:id="@+id/edit_vehicle_frag_vehicle_number_letters"
                     android:paddingVertical="13dp"
                     android:textSize="16sp"
                     android:text="NNN"
@@ -190,6 +179,7 @@
                     android:layout_height="wrap_content">
                 </EditText>
                 <EditText
+                    android:id="@+id/edit_vehicle_frag_vehicle_number_digits"
                     android:paddingVertical="13dp"
                     android:textSize="16sp"
                     android:text="0000"
@@ -200,7 +190,7 @@
                     android:layout_height="wrap_content">
                 </EditText>
                 <Spinner
-                    android:id="@+id/add_vehicle_frag_province_spinner"
+                    android:id="@+id/edit_vehicle_frag_province_spinner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -237,7 +227,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView90">
                 <Spinner
-                    android:id="@+id/add_vehicle_frag_type_spinner"
+                    android:id="@+id/edit_vehicle_frag_type_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -248,24 +238,48 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/edit_vehicle_frag_edit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Vehicle"
-            app:layout_constraintBottom_toBottomOf="@+id/button8"
+            app:layout_constraintBottom_toBottomOf="@+id/edit_vehicle_frag_discard_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button8"
+            app:layout_constraintTop_toTopOf="@+id/edit_vehicle_frag_discard_btn"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/edit_vehicle_frag_discard_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:backgroundTint="@color/bottomNavUnselectedItemColor"
             android:text="Discard"
-            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+        <TextView
+            android:id="@+id/textView72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:text="Do you want to delete the record completely?"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vehicleTypeConstView" />
+
+        <TextView
+            android:id="@+id/textView73"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primaryColor"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:text="Delete this record"
+            android:onClick="edit_vehicle_frag_delete_btn"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView72" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

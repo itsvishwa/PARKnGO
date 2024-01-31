@@ -33,27 +33,18 @@ public class SessionMainFragment extends Fragment {
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
         errorView = inflater.inflate(R.layout.fragment_error, container, false);
 
-        
-        // call this http://localhost/PARKnGO/server/mobile/driver/view_vehicle_info fetch the data here - DONE
-        
-        
-        // until fetching data load the loading screen - DONE
-        
-        // change visible to GONE appropriately - DONE
         SessionMainFetchData sessionMainFetchData = new SessionMainFetchData(sessionMainView, loadingView, errorView, getContext());
         sessionMainFetchData.fetchData();
-        // have to make sure that the backend is always send the "selected" property in the correct order
-
         
         // then make a fragment for vehicle adding and editing
         // make long tap work for editing
 
 
-        SessionMainButtonHandlers sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView);
+        SessionMainButtonHandlers sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView, requireActivity().getSupportFragmentManager());
 
         // onclick listeners.................................................................................
         sessionMainButtonHandlers.initVehicleBtnHandlers();
-        sessionMainButtonHandlers.initTaptoAddBtnHandlers();
+        sessionMainButtonHandlers.initTapToAddBtnHandlers();
         sessionMainButtonHandlers.initContinueBtnHandler();
         // onclick listeners.................................................................................
 

@@ -5,14 +5,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.session.AddVehicle;
+import com.example.parkngo.session.EditVehicle;
 import com.example.parkngo.session.SessionQRFragment;
 
 public class SessionMainButtonHandlers {
@@ -22,11 +26,13 @@ public class SessionMainButtonHandlers {
     Context context;
     View sessionMainView;
     Button continueBtn;
+    FragmentManager fragmentManager;
 
-    public SessionMainButtonHandlers(Context context, View sessionMainView){
+    public SessionMainButtonHandlers(Context context, View sessionMainView, FragmentManager fragmentManager){
             this.context = context;
             this.sessionMainView = sessionMainView;
             continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);
+            this.fragmentManager = fragmentManager;
     }
 
     public void initVehicleBtnHandlers(){
@@ -95,9 +101,70 @@ public class SessionMainButtonHandlers {
                 }
             }
         });
+
+        // long taps
+        car1View.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                TextView vehicleNameView = car1View.findViewById(R.id.fragment_session_main_1st_vehicle_name);
+                TextView vehicleNumberView = car1View.findViewById(R.id.fragment_session_main_1st_vehicle_number);
+                TextView vehicleTypeView = car1View.findViewById(R.id.fragment_session_main_1st_vehicle_type);
+                String vehicleName = vehicleNameView.getText().toString();
+                String vehicleNumber = vehicleNumberView.getText().toString();
+                String vehicleType = vehicleTypeView.getText().toString();
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 1);
+                data.putString("vehicleName", vehicleName);
+                data.putString("vehicleNumber", vehicleNumber);
+                data.putString("vehicleType", vehicleType);
+                mainActivity.replaceFragment(new EditVehicle(), data);
+                return true;
+            }
+        });
+
+        car2View.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                TextView vehicleNameView = car2View.findViewById(R.id.fragment_session_main_2nd_vehicle_name);
+                TextView vehicleNumberView = car2View.findViewById(R.id.fragment_session_main_2nd_vehicle_number);
+                TextView vehicleTypeView = car2View.findViewById(R.id.fragment_session_main_2nd_vehicle_type);
+                String vehicleName = vehicleNameView.getText().toString();
+                String vehicleNumber = vehicleNumberView.getText().toString();
+                String vehicleType = vehicleTypeView.getText().toString();
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 2);
+                data.putString("vehicleName", vehicleName);
+                data.putString("vehicleNumber", vehicleNumber);
+                data.putString("vehicleType", vehicleType);
+                mainActivity.replaceFragment(new EditVehicle(), data);
+                return true;
+            }
+        });
+
+        car3View.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                TextView vehicleNameView = car3View.findViewById(R.id.fragment_session_main_3rd_vehicle_name);
+                TextView vehicleNumberView = car3View.findViewById(R.id.fragment_session_main_3rd_vehicle_number);
+                TextView vehicleTypeView = car3View.findViewById(R.id.fragment_session_main_3rd_vehicle_type);
+                String vehicleName = vehicleNameView.getText().toString();
+                String vehicleNumber = vehicleNumberView.getText().toString();
+                String vehicleType = vehicleTypeView.getText().toString();
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 3);
+                data.putString("vehicleName", vehicleName);
+                data.putString("vehicleNumber", vehicleNumber);
+                data.putString("vehicleType", vehicleType);
+                mainActivity.replaceFragment(new EditVehicle(), data);
+                return true;
+            }
+        });
     }
 
-    public void initTaptoAddBtnHandlers(){
+    public void initTapToAddBtnHandlers(){
         View tapToAdd1View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_1);
         View tapToAdd2View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_2);
         View tapToAdd3View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_3);
@@ -132,6 +199,7 @@ public class SessionMainButtonHandlers {
         });
 
     }
+
     public void initContinueBtnHandler(){
         Button continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);
         continueBtn.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +212,7 @@ public class SessionMainButtonHandlers {
             }
         });
     }
+
     public int getSelectedVehicle(){
         if(is1Selected){
             return 1;
