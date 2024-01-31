@@ -73,4 +73,49 @@ class DriverQRModel
 
         $this->db->execute();
     }
+
+    // update vehicle informations
+    public function update_vehicle_info($name, $number, $type, $selected, $driver_id)
+    {
+        $this->db->query("UPDATE driver_qr SET vehicle_name = :name, vehicle_number = :number, vehicle_type = :type WHERE selected = :selected AND driver_id = :driver_id");
+        $this->db->bind(":name", $name);
+        $this->db->bind(":number", $number);
+        $this->db->bind(":type", $type);
+        $this->db->bind(":selected", $selected);
+        $this->db->bind(":driver_id", $driver_id);
+        $this->db->execute();
+    }
+
+    public function check_user($driver_id, $selected)
+    {
+        $this->db->query("SELECT _id FROM driver_qr WHERE driver_id = :driver_id AND selected = :selected");
+        $this->db->bind(":driver_id", $driver_id);
+        $this->db->bind(":selected", $selected);
+
+        $this->db->execute();
+
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete_driver_vehicle($selected_vehicle, $driver_id)
+    {
+        $this->db->query("DELETE FROM driver_qr WHERE driver_id = :driver_id AND selected = :selected");
+        $this->db->bind(":driver_id", $driver_id);
+        $this->db->bind(":selected", $selected_vehicle);
+        $this->db->execute();
+    }
+
+
+    public function update_driver_selected_vehicle_level($driver_id, $old_selected, $new_selected)
+    {
+        $this->db->query("UPDATE driver_qr SET selected = :new_selected WHERE driver_id = :driver_id AND selected = :old_selected");
+        $this->db->bind(":driver_id", $driver_id);
+        $this->db->bind(":old_selected", $old_selected);
+        $this->db->bind(":new_selected", $new_selected);
+        $this->db->execute();
+    }
 }
