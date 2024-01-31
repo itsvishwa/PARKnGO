@@ -172,8 +172,9 @@
                     android:paddingVertical="13dp"
                     android:textSize="16sp"
                     android:text="NNN"
+                    android:maxLength="3"
                     android:background="@null"
-                    android:ems="10"
+                    android:ems="3"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content">
@@ -183,8 +184,9 @@
                     android:paddingVertical="13dp"
                     android:textSize="16sp"
                     android:text="0000"
+                    android:maxLength="4"
                     android:background="@null"
-                    android:ems="10"
+                    android:ems="4"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content">
@@ -255,7 +257,7 @@
             android:backgroundTint="@color/bottomNavUnselectedItemColor"
             android:text="Discard"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView73" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_vehicle_frag_delete_btn" />
 
         <TextView
             android:id="@+id/textView72"
@@ -268,14 +270,13 @@
             app:layout_constraintTop_toBottomOf="@+id/vehicleTypeConstView" />
 
         <TextView
-            android:id="@+id/textView73"
+            android:id="@+id/edit_vehicle_frag_delete_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primaryColor"
             android:textStyle="bold"
             android:textSize="16sp"
             android:text="Delete this record"
-            android:onClick="edit_vehicle_frag_delete_btn"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintStart_toStartOf="parent"

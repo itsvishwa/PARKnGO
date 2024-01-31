@@ -3434,6 +3434,7 @@ id edit_review_frag_confirm_btn
 id edit_review_frag_content
 id edit_review_frag_discard_btn
 id edit_review_frag_rating_bar
+id edit_vehicle_frag_delete_btn
 id edit_vehicle_frag_discard_btn
 id edit_vehicle_frag_edit_btn
 id edit_vehicle_frag_province_spinner
@@ -3942,7 +3943,6 @@ id textView7
 id textView70
 id textView71
 id textView72
-id textView73
 id textView8
 id textView80
 id textView81
