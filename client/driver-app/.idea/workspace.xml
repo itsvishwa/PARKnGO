@@ -11,10 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/parkngo/session/EditVehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/parkngo/session/EditVehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/parkngo/session/helpers/EditVehicleHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/parkngo/session/helpers/EditVehicleHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_vehicle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_vehicle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Driver.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Driver.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

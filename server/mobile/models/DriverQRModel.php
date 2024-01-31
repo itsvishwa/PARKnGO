@@ -32,6 +32,7 @@ class DriverQRModel
         $this->db->execute();
     }
 
+    // get all saved vehicle information for a given driver id , return false if there non are there
     public function get_all($driver_id)
     {
         $this->db->query("SELECT * FROM driver_qr WHERE driver_id = :driver_id");
@@ -45,8 +46,7 @@ class DriverQRModel
         }
     }
 
-
-    // get the selected number of new record
+    // get the selected number count for the new record
     public function get_selected_vehicle_number($driver_id)
     {
         $this->db->query("SELECT MAX(selected) as result FROM driver_qr WHERE driver_id = :driver_id");
@@ -86,7 +86,8 @@ class DriverQRModel
         $this->db->execute();
     }
 
-    public function check_user($driver_id, $selected)
+    // validating whether the vehicle record is exist or not for a given driver id and and the selected count
+    public function is_exist_vehicle_record($driver_id, $selected)
     {
         $this->db->query("SELECT _id FROM driver_qr WHERE driver_id = :driver_id AND selected = :selected");
         $this->db->bind(":driver_id", $driver_id);
@@ -101,6 +102,7 @@ class DriverQRModel
         }
     }
 
+    // delete the vehicle record
     public function delete_driver_vehicle($selected_vehicle, $driver_id)
     {
         $this->db->query("DELETE FROM driver_qr WHERE driver_id = :driver_id AND selected = :selected");
@@ -109,7 +111,7 @@ class DriverQRModel
         $this->db->execute();
     }
 
-
+    // update selected count
     public function update_driver_selected_vehicle_level($driver_id, $old_selected, $new_selected)
     {
         $this->db->query("UPDATE driver_qr SET selected = :new_selected WHERE driver_id = :driver_id AND selected = :old_selected");
