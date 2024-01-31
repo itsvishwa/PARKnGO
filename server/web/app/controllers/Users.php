@@ -20,6 +20,14 @@ class Users extends Controller
     $this->view('company/registrationSuccussfulView');
   }
 
+  public function suspendView()
+  {
+    $data = [
+      'suspend_details' => $this->userModel->getCompanySuspendDetails($_SESSION['user_id']),
+    ];
+    $this->view('company/suspendView', $data);
+  }
+
   public function registrationView()
   {
     // Check for POST
@@ -235,4 +243,3 @@ class Users extends Controller
     }
   }
 }
-
