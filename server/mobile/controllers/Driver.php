@@ -6,13 +6,18 @@ class Driver extends Controller
 
         public $driver_model;
         public $driver_qr_model;
+        public $session_model;
+        public $payment_model;
 
         public function __construct()
         {
                 $this->driver_model = $this->model("DriverModel");
                 $this->driver_qr_model = $this->model("DriverQRModel");
+                $this->session_model = $this->model("SessionModel");
+                $this->payment_model = $this->model("PaymentModel");
         }
 
+        // driver req - view saved vehicle informations
         public function view_vehicle_info()
         {
                 $token_data = $this->verify_token_for_drivers();
@@ -49,6 +54,7 @@ class Driver extends Controller
                 }
         }
 
+        // driver req - add new vehicle
         public function add_vehicle()
         {
                 $vehicle_data = [
@@ -77,6 +83,7 @@ class Driver extends Controller
                 }
         }
 
+        // driver req - edit vehicle information
         public function edit_vehicle()
         {
                 $vehicle_data = [
@@ -93,7 +100,7 @@ class Driver extends Controller
                 } else if ($token_data === 404) {
                         $this->send_json_404("Token not found");
                 } else {
-                        $result = $this->driver_qr_model->check_user($token_data["user_id"], $vehicle_data["selected"]);
+                        $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], $vehicle_data["selected"]);
                         if ($result) {
                                 $this->driver_qr_model->update_vehicle_info(
                                         $vehicle_data["vehicle_name"],
@@ -109,6 +116,7 @@ class Driver extends Controller
                 }
         }
 
+        // driver req - delete vehicle infomation
         public function delete_vehicle($selected_vehicle)
         {
                 $token_data = $this->verify_token_for_drivers();
@@ -118,21 +126,21 @@ class Driver extends Controller
                 } else if ($token_data === 404) {
                         $this->send_json_404("Token not found");
                 } else {
-                        $result = $this->driver_qr_model->check_user($token_data["user_id"], $selected_vehicle);
+                        $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], $selected_vehicle);
                         if ($result) {
                                 $this->driver_qr_model->delete_driver_vehicle($selected_vehicle, $token_data["user_id"]);
                                 // has to restructure reamainng vehicle informations
                                 if ($selected_vehicle == 2) {
-                                        $result = $this->driver_qr_model->check_user($token_data["user_id"], 3);
+                                        $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], 3);
                                         if ($result) {
                                                 $this->driver_qr_model->update_driver_selected_vehicle_level($token_data["user_id"], 3, 2);
                                         }
                                 } else if ($selected_vehicle == 1) {
-                                        $result = $this->driver_qr_model->check_user($token_data["user_id"], 2);
+                                        $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], 2);
                                         if ($result) {
                                                 $this->driver_qr_model->update_driver_selected_vehicle_level($token_data["user_id"], 2, 1);
                                         }
-                                        $result = $this->driver_qr_model->check_user($token_data["user_id"], 3);
+                                        $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], 3);
                                         if ($result) {
                                                 $this->driver_qr_model->update_driver_selected_vehicle_level($token_data["user_id"], 3, 2);
                                         }
@@ -141,6 +149,79 @@ class Driver extends Controller
                         } else {
                                 // driver don't have a vehicle information related to requested data
                                 $this->send_json_400("Invald user details");
+                        }
+                }
+        }
+
+        // driver req - check whether the driver has a open parking session, send data if exist
+        public function view_open_parking_session()
+        {
+                $token_data = $this->verify_token_for_drivers();
+
+                if ($token_data === 400) {
+                        $this->send_json_400("Invalid Token");
+                } else if ($token_data === 404) {
+                        $this->send_json_404("Token not found");
+                } else {
+                        $result = $this->session_model->is_driver_session_exist($token_data["user_id"]);
+                        if ($result) {
+                                $result_arr = [
+                                        "status_code" => "S_D001",
+                                        "session_id" => $this->encrypt_id($result->_id),
+                                        "start_time" => $result->start_time,
+                                        "vehicle_number" => $result->vehicle_number,
+                                        "vehicle_type" => ucfirst($result->vehicle_type),
+                                        "officer_id" => $result->officer_id,
+                                        "officer_name" => $result->first_name . " " . $result->last_name
+                                ];
+                                $this->send_json_200($result_arr);
+                        } else // no open parking session for driver
+                        {
+                                $result_arr = [
+                                        "sattus_code" => "E_D001"
+                                ];
+                                $this->send_json_200("result_arr");
+                        }
+                }
+        }
+
+        // driver req - check whether the driver has a payment due session, send data if exist
+        public function view_open_payments()
+        {
+                $token_data = $this->verify_token_for_drivers();
+
+                if ($token_data === 400) {
+                        $this->send_json_400("Invalid Token");
+                } else if ($token_data === 404) {
+                        $this->send_json_404("Token not found");
+                } else {
+                        $payment_id = $this->payment_model->is_open_payment_exist($token_data["user_id"]);
+                        if ($payment_id) {
+                                $payment_data = $this->payment_model->get_all_data($payment_id);
+                                $result_arr = [
+                                        "amount" => $payment_data->amount,
+                                        "start_time" => $payment_data->start_time,
+                                        "end_time" => $payment_data->end_time,
+                                        "rate" => $payment_data->rate,
+                                        "vehicle_number" => $payment_data->vehicle_number,
+                                        "vehicle_type" => $payment_data->vehicle_type,
+                                        "parking_space_name" => $payment_data->name,
+                                        "officer_id" => $payment_data->officer_id,
+                                        "officer_name" => $payment_data->first_name . " " . $payment_data->last_name
+                                ];
+                                $this->send_json_200(
+                                        [
+                                                "status_code" => "S_D002",
+                                                "data" => $result_arr
+                                        ]
+                                );
+                        } else {
+                                $this->send_json_200(
+                                        [
+                                                "status_code" => "E_D002",
+                                                "msg" => "Driver dosen't have open payemnt session"
+                                        ]
+                                );
                         }
                 }
         }
