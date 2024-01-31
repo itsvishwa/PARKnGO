@@ -36,7 +36,7 @@ class Driver extends Controller
                                                 "selected" => $result_data->selected,
                                                 "vehicle_name" => $result_data->vehicle_name,
                                                 "vehicle_number" => $result_data->vehicle_number,
-                                                "vehicle_type" => $result_data->vehicle_type
+                                                "vehicle_type" => ucfirst($result_data->vehicle_type) // first letter to capital
                                         ];
                                         $result_arr[] = $temp;
                                 }
