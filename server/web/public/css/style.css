@@ -947,3 +947,14 @@ body {
 .text-decoration-none {
   text-decoration: none;
 }
+
+.return-to-login-btn {
+  text-align: right;
+  margin-right: 100px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.return-to-login-btn:hover {
+  text-decoration: underline;
+}
