@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Home.HomeMainFragment"
+    tools:context=".Profile.ProfileMainFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -102,14 +102,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
-        android:paddingHorizontal="18dp">
+        android:paddingHorizontal="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutID1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
-            android:paddingTop="20dp"
+            android:paddingTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +136,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textID"
+                    android:id="@+id/profile_main_frag_officer_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="OF00004"
@@ -183,7 +183,7 @@
                 android:id="@+id/constraintLayoutName2"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/profile_input_field"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,7 +200,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textName"
+                    android:id="@+id/profile_main_frag_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="John"
@@ -222,13 +222,13 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="11dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="Name"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.114"
+                app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -264,7 +264,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textPN"
+                    android:id="@+id/profile_main_frag_mobile_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+94 71 234 56 77"
@@ -312,7 +312,7 @@
                 android:id="@+id/constraintLayoutNIC2"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/profile_input_field"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -329,7 +329,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textNIC"
+                    android:id="@+id/profile_main_frag_nic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="200144227722"
@@ -352,7 +352,7 @@
                 android:id="@+id/textViewNIC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="11dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="NIC Number"
@@ -377,7 +377,7 @@
                 android:id="@+id/constraintLayoutParking2"
                 android:layout_width="match_parent"
                 android:layout_height="61dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/profile_input_field"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -394,7 +394,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textParking"
+                    android:id="@+id/profile_main_frag_parking_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CMC | Car Park 01"
@@ -417,7 +417,7 @@
                 android:id="@+id/textViewParking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="11dp"
                 android:background="@color/backgroundColor"
                 android:paddingHorizontal="5dp"
                 android:text="Allocated Parking"

@@ -1,5 +1,6 @@
 package com.example.officertestapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,6 +21,7 @@ import com.example.officertestapp.Profile.ProfileLogoutFragment;
 import com.example.officertestapp.Profile.ProfileMainFragment;
 import com.example.officertestapp.Profile.ProfilePaymentHistoryFragment;
 import com.example.officertestapp.Status.StatusMainFragment;
+import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity{
@@ -42,7 +44,9 @@ public class MainActivity extends AppCompatActivity{
             return true;
         });
     }
-
+    public void backBtnHandler(View view){
+        onBackPressed();
+    }
     private void replaceFragment(Fragment f){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -153,8 +157,11 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new ProfileMainFragment());
     }
 
-    /*public void frag_profile_logout_yes_btn_handler(View v) {
-        replaceFragment(new );
-    }*/
+    public void frag_profile_logout_yes_btn_handler(View v) {
+        ParkngoStorage parkngoStorage = new ParkngoStorage(getApplicationContext());
+        parkngoStorage.clearData();
+        Intent i = new Intent(this, HeroActivity.class);
+        startActivity(i);
+    }
 
 }

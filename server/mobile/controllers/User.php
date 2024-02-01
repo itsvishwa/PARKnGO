@@ -265,8 +265,8 @@ class User extends Controller
                                 "first_name" => $officer_data["first_name"],
                                 "last_name" => $officer_data["last_name"],
                                 "mobile_number" => $officer_data["mobile_number"],
-                                "company_id" => $officer_data["company_id"],
-                                "parking_id" => $officer_data["parking_id"]
+                                "parking_name" => $officer_data["parking_name"],
+                                "parking_id" => $this->encrypt_id($officer_data["parking_id"])
                         ];
                 }
 
