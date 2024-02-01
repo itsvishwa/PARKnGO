@@ -152,8 +152,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             var selectedParkingSpaceStatus = parking_spaces_status.filter(function(parking_space_status) {
               return parking_space_status.parking_id == selectedParkingSpaceId;
             });
-            console.log(selectedParkingSpace);
-            console.log(selectedParkingSpaceStatus);
+            // console.log(selectedParkingSpace);
+            // console.log(selectedParkingSpaceStatus);
             // Populate form fields with officer details
 
             if (selectedParkingSpace) {
