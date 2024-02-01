@@ -3750,6 +3750,7 @@ int id search_voice_btn 0x7f090231
 int id select_dialog_listview 0x7f090232
 int id selected 0x7f090233
 int id selection_type 0x7f090234
+int id session_payment_pay_btn 0x7f09030d
 int id sharedValueSet 0x7f090235
 int id sharedValueUnset 0x7f090236
 int id shortcut 0x7f090237
@@ -3865,6 +3866,7 @@ int id textView39 0x7f0902a1
 int id textView4 0x7f0902a2
 int id textView40 0x7f0902a3
 int id textView41 0x7f0902f4
+int id textView42 0x7f09030e
 int id textView43 0x7f0902f5
 int id textView44 0x7f0902f6
 int id textView45 0x7f0902f7
@@ -3892,7 +3894,11 @@ int id textView65 0x7f09030a
 int id textView66 0x7f09030b
 int id textView67 0x7f09030c
 int id textView7 0x7f0902a6
+int id textView70 0x7f09030f
+int id textView71 0x7f090310
 int id textView8 0x7f0902a7
+int id textView80 0x7f090311
+int id textView81 0x7f090312
 int id textView9 0x7f0902a8
 int id text_input_end_icon 0x7f0902a9
 int id text_input_error_icon 0x7f0902aa

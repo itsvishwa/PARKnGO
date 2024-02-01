@@ -63,7 +63,7 @@
                         <li>
                             <a href="./driverReviews">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                                 </svg>
                                 Driver Reviews
                             </a>
@@ -79,7 +79,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
                         <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
                     </svg>
-                    <h3>Driver Reviews</h3>
+                    <h3>Requests History</h3>
                 </div>
                 <div class="profile">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
@@ -105,165 +105,86 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Table rows will go here -->
-                                <tr>
-                                    <td>University of Moratuwa</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status1-cell">Rejected</td>
-                                    <!-- More table rows as needed -->
 
-                                    <td>Incomplete documentation</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
+                                <?php
+                                $approvedApplications = $data['approvedApplications'];
+                                $rejectedApplications = $data['rejectedApplications'];
 
-                                </tr>
-                                <tr>
-                                    <td>Nawaloka Hospitals PLC</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status1-cell">Rejected</td>
-                                    <!-- More table rows as needed -->
+                                $maxIterations = max(count($approvedApplications), count($rejectedApplications));
 
-                                    <td>Parking Certificate issues and Identity verification problems</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
+                                for ($i = 0; $i < $maxIterations; $i++) {
+                                    if (isset($approvedApplications[$i])) {
+                                        $approvedApplication = $approvedApplications[$i];
+                                ?>
+                                        <tr>
+                                            <td><?php echo $approvedApplication->name; ?></td>
+                                            <!--  <td>Nov 23, 2023 <br> 05:20:32 PM</td> -->
+                                            <td>
+                                                <?php
+                                                $timestamp = $approvedApplication->registered_time_stamp;
+                                                $date = date("M d, Y", $timestamp);
+                                                $time = date("h:i:s A", $timestamp);
+                                                echo "<p>{$date}</p>";
+                                                echo "<p>{$time}</p>";
+                                                ?>
+                                            </td>
+                                            <td class="status2-cell">Approved</td>
+                                            <td>N/A</td>
+                                            <td>
+                                                <span class="material-symbols-outlined">
+                                                    download
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
 
-                                </tr>
-                                <tr>
-                                    <td>University of Ruhuna</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status2-cell">Approved</td>
-                                    <!-- More table rows as needed -->
+                                    if (isset($rejectedApplications[$i])) {
+                                        $rejectedApplication = $rejectedApplications[$i];
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $rejectedApplication->name; ?></td>
+                                            <!--<td>Nov 23, 2023 <br> 05:20:32 PM</td> -->
+                                            <td>
+                                                <?php
+                                                $timestamp = $rejectedApplication->registered_time_stamp;
+                                                $date = date("M d, Y", $timestamp);
+                                                $time = date("h:i:s A", $timestamp);
+                                                echo "<p>{$date}</p>";
+                                                echo "<p>{$time}</p>";
+                                                ?>
+                                            </td>
+                                            <td class="status1-cell">Rejected</td>
+                                            <!--<td>Incomplete documentation</td>-->
+                                            <td>
+                                                <div class="truncate-text">
+                                                    <?php
+                                                    $reviewMessage = $rejectedApplication->review_message;
+                                                    $maxLength = 50; // Define the maximum length to display initially
+                                                    if (strlen($reviewMessage) > $maxLength) {
+                                                        // If the message length exceeds the maximum length, truncate and show a "Read More" link
+                                                        echo substr($reviewMessage, 0, $maxLength) . '... ';
+                                                        echo '<a href="javascript:void(0);" class="read-more-link">Read More</a>';
+                                                        echo '<span class="full-text" style="display: none;">' . $reviewMessage . '</span>';
+                                                    } else {
+                                                        // If the message length is within the limit, display the whole message
+                                                        echo $reviewMessage;
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </td>
 
-                                    <td>N/A</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
+                                            <td>
+                                                <span class="material-symbols-outlined">
+                                                    download
+                                                </span>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                }
+                                ?>
 
-                                </tr>
-                                <tr>
-                                    <td>Colombo City Center</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status1-cell">Rejected</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>Identity Verification Concerns</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>Cinnamon Grand Hotel</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status2-cell">Approved</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>N/A</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr><tr>
-                                    <td>Hilton Hotel Colombo</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status2-cell">Approved</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>N/A</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr><tr>
-                                    <td>University of Moratuwa</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status2-cell">Approved</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>N/A</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr><tr>
-                                    <td>University of Peradeniya</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status1-cell">Rejected</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>Spelling errors and Identity Verification Concerns</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>Hayles PLC</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status2-cell">Approved</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>N/A</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <tr>
-                                    <td>University of Sri Jayawardanapura</td>
-                                    <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-                                    <!-- Your HTML code -->
-                                    <td class="status2-cell">Approved</td>
-                                    <!-- More table rows as needed -->
-
-                                    <td>N/A</td>
-                                    <!--<td>★★★★☆</td> -->
-                                    <td>
-                                        <span class="material-symbols-outlined">
-                                            download
-                                        </span>
-                                    </td>
-
-                                </tr>
-                                <!-- More rows as needed -->
                             </tbody>
                         </table>
                     </div>
@@ -275,7 +196,19 @@
     </div>
     </div>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const readMoreLinks = document.querySelectorAll('.read-more-link');
+            readMoreLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const fullText = this.nextElementSibling;
+                    fullText.style.display = 'inline'; // Show the full text when clicked
+                    this.style.display = 'none'; // Hide the "Read More" link
+                });
+            });
+        });
+    </script>
 
 </body>
 
