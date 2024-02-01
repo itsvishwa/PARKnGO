@@ -192,6 +192,7 @@ class ParkingSpace
     $this->db->query('SELECT
                         ps._id AS parking_id,
                         ps.name AS parking_name,
+                        ps.image AS parking_image,
                         ps.address AS parking_address,
                         ps.no_of_slots AS parking_total_slots,
                         ps.is_public AS parking_is_public,

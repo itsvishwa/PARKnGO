@@ -93,7 +93,19 @@ class Company
   //get all the parking spaces that related to that company
   public function getParkingSpaces($company_id)
   {
-    $this->db->query('SELECT * FROM parking_spaces WHERE company_id = :company_id');
+    $this->db->query('SELECT ps._id ,
+    ps.name ,
+    ps.address,
+    ps.no_of_slots,
+    ps.is_public,
+    ps.is_closed,
+    ps.closed_start_time,
+    ps.closed_end_time,
+    ps.latitude,
+    ps.longitude,
+    ps.avg_star_count,
+    ps.total_review_count,
+    ps.company_id FROM parking_spaces ps WHERE company_id = :company_id');
     $this->db->bind(':company_id', $company_id);
     $row = $this->db->resultSet();
     return $row;
