@@ -7,59 +7,38 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.officertestapp.R;
+import com.example.officertestapp.Helpers.ParkngoStorage;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileMainFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProfileMainFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ProfileMainFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileMainFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProfileMainFragment newInstance(String param1, String param2) {
-        ProfileMainFragment fragment = new ProfileMainFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_main, container, false);
+        View view =  inflater.inflate(R.layout.fragment_profile_main, container, false);
+
+        TextView officerIDView = view.findViewById(R.id.profile_main_frag_officer_id);
+        TextView nameView = view.findViewById(R.id.profile_main_frag_name);
+        TextView phoneNumberView = view.findViewById(R.id.profile_main_frag_mobile_number);
+        TextView nicView = view.findViewById(R.id.profile_main_frag_nic);
+        TextView parkingNameView = view.findViewById(R.id.profile_main_frag_parking_name);
+
+        ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
+        String firstName = parkngoStorage.getData("firstName");
+        String lastName = parkngoStorage.getData("lastName");
+        String mobileNumber = parkngoStorage.getData("mobileNumber");
+        String nic = parkngoStorage.getData("nic");
+        String parkingName = parkngoStorage.getData("parkingName");
+        String officerID  = parkngoStorage.getData("officerID");
+
+        officerIDView.setText(officerID);
+        nameView.setText(firstName + " " + lastName);
+        phoneNumberView.setText("(+94) " + mobileNumber);
+        nicView.setText(nic);
+        parkingNameView.setText(parkingName);
+
+        return view;
     }
 }
