@@ -19,7 +19,9 @@
 }
 
 .confirmation-card-table {
-  width: 50%;
+  padding-left: 10px;
+  padding-top: 5px;
+  width: 60%;
   background-color: #fffbf4;
 }
 .tr-b {
@@ -29,7 +31,7 @@
 .c-btn-section {
   display: flex;
   justify-content: space-between;
-  margin: 5px 30px 0px 30px;
+  margin: 5px 30px 0px 15px;
   width: 610px;
 }
 

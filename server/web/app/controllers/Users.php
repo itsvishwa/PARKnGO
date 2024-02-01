@@ -20,6 +20,14 @@ class Users extends Controller
     $this->view('company/registrationSuccussfulView');
   }
 
+  public function suspendView()
+  {
+    $data = [
+      'suspend_details' => $this->userModel->getCompanySuspendDetails($_SESSION['user_id']),
+    ];
+    $this->view('company/suspendView', $data);
+  }
+
   public function registrationView()
   {
     // Check for POST
@@ -118,6 +126,7 @@ class Users extends Controller
   {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
       // Process Form
       // Sanitize POST data
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -143,10 +152,13 @@ class Users extends Controller
           }
         }
       } else if ($this->userModel->findCompanyByEmail($data['email'])) {
+
         // Company found
         if (!empty($data['password']) && empty($data['email_err'])) {
           $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+
           if ($loggedInUser) {
+
             // Create Session
             if ($loggedInUser->is_approved) {
               $this->createUserSession($loggedInUser);
@@ -163,7 +175,7 @@ class Users extends Controller
         $data['email_err'] = 'User not found';
         $this->view('loginView', $data);
       }
-
+      // end
       // // Check errors are empty
       // if (!empty($data['email']) && !empty($data['password']) && empty($data['email_err'])) {
       //   //validate
@@ -201,6 +213,7 @@ class Users extends Controller
     $_SESSION['user_id'] = $user->_id;
     $_SESSION['user_email'] = $user->email;
     $_SESSION['user_name'] = $user->name;
+
     redirect('companys/dashboardView');
   }
 
@@ -230,4 +243,3 @@ class Users extends Controller
     }
   }
 }
-
