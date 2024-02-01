@@ -74,10 +74,10 @@
 			<div class="header text-md">
 				<p>Fill the following details to add a new parking space</p>
 			</div>
-			<form action="parkingSpaceSaveView.php" method="POST" class="parking-form" onsubmit="saveFormData()">
+			<form action="parkingSpaceSaveView" method="POST" class="parking-form" onsubmit="saveFormData()">
 				<div class="form-left">
-					<label for="parkingName" class="p-form-label ">Parking Name *</label>
-					<input type="text" name="parkingName" class="p-form-input width-65" placeholder="Display name of the parking space" required>
+					<label for="name" class="p-form-label ">Parking Name *</label>
+					<input type="text" name="name" class="p-form-input width-65" placeholder="Display name of the parking space" required>
 
 					<label for="address" class="p-form-label">Address *</label>
 					<input type="text" name="address" id="address" placeholder="Enter Parking Space Address" class="p-form-input width-75" required>
@@ -86,21 +86,20 @@
 						<p class="p-form-label">Parking Slots *</p>
 						<div id="parkingSlotBatchForm" class="p-slot-batch">
 
+							<label for="noOfSlots" class="p-form-label">Slots* </label>
 							<input type="number" name="noOfSlots[]" class="p-form-input width-20" placeholder="No of slots" required>
 
+							<label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
 							<select name="vehicleType[]" class="p-form-dropdown" required>
 								<option value="" disabled selected>Vehicle Type</option>
 								<option value="Car">Car</option>
 								<option value="Van">Van</option>
 								<option value="Bus">Bus</option>
-								<option value="Bicycle">Bicycle</option>
+								<option value="Motorcycle">Motorcycle</option>
 							</select><br>
 
-							<label for="startNumber" class="p-form-label">Start</label>
-							<input type="number" name="startNumber[]" class="p-form-input width-40" placeholder="Parking Slot Start Number" required>
-
-							<label for="endNumber" class="p-form-label">To</label>
-							<input type="number" name="endNumber[]" class="p-form-input width-30" placeholder="Parking Slot End Number" disabled required>
+							<br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
+							<span class="p-form-label">Rs. <input type="number" name="parkingRate[]" placeholder="Price" class="p-form-input width-20" required> per Hour</span>
 
 							<button type="button" onclick="removeParkingSlotBatch(this.parentNode)" class="p-form-btn p-form-label">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="button-icon text-red p-form-icon">
@@ -124,10 +123,9 @@
 						<option value="public">Public</option>
 						<option value="customers">Customers Only</option>
 					</select>
-
-					<label for="parkingRate" class="p-form-label">Parking Rate *</label>
-					<span class="p-form-label">Rs. <input type="number" name="parkingRate" placeholder="Price" class="p-form-input width-20" required> per Hour</span>
-
+					<!-- 
+					<label for="parkingImage" class="p-form-label mb-10">Parking Image*</label>
+					<input type="file" name="parkingImage" id="parkingImage" accept="image/*"> -->
 
 				</div>
 				<div class="form-right">
@@ -148,9 +146,7 @@
 						Auto Mark Location
 					</button>
 					<div>
-						<div id="map" class="map">
-
-						</div>
+						<div id="map" class="map"></div>
 					</div>
 					<div class="p-btn-section">
 						<input type="button" value="Discard" class="p-btn bg-black40" onclick="confirmDiscard()">
@@ -167,6 +163,18 @@
 	<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcYa9qDHqK5bpg0nJiZb7FkTOFCfRuuEE&callback=initMap">
 	</script>
 	<script src="<?php echo URLROOT; ?>/js/company/googleMapApi.js"></script>
+	<script>
+		function confirmDiscard() {
+			if (
+				confirm(
+					'Are you sure you want to discard? All the field data will not be saved.',
+				)
+			) {
+				window.location.href = './parkingSpaceView';
+			}
+		}
+	</script>
+
 </body>
 
 </html>
