@@ -1,67 +1,92 @@
-# PARK'N GO
+!["border image](./tests/newborder.png)
 
-### A Parking Management System
-<hr>
+# PARK'N GO - Parking Management System
 
-Park'N Go is a comprehensive parking management system designed to solve the parking woes in Sri Lanka, especially in Colombo. It offers a user-friendly mobile app and a web platform to facilitate drivers, parking companies, and parking officers.
+> Email Us: parkngo.email@gmail.com
 
 ## Table of Contents
+
 - [Introduction](#introduction)
 - [Features](#features)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 
-
 ## Introduction
 
-Sri Lanka's parking problem is a mess! Currently, there's no efficient system for managing parking in the country, especially in Colombo, the bustling commercial city. Around 250,000 vehicles come and go every day, but there's no organized parking plan in place.
-
-Park'N Go aims to address this issue by providing real-time parking information, navigation to parking spaces, card payment options, and efficient parking space management for companies.
+The **PARK'N GO** parking management system is a state-of-the-art solution designed to revolutionize parking management in Sri Lanka. It offers a comprehensive digital platform that caters to the needs of all stakeholders within the parking ecosystem, including drivers, parking officers, parking space providers (both public and private entities), and system administrators. This README provides an overview of the system, its features, installation instructions, usage guidelines, and the technologies used.
 
 ## Features
 
-- **For Drivers:**
-  - Check parking space availability.
-  - Navigate to a parking space.
-  - Make card payments for parking fees.
-  - View payment details and history.
+### For Drivers
 
-- **For Companies:**
-  - Manage parking spaces (add, view real-time status, etc.).
-  - Manage parking officers (track their activities, assign parking officers to spaces, etc.).
+- **Real-time Parking Information:** Access up-to-the-minute details on parking space availability, location, number of free and occupied slots, and parking rates.
+- **Navigation Assistance:** Receive navigational guidance to your chosen parking space, making it easier to find your destination.
+- **Secure Card Payments:** Conveniently pay for parking sessions using credit or debit cards, eliminating the need for cash transactions.
+- **Complaint Reporting:** Easily report any issues or provide feedback regarding your parking experience through the app.
+- **Cost Calculator:** Calculate your parking costs based on your input of time duration and parking rates.
 
-- **For Parking Officers:**
-  - Assign a vehicle to a parking space.
-  - Release a vehicle from a parking space.
+### For Parking Officers
 
-## Installation
+- **Efficient Session Management:** Start and end parking sessions efficiently and accurately, reducing the chances of errors.
+- **Real-time Slot Status:** Monitor the status of individual parking slots within the parking area, enhancing efficiency.
+- **Accept Cash Payments:** Facilitate cash payments for a seamless parking experience.
 
-1. Clone the repository: `git clone https://github.com/yourusername/parkngo.git`
-2. Follow the installation instructions for the mobile app (Android) and web app (HTML, CSS, JS) in their respective directories.
-3. Set up the database (MySQL) and configure the server (PHP) using the provided scripts.
+### For Companies Offering Parking Spaces
+
+- **Real-time Monitoring:** Gain real-time insights into parking officers' activities and the status of parking spaces.
+- **Analytical Reports:** Generate various reports, including net revenue, usage patterns, and more, to make informed decisions.
+- **Complaint Management:** Monitor and address driver reviews and complaints to ensure a satisfactory parking experience.
+
+### For System Administrators
+
+- **Registration Verification:** Review and approve or deny company registration forms to maintain the system's trustworthiness.
+- **Complaint Monitoring:** Receive alerts about companies receiving an excessive number of complaints over a specified time period.
+- **Ban or Removal Authority:** Administrators can temporarily ban or permanently remove companies that exhibit unsatisfactory performance or behavior, preserving the system's quality.
 
 ## Usage
 
-- Detailed usage instructions for drivers, companies, and parking officers will be available in the respective app documentation.
+To use **PARK'N GO**, follow these general steps:
+
+1. **Drivers:**
+
+   - Download the mobile app.
+   - Create an account or log in.
+   - Search for parking spaces.
+   - Select a space, pay for your session, and enjoy a hassle-free parking experience.
+
+2. **Parking Officers:**
+
+   - Download the mobile app.
+   - Log in with your credentials.
+   - Manage parking sessions, monitor slot status, and accept payments as needed.
+
+3. **Companies Offering Parking Spaces:**
+
+   - Access the web application.
+   - Log in with your company account.
+   - Monitor your parking officers' activities, generate reports, and manage driver complaints.
+
+4. **System Administrators:**
+   - Log in to the administrative interface.
+   - Review and approve company registrations, monitor complaints, and maintain the system's integrity.
 
 ## Technologies Used
 
-- **Mobile App (Android):**
-  - Java
-  - Google Maps SDK for Android
+- Front-End:
 
-- **Web App:**
-  - HTML, CSS, JavaScript
-  - Google Maps JavaScript API
+  - Web App: HTML, CSS, JavaScript
+  - Mobile App: Android Development Kit with JAVA
 
-- **Server:**
-  - PHP
-  - MySQL (Database)
-  - Microsoft Azure (Server hosting)
+- Database: MySQL (Hosted on Microsoft Azure)
 
-- **Payment Gateway:**
-  - PayHere (Payment processing)
+- Backend: PHP
 
+- Special Features Implementations:
+  - Map Navigation: Google Map SDK and Google Map API for JavaScript
+  - Email Service
+  - SMS Service: Twilio
+  - QR Code generator and scanner
+  - Card Payments: "PayHere"
 
+Ensure that you have the necessary technologies and services available to deploy and use **PARK'N GO** effectively.
 

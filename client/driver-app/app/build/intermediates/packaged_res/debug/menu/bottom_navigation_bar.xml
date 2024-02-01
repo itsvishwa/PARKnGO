@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:enabled="true"
+        android:icon="@drawable/baseline_home_24"
+        android:id="@+id/navbar_home"
+        />
+    <item
+        android:title="Scan"
+        android:enabled="true"
+        android:icon="@drawable/baseline_qr_code_scanner_24"
+        android:id="@+id/navbar_scan"
+        />
+    <item
+        android:title="Parking"
+        android:enabled="true"
+        android:icon="@drawable/baseline_local_parking_24"
+        android:id="@+id/navbar_parking"
+        />
+    <item
+        android:title="Profile"
+        android:enabled="true"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:id="@+id/navbar_profile"
+        />
+</menu>

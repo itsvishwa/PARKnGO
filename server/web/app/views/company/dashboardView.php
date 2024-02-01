@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="refresh" content="15" />
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/dashboardView.css" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/parkingSpaceView.css" />
   <title>Dashboard</title>
 </head>
 
@@ -84,129 +86,251 @@
           <h4>Business Analysis</h4>
         </div>
         <div class="card-section">
-          <div class="b-card bg-light-green">
-            <div class="b-card-icon bg-green">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-white">
+          <div class="b-card bg-dark-gray">
+            <div class="b-card-icon bg-light-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <div class="b-card-content text-green">
-              <h3>Rs. 108, 500</h3>
+            <div class="b-card-content text-light-yellow">
+              <h3>Rs: <?php if ($data['monthlyEarned'] != 0) {
+                        echo $data['monthlyEarned'];
+                      } else {
+                        echo "0";
+                      } ?>.00</h3>
               <p>Earned this month</p>
             </div>
           </div>
-          <div class="b-card bg-white">
-            <div class="b-card-icon bg-secondary">
-              <span class="material-symbols-outlined menu-logo">
+          <div class="b-card bg-dark-gray">
+            <div class="b-card-icon bg-light-gray">
+              <span class="material-symbols-outlined menu-logo text-light-yellow">
                 group
               </span>
             </div>
-            <div class="b-card-content text-black">
-              <h3>3245</h3>
+            <div class="b-card-content text-light-yellow">
+              <h3><?php echo $data['numberOfUsers'] ?></h3>
               <p>Monthly Users</p>
             </div>
           </div>
-          <div class="b-card bg-light-green">
-            <div class="b-card-icon bg-green">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-white">
+          <div class="b-card bg-dark-gray">
+            <div class="b-card-icon bg-light-gray">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <div class="b-card-content text-green">
-              <h3>Rs. 5, 500</h3>
+            <div class="b-card-content text-light-yellow">
+              <h3>Rs: <?php if ($data['todayEarned'] != 0) {
+                        echo $data['todayEarned'];
+                      } else {
+                        echo "0";
+                      } ?>.00</h3>
               <p>Earned today</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="dashboard-main-section">
-        <div class="update-section">
-          <div class="table-heading">
-            <div class="heading">
-              <span class="material-symbols-outlined menu-icon ">
-                update
-              </span>
-              <h4>Latest Updates</h4>
-            </div>
-            <a href="./updateView" class="see-more">
-              See more
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </a>
-          </div>
-          <div class="table-div">
-            <table id="updatesTable" class="table">
-              <tr class="tr-h" class="tr">
-                <th class="th">Number Plate</th>
-                <th class="th">Arrived at</th>
-                <th class="th">Parked Hours</th>
-                <th class="th">Total Price</th>
-                <th class="th">Paid By</th>
-              </tr>
-              <tbody>
-                <!-- Table rows will be generated dynamically using JavaScript -->
-              </tbody>
-            </table>
-          </div>
+      <div class="section-one">
+        <div class="section-one-left bar-graph mt--30">
+          <canvas id="parkingSessions"></canvas>
         </div>
-        <div class="officer-section">
-          <div class="table-heading">
-            <div class="heading">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-              </svg>
+        <div class="section-one-right pie-chart mt--30">
+          <canvas id="myPieChart"></canvas>
+        </div>
 
-              <h4>Parking Officer</h4>
-            </div>
-            <a href="./parkingOfficerView" class="see-more">
-              See more
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-              </svg>
-            </a>
-          </div>
-          <div class="table-div">
-            <table id="officersTable" class="table">
-              <thead>
-                <tr class="tr-h">
-                  <th class="th">Name</th>
-                  <th class="th">Parking</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Table rows will be generated dynamically using JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-      <div class="parking-space-section">
-        <div class="table-heading parking-header">
-          <div class="heading">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-            </svg>
+      <div class="section-two">
+        <div class="section-two-left bar-graph">
+          <canvas id="revenue"></canvas>
+        </div>
+        <div class="section-two-right latest-reviews">
+          <h1 class="review-heading">Recent Driver Reviews</h1>
+          <div class="content-body">
 
-            <h4>Parking Spaces</h4>
+
           </div>
-          <a href="./parkingSpaceView" class="see-more">
-            See more
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="button-icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-            </svg>
-          </a>
-        </div>
-        <div id="parkingCards" class="parking-cards">
-          <!-- Parking Cards will be generated dynamically using JavaScript -->
-        </div>
 
+        </div>
       </div>
     </div>
   </div>
+  </div>
+  <!-- reviews -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      const popupContentBody = document.querySelector('.content-body');
+      const reviewsData = <?php echo json_encode($data['reviews']); ?>;
+
+      function generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const emptyStars = 5 - fullStars;
+
+        const stars = Array(fullStars).fill(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary" width="15px">
+          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+        </svg>
+      `);
+
+        stars.push(...Array(emptyStars).fill(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-light-gray" width="15px">
+          <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+        </svg>
+      `));
+
+        return stars.join('');
+      }
 
 
-  <script src="<?php echo URLROOT; ?>/js/company/dashboardView.js"></script>
+      popupContentBody.innerHTML = '';
+
+      reviewsData.forEach(review => {
+        const card = document.createElement('div');
+        card.classList.add('latest-reviews');
+
+        const starsSVG = generateStars(review.no_of_stars);
+
+        card.innerHTML = `
+            <div class="dashboard-review-head">
+              <h2 class="dashboard-driver-name">${review.driver_first_name} ${review.driver_last_name}</h2>
+              <div class="star-rating" id="starRating">
+                ${starsSVG}
+              </div>
+            </div>
+            <h3 class="review-parking-name">${review.parking_name}</h3>
+            <p class="review-content">${review.content}</p>
+            <div class="horizontal-line"></div>
+          `;
+
+        popupContentBody.appendChild(card);
+      });
+    });
+  </script>
+
+  <!-- bar graph for number of parking sessions -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Replace this with your actual server response data
+      const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
+
+      // Extract dates and values from the response
+      const dates = Object.keys(responseData);
+      const values = Object.values(responseData);
+
+      // Format dates to show only the day
+      const formattedDates = dates.map(date => new Date(date).getDate());
+
+      // Create a bar chart
+      const ctx = document.getElementById('parkingSessions').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: formattedDates,
+          datasets: [{
+            label: 'Number of Parking Sessions Last 30 Days',
+            data: values,
+            backgroundColor: '#363636',
+            borderColor: '#363636',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- bar graph for revenue -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Replace the data variable with your actual data
+      const rawData = <?php echo json_encode($data['revenues']); ?>;
+
+      // Convert raw data to an array of objects
+      const data = Object.entries(rawData).map(([date, value]) => ({
+        date,
+        value
+      }));
+
+      // Extract dates and values from the data
+      const dates = data.map(entry => entry.date);
+      const values = data.map(entry => entry.value);
+
+      const formattedDates = dates.map(date => new Date(date).getDate());
+
+      // Create a bar chart
+      const ctx = document.getElementById('revenue').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: formattedDates,
+          datasets: [{
+            label: 'Revenue from Parking Spaces Last 30 Days',
+            data: values,
+            backgroundColor: '#363636',
+            borderColor: '#363636',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- pie chart for vehicle types -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fetch data for the pie chart (replace with your actual data fetching logic)
+      const data = generateRandomData();
+
+      // Create a pie chart
+      const ctx = document.getElementById('myPieChart').getContext('2d');
+      const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: data.labels,
+          datasets: [{
+            data: data.values,
+            backgroundColor: [
+              '#cb99c9',
+              '#77dd77',
+              '#fdfd96',
+              '#ffb347',
+              '#ff6961'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+
+      // Function to generate random data (replace with your actual data fetching logic)
+      function generateRandomData() {
+        const data = <?php echo json_encode($data['activities']); ?>;
+
+        const labels = data.map(officer => officer.first_name + ' ' + officer.last_name);
+        const values = data.map(officer => officer.no_of_activities);
+        return {
+          labels,
+          values
+        };
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="<?php echo URLROOT; ?>/js/company/dashboard.js"></script>
 </body>
 
 </html>
