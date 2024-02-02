@@ -42,6 +42,7 @@ class PaymentModel
     {
         $this->db->query(
             "SELECT 
+            payment._id,
             payment.amount,  
             parking_session.start_time, 
             parking_session.end_time,
