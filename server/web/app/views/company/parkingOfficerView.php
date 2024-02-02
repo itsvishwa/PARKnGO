@@ -84,10 +84,15 @@
             Add Parking Officer
           </div>
         </a>
+        <div class="search-bar flex">
+          <input type="text" id="searchInput" placeholder="Search By Name." oninput="filterOfficers()" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-logo text-black">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
 
       </div>
       <div class="parking-space-section">
-
         <div id="officerCards" class="officerCards">
           <!-- Inside your HTML file where you want to display officer cards -->
           <?php foreach ($data as $officer) : ?>
@@ -147,6 +152,24 @@
       </div>
     </div>
   </div>
+  <script>
+    function filterOfficers() {
+      var input, filter, cards, card, officerName, i;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      cards = document.getElementById("officerCards");
+      card = cards.getElementsByClassName("officer-card");
+
+      for (i = 0; i < card.length; i++) {
+        officerName = card[i].getElementsByClassName("officer-name")[0];
+        if (officerName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          card[i].style.display = "";
+        } else {
+          card[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>
