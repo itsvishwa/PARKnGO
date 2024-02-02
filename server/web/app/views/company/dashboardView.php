@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="15" />
+  <meta http-equiv="refresh" content="300" />
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -78,7 +78,7 @@
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <div class="business">
+      <!-- <div class="business">
         <div class="heading">
           <span class="material-symbols-outlined menu-icon ">
             monitoring
@@ -145,10 +145,73 @@
         <div class="section-two-right latest-reviews">
           <h1 class="review-heading">Recent Driver Reviews</h1>
           <div class="content-body">
-
-
+          </div>
+        </div>
+      </div> -->
+      <div class="flex right-section">
+        <div class="card-section-col-1">
+          <div class="card-section-row-1 flex ml-20">
+            <div class="b-card bg-dark-gray b-card-1 mr-20">
+              <div class="b-card-icon bg-light-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="b-card-content text-light-yellow">
+                <h3>Rs: <?php if ($data['monthlyEarned'] != 0) {
+                          echo $data['monthlyEarned'];
+                        } else {
+                          echo "0";
+                        } ?>.00</h3>
+                <p>Earned this month</p>
+              </div>
+            </div>
+            <div class="b-card bg-dark-gray b-card-2">
+              <div class="b-card-icon bg-light-gray">
+                <span class="material-symbols-outlined menu-logo text-light-yellow">
+                  group
+                </span>
+              </div>
+              <div class="b-card-content text-light-yellow">
+                <h3><?php echo $data['numberOfUsers'] ?></h3>
+                <p>Monthly Users</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-section-row-2 section-one-left bar-graph mt-20">
+            <canvas id="parkingSessions"></canvas>
+          </div>
+          <div class="card-section-row-3 section-two-left bar-graph mt-20 mb-10">
+            <canvas id="revenue"></canvas>
+          </div>
+        </div>
+        <div class="card-section-col-2">
+          <div class="card-section-row-1 ml-20">
+            <div class="b-card bg-dark-gray">
+              <div class="b-card-icon bg-light-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="b-card-content text-light-yellow">
+                <h3>Rs: <?php if ($data['todayEarned'] != 0) {
+                          echo $data['todayEarned'];
+                        } else {
+                          echo "0";
+                        } ?>.00</h3>
+                <p>Earned today</p>
+              </div>
+            </div>
           </div>
 
+          <div class="card-section-row-2 section-one-right pie-chart mt-20">
+            <canvas id="myPieChart"></canvas>
+          </div>
+          <div class="card-section-row-3 section-two-right latest-reviews mt-20 mb-10">
+            <h1 class="review-heading">Recent Driver Reviews</h1>
+            <div class="content-body">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -217,7 +280,12 @@
       const values = Object.values(responseData);
 
       // Format dates to show only the day
-      const formattedDates = dates.map(date => new Date(date).getDate());
+      const formattedDates = dates.map(date => {
+        const formattedDate = new Date(date);
+        const month = formattedDate.getMonth() + 1; // Months are zero-based
+        const day = formattedDate.getDate();
+        return `${month}-${day}`;
+      });
 
       // Create a bar chart
       const ctx = document.getElementById('parkingSessions').getContext('2d');
@@ -260,7 +328,12 @@
       const dates = data.map(entry => entry.date);
       const values = data.map(entry => entry.value);
 
-      const formattedDates = dates.map(date => new Date(date).getDate());
+      const formattedDates = dates.map(date => {
+        const formattedDate = new Date(date);
+        const month = formattedDate.getMonth() + 1; // Months are zero-based
+        const day = formattedDate.getDate();
+        return `${month}-${day}`;
+      });
 
       // Create a bar chart
       const ctx = document.getElementById('revenue').getContext('2d');
