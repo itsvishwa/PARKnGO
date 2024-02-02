@@ -166,21 +166,26 @@ class Driver extends Controller
                         $result = $this->session_model->is_driver_session_exist($token_data["user_id"]);
                         if ($result) {
                                 $result_arr = [
-                                        "status_code" => "S_D001",
-                                        "session_id" => $this->encrypt_id($result->_id),
-                                        "start_time" => $result->start_time,
-                                        "vehicle_number" => $result->vehicle_number,
-                                        "vehicle_type" => ucfirst($result->vehicle_type),
-                                        "officer_id" => $result->officer_id,
-                                        "officer_name" => $result->first_name . " " . $result->last_name
+                                        "status_code" => "S_D010", // means user has a open parking session
+                                        "data" => [
+                                                "session_id" => $this->encrypt_id($result->_id),
+                                                "parking_name" => $result->name,
+                                                "parking_rate" => $result->rate,
+                                                "start_time" => date("h:i A | d/m/y", $result->start_time),
+                                                "vehicle_number" => $result->vehicle_number,
+                                                "vehicle_type" => ucfirst($result->vehicle_type),
+                                                "officer_id" => $result->officer_id,
+                                                "officer_name" => $result->first_name . " " . $result->last_name,
+                                                "time_went" => $this->calculate_time(time() - $result->start_time)
+                                        ]
                                 ];
                                 $this->send_json_200($result_arr);
                         } else // no open parking session for driver
                         {
                                 $result_arr = [
-                                        "sattus_code" => "E_D001"
+                                        "status_code" => "S_D011" // means user has no open parking session
                                 ];
-                                $this->send_json_200("result_arr");
+                                $this->send_json_200($result_arr);
                         }
                 }
         }
@@ -199,9 +204,11 @@ class Driver extends Controller
                         if ($payment_id) {
                                 $payment_data = $this->payment_model->get_all_data($payment_id);
                                 $result_arr = [
+                                        "payment_id" => $this->encrypt_id($payment_data->_id),
                                         "amount" => $payment_data->amount,
                                         "start_time" => $payment_data->start_time,
                                         "end_time" => $payment_data->end_time,
+                                        "time_went" => $this->calculate_time($payment_data->end_time - $payment_data->start_time),
                                         "rate" => $payment_data->rate,
                                         "vehicle_number" => $payment_data->vehicle_number,
                                         "vehicle_type" => $payment_data->vehicle_type,
@@ -211,18 +218,32 @@ class Driver extends Controller
                                 ];
                                 $this->send_json_200(
                                         [
-                                                "status_code" => "S_D002",
+                                                "status_code" => "S_D002", // means that the user has a open payemnt due session
                                                 "data" => $result_arr
                                         ]
                                 );
                         } else {
                                 $this->send_json_200(
                                         [
-                                                "status_code" => "E_D002",
+                                                "status_code" => "S_D003", // means that the user has no open payemnt due session 
                                                 "msg" => "Driver dosen't have open payemnt session"
                                         ]
                                 );
                         }
                 }
+        }
+
+        // calculate time
+        private function calculate_time($time)
+        {
+                $hours = floor($time / 3600);
+                $minutes = floor(($time % 3600) / 60);
+
+                $result = [
+                        "hours" => $hours . "",
+                        "minutes" => $minutes . ""
+                ];
+
+                return $result;
         }
 }
