@@ -138,7 +138,7 @@
             <canvas id="myPieChart"></canvas>
           </div>
           <div class="card-section-row-3 section-two-right latest-reviews mt-20 mb-10">
-            <h1 class="review-heading">Recent Driver Reviews</h1>
+            <h1 class="review-heading mb-10">Recent Driver Reviews</h1>
             <div class="content-body">
             </div>
           </div>
