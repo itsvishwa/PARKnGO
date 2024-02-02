@@ -246,8 +246,8 @@ class ParkingSpace
   public function deleteParkingSpace($parking_id)
   {
     $this->db->query(
-      'DELETE FROM 
-        parking_spaces 
+      'DELETE FROM
+        parking_spaces
       WHERE _id = :parking_id'
     );
 
@@ -265,7 +265,7 @@ class ParkingSpace
   public function updateClosedTime($data)
   {
     $this->db->query(
-      'UPDATE parking_spaces 
+      'UPDATE parking_spaces
             SET is_closed = 1, closed_start_time = :closed_start_time, closed_end_time = :closed_end_time
             WHERE _id = :parking_id'
     );
@@ -296,7 +296,7 @@ class ParkingSpace
         review.parking_id AS parking_id,
         parking_spaces.name AS parking_name,
         parking_spaces.address AS parking_address,
-        driver.first_name AS driver_first_name, 
+        driver.first_name AS driver_first_name,
         driver.last_name AS driver_last_name,
         review.content,
         review.time_stamp,
@@ -304,7 +304,9 @@ class ParkingSpace
       FROM
         review
       LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
-      LEFT JOIN driver ON review.driver_id = driver._id'
+      LEFT JOIN driver ON review.driver_id = driver._id
+      ORDER BY review.time_stamp DESC
+      LIMIT 50'
     );
 
     $row = $this->db->resultSet();
@@ -320,7 +322,7 @@ class ParkingSpace
         review.parking_id AS parking_id,
         parking_spaces.name AS parking_name,
         parking_spaces.address AS parking_address,
-        driver.first_name AS driver_first_name, 
+        driver.first_name AS driver_first_name,
         driver.last_name AS driver_last_name,
         review.content,
         review.time_stamp,
