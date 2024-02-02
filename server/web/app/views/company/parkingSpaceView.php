@@ -84,7 +84,7 @@
         </a>
         <div class="search-bar flex">
           <input type="text" id="searchInput" placeholder="Search By Name." oninput="filterOfficers()" />
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-logo text-black">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-logo text-primary">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
         </div>
@@ -256,15 +256,11 @@
       const popupContentBody = document.querySelector('.content-body');
       const parkingName = document.querySelector('.popup-parking-name');
       const parkingAddress = document.querySelector('.popup-parking-address');
-      const reviewsData = <?php echo json_encode($data['reviews']); ?>; // Assuming $data['reviews'] is a PHP variable containing the reviews data
+      const reviewsData = <?php echo json_encode($data['reviews']); ?>;
 
-      // Add event listener to each review button
       reviewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-          // Get the parking_id from the data attribute
           const parkingId = this.getAttribute('data-parking-id');
-
-          // Filter reviews based on parkingId
           const filteredReviews = reviewsData.filter(review => review.parking_id == parkingId);
 
           function generateStars(rating) {
@@ -286,42 +282,46 @@
             return stars.join('');
           }
 
-          parkingName.innerHTML = '';
           parkingName.innerHTML = `${filteredReviews[0].parking_name}`;
-
-          parkingAddress.innerHTML = '';
           parkingAddress.innerHTML = `${filteredReviews[0].parking_address}`;
-
-          // Clear the popup content body
           popupContentBody.innerHTML = '';
 
-
-          // Create cards for each review and append them to the popup
           filteredReviews.forEach(review => {
             const card = document.createElement('div');
             card.classList.add('review-card');
 
             const starsSVG = generateStars(review.no_of_stars);
-            // Customize the card content based on your review structure
             card.innerHTML = `
-            <div class="review-head">
-              <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
-              <p>${review.time_stamp}</p>
-            </div>
-            <div class="review-body">
-              ${review.content}
-            </div>
-            <div class="stars-container">
-              ${starsSVG}
-            </div>
-          `;
-
-            // Append the card to the popup
+                        <div class="review-head">
+                            <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
+                            <p>${review.time_stamp}</p>
+                        </div>
+                        <div class="review-body">
+                            ${review.content}
+                        </div>
+                        <div class="stars-container">
+                            ${starsSVG}
+                        </div>
+                    `;
             popupContentBody.appendChild(card);
           });
 
-          // Show the popup
           popupContainer.style.display = 'block';
+
+          if (filteredReviews.length > 5) {
+            popupContentBody.style.maxHeight = '300px';
+            popupContentBody.style.overflowY = 'auto';
+          } else {
+            popupContentBody.style.maxHeight = 'none';
+            popupContentBody.style.overflowY = 'hidden';
+          }
+
+          const popupContainerRect = popupContainer.getBoundingClientRect();
+          const closePopupButtonRect = closePopupButton.getBoundingClientRect();
+
+          closePopupButton.style.position = 'fixed';
+          closePopupButton.style.top = `${popupContainerRect.top + closePopupButtonRect.height}px`;
+          closePopupButton.style.right = `${popupContainerRect.right - closePopupButtonRect.width}px`;
         });
       });
 
@@ -329,7 +329,6 @@
         popupContainer.style.display = 'none';
       });
 
-      // Close the popup if the user clicks outside the content
       window.addEventListener('click', function(event) {
         if (event.target === popupContainer) {
           popupContainer.style.display = 'none';
