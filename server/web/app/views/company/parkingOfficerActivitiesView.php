@@ -99,35 +99,29 @@
         <div class="table-div">
           <table id="advancedUpdatesTable" class="advancedUpdatesTable table">
             <tr class="tr-h">
-              <th class="th">Number Plate</th>
+              <th class="th">Activity ID</th>
+              <th class="th">Activity Type</th>
+              <th class="th">Date & Time</th>
               <th class="th">Parking Space</th>
+              <th class="th">Driver Name</th>
+              <th class="th">Mobile Number</th>
+              <th class="th">Number Plate</th>
               <th class="th">Vehicle Type</th>
-              <th class="th">Arrived at</th>
-              <th class="th">Left at</th>
-              <th class="th">Parked Hours</th>
-              <th class="th">Parking Rate</th>
-              <th class="th">Total Price</th>
-              <th class="th">Paid By</th>
             </tr>
             <tbody>
               <?php
               foreach ($data['activities'] as $row) {
-                $startTime = strtotime($row->session_start_time);
-                $endTime = strtotime($row->session_end_time);
-
-                // Calculate the difference in hours
-                $parkedHours = round(($endTime - $startTime) / 3600, 2);
+                $dateAndTime = date('Y-m-d H:i:s', $row->activity_time_stamp);
 
                 echo '<tr>
-                    <td>' . htmlspecialchars($row->session_vehicle_number) . '</td>
+                    <td>' . $row->officer_activity_id . '</td>
+                    <td>' . htmlspecialchars($row->activity_type) . '</td>
+                    <td>' . $dateAndTime . '</td>
                     <td>' . htmlspecialchars($row->parking_space_name) . '</td>
-                    <td>' . htmlspecialchars($row->parking_space_status_vehicle_type) . '</td>
-                    <td>' . htmlspecialchars($row->session_start_time) . '</td>
-                    <td>' . htmlspecialchars($row->session_end_time) . '</td>
-                    <td>' . htmlspecialchars($parkedHours) . '</td>
-                    <td>Rs: ' . htmlspecialchars($row->parking_space_status_rate) . '</td>
-                    <td>Rs: ' .  htmlspecialchars($row->payment_amount) . '</td>
-                    <td>' . htmlspecialchars($row->payment_method) . '</td>
+                    <td>' . htmlspecialchars($row->first_name) . '</td>
+                    <td>' . htmlspecialchars($row->driver_mobile_number) . '</td>
+                    <td>' . htmlspecialchars($row->vehicle_number) . '</td>
+                    <td>' . htmlspecialchars($row->vehicle_type) . '</td>
                   </tr>';
               }
               ?>
