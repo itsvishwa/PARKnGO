@@ -35,11 +35,6 @@ public class SessionMainFragment extends Fragment {
 
         SessionMainFetchData sessionMainFetchData = new SessionMainFetchData(sessionMainView, loadingView, errorView, getContext());
         sessionMainFetchData.fetchData();
-        
-        // then make a fragment for vehicle adding and editing
-        // make long tap work for editing
-
-
         SessionMainButtonHandlers sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView, requireActivity().getSupportFragmentManager());
 
         // onclick listeners.................................................................................

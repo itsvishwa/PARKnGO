@@ -1,6 +1,8 @@
 package com.example.parkngo.session.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,9 +17,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ErrorFragmentHandler;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.session.EditVehicle;
+import com.example.parkngo.session.SessionOnGoingFragment;
+import com.example.parkngo.session.SessionPaymentFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,23 +44,27 @@ public class SessionMainFetchData {
         this.loadingView = loadingView;
         this.errorView = errorView;
         this.context = context;
+        this.checkOpenPaymentSessions();
+        this.checkOpenParkingSessions();
     }
 
-    public void fetchData(){
+
+    // open parking session check
+    private void checkOpenParkingSessions(){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/driver/view_vehicle_info";
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/driver/view_open_parking_session";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        successResponseHandler(response);
+                        successResponseHandleOpenParking(response);
                     }
                 },
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
-                        errorResponseHandler(error);
+                        errorResponseHandlerFetchOpenParking(error);
                     }
                 }
 
@@ -71,7 +81,183 @@ public class SessionMainFetchData {
         queue.add(stringRequest);
     }
 
-    private void successResponseHandler(String response){
+    private void successResponseHandleOpenParking(String response){
+        try{
+            JSONObject mainJsonObject = new JSONObject(response);
+            JSONObject jsonDataObject = mainJsonObject.getJSONObject("response");
+
+            String statusCode = jsonDataObject.getString("status_code");
+            if(statusCode.equals("S_D010")){
+                JSONObject jsonData = jsonDataObject.getJSONObject("data");
+                JSONObject timeDataObj = jsonData.getJSONObject("time_went");
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                SessionOnGoingModel sessionOnGoingModel = new SessionOnGoingModel(
+                        jsonData.getString("session_id"),
+                        jsonData.getString("parking_name"),
+                        jsonData.getString("parking_rate"),
+                        jsonData.getString("start_time"),
+                        jsonData.getString("vehicle_number"),
+                        jsonData.getString("vehicle_type"),
+                        jsonData.getString("officer_id"),
+                        jsonData.getString("officer_name"),
+                        timeDataObj.getString("hours"),
+                        timeDataObj.getString("minutes")
+                );
+                data.putSerializable("sessionOnGoingModelObj", sessionOnGoingModel);
+                mainActivity.replaceFragment(new SessionOnGoingFragment(), data);
+            }
+        }catch(JSONException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void errorResponseHandlerFetchOpenParking(VolleyError error){
+        String errorResponse;
+        if (error.networkResponse != null && error.networkResponse.data != null) {
+            errorResponse = new String(error.networkResponse.data);
+            try {
+                JSONObject jsonResponse = new JSONObject(errorResponse);
+                String response = jsonResponse.getString("response");
+
+                if (response.equals("ERROR_6001")){
+                    String appBarMainText = "Something Went Wrong hlo";
+                    String appBarSubText = "";
+                    int bodyImg = R.drawable.not_available;
+                    String bodyMainText = "I don't know what to type here! xD";
+                    String bodySubText = "Please try again later, cause we don't know what happened either";
+
+                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
+                    View newErrorView = errorFragmentHandler.setupView();
+
+                    ViewGroup parent = (ViewGroup) loadingView.getParent();
+                    if (parent != null) {
+                        int index = parent.indexOfChild(loadingView);
+                        parent.removeView(loadingView);
+                        parent.addView(newErrorView, index);
+                    }
+                }else{
+                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    // open parking session check end
+
+
+    // open payment session check start
+    private void checkOpenPaymentSessions(){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/driver/view_open_payments";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        successResponseHandleOpenPayment(response);
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        errorResponseHandlerFetchOpenPayment(error);
+                    }
+                }
+
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                ParkngoStorage parkngoStorage = new ParkngoStorage(context);
+                String token = parkngoStorage.getData("token");
+                Map<String, String> headers = new HashMap<>();
+                headers.put("token", token);
+                return headers;
+            }
+        };
+        queue.add(stringRequest);
+    }
+    private void successResponseHandleOpenPayment(String response){
+        try{
+            JSONObject mainJsonObject = new JSONObject(response);
+            JSONObject jsonDataObject = mainJsonObject.getJSONObject("response");
+            String statusCode = jsonDataObject.getString("status_code");
+            if(statusCode.equals("S_D002")){
+                JSONObject jsonData = jsonDataObject.getJSONObject("data");
+                JSONObject timeDataObj = jsonData.getJSONObject("time_went");
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                PaymentOnGoingModel paymentOnGoingModel = new PaymentOnGoingModel(
+                        jsonData.getString("payment_id"),
+                        jsonData.getString("parking_space_name"),
+                        jsonData.getString("rate"),
+                        jsonData.getString("start_time"),
+                        jsonData.getString("end_time"),
+                        jsonData.getString("vehicle_number"),
+                        jsonData.getString("vehicle_type"),
+                        jsonData.getString("officer_id"),
+                        jsonData.getString("officer_name"),
+                        timeDataObj.getString("hours"),
+                        timeDataObj.getString("minutes"),
+                        jsonData.getString("amount")
+                );
+                data.putSerializable("paymentOnGoingModelObj", paymentOnGoingModel);
+                mainActivity.replaceFragment(new SessionPaymentFragment(), data);
+            }
+        }catch(JSONException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void errorResponseHandlerFetchOpenPayment(VolleyError error){
+        String errorResponse;
+        if (error.networkResponse != null && error.networkResponse.data != null) {
+            errorResponse = new String(error.networkResponse.data);
+            try {
+                JSONObject jsonResponse = new JSONObject(errorResponse);
+                String response = jsonResponse.getString("response");
+                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    // open payment session check end
+    public void fetchData(){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/driver/view_vehicle_info";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        successResponseHandleFetch(response);
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        errorResponseHandlerFetch(error);
+                    }
+                }
+
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                ParkngoStorage parkngoStorage = new ParkngoStorage(context);
+                String token = parkngoStorage.getData("token");
+                Map<String, String> headers = new HashMap<>();
+                headers.put("token", token);
+                return headers;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void successResponseHandleFetch(String response){
         try{
             JSONObject jsonObject = new JSONObject(response);
             JSONObject jsonDataObject = jsonObject.getJSONObject("response");
@@ -168,7 +354,7 @@ public class SessionMainFetchData {
     }
 
     // response-error handler
-    private void errorResponseHandler(VolleyError error){
+    private void errorResponseHandlerFetch(VolleyError error){
         String errorResponse;
         if (error.networkResponse != null && error.networkResponse.data != null) {
             errorResponse = new String(error.networkResponse.data);
