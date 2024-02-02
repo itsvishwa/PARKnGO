@@ -89,9 +89,30 @@
             <th class="th">Paid By</th>
           </tr>
           <tbody>
-            <?php foreach ($data as $update) : ?>
+            <?php
+            $dummyData = [];
+            for ($i = 1; $i <= 50; $i++) {
+              $dummyData[] = (object) [
+                'vehicle_number' => 'ABC' . sprintf('%03d', $i),
+                'name' => 'Driver' . $i,
+                'vehicle_type' => 'Car',
+                'start_time' => strtotime('2024-02-02 08:00:00'),
+                'end_time' => strtotime('2024-02-02 18:00:00'),
+                'officer_id' => 'O' . sprintf('%03d', $i),
+                'first_name' => 'Officer' . $i,
+                'last_name' => 'Last' . $i,
+                'amount' => rand(1000, 5000),
+                'payment_method' => 'Credit Card'
+              ];
+            }
 
+            $itemsPerPage = 20; // Set the number of items per page
+            $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
+            $startIndex = ($currentPage - 1) * $itemsPerPage;
+            $pagedData = array_slice($dummyData, $startIndex, $itemsPerPage); // $dummyData is should be $data (only for check)
+
+            foreach ($pagedData as $update) : ?>
               <tr>
                 <td><?php echo htmlspecialchars($update->vehicle_number) ?></td>
                 <td><?php echo htmlspecialchars($update->name) ?></td>
@@ -106,7 +127,17 @@
               </tr>
             <?php endforeach; ?>
           </tbody>
+
         </table>
+        <div class="pagination">
+          <?php
+          $totalPages = ceil(count($dummyData) / $itemsPerPage); // $dummyData is should be $data (only for check)
+          for ($i = 1; $i <= $totalPages; $i++) {
+            $activeClass = ($i === $currentPage) ? 'active' : '';
+            echo "<a href='?page=$i' class='pagination-link $activeClass'>$i</a>";
+          }
+          ?>
+        </div>
       </div>
 
     </div>

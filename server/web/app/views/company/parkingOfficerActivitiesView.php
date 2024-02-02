@@ -110,7 +110,29 @@
             </tr>
             <tbody>
               <?php
-              foreach ($data['activities'] as $row) {
+
+              $dummyData = [];
+              for ($i = 1; $i <= 50; $i++) {
+                $dummyData[] = (object) [
+                  'officer_activity_id' => $i,
+                  'activity_type' => 'Start',
+                  'activity_time_stamp' => 1706872215,
+                  'parking_space_name' => 'Space' . $i,
+                  'first_name' => 'Driver',
+                  'last_name' => 'Last' . $i,
+                  'driver_mobile_number' => '077123456' . sprintf('%02d', $i),
+                  'vehicle_number' => 'ABC' . sprintf('%03d', $i),
+                  'vehicle_type' => 'Car',
+                ];
+              }
+
+              $itemsPerPage = 20; // Set the number of items per page
+              $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+              $startIndex = ($currentPage - 1) * $itemsPerPage;
+              $pagedData = array_slice($dummyData, $startIndex, $itemsPerPage); // $dummyData is should be $data (only for check)
+
+              foreach ($pagedData as $row) {
                 $dateAndTime = date('Y-m-d H:i:s', $row->activity_time_stamp);
 
                 echo '<tr>
@@ -118,7 +140,7 @@
                     <td>' . htmlspecialchars($row->activity_type) . '</td>
                     <td>' . $dateAndTime . '</td>
                     <td>' . htmlspecialchars($row->parking_space_name) . '</td>
-                    <td>' . htmlspecialchars($row->first_name) . '</td>
+                    <td>' . htmlspecialchars($row->first_name) . ' ' . htmlspecialchars($row->last_name) . '</td>
                     <td>' . htmlspecialchars($row->driver_mobile_number) . '</td>
                     <td>' . htmlspecialchars($row->vehicle_number) . '</td>
                     <td>' . htmlspecialchars($row->vehicle_type) . '</td>
@@ -127,6 +149,15 @@
               ?>
             </tbody>
           </table>
+          <div class="pagination">
+            <?php
+            $totalPages = ceil(count($dummyData) / $itemsPerPage); // $dummyData is should be $data (only for check)
+            for ($i = 1; $i <= $totalPages; $i++) {
+              $activeClass = ($i === $currentPage) ? 'active' : '';
+              echo "<a href='?page=$i' class='pagination-link $activeClass'>$i</a>";
+            }
+            ?>
+          </div>
         </div>
       </div>
 
