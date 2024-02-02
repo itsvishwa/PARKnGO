@@ -304,7 +304,7 @@
 
   .colombo-content2 {
     margin-top: -34px;
-    margin-left: 698px;
+    margin-left: 450px;
     font-size: 0.9rem;
     font-weight: 510;
   }
@@ -394,7 +394,7 @@
 
   .location-icon {
     margin-top: -32px;
-    margin-left: 650px;
+    margin-left: 400px;
     left:96px;
     padding: 10px;
     border-radius: 10px;
@@ -452,8 +452,8 @@
 .time-select {
  /* appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;*/
+  -moz-appearance: none;*/
+  border: none;
   background-color: transparent;
   
   padding:0 10px;

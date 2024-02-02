@@ -31,13 +31,16 @@ class Admins extends Controller
     $totalSuspendApplications = $this->adminModel->getSuspendCompanyCount()['totalSuspendApplications'];
     $reviews = $this->adminModel->getLatestReviews($_SESSION['user_id']);
 
-   
+     
 
 
     
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
     }
+
+
+
 
     // Prepare data for the view
     $data = [
@@ -48,7 +51,8 @@ class Admins extends Controller
       'totalPendingApplications' => $totalPendingApplications,
       'totalSuspendApplications' => $totalSuspendApplications,
       'topTwoReviews' => $topTwoReviews,
-      'reviews' => $reviews
+      'reviews' => $reviews,
+      
     ];
    
 
@@ -62,12 +66,25 @@ class Admins extends Controller
     // Fetch approved company applications details
     $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
 
-    
+    // Get parking officers count for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
+      $company->parkingOfficersCount = $parkingOfficersCount;
+    }
+
+    // Get parking officers count for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
+      $company->parkingSlotsCount = $parkingSlotsCount;
+    }
     
 
     // Prepare data for the view
     $data = [
         'approvedApplications' => $approvedApplications,
+       
         
     ];
 
@@ -79,7 +96,40 @@ class Admins extends Controller
 
   public function deletionView()
   {
-    $this->view('admin/deletionView');
+
+        // Fetch approved company applications details
+        $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
+
+        // Get parking officers count for each approved company
+        foreach ($approvedApplications as &$company) {
+          $companyId = $company->_id;
+          $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
+          $company->parkingOfficersCount = $parkingOfficersCount;
+        }
+    
+        // Get parking officers count for each approved company
+        foreach ($approvedApplications as &$company) {
+          $companyId = $company->_id;
+          $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
+          $company->parkingSlotsCount = $parkingSlotsCount;
+        }
+
+         // Get parking spaces public or not for each approved company
+        foreach ($approvedApplications as &$company) {
+          $companyId = $company->_id;
+          $public = $this->adminModel-> getPublicOrNot($companyId);
+          $company->public= $public;
+        }
+        
+    
+        // Prepare data for the view
+        $data = [
+            'approvedApplications' => $approvedApplications,
+           
+            
+        ];
+
+    $this->view('admin/deletionView' , $data);
   }
 
   public function requestsHistoryView()
@@ -296,6 +346,7 @@ public function delete($id){
   $this->view('admin/dashboardView', ['topTwoReviews' => []]); // Passing an empty array
 }
 }*/
+
 
 
   
