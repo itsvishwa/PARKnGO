@@ -144,3 +144,25 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-link {
+  margin: 0 5px;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.pagination-link.active {
+  background-color: #ffa811;
+  color: #fff;
+  border: 1px solid #ffa811;
+}
