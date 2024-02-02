@@ -140,9 +140,10 @@ tr:nth-child(4n) {
 
 .parking-cards {
   display: flex;
+  width: 100%;
   flex-wrap: wrap; /* Enable wrapping of flex items */
   justify-content: left;
-  margin-left: 20px;
+  margin-left: 45px;
 }
 
 .parking-space-card {
