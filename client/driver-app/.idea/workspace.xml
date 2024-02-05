@@ -14,10 +14,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/AssignVehicle01Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/AssignVehicle01Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/Helpers/HomeFragmentHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/Helpers/HomeFragmentHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Status/Helpers/StatusFetchData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Status/Helpers/StatusFetchData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_assign_vehicle01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_assign_vehicle01.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/ReleaseASlot01Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/ReleaseASlot01Fragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot01.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

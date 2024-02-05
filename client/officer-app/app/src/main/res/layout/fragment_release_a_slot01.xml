@@ -143,6 +143,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                     <EditText
+                        android:id="@+id/vehicle_num_letters"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.5"
@@ -151,6 +152,7 @@
                         android:gravity="center" />
 
                     <EditText
+                        android:id="@+id/vehicle_num_digits"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3"
@@ -182,13 +184,12 @@
 
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/release_vehicle_01_search_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:drawableRight="@drawable/baseline_search_24"
                 android:drawableTint="@color/white"
-                android:onClick="release_vehicle_01_search_btn_handler"
                 android:text="Search"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"
@@ -201,10 +202,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                app:layout_constraintEnd_toEndOf="@+id/button3"
+                app:layout_constraintEnd_toEndOf="@+id/release_vehicle_01_search_btn"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/button3"
-                app:layout_constraintTop_toBottomOf="@+id/button3">
+                app:layout_constraintStart_toStartOf="@+id/release_vehicle_01_search_btn"
+                app:layout_constraintTop_toBottomOf="@+id/release_vehicle_01_search_btn">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -217,10 +218,12 @@
 
                 <TextView
                     android:id="@+id/parked_Date_Time_txt"
-                    android:layout_width="130dp"
+                    android:paddingLeft="8dp"
+                    android:layout_width="150dp"
                     android:layout_height="49dp"
                     android:textSize="16sp"
-                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical|start"
                     android:layout_marginStart="137dp"
                     android:background="@drawable/input_txt_background"
                     app:layout_constraintBottom_toBottomOf="@+id/textView11"
@@ -242,18 +245,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
 
                 <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="49dp"
-                    android:background="@drawable/input_txt_background"
-                    android:inputType="time"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@+id/duration_txt"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/duration_txt" />
-
-                <TextView
-                    android:id="@+id/duration_txt"
+                    android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Duration"
@@ -261,6 +253,22 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/duration_txt"
+                    android:layout_width="150dp"
+                    android:layout_height="49dp"
+                    android:background="@drawable/input_txt_background"
+                    android:inputType="time"
+                    android:paddingLeft="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical|start"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -273,17 +281,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
 
                 <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="49dp"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:background="@drawable/input_txt_background"
-                    app:layout_constraintBottom_toBottomOf="@+id/amount_txt"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/amount_txt" />
-
-                <TextView
-                    android:id="@+id/amount_txt"
+                    android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Amount"
@@ -292,12 +290,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/amount_txt"
+                    android:layout_width="150dp"
+                    android:layout_height="49dp"
+                    android:textSize="16sp"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical|start"
+                    android:background="@drawable/input_txt_background"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView16" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/release_vehicle_01_continue_btn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:gravity="center"
@@ -305,7 +317,6 @@
             android:backgroundTint="#86837B61"
             app:cornerRadius="11dp"
             android:layout_marginTop="20dp"
-            android:onClick="release_vehicle_01_continue_btn_handler"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7" />
