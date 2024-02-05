@@ -116,7 +116,7 @@ class Session extends Controller
 
 
     // Search parking session
-    public function search($vehicle_number, $parking_id)
+    public function search($vehicle_number)
     {
         $token_data = $this->verify_token_for_officers();
 
@@ -127,7 +127,12 @@ class Session extends Controller
         } else // token is valid
         {
 
-            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+            if (isset($_SERVER['HTTP_ENCODED_PARKING_ID'])) {
+                $encoded_parking_id = $_SERVER['HTTP_ENCODED_PARKING_ID'];
+                $parking_id = $this->decrypt_id($encoded_parking_id);
+
+
+                $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
@@ -160,9 +165,12 @@ class Session extends Controller
 
                         $start_timestamp = $parking_session_data->start_time;
                         $readable_date_time = date("h.i A  d M Y", $start_timestamp);
+                        $readable_start_time = date("h.i A", $start_timestamp);
 
                         $end_timestamp = time();
                         $duration = $end_timestamp - $start_timestamp;
+                        $readable_date_time = date("h.i A  d M Y", $end_timestamp);
+                        $readable_end_time = date("h.i A", $end_timestamp);
 
                         // Convert duration to hours and minutes
                         $hours = floor($duration / 3600);
@@ -189,10 +197,14 @@ class Session extends Controller
                             $result = [
                                 "response_code" => "800",
                                 "session_id" => $encrypted_session_id,
-                                "Parked Time/ Date" => $readable_date_time,
+                                "Parked_Time_Date" => $readable_date_time,
                                 "Duration" => $formatted_duration,
                                 "Amount" => $formatted_amount,
-                                "end_timestamp" => $end_timestamp
+                                "Vehicle_Number" => $vehicle_number,
+                                "Vehicle_Type" => $vehicle_type,
+                                "Session_started_at" => $readable_start_time,
+                                "Ended_Time_Date" => $readable_date_time,
+                                "Session_ended_at" => $readable_end_time
                             ];
 
                             $this->send_json_200($result);
@@ -221,6 +233,12 @@ class Session extends Controller
 
                     $this->send_json_404($result);
                 }
+            }
+
+
+            } else {
+                
+                $this->send_json_404(["message" => "HTTP_ENCODED_PARKING_ID not set"]);
             }
         }
     }
