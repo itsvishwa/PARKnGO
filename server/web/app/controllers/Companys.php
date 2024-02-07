@@ -176,6 +176,8 @@ class Companys extends Controller
       // Decode the JSON data into an associative array
       $data = json_decode($json_data, true);
 
+      $data['parking_image'] = base64_decode($data['parking_image']);
+
       $result = $this->parkingSpaceModel->parkingSave($data);
 
       if ($result) {
@@ -348,7 +350,7 @@ class Companys extends Controller
         }
       } else {
         // Load view
-        $data['profiel_image'] = '';
+        $data['profile_image'] = '';
         $this->view('company/parkingOfficerFormView', $data);
       }
     } else {

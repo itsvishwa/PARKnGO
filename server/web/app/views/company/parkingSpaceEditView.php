@@ -122,7 +122,9 @@
             <option value="customers" <?php if (!$data['parking_space']->parking_is_public) echo 'selected'; ?>>Customers Only</option>
           </select>
 
-
+          <!-- image -->
+          <label for="parkingImage" class="p-form-label">Parking Image</label>
+          <input type="file" name="parkingImage[]" accept="image/*" class="p-form-input" id="parkingImageInput" />
 
 
 

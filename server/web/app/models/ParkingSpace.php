@@ -22,14 +22,14 @@ class ParkingSpace
   {
     // Check if required keys are present
     if (
-      isset($data['name'], $data['address'], $data['latitude'], $data['longitude'], $data['parkingType'], $data['parkingSlotBatches'])
+      isset($data['name'], $data['address'], $data['latitude'], $data['longitude'], $data['parkingType'], $data['parkingSlotBatches'], $data['parking_image'])
     ) {
       // Start a transaction to ensure data consistency
       $this->db->beginTransaction();
 
       try {
         // Insert into parking_spaces table
-        $this->db->query('INSERT INTO parking_spaces (name, address, latitude, longitude, no_of_slots, is_public, company_id) VALUES (:name, :address, :latitude, :longitude, :no_of_slots, :is_public, :company_id)');
+        $this->db->query('INSERT INTO parking_spaces (name, address, latitude, longitude, no_of_slots, is_public, company_id, image) VALUES (:name, :address, :latitude, :longitude, :no_of_slots, :is_public, :company_id, :image)');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -37,6 +37,7 @@ class ParkingSpace
         $this->db->bind(':latitude', $data['latitude']);
         $this->db->bind(':longitude', $data['longitude']);
         $this->db->bind(':is_public', ($data['parkingType'] == 'public' ? 1 : 0));
+        $this->db->bind(':image', ($data['parking_image'] ? $data['parking_image'] : null));
         $this->db->bind(':company_id', $_SESSION['user_id']);
 
         $totalSlots = 0;
@@ -106,7 +107,7 @@ class ParkingSpace
         }
 
         // Update parking_spaces table
-        $this->db->query('UPDATE parking_spaces SET name = :name, address = :address, latitude = :latitude, no_of_slots = :no_of_slots, longitude = :longitude, is_public = :is_public WHERE _id = :parking_id');
+        $this->db->query('UPDATE parking_spaces SET name = :name, address = :address, latitude = :latitude, no_of_slots = :no_of_slots, longitude = :longitude, is_public = :is_public, image = :image WHERE _id = :parking_id');
 
         // Bind values
         $this->db->bind(':name', $data['name']);
@@ -114,6 +115,7 @@ class ParkingSpace
         $this->db->bind(':latitude', $data['latitude']);
         $this->db->bind(':longitude', $data['longitude']);
         $this->db->bind(':is_public', ($data['parkingType'] == 'public' ? 1 : 0));
+        $this->db->bind(':image', ($data['parking_image'] ? $data['parking_image'] : null));
         $this->db->bind(':parking_id', $data['parking_id']);
 
         $totalSlots = 0;

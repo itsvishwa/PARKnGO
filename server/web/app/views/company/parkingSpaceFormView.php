@@ -123,9 +123,9 @@
 						<option value="public">Public</option>
 						<option value="customers">Customers Only</option>
 					</select>
-					<!-- 
-					<label for="parkingImage" class="p-form-label mb-10">Parking Image*</label>
-					<input type="file" name="parkingImage" id="parkingImage" accept="image/*"> -->
+					<!-- image -->
+					<label for="parkingImage" class="p-form-label">Parking Image</label>
+					<input type="file" name="parkingImage[]" accept="image/*" class="p-form-input" id="parkingImageInput" />
 
 				</div>
 				<div class="form-right">
