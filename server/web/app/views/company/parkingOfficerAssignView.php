@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
           <div id="card-container" class="parking-card mt-20">
 
-            <div id="confirmationCard"></div>
+            <div id="confirmationCard" class="ml-40"></div>
 
             <div>
 
@@ -159,24 +159,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (selectedParkingSpace) {
               // Update the confirmation card content dynamically
               confirmationCard.innerHTML = `
-              <div class="confirmation-card">
-                <div class='confirmation-card-line mb-10'>
-                    <h3 class='b-600'>${selectedParkingSpace.name}</h3>
-                    <p class='b-600'>${selectedParkingSpace.address}</p>
+              <div class="parking-space-card">
+                <div class="parking-card-header">
+                  <div class="parking-name">
+                    <h3 class="parking-card-bold ml-20">${selectedParkingSpace.name}</h3>
+                  </div>
+                  <p class="parking-card-bold">${selectedParkingSpace.address}</p>
                 </div>
                 <div class='confirmation-card-line mb-10'>
-                    <p class='f-14'>Total Slots <span class='b-500'>${selectedParkingSpace.no_of_slots}</span></p>
-                    ${
-                      selectedParkingSpaceStatus && selectedParkingSpaceStatus.length > 0
-                        ? selectedParkingSpaceStatus[0].rate == 0
-                          ? '<p class="parking-type bg-blue text-white">Free</p>'
-                          : `<p class="b-500 f-14">For ${selectedParkingSpaceStatus[0].vehicle_type} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
-                        : ''
-                    }
+                  <div class="parking-card-info">
+                    <p>Total Slots: <span class="parking-card-bold">${selectedParkingSpace.no_of_slots}</span></p>
+                    <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
+                  </div>
                 </div>
                 <div class='confirmation-card-line'>
                     <h3 class='f-14'>Parking Slots</h3>
-                    <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
                 </div>
                 <table class='confirmation-card-table'>
                     <thead>
@@ -200,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </tbody>
                 </table>
               </div>
-              <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>/${selectedParkingSpace._id}" class=" c-btn-section" method="POST" enctype="multipart/form-data">
+              <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>/${selectedParkingSpace._id}" class="c-btn-section2" method="POST" enctype="multipart/form-data">
                 <input type="button" value="Cancel" class="c-btn bg-black40" onclick="window.history.back()">
                 <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
               </form>
