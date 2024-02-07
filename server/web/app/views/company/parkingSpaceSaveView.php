@@ -93,6 +93,7 @@
 	<script>
 		function saveData() {
 			const formData = JSON.parse(localStorage.getItem('formData'));
+			const parkingImage = localStorage.getItem('parkingImage');
 
 			<?php if (isset($data)) : ?>
 				formData['parking_id'] = <?php echo $data ?>;
@@ -100,6 +101,8 @@
 
 			if (formData) {
 				const apiUrl = '<?php echo URLROOT; ?>/companys/parkingSpaceView';
+
+				formData['parking_image'] = parkingImage;
 
 				fetch(apiUrl, {
 						method: 'POST',

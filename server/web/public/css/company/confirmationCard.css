@@ -1,6 +1,13 @@
 .confirmation-card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-card-content {
+  display: flex;
+  flex-direction: column;
   min-width: 600px;
   padding: 20px 5px;
   border-radius: 10px;
@@ -8,6 +15,22 @@
   width: 90%;
   margin: 20px;
   background-color: #fffbf4;
+}
+
+.confirmation-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 610px;
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.parking-image {
+  width: 100%;
 }
 
 .confirmation-card-line {
@@ -31,8 +54,8 @@
 .c-btn-section {
   display: flex;
   justify-content: space-between;
-  margin: 5px 30px 0px 15px;
-  width: 610px;
+  margin: 5px 15px 0px 15px;
+  width: 600px;
 }
 
 .c-btn {
