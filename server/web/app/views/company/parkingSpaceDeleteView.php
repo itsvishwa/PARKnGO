@@ -75,16 +75,16 @@
         </div>
       </div>
 
-      <div class="center">
+      <div class="flex-column justify-content-center align-items-center">
+        <div class="confirmation-card-image">
+          <img src="data:<?php $encodedImage = base64_encode($data['parking_space']->parking_image);
+                          $imageMimeType = "image/jpeg";
+                          echo $imageMimeType; ?>;base64,<?php echo $encodedImage; ?>" alt="parking image" class="parking-image" />
+        </div>
         <div class="parking-space-card">
           <div class="parking-card-header">
             <div class="parking-name">
               <h3 class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_name); ?></h3>
-              <?php if ($data['parking_space']->parking_is_closed) {
-                echo '<p class="parking-type bg-red text-white">Closed</p>';
-              } else {
-                echo "";
-              } ?>
 
             </div>
 

@@ -176,6 +176,9 @@ class Companys extends Controller
       // Decode the JSON data into an associative array
       $data = json_decode($json_data, true);
 
+      $data['parking_image'] = explode(',', $data['parking_image'])[1];
+      file_put_contents('received_data3.log', $data['parking_image']);
+
       $data['parking_image'] = base64_decode($data['parking_image']);
 
       $result = $this->parkingSpaceModel->parkingSave($data);
