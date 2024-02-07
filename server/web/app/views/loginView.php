@@ -38,12 +38,12 @@
                 justify-content: space-between;
                 align-items: center;
               ">
-            <div>
+            <!-- <div>
               <input type="checkbox" id="remember" name="remember" />
               <label for="remember" class="sub-link-label" style="vertical-align: middle">Remember me</label>
             </div>
 
-            <a href="#" class="sub-link">Forgot password?</a>
+            <a href="#" class="sub-link">Forgot password?</a> -->
           </div>
 
           <input type="submit" value="Log in" class="primary-button" />

@@ -21,7 +21,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 610px;
+  width: 600px;
   height: 200px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -54,7 +54,7 @@
 .c-btn-section {
   display: flex;
   justify-content: space-between;
-  margin: 5px 15px 0px 15px;
+  margin: 5px 20px 0px 20px;
   width: 600px;
 }
 
@@ -72,11 +72,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  max-width: 600px;
-  padding: 20px 5px;
+  width: 600px;
+  padding: 20px 0px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  width: 90%;
   margin: 20px;
   background-color: #fffbf4;
 }

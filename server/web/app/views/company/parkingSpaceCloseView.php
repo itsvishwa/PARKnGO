@@ -79,7 +79,12 @@
         </div>
       </div>
       <div class="center">
-        <div id="card-container" class="mt-20 ml-35">
+        <div id="card-container">
+          <div class="confirmation-card-image">
+            <img src="data:<?php $encodedImage = base64_encode($data['parking_space']->parking_image);
+                            $imageMimeType = "image/jpeg";
+                            echo $imageMimeType; ?>;base64,<?php echo $encodedImage; ?>" alt="parking image" class="parking-image" />
+          </div>
           <div class="parking-space-card ">
             <div class="parking-card-header">
               <div class="parking-name">
@@ -143,7 +148,7 @@
             </div>
           </div>
         </div>
-        <form class="pl-20" action="<?php echo URLROOT; ?>companys/parkingSpaceCloseView/<?php echo $data['parking_space']->parking_id ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo URLROOT; ?>companys/parkingSpaceCloseView/<?php echo $data['parking_space']->parking_id ?>" method="POST" enctype="multipart/form-data">
           <div class=" time-section">
             <div class="time-card ">
               <h4 class="f-14 mr-10">Close from</h4>
