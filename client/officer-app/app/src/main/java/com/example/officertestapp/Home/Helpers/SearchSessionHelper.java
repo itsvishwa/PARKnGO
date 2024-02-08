@@ -43,7 +43,6 @@ public class SearchSessionHelper {
     private Context context;
     private FragmentManager fragmentManager;
     private Button continueBtn;
-    private Bundle searchSessionDataBundle;
 
     public SearchSessionHelper(View view, Context context, FragmentManager fragmentManager, Button continueBtn) {
         this.view = view;
@@ -76,6 +75,7 @@ public class SearchSessionHelper {
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
             String token = parkngoStorage.getData("token");
+
             String encodedParkingId = parkngoStorage.getData("parkingID");
 
             // volley request
@@ -104,13 +104,16 @@ public class SearchSessionHelper {
                     Map<String, String> headers = new HashMap<>();
                     headers.put("token", token);
                     headers.put("encoded-parking-id", encodedParkingId);
+
+                    // Logging header values
+                    Log.d("Header Values", "Token: " + token);
+                    Log.d("Header Values", "Encoded Parking ID: " + encodedParkingId);
+
                     return headers;
                 }
             };
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
-            Log.d("token", token);
-            Log.d("encoded-parking-id", encodedParkingId);
         }
     }
 
@@ -124,7 +127,6 @@ public class SearchSessionHelper {
 
             // Extract values from the JSON response
             String sessionID = responseData.getString("session_id");
-            String parkingID = responseData.getString("parking_id");
             String timeStamp = responseData.getString("end_Time_Stamp");
             String parkedTimeDate = responseData.getString("Parked_Time_Date");
             String duration = responseData.getString("Duration");
@@ -146,7 +148,6 @@ public class SearchSessionHelper {
             // Pass the values to the next fragment using a Bundle
             Bundle bundle = new Bundle();
             bundle.putString("sessionID", sessionID);
-            bundle.putString("parkingID", parkingID);
             bundle.putString("timeStamp", timeStamp);
             bundle.putString("parkedTimeDate", parkedTimeDate);
             bundle.putString("duration", duration);
@@ -165,7 +166,6 @@ public class SearchSessionHelper {
 
             // Log the values for debugging
             Log.d("Bundle Values", "Session ID: " + sessionID);
-            Log.d("Bundle Values", "Parking ID: " + parkingID);
             Log.d("Bundle Values", "End Time Stamp: " + timeStamp);
             Log.d("Bundle Values", "Parked Time/Date: " + parkedTimeDate);
             Log.d("Bundle Values", "Duration: " + duration);
