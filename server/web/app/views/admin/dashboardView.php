@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!--  <meta http-equiv="refresh" content="15" />-->
+  <meta http-equiv="refresh" content="15" />
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -93,12 +93,7 @@
         </div>
       </div>
       <div class="business">
-        <!-- <div class="heading">
-          <span class="material-symbols-outlined menu-icon ">
-            monitoring
-          </span>
-          <h4>Status</h4>
-        </div>-->
+
         <div class="card-section ">
           <div class="b-card ">
             <div class="b-card-icon">
@@ -176,11 +171,13 @@
       </div>
       <div class="card-section2 ">
         <div class="b-card3 ">
-          <div class="b2-card-content text-bla">
+          <div class="b4-card-content text-bla">
             <p>Number of parking sessions</p>
-            <canvas id="parkingSessionsChart" width="400" height="200"></canvas>
 
-          </div>
+            </div>
+            <canvas id="parkingSessions"></canvas>
+
+          
         </div>
         <div class="b-card4">
           <div class="b2-card-content text-bla">
@@ -231,120 +228,96 @@
         </div>
       </div>
 
-      <div class="card-section3 ">
-        <div class="b-card3 ">
-          <div class="b2-card-content text-bla">
+    <!--<div class="card-section3 ">
+        <div class="b-card3">
+          <div class="b2-card-content text-bla ">
+         
             <p>Subscription revenue for last 30 days</p>
-            <canvas id="revenueChart" width="400" height="200"></canvas>
+            
+            <canvas id="revenue"></canvas>
+
           </div>
 
         </div>
-      <!--  <div class="section-two-right latest-reviews">
-    <h1 class="review-heading">Recent Driver Reviews</h1>-->
-       
-        <div class="b-card6 ">
-          <div class="b2-card-content text-bla">
-            <p>Recent Driver Reviews</p>
-          </div>
-          <!-- <div class="section-two-right latest-reviews">
-          <h1 class="review-heading">Recent Driver Reviews</h1>  
-          <div class="content-body">-->
-       
+        
+
+        <div class="section-two-right latest-reviews">
+          <h1 class="review-heading">Recent Driver Reviews</h1>
+          <div class="content-body">
 
 
-          <!-- Reviews script will populate content here -->
-          <!-- Reviews -->
-         <div class="latest-reviews">
-            <div class="dashboard-review-head">
-            
-              <p class="dashboard-driver-name">John Doe</p>
-              
-
-              <div class="driver-rating">
-                <div class="star-rating" id="starRating">
-
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-primary">
-                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                  </svg>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                  </svg>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" class="w-6 h-6 text-light-gray">
-                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                  </svg>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                  </svg>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#808080" class="w-6 h-6 text-light-gray">
-                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
-                  </svg>
-
-
-
-                </div>
-              </div>
-            </div>
-            <p class="review-parking-name">CMC CAR PARK 01</p>
-            <p class="review-content">The parking area was clean and well-maintained, contributing to a positive overall experience.</p>
-            <div class="horizontal-line"></div>
           </div>
 
-         
-     <div class="dashboard-main-section">
-        <div class="update-section">
-          <div class="table-heading">
-            <div class="heading">
-            </div>
+        </div>-->
+
+        <div class="section-two">
+        <div class="section-two-left bar-graph">
+        <div class="b2-card-content text-bla ">
+        <p>Subscription revenue for last 30 days</p>
+        </div>
+          <canvas id="revenue"></canvas>
+        </div>
+        <div class="section-two-right latest-reviews">
+          <h1 class="review-heading">Recent Driver Reviews</h1>
+          <div class="content-body">
+
+
           </div>
+
         </div>
       </div>
-      <div class="latest-reviews-container">
 
-    </div>
-  </div>
-  </div>
-  <!-- reviews -->
- <!-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        </div>
+        
+        <!-- reviews -->
 
-      const popupContentBody = document.querySelector('.content-body');
-      
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
 
-      function generateStars(rating) {
-        const fullStars = Math.floor(rating);
-        const emptyStars = 5 - fullStars;
+            
 
-        const stars = Array(fullStars).fill(`
+            const popupContentBody = document.querySelector('.content-body');
+
+                // Debugging statement to log reviews data
+    console.log(<?php echo json_encode($data['reviews']); ?>);
+
+
+            
+            const reviewsData = <?php echo json_encode($data['reviews']); ?>;
+
+            
+
+            function generateStars(rating) {
+              const fullStars = Math.floor(rating);
+              const emptyStars = 5 - fullStars;
+
+              const stars = Array(fullStars).fill(`
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-primary" width="15px">
           <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
         </svg>
       `);
 
-        stars.push(...Array(emptyStars).fill(`
+              stars.push(...Array(emptyStars).fill(`
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-light-gray" width="15px">
           <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
         </svg>
       `));
 
-        return stars.join('');
-      }
+              return stars.join('');
+            }
 
 
-      popupContentBody.innerHTML = '';
+            popupContentBody.innerHTML = '';
 
-      reviewsData.forEach(review => {
-        const card = document.createElement('div');
-        card.classList.add('latest-reviews');
+            reviewsData.forEach(review => {
+              const card = document.createElement('div');
+              card.classList.add('latest-reviews');
 
-        const starsSVG = generateStars(review.no_of_stars);
+              const starsSVG = generateStars(review.no_of_stars);
 
-        card.innerHTML = `
+              card.innerHTML = `
             <div class="dashboard-review-head">
+            
               <h2 class="dashboard-driver-name">${review.driver_first_name} ${review.driver_last_name}</h2>
               <div class="star-rating" id="starRating">
                 ${starsSVG}
@@ -355,113 +328,95 @@
             <div class="horizontal-line"></div>
           `;
 
-        popupContentBody.appendChild(card);
-      });
-    });
-  </script>-->
+              popupContentBody.appendChild(card);
+            });
+          });
+        </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Fetch data for the last 24 hours
-      const data = generateRandomData(24);
+        <!-- bar graph for number of parking sessions -->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            // Replace this with your actual server response data
+            const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
 
-      // Create a bar chart for the last 24 hours
-      const ctx = document.getElementById('parkingSessionsChart').getContext('2d');
-      const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: data.hours,
-          datasets: [{
-            label: 'Number of Parking Sessions (Past 24 Hours)',
-            data: data.values,
-            backgroundColor: '#363636',
-            borderColor: '#363636',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
+            // Extract dates and values from the response
+            const dates = Object.keys(responseData);
+            const values = Object.values(responseData);
 
-      // Function to generate random data for the last 24 hours
-      function generateRandomData(hours) {
-        const hoursData = [];
-        const values = [];
-        const currentDate = new Date();
-        currentDate.setHours(currentDate.getHours() - hours + 1);
+            // Format dates to show only the day
+            const formattedDates = dates.map(date => new Date(date).getDate());
 
-        for (let i = 0; i < hours; i++) {
-          hoursData.push(currentDate.getHours());
-          values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
-          currentDate.setHours(currentDate.getHours() + 1);
-        }
-
-        return {
-          hours: hoursData,
-          values
-        };
-      }
-    });
-  </script>
-  
+            // Create a bar chart
+            const ctx = document.getElementById('parkingSessions').getContext('2d');
+            const myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: formattedDates,
+                datasets: [{
+                  label: 'Number of Parking Sessions Last 30 Days',
+                  data: values,
+                  backgroundColor: '#363636',
+                  borderColor: '#363636',
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          });
+        </script>
 
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Fetch data for the last 30 days (replace with your actual data fetching logic)
-      const data = generateRandomData(30);
+        <!-- bar graph for revenue -->
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            // Replace the data variable with your actual data
+            const rawData = <?php echo json_encode($data['revenues']); ?>;
 
-      // Create a bar chart
-      const ctx = document.getElementById('revenueChart').getContext('2d');
-      const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: data.dates,
-          datasets: [{
-            label: 'Revenue from Parking Spaces Last 30 Days',
-            data: data.values,
-            backgroundColor: '#363636',
-            borderColor: '#363636',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
+            // Convert raw data to an array of objects
+            const data = Object.entries(rawData).map(([date, value]) => ({
+              date,
+              value
+            }));
 
-      // Function to generate random data for testing purposes
-      function generateRandomData(days) {
-        const dates = [];
-        const values = [];
-        const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() - days);
+            // Extract dates and values from the data
+            const dates = data.map(entry => entry.date);
+            const values = data.map(entry => entry.value);
 
-        for (let i = 0; i < days; i++) {
-          dates.push(currentDate.toLocaleDateString());
-          values.push(Math.floor(Math.random() * 100)); // Generating random values (replace with your actual data)
-          currentDate.setDate(currentDate.getDate() + 1);
-        }
+            const formattedDates = dates.map(date => new Date(date).getDate());
 
-        return {
-          dates,
-          values
-        };
-      }
-    });
-  </script>
+            // Create a bar chart
+            const ctx = document.getElementById('revenue').getContext('2d');
+            const myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: formattedDates,
+                datasets: [{
+                  label: 'Revenue from Parking Spaces Last 30 Days',
+                  data: values,
+                  backgroundColor: '#363636',
+                  borderColor: '#363636',
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          });
+        </script>
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 
