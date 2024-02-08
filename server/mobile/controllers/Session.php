@@ -197,7 +197,6 @@ class Session extends Controller
                             $result = [
                                 "response_code" => "800",
                                 "session_id" => $encrypted_session_id,
-                                "parking_id" => $encoded_parking_id,
                                 "end_Time_Stamp" => $end_timestamp,
                                 "Parked_Time_Date" => $readable_date_time,
                                 "Duration" => $formatted_duration,

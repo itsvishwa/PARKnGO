@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.officertestapp.Home.Helpers.AddVehicleDetails;
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
+import com.example.officertestapp.Home.Helpers.ReleaseASlotHelper;
 import com.example.officertestapp.R;
 
 
@@ -49,6 +50,28 @@ public class ReleaseASlot02Fragment extends Fragment {
             public void onClick(View v) {
                 // Navigate back to the previous fragment
                 requireActivity().onBackPressed();
+            }
+        });
+
+        // Handle release a slot confirmation Yes button click
+        Button reserveSlotConfirmationYesBtn = view.findViewById(R.id.release_slot_02_yes_btn);
+        reserveSlotConfirmationYesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ReleaseASlot02Fragment", "Yes button clicked");
+
+                // Retrieve values from the Bundle
+                Bundle args = getArguments();
+                if (args != null) {
+                    String sessionID = args.getString("sessionID");
+                    String timeStamp = args.getString("timeStamp");
+
+                    // Invoke the ReleaseASlotHelper helper to release the slot
+                    ReleaseASlotHelper releaseASlotHelper = new ReleaseASlotHelper(view, requireContext(), getFragmentManager());
+                    releaseASlotHelper.releaseSlot(sessionID, timeStamp);
+                } else {
+                    Log.e("ReleaseASlot02Fragment", "Arguments (Bundle) is null");
+                }
             }
         });
 
