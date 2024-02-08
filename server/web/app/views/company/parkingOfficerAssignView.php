@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (selectedParkingSpace) {
               // Update the confirmation card content dynamically
               confirmationCard.innerHTML = `
-              <div class="parking-space-card">
+              <div class="parking-space-card mb-20">
                 <div class="parking-card-header">
                   <div class="parking-name">
                     <h3 class="parking-card-bold ml-20">${selectedParkingSpace.name}</h3>
