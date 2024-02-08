@@ -283,7 +283,8 @@
 
 .colombo{
     position: relative;
-    background: linear-gradient(to right, #FFC45E, #F6EAD3);
+    /*background: linear-gradient(to right, #FFC45E, #F6EAD3);*/
+    background:  #FFF5E3;
     margin-top: 5px;
     margin-left :30px;
     padding: 50px;
