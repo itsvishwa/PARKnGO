@@ -29,6 +29,7 @@ import java.util.Arrays;
 public class ReleaseASlot01Fragment extends Fragment {
     private Spinner spinnerProvinces;
     private Button continueBtn;
+    private Bundle searchSessionDataBundle;
 
 
     @Override
@@ -69,6 +70,20 @@ public class ReleaseASlot01Fragment extends Fragment {
                 if (continueBtn.isEnabled()) {
                     // Continue button is enabled
 
+                    // Check if the Bundle is not empty
+                    if (!searchSessionDataBundle.isEmpty()) {
+                        // Navigate to ReleaseASlot02Fragment with the Bundle
+                        ReleaseASlot02Fragment releaseASlot02Fragment = new ReleaseASlot02Fragment();
+                        releaseASlot02Fragment.setArguments(searchSessionDataBundle);
+
+                        // Navigate to ReleaseASlot02Fragment
+                        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.main_act_frame_layout, releaseASlot02Fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+
                 } else {
                     // Continue button is disabled, show a message indicating it's disabled
                     Toast.makeText(getContext(), "Continue button is disabled", Toast.LENGTH_SHORT).show();
@@ -99,6 +114,11 @@ public class ReleaseASlot01Fragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+    }
+
+    // Method to set the session data bundle
+    public void setSearchSessionDataBundle(Bundle bundle) {
+        searchSessionDataBundle = bundle;
     }
 
 }

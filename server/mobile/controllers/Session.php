@@ -161,7 +161,7 @@ class Session extends Controller
                         $this->send_json_404($result);
                     } else // parking space found
                     {
-                        $encrypted_session_id = $this->encrypt_session_id($parking_session_data->_id);
+                        $encrypted_session_id = $this->encrypt_id($parking_session_data->_id);
 
                         $start_timestamp = $parking_session_data->start_time;
                         $readable_date_time = date("h.i A  d M Y", $start_timestamp);
@@ -197,6 +197,8 @@ class Session extends Controller
                             $result = [
                                 "response_code" => "800",
                                 "session_id" => $encrypted_session_id,
+                                "parking_id" => $encoded_parking_id,
+                                "end_Time_Stamp" => $end_timestamp,
                                 "Parked_Time_Date" => $readable_date_time,
                                 "Duration" => $formatted_duration,
                                 "Amount" => $formatted_amount,
@@ -256,13 +258,17 @@ class Session extends Controller
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            $parking_id = trim($_POST["parking_id"]);
+            $encrypted_parking_id = trim($_POST["parking_id"]);
+
+            // Decrypt the parking_id
+            $parking_id = $this->decrypt_id($encrypted_parking_id);
+
 
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $encrypted_session_id = trim($_POST["session_id"]);
 
-                $session_id = $this->decrypt_session_id($encrypted_session_id);
+                $session_id = $this->decrypt_id($encrypted_session_id);
 
                 $session_exists = $this->session_model->is_session_exists($session_id);
 
