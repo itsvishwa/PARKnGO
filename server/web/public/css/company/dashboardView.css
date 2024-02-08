@@ -149,7 +149,6 @@ tr:nth-child(4n) {
 
 .parking-space-card {
   background-color: #fffbf4;
-  margin: 10px 0px 10px 0px;
   width: 600px;
   padding: 20px;
   flex-basis: calc(49% - 9px);
