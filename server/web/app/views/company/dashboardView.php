@@ -286,7 +286,7 @@
   </script>
 
   <!-- pie chart for vehicle types -->
-  <script>
+  <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Fetch data for the pie chart (replace with your actual data fetching logic)
       const data = generateRandomData();
@@ -326,7 +326,88 @@
         };
       }
     });
-  </script>
+  </script> -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Fetch data for the pie chart (replace with your actual data fetching logic)
+    const dummyData = [
+      { first_name: 'Officer1', last_name: 'Last1', no_of_activities: 20 },
+      { first_name: 'Officer2', last_name: 'Last2', no_of_activities: 15 },
+      { first_name: 'Officer3', last_name: 'Last3', no_of_activities: 12 },
+      { first_name: 'Officer4', last_name: 'Last4', no_of_activities: 10 },
+      { first_name: 'Officer5', last_name: 'Last5', no_of_activities: 8 },
+      { first_name: 'Officer6', last_name: 'Last6', no_of_activities: 5 },
+      { first_name: 'Officer7', last_name: 'Last7', no_of_activities: 3 },
+      { first_name: 'Officer8', last_name: 'Last8', no_of_activities: 2 },
+    ];
+
+    const data = generateRandomData();
+
+    // Create a pie chart
+    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: data.labels,
+        datasets: [{
+          data: data.values,
+          backgroundColor: [
+            '#cb99c9',
+            '#77dd77',
+            '#fdfd96',
+            '#ffb347',
+            '#ff6961',
+            '#4E4E4E' // color for "Others"
+          ]
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    // Function to generate data for the pie chart
+    function generateRandomData() {
+      //replace with in php tag echo json_encode($data['activities']);
+      const data = <?php echo json_encode($data['activities']); ?>;
+      // const data = dummyData;
+
+      // Sort the data by activity count in descending order
+      data.sort((a, b) => b.no_of_activities - a.no_of_activities);
+
+      // Extract top 5 officers
+      const top5Officers = data.slice(0, 5);
+
+      if (data.length > 5) {
+        const otherOfficers = data.slice(5);
+        const othersTotalCount = otherOfficers.reduce((sum, officer) => sum + officer.no_of_activities, 0);
+
+        // Combine top 5 officers and "Others"
+        const combinedData = [...top5Officers, { first_name: 'Others', last_name: '', no_of_activities: othersTotalCount }];
+
+        const labels = combinedData.map(officer => officer.first_name + ' ' + officer.last_name);
+        const values = combinedData.map(officer => officer.no_of_activities);
+
+        return {
+          labels,
+          values
+        };
+      } else {
+        // If there are 5 or fewer officers, use the original data
+        const labels = top5Officers.map(officer => officer.first_name + ' ' + officer.last_name);
+        const values = top5Officers.map(officer => officer.no_of_activities);
+
+        return {
+          labels,
+          values
+        };
+      }
+    }
+  });
+</script>
+
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="<?php echo URLROOT; ?>/js/company/dashboard.js"></script>
 </body>
