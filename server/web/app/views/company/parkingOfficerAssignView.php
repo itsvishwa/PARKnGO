@@ -178,8 +178,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <table class='confirmation-card-table'>
                     <thead>
                         <tr>
-                            <th>Type</th>
-                            <th>Count</th>
+                            <th>Vehicle Type</th>
+                            <th>Slots</th>
                         </tr>
                     </thead>
                     <tbody>
