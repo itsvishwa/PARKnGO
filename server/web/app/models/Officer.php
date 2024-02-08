@@ -301,8 +301,7 @@ WHERE
 GROUP BY 
     po._id, po.first_name, po.last_name
 ORDER BY 
-    no_of_activities DESC
-LIMIT 5;
+    no_of_activities DESC;
 
 ");
     $this->db->bind(':company_id', $company_id);
