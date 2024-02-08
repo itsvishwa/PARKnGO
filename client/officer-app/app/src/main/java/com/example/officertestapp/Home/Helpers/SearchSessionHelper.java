@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Home.ReleaseASlot01Fragment;
 import com.example.officertestapp.R;
 import com.example.officertestapp.Status.PSRecycleViewAdapter;
 import com.example.officertestapp.Status.ParkingStatusModel;
@@ -42,6 +43,7 @@ public class SearchSessionHelper {
     private Context context;
     private FragmentManager fragmentManager;
     private Button continueBtn;
+    private Bundle searchSessionDataBundle;
 
     public SearchSessionHelper(View view, Context context, FragmentManager fragmentManager, Button continueBtn) {
         this.view = view;
@@ -51,7 +53,7 @@ public class SearchSessionHelper {
         searchSession();
     }
 
-    private void searchSession() {
+    public void searchSession() {
         // getting reference to the views
         EditText lettersEditText = view.findViewById(R.id.vehicle_num_letters);
         EditText digitsEditText = view.findViewById(R.id.vehicle_num_digits);
@@ -70,7 +72,6 @@ public class SearchSessionHelper {
 
             // Concatenate the values to create the complete vehicle number
             String completeVehicleNumber = letters + digits + province;
-            //Toast.makeText(context, "Complete Vehicle Number: " + completeVehicleNumber, Toast.LENGTH_SHORT).show();
 
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -123,11 +124,20 @@ public class SearchSessionHelper {
 
             // Extract values from the JSON response
             String sessionID = responseData.getString("session_id");
+            String parkingID = responseData.getString("parking_id");
+            String timeStamp = responseData.getString("end_Time_Stamp");
             String parkedTimeDate = responseData.getString("Parked_Time_Date");
             String duration = responseData.getString("Duration");
             String amount = responseData.getString("Amount");
             String vehicleNumber = responseData.getString("Vehicle_Number");
+            // Insert space between letters and numbers in the vehicle number
+            String formattedVehicleNumber = vehicleNumber.replaceAll("(\\D)(\\d)", "$1 $2");
+
+            // Extracting vehicle number without province
+            String vehicleNumberWithoutProvince = formattedVehicleNumber.substring(0, formattedVehicleNumber.length() - 2);
+
             String vehicleType = responseData.getString("Vehicle_Type");
+            String vehicleTypeCaps = responseData.getString("Vehicle_Type").toUpperCase();
             String sessionStartedAt = responseData.getString("Session_started_at");
             String endedTimeDate = responseData.getString("Ended_Time_Date");
             String sessionEndedAt = responseData.getString("Session_ended_at");
@@ -136,6 +146,8 @@ public class SearchSessionHelper {
             // Pass the values to the next fragment using a Bundle
             Bundle bundle = new Bundle();
             bundle.putString("sessionID", sessionID);
+            bundle.putString("parkingID", parkingID);
+            bundle.putString("timeStamp", timeStamp);
             bundle.putString("parkedTimeDate", parkedTimeDate);
             bundle.putString("duration", duration);
             bundle.putString("amount", amount);
@@ -144,14 +156,24 @@ public class SearchSessionHelper {
             bundle.putString("sessionStartedAt", sessionStartedAt);
             bundle.putString("endedTimeDate", endedTimeDate);
             bundle.putString("sessionEndedAt", sessionEndedAt);
+            bundle.putString("vehicleTypeCaps", vehicleTypeCaps);
+            bundle.putString("vehicleNumberWithoutProvince", vehicleNumberWithoutProvince);
+
+            // Set the session data bundle in the fragment
+            ((ReleaseASlot01Fragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
+
 
             // Log the values for debugging
             Log.d("Bundle Values", "Session ID: " + sessionID);
+            Log.d("Bundle Values", "Parking ID: " + parkingID);
+            Log.d("Bundle Values", "End Time Stamp: " + timeStamp);
             Log.d("Bundle Values", "Parked Time/Date: " + parkedTimeDate);
             Log.d("Bundle Values", "Duration: " + duration);
             Log.d("Bundle Values", "Amount: " + amount);
             Log.d("Bundle Values", "Vehicle Number: " + vehicleNumber);
+            Log.d("Bundle Values", "Vehicle Number Without Province: " + vehicleNumberWithoutProvince);
             Log.d("Bundle Values", "Vehicle Type: " + vehicleType);
+            Log.d("Bundle Values", "Vehicle Type Caps: " + vehicleTypeCaps);
             Log.d("Bundle Values", "Session Started At: " + sessionStartedAt);
             Log.d("Bundle Values", "Ended Time/Date: " + endedTimeDate);
             Log.d("Bundle Values", "Session Ended At: " + sessionEndedAt);
