@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/deletionView.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
     <script>
         $(document).ready(function() {
             $('.arrow-logo').click(function(e) {
@@ -21,6 +23,51 @@
             });
         });
     </script>
+
+<!--<script>
+    $(document).ready(function () {
+        // Attach an event listener to the input field
+        $('#companyIDInput').on('input', function () {
+            var enteredID = $(this).val();
+
+            // Hide all company cards
+            $('.select-card').hide();
+            
+
+            // Show only the relevant company card based on the entered ID
+            $('.select-card[data-company-id="' + enteredID + '"]').show();
+        });
+    });
+</script>-->
+
+<!-- Updated script in the head section of your HTML -->
+<!-- Updated script in the head section of your HTML -->
+<script>
+    $(document).ready(function () {
+        $('.companyIDInput').on('input', function () {
+            var enteredID = $(this).val();
+
+            // Log entered ID for debugging
+            console.log('Entered Company ID:', enteredID);
+
+            // Hide all company cards
+            $('.select-card').hide();
+
+            // Show only the relevant company card based on the entered ID
+            var $selectedCard = $('.select-card[data-company-id="' + enteredID + '"]');
+            
+            if ($selectedCard.length > 0) {
+                $selectedCard.show();
+                console.log('Company Card Found:', enteredID);
+            } else {
+                console.log('Company Card Not Found:', enteredID);
+            }
+        });
+    });
+</script>
+
+
+
     <title>Suspend</title>
 </head>
 
@@ -93,76 +140,30 @@
                 </div>
 
                 <div class="profile">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
+                   <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>
+                    </svg>-->
                     <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
                     <a href="../users/logout" class="logout">Log out</a>
                 </div>
             </div>
             <div class="business">
-              <!--  <div class="card-section bg-red ">
-                    <div class="b-card1 bg-blue">
-                        <div class="b-card01 bg-grey">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo">
-                                <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
-                            </svg>
-                        </div>
-                        <div class="b-card bg-black">
-                            <div class="b-card-content p text-white">
-                                <p>10 Inactive Drivers Detected</p>
-                            </div>
-                        </div>
-                        <button class="delete-card1 bg-red" type="button">
-                        
-                            <div class="delete-card1-content p text-white">
-                                <p>Delete all</p>
-                            </div>
-                            <div class="delete-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
-                                    <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="b-card2 bg-blue">
-                        <div class="b-card01 bg-grey">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo">
-                                <path fillRule="evenodd" d="M3 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5H15v-18a.75.75 0 000-1.5H3zM6.75 19.5v-2.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75zM6 6.75A.75.75 0 016.75 6h.75a.75.75 0 010 1.5h-.75A.75.75 0 016 6.75zM6.75 9a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM6 12.75a.75.75 0 01.75-.75h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 6a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zm-.75 3.75A.75.75 0 0110.5 9h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 12a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM16.5 6.75v15h5.25a.75.75 0 000-1.5H21v-12a.75.75 0 000-1.5h-4.5zm1.5 4.5a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 2.25a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75v-.008a.75.75 0 00-.75-.75h-.008zM18 17.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clipRule="evenodd" />
-                            </svg>
-                        </div>
-                        <div class="b-card bg-black">
-                            <div class="b-card2-content p text-white">
-                                <p>02 Inactive Companies Detected</p>
-                            </div>
-                        </div>
-                        <button class="detail-card bg-primary" type="button">
-                        
-                            <div class="detail-content p text-white">
-                                <p>View Details</p>
-                            </div>
-                        </button>
-                        <button class="delete-card2 bg-red" type="button">
-                            <div class="delete-card2-content p text-white">
-                                <p>Delete all</p>
-                            </div>
-                            <div class="delete-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
-                                    <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-                </div>-->
+            
                 <div class="suspend-card1-content p text-black">
                     <p>Suspend a Company</p>
                 </div>
                 <div class="suspend-card2-content p text-black">
                     <p>Select the company you want to suspend</p>
                 </div>
-                <div class="select-card">
+                <?php foreach ($data['approvedApplications'] as $application) : ?>
+               <!-- <div class="select-card"> -->
+                <div class="select-card" data-company-id="<?php echo $application->_id; ?>">
                     <div class="select-card-content p text-grey">
-                        <p>Enter Company ID</p>
+                        <!--<p>Enter Company ID</p> -->
+                        <label for="companyIDInput">Enter Company ID</label>
+                        
+                        <input type="text" class="companyIDInput" name="companyID" placeholder="COMP<?php echo $application->_id; ?>">
+
                     </div>
                     <div class="arrow-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="grey" class="arrow-logo">
@@ -173,9 +174,11 @@
                 <div class="custom-line">
                     <hr style="border: 1px solid #00000045;">
                 </div>
+                
                 <div class="colombo ">
                     <div class="colombo-content1 text-black">
-                        <p>Colombo Municipal Council - CMC</p>
+                     <!--   <p>Colombo Municipal Council - CMC</p>-->
+                        <p><?php echo $application->name; ?></p>
                     </div>
                     <div class="location-icon">
                         <span class="material-symbols-outlined">
@@ -183,27 +186,33 @@
                         </span>
                     </div>
                     <div class="colombo-content2 text-black">
-                        <p>WV87+F7V,Colombo 00700</p>
+                       <!-- <p>WV87+F7V,Colombo 00700</p> -->
+                        <p><?php echo $application->address; ?></p>
                     </div>
                     <div class="public-card bg-green">
                         <div class="public-card-content p text-white">
-                            <p>public</p>
+                        <!--   <p>public</p> -->
+                        <p><?php echo $application->public; ?></p>
                         </div>
                     </div>
                     <div class="colombo-content3 text-grey">
-                        <p>ID COMP001A1</p>
+                       <!-- <p>ID COMP001A1</p>-->
+                        <p>ID COMP<?php echo $application->_id; ?></p>
                     </div>
                     <div class="colombo-content4 text-black">
                         <p>Email</p>
                     </div>
                     <div class="colombo-content5 text-black">
-                        <p>commisioner@colombo.mc.gov.lk</p>
+                      <!--  <p>commisioner@colombo.mc.gov.lk</p>-->
+                        <p><?php echo $application->email; ?></p>
                     </div>
                     <div class="colombo-content6 text-black">
-                        <p>Telephone Number 01</p>
+                        <p>Telephone Number 01</p> 
+                        
                     </div>
                     <div class="colombo-content7 text-black">
-                        <p>(011) 2691191</p>
+                       <!-- <p>(011) 2691191</p>-->
+                        <p><?php echo $application->phone_number; ?></p>
                     </div>
                     <div class="colombo-content6 text-black">
                         <p>Telephone Number 02</p>
@@ -215,15 +224,40 @@
                         <p>Total Number of Parking Officers</p>
                     </div>
                     <div class="colombo-content9 text-black">
-                        <p>15</p>
+                       <!-- <p>15</p> -->
+                        <?php
+                        // Check if the property 'parkingOfficersCount' exists in the current application
+                        if (property_exists($application, 'parkingOfficersCount')) {
+                          $parkingOfficersCount = $application->parkingOfficersCount;
+                            // Adjust the label based on the count
+                          
+                          echo "<p>{$parkingOfficersCount}</p>";
+                        } else {
+                          echo "<p>No Parking Officers</p>"; // Default value if count is not available
+                        }
+                        ?>
                     </div>
                     <div class="colombo-content10 text-black">
                         <p>Total Number of Parking Spaces</p>
+                        
                     </div>
                     <div class="colombo-content11 text-black">
-                        <p>10</p>
+                      <!--  <p>10</p> -->
+                        <?php
+                        // Check if the property 'parkingSlotsCount' exists in the current application
+                        if (property_exists($application, 'parkingSlotsCount')) {
+                          $parkingSlotsCount = $application->parkingSlotsCount;
+                        
+                          echo "<p>{$parkingSlotsCount}</p>";
+                        } else {
+                          echo "<p>No Parking Spaces</p>"; // Default value if count is not available
+                        }
+                        ?>
                     </div>
                 </div>
+                        
+                
+                
                 <div class="b-card3">
                     <div class="colombo-content12 text-grey">
                         <p>Write the reason to suspend....</p>
@@ -251,6 +285,7 @@
     </div>
 </div>
             </div>
+           
                 <button class="sus bg-red" type="button">
                 
                     <div class="sus-content text-white">
@@ -259,9 +294,12 @@
                 </div>
                 </div>
                 </button>
+                     
         
     </div>
-
+                    
+    
+    <?php endforeach; ?>
 
 </body>
 

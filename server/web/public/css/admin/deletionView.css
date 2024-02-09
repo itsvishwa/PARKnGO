@@ -263,7 +263,7 @@
     align-items: center;
     width: 90%;
     height:40%;
-    
+    background: #FFF5E3;
   }
 
 .b-card5-icon {
@@ -283,7 +283,8 @@
 
 .colombo{
     position: relative;
-    background: linear-gradient(to right, #FFC45E, #F6EAD3);
+    /*background: linear-gradient(to right, #FFC45E, #F6EAD3);*/
+    background:  #FFF5E3;
     margin-top: 5px;
     margin-left :30px;
     padding: 50px;
@@ -304,7 +305,7 @@
 
   .colombo-content2 {
     margin-top: -34px;
-    margin-left: 698px;
+    margin-left: 450px;
     font-size: 0.9rem;
     font-weight: 510;
   }
@@ -394,7 +395,7 @@
 
   .location-icon {
     margin-top: -32px;
-    margin-left: 650px;
+    margin-left: 400px;
     left:96px;
     padding: 10px;
     border-radius: 10px;
@@ -452,8 +453,8 @@
 .time-select {
  /* appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  border: none;*/
+  -moz-appearance: none;*/
+  border: none;
   background-color: transparent;
   
   padding:0 10px;
