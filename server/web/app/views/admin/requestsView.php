@@ -129,7 +129,7 @@
               ?></p>
             </div>
 
-            <!-- Example button inside the foreach loop to handle each card -->
+            
           
             <button class="proceed-button" onclick="window.location.href='./proceedView.php?name=<?php echo urlencode($application->name); ?>&address=<?php echo urlencode($application->address); ?>&datetime=<?php echo urlencode($application->registered_time_stamp); ?>'">Proceed <span>&gt;</span></button>
 
