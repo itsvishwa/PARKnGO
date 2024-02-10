@@ -147,9 +147,6 @@ class Admins extends Controller
       
     ];
    
-   /* var_dump($data['reviews']);
-    var_dump($data['revenues']);*/
-
     // Pass the data to the view
     $this->view('admin/dashboardView', $data);
   }
@@ -177,9 +174,9 @@ class Admins extends Controller
 
     // Prepare data for the view
     $data = [
+      
         'approvedApplications' => $approvedApplications,
-       
-        
+              
     ];
 
 
