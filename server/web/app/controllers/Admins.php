@@ -417,24 +417,7 @@ public function delete($id){
   }
 }
 
-/****************************** */
-/*public function getTopTwoReviews() {
-  $adminModel = new Admin();
-  $topTwoReviews = $adminModel->getTopTwoReviewsData();
 
-  // Pass data to the view
-  // Assuming a method to load the view
- // $this->view('admin/dashboardView', ['topTwoReviews' => $topTwoReviews]);
-
- if ($topTwoReviews !== null && !empty($topTwoReviews)) {
-  // Pass data to the view if it's not null or empty
-  $this->view('admin/dashboardView', ['topTwoReviews' => $topTwoReviews]);
-} else {
-  // Handle the case when no reviews are available
-  error_log("No reviews fetched or issue with data retrieval."); // Log an error message
-  $this->view('admin/dashboardView', ['topTwoReviews' => []]); // Passing an empty array
-}
-}*/
 
 
 
