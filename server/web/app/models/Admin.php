@@ -280,25 +280,6 @@ public function deleteEntry($_id) {
     }
   }
 
-  // Method to fetch top two reviews with specific fields
-  public function getTopTwoReviewsData()
-  {
-    $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
-    // return $this->db->resultSet(); // Assuming resultSet() fetches all rows
-
-    // $rows = $this->db->resultSet(); 
-
-    // return $rows;
-    try {
-      $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
-      return $rows;
-    } catch (Exception $e) {
-      // Handle database query error
-      error_log('Database error: ' . $e->getMessage());
-      return false;
-    }
-  }
-
   public function getReviewDetails()
   {
     $this->db->query(
@@ -340,15 +321,11 @@ public function deleteEntry($_id) {
       review
     LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
     LEFT JOIN driver ON review.driver_id = driver._id
-    /*WHERE parking_spaces.company_id = :company_id*/
     ORDER BY review.time_stamp DESC
     LIMIT 5'
     );
 
-    /*$this->db->bind(':company_id', $driver_id);*/
     $rows = $this->db->resultSet();
-
-
 
     return $rows;
   }
