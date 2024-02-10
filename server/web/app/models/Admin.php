@@ -323,7 +323,7 @@ public function deleteEntry($_id) {
     return $row;
   }
 
-  public function getLatestReviews($driver_id)
+  public function getLatestReviews()
   {
     $this->db->query(
       'SELECT
@@ -340,12 +340,12 @@ public function deleteEntry($_id) {
       review
     LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
     LEFT JOIN driver ON review.driver_id = driver._id
-    WHERE parking_spaces.company_id = :company_id
+    /*WHERE parking_spaces.company_id = :company_id*/
     ORDER BY review.time_stamp DESC
     LIMIT 5'
     );
 
-    $this->db->bind(':company_id', $driver_id);
+    /*$this->db->bind(':company_id', $driver_id);*/
     $rows = $this->db->resultSet();
 
 
