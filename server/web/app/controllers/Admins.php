@@ -28,7 +28,7 @@ class Admins extends Controller
     $totalRevenue = $this->adminModel->getTotalRevenue();
     $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
     $totalSuspendApplications = $this->adminModel->getSuspendCompanyCount()['totalSuspendApplications'];
-    $reviews = $this->adminModel->getLatestReviews();
+    $reviews = $this->adminModel->getLatestReviews($_SESSION['user_id']);
     $parkingSessions = $this->adminModel->parkingSession($_SESSION['user_id']);
     $revenues = $this->adminModel->getRevenue($_SESSION['user_id']);
    

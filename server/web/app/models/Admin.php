@@ -340,7 +340,7 @@ public function deleteEntry($_id) {
       review
     LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
     LEFT JOIN driver ON review.driver_id = driver._id
-    /*WHERE parking_spaces.company_id = :company_id*/
+    WHERE parking_spaces.company_id = :company_id
     ORDER BY review.time_stamp DESC
     LIMIT 5'
     );
