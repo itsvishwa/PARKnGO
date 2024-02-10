@@ -21,7 +21,6 @@ class Admins extends Controller
     //*********************************************************** */
     // Get counts of users, parking officers, and companies from the model
     $adminModel = $this->model('Admin');
-    $topTwoReviews = $adminModel->getTopTwoReviewsData();
     $userCount = $this->adminModel->getUsersCount($_SESSION['user_id']);
     $parkingOfficersCount = $this->adminModel->getParkingOfficersCount($_SESSION['user_id']);
     $companiesCount = $this->adminModel->getCompaniesCount($_SESSION['user_id']);
@@ -140,7 +139,6 @@ class Admins extends Controller
       'totalRevenue' => $totalRevenue !== false ? $totalRevenue : 0,
       'totalPendingApplications' => $totalPendingApplications,
       'totalSuspendApplications' => $totalSuspendApplications,
-      'topTwoReviews' => $topTwoReviews,
       'reviews' => $reviews,
       'parkingSessions' => $parkingSessions,
       'revenues' => $processedRevenues,
@@ -174,7 +172,7 @@ class Admins extends Controller
 
     // Prepare data for the view
     $data = [
-      
+
         'approvedApplications' => $approvedApplications,
               
     ];
