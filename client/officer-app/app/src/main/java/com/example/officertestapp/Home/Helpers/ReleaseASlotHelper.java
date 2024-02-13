@@ -119,4 +119,3 @@ public class ReleaseASlotHelper {
         }
     }
 }
-
