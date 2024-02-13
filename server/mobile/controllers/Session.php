@@ -134,111 +134,110 @@ class Session extends Controller
 
                 $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+                if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
-                $open_session = $this->session_model->is_open_session_exists($vehicle_number);
+                    $open_session = $this->session_model->is_open_session_exists($vehicle_number);
 
-                // check whether the given vehicle number has an open session
-                if (!$open_session) {
-                    $result = [
-                        "response_code" => "409",
-                        "message" => "No open session found for the vehicle number $vehicle_number"
-                    ];
-
-                    $this->send_json_404($result);
-                } else {    // An open session exists for the vehicle number
-
-                    // get the parking session details from the parking_session table
-                    $parking_session_data = $this->session_model->search_session($vehicle_number);
-
-                    if ($parking_session_data === false) // no parking session for a given vehicle number
-                    {
+                    // check whether the given vehicle number has an open session
+                    if (!$open_session) {
                         $result = [
-                            "response_code" => "204",
-                            "message" => "Parking Session Not Found"
+                            "response_code" => "409",
+                            "message" => "No open session found for the vehicle number $vehicle_number"
                         ];
 
                         $this->send_json_404($result);
-                    } else // parking space found
-                    {
-                        $encrypted_session_id = $this->encrypt_id($parking_session_data->_id);
+                    } else {    // An open session exists for the vehicle number
 
-                        $start_timestamp = $parking_session_data->start_time;
-                        $readable_date_time = date("h.i A  d M Y", $start_timestamp);
-                        $readable_start_time = date("h.i A", $start_timestamp);
+                        // get the parking session details from the parking_session table
+                        $parking_session_data = $this->session_model->search_session($vehicle_number);
 
-                        $end_timestamp = time();
-                        $duration = $end_timestamp - $start_timestamp;
-                        $readable_date_time = date("h.i A  d M Y", $end_timestamp);
-                        $readable_end_time = date("h.i A", $end_timestamp);
-
-                        // Convert duration to hours and minutes
-                        $hours = floor($duration / 3600);
-                        $minutes = floor(($duration % 3600) / 60);
-
-                        // Format the duration
-                        $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
-
-
-                        // calculate amount
-
-                        if (isset($parking_session_data->vehicle_type) && isset($parking_session_data->parking_id)) {
-                            $vehicle_type = $parking_session_data->vehicle_type;
-                            $parking_id = $parking_session_data->parking_id;
-
-                            $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type, $parking_id);
-                            $hourly_rate = $hourly_rate_value->rate;
-
-                            $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
-
-                            $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
-
-
+                        if ($parking_session_data === false) // no parking session for a given vehicle number
+                        {
                             $result = [
-                                "response_code" => "800",
-                                "session_id" => $encrypted_session_id,
-                                "end_Time_Stamp" => $end_timestamp,
-                                "Parked_Time_Date" => $readable_date_time,
-                                "Duration" => $formatted_duration,
-                                "Amount" => $formatted_amount,
-                                "Vehicle_Number" => $vehicle_number,
-                                "Vehicle_Type" => $vehicle_type,
-                                "Session_started_at" => $readable_start_time,
-                                "Ended_Time_Date" => $readable_date_time,
-                                "Session_ended_at" => $readable_end_time
+                                "response_code" => "204",
+                                "message" => "Parking Session Not Found"
                             ];
 
-                            $this->send_json_200($result);
+                            $this->send_json_404($result);
+                        } else // parking space found
+                        {
+                            $encrypted_session_id = $this->encrypt_id($parking_session_data->_id);
+
+                            $start_timestamp = $parking_session_data->start_time;
+                            $readable_date_time = date("h.i A  d M Y", $start_timestamp);
+                            $readable_start_time = date("h.i A", $start_timestamp);
+
+                            $end_timestamp = time();
+                            $duration = $end_timestamp - $start_timestamp;
+                            $readable_date_time = date("h.i A  d M Y", $end_timestamp);
+                            $readable_end_time = date("h.i A", $end_timestamp);
+
+                            // Convert duration to hours and minutes
+                            $hours = floor($duration / 3600);
+                            $minutes = floor(($duration % 3600) / 60);
+
+                            // Format the duration
+                            $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
+
+
+                            // calculate amount
+
+                            if (isset($parking_session_data->vehicle_type) && isset($parking_session_data->parking_id)) {
+                                $vehicle_type = $parking_session_data->vehicle_type;
+                                $parking_id = $parking_session_data->parking_id;
+
+                                $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type, $parking_id);
+                                $hourly_rate = $hourly_rate_value->rate;
+
+                                $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
+
+                                $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
+
+
+                                $result = [
+                                    "response_code" => "800",
+                                    "session_id" => $encrypted_session_id,
+                                    "parking_id" => $encoded_parking_id,
+                                    "end_Time_Stamp" => $end_timestamp,
+                                    "Parked_Time_Date" => $readable_date_time,
+                                    "Duration" => $formatted_duration,
+                                    "Amount" => $formatted_amount,
+                                    "Vehicle_Number" => $vehicle_number,
+                                    "Vehicle_Type" => $vehicle_type,
+                                    "Session_started_at" => $readable_start_time,
+                                    "Ended_Time_Date" => $readable_date_time,
+                                    "Session_ended_at" => $readable_end_time
+                                ];
+
+                                $this->send_json_200($result);
+                            }
                         }
                     }
+                } else {    //parking_id is not similar to the assigned parking
+
+                    $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+
+                    if ($assigned_parking_details) {
+                        $assigned_parking_name = $assigned_parking_details->name;
+
+                        $result = [
+                            "response_code" => "101",
+                            "updated parking_id" => $assigned_parking,
+                            "updated parking_name" => $assigned_parking_name,
+                        ];
+
+                        $this->send_json_200($result);
+                    } else {
+                        $result = [
+                            "response_code" => "204",
+                            "message" => "parking details not found"
+                        ];
+
+                        $this->send_json_404($result);
+                    }
                 }
-            } else {    //parking_id is not similar to the assigned parking
-
-                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
-
-                if ($assigned_parking_details) {
-                    $assigned_parking_name = $assigned_parking_details->name;
-
-                    $result = [
-                        "response_code" => "101",
-                        "updated parking_id" => $assigned_parking,
-                        "updated parking_name" => $assigned_parking_name,
-                    ];
-
-                    $this->send_json_200($result);
-                } else {
-                    $result = [
-                        "response_code" => "204",
-                        "message" => "parking details not found"
-                    ];
-
-                    $this->send_json_404($result);
-                }
-            }
-
-
             } else {
-                
+
                 $this->send_json_404(["message" => "HTTP_ENCODED_PARKING_ID not set"]);
             }
         }
@@ -439,7 +438,7 @@ class Session extends Controller
 
 
     // Officer - show all details of the parking sessions
-    public function view_status($parking_id)
+    public function view_status($vehicle_type, $status_type)
     {
         $token_data = $this->verify_token_for_officers();
 
@@ -449,7 +448,11 @@ class Session extends Controller
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
+            $parking_id = $_SERVER['HTTP_X_ENCODED_DATA'];
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+            // decrypting the parking id
+            $parking_id = $this->decrypt_id($parking_id);
 
             if ($assigned_parking === $parking_id) //parking_id is similar to the assigned parking
             {
@@ -465,11 +468,29 @@ class Session extends Controller
                     "payment_due" => $no_of_payment_due_sessions
                 ];
 
-                // get payment_due parking sessions details
-                $final_payment_due_session_arr = $this->get_payment_due_session_data($parking_id);
+                // filterring for $vehicle_type, $status_type
+                // status_type - {all => all, ip=>in progress, pd=>"payment due"}
 
-                // get payment_due parking sessions details
-                $final_in_progress_session_arr = $this->get_in_progress_session_data($parking_id);
+                $final_payment_due_session_arr = null;
+                $final_in_progress_session_arr = null;
+
+                if ($status_type === "all") // all status type
+                {
+                    $final_payment_due_session_arr = $this->get_payment_due_session_data($parking_id, $vehicle_type);
+                    $final_in_progress_session_arr = $this->get_in_progress_session_data($parking_id, $vehicle_type);
+                } else if ($status_type === "ip") // only in progree
+                {
+                    $final_in_progress_session_arr = $this->get_in_progress_session_data($parking_id, $vehicle_type);
+                    $final_payment_due_session_arr = [
+                        "is_available" => "0"
+                    ];
+                } else // only payment due 
+                {
+                    $final_payment_due_session_arr = $this->get_payment_due_session_data($parking_id, $vehicle_type);
+                    $final_in_progress_session_arr = [
+                        "is_available" => "0"
+                    ];
+                }
 
                 $result = [
                     "response_code" => "800",
@@ -483,32 +504,28 @@ class Session extends Controller
             {
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
-                if ($assigned_parking_details) {
-                    $assigned_parking_name = $assigned_parking_details->name;
-
-                    $result = [
-                        "response_code" => "101",
-                        "updated parking_id" => $assigned_parking,
-                        "updated parking_name" => $assigned_parking_name,
-                    ];
-
-                    $this->send_json_400($result);
-                } else {
-                    $result = [
-                        "response_code" => "204",
-                        "message" => "parking details not found"
-                    ];
-
-                    $this->send_json_404($result);
+                if ($assigned_parking_details) // new parking has been assigned to the officer
+                {
+                    // You have been reassigned to a new parking space
+                    $this->send_json_400("101");
+                } else // no parking has been assigned to the officer
+                {
+                    // parking details not found
+                    $this->send_json_404("204");
                 }
             }
         }
     }
 
     // return a array of payment due session data 
-    private function get_payment_due_session_data($parking_id)
+    private function get_payment_due_session_data($parking_id, $vehicle_type)
     {
-        $result_data = $this->payment_model->get_payment_due_session_details($parking_id);
+        // vehicle_type code meanings - {all => all, car => car, bus=>bus, bike=>bike, lorry=>lorry, van=>van}
+        if ($vehicle_type === "all") {
+            $vehicle_type = "%";
+        }
+
+        $result_data = $this->payment_model->get_payment_due_session_details($parking_id, $vehicle_type);
 
         $final_arr = [];
 
@@ -526,7 +543,7 @@ class Session extends Controller
 
             foreach ($result_data as $data) {
                 $temp_arr = [
-                    "payment_id" => $this->encrypt_id($data->_id),
+                    "_id" => $this->encrypt_id($data->_id),
                     "session_end_time" => date("h:i A | d/m/y", $data->end_time),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
@@ -540,9 +557,14 @@ class Session extends Controller
 
 
     // return a array of in progress session data 
-    private function get_in_progress_session_data($parking_id)
+    private function get_in_progress_session_data($parking_id, $vehicle_type)
     {
-        $result_data = $this->session_model->get_in_progress_session_details($parking_id);
+        // vehicle_type code meanings - {all => all, car => car, bus=>bus, bike=>bike, lorry=>lorry, van=>van}
+        if ($vehicle_type === "all") {
+            $vehicle_type = "%";
+        }
+
+        $result_data = $this->session_model->get_in_progress_session_details($parking_id, $vehicle_type);
 
         $final_arr = [];
 
@@ -560,6 +582,7 @@ class Session extends Controller
 
             foreach ($result_data as $data) {
                 $temp_arr = [
+                    "_id" => $this->encrypt_id($data->_id),
                     "session_start_time" => date("h:i A | d/m/y", $data->start_time),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type

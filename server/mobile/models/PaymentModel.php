@@ -127,13 +127,14 @@ class PaymentModel
     }
 
 
-    public function get_payment_id($session_id) {
+    public function get_payment_id($session_id)
+    {
         $this->db->query("SELECT _id FROM payment WHERE session_id = :session_id");
-    
+
         $this->db->bind(":session_id", $session_id);
-    
+
         $result = $this->db->single();
-    
+
         if ($result) {
             return $result->_id;
         } else {
@@ -162,7 +163,7 @@ class PaymentModel
         $this->db->bind(":payment_method", $payment_data["payment_method"]);
         $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
         $this->db->bind(":payment_id", $payment_data["payment_id"]);
-        
+
         $this->db->execute();
     }
 
@@ -201,7 +202,8 @@ class PaymentModel
     }
 
     // get payment details by payment_id
-    public function get_payment_details($_id) {
+    public function get_payment_details($_id)
+    {
         $this->db->query(
             "SELECT  
             parking_session.vehicle_number,
@@ -254,8 +256,8 @@ class PaymentModel
     }
 
 
-    // return the payment due session's details of a given parking - retrun false if there is no such session
-    public function get_payment_due_session_details($parking_id)
+    // return the payment due session's details of a given parking and vehicle type - retrun false if there is no such session
+    public function get_payment_due_session_details($parking_id, $vehicle_type)
     {
         $this->db->query(
             "SELECT 
@@ -272,10 +274,13 @@ class PaymentModel
             WHERE 
                 payment.is_complete = 0
             AND
-                parking_session.parking_id = :parking_id"
+                parking_session.parking_id = :parking_id
+            AND 
+                parking_session.vehicle_type LIKE :vehicle_type"
         );
 
         $this->db->bind(":parking_id", $parking_id);
+        $this->db->bind(":vehicle_type", $vehicle_type);
 
         $result = $this->db->resultSet();
 
@@ -285,5 +290,4 @@ class PaymentModel
             return false;
         }
     }
-
 }
