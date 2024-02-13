@@ -47,11 +47,26 @@ public class MainActivity extends AppCompatActivity{
     public void backBtnHandler(View view){
         onBackPressed();
     }
+
     private void replaceFragment(Fragment f){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_act_frame_layout, f);
         fragmentTransaction.commit();
+    }
+
+    public void replaceFragment(Fragment fragment, Bundle data, View currView) {
+        fragment.setArguments(data); // Set the data as arguments for the fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_act_frame_layout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        if (currView != null) {
+            currView.setClickable(false);
+            currView.setFocusable(false);
+        }
     }
 
     public void frag_home_main_assign_vehicle_btn_handler(View v) {
@@ -90,11 +105,21 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new HomeMainFragment());
     }
 
+    public void release_vehicle_01_continue_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot02Fragment());
+    }
 
     public void release_vehicle_02_back_notify_btn_handler(View v) {
         replaceFragment(new ReleaseASlot01Fragment());
     }
 
+    public void release_slot_02_back_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot01Fragment());
+    }
+
+    public void release_slot_02_yes_btn_handler(View v) {
+        replaceFragment(new ReleaseASlot03Fragment());
+    }
 
     public void release_slot_03_receive_cash_payment_btn_handler(View v) {
         replaceFragment(new ReleaseASlot04Fragment());
@@ -144,6 +169,13 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void frag_profile_logout_yes_btn_handler(View v) {
+        ParkngoStorage parkngoStorage = new ParkngoStorage(getApplicationContext());
+        parkngoStorage.clearData();
+        Intent i = new Intent(this, HeroActivity.class);
+        startActivity(i);
+    }
+
+    public void logout_immediately(){
         ParkngoStorage parkngoStorage = new ParkngoStorage(getApplicationContext());
         parkngoStorage.clearData();
         Intent i = new Intent(this, HeroActivity.class);

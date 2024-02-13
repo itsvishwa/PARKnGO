@@ -27,11 +27,13 @@ public class StatusMainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_status_main, container, false);
         View loadingView = inflater.inflate(R.layout.loading_frag, container, false);
 
-        // init spinners
-        new StatusMainSpinner(view, getContext());
-        new StatusFetchData(getContext(),view, loadingView);
+        // fetching data
+        StatusFetchData statusFetchData = new StatusFetchData(getContext(),view, loadingView);
 
-        //Create an instance of ParkngoStorage using the Fragment's context
+        // init spinners
+        StatusMainSpinner statusMainSpinner = new StatusMainSpinner(view, loadingView, getContext(), statusFetchData);
+
+        //Create an instance of Parkngo Storage using the Fragment's context
         ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
 
         // Get data from storage
