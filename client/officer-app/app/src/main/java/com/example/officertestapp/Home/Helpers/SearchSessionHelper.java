@@ -71,6 +71,7 @@ public class SearchSessionHelper {
 
             // Concatenate the values to create the complete vehicle number
             String completeVehicleNumber = letters + digits + province;
+            //Log.d("Complete Vehicle Number", completeVehicleNumber);
 
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -214,4 +215,3 @@ public class SearchSessionHelper {
         }
     }
 }
-

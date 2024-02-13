@@ -136,7 +136,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/vehicle_num_txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="52dp"
@@ -160,7 +160,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
             <TextView
-                android:id="@+id/textView32"
+                android:id="@+id/vehicle_type_txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="77dp"
@@ -184,7 +184,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
             <TextView
-                android:id="@+id/textView34"
+                android:id="@+id/session_started_time_txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="33dp"
@@ -208,7 +208,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
             <TextView
-                android:id="@+id/textView36"
+                android:id="@+id/session_ended_time_txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="42dp"
@@ -233,7 +233,7 @@
 
 
             <TextView
-                android:id="@+id/textView38"
+                android:id="@+id/time_duration_txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
@@ -257,7 +257,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
             <TextView
-                android:id="@+id/textView40"
+                android:id="@+id/amount_txt_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="112dp"

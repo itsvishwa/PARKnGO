@@ -26,12 +26,12 @@
         android:id="@+id/ps_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="07 JUNE 2023 | 10.00 AM "
-        android:textStyle="bold"
         android:textColor="@color/textGrey"
-
         android:textSize="14sp"
+
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ps_txt" />
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Session ended \n Date &amp; Time"
+        android:text="Session ended Date &amp; Time"
         android:textColor="@color/textGrey"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
