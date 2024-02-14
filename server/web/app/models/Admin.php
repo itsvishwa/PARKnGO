@@ -388,7 +388,15 @@ public function deleteEntry($_id) {
     return $row;
   }
 
-  
+  // Approve company application
+  public function approveCompanyApplication($applicationId)
+  {
+      // Update the database table with the approved status
+      $this->db->query('UPDATE company SET is_approved = 1, is_reviewed = 1 WHERE _id = :applicationId');
+      $this->db->bind(':applicationId', $applicationId);
+
+      return $this->db->execute();
+  }
 
 
 
