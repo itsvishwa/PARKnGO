@@ -319,7 +319,7 @@ public function downloadDocument($_id)
 
 
 /**************** */
-public function approveApplication()
+/*public function approveApplication()
     {
         // Check if the request is POST and if the application ID is provided
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dataset.application_id'])) {
@@ -338,7 +338,7 @@ public function approveApplication()
         // If something goes wrong, send an error response
         echo json_encode(['success' => false]);
         exit();
-    }
+    }*/
 
 // Inside your controller method that handles the deletion
 /*public function delete($entry_id) {
@@ -417,7 +417,29 @@ public function delete($id){
   }
 }
 
+// Approve company application
+public function approveApplication()
+{
+    // Check if the request is POST and if the application ID is provided
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['applicationId'])) {
+        $applicationId = $_POST['applicationId'];
 
+        // Call the method to approve the application in your model
+        $result = $this->adminModel->approveCompanyApplication($applicationId);
+
+        if ($result) {
+            // If the update is successful, send a success response
+            echo json_encode(['success' => true]);
+            exit();
+        }
+    }
+
+    // If something goes wrong, send an error response
+    echo json_encode(['success' => false]);
+    exit();
+
+    
+}
 
 
 

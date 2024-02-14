@@ -171,12 +171,9 @@
         <div class="b-card-apre">       
     <button class="reject-button" type="button">Reject Application</button> 
     <!--<button class="approve-button" type="button">-->
-    <button class="approve-button" data-application-id="<?php echo $application['id']; ?>">Approve Application</button>
+    <button class="approve-button" data-application-id="<?php echo $application['_id']; ?>">Approve Application</button>
+    
         </div>
-
-        
-       
-        
 
           <div class="b-card-content text-black">
           </div>
@@ -186,50 +183,42 @@
   </div>
   </div>
   </div>
-  <script>
-  function downloadPDF() {
-    // Make a GET request to the PHP function that downloads the document
-    window.location.href = 'app/controllers/Admins.php?action=downloadDocument';
-  }
-</script>
-  <script>
+  
+</body>
+<script>
+  // Assuming you have a button or some trigger element with the applicationId as data attribute
+
+  document.querySelector('.approve-button').addEventListener('click', function () {
+    var applicationId = this.dataset.applicationId;
     
-document.addEventListener('DOMContentLoaded', function () {
-    const approveButtons = document.querySelectorAll('.approve-button');
 
-    approveButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const applicationId = this.dataset.applicationId;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "admins/approveApplication", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            fetch('app/conrollers/Admins.php?action=approveApplication', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    application_id: applicationId,
-                }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.success) {
-                        // Update UI or show success message
-                        console.log('Application approved successfully');
-                        // Reload the page or perform necessary UI updates
-                        window.location.reload();
-                    } else {
-                        // Handle error scenario
-                        console.error('Failed to approve application');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-        });
-    });
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Request was successful, handle the response
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // Application approved successfully, perform any necessary actions
+                    console.log("Application approved successfully");
+                } else {
+                    // Handle the case when the approval fails
+                    console.log("Failed to approve application");
+                }
+            } else {
+                // Handle the case when the request fails
+                console.log("Request failed");
+            }
+        }
+    };
+
+    // Send the request with the applicationId parameter
+    xhr.send("applicationId=" + applicationId);
 });
 
-  </script>
-</body>
+</script>
 
 </html>
