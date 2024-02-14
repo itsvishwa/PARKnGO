@@ -186,7 +186,8 @@
                       </div>
                     </div>
 
-                    <button class="b-view-more bg-black" type="button">
+                  <!--  <button class="b-view-more bg-black" type="button">-->
+                    <button class="b-view-more bg-black" type="button" onclick="downloadDocument(<?php echo $application->_id; ?>)">
                       <div class="b-card_down-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="rd-menu-logo">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -196,9 +197,6 @@
                         <p>Download the document</p>
                       </div>
                     </button>
-
-
-
 
 
                     <button class="b-delete-more bg-black">
@@ -213,10 +211,7 @@
                         <p>Delete</p>
                       </div>
 
-
                     </button>
-
-
 
                   </div>
                 </div>
@@ -265,74 +260,7 @@
       </script>
 
 
-      <!--      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-  const deleteButtons = document.querySelectorAll('.b-delete-more');
-
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const companyId = this.dataset.companyId;
-
-      // Perform deletion action using the company ID via fetch or other methods
-      // Example: Call a function to handle the deletion
-      handleDelete(companyId);
-    });
-  });
-
-  // Function to handle deletion
-  function handleDelete(companyId) {
-    // Use fetch or other means to send a request to the server to delete the company with the given ID
-    // Example using fetch:
-    fetch(`/Admins/delete/${companyId}`, {
-      method: 'POST'
-      // Additional headers or data can be added if needed
-    })
-    .then(response => {
-      if (response.ok) {
-        // If deletion is successful, you might want to update the UI or remove the deleted company's card
-        console.log('Company deleted successfully');
-        // Perform necessary UI updates like removing the card or reloading the list
-      } else {
-        console.error('Failed to delete company');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
-});
-
-      </script>-->
-
-      <!--   <script>
-        // JavaScript code inside your HTML or in an external file
-document.querySelectorAll('.b-delete-more').forEach(button => {
-  button.addEventListener('click', function() {
-    const companyId = this.dataset.companyId; // Fetch the unique ID associated with the card
-
-    // Send an AJAX request to delete the card
-    fetch(`/admins/delete/${companyId}`, {
-      method: 'DELETE', // Use the appropriate HTTP method (e.g., DELETE)
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        // If deletion is successful, remove the card from the UI
-        this.closest('.b-card1').remove(); // Remove the deleted card from the UI
-        console.log('Company deleted successfully');
-      } else {
-        console.error('Failed to delete company');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  });
-});
-
-      </script>-->
+   
 </body>
 
 </html>
