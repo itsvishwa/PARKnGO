@@ -291,7 +291,7 @@ class Admins extends Controller
     
 }
 
-public function downloadDocument($_id)
+/*public function downloadDocument($_id)
 {
     // Retrieve document content from the database based on an ID or any other identifier
     $documentContent = ''; // Initialize the variable
@@ -315,7 +315,7 @@ public function downloadDocument($_id)
         echo "Failed to retrieve document content.";
         // Optionally, you can redirect or show an error message
     }
-}
+}*/
 
 
 /**************** */
@@ -441,6 +441,28 @@ public function approveApplication()
     
 }
 
+// Inside your controller
+public function downloadDocument($documentId) {
+  // Load the Company model
+  $this->load_model('CompanyModel');
+
+  // Fetch the document from the model based on $documentId
+  $document = $this->adminModel->getDocument($documentId);
+
+  // Check if the document exists
+  if ($document) {
+     // Set appropriate headers for PDF file
+     header('Content-Type: application/pdf');
+     header('Content-Disposition: inline; filename="document.pdf"');
+
+     // Output the document content
+     echo $document;
+  } else {
+     // Handle case when the document is not found
+     // You can redirect to an error page or show a message
+     echo 'Document not found';
+  }
+}
 
 
   

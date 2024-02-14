@@ -398,6 +398,23 @@ public function deleteEntry($_id) {
       return $this->db->execute();
   }
 
+  // Inside your CompanyModel
+public function getDocument($documentId) {
+  // Assuming your documents are stored in the 'company' table with a 'documents' field
+  $query = 'SELECT documents FROM company WHERE _id = :id';
+  $params = [':id' => $documentId];
+
+  $result = $this->db->query($query, $params);
+
+  if ($result) {
+     // Assuming you are using BLOB for storing documents
+     return $result[0]['documents'];
+  }
+
+  return false; // Return false if the document is not found or an error occurs
+}
+
+
 
 
 }
