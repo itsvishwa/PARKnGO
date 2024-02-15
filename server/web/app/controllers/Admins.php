@@ -444,7 +444,7 @@ public function approveApplication()
 // Inside your controller
 public function downloadDocument($documentId) {
   // Load the Company model
-  $this->load_model('CompanyModel');
+  $this->load_model('adminModel');
 
   // Fetch the document from the model based on $documentId
   $document = $this->adminModel->getDocument($documentId);
@@ -464,6 +464,13 @@ public function downloadDocument($documentId) {
   }
 }
 
+protected function load_model($adminModel) {
+  // Require the model file
+  require_once '../app/models/' . $adminModel . '.php';
+
+  // Instantiate the model
+  return new $adminModel();
+}
 
   
 }
