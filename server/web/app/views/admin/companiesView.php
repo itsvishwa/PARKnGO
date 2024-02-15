@@ -9,8 +9,26 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/companiesView.css" />
   <title>Companies</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    function downloadDocument(documentId) {
+        // Using jQuery for AJAX, make sure to include jQuery in your project
+        $.ajax({
+            url: 'downloadDocument/' + documentId, // Adjust the path as needed
+            method: 'GET',
+            success: function(response) {
+                // Handle the response, e.g., initiate the download
+                // For simplicity, let's redirect to the PDF URL
+                window.location.href = 'data:application/pdf;base64,' + response;
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+</script>
 
-  
+
 
 </head>
 
