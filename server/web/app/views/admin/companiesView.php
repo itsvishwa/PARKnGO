@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/companiesView.css" />
   <title>Companies</title>
 
+  
+
 </head>
 
 <body>
