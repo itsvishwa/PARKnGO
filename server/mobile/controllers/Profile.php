@@ -175,7 +175,7 @@ class Profile extends Controller
 
 
     // get payment history of the officer
-    public function officer_payment_history($parking_id)
+    public function officer_payment_history()
     {
         $token_data = $this->verify_token_for_officers();
 
@@ -185,7 +185,10 @@ class Profile extends Controller
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
-            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+            $encoded_parking_id = $_SERVER['HTTP_ENCODED_PARKING_ID'];
+            $parking_id = $this->decrypt_id($encoded_parking_id);
+
+             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
             if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
@@ -195,7 +198,7 @@ class Profile extends Controller
                 {
                     $result = [
                         "response_code" => "204",
-                        "message" => "No Payments has been made yet"
+                        "message" => "No Payment transactions has been made yet"
                     ];
 
                     $this->send_json_400($result);
@@ -205,18 +208,19 @@ class Profile extends Controller
 
                     foreach ($payments_history_data as $payment_history_data) {
                         $timestamp = strtotime($payment_history_data->time_stamp);
-                        $formatted_date = date("h.i A | d F", $timestamp);
+                        $formatted_date = date("h.i A | d M", $timestamp);
         
                         $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
+
 
                         $formatted_payment_method = strtoupper($payment_history_data->payment_method);
 
                         $temp = [
                             "response_code" => "800",
-                            "Date and Time" => $formatted_date,
+                            "Date_and_Time" => $formatted_date,
                             "Amount" => $formatted_amount,
                             "Vehicle" => $payment_history_data->vehicle_number,
-                            "Payment Method" => $formatted_payment_method
+                            "Payment_Method" => $formatted_payment_method
                         ];
                         $result_data[] = $temp;
                     }
@@ -227,25 +231,14 @@ class Profile extends Controller
             } else {    //parking_id is not similar to the assigned parking
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
-
-                if ($assigned_parking_details) {
-                    $assigned_parking_name = $assigned_parking_details->name;
-
-                    $result = [
-                        "response_code" => "101",
-                        "updated parking_id" => $assigned_parking,
-                        "updated parking_name" => $assigned_parking_name,
-                    ];
-
-                    $this->send_json_200($result);
-                    
-                } else {
-                    $result = [
-                        "response_code" => "204",
-                        "message" => "parking details not found"
-                    ];
-
-                    $this->send_json_404($result);
+                if ($assigned_parking_details) // new parking has been assigned to the officer
+                {
+                    // You have been reassigned to a new parking space
+                    $this->send_json_400("101");
+                } else // no parking has been assigned to the officer
+                {
+                    // parking details not found
+                    $this->send_json_404("204");
                 }
             }
         }

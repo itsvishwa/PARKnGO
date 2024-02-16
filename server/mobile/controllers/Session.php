@@ -131,7 +131,6 @@ class Session extends Controller
                 $encoded_parking_id = $_SERVER['HTTP_ENCODED_PARKING_ID'];
                 $parking_id = $this->decrypt_id($encoded_parking_id);
 
-
                 $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
                 if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking

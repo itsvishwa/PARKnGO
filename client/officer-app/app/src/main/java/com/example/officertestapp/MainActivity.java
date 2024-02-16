@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-
     public void frag_profile_logout_back_btn_handler(View v) {
         replaceFragment(new ProfileMainFragment());
     }
