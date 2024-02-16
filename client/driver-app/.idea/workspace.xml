@@ -10,20 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/ReleaseASlot01Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Home/ReleaseASlot01Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot01.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Profile/PPRecycleViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Profile/Helpers/PPRecycleViewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Profile/PaymentProfileModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Profile/Helpers/PaymentProfileModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Profile/ProfilePaymentHistoryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Profile/ProfilePaymentHistoryFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Status/StatusMainFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Status/StatusMainFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Session.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\DELL\.android\avd\test01.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\DELL\.android\avd\Pixel_4_API_27.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

@@ -1,4 +1,4 @@
-package com.example.officertestapp.Profile;
+package com.example.officertestapp.Profile.Helpers;
 
 public class PaymentProfileModel {
     String dateTime;
