@@ -1,4 +1,4 @@
-package com.example.officertestapp.Profile;
+package com.example.officertestapp.Profile.Helpers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -59,10 +59,10 @@ public class PPRecycleViewAdapter extends RecyclerView.Adapter<PPRecycleViewAdap
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            dateTimeView = itemView.findViewById(R.id.pph_frag_datetime);
-            amountView = itemView.findViewById(R.id.pph_frag_amount);
-            vehicleNumView = itemView.findViewById(R.id.pph_frag_vehicleNum);
-            paymentMethodView = itemView.findViewById(R.id.pph_frag_payment_method);
+            this.dateTimeView = itemView.findViewById(R.id.pph_frag_datetime);
+            this.amountView = itemView.findViewById(R.id.pph_frag_amount);
+            this.vehicleNumView = itemView.findViewById(R.id.pph_frag_vehicleNum);
+            this.paymentMethodView = itemView.findViewById(R.id.pph_frag_payment_method);
         }
     }
 }

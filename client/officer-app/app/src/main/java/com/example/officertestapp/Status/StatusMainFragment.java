@@ -18,9 +18,6 @@ import java.util.ArrayList;
 
 public class StatusMainFragment extends Fragment {
 
-
-    ArrayList<ParkingStatusModel> parkingStatusModels = new ArrayList<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
