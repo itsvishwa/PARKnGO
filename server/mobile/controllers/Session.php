@@ -318,6 +318,7 @@ class Session extends Controller
                         $payment_id = $this->payment_model->get_payment_id($session_id);
 
                         $payment_id = $this->encrypt_id($payment_id);
+                        print_r($payment_id);
 
                         //view payment details
                         $this->view_payment_details_of_session($payment_id);
