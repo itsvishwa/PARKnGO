@@ -219,7 +219,7 @@
                     </button>
 
 
-                    <button class="b-delete-more bg-black">
+                    <form class="b-delete-more bg-black" method="POST" enctype="multipart/form-data">
 
                       <div class="b-card_del-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
@@ -227,11 +227,13 @@
                         </svg>
                       </div>
 
-                      <div class="b-delete-more-card2-content text-white">
-                        <p>Delete</p>
-                      </div>
+                      
+                      <input type="submit" id="deleteButton" value="Delete" class="b-delete-more-card2-content text-white bg-red">
+                       
+                      
 
-                    </button>
+                      </form>
+                
 
                   </div>
                 </div>
