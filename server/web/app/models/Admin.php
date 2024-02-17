@@ -414,7 +414,25 @@ public function getDocument($documentId) {
   return false; // Return false if the document is not found or an error occurs
 }
 
+public function delete($company_id)
+{
+  $this->db->query(
+    'DELETE FROM 
+      company
+    WHERE company_id = :company_id'
+  );
 
+  // Bind values
+  
+  $this->db->bind(':company_id', $company_id);
+
+  // Execute
+  if ($this->db->execute()) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 
 }
