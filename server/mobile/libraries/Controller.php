@@ -228,13 +228,19 @@ class Controller
                 // Encode the binary data as a Base64 string
                 $encoded_string = base64_encode($encoded_string);
 
+                // Make the Base64 string URL safe by replacing certain characters
+                $url_safe_encrypted_id = strtr($encoded_string, '+/', '.~');
+
                 // Send the Base64-encoded string as a JSON response
-                return $encoded_string;
+                return $url_safe_encrypted_id;
         }
 
         // return the decrypted data when pass the encoded string
-        public function decrypt_id($encoded_string)
+        public function decrypt_id($url_safe_encrypted_id)
         {
+                // Reverse the URL-safe character replacements to get the original Base64 string
+                $encoded_string = strtr($url_safe_encrypted_id, '.~', '+/');
+
                 // Decode the Base64-encoded string to get the binary data
                 $binary_data = base64_decode($encoded_string);
 
@@ -256,5 +262,4 @@ class Controller
                 // Send the decrypted payment_id as a JSON response
                 return $decrypted_payment_id;
         }
-
 }
