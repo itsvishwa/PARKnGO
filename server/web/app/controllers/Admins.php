@@ -149,11 +149,12 @@ class Admins extends Controller
     $this->view('admin/dashboardView', $data);
   }
 
-  public function companiesView()
+ public function companiesView()
   {
 
     // Fetch approved company applications details
     $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
+    
 
     // Get parking officers count for each approved company
     foreach ($approvedApplications as &$company) {
@@ -183,6 +184,7 @@ class Admins extends Controller
     $this->view('admin/companiesView', $data);
   }
 
+  
   public function deletionView()
   {
 
@@ -394,28 +396,7 @@ class Admins extends Controller
     }
   }
 }*/
-public function delete($id){
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    // Get existing post from model
-    $company = $this->adminModel->getCompanyById($id);
 
-    // Check for owner
-    if($company->user_id != $_SESSION['user_id']){
-      redirect('admins');
-    }
-
-    if($this->adminModel->deleteCompany($id)){
-      flash('post_message' , 'Company Removed');
-      redirect('admins');
-
-    }else{
-      die('Something went wrong');
-    }
-
-  }else{
-    redirect('admins');
-  }
-}
 
 // Approve company application
 public function approveApplication()
@@ -441,36 +422,44 @@ public function approveApplication()
     
 }
 
-// Inside your controller
+
 public function downloadDocument($documentId) {
   // Load the Company model
-  $this->load_model('adminModel');
+ 
+ // $adminModel = $this->model('Admin');
+  $this->adminModel = $this->model('Admin');
 
   // Fetch the document from the model based on $documentId
-  $document = $this->adminModel->getDocument($documentId);
+  $documents = $this->adminModel->getDocument($documentId);
 
   // Check if the document exists
-  if ($document) {
+  if ($documents) {
      // Set appropriate headers for PDF file
+     
      header('Content-Type: application/pdf');
      header('Content-Disposition: inline; filename="document.pdf"');
+    // header('Content-Length: ' . strlen($documents));
+    
+     // Encode binary data to base64
+     $base64Encoded = base64_encode($documents);
 
+     // Set Content-Length header to the length of base64 data
+     header('Content-Length: ' . strlen($base64Encoded));
+      
      // Output the document content
-     echo $document;
+   //  echo $documents;
+     // Output the document content
+     echo $base64Encoded;
+     
   } else {
      // Handle case when the document is not found
+     
      // You can redirect to an error page or show a message
      echo 'Document not found';
   }
 }
 
-protected function load_model($adminModel) {
-  // Require the model file
-  require_once '../app/models/' . $adminModel . '.php';
 
-  // Instantiate the model
-  return new $adminModel();
-}
 
   
 }

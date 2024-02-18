@@ -118,7 +118,7 @@ class Admin
 
   public function getApprovedCompanyApplications()
   {
-    $this->db->query('SELECT name, _id , email , phone_number , address FROM company WHERE is_approved = 1 AND is_reviewd = 1');
+    $this->db->query('SELECT name, _id , email , phone_number , documents , address FROM company WHERE is_approved = 1 AND is_reviewd = 1');
     
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
@@ -399,7 +399,7 @@ public function deleteEntry($_id) {
   }
 
   // Inside your CompanyModel
-public function getDocument($documentId) {
+/*public function getDocument($documentId) {
   // Assuming your documents are stored in the 'company' table with a 'documents' field
   $query = 'SELECT documents FROM company WHERE _id = :id';
   $params = [':id' => $documentId];
@@ -413,26 +413,30 @@ public function getDocument($documentId) {
 
   return false; // Return false if the document is not found or an error occurs
 }
+*/
 
-public function delete($company_id)
-{
-  $this->db->query(
-    'DELETE FROM 
-      company
-    WHERE company_id = :company_id'
-  );
+public function getDocument($documentId) {
+  // Assuming your documents are stored in the 'company' table with a 'documents' field
+  $params = [':id' => $documentId];
 
-  // Bind values
-  
-  $this->db->bind(':company_id', $company_id);
+  $result = $this->db->query('SELECT _id , documents FROM company WHERE _id = :id', $params);
 
-  // Execute
-  if ($this->db->execute()) {
-    return true;
-  } else {
-    return false;
+  if ($result) {
+     // Assuming you are using BLOB for storing documents
+     return $result[0]['documents'];
+     // Encode the binary data to base64
+    // $documentData = $result[0]['documents'];
+    /// $base64Encoded = base64_encode($documentData);
+
+     //return $base64Encoded;
   }
+
+  return false; // Return false if the document is not found or an error occurs
 }
+
+
+
+
 
 
 }
