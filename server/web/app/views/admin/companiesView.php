@@ -26,9 +26,7 @@
             }
         });
     }
-</script>
-
-
+  </script>
 
 </head>
 
@@ -133,7 +131,7 @@
                 <p><?php echo $application->name; ?></p>
               </div>
               <div class="company-card3-content text-black">
-                <p>ID COMP<?php echo $application->_id; ?></p>
+                <p>ID COMP_<?php echo $application->_id; ?></p>
               </div>
               <div class="location-icon">
                 <span class="material-symbols-outlined">
@@ -219,7 +217,7 @@
                     </button>
 
 
-                    <form class="b-delete-more bg-black" method="POST" enctype="multipart/form-data">
+                    <button class="b-delete-more bg-black">
 
                       <div class="b-card_del-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
@@ -227,13 +225,13 @@
                         </svg>
                       </div>
 
-                      
-                      <input type="submit" id="deleteButton" value="Delete" class="b-delete-more-card2-content text-white bg-red">
-                       
-                      
+                      <div class="b-delete-more-card2-content text-white">
+                        <p>Delete</p>
+                      </div>
 
-                      </form>
-                
+                      </button>
+
+                 
 
                   </div>
                 </div>
