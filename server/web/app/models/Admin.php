@@ -434,7 +434,20 @@ public function getDocument($documentId) {
   return false; // Return false if the document is not found or an error occurs
 }
 
+public function insertCompanySuspendDetails($data)
+{
+  $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
+  $this->db->bind(':company_id', $data['company_id']);
+  $this->db->bind(':message', $data['message']);
+  $this->db->bind(':duration', $data['duration']);
+  $this->db->bind(':time_stamp', $data['time_stamp']);
 
+  if ($this->db->execute()) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 
 
