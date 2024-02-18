@@ -185,7 +185,7 @@ class Admins extends Controller
   }
 
   
-  public function deletionView()
+ /* public function deletionView()
   {
 
         // Fetch approved company applications details
@@ -221,6 +221,65 @@ class Admins extends Controller
         ];
 
     $this->view('admin/deletionView' , $data);
+  }*/
+
+
+  public function deletionView()
+  {
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Get the raw POST data
+      $json_data = file_get_contents('php://input');
+
+      // Log the received JSON data
+      file_put_contents('received_suspend_data.log', $json_data);
+
+      // Decode the JSON data into an associative array
+      $data = json_decode($json_data, true);
+
+      $result = $this->adminModel->insertCompanySuspendDetails($data);
+
+      if ($result) {
+        // Successfully registered parking
+        echo json_encode(['message' => 'Company Suspended..']);
+      } else {
+        // Error in registering parking
+        http_response_code(500);
+        echo json_encode(['message' => 'Error Occured...']);
+      }
+    }
+
+    // Fetch approved company applications details
+    $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
+
+    // Get parking officers count for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
+      $company->parkingOfficersCount = $parkingOfficersCount;
+    }
+
+    // Get parking officers count for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
+      $company->parkingSlotsCount = $parkingSlotsCount;
+    }
+
+    // Get parking spaces public or not for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $public = $this->adminModel->getPublicOrNot($companyId);
+      $company->public = $public;
+    }
+
+
+    // Prepare data for the view
+    $data = [
+      'approvedApplications' => $approvedApplications,
+    ];
+
+    $this->view('admin/deletionView', $data);
   }
 
   public function requestsHistoryView()
