@@ -2,18 +2,15 @@
 class Admins extends Controller
 {
   private $adminModel;
-  
+
 
   public function __construct()
   {
     $this->adminModel = $this->model('admin');
-   
+
     if (!isset($_SESSION['user_id'])) {
       redirect('users/login');
-    
     }
-
-
   }
 
   public function dashboardView()
@@ -28,10 +25,10 @@ class Admins extends Controller
     $totalRevenue = $this->adminModel->getTotalRevenue();
     $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
     $totalSuspendApplications = $this->adminModel->getSuspendCompanyCount()['totalSuspendApplications'];
-    $reviews = $this->adminModel->getLatestReviews($_SESSION['user_id']);
+    $reviews = $this->adminModel->getLatestReviews();
     $parkingSessions = $this->adminModel->parkingSession($_SESSION['user_id']);
     $revenues = $this->adminModel->getRevenue($_SESSION['user_id']);
-   
+
 
     foreach ($revenues as &$revenue) {
       $revenue->time_stamp = date('Y-m-d H:i:s', $revenue->time_stamp);
@@ -76,8 +73,8 @@ class Admins extends Controller
     }
 
     $processedRevenues = processRevenues($revenues);
- 
-  
+
+
     foreach ($parkingSessions as &$parkingSession) {
       $parkingSession->start_time = date('Y-m-d H:i:s', $parkingSession->start_time);
     }
@@ -130,8 +127,6 @@ class Admins extends Controller
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
     }
 
-    
-
     // Prepare data for the view
     $data = [
       'userCount' => $userCount !== false ? $userCount : 0,
@@ -144,10 +139,10 @@ class Admins extends Controller
       'reviews' => $reviews,
       'parkingSessions' => $parkingSessions,
       'revenues' => $processedRevenues,
-      
+
     ];
-   
-   /* var_dump($data['reviews']);
+
+    /* var_dump($data['reviews']);
     var_dump($data['revenues']);*/
 
     // Pass the data to the view
@@ -173,13 +168,13 @@ class Admins extends Controller
       $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
       $company->parkingSlotsCount = $parkingSlotsCount;
     }
-    
+
 
     // Prepare data for the view
     $data = [
-        'approvedApplications' => $approvedApplications,
-       
-        
+      'approvedApplications' => $approvedApplications,
+
+
     ];
 
 
@@ -191,39 +186,59 @@ class Admins extends Controller
   public function deletionView()
   {
 
-        // Fetch approved company applications details
-        $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Get the raw POST data
+      $json_data = file_get_contents('php://input');
 
-        // Get parking officers count for each approved company
-        foreach ($approvedApplications as &$company) {
-          $companyId = $company->_id;
-          $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
-          $company->parkingOfficersCount = $parkingOfficersCount;
-        }
-    
-        // Get parking officers count for each approved company
-        foreach ($approvedApplications as &$company) {
-          $companyId = $company->_id;
-          $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
-          $company->parkingSlotsCount = $parkingSlotsCount;
-        }
+      // Log the received JSON data
+      file_put_contents('received_suspend_data.log', $json_data);
 
-         // Get parking spaces public or not for each approved company
-        foreach ($approvedApplications as &$company) {
-          $companyId = $company->_id;
-          $public = $this->adminModel-> getPublicOrNot($companyId);
-          $company->public= $public;
-        }
-        
-    
-        // Prepare data for the view
-        $data = [
-            'approvedApplications' => $approvedApplications,
-           
-            
-        ];
+      // Decode the JSON data into an associative array
+      $data = json_decode($json_data, true);
 
-    $this->view('admin/deletionView' , $data);
+      $result = $this->adminModel->insertCompanySuspendDetails($data);
+
+      if ($result) {
+        // Successfully registered parking
+        echo json_encode(['message' => 'Company Suspended..']);
+      } else {
+        // Error in registering parking
+        http_response_code(500);
+        echo json_encode(['message' => 'Error Occured...']);
+      }
+    }
+
+    // Fetch approved company applications details
+    $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
+
+    // Get parking officers count for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
+      $company->parkingOfficersCount = $parkingOfficersCount;
+    }
+
+    // Get parking officers count for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
+      $company->parkingSlotsCount = $parkingSlotsCount;
+    }
+
+    // Get parking spaces public or not for each approved company
+    foreach ($approvedApplications as &$company) {
+      $companyId = $company->_id;
+      $public = $this->adminModel->getPublicOrNot($companyId);
+      $company->public = $public;
+    }
+
+
+    // Prepare data for the view
+    $data = [
+      'approvedApplications' => $approvedApplications,
+    ];
+
+    $this->view('admin/deletionView', $data);
   }
 
   public function requestsHistoryView()
@@ -237,67 +252,66 @@ class Admins extends Controller
 
     // Prepare data for the view
     $data = [
-        'approvedApplications' => $approvedApplications,
-        'rejectedApplications' => $rejectedApplications
+      'approvedApplications' => $approvedApplications,
+      'rejectedApplications' => $rejectedApplications
     ];
 
     $this->view('admin/requestsHistoryView', $data);
   }
 
   public function requestsView()
-  {  
+  {
     // Fetch pending company applications
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
 
     // Prepare data for the view
     $data = [
-        'pendingApplications' => $pendingApplications
+      'pendingApplications' => $pendingApplications
     ];
 
     // Pass the data to the view
-     
+
     $this->view('admin/requestsView', $data);
   }
 
   public function driverReviews()
   {
-     // Instantiate the ReviewModel
+    // Instantiate the ReviewModel
     // $adminModel = $this->model('Admin');
-     
 
-     // Call the method to get all reviews
-     //$reviews = $adminModel->getAllReviews();
 
-     // Call the method to get all reviews using the existing model instance
+    // Call the method to get all reviews
+    //$reviews = $adminModel->getAllReviews();
+
+    // Call the method to get all reviews using the existing model instance
     $reviews = $this->adminModel->getAllReviews();
 
-     // Prepare data to pass to the view
-     $data = [
-         'reviews' => $reviews
-     ];
+    // Prepare data to pass to the view
+    $data = [
+      'reviews' => $reviews
+    ];
 
     $this->view('admin/driverReviews', $data);
   }
 
-  public function index() {
+  public function index()
+  {
 
-    
+
     // Fetch pending company applications
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
 
-     // Prepare data for the view
-     $data = [
+    // Prepare data for the view
+    $data = [
       'pendingApplications' => $pendingApplications
-  ];
+    ];
 
 
     $this->view('admin/proceedView', $data);
-  
-    
-}
+  }
 
-public function downloadDocument($_id)
-{
+  public function downloadDocument($_id)
+  {
     // Retrieve document content from the database based on an ID or any other identifier
     $documentContent = ''; // Initialize the variable
 
@@ -306,47 +320,47 @@ public function downloadDocument($_id)
     $documentContent = $this->adminModel->getDocumentContentById($_id);
 
     if ($documentContent !== false) {
-        // Set headers for PDF content
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="document.pdf"');
+      // Set headers for PDF content
+      header('Content-Type: application/pdf');
+      header('Content-Disposition: attachment; filename="document.pdf"');
 
-        // Output the retrieved document content as a PDF file
-        echo $documentContent;
+      // Output the retrieved document content as a PDF file
+      echo $documentContent;
 
-        // Terminate script execution
-        exit();
+      // Terminate script execution
+      exit();
     } else {
-        // Handle the case when the document content retrieval fails
-        echo "Failed to retrieve document content.";
-        // Optionally, you can redirect or show an error message
+      // Handle the case when the document content retrieval fails
+      echo "Failed to retrieve document content.";
+      // Optionally, you can redirect or show an error message
     }
-}
+  }
 
 
-/**************** */
-public function approveApplication()
-    {
-        // Check if the request is POST and if the application ID is provided
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dataset.application_id'])) {
-            $applicationId = $_POST['dataset.application_id'];
+  /**************** */
+  public function approveApplication()
+  {
+    // Check if the request is POST and if the application ID is provided
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dataset.application_id'])) {
+      $applicationId = $_POST['dataset.application_id'];
 
-            // Update the application status to 'approved' in your model
-            $result = $this->adminModel->updateApplicationStatus($applicationId, 1); // Assuming 1 means approved status
+      // Update the application status to 'approved' in your model
+      $result = $this->adminModel->updateApplicationStatus($applicationId, 1); // Assuming 1 means approved status
 
-            if ($result) {
-                // If the update is successful, send a success response
-                echo json_encode(['success' => true]);
-                exit();
-            }
-        }
-
-        // If something goes wrong, send an error response
-        echo json_encode(['success' => false]);
+      if ($result) {
+        // If the update is successful, send a success response
+        echo json_encode(['success' => true]);
         exit();
+      }
     }
 
-// Inside your controller method that handles the deletion
-/*public function delete($entry_id) {
+    // If something goes wrong, send an error response
+    echo json_encode(['success' => false]);
+    exit();
+  }
+
+  // Inside your controller method that handles the deletion
+  /*public function delete($entry_id) {
   if ($this->adminModel->deleteEntry($entry_id)) {
       // Success - Entry deleted
       // Redirect or perform other actions as needed
@@ -360,7 +374,7 @@ public function approveApplication()
 }*/
 
 
-/*public function delete($_id){
+  /*public function delete($_id){
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // Get existing post from model
     $post = $this->adminModel->getApprovedCompanyApplications($_id);
@@ -382,7 +396,7 @@ public function approveApplication()
     redirect('admins/companiesView');
   }
 }*/
-/*public function delete($_id) {
+  /*public function delete($_id) {
   if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     // Delete the company with the given ID using your model's method
     if ($this->adminModel->deleteCompany($_id)) {
@@ -399,31 +413,30 @@ public function approveApplication()
     }
   }
 }*/
-public function delete($id){
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    // Get existing post from model
-    $company = $this->adminModel->getCompanyById($id);
+  public function delete($id)
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // Get existing post from model
+      $company = $this->adminModel->getCompanyById($id);
 
-    // Check for owner
-    if($company->user_id != $_SESSION['user_id']){
+      // Check for owner
+      if ($company->user_id != $_SESSION['user_id']) {
+        redirect('admins');
+      }
+
+      if ($this->adminModel->deleteCompany($id)) {
+        flash('post_message', 'Company Removed');
+        redirect('admins');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
       redirect('admins');
     }
-
-    if($this->adminModel->deleteCompany($id)){
-      flash('post_message' , 'Company Removed');
-      redirect('admins');
-
-    }else{
-      die('Something went wrong');
-    }
-
-  }else{
-    redirect('admins');
   }
-}
 
-/****************************** */
-/*public function getTopTwoReviews() {
+  /****************************** */
+  /*public function getTopTwoReviews() {
   $adminModel = new Admin();
   $topTwoReviews = $adminModel->getTopTwoReviewsData();
 
@@ -440,9 +453,4 @@ public function delete($id){
   $this->view('admin/dashboardView', ['topTwoReviews' => []]); // Passing an empty array
 }
 }*/
-
-
-
-  
 }
-
