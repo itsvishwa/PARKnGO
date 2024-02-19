@@ -405,6 +405,27 @@ public function deleteEntry($_id) {
     return $row;
   }
 
+  public function getDocument($documentId) {
+    $params = [':id' => $documentId];
+  
+    // Assuming you have a 'company_documents' table where you store the documents
+    $result = $this->db->query('SELECT documents FROM company WHERE _id = :id', $params);
+  
+    if ($result && !empty($result[0]['documents'])) {
+      $documentData = $result[0]['documents'];
+  
+      // Set the appropriate headers for downloading a PDF file
+      header('Content-Type: application/pdf');
+      header('Content-Disposition: attachment; filename="document.pdf"');
+  
+      // Output the document data
+      echo $documentData;
+      exit;
+    }
+  
+    return false; // Return false if the document is not found or an error occurs
+  }
+
   public function insertCompanySuspendDetails($data)
   {
     $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
