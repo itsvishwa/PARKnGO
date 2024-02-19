@@ -118,8 +118,8 @@ class Admin
 
   public function getApprovedCompanyApplications()
   {
-    $this->db->query('SELECT name, _id , email , phone_number , documents , address FROM company WHERE is_approved = 1 AND is_reviewd = 1');
-    
+    $this->db->query('SELECT name, _id , email , phone_number , address FROM company WHERE is_approved = 1 AND is_reviewd = 1');
+
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
     return $rows;
@@ -280,6 +280,25 @@ public function deleteEntry($_id) {
     }
   }
 
+  // Method to fetch top two reviews with specific fields
+  public function getTopTwoReviewsData()
+  {
+    $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
+    // return $this->db->resultSet(); // Assuming resultSet() fetches all rows
+
+    // $rows = $this->db->resultSet(); 
+
+    // return $rows;
+    try {
+      $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
+      return $rows;
+    } catch (Exception $e) {
+      // Handle database query error
+      error_log('Database error: ' . $e->getMessage());
+      return false;
+    }
+  }
+
   public function getReviewDetails()
   {
     $this->db->query(
@@ -312,7 +331,7 @@ public function deleteEntry($_id) {
       review.parking_id AS parking_id,
       parking_spaces.name AS parking_name,
       parking_spaces.address AS parking_address,
-      driver.first_name AS driver_first_name, 
+      driver.first_name AS driver_first_name,
       driver.last_name AS driver_last_name,
       review.content,
       review.time_stamp,
@@ -324,9 +343,7 @@ public function deleteEntry($_id) {
     ORDER BY review.time_stamp DESC
     LIMIT 5'
     );
-
     $rows = $this->db->resultSet();
-
     return $rows;
   }
 
@@ -388,68 +405,18 @@ public function deleteEntry($_id) {
     return $row;
   }
 
-  // Approve company application
-  public function approveCompanyApplication($applicationId)
+  public function insertCompanySuspendDetails($data)
   {
-      // Update the database table with the approved status
-      $this->db->query('UPDATE company SET is_approved = 1, is_reviewed = 1 WHERE _id = :applicationId');
-      $this->db->bind(':applicationId', $applicationId);
+    $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
+    $this->db->bind(':company_id', $data['company_id']);
+    $this->db->bind(':message', $data['message']);
+    $this->db->bind(':duration', $data['duration']);
+    $this->db->bind(':time_stamp', $data['time_stamp']);
 
-      return $this->db->execute();
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
   }
-
-  // Inside your CompanyModel
-/*public function getDocument($documentId) {
-  // Assuming your documents are stored in the 'company' table with a 'documents' field
-  $query = 'SELECT documents FROM company WHERE _id = :id';
-  $params = [':id' => $documentId];
-
-  $result = $this->db->query($query, $params);
-
-  if ($result) {
-     // Assuming you are using BLOB for storing documents
-     return $result[0]['documents'];
-  }
-
-  return false; // Return false if the document is not found or an error occurs
-}
-*/
-
-public function getDocument($documentId) {
-  // Assuming your documents are stored in the 'company' table with a 'documents' field
-  $params = [':id' => $documentId];
-
-  $result = $this->db->query('SELECT _id , documents FROM company WHERE _id = :id', $params);
-
-  if ($result) {
-     // Assuming you are using BLOB for storing documents
-     return $result[0]['documents'];
-     // Encode the binary data to base64
-    // $documentData = $result[0]['documents'];
-    /// $base64Encoded = base64_encode($documentData);
-
-     //return $base64Encoded;
-  }
-
-  return false; // Return false if the document is not found or an error occurs
-}
-
-public function insertCompanySuspendDetails($data)
-{
-  $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
-  $this->db->bind(':company_id', $data['company_id']);
-  $this->db->bind(':message', $data['message']);
-  $this->db->bind(':duration', $data['duration']);
-  $this->db->bind(':time_stamp', $data['time_stamp']);
-
-  if ($this->db->execute()) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-
-
-
 }
