@@ -9,65 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/deletionView.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-    <script>
-        $(document).ready(function() {
-            $('.arrow-logo').click(function(e) {
-                e.stopPropagation();
-                $(this).closest('.time-dropdown').toggleClass('show');
-            });
-
-            $(document).click(function() {
-                $('.time-dropdown').removeClass('show');
-            });
-        });
-    </script>
-
-    <!--<script>
-    $(document).ready(function () {
-        // Attach an event listener to the input field
-        $('#companyIDInput').on('input', function () {
-            var enteredID = $(this).val();
-
-            // Hide all company cards
-            $('.select-card').hide();
-            
-
-            // Show only the relevant company card based on the entered ID
-            $('.select-card[data-company-id="' + enteredID + '"]').show();
-        });
-    });
-</script>-->
-
-    <!-- Updated script in the head section of your HTML -->
-    <!-- Updated script in the head section of your HTML -->
-    <script>
-        $(document).ready(function() {
-            $('.companyIDInput').on('input', function() {
-                var enteredID = $(this).val();
-
-                // Log entered ID for debugging
-                console.log('Entered Company ID:', enteredID);
-
-                // Hide all company cards
-                $('.select-card').hide();
-
-                // Show only the relevant company card based on the entered ID
-                var $selectedCard = $('.select-card[data-company-id="' + enteredID + '"]');
-
-                if ($selectedCard.length > 0) {
-                    $selectedCard.show();
-                    console.log('Company Card Found:', enteredID);
-                } else {
-                    console.log('Company Card Not Found:', enteredID);
-                }
-            });
-        });
-    </script>
-
-
-
     <title>Suspend</title>
 </head>
 
@@ -177,7 +118,7 @@
 
             // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
             // For example, assuming you have a JavaScript object containing officer details:
-            var Companies = <?php echo json_encode($data['approvedApplications']); ?>;
+            var Companies = <?php echo json_encode($data['approvedApplications'] ); ?>;
 
 
             var selectedCompany = Companies.find(function(parking_space) {
