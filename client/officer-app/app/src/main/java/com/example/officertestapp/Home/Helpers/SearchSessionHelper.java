@@ -86,7 +86,7 @@ public class SearchSessionHelper {
             Log.d("Request URL", apiURL);
 
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {

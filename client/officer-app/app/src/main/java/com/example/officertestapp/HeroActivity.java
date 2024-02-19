@@ -29,6 +29,7 @@ public class HeroActivity extends AppCompatActivity {
     }
 
     public void hero_act_login_btn_handler(View v){
+        // transition to the current activity to another activity
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
