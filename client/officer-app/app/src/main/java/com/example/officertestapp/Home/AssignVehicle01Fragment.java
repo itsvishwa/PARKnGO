@@ -23,9 +23,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.officertestapp.Home.Helpers.AddVehicleDetails;
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
+import com.example.officertestapp.Home.Helpers.QRHelper;
 import com.example.officertestapp.Home.Helpers.VehicleDataHelper;
+import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -41,7 +42,7 @@ public class AssignVehicle01Fragment extends Fragment {
     private Handler handler;
 
     private Spinner spinnerProvinces;
-    private Spinner spinnerSlots;
+    private Spinner spinnerVehicleTypes;
     private Button btn_scan;
 
     @Override
@@ -53,7 +54,7 @@ public class AssignVehicle01Fragment extends Fragment {
         btn_scan.setOnClickListener(clikedView -> scanCode());
 
         spinnerProvinces = view.findViewById(R.id.spinner_provinces);
-        spinnerSlots = view.findViewById(R.id.spinner_vehicle_types);
+        spinnerVehicleTypes = view.findViewById(R.id.spinner_vehicle_types);
 
         // Initialize spinners and adapters
         initializeSpinners();
@@ -79,24 +80,20 @@ public class AssignVehicle01Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Create an instance of VehicleDataHelper
-                VehicleDataHelper vehicleDataHelper = new VehicleDataHelper(getView(), getContext(), getParentFragmentManager());
-
-                // Get the Bundle from the VehicleDataHelper
+                VehicleDataHelper vehicleDataHelper = new VehicleDataHelper(view, requireContext(), requireActivity().getSupportFragmentManager());
                 Bundle vehicleDataBundle = vehicleDataHelper.createAssignVehicleDataBundle();
 
-                // Check if the Bundle is not empty
-                if (!vehicleDataBundle.isEmpty()) {
+                // Check if the bundle is empty (indicating validation failure)
+                if (vehicleDataBundle.isEmpty()) {
+                    // Handle the case where validation fails, show an error message
+                    Toast.makeText(requireContext(), "Failed to reserve slot. Please fill all fields.", Toast.LENGTH_SHORT).show();
+                } else {
                     // Navigate to AssignVehicle02Fragment with the Bundle
                     AssignVehicle02Fragment assignVehicle02Fragment = new AssignVehicle02Fragment();
-                    assignVehicle02Fragment.setArguments(vehicleDataBundle);
 
-                    // Navigate to AssignVehicle02Fragment
-                    FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.main_act_frame_layout, assignVehicle02Fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    ((MainActivity) requireActivity()).replaceFragment(assignVehicle02Fragment, vehicleDataBundle, getView());
                 }
+
             }
         });
 
@@ -138,7 +135,7 @@ public class AssignVehicle01Fragment extends Fragment {
         ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Bike", "Van", "Lorry", "Bus"));
         ArrayAdapter<String> vTypeAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, vehicleTypes);
         vTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        spinnerSlots.setAdapter(vTypeAdapter);
+        spinnerVehicleTypes.setAdapter(vTypeAdapter);
 
         // Spinner item selected listeners
         spinnerProvinces.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -153,7 +150,7 @@ public class AssignVehicle01Fragment extends Fragment {
             }
         });
 
-        spinnerSlots.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerVehicleTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
@@ -182,10 +179,9 @@ public class AssignVehicle01Fragment extends Fragment {
     // Initialize barLauncher
     ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
         if (result.getContents() != null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-            builder.setTitle("Result");
-            builder.setMessage(result.getContents());
-            builder.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.dismiss()).show();
+            // Process the scanned QR code content using QRHelper
+            QRHelper qrHelper = new QRHelper(getView(), requireContext(), requireActivity().getSupportFragmentManager());
+            qrHelper.processQRCode(result.getContents());
         }
     });
 }

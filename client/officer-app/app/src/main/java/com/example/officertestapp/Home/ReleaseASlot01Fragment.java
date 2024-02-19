@@ -2,25 +2,21 @@ package com.example.officertestapp.Home;
 
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.Home.Helpers.SearchSessionHelper;
-import com.example.officertestapp.Home.Helpers.VehicleDataHelper;
 import com.example.officertestapp.R;
 
 import java.util.ArrayList;

@@ -24,15 +24,16 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_act_bottom_nav_menu"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-        app:menu="@menu/bottom_nav_menu"
-        android:background="#F4EDDE"
-        app:itemRippleColor="@color/primaryColor"
-        app:itemIconTint="@color/bottom_nav_item_colors"
-        app:itemTextColor="@color/bottom_nav_item_colors"
-        android:paddingVertical="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#F4EDDE"
+        android:paddingVertical="15dp"
+        app:itemIconTint="@color/bottom_nav_item_colors"
+        app:itemRippleColor="@color/primaryColor"
+        app:itemTextColor="@color/bottom_nav_item_colors"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

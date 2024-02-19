@@ -24,21 +24,20 @@ public class VehicleDataHelper {
     private Context context;
     private View view;
     private FragmentManager fragmentManager;
-
-    private String vehicleNumberWithoutProvince;
-    private String selectedVehicleType01;
+    private String driverId;
 
     public VehicleDataHelper(View view, Context context, FragmentManager fragmentManager) {
         this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
-        createAssignVehicleDataBundle();
     }
+
 
     public Bundle createAssignVehicleDataBundle() {
         // getting reference to the views
         EditText lettersEditText = view.findViewById(R.id.vehicle_num_letters);
         EditText digitsEditText = view.findViewById(R.id.vehicle_num_digits);
+        EditText driverIdEditText = view.findViewById(R.id.driver_id_etxt);
         Spinner provincesSpinner = view.findViewById(R.id.spinner_provinces);
         Spinner vehicleTypesSpinner = view.findViewById(R.id.spinner_vehicle_types);
         TextView reserveTimeTextView = view.findViewById(R.id.reserve_time_txt);
@@ -56,6 +55,7 @@ public class VehicleDataHelper {
             return new Bundle();
 
         } else {
+            // Extract user inputs
             // Get vehicleNumber
             String letters = lettersEditText.getText().toString();
             String digits = digitsEditText.getText().toString();
@@ -65,7 +65,11 @@ public class VehicleDataHelper {
 
             // Get vehicle type
             String selectedVehicleType = vehicleTypesSpinner.getSelectedItem().toString();
+            String selectedVehicleTypeLowercase = selectedVehicleType.toLowerCase();
             String selectedVehicleTypeCaps = vehicleTypesSpinner.getSelectedItem().toString().toUpperCase();
+
+            // Get driverId
+            String driverId = driverIdEditText.getText().toString();
 
             // Get the timestamp
             String reserveDate = reserveDateTextView.getText().toString();
@@ -76,9 +80,6 @@ public class VehicleDataHelper {
             // Calculate timestamp
             long startTimeStamp = calculateTimestamp(dateTimeString);
 
-            // If driver_id is not provided, set it to "-1"
-            String driverId = "-1";
-
             // Get the parkingId
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
             String parkingId = parkngoStorage.getData("parkingID");
@@ -86,19 +87,21 @@ public class VehicleDataHelper {
             // get the token
             String token = parkngoStorage.getData("token");
 
+
             Bundle bundle = new Bundle();
             bundle.putString("token", token);
             bundle.putString("vehicle_number", vehicleNumber);
-            bundle.putString("vehicle_type", selectedVehicleType);
+            bundle.putString("vehicle_type", selectedVehicleTypeLowercase);
             bundle.putString("start_time", String.valueOf(startTimeStamp));
             bundle.putString("parking_id", parkingId);
             bundle.putString("driver_id", driverId);
+
             bundle.putString("vehicle_number_without_province", vehicleNumberWithoutProvince);
             bundle.putString("vehicle_type_caps", selectedVehicleTypeCaps);
 
             // Log the values before returning the Bundle
             Log.d("BundleValues", "Vehicle Number: " + vehicleNumber);
-            Log.d("BundleValues", "Vehicle Type: " + selectedVehicleType);
+            Log.d("BundleValues", "Vehicle Type: " + selectedVehicleTypeLowercase);
             Log.d("BundleValues", "Start Time Stamp: " + startTimeStamp);
             Log.d("BundleValues", "Parking ID: " + parkingId);
             Log.d("BundleValues", "Driver ID: " + driverId);
@@ -112,6 +115,7 @@ public class VehicleDataHelper {
 
 
     private long calculateTimestamp(String dateTimeString) {
+
         long calcStartTimeStamp = 0;
 
         try {

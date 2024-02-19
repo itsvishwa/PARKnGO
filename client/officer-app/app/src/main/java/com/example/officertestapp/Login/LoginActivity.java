@@ -87,10 +87,4 @@ public class LoginActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
-
-    public void login_otp_act_send_otp_btn_handler(View v){
-        Intent i = new Intent(this, LoginOtpActivity.class);
-        startActivity(i);
-    }
-
 }

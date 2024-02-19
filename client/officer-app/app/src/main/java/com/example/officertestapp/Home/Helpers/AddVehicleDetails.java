@@ -1,16 +1,13 @@
 package com.example.officertestapp.Home.Helpers;
 
 import android.content.Context;
-import android.text.TextUtils;
+
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -19,18 +16,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.Home.AssignVehicle03Fragment;
-import com.example.officertestapp.R;
+import com.example.officertestapp.MainActivity;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class AddVehicleDetails {
@@ -49,12 +43,13 @@ public class AddVehicleDetails {
         // volley request
         RequestQueue queue = Volley.newRequestQueue(context);
         String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/start";
+        Log.d("Request URL", apiURL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        successResponseHandler();
+                        successResponseHandler(response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -94,17 +89,36 @@ public class AddVehicleDetails {
         queue.add(stringRequest);
     }
 
-    private void successResponseHandler(){
-        Toast.makeText(context, "Parking Session Added Successfully", Toast.LENGTH_SHORT).show();
+    private void successResponseHandler(String response){
+        Log.d("Raw Response", response);
 
-        // Create a new instance of AssignVehicle03Fragment
-        AssignVehicle03Fragment assignVehicle03Fragment = new AssignVehicle03Fragment();
+        try {
+            JSONObject jsonResponse = new JSONObject(response);
+            JSONObject innerResponse = jsonResponse.getJSONObject("response");
+            String responseCode = innerResponse.getString("response_code");
+            String message = innerResponse.getString("message");
 
-        // Navigate to AssignVehicle02Fragment
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.main_act_frame_layout, assignVehicle03Fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+            // Log the parsed response data
+            Log.d("Response Code", responseCode);
+            Log.d("Message", message);
+
+            // Check if the response code is "800"
+            if ("800".equals(responseCode)) {
+                // Show a toast message with the response message
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+                // Navigate to AssignVehicle03Fragment
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new AssignVehicle03Fragment());
+            } else {
+                // Show a toast message with the response message
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (JSONException e) {
+            Log.e("JSON Parsing Error", "Error parsing response: " + e.getMessage());
+            Toast.makeText(context, "Error parsing response", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void errorResponseHandler(VolleyError error) {
