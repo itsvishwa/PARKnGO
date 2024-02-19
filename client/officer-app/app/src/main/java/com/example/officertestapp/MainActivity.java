@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
         onBackPressed();
     }
 
-    private void replaceFragment(Fragment f){
+    public void replaceFragment(Fragment f){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.main_act_frame_layout, f);

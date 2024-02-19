@@ -115,7 +115,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
             android:layout_width="match_parent"
-            android:layout_height="340dp"
+            android:layout_height="350dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/rounded_background_detail_box"
             android:elevation="2dp"
@@ -310,6 +310,19 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/driver_id_etxt"
+                android:layout_width="125dp"
+                android:layout_height="48dp"
+                android:background="@drawable/vehicle_details_input_feild_bg"
+                android:gravity="center"
+                android:text="-1"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
@@ -318,7 +331,6 @@
             android:layout_height="62dp"
             android:gravity="center"
             android:text="Reserve the slot"
-            android:onClick="frag_home_assign_vehicle01_reserve_slot_btn_handler"
             app:cornerRadius="11dp"
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
