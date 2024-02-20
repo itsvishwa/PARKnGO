@@ -151,25 +151,15 @@
         <p>Approve or Reject?<p>
         
         </div>
-       <div class="b-card3 ">
+       <form class="b-card3 ">
         <div class="card-content12 text-gray">
         <p>Write the reason to reject....</p>
         </div>
-        </div>
-      <!--   <textarea class="b-card3">
-   <div class="card-content12 text-gray">
-        
-            <textarea name="rejection_reason" placeholder="Write the reason to reject..." required></textarea>
-            
-       
-    </div>
-</textarea>-->
-
-
-        
-              
+</form>
+                  
         <div class="b-card-apre">       
     <button class="reject-button" type="button">Reject Application</button> 
+    
     <!--<button class="approve-button" type="button">-->
     <button class="approve-button" data-application-id="<?php echo $application['_id']; ?>">Approve Application</button>
     
