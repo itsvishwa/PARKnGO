@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.officertestapp.Home.Helpers.AddVehicleDetails;
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.Home.Helpers.ReleaseASlotHelper;
+import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
 
 public class ReleaseASlot02Fragment extends Fragment {
+    private Bundle endSessionDataBundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +70,14 @@ public class ReleaseASlot02Fragment extends Fragment {
                     // Invoke the ReleaseASlotHelper helper to release the slot
                     ReleaseASlotHelper releaseASlotHelper = new ReleaseASlotHelper(view, requireContext(), getFragmentManager());
                     releaseASlotHelper.releaseSlot(sessionID, timeStamp);
+
+//                    // Check if the Bundle is not empty
+//                    if (!endSessionDataBundle.isEmpty()) {
+//                        // Navigate to ReleaseASlot03Fragment with the Bundle
+//                        ReleaseASlot03Fragment releaseASlot03Fragment = new ReleaseASlot03Fragment();
+//                        ((MainActivity) requireActivity()).replaceFragment(releaseASlot03Fragment, endSessionDataBundle, getView());
+//                    }
+
                 } else {
                     Log.e("ReleaseASlot02Fragment", "Arguments (Bundle) is null");
                 }
@@ -76,5 +85,10 @@ public class ReleaseASlot02Fragment extends Fragment {
         });
 
         return view;
+    }
+
+    // Method to set the end  session data bundle
+    public void setEndSessionDataBundle(Bundle bundle) {
+        endSessionDataBundle = bundle;
     }
 }

@@ -25,7 +25,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Home.AssignVehicle03Fragment;
 import com.example.officertestapp.Home.ReleaseASlot01Fragment;
+import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.example.officertestapp.Status.PSRecycleViewAdapter;
 import com.example.officertestapp.Status.ParkingStatusModel;
@@ -53,6 +55,7 @@ public class SearchSessionHelper {
     }
 
     public void searchSession() {
+        Log.d("SearchSession", "This is searchSession");
         // getting reference to the views
         EditText lettersEditText = view.findViewById(R.id.vehicle_num_letters);
         EditText digitsEditText = view.findViewById(R.id.vehicle_num_digits);
@@ -60,7 +63,7 @@ public class SearchSessionHelper {
 
 
         if (TextUtils.isEmpty(lettersEditText.getText()) || TextUtils.isEmpty(digitsEditText.getText()) || provincesSpinner.getSelectedItem() == null){
-            // Show a toast or some UI indication that input is incomplete
+            // Show a toast that input is incomplete
             Toast.makeText(context, "Please fill all fields of Vehicle Number", Toast.LENGTH_SHORT).show();
 
         }else {
@@ -71,7 +74,7 @@ public class SearchSessionHelper {
 
             // Concatenate the values to create the complete vehicle number
             String completeVehicleNumber = letters + digits + province;
-            //Log.d("Complete Vehicle Number", completeVehicleNumber);
+            Log.d("Complete Vehicle Number", completeVehicleNumber);
 
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -120,86 +123,88 @@ public class SearchSessionHelper {
 
     private void successResponseHandler(String response){
         Log.d("Raw Response", response);
-        Toast.makeText(context, "Session Search Successful", Toast.LENGTH_SHORT).show();
 
         try {
             JSONObject jsonResponse = new JSONObject(response);
             JSONObject responseData = jsonResponse.getJSONObject("response");
 
             // Extract values from the JSON response
-            String sessionID = responseData.getString("session_id");
-            String timeStamp = responseData.getString("end_Time_Stamp");
-            String parkedTimeDate = responseData.getString("Parked_Time_Date");
-            String duration = responseData.getString("Duration");
-            String amount = responseData.getString("Amount");
-            String vehicleNumber = responseData.getString("Vehicle_Number");
-            // Insert space between letters and numbers in the vehicle number
-            String formattedVehicleNumber = vehicleNumber.replaceAll("(\\D)(\\d)", "$1 $2");
+            String responseCode = responseData.getString("response_code");
+            String message = responseData.getString("message");
 
-            // Extracting vehicle number without province
-            String vehicleNumberWithoutProvince = formattedVehicleNumber.substring(0, formattedVehicleNumber.length() - 2);
-
-            String vehicleType = responseData.getString("Vehicle_Type");
-            String vehicleTypeCaps = responseData.getString("Vehicle_Type").toUpperCase();
-            String sessionStartedAt = responseData.getString("Session_started_at");
-            String endedTimeDate = responseData.getString("Ended_Time_Date");
-            String sessionEndedAt = responseData.getString("Session_ended_at");
+            // Log the parsed response data
+            Log.d("responseCode", responseCode);
+            Log.d("message", message);
 
 
-            // Pass the values to the next fragment using a Bundle
-            Bundle bundle = new Bundle();
-            bundle.putString("sessionID", sessionID);
-            bundle.putString("timeStamp", timeStamp);
-            bundle.putString("parkedTimeDate", parkedTimeDate);
-            bundle.putString("duration", duration);
-            bundle.putString("amount", amount);
-            bundle.putString("vehicleNumber", vehicleNumber);
-            bundle.putString("vehicleType", vehicleType);
-            bundle.putString("sessionStartedAt", sessionStartedAt);
-            bundle.putString("endedTimeDate", endedTimeDate);
-            bundle.putString("sessionEndedAt", sessionEndedAt);
-            bundle.putString("vehicleTypeCaps", vehicleTypeCaps);
-            bundle.putString("vehicleNumberWithoutProvince", vehicleNumberWithoutProvince);
+            // Check if the response code is "800"
+            if ("800".equals(responseCode)) {
+                // Show a toast message with the response message
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-            // Set the session data bundle in the fragment
-            ((ReleaseASlot01Fragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
+                // Extract values from the JSON response
+                String SessionID = responseData.getString("session_id");
+                String EndTimeStamp = responseData.getString("end_Time_Stamp");
+                String ParkedTimeDate = responseData.getString("Parked_Time_Date");
+                String Duration = responseData.getString("Duration");
+                String Amount = responseData.getString("Amount");
 
+                // Insert space between letters and numbers in the vehicle number
+                String formattedVehicleNumber = responseData.getString("Vehicle_Number").replaceAll("(\\D)(\\d)", "$1 $2");
 
-            // Log the values for debugging
-            Log.d("Bundle Values", "Session ID: " + sessionID);
-            Log.d("Bundle Values", "End Time Stamp: " + timeStamp);
-            Log.d("Bundle Values", "Parked Time/Date: " + parkedTimeDate);
-            Log.d("Bundle Values", "Duration: " + duration);
-            Log.d("Bundle Values", "Amount: " + amount);
-            Log.d("Bundle Values", "Vehicle Number: " + vehicleNumber);
-            Log.d("Bundle Values", "Vehicle Number Without Province: " + vehicleNumberWithoutProvince);
-            Log.d("Bundle Values", "Vehicle Type: " + vehicleType);
-            Log.d("Bundle Values", "Vehicle Type Caps: " + vehicleTypeCaps);
-            Log.d("Bundle Values", "Session Started At: " + sessionStartedAt);
-            Log.d("Bundle Values", "Ended Time/Date: " + endedTimeDate);
-            Log.d("Bundle Values", "Session Ended At: " + sessionEndedAt);
-
-
-            TextView parkedDateTimeView = view.findViewById(R.id.parked_Date_Time_txt);
-            TextView durationView = view.findViewById(R.id.duration_txt);
-            TextView amountView = view.findViewById(R.id.amount_txt);
+                // Extracting vehicle number without province
+                String vehicleNumberWithoutProvince = formattedVehicleNumber.substring(0, formattedVehicleNumber.length() - 2);
+                String vehicleTypeCaps = responseData.getString("Vehicle_Type").toUpperCase();
 
 
 
-            // Set the values to TextViews
-            parkedDateTimeView.setText(parkedTimeDate);
-            durationView.setText(duration);
-            amountView.setText(amount);
+                // Bundle response values
+                Bundle bundle = new Bundle();
+                bundle.putString("SessionID", SessionID);
+                bundle.putString("EndTimeStamp", EndTimeStamp);
+                bundle.putString("ParkedTimeDate", ParkedTimeDate);
+                bundle.putString("Duration", Duration);
+                bundle.putString("Amount", Amount);
+                bundle.putString("vehicleNumberWithoutProvince", vehicleNumberWithoutProvince);
+                bundle.putString("vehicleTypeCaps", vehicleTypeCaps);
 
-            // Enable the continueBtn
-            continueBtn.setEnabled(true);
-            continueBtn.setBackgroundColor(ContextCompat.getColor(context, R.color.primaryColor));
+                // Log the values for debugging
+                Log.d("Bundle Values", "Session ID: " + SessionID);
+                Log.d("Bundle Values", "End Time Stamp: " + EndTimeStamp);
+                Log.d("Bundle Values", "Parked Time/Date: " + ParkedTimeDate);
+                Log.d("Bundle Values", "Duration: " + Duration);
+                Log.d("Bundle Values", "Amount: " + Amount);
+                Log.d("Bundle Values", "Vehicle Number Without Province: " + vehicleNumberWithoutProvince);
+                Log.d("Bundle Values", "Vehicle Type Caps: " + vehicleTypeCaps);
+
+
+                // Set the session data bundle in the fragment
+                ((ReleaseASlot01Fragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
+
+
+                TextView parkedDateTimeView = view.findViewById(R.id.parked_Date_Time_txt);
+                TextView durationView = view.findViewById(R.id.duration_txt);
+                TextView amountView = view.findViewById(R.id.amount_txt);
+
+                // Set the values to TextViews
+                parkedDateTimeView.setText(ParkedTimeDate);
+                durationView.setText(Duration);
+                amountView.setText(Amount);
+
+                // Enable the continueBtn
+                continueBtn.setEnabled(true);
+                continueBtn.setBackgroundColor(ContextCompat.getColor(context, R.color.primaryColor));
+
+
+            } else {
+                // Show a toast message with the response message
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
 
         }catch (JSONException e){
-            throw new RuntimeException(e);
+            Log.e("JSON Parsing Error", "Error parsing response: " + e.getMessage());
+            Toast.makeText(context, "Error parsing response", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private void errorResponseHandler(VolleyError error) {
