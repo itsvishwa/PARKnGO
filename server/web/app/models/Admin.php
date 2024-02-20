@@ -474,4 +474,15 @@ public function deleteEntry($_id) {
       return false;
     }
   }
+
+  public function updateRejectReason($companyId, $rejectReason)
+{
+    $this->db->query('UPDATE company SET review_message = :rejectReason WHERE _id = :companyId');
+    $this->db->bind(':rejectReason', $rejectReason);
+    $this->db->bind(':companyId', $companyId);
+
+    // Execute the update query
+    return $this->db->execute();
+}
+
 }
