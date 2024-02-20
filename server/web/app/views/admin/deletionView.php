@@ -174,7 +174,7 @@
                         </div>
                     </div>
                     <form class="suspend-form" onsubmit="saveData()">
-                        <textarea id="suspend-msg" name="suspend-msg" rows="5" cols="50" maxlength="250" class="suspend-msg" placeholder="Enter reason to suspend..."></textarea>
+                        <textarea id="suspend-msg" name="suspend-msg" rows="5" cols="50" maxlength="500" class="suspend-msg" placeholder="Enter reason to suspend..."></textarea>
                         <div class="suspend-time">
                             <div class="suspend-dropdown">
                                 <p>Select the time duration for the suspend</p>
