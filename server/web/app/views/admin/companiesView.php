@@ -38,6 +38,7 @@
     $.ajax({
         url: 'downloadDocument/' + documentId,
         method: 'GET',
+        dataType: 'text', // Add this line
         success: function(response) {
             // Log success message
             
@@ -48,10 +49,15 @@
             
 
         },
-        error: function(error) {
+       /* error: function(error) {
             // Log error details
             console.error('Error:', error);
-        }
+        }*/
+        error: function(xhr, status, error) {
+        console.error('Error:', error);
+        alert('Error downloading document. Please try again later.');
+}
+
     });
 }
 
