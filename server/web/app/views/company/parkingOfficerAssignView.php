@@ -84,15 +84,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <div class="filter-parking">
         <div class="header text-md">
-          <p>Select the parking space you want to delete</p>
+          <p>Search and Select the parking space you want to assgin.</p>
         </div>
         <div class="ml-20">
-          <select id="parkingDropdown" class="p-form-dropdown" onchange="populateFormFields()">
-            <option value="" disabled selected>Select Parking Space</option>
-            <?php foreach ($data['parking_spaces'] as $parking_space) {
-              echo "<option value='" . $parking_space->_id . "'>" . $parking_space->name . "</option>";
-            } ?>
-          </select>
+          <div class="flex justify-content-left align-items-center">
+            <input type="text" id="parkingSearch" class="parking-search-bar" oninput="searchParking()" placeholder="Search Parking Space.">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="parking-search-logo text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </div>
+          <ul id="searchResults" class="search-results" onclick="selectParkingSpace(event)"></ul>
         </div>
       </div>
 
@@ -128,10 +129,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </div>
         <script>
-          function populateFormFields() {
-            var selectElement = document.getElementById("parkingDropdown");
+          function searchParking() {
+            var searchInput = document.getElementById("parkingSearch").value.toLowerCase();
+            var parkingSpaces = <?php echo json_encode($data['parking_spaces']); ?>;
+            var resultsContainer = document.getElementById("searchResults");
+
+            // Clear previous search results
+            resultsContainer.innerHTML = "";
+
+            // Filter parking spaces based on the search input
+            var filteredSpaces = parkingSpaces.filter(function(parking_space) {
+              return parking_space.name.toLowerCase().includes(searchInput);
+            });
+
+            // Display search results
+            filteredSpaces.forEach(function(result) {
+              var li = document.createElement("li");
+              li.textContent = result.name;
+              resultsContainer.appendChild(li);
+            });
+
+            // Show the results container
+            resultsContainer.style.display = filteredSpaces.length > 0 ? "block" : "none";
+          }
+
+          function selectParkingSpace(event) {
+            var selectedParkingSpaceName = event.target.textContent;
+            var inputField = document.getElementById("parkingSearch");
+
+            // Populate the input field with the selected parking space name
+            inputField.value = selectedParkingSpaceName;
+
+            // Hide the results container
+            document.getElementById("searchResults").style.display = "none";
+
+            // Find the selected space and perform additional actions if needed
+            var selectedSpace = <?php echo json_encode($data['parking_spaces']); ?>.find(function(parking_space) {
+              return parking_space.name === selectedParkingSpaceName;
+            });
+
+            if (selectedSpace) {
+              populateFormFields(selectedSpace);
+            }
+          }
+
+          function populateFormFields(selectedParkingSpace) {
             var confirmationCard = document.getElementById('confirmationCard');
-            var selectedParkingSpaceId = selectElement.value;
+            var selectedParkingSpaceId = selectedParkingSpace._id;
 
             // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
             // For example, assuming you have a JavaScript object containing officer details:
@@ -204,6 +248,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               confirmationCard.innerHTML = "<p>No data available for the selected parking space.</p>";
             }
           }
+
+          window.onclick = function(event) {
+            if (!event.target.matches('#parkingSearch')) {
+              var resultsContainer = document.getElementById("searchResults");
+              if (resultsContainer.style.display === 'block') {
+                resultsContainer.style.display = 'none';
+              }
+            }
+          };
         </script>
 
         <script>
