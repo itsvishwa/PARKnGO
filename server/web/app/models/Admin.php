@@ -419,4 +419,31 @@ public function deleteEntry($_id) {
       return false;
     }
   }
+
+  public function updateRecoveryToken($data)
+  {
+    $this->db->query('UPDATE admin SET token = :token WHERE email = :email');
+    $this->db->bind(':token', $data['token']);
+    $this->db->bind(':email', $data['email']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function updatePassword($data)
+  {
+    $this->db->query('UPDATE admin SET password = :password WHERE token = :token AND email = :email');
+    $this->db->bind(':password', $data['password']);
+    $this->db->bind(':email', $data['email']);
+    $this->db->bind(':token', $data['token']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
