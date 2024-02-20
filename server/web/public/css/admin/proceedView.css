@@ -537,3 +537,15 @@
   color: #000; /* Change the text color as needed */
   display: flex;
 }
+
+#rejectReason {
+  margin-top: -15px;
+  margin-bottom: 5px;
+  margin-left: -28px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 965px;
+  height: 230px;
+  background-color: #FFF5E3;
+  /* Add other styles as needed */
+}
