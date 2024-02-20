@@ -10,9 +10,9 @@
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/companiesView.css" />
   <title>Companies</title>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script>
+  <!--<script>
     function downloadDocument(documentId) {
-        // Using jQuery for AJAX, make sure to include jQuery in your project
+      
         $.ajax({
             url: 'downloadDocument/' + documentId, // Adjust the path as needed
             method: 'GET',
@@ -26,6 +26,35 @@
             }
         });
     }
+  </script>
+  <script>
+    function downloadDocument(documentId) {
+        window.location.href = 'downloadDocument/' + documentId;
+    }
+  </script>-->
+  <script>
+    function downloadDocument(documentId) {
+      
+    $.ajax({
+        url: 'downloadDocument/' + documentId,
+        method: 'GET',
+        success: function(response) {
+            // Log success message
+            
+            console.log('Document downloaded successfully.');
+            // Handle the response, e.g., initiate the download
+            // For simplicity, let's redirect to the PDF URL
+            window.location.href = 'data:application/pdf;base64,' + response;
+            
+
+        },
+        error: function(error) {
+            // Log error details
+            console.error('Error:', error);
+        }
+    });
+}
+
   </script>
 
 </head>
@@ -205,7 +234,8 @@
                     </div>
 
                   <!--  <button class="b-view-more bg-black" type="button">-->
-                    <button class="b-view-more bg-black" type="button" onclick="downloadDocument(<?php echo $application->_id; ?>)">
+                   
+                    <button class="b-view-more bg-black" type="button" onclick="downloadDocument(<?php echo json_encode($application->_id); ?>)">
                       <div class="b-card_down-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="rd-menu-logo">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -217,7 +247,8 @@
                     </button>
 
 
-                    <button class="b-delete-more bg-black">
+                  <!--  <button class="b-delete-more bg-black">-->
+                    <button class="b-delete-more bg-black" onclick="confirmDelete(<?php echo $application->_id; ?>)">
 
                       <div class="b-card_del-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
@@ -279,8 +310,17 @@
         });
       </script>
 
-
-   
+<script>
+    function confirmDelete(companyId) {
+        if (confirm("Are you sure you want to delete this company?")) {
+            // User clicked "OK", proceed with the delete action
+            window.location.href = 'delete/' + companyId; // Adjust the URL as needed
+        } else {
+            // User clicked "Cancel", do nothing
+        }
+    }
+</script>
+  
 </body>
 
 </html>
