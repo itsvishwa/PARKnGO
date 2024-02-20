@@ -363,60 +363,8 @@ class Admins extends Controller
     exit();
   }
 
-  // Inside your controller method that handles the deletion
-  /*public function delete($entry_id) {
-  if ($this->adminModel->deleteEntry($entry_id)) {
-      // Success - Entry deleted
-      // Redirect or perform other actions as needed
-      flash('post_message' , 'Company Removed');
-      redirect('admin/companiesView');
-      
-  } else {
-      // Failure - Handle the failure (e.g., show an error message)
-      die('Something went wrong');
-  }
-}*/
+  
 
-
-  /*public function delete($_id){
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    // Get existing post from model
-    $post = $this->adminModel->getApprovedCompanyApplications($_id);
-
-    // Check for owner
-    if($post->user_id != $_SESSION['user_id']){
-      redirect('admins/companiesView');
-    }
-
-    if($this->adminModel->deleteEntry($_id)){
-      flash('post_message' , 'Company Removed');
-      redirect('admins/companiesView');
-
-    }else{
-      die('Something went wrong');
-    }
-
-  }else{
-    redirect('admins/companiesView');
-  }
-}*/
-  /*public function delete($_id) {
-  if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    // Delete the company with the given ID using your model's method
-    if ($this->adminModel->deleteCompany($_id)) {
-      // Deletion successful
-      http_response_code(200); // Respond with a success status code
-      // You might also send a success message as a JSON response
-      echo json_encode(['success' => true]);
-      exit();
-    } else {
-      // Deletion failed
-      http_response_code(500); // Respond with an error status code
-      echo json_encode(['success' => false]);
-      exit();
-    }
-  }
-}*/
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
