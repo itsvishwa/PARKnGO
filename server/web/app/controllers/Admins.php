@@ -151,9 +151,12 @@ class Admins extends Controller
 
   public function companiesView()
   {
+   
+    
 
     // Fetch approved company applications details
     $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
+    
 
     // Get parking officers count for each approved company
     foreach ($approvedApplications as &$company) {
@@ -176,6 +179,7 @@ class Admins extends Controller
 
 
     ];
+    
 
 
     // Pass the data to the view
@@ -310,7 +314,7 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
-  public function downloadDocument($_id)
+  /*public function downloadDocument($_id)
   {
     // Retrieve document content from the database based on an ID or any other identifier
     $documentContent = ''; // Initialize the variable
@@ -334,7 +338,7 @@ class Admins extends Controller
       echo "Failed to retrieve document content.";
       // Optionally, you can redirect or show an error message
     }
-  }
+  }*/
 
 
   /**************** */
@@ -415,23 +419,23 @@ class Admins extends Controller
 }*/
   public function delete($id)
   {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       // Get existing post from model
       $company = $this->adminModel->getCompanyById($id);
 
       // Check for owner
       if ($company->user_id != $_SESSION['user_id']) {
-        redirect('admins');
+        redirect('admins/companiesView');
       }
 
       if ($this->adminModel->deleteCompany($id)) {
         flash('post_message', 'Company Removed');
-        redirect('admins');
+        redirect('admins/companiesView');
       } else {
         die('Something went wrong');
       }
     } else {
-      redirect('admins');
+      redirect('admins/companiesView');
     }
   }
 
@@ -453,4 +457,68 @@ class Admins extends Controller
   $this->view('admin/dashboardView', ['topTwoReviews' => []]); // Passing an empty array
 }
 }*/
+
+/*public function downloadDocument($documentId) {
+  // Load the Company model
+ 
+ // $adminModel = $this->model('Admin');
+  $this->adminModel = $this->model('Admin');
+
+  // Fetch the document from the model based on $documentId
+  $documents = $this->adminModel->getDocument($documentId);
+
+  var_dump($documents);
+
+  // Check if the document exists
+  if ($documents) {
+     // Set appropriate headers for PDF file
+     
+     header('Content-Type: application/pdf');
+     header('Content-Disposition: attachment; filename="document.pdf"');
+
+    // header('Content-Disposition: inline; filename="document.pdf"');
+    // header('Content-Length: ' . strlen($documents));
+    
+     // Encode binary data to base64
+     $base64Encoded = base64_encode($documents);
+
+     // Set Content-Length header to the length of base64 data
+    // header('Content-Length: ' . strlen($base64Encoded));
+     header('Content-Length: ' . strlen(base64_decode($base64Encoded)));
+
+     // Output the document content
+   //  echo $documents;
+     // Output the document content
+     //echo $base64Encoded;
+     echo base64_decode($base64Encoded);
+
+  } else {
+     // Handle case when the document is not found
+     
+     // You can redirect to an error page or show a message
+     echo 'Document not found';
+  }
+}*/
+
+public function downloadDocument($documentId) {
+  $this->adminModel = $this->model('Admin');
+
+  // Fetch the document from the model based on $documentId
+  $document = $this->adminModel->getDocument($documentId);
+
+  // Check if the document exists
+  if ($document) {
+      // Set appropriate headers for PDF file
+      header('Content-Type: application/pdf');
+      header('Content-Disposition: attachment; filename="document.pdf"');
+      header('Content-Length: ' . strlen($document));
+
+      // Output the document content
+      echo $document;
+  } else {
+      // Handle case when the document is not found
+      echo 'Document not found';
+  }
+}
+
 }
