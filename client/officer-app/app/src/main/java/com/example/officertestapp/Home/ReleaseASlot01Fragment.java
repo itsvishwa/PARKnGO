@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.Home.Helpers.SearchSessionHelper;
+import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
 import java.util.ArrayList;
@@ -33,27 +35,24 @@ public class ReleaseASlot01Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_release_a_slot01, container, false);
 
-
         // Find the view
         spinnerProvinces = view.findViewById(R.id.spinner_provinces);
 
         continueBtn = view.findViewById(R.id.release_vehicle_01_continue_btn);
         continueBtn.setEnabled(false);
 
-
         //Initialize spinner
         initializeSpinner();
 
-
         // Use the helper class to set app bar details
         HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
-
 
         // Handle search button click
         Button searchBtn = view.findViewById(R.id.release_vehicle_01_search_btn);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("SearchButtonClicked", "Search button is clicked");
                 new SearchSessionHelper(view, getContext(), requireActivity().getSupportFragmentManager(), continueBtn);
             }
         });
@@ -70,14 +69,7 @@ public class ReleaseASlot01Fragment extends Fragment {
                     if (!searchSessionDataBundle.isEmpty()) {
                         // Navigate to ReleaseASlot02Fragment with the Bundle
                         ReleaseASlot02Fragment releaseASlot02Fragment = new ReleaseASlot02Fragment();
-                        releaseASlot02Fragment.setArguments(searchSessionDataBundle);
-
-                        // Navigate to ReleaseASlot02Fragment
-                        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.main_act_frame_layout, releaseASlot02Fragment);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
+                        ((MainActivity) requireActivity()).replaceFragment(releaseASlot02Fragment, searchSessionDataBundle, getView());
                     }
 
                 } else {
