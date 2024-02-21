@@ -222,4 +222,25 @@ public class SessionMainButtonHandlers {
             return 3;
         }
     }
+
+    public void removeOnClickListeners() {
+        Button continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);
+        View tapToAdd1View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_1);
+        View tapToAdd2View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_2);
+        View tapToAdd3View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_3);
+        ConstraintLayout car1View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_1);
+        ConstraintLayout car2View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_2);
+        ConstraintLayout car3View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_3);
+
+        continueBtn.setOnClickListener(null);
+        tapToAdd1View.setOnClickListener(null);
+        tapToAdd2View.setOnClickListener(null);
+        tapToAdd3View.setOnClickListener(null);
+        car1View.setOnClickListener(null);
+        car2View.setOnClickListener(null);
+        car3View.setOnClickListener(null);
+        car1View.setOnLongClickListener(null);
+        car2View.setOnLongClickListener(null);
+        car3View.setOnLongClickListener(null);
+    }
 }

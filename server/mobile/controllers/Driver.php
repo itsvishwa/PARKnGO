@@ -206,8 +206,8 @@ class Driver extends Controller
                                 $result_arr = [
                                         "payment_id" => $this->encrypt_id($payment_data->_id),
                                         "amount" => $payment_data->amount,
-                                        "start_time" => $payment_data->start_time,
-                                        "end_time" => $payment_data->end_time,
+                                        "start_time" => date("h:i A | d/m/y", $payment_data->start_time),
+                                        "end_time" => date("h:i A | d/m/y", $payment_data->end_time),
                                         "time_went" => $this->calculate_time($payment_data->end_time - $payment_data->start_time),
                                         "rate" => $payment_data->rate,
                                         "vehicle_number" => $payment_data->vehicle_number,

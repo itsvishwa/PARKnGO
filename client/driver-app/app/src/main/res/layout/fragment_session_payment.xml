@@ -6,6 +6,8 @@
     tools:context=".session.SessionPaymentFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@color/backgroundColor">
 
     <!--    Top App Bar Here-->
@@ -178,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:background="@drawable/radius_6_solid"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -394,7 +396,7 @@
             android:background="@drawable/radius_6_solid"
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:translationZ="5dp"
+            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
@@ -429,7 +431,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="*If you wish to pay by credit/debit car press on “Pay” button"
+            android:text="*If you wish to pay by credit/debit card press on “Pay” button"
             android:textAlignment="center"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -441,7 +443,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pay by Card"
-            android:onClick="payment_frag_pay_btn_handler"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

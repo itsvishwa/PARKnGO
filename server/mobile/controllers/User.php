@@ -57,18 +57,10 @@ class User extends Controller
         // send the otp sms
         private function send_sms($code, $mobile_number)
         {
-                $sid    = SID;
-                $token  = TOKEN;
-                $twilio = new Client($sid, $token);
+                $text = "Your+OTP+code+for+PARKnGO%3A+" . $code . ".+Please+use+this+code+to+complete+your+authentication.+Thank+you%21";
+                $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=3865&to=0713072925&text=" . $text;
 
-                $message = $twilio->messages
-                        ->create(
-                                "+94713072925", // to
-                                array(
-                                        "from" => "+12255353202",
-                                        "body" => "Your One-Time Password (OTP): $code , Thanks for choosing PARKnGO!"
-                                )
-                        );
+                file_get_contents($url);
         }
 
 
