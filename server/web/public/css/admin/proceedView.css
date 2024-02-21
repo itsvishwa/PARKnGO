@@ -549,3 +549,12 @@
   background-color: #FFF5E3;
   /* Add other styles as needed */
 }
+
+#rejectReason::placeholder {
+
+  text-indent: 10px; 
+  margin-top: 10px;
+  color: #999; /* Placeholder text color */
+  font-style: italic; /* Placeholder text style */
+  /* Add any other styles you want to apply to the placeholder */
+}
