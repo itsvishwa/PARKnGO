@@ -89,16 +89,16 @@ public class AvailableParkingSpacesFragment extends Fragment {
                 for(int i=0; i<checkedIds.size(); i++)
                 {
                     Chip chipView = view.findViewById(checkedIds.get(i));
-                    if(chipView.getText().toString().equals("Minimum Distance")){
+                    if(chipView.getText().toString().equals("Distance: Low to High")){
                         min_distance = true;
                     }
-                    else if(chipView.getText().toString().equals("Maximum Free Slots")){
+                    else if(chipView.getText().toString().equals("Free Slots: High to Low")){
                         max_free_slots = true;
                     }
-                    else if(chipView.getText().toString().equals("Public")){
+                    else if(chipView.getText().toString().equals("Public Parking Spaces")){
                         is_public = true;
                     }
-                    else if(chipView.getText().toString().equals("Minimum Rate")){
+                    else if(chipView.getText().toString().equals("Rate: Low to High")){
                         min_rate = true;
                     }
                 }

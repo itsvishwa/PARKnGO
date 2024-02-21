@@ -1,11 +1,16 @@
 package com.example.parkngo.session.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.session.SessionEndQRFragment;
 
 public class SessionOnGoingHelper {
 
@@ -41,5 +46,18 @@ public class SessionOnGoingHelper {
         officerIDView.setText(sessionOnGoingModel.getOfficer_id());
         hoursWentView.setText(sessionOnGoingModel.getHours());
         minutesWentView.setText(sessionOnGoingModel.getMinutes());
+    }
+
+    public void showQRBtnHandler(){
+        Button button = sessionOnGoingView.findViewById(R.id.session_on_going_show_qr_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity) context;
+                Bundle data = new Bundle();
+                data.putString("sessionID", sessionOnGoingModel.getSessionID());
+                mainActivity.replaceFragment(new SessionEndQRFragment(), data);
+            }
+        });
     }
 }

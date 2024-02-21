@@ -46,7 +46,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ShapeableImageView shapeableImageView = view.findViewById(R.id.home_frag_main_img); // main button in home fragment
+        // main button in home fragment
+        ShapeableImageView shapeableImageView = view.findViewById(R.id.home_frag_main_img);
         shapeableImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class SessionMainFragment extends Fragment {
     View sessionMainView;
     View loadingView;
     View errorView;
+    SessionMainButtonHandlers sessionMainButtonHandlers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +37,7 @@ public class SessionMainFragment extends Fragment {
 
         SessionMainFetchData sessionMainFetchData = new SessionMainFetchData(sessionMainView, loadingView, errorView, getContext());
         sessionMainFetchData.fetchData();
-        SessionMainButtonHandlers sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView, requireActivity().getSupportFragmentManager());
+        sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView, requireActivity().getSupportFragmentManager());
 
         // onclick listeners.................................................................................
         sessionMainButtonHandlers.initVehicleBtnHandlers();

@@ -1,10 +1,19 @@
 package com.example.parkngo.session.helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+
+import lk.payhere.androidsdk.PHConfigs;
+import lk.payhere.androidsdk.PHConstants;
+import lk.payhere.androidsdk.PHMainActivity;
+import lk.payhere.androidsdk.model.InitRequest;
 
 public class PaymentOngoingHelper {
     View paymentOnGoingView;
@@ -34,7 +43,7 @@ public class PaymentOngoingHelper {
         parkingNameView.setText(paymentOnGoingModel.getParking_name());
         startTimeView.setText(paymentOnGoingModel.getStart_time());
         vehicleNumberView.setText(paymentOnGoingModel.getVehicle_number());
-        vehicleTypeView.setText(paymentOnGoingModel.getVehicle_type());
+        vehicleTypeView.setText(paymentOnGoingModel.getVehicle_type().toUpperCase());
         officerNameView.setText(paymentOnGoingModel.getOfficer_name());
         officerIDView.setText(paymentOnGoingModel.getOfficer_id());
         timeWentView.setText(paymentOnGoingModel.getHours() + " Hours " + paymentOnGoingModel.getMinutes() + " Minutes");

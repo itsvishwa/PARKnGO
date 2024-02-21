@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/backgroundColor"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".home.AvailableParkingSpacesFragment">
 
 
@@ -124,30 +126,32 @@
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Minimum Distance"
+                android:text="Distance: Low to High"
                 app:chipEndPadding="10dp"
                 app:chipStartPadding="10dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/aps_frag_max_free_slots_chip"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Maximum Free Slots" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/aps_frag_public_chip"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Public" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/aps_frag_min_rate_chip"
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Minimum Rate" />
+                android:text="Rate: Low to High" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/aps_frag_max_free_slots_chip"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free Slots: High to Low" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/aps_frag_public_chip"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Public Parking Spaces" />
+
+
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView

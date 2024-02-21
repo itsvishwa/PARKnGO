@@ -7,6 +7,8 @@
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".session.SessionOnGoingFragment"
+    android:clickable="true"
+    android:focusable="true"
     tools:layout_editor_absoluteX="-21dp"
     tools:layout_editor_absoluteY="-103dp">
 
@@ -180,9 +182,9 @@
             android:id="@+id/constraintLayout16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/radius_6_solid"
-            android:elevation="5dp"
+            android:elevation="2dp"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -354,7 +356,7 @@
             android:background="@drawable/radius_6_solid"
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:translationZ="5dp"
+            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
@@ -427,13 +429,33 @@
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="* As soon as the officer end the session you will redirect to payment section automatically"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="* Press Show QR button when you want to leave the parking space"
             android:textAlignment="center"
             android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout17" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:backgroundTint="#FE5654"
+            android:text="Force Stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+        <Button
+            android:id="@+id/session_on_going_show_qr_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="56dp"
+            android:text="Show QR"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

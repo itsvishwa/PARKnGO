@@ -100,6 +100,7 @@ id button
 id button12
 id button13
 id button14
+id button2
 id button3
 id button4
 id button5
@@ -158,6 +159,7 @@ id error_frag_img
 id fab_btn_edit_profile
 id fab_btn_main
 id fab_btn_payment_history
+id fragment_session_end_qr_imageView
 id fragment_session_main_1st_vehicle_name
 id fragment_session_main_1st_vehicle_number
 id fragment_session_main_1st_vehicle_type
@@ -280,6 +282,7 @@ id session_on_going_officer_id
 id session_on_going_officer_name
 id session_on_going_parking_name
 id session_on_going_parking_rate
+id session_on_going_show_qr_btn
 id session_on_going_started_time
 id session_on_going_vehicle_number
 id session_on_going_vehicle_type
@@ -399,6 +402,7 @@ layout fragment_payment_history
 layout fragment_payment_success
 layout fragment_profile
 layout fragment_scan
+layout fragment_session_end_qr
 layout fragment_session_main
 layout fragment_session_on_going
 layout fragment_session_payment
