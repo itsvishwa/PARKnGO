@@ -212,13 +212,14 @@
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
   function submitRejectReason() {
     var rejectReason = $('#rejectReason').val();
 
     // Perform AJAX request to submit the reject reason
     $.ajax({
-      url: 'submitRejectReason',
+      url: 'submitRejectReason/',
       method: 'POST',
       data: {
         rejectReason: rejectReason
