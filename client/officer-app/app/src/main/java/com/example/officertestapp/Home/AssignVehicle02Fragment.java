@@ -3,8 +3,6 @@ package com.example.officertestapp.Home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,16 +64,14 @@ public class AssignVehicle02Fragment extends Fragment {
                 // Retrieve values from the Bundle
                 Bundle args = getArguments();
                 if (args != null) {
-                    String token = args.getString("token");
                     String vehicleNumber = args.getString("vehicle_number");
                     String selectedVehicleType = args.getString("vehicle_type");
                     String startTimeStamp = args.getString("start_time");
-                    String parkingId = args.getString("parking_id");
                     String driverId = args.getString("driver_id");
 
                     // Invoke the AddVehicleDetails helper to add vehicle details
                     AddVehicleDetails addVehicleDetailsHelper = new AddVehicleDetails(view, requireContext(), getFragmentManager());
-                    addVehicleDetailsHelper.addDetails(token, vehicleNumber, selectedVehicleType, startTimeStamp, parkingId, driverId);
+                    addVehicleDetailsHelper.addDetails(vehicleNumber, selectedVehicleType, startTimeStamp, driverId);
                 } else {
                     Log.e("AssignVehicle02Fragment", "Arguments (Bundle) is null");
                 }

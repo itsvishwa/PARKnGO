@@ -207,20 +207,20 @@ class Profile extends Controller
                     $result_data = [];
 
                     foreach ($payments_history_data as $payment_history_data) {
-                        $timestamp = strtotime($payment_history_data->time_stamp);
-                        $formatted_date = date("h.i A | d M", $timestamp);
+                        $timestamp = $payment_history_data->time_stamp;
+                        // $formatted_date = date("h.i A | d M", $timestamp);
         
                         $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
 
 
-                        $formatted_payment_method = strtoupper($payment_history_data->payment_method);
+                        $payment_method = ($payment_history_data->payment_method);
 
                         $temp = [
                             "response_code" => "800",
-                            "Date_and_Time" => $formatted_date,
+                            "Date_and_Time" => $timestamp,
                             "Amount" => $formatted_amount,
                             "Vehicle" => $payment_history_data->vehicle_number,
-                            "Payment_Method" => $formatted_payment_method
+                            "Payment_Method" => $payment_method
                         ];
                         $result_data[] = $temp;
                     }

@@ -30,9 +30,6 @@ class Session extends Controller
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
-
-            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
-
             $session_data = [
                 "vehicle_number" => trim($_POST["vehicle_number"]),
                 "vehicle_type" => trim($_POST["vehicle_type"]),
@@ -42,7 +39,10 @@ class Session extends Controller
                 "driver_id" => trim($_POST["driver_id"])
             ];
 
-            // Decrypt the parking_id
+            // Get the assigned parking_id
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+            // Decrypt the parking_id that comes with the url
             $decrypted_parking_id = $this->decrypt_id($session_data["parking_id"]);
 
             // Replace the encrypted parking_id with the decrypted value
@@ -61,6 +61,8 @@ class Session extends Controller
                     ];
 
                     $this->send_json_404($result);
+                    
+                // No open session exists for the vehicle number
                 } else {    // No open session exists for the vehicle number
                     if ($session_data["driver_id"] === "-1") {
                         // If driver_id is -1, set it to null before adding session data
@@ -143,7 +145,9 @@ class Session extends Controller
                     ];
 
                     $this->send_json_404($result);
-                } else {    // An open session exists for the vehicle number
+
+                // An open session exists for the given vehicle number
+                } else {    
                 
                     // get the parking session details from the parking_session table
                     $parking_session_data = $this->session_model->search_session($vehicle_number);
@@ -156,24 +160,22 @@ class Session extends Controller
                         ];
 
                         $this->send_json_404($result);
-                    } else // parking space found
+                    } else // parking session found
                     {
 
                         //The parking that the vehicle is assigned currently
                         $current_vehicle_assigned_parking = $parking_session_data->parking_id;
 
-                        if($current_vehicle_assigned_parking  == $assigned_parking) {
+                        if($current_vehicle_assigned_parking  == $parking_id) { // Check whether the founded open session is belong to this parking
+
                             $encrypted_session_id = $this->encrypt_id($parking_session_data->_id);
 
                             $start_timestamp = $parking_session_data->start_time;
-                            $readable_date_time = date("h.i A  d M Y", $start_timestamp);
-                            $readable_start_time = date("h.i A", $start_timestamp);
-
+                            
                             $end_timestamp = time();
+                            
                             $duration = $end_timestamp - $start_timestamp;
-                            $readable_date_time = date("h.i A  d M Y", $end_timestamp);
-                            $readable_end_time = date("h.i A", $end_timestamp);
-
+                            
                             // Convert duration to hours and minutes
                             $hours = floor($duration / 3600);
                             $minutes = floor(($duration % 3600) / 60);
@@ -201,7 +203,7 @@ class Session extends Controller
                                     "message" => "Search session is successfull!",
                                     "session_id" => $encrypted_session_id,
                                     "end_Time_Stamp" => $end_timestamp,
-                                    "Parked_Time_Date" => $readable_date_time,
+                                    "start_Time_Stamp" => $start_timestamp,
                                     "Duration" => $formatted_duration,
                                     "Amount" => $formatted_amount,
                                     "Vehicle_Number" => $vehicle_number,
@@ -214,7 +216,7 @@ class Session extends Controller
                         } else {
                             $result = [
                                 "response_code" => "204",
-                                "message" => "This Parking Session is not belongs to this parking"
+                                "message" => "Searched Parking Session is not belongs to your parking"
                             ];
                             $this->send_json_404($result);
                         }
@@ -283,7 +285,6 @@ class Session extends Controller
                     // Fetch session data using session_id from parking_session table
                     $session_details = $this->session_model->get_session_data($session_id);
 
-
                     //The parking that the vehicle is assigned currently
                     $current_vehicle_assigned_parking = $session_details["parking_id"];
 
@@ -325,7 +326,6 @@ class Session extends Controller
                             $payment_id = $this->payment_model->get_payment_id($session_id);
 
                             $payment_id = $this->encrypt_id($payment_id);
-                            print_r($payment_id);
 
                             //view payment details
                             $this->view_payment_details_of_session($payment_id);
