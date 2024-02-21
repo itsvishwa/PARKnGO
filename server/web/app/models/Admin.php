@@ -475,7 +475,7 @@ public function deleteEntry($_id) {
     }
   }
 
-  public function updateRejectReason($companyId, $rejectReason)
+/*  public function updateRejectReason($companyId, $rejectReason)
 {
     $this->db->query('UPDATE company SET review_message = :rejectReason WHERE _id = :companyId');
     $this->db->bind(':rejectReason', $rejectReason);
@@ -483,6 +483,21 @@ public function deleteEntry($_id) {
 
     // Execute the update query
     return $this->db->execute();
+}*/
+
+public function updateRejectReason($companyId, $rejectReason) {
+  // Prepare the SQL query
+  $this->db->query('UPDATE company 
+                    SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason 
+                    WHERE _id = :companyId');
+
+  // Bind the parameters
+  $this->db->bind(':rejectReason', $rejectReason);
+  $this->db->bind(':companyId', $companyId);
+
+  // Execute the update query
+  return $this->db->execute();
 }
+
 
 }

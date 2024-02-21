@@ -371,7 +371,7 @@
 
     /************/
     /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+    background-color:transparent;
 
     /* Ensure text is visible on the gradient background */
     color: #000; /* Change the text color as needed */
