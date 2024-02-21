@@ -479,12 +479,13 @@ public function submitRejectReason()
         // Perform validation on $rejectReason if necessary
 
         // Get the company ID from your session or another source
-        $companyId = $_SESSION['company_id']; // Replace with your logic
+        $companyId = $_SESSION['user_id']; // Replace with your logic
 
         // Update the company table with the reject reason
         if ($this->adminModel->updateRejectReason($companyId, $rejectReason)) {
             // Send a success response
             echo 'Reject reason submitted successfully.';
+            
         } else {
             // Send an error response
             echo 'Failed to submit reject reason.';

@@ -343,7 +343,7 @@
   right: 0;
   border-radius:0px 0px 0px 10px;
   height: 40px;
-  width: 65%;
+  width: 64%;
 }
 
 .b-delete-more{
@@ -351,11 +351,11 @@
   position: absolute;
   background-color:  #FF4545;
   bottom: 0;
-  left: 310px;
+  left: 301px;
   right: 0;
   border-radius:0px 0px 10px 0px;
   height: 40px;
-  width: 35%;
+  width: 37%;
 }
 
 

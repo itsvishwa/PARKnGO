@@ -209,7 +209,7 @@
                   <?php elseif ($data['totalSuspendApplications'] === 1) : ?>
                     <p>Currently, one company has been suspended</p>
                   <?php else : ?>
-                    <p>Currently<?php echo $data['totalSuspendApplications']; ?> companies have been suspended</p>
+                    <p>Currently <?php echo $data['totalSuspendApplications']; ?> companies have been suspended</p>
                   <?php endif; ?>
                 <?php endif; ?>
               </div>
