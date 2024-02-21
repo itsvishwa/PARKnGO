@@ -30,6 +30,9 @@ public class SessionOnGoingFragment extends Fragment {
         SessionOnGoingHelper sessionOnGoingHelper = new SessionOnGoingHelper(getContext(), sessionOnGoingView, sessionOnGoingModel);
         sessionOnGoingHelper.initLayout();
 
+        // button handlers
+        sessionOnGoingHelper.showQRBtnHandler();
+
         return sessionOnGoingView;
     }
 }

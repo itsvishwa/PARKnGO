@@ -29,8 +29,6 @@ if (file_exists($envFile)) {
 // Load Config
 require_once 'config/config.php';
 
-// load Twilio SDK
-require_once "helpers/twilio-php-main/twilio-php-main/src/Twilio/autoload.php";
 
 // Autoload Core libraries
 spl_autoload_register(function ($className) {
