@@ -155,13 +155,13 @@
                     android:layout_marginTop="15dp"
                     android:text="Rs"
                     android:textSize="17sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView17"
+                    app:layout_constraintEnd_toStartOf="@+id/amount_txt"
                     app:layout_constraintHorizontal_bias="0.885"
                     app:layout_constraintStart_toStartOf="@+id/textView13"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/amount_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="60dp"
@@ -183,7 +183,7 @@
                     android:layout_marginTop="15dp"
                     android:text="from the customer"
                     android:textSize="17sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView17"
+                    app:layout_constraintEnd_toEndOf="@+id/amount_txt"
                     app:layout_constraintStart_toStartOf="@+id/textView16"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -192,7 +192,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/release_vehicle_04_payment_cancel_btn"
             android:layout_width="138dp"
             android:layout_height="53dp"
             android:layout_marginTop="44dp"
@@ -200,24 +200,22 @@
             android:text="Cancel"
             android:textSize="16sp"
             app:cornerRadius="11dp"
-            android:onClick="release_vehicle_04_payment_cancel_btn_handler"
-            app:layout_constraintEnd_toStartOf="@+id/button2"
+            app:layout_constraintEnd_toStartOf="@+id/release_slot_04_payment_confirm_btn"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/release_slot_04_payment_confirm_btn"
             android:layout_width="138dp"
             android:layout_height="53dp"
             android:backgroundTint="@color/primaryColor"
             android:text="Confirm"
             android:textSize="16sp"
             app:cornerRadius="11dp"
-            android:onClick="release_slot_04_payment_confirm_btn_handler"
-            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintBottom_toBottomOf="@+id/release_vehicle_04_payment_cancel_btn"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="@+id/button" />
+            app:layout_constraintTop_toTopOf="@+id/release_vehicle_04_payment_cancel_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

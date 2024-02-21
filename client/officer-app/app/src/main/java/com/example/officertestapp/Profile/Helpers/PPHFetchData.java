@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,9 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class PPHFetchData {
     View view;
@@ -90,6 +95,7 @@ public class PPHFetchData {
 
     // response-success handler
     private void successResponseHandler(String response){
+        Log.d("Raw Response", response);
         try {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray resultDataArr = jsonObject.getJSONArray("response");
@@ -103,13 +109,33 @@ public class PPHFetchData {
                 String vehicle = resultData.getString("Vehicle");
                 String paymentMethod = resultData.getString("Payment_Method");
 
-                paymentHistoryModels.add(new PaymentProfileModel(dateTime, amount, vehicle, paymentMethod));
+
+                // format the timestamp to date time according to the devices time zone
+                // Convert the timestamp string to a long value
+                long timestamp = Long.parseLong(dateTime);
+                // Create a Date object from the timestamp
+                Date startDate = new Date(timestamp * 1000);
+                // Create a SimpleDateFormat object with your desired format
+                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a | dd MMM", Locale.ENGLISH);
+                // Set the timezone to the device's local timezone
+                sdf.setTimeZone(TimeZone.getDefault());
+                // Format the date object to a string
+                String formattedDate = sdf.format(startDate);
+
+                // Insert space between letters and numbers in the vehicle number
+                String formattedVehicleNumber = vehicle.replaceAll("(\\D)(\\d+)", "$1 $2 ");
+
+                // Payment Method to uppercase
+                String formattedPaymentMethod = paymentMethod.toUpperCase();
+
+                paymentHistoryModels.add(new PaymentProfileModel(formattedDate, amount, formattedVehicleNumber, formattedPaymentMethod));
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.profile_payment_frag_recycle_view);
                 PPRecycleViewAdapter adapter = new PPRecycleViewAdapter(paymentHistoryModels ,context);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
 
                 // Replace the loading view with the parking view
                 ViewGroup parent = (ViewGroup) loadingView.getParent();

@@ -95,7 +95,7 @@ class OfficerModel
         }
     }
 
-    //get a parking for given officer_id
+    //get the assigned parking_id for given officer_id
     public function get_parking_id($_id)
     {
         $this->db->query("SELECT * FROM parking_officer WHERE _id = :_id");
