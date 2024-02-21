@@ -1,10 +1,8 @@
 package com.example.officertestapp.Home.Helpers;
 
 import android.content.Context;
-
 import android.util.Log;
 import android.view.View;
-
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
@@ -17,41 +15,38 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
-import com.example.officertestapp.Home.AssignVehicle03Fragment;
+import com.example.officertestapp.Home.ReleaseASlot06Fragment;
 import com.example.officertestapp.MainActivity;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddVehicleDetails {
-
+public class PaymentReceiveCashHelper {
     Context context;
     View view;
     FragmentManager fragmentManager;
 
-    public AddVehicleDetails(View view, Context context, FragmentManager fragmentManager) {
+    public PaymentReceiveCashHelper(View view, Context context, FragmentManager fragmentManager) {
         this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
     }
 
-    public void addDetails(String vehicleNumber, String selectedVehicleType, String startTimeStamp, String driverId) {
-        // volley request
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/start";
-        Log.d("Request URL", apiURL);
-
+    public void paymentReceivedCash(String paymentId) {
         // Get the parkingId
         ParkngoStorage parkngoStorage = new ParkngoStorage(context);
         String parkingId = parkngoStorage.getData("parkingID");
 
         // get the token
         String token = parkngoStorage.getData("token");
+
+        // volley request
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/payment/cash";
+        Log.d("Request URL", apiURL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
                 new Response.Listener<String>() {
@@ -76,18 +71,12 @@ public class AddVehicleDetails {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("vehicle_number", vehicleNumber);
-                params.put("vehicle_type", selectedVehicleType);
-                params.put("start_time", startTimeStamp);
                 params.put("parking_id", parkingId);
-                params.put("driver_id", driverId);
+                params.put("payment_id", paymentId);
 
                 // Log the values
-                Log.d("RequestParameters", "Vehicle Number: " + vehicleNumber);
-                Log.d("RequestParameters", "Vehicle Type: " + selectedVehicleType);
-                Log.d("RequestParameters", "Start Time: " + startTimeStamp);
                 Log.d("RequestParameters", "Parking ID: " + parkingId);
-                Log.d("RequestParameters", "Driver ID: " + driverId);
+                Log.d("RequestParameters", "Payment ID: " + paymentId);
 
                 return params;
 
@@ -102,9 +91,10 @@ public class AddVehicleDetails {
 
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            JSONObject innerResponse = jsonResponse.getJSONObject("response");
-            String responseCode = innerResponse.getString("response_code");
-            String message = innerResponse.getString("message");
+            JSONObject responseData = jsonResponse.getJSONObject("response");
+
+            String responseCode = responseData.getString("response_code");
+            String message = responseData.getString("message");
 
             // Log the parsed response data
             Log.d("Response Code", responseCode);
@@ -117,10 +107,12 @@ public class AddVehicleDetails {
 
                 // Navigate to AssignVehicle03Fragment
                 MainActivity mainActivity = (MainActivity) context;
-                mainActivity.replaceFragment(new AssignVehicle03Fragment());
+                mainActivity.replaceFragment(new ReleaseASlot06Fragment());
+
             } else {
                 // Show a toast message with the response message
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
             }
 
         } catch (JSONException e) {
@@ -142,4 +134,3 @@ public class AddVehicleDetails {
         }
     }
 }
-

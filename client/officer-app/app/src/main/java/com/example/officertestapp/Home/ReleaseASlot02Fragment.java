@@ -18,7 +18,7 @@ import com.example.officertestapp.R;
 
 
 public class ReleaseASlot02Fragment extends Fragment {
-    private Bundle endSessionDataBundle;
+    private Bundle paymentSessionDataBundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,31 +64,25 @@ public class ReleaseASlot02Fragment extends Fragment {
                 // Retrieve values from the Bundle
                 Bundle args = getArguments();
                 if (args != null) {
-                    String sessionID = args.getString("sessionID");
-                    String timeStamp = args.getString("timeStamp");
+                    String sessionId = args.getString("SessionID");
+                    String timestamp = args.getString("EndTimeStamp");
 
                     // Invoke the ReleaseASlotHelper helper to release the slot
                     ReleaseASlotHelper releaseASlotHelper = new ReleaseASlotHelper(view, requireContext(), getFragmentManager());
-                    releaseASlotHelper.releaseSlot(sessionID, timeStamp);
-
-//                    // Check if the Bundle is not empty
-//                    if (!endSessionDataBundle.isEmpty()) {
-//                        // Navigate to ReleaseASlot03Fragment with the Bundle
-//                        ReleaseASlot03Fragment releaseASlot03Fragment = new ReleaseASlot03Fragment();
-//                        ((MainActivity) requireActivity()).replaceFragment(releaseASlot03Fragment, endSessionDataBundle, getView());
-//                    }
+                    releaseASlotHelper.releaseSlot(sessionId, timestamp);
 
                 } else {
                     Log.e("ReleaseASlot02Fragment", "Arguments (Bundle) is null");
                 }
+
             }
         });
 
         return view;
     }
 
-    // Method to set the end  session data bundle
-    public void setEndSessionDataBundle(Bundle bundle) {
-        endSessionDataBundle = bundle;
+    // Method to set the session data bundle
+    public void setPaymentSessionDataBundle(Bundle bundle) {
+        paymentSessionDataBundle = bundle;
     }
 }

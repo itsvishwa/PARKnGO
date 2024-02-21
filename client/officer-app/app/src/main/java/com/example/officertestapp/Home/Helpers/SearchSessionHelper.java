@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -14,8 +13,6 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,20 +22,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
-import com.example.officertestapp.Home.AssignVehicle03Fragment;
 import com.example.officertestapp.Home.ReleaseASlot01Fragment;
-import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
-import com.example.officertestapp.Status.PSRecycleViewAdapter;
-import com.example.officertestapp.Status.ParkingStatusModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class SearchSessionHelper {
     private View view;
@@ -145,9 +140,23 @@ public class SearchSessionHelper {
                 // Extract values from the JSON response
                 String SessionID = responseData.getString("session_id");
                 String EndTimeStamp = responseData.getString("end_Time_Stamp");
-                String ParkedTimeDate = responseData.getString("Parked_Time_Date");
+                String StartTimeStamp = responseData.getString("start_Time_Stamp");
                 String Duration = responseData.getString("Duration");
                 String Amount = responseData.getString("Amount");
+
+
+                // format the timestamp to date time according to the devices time zone
+                // Convert the timestamp string to a long value
+                long timestamp = Long.parseLong(StartTimeStamp);
+                // Create a Date object from the timestamp
+                Date startDate = new Date(timestamp * 1000);
+                // Create a SimpleDateFormat object with your desired format
+                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a\ndd MMM yyyy", Locale.ENGLISH);
+                // Set the timezone to the device's local timezone
+                sdf.setTimeZone(TimeZone.getDefault());
+                // Format the date object to a string
+                String formattedDate = sdf.format(startDate);
+
 
                 // Insert space between letters and numbers in the vehicle number
                 String formattedVehicleNumber = responseData.getString("Vehicle_Number").replaceAll("(\\D)(\\d)", "$1 $2");
@@ -157,12 +166,11 @@ public class SearchSessionHelper {
                 String vehicleTypeCaps = responseData.getString("Vehicle_Type").toUpperCase();
 
 
-
                 // Bundle response values
                 Bundle bundle = new Bundle();
                 bundle.putString("SessionID", SessionID);
                 bundle.putString("EndTimeStamp", EndTimeStamp);
-                bundle.putString("ParkedTimeDate", ParkedTimeDate);
+                bundle.putString("ParkedTimeDate", formattedDate);
                 bundle.putString("Duration", Duration);
                 bundle.putString("Amount", Amount);
                 bundle.putString("vehicleNumberWithoutProvince", vehicleNumberWithoutProvince);
@@ -171,7 +179,7 @@ public class SearchSessionHelper {
                 // Log the values for debugging
                 Log.d("Bundle Values", "Session ID: " + SessionID);
                 Log.d("Bundle Values", "End Time Stamp: " + EndTimeStamp);
-                Log.d("Bundle Values", "Parked Time/Date: " + ParkedTimeDate);
+                Log.d("Bundle Values", "Parked Time/Date: " + formattedDate);
                 Log.d("Bundle Values", "Duration: " + Duration);
                 Log.d("Bundle Values", "Amount: " + Amount);
                 Log.d("Bundle Values", "Vehicle Number Without Province: " + vehicleNumberWithoutProvince);
@@ -187,7 +195,7 @@ public class SearchSessionHelper {
                 TextView amountView = view.findViewById(R.id.amount_txt);
 
                 // Set the values to TextViews
-                parkedDateTimeView.setText(ParkedTimeDate);
+                parkedDateTimeView.setText(formattedDate);
                 durationView.setText(Duration);
                 amountView.setText(Amount);
 

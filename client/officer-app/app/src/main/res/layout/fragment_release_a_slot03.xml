@@ -274,12 +274,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            android:id="@+id/release_slot_03_receive_cash_payment_btn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:layout_marginTop="90dp"
             android:gravity="center"
             android:text="Receive Cash Payment"
-            android:onClick="release_slot_03_receive_cash_payment_btn_handler"
             app:cornerRadius="11dp"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout17"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout17"
