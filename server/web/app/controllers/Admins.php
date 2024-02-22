@@ -341,30 +341,6 @@ class Admins extends Controller
   }*/
 
 
-  /**************** */
-  public function approveApplication()
-  {
-    // Check if the request is POST and if the application ID is provided
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dataset.application_id'])) {
-      $applicationId = $_POST['dataset.application_id'];
-
-      // Update the application status to 'approved' in your model
-      $result = $this->adminModel->updateApplicationStatus($applicationId, 1); // Assuming 1 means approved status
-
-      if ($result) {
-        // If the update is successful, send a success response
-        echo json_encode(['success' => true]);
-        exit();
-      }
-    }
-
-    // If something goes wrong, send an error response
-    echo json_encode(['success' => false]);
-    exit();
-  }
-
-
-
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -448,7 +424,7 @@ class Admins extends Controller
   }
 }*/
 
-public function downloadDocument($documentId) {
+/*public function downloadDocument($documentId) {
   $this->adminModel = $this->model('Admin');
 
   // Fetch the document from the model based on $documentId
@@ -467,7 +443,28 @@ public function downloadDocument($documentId) {
       // Handle case when the document is not found
       echo 'Document not found';
   }
+}*/
+
+public function downloadDocument($documentId) {
+  $this->adminModel = $this->model('Admin');
+
+  // Fetch the document from the model based on $documentId
+  $document = $this->adminModel->getDocument($documentId);
+
+  // Check if the document exists
+  if ($document) {
+      // Set appropriate headers for PDF file
+      header('Content-Type: application/pdf');
+      header('Content-Disposition: attachment; filename="document.pdf"');
+
+      // Output the document content after base64 decoding
+      echo base64_decode($document);
+  } else {
+      // Handle case when the document is not found
+      echo 'Document not found';
+  }
 }
+
 
 
 public function submitRejectReason()
@@ -494,6 +491,17 @@ public function submitRejectReason()
         // Handle non-POST requests
         echo 'Invalid request method.';
     }
+}
+
+public function approveApplication($companyId) {
+  $this->adminModel = $this->model('Admin');
+
+  // Update the company table with approval status
+  $success = $this->adminModel->updateApprovalStatus($companyId);
+
+  // Send a JSON response indicating success or failure
+  header('Content-Type: application/json');
+  echo json_encode(['success' => $success]);
 }
 
 

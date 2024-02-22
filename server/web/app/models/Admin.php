@@ -459,7 +459,6 @@ public function deleteEntry($_id) {
     }
 }
 
-
   public function insertCompanySuspendDetails($data)
   {
     $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
@@ -498,6 +497,18 @@ public function updateRejectReason($companyId, $rejectReason) {
   // Execute the update query
   return $this->db->execute();
 }
+
+public function updateApprovalStatus($companyId) {
+  // Prepare the SQL query
+  $this->db->query('UPDATE company SET is_approved = 1, is_reviewd = 1 WHERE _id = :companyId');
+
+  // Bind the parameter
+  $this->db->bind(':companyId', $companyId);
+
+  // Execute the update query
+  return $this->db->execute();
+}
+
 
 
 }
