@@ -24,7 +24,6 @@ public class VehicleDataHelper {
     private Context context;
     private View view;
     private FragmentManager fragmentManager;
-    private String driverId;
 
     public VehicleDataHelper(View view, Context context, FragmentManager fragmentManager) {
         this.view = view;
@@ -112,7 +111,6 @@ public class VehicleDataHelper {
             return bundle;
         }
     }
-
 
     private long calculateTimestamp(String dateTimeString) {
 

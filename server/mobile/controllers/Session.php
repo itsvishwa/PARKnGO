@@ -370,6 +370,12 @@ class Session extends Controller
     // View payment details of the given session in the officer mobile app
     public function view_payment_details_of_session($payment_id)
     {
+        // Validate the parking id
+
+
+
+
+        
 
         $payment_id = $this->decrypt_id($payment_id);
         $payment_session_exists = $this->payment_model->is_payment_session_id_exist($payment_id);
@@ -411,8 +417,8 @@ class Session extends Controller
                     "payment_id" => $encrypted_payment_id,
                     "vehicle_number" => $payment_details->vehicle_number,
                     "vehicle_type" => $uppercase_vehicle_type,
-                    "start_time" => date('h:i A', $start_timestamp),
-                    "end_time" => date('h:i A', $end_timestamp),
+                    "start_time" => $start_timestamp,
+                    "end_time" => $end_timestamp,
                     "time_went" => $formatted_duration,
                     "amount" => $formatted_amount
                 ];

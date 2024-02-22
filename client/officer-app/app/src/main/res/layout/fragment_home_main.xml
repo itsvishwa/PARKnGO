@@ -6,7 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home.HomeMainFragment"
     android:orientation="vertical"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    android:clickable="true"
+    android:focusable="true">
 
     <!--    Top App Bar Here-->
     <androidx.constraintlayout.widget.ConstraintLayout
