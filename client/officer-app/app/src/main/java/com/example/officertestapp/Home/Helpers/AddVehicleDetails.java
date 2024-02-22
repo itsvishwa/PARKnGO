@@ -2,6 +2,7 @@ package com.example.officertestapp.Home.Helpers;
 
 import android.content.Context;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
@@ -17,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.HeroActivity;
 import com.example.officertestapp.Home.AssignVehicle03Fragment;
 import com.example.officertestapp.MainActivity;
 
@@ -29,15 +31,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddVehicleDetails {
-
     Context context;
     View view;
     FragmentManager fragmentManager;
+    ParkngoStorage parkngoStorage;
 
     public AddVehicleDetails(View view, Context context, FragmentManager fragmentManager) {
         this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.parkngoStorage = new ParkngoStorage(context);
     }
 
     public void addDetails(String vehicleNumber, String selectedVehicleType, String startTimeStamp, String driverId) {
@@ -47,7 +50,6 @@ public class AddVehicleDetails {
         Log.d("Request URL", apiURL);
 
         // Get the parkingId
-        ParkngoStorage parkngoStorage = new ParkngoStorage(context);
         String parkingId = parkngoStorage.getData("parkingID");
 
         // get the token
@@ -135,7 +137,16 @@ public class AddVehicleDetails {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
+                String response = jsonResponse.getString("response");
+                if(response.equals("101") || response.equals("204")) // the officer's parking space has been changed
+                {
+                    parkngoStorage.clearData();
+                    Intent i = new Intent(context, HeroActivity.class);
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.logout_immediately();
+                }else{
+                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
