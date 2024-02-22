@@ -15,6 +15,11 @@ import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class ReleaseASlot03Fragment extends Fragment {
 
     @Override
@@ -24,6 +29,13 @@ public class ReleaseASlot03Fragment extends Fragment {
 
         // Use the helper class to set app bar details
         HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
+
+
+
+        // CAll the paymentDetailsHelper here
+
+
+
 
         // Find the TextViews
         TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
@@ -44,14 +56,36 @@ public class ReleaseASlot03Fragment extends Fragment {
             String TimeWent = args.getString("TimeWent");
             String Amount = args.getString("Amount");
 
+
             // Insert space between letters and numbers in the vehicle number
-            String formattedVehicleNumber = vehicleNumber.replaceAll("(\\D)(\\d)", "$1 $2");
+            String formattedVehicleNumber = vehicleNumber.replaceAll("(\\D)(\\d+)", "$1 $2 ");
+
+
+            // format the timestamp to date time according to the devices time zone
+            // Convert the timestamp string to a long value
+            long timestampStart = Long.parseLong(StartTime);
+            // Create a Date object from the timestamp
+            Date startDate = new Date(timestampStart * 1000);
+            // Create a SimpleDateFormat object with your desired format
+            SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
+            // Set the timezone to the device's local timezone
+            sdf.setTimeZone(TimeZone.getDefault());
+            // Format the date object to a string
+            String formattedStartTime = sdf.format(startDate);
+
+
+            long timestampEnd = Long.parseLong(EndTime);
+            Date EndDate = new Date(timestampEnd * 1000);
+            SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
+            edf.setTimeZone(TimeZone.getDefault());
+            String formattedEndTime = sdf.format(EndDate);
+
 
             // Update TextViews with the retrieved values
             vehicleNumberTextView.setText(formattedVehicleNumber);
             vehicleTypeTextView.setText(VehicleType);
-            sessionStartedTimeTextView.setText(StartTime);
-            sessionEndedTimeTextView.setText(EndTime);
+            sessionStartedTimeTextView.setText(formattedStartTime);
+            sessionEndedTimeTextView.setText(formattedEndTime);
             timeDurationTextView.setText(TimeWent);
             amountTextView.setText(Amount);
 

@@ -1,6 +1,7 @@
 package com.example.officertestapp.Home.Helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.HeroActivity;
 import com.example.officertestapp.Home.ReleaseASlot01Fragment;
+import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
 import org.json.JSONException;
@@ -40,12 +43,14 @@ public class SearchSessionHelper {
     private Context context;
     private FragmentManager fragmentManager;
     private Button continueBtn;
+    ParkngoStorage parkngoStorage;
 
     public SearchSessionHelper(View view, Context context, FragmentManager fragmentManager, Button continueBtn) {
         this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.continueBtn = continueBtn;
+        this.parkngoStorage = new ParkngoStorage(context);
         searchSession();
     }
 
@@ -221,7 +226,16 @@ public class SearchSessionHelper {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
+                String response = jsonResponse.getString("response");
+                if(response.equals("101") || response.equals("204")) // the officer's parking space has been changed
+                {
+                    parkngoStorage.clearData();
+                    Intent i = new Intent(context, HeroActivity.class);
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.logout_immediately();
+                }else{
+                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
