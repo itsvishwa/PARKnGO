@@ -161,15 +161,11 @@
           </form>
 
           <div class="b-card-apre">
-            <button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>
-
+               
+            <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo isset($pendingApplications['_id']) ? $pendingApplications['_id'] : ''; ?>')">Reject Application</button>         
+          <!--  <button class="approve-button">Approve Application</button>-->           
             
-          <!--  <button class="approve-button">Approve Application</button>-->
-            
-            <button class="approve-button" data-company-id="<?php echo isset($pendingApplications['_id']) ? $pendingApplications['_id'] : ''; ?>">Approve Application</button>
-
-
-
+            <button class="approve-button" onclick="approveApplication('<?php echo isset($pendingApplications['_id']) ? $pendingApplications['_id'] : ''; ?>')">Approve Application</button>
           </div>
 
           <div class="b-card-content text-black">
@@ -183,7 +179,7 @@
 
 </body>
 
-<script>
+<!--<script>
    function approveApplication(companyId) {
       $.ajax({
          url: 'admins/approveApplication/' + companyId,
@@ -203,32 +199,6 @@
       });
    }
 </script>
-
-
-
-
-<!--<script>
-  function submitRejectReason() {
-    var rejectReason = $('#rejectReason').val();
-
-    // Perform AJAX request to submit the reject reason
-    $.ajax({
-      url: 'submitRejectReason/',
-      method: 'POST',
-      data: {
-        rejectReason: rejectReason
-      },
-      success: function(response) {
-        // Handle the response if needed
-        console.log('Reject reason submitted successfully.');
-      },
-      error: function(error) {
-        console.error('Error:', error);
-      }
-    });
-  }
-</script>-->
-
 
 <script>
   function submitRejectReason() {
@@ -251,6 +221,95 @@
       }
     });
   }
+</script>-->
+
+<!--<script>
+    function approveApplication(companyId) {
+        $.ajax({
+            url: 'admins/approveApplication/' + companyId,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    console.log('Application approved successfully.');
+                } else {
+                    console.error('Failed to approve application.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Error approving application. Please try again later.');
+            }
+        });
+    }
+
+    function submitRejectReason(companyId) {
+        var rejectReason = $('#rejectReason').val();
+
+        // Perform AJAX request to submit the reject reason
+        $.ajax({
+            url: 'admins/rejectApplication/' + companyId,
+            method: 'POST',
+            data: {
+                rejectReason: rejectReason
+            },
+            success: function(response) {
+                // Handle the response if needed
+                console.log('Reject reason submitted successfully.');
+                console.log(response); // Log the response for debugging
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+</script>-->
+
+<script>
+    function approveApplication(companyId) {
+        $.ajax({
+            url: 'approveApplication/' + companyId,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    console.log('Application approved successfully.');
+                } else {
+                    console.error('Failed to approve application. Server response:', response);
+                    alert('Failed to approve application. See console for details.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Error approving application. Please check the console for details.');
+            }
+        });
+    }
+
+    function submitRejectReason(companyId) {
+        var rejectReason = $('#rejectReason').val();
+
+        // Perform AJAX request to submit the reject reason
+        $.ajax({
+            url: 'rejectApplication/' + companyId,
+            method: 'POST',
+            data: {
+                rejectReason: rejectReason
+            },
+            success: function(response) {
+                // Handle the response if needed
+                console.log('Reject reason submitted successfully.');
+                console.log(response); // Log the response for debugging
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                alert('Error submitting reject reason. Please check the console for details.');
+            }
+        });
+    }
 </script>
+
+
+
 
 </html>
