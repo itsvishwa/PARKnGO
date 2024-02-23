@@ -475,7 +475,7 @@ public function downloadDocument($documentId) {
 
 
 
-public function submitRejectReason()
+/*public function submitRejectReason()
 {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Retrieve the reject reason from the POST data
@@ -510,7 +510,29 @@ public function approveApplication($companyId) {
   // Send a JSON response indicating success or failure
   header('Content-Type: application/json');
   echo json_encode(['success' => $success]);
+}*/
+
+public function approveApplication($companyId) {
+  // Update the database to set is_approved to 1 and is_reviewed to 1
+  // Implement this logic based on your database structure
+  $this->adminModel->approveApplication($companyId);
+
+  // You can return a JSON response indicating success or failure
+  echo json_encode(['success' => true]);
 }
+
+public function rejectApplication($companyId) {
+  // Get reject reason from POST data
+  $rejectReason = $_POST['rejectReason'];
+
+  // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
+  // Implement this logic based on your database structure
+  $this->adminModel->rejectApplication($companyId, $rejectReason);
+
+  // You can return a JSON response indicating success or failure
+  echo json_encode(['success' => true]);
+}
+
 
 
 }
