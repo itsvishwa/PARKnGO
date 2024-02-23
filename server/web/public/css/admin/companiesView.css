@@ -335,17 +335,7 @@
   font-size: 0.8rem;
 }
 
-/*.b-view-more{
-   
-  position: absolute;
-  background-color:  #363636;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius:0px 0px 0px 10px;
-  height: 40px;
-  width: 64%;
-}*/
+
 
 .b-view-more{
    
@@ -363,17 +353,7 @@
   border: none;
 }
 
-/*.b-delete-more{
-   
-  position: absolute;
-  background-color:  #FF4545;
-  bottom: 0;
-  left: 301px;
-  right: 0;
-  border-radius:0px 0px 10px 0px;
-  height: 40px;
-  width: 37%;
-}*/
+
 
 .b-delete-more{
    
