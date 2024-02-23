@@ -132,7 +132,7 @@
                     <td>
                       <?php
                       $content = $review->content;
-                      $maxChars = 60; // Maximum characters to display (adjust as needed)
+                      $maxChars = 100; // Maximum characters to display (adjust as needed)
 
                       // Check if the content length exceeds the maximum characters
                       if (strlen($content) > $maxChars) {

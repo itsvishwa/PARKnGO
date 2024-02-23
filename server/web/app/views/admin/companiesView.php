@@ -32,37 +32,7 @@
         window.location.href = 'downloadDocument/' + documentId;
     }
   </script>-->
-  <script>
-    function downloadDocument(documentId) {
-      
-    $.ajax({
-        url: 'downloadDocument/' + documentId,
-        method: 'GET',
-        dataType: 'text', // Add this line
-        success: function(response) {
-            // Log success message
-            
-            console.log('Document downloaded successfully.');
-            console.log(response); 
-            // Handle the response, e.g., initiate the download
-            // For simplicity, let's redirect to the PDF URL
-            window.location.href = 'data:application/pdf;base64,' + response;
-            
 
-        },
-       /* error: function(error) {
-            // Log error details
-            console.error('Error:', error);
-        }*/
-        error: function(xhr, status, error) {
-        console.error('Error:', error);
-        alert('Error downloading document. Please try again later.');
-}
-
-    });
-}
-
-  </script>
 
 </head>
 
@@ -134,7 +104,7 @@
           <h3 class="ml-5">Companies</h3>
         </div>
         <div class="profile">
-          
+
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -143,7 +113,7 @@
         <div class="heading">
         </div>
       </div>
-     
+
       <div class="b-card-content p text-grey">
         <div class="search-box">
           <input type="text" id="companySearch" placeholder="Search a Company" />
@@ -204,7 +174,7 @@
                         </div>
                       </div>
                       <div class="park-card2-content text-black">
-                      <!--  <p>10 Parking Spaces</p> -->
+                        <!--  <p>10 Parking Spaces</p> -->
                         <?php
                         // Check if the property 'parkingSlotsCount' exists in the current application
                         if (property_exists($application, 'parkingSlotsCount')) {
@@ -230,7 +200,7 @@
                         // Check if the property 'parkingOfficersCount' exists in the current application
                         if (property_exists($application, 'parkingOfficersCount')) {
                           $parkingOfficersCount = $application->parkingOfficersCount;
-                            // Adjust the label based on the count
+                          // Adjust the label based on the count
                           $label = ($parkingOfficersCount == 1) ? 'Parking Officer' : 'Parking Officers';
                           echo "<p>{$parkingOfficersCount} {$label}</p>";
                         } else {
@@ -240,10 +210,12 @@
                       </div>
                     </div>
 
-                  <!--  <button class="b-view-more bg-black" type="button">-->
-                   
-                    <button class="b-view-more bg-black" type="button" onclick="downloadDocument(<?php echo ($application->_id); ?>)">
-                      <div class="b-card_down-icon ">
+                    <!--  <button class="b-view-more bg-black" type="button">-->
+
+
+
+                    <button class="b-view-more bg-black" onclick="downloadDocument('<?php echo $application->_id; ?>')">
+                      <div class="b-card_down-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" class="rd-menu-logo">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                         </svg>
@@ -254,7 +226,9 @@
                     </button>
 
 
-                  <!--  <button class="b-delete-more bg-black">-->
+
+
+                    <!--  <button class="b-delete-more bg-black">-->
                     <button class="b-delete-more bg-black" onclick="confirmDelete(<?php echo $application->_id; ?>)">
 
                       <div class="b-card_del-icon ">
@@ -267,9 +241,9 @@
                         <p>Delete</p>
                       </div>
 
-                      </button>
+                    </button>
 
-                 
+
 
                   </div>
                 </div>
@@ -317,17 +291,53 @@
         });
       </script>
 
-<script>
-    function confirmDelete(companyId) {
-        if (confirm("Are you sure you want to delete this company?")) {
+      <script>
+    function downloadDocument(documentId) {
+      
+    $.ajax({
+        url: 'downloadDocument/' + documentId,
+        method: 'GET',
+        dataType: 'text', // Add this line
+        success: function(response) {
+            // Log success message
+            
+            console.log('Document downloaded successfully.');
+            console.log(response); 
+            // Handle the response, e.g., initiate the download
+            // For simplicity, let's redirect to the PDF URL
+            window.location.href = 'data:application/pdf;base64,' + response;
+            
+
+        },
+       /* error: function(error) {
+            // Log error details
+            console.error('Error:', error);
+        }*/
+        error: function(xhr, status, error) {
+        console.error('Error:', error);
+        alert('Error downloading document. Please try again later.');
+}
+
+    });
+}
+
+  </script>
+
+
+
+      <script>
+        function confirmDelete(companyId) {
+          if (confirm("Are you sure you want to delete this company?")) {
             // User clicked "OK", proceed with the delete action
             window.location.href = 'delete/' + companyId; // Adjust the URL as needed
-        } else {
+          } else {
             // User clicked "Cancel", do nothing
+          }
         }
-    }
-</script>
-  
+      </script>
+
+
+
 </body>
 
 </html>

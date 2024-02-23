@@ -439,12 +439,15 @@ public function deleteEntry($_id) {
     $params = [':id' => $documentId];
 
     try {
-        $result = $this->db->query('SELECT documents FROM company WHERE _id = :id', $params);
+        $result = $this->db->query('SELECT _id , documents FROM company WHERE _id = :id', $params);
     } catch (Exception $e) {
         // Log the exception message
         error_log('Exception caught: ' . $e->getMessage());
         return false;
+
     }
+
+    var_dump($result);
 
     if ($result && !empty($result[0]['documents'])) {
         $documentData = $result[0]['documents'];
