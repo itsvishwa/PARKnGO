@@ -579,3 +579,7 @@
   margin-left: 10px; /* Adjust margin as needed */
   stroke: #333; /* Change SVG color */
 }
+
+.ml-5 {
+  margin-left: 5px;
+}
