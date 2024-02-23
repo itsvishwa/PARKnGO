@@ -549,7 +549,7 @@
 .b-card-content .search-box {
   display: flex;
   align-items: center;
-  width: 960px; /* Adjust width as needed */
+  width: 950px; /* Adjust width as needed */
   height: 25px; /* Adjust height as needed */
   border: 1px solid #ccc; /* Add border */
   border-radius: 5px; /* Add border radius */
@@ -558,6 +558,7 @@
   /*color: #ccc;*/
   color: #ccc;
   background-color: #FFF5E3;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .b-card-content .search-box input[type="text"] {
