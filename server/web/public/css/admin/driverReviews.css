@@ -129,7 +129,9 @@
 /* Add this CSS to your existing CSS file or create a new one */
 
 .review-table {
-  width: 103%;
+ /* width: 137%;*/
+  width: 994px; /* Set the desired width in pixels */
+ 
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: -24px;
