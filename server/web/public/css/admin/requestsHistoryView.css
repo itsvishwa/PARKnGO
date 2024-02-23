@@ -146,7 +146,8 @@
 /* Add this CSS to your existing CSS file or create a new one */
 
 .review-table {
-  width: 105%;
+  /*width: 105%;*/
+  width: 994px;
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: -24px;
