@@ -180,7 +180,7 @@ class Admins extends Controller
 
     ];
     
-
+    
 
     // Pass the data to the view
 
@@ -449,15 +449,21 @@ class Admins extends Controller
 
 public function downloadDocument($documentId) {
   $this->adminModel = $this->model('Admin');
+  
+  // Log received document ID
+  error_log('Received document ID: ' . $documentId);
 
   // Fetch the document from the model based on $documentId
   $document = $this->adminModel->getDocument($documentId);
+
+   // Log the document content
+   error_log('Document content: ' . print_r($document, true));
 
   // Check if the document exists
   if ($document) {
       // Set appropriate headers for PDF file
       header('Content-Type: application/pdf');
-      header('Content-Disposition: attachment; filename="document.pdf"');
+      header('Content-Disposition: attachment; filename="company_documents.pdf"');
 
       // Output the document content after base64 decoding
       echo base64_decode($document);
