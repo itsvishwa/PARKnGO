@@ -90,7 +90,17 @@
       </div>
       <div class="business">
         <div class="heading">
-          <h4>You have 03 pending applications to review</h4>
+        <!--  <h4>You have 03 pending applications to review</h4>-->
+          <?php if (isset($data['totalPendingApplications'])) : ?>
+                  <?php if ($data['totalPendingApplications'] === 0) : ?>
+                    <h4>You have no new company applications to review</h4>
+                  <?php elseif ($data['totalPendingApplications'] === 1) : ?>
+                    <h4>You have 1 new company application to review</h4>
+                  <?php else : ?>
+                    <h4>You have <?php echo $data['totalPendingApplications']; ?> new company applications to review</h4>
+                    
+                  <?php endif; ?>
+                <?php endif; ?>
         </div>       
        <div class="card-section">
        

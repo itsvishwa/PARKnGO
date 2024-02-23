@@ -267,10 +267,12 @@ class Admins extends Controller
   {
     // Fetch pending company applications
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
+    $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
 
     // Prepare data for the view
     $data = [
-      'pendingApplications' => $pendingApplications
+      'pendingApplications' => $pendingApplications,
+      'totalPendingApplications' => $totalPendingApplications,
     ];
 
     // Pass the data to the view
