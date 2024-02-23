@@ -560,3 +560,7 @@
   /* Add any other styles you want to apply to the placeholder */
   
 }
+
+.ml-5 {
+  margin-left: 5px;
+}
