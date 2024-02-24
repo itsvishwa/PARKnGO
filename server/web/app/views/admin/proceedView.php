@@ -135,8 +135,7 @@
               </p>
             </div>
 
-            <button class="b-card_d-icon">
-
+             <button class="b-card_d-icon">            
               <div class="b-card_down-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="r-menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -151,7 +150,7 @@
           <div class="b-card-ar-content text-black">
             <p>Approve or Reject?</p>
           </div>
-          
+
           <form class="b-card3" id="rejectForm">
             <div class="card-content12 text-gray">
               <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...."></textarea>
@@ -160,10 +159,10 @@
           </form>
 
           <div class="b-card-apre">
-            
-              <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo isset($pendingApplications[0]['_id']) ? $pendingApplications[0]['_id'] : ''; ?>')">Reject Application</button>
-              <button class="approve-button" onclick="approveApplication('<?php echo isset($pendingApplications[0]['_id']) ? $pendingApplications[0]['_id'] : ''; ?>')">Approve Application</button>
-          
+
+            <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo isset($pendingApplications[0]['_id']) ? $pendingApplications[0]['_id'] : ''; ?>')">Reject Application</button>
+            <button class="approve-button" onclick="approveApplication('<?php echo isset($pendingApplications[0]['_id']) ? $pendingApplications[0]['_id'] : ''; ?>')">Approve Application</button>
+
           </div>
 
           <div class="b-card-content text-black">
@@ -304,6 +303,24 @@
         alert('Error submitting reject reason. Please check the console for details.');
       }
     });
+  }
+</script>
+
+<script>
+  function downloadDocument(documentId) {
+    // Make an AJAX request to the server to download the PDF
+    fetch('<?php echo URLROOT; ?>/admins/downloadDocument/' + documentId)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'document.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => console.error('Error downloading document:', error));
   }
 </script>
 
