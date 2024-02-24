@@ -163,9 +163,11 @@
                                                     $maxLength = 50; // Define the maximum length to display initially
                                                     if (strlen($reviewMessage) > $maxLength) {
                                                         // If the message length exceeds the maximum length, truncate and show a "Read More" link
-                                                        echo substr($reviewMessage, 0, $maxLength) . '... ';
+                                                        
+                                                        echo '<span class="truncated-text">' . substr($reviewMessage, 0, $maxLength) . '... </span>';
                                                         echo '<a href="javascript:void(0);" class="read-more-link">Read More</a>';
                                                         echo '<span class="full-text" style="display: none;">' . $reviewMessage . '</span>';
+                                                        echo '<a href="javascript:void(0);" class="show-less-link" style="display: none;">Show Less</a>';
                                                     } else {
                                                         // If the message length is within the limit, display the whole message
                                                         echo $reviewMessage;
@@ -196,7 +198,7 @@
     </div>
     </div>
     </div>
-    <script>
+    <!--<script>
         document.addEventListener('DOMContentLoaded', function() {
             const readMoreLinks = document.querySelectorAll('.read-more-link');
             readMoreLinks.forEach(function(link) {
@@ -208,6 +210,43 @@
                 });
             });
         });
+    </script>-->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const readMoreLinks = document.querySelectorAll('.read-more-link');
+    readMoreLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const truncatedText = this.previousElementSibling;
+            const fullText = this.nextElementSibling;
+            const showLessLink = this.nextElementSibling.nextElementSibling;
+
+            // Toggle visibility of truncated text and full text, and show/hide links
+            truncatedText.style.display = 'none'; // Hide truncated text
+            fullText.style.display = 'inline'; // Show the full text
+            this.style.display = 'none'; // Hide "Read More" link
+            showLessLink.style.display = 'inline'; // Show "Show Less" link
+        });
+    });
+
+    const showLessLinks = document.querySelectorAll('.show-less-link');
+    showLessLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const truncatedText = this.previousElementSibling.previousElementSibling;
+            const fullText = this.previousElementSibling;
+            const readMoreLink = this.previousElementSibling.previousElementSibling.previousElementSibling;
+
+            // Toggle visibility of truncated text and full text, and show/hide links
+            truncatedText.style.display = 'inline'; // Show truncated text
+            fullText.style.display = 'none'; // Hide the full text
+            readMoreLink.style.display = 'inline'; // Show "Read More" link
+            this.style.display = 'none'; // Hide "Show Less" link
+        });
+    });
+});
+
     </script>
 
 </body>

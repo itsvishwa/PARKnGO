@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/proceedView.css" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>proceedView</title>
 
 </head>
@@ -135,9 +134,9 @@
                 ?>
               </p>
             </div>
-           
-            <button class="b-card_d-icon" ">
-            
+
+            <button class="b-card_d-icon">
+
               <div class="b-card_down-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="r-menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -150,22 +149,21 @@
           </button>
 
           <div class="b-card-ar-content text-black">
-            <p>Approve or Reject?
-            <p>
+            <p>Approve or Reject?</p>
           </div>
+          
           <form class="b-card3" id="rejectForm">
             <div class="card-content12 text-gray">
-              <textarea id="rejectReason" name="rejectReason" rows="10" cols="100" placeholder="Write the reason to reject...."></textarea>
+              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...."></textarea>
               <!--<button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>-->
             </div>
           </form>
 
           <div class="b-card-apre">
-               
-            <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo isset($pendingApplications['_id']) ? $pendingApplications['_id'] : ''; ?>')">Reject Application</button>         
-          <!--  <button class="approve-button">Approve Application</button>-->           
             
-            <button class="approve-button" onclick="approveApplication('<?php echo isset($pendingApplications['_id']) ? $pendingApplications['_id'] : ''; ?>')">Approve Application</button>
+              <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo isset($pendingApplications[0]['_id']) ? $pendingApplications[0]['_id'] : ''; ?>')">Reject Application</button>
+              <button class="approve-button" onclick="approveApplication('<?php echo isset($pendingApplications[0]['_id']) ? $pendingApplications[0]['_id'] : ''; ?>')">Approve Application</button>
+          
           </div>
 
           <div class="b-card-content text-black">
@@ -264,49 +262,49 @@
         });
     }
 </script>-->
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    function approveApplication(companyId) {
-        $.ajax({
-            url: 'approveApplication/' + companyId,
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                if (response.success) {
-                    console.log('Application approved successfully.');
-                } else {
-                    console.error('Failed to approve application. Server response:', response);
-                    alert('Failed to approve application. See console for details.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('Error approving application. Please check the console for details.');
-            }
-        });
-    }
+  function approveApplication(companyId) {
+    $.ajax({
+      url: 'approveApplication/' + companyId,
+      method: 'GET',
+      dataType: 'json',
+      success: function(response) {
+        if (response.success) {
+          console.log('Application approved successfully.');
+        } else {
+          console.error('Failed to approve application. Server response:', response);
+          alert('Failed to approve application. See console for details.');
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error);
+        alert('Error approving application. Please check the console for details.');
+      }
+    });
+  }
 
-    function submitRejectReason(companyId) {
-        var rejectReason = $('#rejectReason').val();
+  function submitRejectReason(companyId) {
+    var rejectReason = $('#rejectReason').val();
 
-        // Perform AJAX request to submit the reject reason
-        $.ajax({
-            url: 'rejectApplication/' + companyId,
-            method: 'POST',
-            data: {
-                rejectReason: rejectReason
-            },
-            success: function(response) {
-                // Handle the response if needed
-                console.log('Reject reason submitted successfully.');
-                console.log(response); // Log the response for debugging
-            },
-            error: function(error) {
-                console.error('Error:', error);
-                alert('Error submitting reject reason. Please check the console for details.');
-            }
-        });
-    }
+    // Perform AJAX request to submit the reject reason
+    $.ajax({
+      url: 'rejectApplication/' + companyId,
+      method: 'POST',
+      data: {
+        rejectReason: rejectReason
+      },
+      success: function(response) {
+        // Handle the response if needed
+        console.log('Reject reason submitted successfully.');
+        console.log(response); // Log the response for debugging
+      },
+      error: function(error) {
+        console.error('Error:', error);
+        alert('Error submitting reject reason. Please check the console for details.');
+      }
+    });
+  }
 </script>
 
 
