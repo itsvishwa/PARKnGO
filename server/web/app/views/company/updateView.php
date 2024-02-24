@@ -107,7 +107,7 @@
             $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
             $startIndex = ($currentPage - 1) * $itemsPerPage;
-            $pagedData = array_slice($dummyData, $startIndex, $itemsPerPage); // $dummyData is should be $data (only for check)
+            $pagedData = array_slice($data, $startIndex, $itemsPerPage); // $dummyData is should be $data (only for check)
 
             foreach ($pagedData as $update) : ?>
               <tr>
@@ -128,7 +128,7 @@
         </table>
         <div class="pagination">
           <?php
-          $totalPages = ceil(count($dummyData) / $itemsPerPage); // $dummyData is should be $data (only for check)
+          $totalPages = ceil(count($data) / $itemsPerPage); // $dummyData is should be $data (only for check)
           for ($i = 1; $i <= $totalPages; $i++) {
             $activeClass = ($i === $currentPage) ? 'active' : '';
             echo "<a href='?page=$i' class='pagination-link $activeClass'>$i</a>";
