@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.session.ForceEndConfirmFragment;
 import com.example.parkngo.session.SessionEndQRFragment;
 
 public class SessionOnGoingHelper {
@@ -57,6 +58,20 @@ public class SessionOnGoingHelper {
                 Bundle data = new Bundle();
                 data.putString("sessionID", sessionOnGoingModel.getSessionID());
                 mainActivity.replaceFragment(new SessionEndQRFragment(), data);
+            }
+        });
+    }
+
+    public void forceStopBtnHandler(){
+        Button button = sessionOnGoingView.findViewById(R.id.session_on_going_force_stop_btn);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity) context;
+                Bundle data = new Bundle();
+                data.putString("sessionID", sessionOnGoingModel.getSessionID());
+                mainActivity.replaceFragment(new ForceEndConfirmFragment(), data);
             }
         });
     }

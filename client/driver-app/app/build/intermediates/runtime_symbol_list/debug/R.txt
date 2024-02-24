@@ -3167,6 +3167,7 @@ int drawable round_red_circle 0x7f070133
 int drawable scan_qr 0x7f070134
 int drawable search_view_bg 0x7f070135
 int drawable spinner_circle 0x7f070136
+int drawable sucess 0x7f07013f
 int drawable sucess_result_image 0x7f070137
 int drawable test_level_drawable 0x7f070138
 int drawable tooltip_frame_dark 0x7f070139
@@ -3317,7 +3318,9 @@ int id button2 0x7f090343
 int id button3 0x7f090088
 int id button4 0x7f090089
 int id button5 0x7f09008a
+int id button6 0x7f090348
 int id button7 0x7f09008b
+int id button8 0x7f090349
 int id buttonPanel 0x7f09008c
 int id cache_measures 0x7f09008d
 int id callMeasure 0x7f09008e
@@ -3535,6 +3538,7 @@ int id imageView2 0x7f090160
 int id imageView3 0x7f090161
 int id imageView4 0x7f090162
 int id imageView5 0x7f090163
+int id imageView6 0x7f09034d
 int id imageView7 0x7f090164
 int id imageView9 0x7f090165
 int id imageViewConstraintLayout 0x7f090166
@@ -3804,6 +3808,7 @@ int id search_voice_btn 0x7f09026d
 int id select_dialog_listview 0x7f09026e
 int id selected 0x7f09026f
 int id selection_type 0x7f090270
+int id session_on_going_force_stop_btn 0x7f09034c
 int id session_on_going_hours_went 0x7f090271
 int id session_on_going_minutes_went 0x7f090272
 int id session_on_going_officer_id 0x7f090273
@@ -3931,15 +3936,21 @@ int id textView39 0x7f0902eb
 int id textView4 0x7f0902ec
 int id textView40 0x7f0902ed
 int id textView41 0x7f0902ee
+int id textView42 0x7f090346
 int id textView43 0x7f0902ef
 int id textView44 0x7f0902f0
 int id textView45 0x7f0902f1
 int id textView46 0x7f0902f2
 int id textView47 0x7f0902f3
+int id textView48 0x7f090347
+int id textView49 0x7f09034a
 int id textView5 0x7f0902f4
+int id textView50 0x7f09034b
 int id textView51 0x7f0902f5
 int id textView52 0x7f0902f6
 int id textView53 0x7f0902f7
+int id textView54 0x7f09034e
+int id textView55 0x7f09034f
 int id textView57 0x7f0902f8
 int id textView59 0x7f0902f9
 int id textView6 0x7f0902fa
@@ -4164,6 +4175,8 @@ int layout fragment_edit_profile 0x7f0c003b
 int layout fragment_edit_review 0x7f0c003c
 int layout fragment_edit_vehicle 0x7f0c003d
 int layout fragment_error 0x7f0c003e
+int layout fragment_force_end_confirm 0x7f0c0097
+int layout fragment_force_end_sucessfull 0x7f0c0098
 int layout fragment_home 0x7f0c003f
 int layout fragment_logout 0x7f0c0040
 int layout fragment_navigate 0x7f0c0041
