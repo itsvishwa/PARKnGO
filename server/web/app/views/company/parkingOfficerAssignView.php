@@ -145,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Display search results
             filteredSpaces.forEach(function(result) {
               var li = document.createElement("li");
-              li.textContent = result.name;
+              li.textContent = result._id + "-" + result.name;
               resultsContainer.appendChild(li);
             });
 
@@ -154,18 +154,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }
 
           function selectParkingSpace(event) {
-            var selectedParkingSpaceName = event.target.textContent;
+            var selectedParkingSpace = event.target.textContent;
             var inputField = document.getElementById("parkingSearch");
 
             // Populate the input field with the selected parking space name
-            inputField.value = selectedParkingSpaceName;
+
+            selectedParkingSpaceID = parseInt(selectedParkingSpace.split("-")[0]);
+            inputField.value = selectedParkingSpace.split("-")[1];
+
+
+
 
             // Hide the results container
             document.getElementById("searchResults").style.display = "none";
 
             // Find the selected space and perform additional actions if needed
             var selectedSpace = <?php echo json_encode($data['parking_spaces']); ?>.find(function(parking_space) {
-              return parking_space.name === selectedParkingSpaceName;
+              return parking_space._id === selectedParkingSpaceID;
             });
 
             if (selectedSpace) {
@@ -179,16 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
             // For example, assuming you have a JavaScript object containing officer details:
-            var parking_spaces = <?php echo json_encode($data['parking_spaces']); ?>;
             var parking_spaces_status = <?php echo json_encode($data['parking_spaces_status']); ?>;
 
-            // console.table(parking_spaces)
-            // console.table(parking_spaces_status)
-
-            // Find the selected officer in the officersData array
-            var selectedParkingSpace = parking_spaces.find(function(parking_space) {
-              return parking_space._id == selectedParkingSpaceId;
-            });
 
             var selectedParkingSpaceStatus = parking_spaces_status.filter(function(parking_space_status) {
               return parking_space_status.parking_id == selectedParkingSpaceId;
