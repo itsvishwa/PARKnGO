@@ -348,7 +348,7 @@
   border-radius:20px 20px 20px 20px;
   height: 40px;
   width: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjust the values as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
   outline: none;
   border: none;
 }
@@ -366,7 +366,7 @@
   border-radius:20px 20px 20px 20px;
   height: 40px;
   width: 25%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjust the values as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
   outline: none;
   border: none;
 }
