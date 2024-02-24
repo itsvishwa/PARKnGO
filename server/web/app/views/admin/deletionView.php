@@ -96,12 +96,13 @@
                     <p>Select the company you want to suspend</p>
                 </div>
                 <div class="ml-20">
-                    <select id="companyDropdown" class="company-select" onchange="populateFormFields()">
-                        <option value="" disabled selected>Select Company</option>
-                        <?php foreach ($data['approvedApplications'] as $application) {
-                            echo "<option value='" . $application->_id . "'>" . $application->name . "</option>";
-                        } ?>
-                    </select>
+                    <div class="flex justify-content-left align-items-center">
+                        <input type="text" id="companySearch" class="company-search-bar" oninput="searchCompany()" placeholder="Search Company.">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="company-search-logo text-primary">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </div>
+                    <ul id="searchResults" class="search-results" onclick="selectCompany(event)"></ul>
                 </div>
             </div>
             <div id="card-container" class="parking-card mt-10">
@@ -111,19 +112,55 @@
         </div>
     </div>
     <script>
-        function populateFormFields() {
-            var selectElement = document.getElementById("companyDropdown");
-            var confirmationCard = document.getElementById('confirmationCard');
-            var selectedCompanyId = selectElement.value;
+        function searchCompany() {
+            var searchInput = document.getElementById("companySearch").value.toLowerCase();
+            var companies = <?php echo json_encode($data['approvedApplications']); ?>;
+            var resultsContainer = document.getElementById("searchResults");
 
-            // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
-            // For example, assuming you have a JavaScript object containing officer details:
-            var Companies = <?php echo json_encode($data['approvedApplications']); ?>;
+            // Clear previous search results
+            resultsContainer.innerHTML = "";
 
-
-            var selectedCompany = Companies.find(function(parking_space) {
-                return parking_space._id == selectedCompanyId;
+            // Filter parking spaces based on the search input
+            var filteredCompany = companies.filter(function(company) {
+                return company.name.toLowerCase().includes(searchInput);
             });
+
+
+            // Display search results
+            filteredCompany.forEach(function(result) {
+                var li = document.createElement("li");
+                li.textContent = result._id + "-" + result.name;
+                resultsContainer.appendChild(li);
+            });
+
+            // Show the results container
+            resultsContainer.style.display = filteredCompany.length > 0 ? "block" : "none";
+        }
+
+        function selectCompany(event) {
+            var selectedCompany = event.target.textContent;
+            var inputField = document.getElementById("companySearch");
+
+            // Populate the input field with the selected parking space name
+            selectCompanyID = parseInt(selectedCompany.split("-")[0]);
+            inputField.value = selectedCompany.split("-")[1];
+
+            // Hide the results container
+            document.getElementById("searchResults").style.display = "none";
+
+            // Find the selected space and perform additional actions if needed
+            var selectedCompany = <?php echo json_encode($data['approvedApplications']); ?>.find(function(company) {
+                return company._id === selectCompanyID;
+            });
+
+            if (selectedCompany) {
+                populateFormFields(selectedCompany);
+            }
+        }
+
+        function populateFormFields(selectedCompany) {
+            var confirmationCard = document.getElementById('confirmationCard');
+            var selectedCompanyId = selectedCompany._id;
 
             if (selectedCompany) {
                 // Update the confirmation card content dynamically
