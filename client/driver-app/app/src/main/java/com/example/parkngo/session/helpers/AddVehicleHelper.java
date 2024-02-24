@@ -42,6 +42,7 @@ public class AddVehicleHelper {
         this.context = context;
         this.fragmentManager = fragmentManager;
     }
+
     public void initSpinners(){
         setVehicleProvinceSpinner();
         setVehicleTypeSpinner();

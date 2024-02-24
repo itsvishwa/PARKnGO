@@ -66,6 +66,7 @@ drawable round_outline
 drawable round_red_circle
 drawable scan_qr
 drawable search_view_bg
+drawable sucess
 drawable top_app_bar
 drawable transaction_failed
 id add_review_frag_add_review_btn
@@ -104,7 +105,9 @@ id button2
 id button3
 id button4
 id button5
+id button6
 id button7
+id button8
 id constraintLayout
 id constraintLayout10
 id constraintLayout11
@@ -193,6 +196,7 @@ id imageView2
 id imageView3
 id imageView4
 id imageView5
+id imageView6
 id imageView7
 id imageView9
 id imageViewConstraintLayout
@@ -276,6 +280,7 @@ id ri_msg
 id ri_name
 id ri_rating_bar
 id searchView
+id session_on_going_force_stop_btn
 id session_on_going_hours_went
 id session_on_going_minutes_went
 id session_on_going_officer_id
@@ -343,15 +348,21 @@ id textView39
 id textView4
 id textView40
 id textView41
+id textView42
 id textView43
 id textView44
 id textView45
 id textView46
 id textView47
+id textView48
+id textView49
 id textView5
+id textView50
 id textView51
 id textView52
 id textView53
+id textView54
+id textView55
 id textView57
 id textView59
 id textView6
@@ -391,6 +402,8 @@ layout fragment_edit_profile
 layout fragment_edit_review
 layout fragment_edit_vehicle
 layout fragment_error
+layout fragment_force_end_confirm
+layout fragment_force_end_sucessfull
 layout fragment_home
 layout fragment_logout
 layout fragment_navigate

@@ -41,11 +41,11 @@ class Session extends Controller
                 "parking_id" => trim($_POST["parking_id"]),
             ];
 
-            if($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking {
+            if ($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking {
 
 
                 $open_session = $this->session_model->is_open_session_exists($session_data["vehicle_number"]);
-               
+
                 // check whether the given vehicle number has an open session
                 if ($open_session) {
                     $result = [
@@ -54,7 +54,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_404($result);
-
                 } else {    // No open session exists for the vehicle number
 
                     // add new session data to the parking_session table
@@ -77,9 +76,8 @@ class Session extends Controller
 
                     $this->send_json_200($result);
                 }
-
             } else {    //parking_id is not similar to the assigned parking
-                
+
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
                 if ($assigned_parking_details) {
@@ -92,7 +90,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
 
                     $result = [
@@ -102,7 +99,6 @@ class Session extends Controller
 
                     $this->send_json_404($result);
                 }
-    
             }
         }
     }
@@ -119,13 +115,13 @@ class Session extends Controller
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
-            
+
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $open_session = $this->session_model->is_open_session_exists($vehicle_number);
-    
+
                 // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
@@ -193,7 +189,6 @@ class Session extends Controller
                         $this->send_json_200($result);
                     }
                 }
-
             } else {    //parking_id is not similar to the assigned parking
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
@@ -208,7 +203,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
                     $result = [
                         "response_code" => "204",
@@ -222,7 +216,8 @@ class Session extends Controller
     }
 
 
-    public function end() {
+    public function end()
+    {
         $token_data = $this->verify_token_for_officers();
 
         if ($token_data === 400) {
@@ -235,7 +230,7 @@ class Session extends Controller
 
             $parking_id = trim($_POST["parking_id"]);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $encrypted_session_id = trim($_POST["session_id"]);
 
@@ -267,10 +262,10 @@ class Session extends Controller
                     $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
 
                     //start payment session
-            
+
                     //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
                     $rate = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
-            
+
                     // Check if $rate exists and contains the 'rate' property
                     if ($rate && property_exists($rate, 'rate') && is_numeric($rate->rate)) {
                         $hourly_rate = $rate->rate;
@@ -297,21 +292,19 @@ class Session extends Controller
                             "response_code" => "800",
                             "message" => "parking session is ended successfully!"
                         ];
-    
-                        $this->send_json_200($result);
 
+                        $this->send_json_200($result);
                     } else {
                         $result = [
                             "response_code" => "204",
                             "message" => "Invalid rate or rate not available"
                         ];
-                        
+
                         $this->send_json_404($result);
                     }
                 }
-            
             } else { //parking_id is not similar to the assigned parking
-                
+
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
                 if ($assigned_parking_details) {
@@ -324,7 +317,6 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
                     $result = [
                         "response_code" => "204",
@@ -334,6 +326,21 @@ class Session extends Controller
                     $this->send_json_404($result);
                 }
             }
+        }
+    }
+
+
+    public function force_end($latitude, $longitude)
+    {
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } else if ($token_data === 404) {
+            $this->send_json_404("Token not found");
+        } else {
+            $session_data = $this->session_model->get_ongoing_session_data($token_data["user_id"]);
+            // need to verify 
         }
     }
 }
