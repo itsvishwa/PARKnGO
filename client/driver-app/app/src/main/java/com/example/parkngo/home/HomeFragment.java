@@ -30,33 +30,10 @@ public class HomeFragment extends Fragment {
 
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
 
-        // initialize the helper
-        new HomeHelper(view, getContext());
+        HomeHelper homeHelper = new HomeHelper(view, getContext());
+        homeHelper.initLayout();
+        homeHelper.initAllBtnListeners();
 
-        // onclick listeners
-        Spinner spinner = view.findViewById(R.id.home_frag_spinner); // spinner
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                vehicleType = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        // main button in home fragment
-        ShapeableImageView shapeableImageView = view.findViewById(R.id.home_frag_main_img);
-        shapeableImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle data = new Bundle();
-                data.putString("vehicleType", vehicleType);
-                MainActivity mainActivity = (MainActivity)requireContext();
-                mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
-            }
-        });
         return view;
     }
 }

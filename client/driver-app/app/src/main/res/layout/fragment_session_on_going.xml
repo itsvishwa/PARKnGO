@@ -8,9 +8,7 @@
     android:orientation="vertical"
     tools:context=".session.SessionOnGoingFragment"
     android:clickable="true"
-    android:focusable="true"
-    tools:layout_editor_absoluteX="-21dp"
-    tools:layout_editor_absoluteY="-103dp">
+    android:focusable="true">
 
     <!--    Top App Bar Here-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -184,7 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@drawable/radius_6_solid"
-            android:elevation="2dp"
+
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -356,7 +354,6 @@
             android:background="@drawable/radius_6_solid"
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:translationZ="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
@@ -389,7 +386,7 @@
                 android:id="@+id/textView64"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16sp"
+                android:layout_marginStart="8dp"
                 android:text="H"
                 android:textSize="43sp"
                 android:textStyle="bold"
@@ -401,7 +398,7 @@
                 android:id="@+id/session_on_going_minutes_went"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="30"
                 android:textColor="@color/primaryColor"
                 android:textSize="43sp"
@@ -430,19 +427,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="* Press Show QR button when you want to leave the parking space"
-            android:textAlignment="center"
-            android:textSize="13sp"
+            android:text="* If parking officer is not at the parking space, press “force stop” button to end the session after you leave the parking space."
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout17" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/session_on_going_force_stop_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
-            android:backgroundTint="#FE5654"
+            android:backgroundTint="#949494"
             android:text="Force Stop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -455,7 +451,7 @@
             android:layout_marginEnd="56dp"
             android:text="Show QR"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button2" />
+            app:layout_constraintTop_toTopOf="@+id/session_on_going_force_stop_btn" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
