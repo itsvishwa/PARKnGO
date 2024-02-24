@@ -514,7 +514,7 @@ public function updateApprovalStatus($companyId) {
 public function approveApplication($companyId) {
   // Prepare the SQL query
   $this->db->query('UPDATE company 
-                    SET is_approved = 1, is_reviewd = 1 
+                    SET is_approved = 1, is_reviewd = 1
                     WHERE _id = :companyId');
 
   // Bind the parameters
