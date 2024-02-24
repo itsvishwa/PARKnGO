@@ -538,6 +538,32 @@ public function rejectApplication($companyId, $rejectReason) {
   return $this->db->execute();
 }
 
+// In your Admin.php model
+
+// In your Admin.php model
+
+public function getDocumentData($documentId)
+{
+    // Assuming your document data is stored in the 'documents' field as a blob
+    $sql = "SELECT documents FROM company WHERE _id = :documentId";
+    $this->db->query($sql);
+    $this->db->bind(':documentId', $documentId);
+
+    $row = $this->db->single();
+
+    // Check if the query was successful
+    if ($row) {
+        // Access the 'documents' field
+        $documentData = $row->documents;
+
+        return $documentData;
+    }
+
+    return null; // or handle the case when the document is not found
+}
+
+
+
 
 
 

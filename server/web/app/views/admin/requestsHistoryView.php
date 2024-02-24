@@ -82,9 +82,6 @@
                     <h3 class="ml-5">Requests History</h3>
                 </div>
                 <div class="profile">
-                  <!--  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>-->
                     <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
                     <a href="../users/logout" class="logout">Log out</a>
                 </div>
@@ -131,9 +128,11 @@
                                             <td class="status2-cell">Approved</td>
                                             <td>N/A</td>
                                             <td>
+                                            <a href="#" class="download-document" data-document-id="<?php echo $approvedApplication->_id; ?>">
                                                 <span class="material-symbols-outlined">
                                                     download
                                                 </span>
+                                            </a>
                                             </td>
                                         </tr>
                                     <?php
@@ -177,9 +176,11 @@
                                             </td>
 
                                             <td>
+                                            <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">
                                                 <span class="material-symbols-outlined">
                                                     download
                                                 </span>
+                                            </a>
                                             </td>
                                         </tr>
                                 <?php
@@ -198,20 +199,6 @@
     </div>
     </div>
     </div>
-    <!--<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const readMoreLinks = document.querySelectorAll('.read-more-link');
-            readMoreLinks.forEach(function(link) {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const fullText = this.nextElementSibling;
-                    fullText.style.display = 'inline'; // Show the full text when clicked
-                    this.style.display = 'none'; // Hide the "Read More" link
-                });
-            });
-        });
-    </script>-->
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     const readMoreLinks = document.querySelectorAll('.read-more-link');
@@ -247,7 +234,37 @@
     });
 });
 
-    </script>
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const downloadLinks = document.querySelectorAll('.download-document');
+
+    downloadLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const documentId = this.dataset.documentId;
+
+            // Make an AJAX request to the server to download the PDF
+            fetch('<?php echo URLROOT; ?>/admins/downloadDocument/' + documentId)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'document.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => console.error('Error downloading document:', error));
+        });
+    });
+
+    // ... (existing code for Read More/Show Less functionality)
+});
+
+</script>
 
 </body>
 

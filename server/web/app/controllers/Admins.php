@@ -447,7 +447,7 @@ class Admins extends Controller
   }
 }*/
 
-public function downloadDocument($documentId) {
+public function downloadDocument1($documentId) {
   $this->adminModel = $this->model('Admin');
   
   // Log received document ID
@@ -472,7 +472,22 @@ public function downloadDocument($documentId) {
       echo 'Document not found';
   }
 }
+/********************************* */
+// In your Admins.php controller
 
+public function downloadDocument($documentId)
+{
+    // Fetch the PDF data from the database based on the $documentId
+    $documentData = $this->adminModel->getDocumentData($documentId);
+
+    // Set appropriate headers for PDF response
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="document.pdf"');
+
+    // Output the PDF data
+    echo $documentData;
+    exit();
+}
 
 
 /*public function submitRejectReason()
