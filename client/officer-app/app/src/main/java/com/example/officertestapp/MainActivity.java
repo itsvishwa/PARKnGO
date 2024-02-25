@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.officertestapp.Home.AssignVehicle01Fragment;
-import com.example.officertestapp.Home.AssignVehicle02Fragment;
-import com.example.officertestapp.Home.AssignVehicle03Fragment;
+import com.example.officertestapp.Home.AssignAVehicleAddDetailsFragment;
+import com.example.officertestapp.Home.AssignAVehicleConfirmationFragment;
 import com.example.officertestapp.Home.HomeMainFragment;
 import com.example.officertestapp.Home.ReleaseASlot01Fragment;
 import com.example.officertestapp.Home.ReleaseASlot02Fragment;
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void frag_home_main_assign_vehicle_btn_handler(View v) {
-        replaceFragment(new AssignVehicle01Fragment());
+        replaceFragment(new AssignAVehicleAddDetailsFragment());
     }
 
     public void frag_home_main_release_slot_btn_handler(View v) {
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void frag_home_assign_vehicle01_reserve_slot_btn_handler(View v) {
-        replaceFragment(new AssignVehicle02Fragment());
+        replaceFragment(new AssignAVehicleConfirmationFragment());
     }
 
 
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void assign_vehicle_02_back_btn_handler(View v) {
-        replaceFragment(new AssignVehicle01Fragment());
+        replaceFragment(new AssignAVehicleAddDetailsFragment());
     }
 
 
