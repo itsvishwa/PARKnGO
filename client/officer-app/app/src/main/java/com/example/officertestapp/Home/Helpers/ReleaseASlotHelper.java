@@ -18,7 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
-
 import com.example.officertestapp.Home.ReleaseASlot03Fragment;
 import com.example.officertestapp.MainActivity;
 
@@ -120,8 +119,10 @@ public class ReleaseASlotHelper {
 
                 //parse the bundle to the PaymentDetailsHelper
                 // Create an instance of PaymentDetailsHelper and pass the bundle
-                PaymentDetailsHelper paymentDetailsHelper = new PaymentDetailsHelper(view, context, fragmentManager);
-                paymentDetailsHelper.getPaymentDetails(PaymentID);
+                Bundle data = new Bundle();
+                data.putString("_id", PaymentID);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new ReleaseASlot03Fragment(), data, view);
 
             } else {
                 // Show a toast message with the response message

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
@@ -20,26 +21,31 @@ import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
 import com.example.officertestapp.Home.ReleaseASlot03Fragment;
 import com.example.officertestapp.MainActivity;
+import com.example.officertestapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class PaymentDetailsHelper {
     Context context;
     View view;
-    FragmentManager fragmentManager;
     ParkngoStorage parkngoStorage;
+    String amount;
 
-    public PaymentDetailsHelper (View view, Context context, FragmentManager fragmentManager) {
+    public PaymentDetailsHelper (View view, Context context) {
         this.view = view;
         this.context = context;
-        this.fragmentManager = fragmentManager;
         this.parkngoStorage = new ParkngoStorage(context);
     }
 
-    public void getPaymentDetails(String paymentId) {
+    public void initLayout(String paymentId) {
         String parkingId = parkngoStorage.getData("parkingID");
 
         // get the token
@@ -109,35 +115,45 @@ public class PaymentDetailsHelper {
                 String StartTime = responseData.getString("start_time");
                 String EndTime = responseData.getString("end_time");
                 String TimeWent = responseData.getString("time_went");
-                String Amount = responseData.getString("amount");
+                amount = responseData.getString("amount");
 
-                // Bundle response values
-                Bundle bundle = new Bundle();
-                bundle.putString("PaymentID", PaymentID);
-                bundle.putString("VehicleNumber", VehicleNumber);
-                bundle.putString("VehicleType", VehicleType);
-                bundle.putString("StartTime", StartTime);
-                bundle.putString("EndTime", EndTime);
-                bundle.putString("TimeWent", TimeWent);
-                bundle.putString("Amount", Amount);
+                TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
+                TextView vehicleTypeTextView = view.findViewById(R.id.vehicle_type_txt_view);
+                TextView sessionStartedTimeTextView = view.findViewById(R.id.session_started_time_txt_view);
+                TextView sessionEndedTimeTextView = view.findViewById(R.id.session_ended_time_txt_view);
+                TextView timeDurationTextView = view.findViewById(R.id.time_duration_txt_view);
+                TextView amountTextView = view.findViewById(R.id.amount_txt_view);
 
-                // Log the values for debugging
-                Log.d("Bundle Values", "Payment ID: " + PaymentID);
-                Log.d("Bundle Values", "Vehicle Number: " + VehicleNumber);
-                Log.d("Bundle Values", "Vehicle Type: " + VehicleType);
-                Log.d("Bundle Values", "Start Time: " + StartTime);
-                Log.d("Bundle Values", "End Time: " + EndTime);
-                Log.d("Bundle Values", "Time Went: " + TimeWent);
-                Log.d("Bundle Values", "Amount: " + Amount);
+                // Insert space between letters and numbers in the vehicle number
+                String formattedVehicleNumber = VehicleNumber.replaceAll("(\\D)(\\d+)", "$1 $2 ");
 
-                //parse the bundle to the fragment03
-                // Create an instance of the new fragment and set the bundle
-                ReleaseASlot03Fragment releaseASlot03Fragment = new ReleaseASlot03Fragment();
-                releaseASlot03Fragment.setArguments(bundle);
 
-                // Navigate to AssignVehicle03Fragment
-                MainActivity mainActivity = (MainActivity) context;
-                mainActivity.replaceFragment(releaseASlot03Fragment);
+//                 format the timestamp to date time according to the devices time zone
+//                 Convert the timestamp string to a long value
+            long timestampStart = Long.parseLong(StartTime);
+            // Create a Date object from the timestamp
+            Date startDate = new Date(timestampStart * 1000);
+            // Create a SimpleDateFormat object with your desired format
+            SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
+            // Set the timezone to the device's local timezone
+            sdf.setTimeZone(TimeZone.getDefault());
+            // Format the date object to a string
+            String formattedStartTime = sdf.format(startDate);
+
+
+            long timestampEnd = Long.parseLong(EndTime);
+            Date EndDate = new Date(timestampEnd * 1000);
+            SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
+            edf.setTimeZone(TimeZone.getDefault());
+            String formattedEndTime = sdf.format(EndDate);
+
+            vehicleNumberTextView.setText(formattedVehicleNumber);
+            vehicleTypeTextView.setText(VehicleType);
+            sessionStartedTimeTextView.setText(formattedStartTime);
+            sessionEndedTimeTextView.setText(formattedEndTime);
+            timeDurationTextView.setText(TimeWent);
+            amountTextView.setText(amount);
+
             } else {
                 // Show a toast message with the response message
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -147,6 +163,10 @@ public class PaymentDetailsHelper {
             Log.e("JSON Parsing Error", "Error parsing response: " + e.getMessage());
             Toast.makeText(context, "Error parsing response", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public String getAmount(){
+        return amount;
     }
 
     private void errorResponseHandler(VolleyError error) {
