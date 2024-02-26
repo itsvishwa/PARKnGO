@@ -3177,6 +3177,7 @@ drawable top_app_bar
 drawable transaction_failed
 drawable visa
 drawable vishwa
+drawable warning
 font product_sans_bold
 font product_sans_regular
 id ALT
@@ -3255,6 +3256,7 @@ id add_review_frag_content
 id add_review_frag_discard_btn
 id add_review_frag_rating_bar
 id add_vehicle_frag_add_btn
+id add_vehicle_frag_optional_spinner
 id add_vehicle_frag_province_spinner
 id add_vehicle_frag_type_spinner
 id add_vehicle_frag_vehicle_name
@@ -3315,14 +3317,11 @@ id bounceBoth
 id bounceEnd
 id bounceStart
 id button
-id button12
 id button13
 id button14
-id button2
 id button3
 id button4
 id button5
-id button6
 id button7
 id button8
 id buttonPanel
@@ -3363,11 +3362,14 @@ id constraintLayout15
 id constraintLayout16
 id constraintLayout17
 id constraintLayout18
+id constraintLayout19
 id constraintLayout2
+id constraintLayout20
 id constraintLayout3
 id constraintLayout4
 id constraintLayout5
 id constraintLayout6
+id constraintLayout7
 id constraintLayout8
 id constraintLayout9
 id container
@@ -3407,6 +3409,8 @@ id disablePostScroll
 id disableScroll
 id disjoint
 id divider
+id divider2
+id divider3
 id done_txt
 id dragAnticlockwise
 id dragClockwise
@@ -3444,6 +3448,7 @@ id edit_review_frag_rating_bar
 id edit_vehicle_frag_delete_btn
 id edit_vehicle_frag_discard_btn
 id edit_vehicle_frag_edit_btn
+id edit_vehicle_frag_optional_spinner
 id edit_vehicle_frag_province_spinner
 id edit_vehicle_frag_type_spinner
 id edit_vehicle_frag_vehicle_name
@@ -3479,6 +3484,8 @@ id fitXY
 id fixed
 id flip
 id floating
+id force_end_confirm_fragment_confirm_btn
+id force_end_success_fragment_main_menu_btn
 id forever
 id fragment_container_view_tag
 id fragment_session_end_qr_imageView
@@ -3544,6 +3551,7 @@ id imageView4
 id imageView5
 id imageView6
 id imageView7
+id imageView8
 id imageView9
 id imageViewConstraintLayout
 id img_result_done
@@ -3710,6 +3718,7 @@ id parking_frag_recycle_view
 id parking_selected_frag_is_public
 id parking_selected_frag_no_others_review_text
 id parking_selected_frag_review_layout
+id parking_selected_fragment_navigate_btn
 id password_toggle
 id path
 id pathRelative

@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".session.EditVehicle"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@color/backgroundColor">
 
     <!--    top app bar here -->
@@ -176,9 +178,16 @@
                     android:background="@null"
                     android:ems="3"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content">
                 </EditText>
+
+                <Spinner
+                    android:id="@+id/edit_vehicle_frag_optional_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
                 <EditText
                     android:id="@+id/edit_vehicle_frag_vehicle_number_digits"
                     android:paddingVertical="13dp"
@@ -187,16 +196,17 @@
                     android:maxLength="4"
                     android:background="@null"
                     android:ems="4"
+                    android:inputType="number"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content">
                 </EditText>
+
                 <Spinner
                     android:id="@+id/edit_vehicle_frag_province_spinner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -244,6 +254,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Vehicle"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/edit_vehicle_frag_discard_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/edit_vehicle_frag_discard_btn"
@@ -256,6 +267,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/bottomNavUnselectedItemColor"
             android:text="Discard"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_vehicle_frag_delete_btn" />
 
@@ -275,7 +287,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/primaryColor"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:text="Delete this record"
             android:clickable="true"
             android:focusable="true"

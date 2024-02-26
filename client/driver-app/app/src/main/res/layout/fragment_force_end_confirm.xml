@@ -59,10 +59,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
-                        android:layout_marginTop="10dp"
                         android:text="Confirm your request"
                         android:textColor="@color/textPrimary"
                         android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
@@ -176,58 +176,78 @@
         android:layout_weight="8"
         android:paddingHorizontal="18dp">
 
-        <TextView
-            android:id="@+id/textView42"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout19"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
-            android:text="Are you sure you want to end the session by yourself?"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="44dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/textView48"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="● Please note that this action can’t be undone. To end the parking session, ensure you're outside the designated parking area (beyond a 500m range)."
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="16sp"
-            android:layout_marginTop="40dp"
-            android:paddingHorizontal="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView42" />
-
-        <TextView
-            android:id="@+id/textView49"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="● A notification will be sent to the relevant parking officer regarding this action. "
-            android:textSize="16sp"
-            android:paddingHorizontal="20dp"
             android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:background="@drawable/radius_6_solid"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView48" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="● You will not be charged for the session that ended successfully by “force-stop”"
-            android:textSize="16sp"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView49" />
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Are you sure you want to end the session by yourself?"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Please note that this action can’t be undone. To end the parking session, ensure you're outside the designated parking area (beyond a 500m range)."
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="● A notification will be sent to the relevant parking officer regarding this action. "
+
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="● You will not be charged for the session that ended successfully by “force-stop”"
+                android:textSize="16sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView42"
+                android:src="@drawable/warning" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/force_end_confirm_fragment_confirm_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirm and End"
@@ -241,13 +261,13 @@
             android:id="@+id/button8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deny"
-            android:onClick="backBtnHandler"
-            android:textSize="18sp"
             android:backgroundTint="#949494"
-            android:layout_marginTop="44dp"
+            android:onClick="backBtnHandler"
+            android:text="Deny"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView50" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

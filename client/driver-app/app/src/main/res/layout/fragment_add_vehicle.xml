@@ -176,9 +176,14 @@
                     android:ems="3"
                     android:maxLength="3"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content">
                 </EditText>
+                <Spinner
+                    android:id="@+id/add_vehicle_frag_optional_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
                 <EditText
                     android:id="@+id/add_vehicle_frag_vehicle_number_digits"
                     android:paddingVertical="13dp"
@@ -189,7 +194,7 @@
                     android:ems="4"
                     android:maxLength="4"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content">
                 </EditText>
                 <Spinner

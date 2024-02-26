@@ -59,10 +59,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
-                        android:layout_marginTop="10dp"
                         android:text="You are free to go!"
                         android:textColor="@color/textPrimary"
                         android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
@@ -72,24 +72,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8">
-
-                    <ImageView
-                        android:id="@+id/appbar_icon_home_act"
-                        android:onClick="backBtnHandler"
-                        android:layout_width="51dp"
-                        android:layout_height="51dp"
-                        android:layout_marginTop="27dp"
-                        android:background="@drawable/appbar_icon_bg"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/baseline_arrow_back_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/backgroundColor" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_weight="0.8"/>
 
             </LinearLayout>
 
@@ -202,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Session has been ended sucessfully!"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,7 +198,7 @@
                 android:layout_marginTop="12dp"
                 android:text="You are free to go! \n Thank you for choosing PARKN’GO"
                 android:textAlignment="center"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView54" />
@@ -224,12 +207,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/force_end_success_fragment_main_menu_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:text="Main Menu"
-            android:textSize="17sp"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

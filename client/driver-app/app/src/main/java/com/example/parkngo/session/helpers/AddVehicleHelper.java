@@ -46,6 +46,7 @@ public class AddVehicleHelper {
     public void initSpinners(){
         setVehicleProvinceSpinner();
         setVehicleTypeSpinner();
+        setVehicleOptionalSpinner();
     }
 
     private void setVehicleProvinceSpinner(){
@@ -63,6 +64,16 @@ public class AddVehicleHelper {
         ArrayList<String> vehicleTypeList = new ArrayList<>(Arrays.asList("Car", "Bike", "3 Wheel", "Van", "Bus"));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypeList);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+
+        spinner.setAdapter(adapter);
+    }
+
+    private void setVehicleOptionalSpinner(){
+        Spinner spinner = addVehicleView.findViewById(R.id.add_vehicle_frag_optional_spinner);
+        ArrayList<String> optionalList = new ArrayList<>(Arrays.asList("-", "N/A", "ශ්\u200Dරී"));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, optionalList);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
 
         spinner.setAdapter(adapter);

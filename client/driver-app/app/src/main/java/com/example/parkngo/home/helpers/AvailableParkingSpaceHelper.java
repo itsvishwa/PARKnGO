@@ -150,6 +150,7 @@ public class AvailableParkingSpaceHelper {
                     data.putString("subText2", "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options");
 
                     MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.onBackPressed();
                     mainActivity.replaceFragment(new ErrorFragment(), data);
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
@@ -305,6 +306,8 @@ public class AvailableParkingSpaceHelper {
         });
     }
 
+
+    // sorting model arr
     private void sortParkingSpaceData(Boolean minDistance, Boolean maxFreeSlots, Boolean isPublic, Boolean minRate){
             ArrayList<AvailableParkingSpaceModel> newAvailableParkingSpacesModelArr = new ArrayList<>(availableParkingSpaceModelsArr);
             if(minDistance){
@@ -328,6 +331,7 @@ public class AvailableParkingSpaceHelper {
     }
 
 
+    // initializing refresh btn listener
     private void initRefreshBtnListener(){
         Button button = availableParkingSpaceView.findViewById(R.id.available_parking_space_frag_refresh_btn);
         button.setOnClickListener(new View.OnClickListener() {

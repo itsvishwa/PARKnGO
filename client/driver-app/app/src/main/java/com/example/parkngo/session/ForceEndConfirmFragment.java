@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.parkngo.R;
+import com.example.parkngo.session.helpers.ForceEndConfirmHelper;
 
 public class ForceEndConfirmFragment extends Fragment {
 
@@ -16,6 +17,11 @@ public class ForceEndConfirmFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_force_end_confirm, container, false);
+        View forceEndConfirmView =  inflater.inflate(R.layout.fragment_force_end_confirm, container, false);
+
+        ForceEndConfirmHelper forceEndConfirmHelper = new ForceEndConfirmHelper(getContext(), forceEndConfirmView);
+        forceEndConfirmHelper.initAllBtnListeners();
+
+        return forceEndConfirmView;
     }
 }

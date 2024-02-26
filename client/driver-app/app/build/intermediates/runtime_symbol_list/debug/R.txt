@@ -3176,6 +3176,7 @@ int drawable top_app_bar 0x7f07013b
 int drawable transaction_failed 0x7f07013c
 int drawable visa 0x7f07013d
 int drawable vishwa 0x7f07013e
+int drawable warning 0x7f070140
 int font product_sans_bold 0x7f080000
 int font product_sans_regular 0x7f080001
 int id ALT 0x7f090000
@@ -3254,6 +3255,7 @@ int id add_review_frag_content 0x7f090048
 int id add_review_frag_discard_btn 0x7f090049
 int id add_review_frag_rating_bar 0x7f09004a
 int id add_vehicle_frag_add_btn 0x7f09004b
+int id add_vehicle_frag_optional_spinner 0x7f09035f
 int id add_vehicle_frag_province_spinner 0x7f09004c
 int id add_vehicle_frag_type_spinner 0x7f09004d
 int id add_vehicle_frag_vehicle_name 0x7f09004e
@@ -3314,14 +3316,11 @@ int id bounceBoth 0x7f090081
 int id bounceEnd 0x7f090082
 int id bounceStart 0x7f090083
 int id button 0x7f090084
-int id button12 0x7f090085
 int id button13 0x7f090086
 int id button14 0x7f090087
-int id button2 0x7f090343
 int id button3 0x7f090088
 int id button4 0x7f090089
 int id button5 0x7f09008a
-int id button6 0x7f090348
 int id button7 0x7f09008b
 int id button8 0x7f090349
 int id buttonPanel 0x7f09008c
@@ -3362,11 +3361,14 @@ int id constraintLayout15 0x7f0900ae
 int id constraintLayout16 0x7f0900af
 int id constraintLayout17 0x7f0900b0
 int id constraintLayout18 0x7f0900b1
+int id constraintLayout19 0x7f090356
 int id constraintLayout2 0x7f0900b2
+int id constraintLayout20 0x7f09035d
 int id constraintLayout3 0x7f0900b3
 int id constraintLayout4 0x7f0900b4
 int id constraintLayout5 0x7f0900b5
 int id constraintLayout6 0x7f0900b6
+int id constraintLayout7 0x7f090352
 int id constraintLayout8 0x7f0900b7
 int id constraintLayout9 0x7f0900b8
 int id container 0x7f0900b9
@@ -3406,6 +3408,8 @@ int id disablePostScroll 0x7f0900da
 int id disableScroll 0x7f0900db
 int id disjoint 0x7f0900dc
 int id divider 0x7f0900dd
+int id divider2 0x7f09035a
+int id divider3 0x7f09035b
 int id done_txt 0x7f0900de
 int id dragAnticlockwise 0x7f0900df
 int id dragClockwise 0x7f0900e0
@@ -3443,6 +3447,7 @@ int id edit_review_frag_rating_bar 0x7f0900ff
 int id edit_vehicle_frag_delete_btn 0x7f090100
 int id edit_vehicle_frag_discard_btn 0x7f090101
 int id edit_vehicle_frag_edit_btn 0x7f090102
+int id edit_vehicle_frag_optional_spinner 0x7f09035e
 int id edit_vehicle_frag_province_spinner 0x7f090103
 int id edit_vehicle_frag_type_spinner 0x7f090104
 int id edit_vehicle_frag_vehicle_name 0x7f090105
@@ -3478,6 +3483,8 @@ int id fitXY 0x7f090122
 int id fixed 0x7f090123
 int id flip 0x7f090124
 int id floating 0x7f090125
+int id force_end_confirm_fragment_confirm_btn 0x7f090359
+int id force_end_success_fragment_main_menu_btn 0x7f090357
 int id forever 0x7f090126
 int id fragment_container_view_tag 0x7f090127
 int id fragment_session_end_qr_imageView 0x7f090344
@@ -3543,6 +3550,7 @@ int id imageView4 0x7f090162
 int id imageView5 0x7f090163
 int id imageView6 0x7f09034d
 int id imageView7 0x7f090164
+int id imageView8 0x7f090358
 int id imageView9 0x7f090165
 int id imageViewConstraintLayout 0x7f090166
 int id img_result_done 0x7f090167
@@ -3709,6 +3717,7 @@ int id parking_frag_recycle_view 0x7f090207
 int id parking_selected_frag_is_public 0x7f090208
 int id parking_selected_frag_no_others_review_text 0x7f090209
 int id parking_selected_frag_review_layout 0x7f09020a
+int id parking_selected_fragment_navigate_btn 0x7f09035c
 int id password_toggle 0x7f09020b
 int id path 0x7f09020c
 int id pathRelative 0x7f09020d
