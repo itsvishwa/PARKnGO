@@ -522,4 +522,10 @@ class Companys extends Controller
 
     $this->view('company/parkingOfficerActivitiesView', $data);
   }
+
+  public function forceStoppedSessionView()
+  {
+    $data = $this->parkingSpaceModel->getForceStoppedSessions($_SESSION['user_id']);
+    $this->view('company/forceStoppedSessionView', $data);
+  }
 }
