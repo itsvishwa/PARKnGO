@@ -3286,6 +3286,7 @@ int id autoCompleteToEnd 0x7f090068
 int id autoCompleteToStart 0x7f090069
 int id ava_distance 0x7f09006a
 int id ava_free_slots 0x7f09006b
+int id ava_location 0x7f090355
 int id ava_parking_name 0x7f09006c
 int id ava_rate 0x7f09006d
 int id ava_rating_bar 0x7f09006e
@@ -3293,6 +3294,8 @@ int id ava_rating_count 0x7f09006f
 int id ava_recycle_view 0x7f090070
 int id ava_total_slots 0x7f090071
 int id ava_type 0x7f090072
+int id available_parking_space_frag_refresh_btn 0x7f090353
+int id available_parking_space_frag_view_map_btn 0x7f090354
 int id available_parking_spaces_frag_chip_group 0x7f090073
 int id available_parking_spaces_frag_search_bar 0x7f090074
 int id bank_account_subtitle_txt 0x7f090075
@@ -3918,7 +3921,6 @@ int id textView22 0x7f0902d9
 int id textView23 0x7f0902da
 int id textView24 0x7f0902db
 int id textView25 0x7f0902dc
-int id textView26 0x7f0902dd
 int id textView27 0x7f0902de
 int id textView28 0x7f0902df
 int id textView29 0x7f0902e0

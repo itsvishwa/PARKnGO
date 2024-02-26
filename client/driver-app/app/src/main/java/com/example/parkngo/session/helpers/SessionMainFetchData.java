@@ -2,7 +2,6 @@ package com.example.parkngo.session.helpers;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -19,9 +18,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ErrorFragmentHandler;
+import com.example.parkngo.helpers.ErrorFragmentHelper;
 import com.example.parkngo.helpers.ParkngoStorage;
-import com.example.parkngo.session.EditVehicle;
 import com.example.parkngo.session.SessionOnGoingFragment;
 import com.example.parkngo.session.SessionPaymentFragment;
 
@@ -121,21 +119,7 @@ public class SessionMainFetchData {
                 String response = jsonResponse.getString("response");
 
                 if (response.equals("ERROR_6001")){
-                    String appBarMainText = "Something Went Wrong hlo";
-                    String appBarSubText = "";
-                    int bodyImg = R.drawable.not_available;
-                    String bodyMainText = "I don't know what to type here! xD";
-                    String bodySubText = "Please try again later, cause we don't know what happened either";
-
-                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
-                    View newErrorView = errorFragmentHandler.setupView();
-
-                    ViewGroup parent = (ViewGroup) loadingView.getParent();
-                    if (parent != null) {
-                        int index = parent.indexOfChild(loadingView);
-                        parent.removeView(loadingView);
-                        parent.addView(newErrorView, index);
-                    }
+                    // TODO
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
@@ -363,21 +347,7 @@ public class SessionMainFetchData {
                 String response = jsonResponse.getString("response");
 
                 if (response.equals("ERROR_6001")){
-                    String appBarMainText = "Something Went Wrong hlo";
-                    String appBarSubText = "";
-                    int bodyImg = R.drawable.not_available;
-                    String bodyMainText = "I don't know what to type here! xD";
-                    String bodySubText = "Please try again later, cause we don't know what happened either";
-
-                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
-                    View newErrorView = errorFragmentHandler.setupView();
-
-                    ViewGroup parent = (ViewGroup) loadingView.getParent();
-                    if (parent != null) {
-                        int index = parent.indexOfChild(loadingView);
-                        parent.removeView(loadingView);
-                        parent.addView(newErrorView, index);
-                    }
+                    // TODO
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
