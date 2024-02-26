@@ -46,6 +46,8 @@ public class ParkingSelectedFetchData {
     String userReviewId;
     String userReviewContent;
     int userReviewRating;
+    String latitude;
+    String longitude;
 
     public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, String _id, Context context){
         this.parkingSelectedView = parkingSelectedView;
@@ -55,6 +57,13 @@ public class ParkingSelectedFetchData {
         fetchData();
     }
 
+    public String getLatitude(){
+        return latitude;
+    }
+
+    public String getLongitude(){
+        return longitude;
+    }
 
     private void fetchData(){
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -141,6 +150,9 @@ public class ParkingSelectedFetchData {
         TextView reviewCount = parkingSelectedView.findViewById(R.id.parking_Selected_frag_review_count);
 
         // setting basic parking space details
+        latitude = selectedParkingSpaceData.getString("latitude");
+        longitude = selectedParkingSpaceData.getString("longitude");
+
         topAppBarNameView.setText(selectedParkingSpaceData.getString("name"));
         nameView.setText(selectedParkingSpaceData.getString("name"));
         addressView.setText(selectedParkingSpaceData.getString("address"));

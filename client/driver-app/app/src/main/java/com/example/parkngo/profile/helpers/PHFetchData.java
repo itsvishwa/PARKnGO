@@ -137,6 +137,7 @@ public class PHFetchData {
                     data.putString("subText2", "Once you made it, the payment details will display here");
 
                     MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.onBackPressed();
                     mainActivity.replaceFragment(new ErrorFragment(), data);
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
