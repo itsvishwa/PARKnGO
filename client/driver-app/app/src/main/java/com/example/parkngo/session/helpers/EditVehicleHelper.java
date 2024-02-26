@@ -51,6 +51,7 @@ public class EditVehicleHelper {
         this.fragmentManager = fragmentManager;
         this.setVehicleProvinceSpinner();
         this.setVehicleTypeSpinner();
+        setVehicleOptionalSpinner();
     }
 
     private void setVehicleProvinceSpinner(){
@@ -58,6 +59,16 @@ public class EditVehicleHelper {
         ArrayList<String> provinceList = new ArrayList<>(Arrays.asList("CP", "EP", "NC", "NE", "NW", "SB", "SP", "UP", "WP"));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, provinceList);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+
+        spinner.setAdapter(adapter);
+    }
+
+    private void setVehicleOptionalSpinner(){
+        Spinner spinner = editVehicleView.findViewById(R.id.edit_vehicle_frag_optional_spinner);
+        ArrayList<String> optionalList = new ArrayList<>(Arrays.asList("-", "N/A", "ශ්\u200Dරී"));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, optionalList);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
 
         spinner.setAdapter(adapter);

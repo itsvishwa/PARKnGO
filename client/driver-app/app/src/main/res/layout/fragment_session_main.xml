@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".session.SessionMainFragment"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@color/backgroundColor">
 
     <!--    Top App Bar Here-->
@@ -56,10 +58,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="18dp"
-                    android:layout_marginTop="10dp"
                     android:text="Select your vehicle to proceed "
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
@@ -241,7 +243,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="18dp"
                     android:text="1st car name"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -333,7 +335,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="18dp"
                     android:text="2nd car name"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -425,7 +427,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="18dp"
                     android:text="3rd car name"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -464,7 +466,8 @@
             android:id="@+id/textView53"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
+            android:textSize="16sp"
             android:text="*Long tap to edit or to delete the vehicle details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
