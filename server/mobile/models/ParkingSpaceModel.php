@@ -71,7 +71,12 @@ class ParkingSpaceModel
                         AND 
                         parking_space_status.vehicle_type = :vehicle_type
                         AND
-                        parking_spaces.name LIKE :keyword"
+                        (
+                                parking_spaces.name LIKE :keyword
+                                OR
+                                parking_spaces.address LIKE :keyword
+                        )
+                        "
                 );
 
                 $this->db->bind(":vehicle_type", $vehicle_type);
