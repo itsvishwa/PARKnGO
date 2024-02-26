@@ -1,8 +1,10 @@
 package com.example.parkngo.home.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ErrorFragmentHandler;
+import com.example.parkngo.helpers.ErrorFragment;
+import com.example.parkngo.helpers.ErrorFragmentHelper;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -56,6 +60,7 @@ public class AvailableParkingSpaceHelper {
     public void initAllBtnListeners(){
         initSearchBarListener();
         initChipGroupBtnListener();
+        initRefreshBtnListener();
     }
 
 
@@ -94,7 +99,7 @@ public class AvailableParkingSpaceHelper {
 
             for (int i=0; i<resultDataArr.length(); i++){
                 JSONObject dataObj = resultDataArr.getJSONObject(i);
-                String _id = dataObj.getString("_id");
+                String parkingID = dataObj.getString("_id");
                 String name = dataObj.getString("name");
                 String address = dataObj.getString("address");
                 String latitude = dataObj.getString("latitude");
@@ -105,7 +110,7 @@ public class AvailableParkingSpaceHelper {
                 int rate = Integer.parseInt(dataObj.getString("rate"));
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view
@@ -137,21 +142,15 @@ public class AvailableParkingSpaceHelper {
                 String response = jsonResponse.getString("response");
                 if(response.equals("0")) // 0 => means no parking available
                 {
-                    String appBarMainText = "No Available Parking Spaces";
-                    String appBarSubText = "Please try again later";
-                    int bodyImg = R.drawable.not_available;
-                    String bodyMainText = "Parking spaces not available for selected vehicle type!";
-                    String bodySubText = "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options";
+                    Bundle data = new Bundle();
+                    data.putString("MainText1", "No Available Parking Spaces");
+                    data.putString("subText1", "Please try again later");
+                    data.putInt("img", R.drawable.not_available);
+                    data.putString("MainText2", "Parking spaces not available for selected vehicle type!");
+                    data.putString("subText2", "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options");
 
-                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
-                    View newErrorView = errorFragmentHandler.setupView();
-
-                    ViewGroup parent = (ViewGroup) loadingView.getParent();
-                    if (parent != null) {
-                        int index = parent.indexOfChild(loadingView);
-                        parent.removeView(loadingView);
-                        parent.addView(newErrorView, index);
-                    }
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.replaceFragment(new ErrorFragment(), data);
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
@@ -239,7 +238,7 @@ public class AvailableParkingSpaceHelper {
 
             for (int i=0; i<resultDataArr.length(); i++){
                 JSONObject dataObj = resultDataArr.getJSONObject(i);
-                String _id = dataObj.getString("_id");
+                String parkingID = dataObj.getString("_id");
                 String name = dataObj.getString("name");
                 String address = dataObj.getString("address");
                 String latitude = dataObj.getString("latitude");
@@ -250,7 +249,7 @@ public class AvailableParkingSpaceHelper {
                 int rate = Integer.parseInt(dataObj.getString("rate"));
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(name, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view
@@ -326,5 +325,24 @@ public class AvailableParkingSpaceHelper {
             APSRecycleViewAdapter adapter = new APSRecycleViewAdapter(availableParkingSpaceView.getContext(), newAvailableParkingSpacesModelArr);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(availableParkingSpaceView.getContext()));
+    }
+
+
+    private void initRefreshBtnListener(){
+        Button button = availableParkingSpaceView.findViewById(R.id.available_parking_space_frag_refresh_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // switch back to loading view until the data is get fetched
+                ViewGroup parent = (ViewGroup) availableParkingSpaceView.getParent();
+                if (parent != null) {
+                    int index = parent.indexOfChild(availableParkingSpaceView);
+                    parent.removeView(availableParkingSpaceView);
+                    parent.addView(loadingView, index);
+                }
+                availableParkingSpaceModelsArr.clear();
+                layoutFetchData();
+            }
+        });
     }
 }

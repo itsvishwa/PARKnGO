@@ -3287,6 +3287,7 @@ id autoCompleteToEnd
 id autoCompleteToStart
 id ava_distance
 id ava_free_slots
+id ava_location
 id ava_parking_name
 id ava_rate
 id ava_rating_bar
@@ -3294,6 +3295,8 @@ id ava_rating_count
 id ava_recycle_view
 id ava_total_slots
 id ava_type
+id available_parking_space_frag_refresh_btn
+id available_parking_space_frag_view_map_btn
 id available_parking_spaces_frag_chip_group
 id available_parking_spaces_frag_search_bar
 id bank_account_subtitle_txt
@@ -3919,7 +3922,6 @@ id textView22
 id textView23
 id textView24
 id textView25
-id textView26
 id textView27
 id textView28
 id textView29

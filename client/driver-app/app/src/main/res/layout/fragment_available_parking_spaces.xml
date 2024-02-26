@@ -29,11 +29,12 @@
             android:layout_height="match_parent">
 
             <!--            1st segment here-->
+
+            <!--            2nd segment here -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_weight="2.8"
                 android:layout_height="match_parent"
-                >
+                android:layout_weight="2.8">
 
                 <TextView
                     android:id="@+id/appbar_main_text"
@@ -47,20 +48,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/appbar_secondary_text"
+                <Button
+                    android:id="@+id/available_parking_space_frag_refresh_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Updated 1 minute ago pull down to refresh again"
-                    android:textColor="@color/textPrimary"
+                    android:backgroundTint="#FFF3DC"
+                    android:text="Refresh"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
+                <Button
+                    android:id="@+id/available_parking_space_frag_view_map_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFF3DD"
+                    android:text="View on Map"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/available_parking_space_frag_refresh_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text"
+                     />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            2nd segment here -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.8"
@@ -93,8 +108,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="18dp"
-        android:layout_weight="8">
+        android:layout_weight="8"
+        android:paddingHorizontal="18dp">
 
 
         <!--  Search Bar    -->
@@ -150,15 +165,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Public Parking Spaces" />
-
-
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ava_recycle_view"
-            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

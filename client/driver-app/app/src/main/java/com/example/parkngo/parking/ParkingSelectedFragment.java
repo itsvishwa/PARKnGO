@@ -17,7 +17,7 @@ public class ParkingSelectedFragment extends Fragment {
 
     private View parkingSelectedView;
     private View loadingView;
-    private int _id;
+    private String parkingID;
     private String userReviewId;
 
     MainActivity mainActivity;
@@ -36,11 +36,11 @@ public class ParkingSelectedFragment extends Fragment {
 
         // Retrieve data from arguments
         if (getArguments() != null) {
-            _id = getArguments().getInt("_id", -1);
+            parkingID = getArguments().getString("parkingID");
         }
 
         // Perform data loading in the background
-        ParkingSelectedFetchData parkingSelectedFetchData = new ParkingSelectedFetchData(parkingSelectedView, loadingView, _id, getContext());
+        ParkingSelectedFetchData parkingSelectedFetchData = new ParkingSelectedFetchData(parkingSelectedView, loadingView, parkingID, getContext());
 
 
         // onclick listeners ......................................................................................................
@@ -50,7 +50,7 @@ public class ParkingSelectedFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle data = new Bundle();
-                data.putInt("_id", _id);
+                data.putString("parkingID", parkingID);
                 mainActivity.replaceFragment(new AddReviewFragment(), data);
             }
         }

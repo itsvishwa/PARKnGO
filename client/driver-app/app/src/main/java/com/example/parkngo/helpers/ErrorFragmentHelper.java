@@ -1,16 +1,12 @@
 package com.example.parkngo.helpers;
 
-import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.home.AvailableParkingSpacesFragment;
 
-public class ErrorFragmentHandler {
+public class ErrorFragmentHelper {
 
     String appBarMainText;
     String appBarSubText;
@@ -19,7 +15,7 @@ public class ErrorFragmentHandler {
     String bodySubText;
     View errorView;
 
-    public ErrorFragmentHandler(String appBarMainText, String appBarSubText, int bodyImg, String bodyMainText, String bodySubText, View errorView){
+    public ErrorFragmentHelper(String appBarMainText, String appBarSubText, int bodyImg, String bodyMainText, String bodySubText, View errorView){
         this.appBarMainText = appBarMainText;
         this.appBarSubText = appBarSubText;
         this.bodyImg = bodyImg;
@@ -28,7 +24,7 @@ public class ErrorFragmentHandler {
         this.errorView = errorView;
     }
 
-    public View setupView(){
+    public void initLayout(){
         TextView appBarMainTextView = errorView.findViewById(R.id.error_frag_appbar_main_title);
         TextView appBarSubTextView = errorView.findViewById(R.id.error_frag_appbar_sub_title);
         ImageView bodyImgView = errorView.findViewById(R.id.error_frag_img);
@@ -40,7 +36,5 @@ public class ErrorFragmentHandler {
         bodyImgView.setImageResource(bodyImg);
         bodyMainTextView.setText(bodyMainText);
         bodySubTextView.setText(bodySubText);
-
-        return errorView;
     }
 }

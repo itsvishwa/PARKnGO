@@ -41,16 +41,16 @@ public class ParkingSelectedFetchData {
 
     View parkingSelectedView;
     View loadingView;
-    int _id;
+    String parkingID;
     Context context;
     String userReviewId;
     String userReviewContent;
     int userReviewRating;
 
-    public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, int _id, Context context){
+    public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, String _id, Context context){
         this.parkingSelectedView = parkingSelectedView;
         this.loadingView = loadingView;
-        this._id = _id;
+        this.parkingID = _id;
         this.context = context;
         fetchData();
     }
@@ -58,7 +58,7 @@ public class ParkingSelectedFetchData {
 
     private void fetchData(){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_one/" + _id;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_one/" + parkingID;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
