@@ -14,11 +14,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ErrorFragmentHandler;
+import com.example.parkngo.helpers.ErrorFragmentHelper;
 import com.example.parkngo.helpers.ParkngoStorage;
-import com.example.parkngo.profile.ProfileFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,15 +91,6 @@ public class SessionQRHandler {
                                     String bodyMainText = "Something went wrong";
                                     String bodySubText = "";
 
-                                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
-                                    View newErrorView = errorFragmentHandler.setupView();
-
-                                    ViewGroup parent = (ViewGroup) loadingView.getParent();
-                                    if (parent != null) {
-                                        int index = parent.indexOfChild(loadingView);
-                                        parent.removeView(loadingView);
-                                        parent.addView(newErrorView, index);
-                                    }
                                 }else{
                                     Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
                                 }

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.parking.ParkingSelectedFragment;
 
 import java.util.ArrayList;
 
@@ -56,6 +59,7 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
         holder.distanceView.setText(availableParkingSpaceModelsArr.get(position).getDistance() + " KM");
         holder.ratingBarView.setRating(availableParkingSpaceModelsArr.get(position).getNoOfStars());
         holder.noOfReviewsView.setText(availableParkingSpaceModelsArr.get(position).getNoOfReviews());
+        holder.locationView.setText(availableParkingSpaceModelsArr.get(position).getLocation());
     }
 
     @Override
@@ -64,7 +68,7 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
         return availableParkingSpaceModelsArr.size();
     }
 
-    public static class MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         TextView parkingNameView;
         TextView freeSlotsView;
@@ -74,6 +78,7 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
         TextView distanceView;
         RatingBar ratingBarView;
         TextView noOfReviewsView;
+        TextView locationView;
         Context context;
         ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
@@ -87,11 +92,13 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
             distanceView = itemView.findViewById(R.id.ava_distance);
             ratingBarView = itemView.findViewById(R.id.ava_rating_bar);
             noOfReviewsView = itemView.findViewById(R.id.ava_rating_count);
+            locationView = itemView.findViewById(R.id.ava_location);
             this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
             this.context = itemView.getContext();
 
             // Set the OnClickListener for the entire item view
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
         @Override
         public void onClick(View view) {
@@ -118,6 +125,23 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
                 MainActivity mainActivity = (MainActivity) context;
                 mainActivity.startActivity(intent);
             }
+        }
+        @Override
+        public boolean onLongClick(View view) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                AvailableParkingSpaceModel clickedItem = availableParkingSpaceModelsArr.get(position);
+                String parkingID = clickedItem.getParkingID();
+
+                availableParkingSpaceModelsArr.clear();
+
+                Bundle data = new Bundle();
+                data.putString("parkingID", parkingID);
+
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new ParkingSelectedFragment(), data);
+            }
+            return true;
         }
     }
 }
