@@ -376,10 +376,26 @@ class ParkingSpace
         parking_session.parking_id,
         parking_spaces.company_id
       FROM parking_session
-      LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id;
+      LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id
       WHERE parking_spaces.company_id = :company_id'
     );
 
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
+  public function getForceStoppedSessions($company_id)
+  {
+    $this->db->query(
+      'SELECT pse.start_time, pse.end_time, pse.vehicle_number, pse.vehicle_type, ps.name AS parking_name, po.first_name AS officer_first_name, po.last_name AS officer_last_name, po.officer_id
+      FROM parking_session pse
+      LEFT JOIN parking_spaces ps ON ps._id = pse.parking_id
+      LEFT JOIN parking_officer po ON po.parking_id = ps._id
+      WHERE ps.company_id = :company_id AND pse.is_force_end = 1
+      ORDER BY pse.end_time DESC
+      LIMIT 100'
+    );
     $this->db->bind(':company_id', $company_id);
     $row = $this->db->resultSet();
     return $row;
