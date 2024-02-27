@@ -10,14 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/ForceEnd/ForceEndMainFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/baseline_back_hand_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/search_view_bg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/force_ended_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_force_end_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../server/mobile/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../server/mobile/libraries/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/libraries/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/baseline_search_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/baseline_search_24.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

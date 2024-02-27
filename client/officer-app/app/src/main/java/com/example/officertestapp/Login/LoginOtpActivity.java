@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.officertestapp.Attendance.MarkAttendanceActivity;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
@@ -130,7 +131,7 @@ public class LoginOtpActivity extends AppCompatActivity {
                             parkngoStorage.addData(dataArr);
 
                             // redirect to main page
-                            Intent i = new Intent(LoginOtpActivity.this, MainActivity.class);
+                            Intent i = new Intent(LoginOtpActivity.this, MarkAttendanceActivity.class);
                             startActivity(i);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
