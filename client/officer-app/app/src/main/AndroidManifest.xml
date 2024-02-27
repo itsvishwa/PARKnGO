@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +21,18 @@
         android:theme="@style/Theme.OfficerTestApp"
         tools:targetApi="31">
         <activity
+            android:name=".Attendance.MarkAttendanceOffActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Attendance.MarkedAttendanceFailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Attendance.MarkedAttendanceSuccessfulActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Attendance.MarkAttendanceActivity"
+            android:exported="false" />
+        <activity
             android:name=".HeroActivity"
             android:exported="true">
             <intent-filter>
@@ -27,25 +41,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Login.LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".Login.LoginOtpActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".Home.CaptureAct"
             android:screenOrientation="portrait"
-            android:theme="@style/zxing_CaptureTheme"/>
-
-
+            android:theme="@style/zxing_CaptureTheme" />
     </application>
 
 </manifest>

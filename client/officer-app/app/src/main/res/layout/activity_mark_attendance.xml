@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Profile.ProfileMainFragment"
+    tools:context=".Attendance.MarkAttendanceActivity"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -27,47 +27,28 @@
                 android:layout_weight="2.8"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/profile_frag_app_bar_parking_name"
-                    android:layout_width="138dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/app_bar_info_box"
-                    android:text="CMC Car Park 01"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/appbar_main_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Your Profile"
+                    android:text="Hi Officer!"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_frag_app_bar_parking_name"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginTop="43dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_frag_app_bar_parking_name" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
+                <TextView
+                    android:id="@+id/appbar_secondary_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="1dp"
-                    android:backgroundTint="@color/detailBoxBackground"
-                    android:onClick="frag_profile_main_payment_history_btn_handler"
-                    android:text="Payment History"
-                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Please mark your attendance"
+                    android:textColor="@color/textPrimary"
                     android:textSize="16sp"
-                    app:cornerRadius="7dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/appbar_main_text"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
 
@@ -86,9 +67,8 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="frag_profile_main_logout_btn_handler"
                     android:background="@drawable/notification_icon_background"
-                    android:src="@drawable/baseline_logout_24"
+                    android:src="@drawable/baseline_notifications_none_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +106,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/profile_main_frag_name"
+                android:id="@+id/mark_attendance_act_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -151,7 +131,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/profile_main_frag_mobile_number"
+                android:id="@+id/mark_attendance_act_mobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -171,10 +151,10 @@
                 android:text="Officer ID"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_main_frag_name" />
+                app:layout_constraintTop_toBottomOf="@+id/mark_attendance_act_name" />
 
             <TextView
-                android:id="@+id/profile_main_frag_officer_id"
+                android:id="@+id/mark_attendance_act_officer_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -196,10 +176,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.457"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/profile_main_frag_mobile_number" />
+                app:layout_constraintTop_toBottomOf="@+id/mark_attendance_act_mobile" />
 
             <TextView
-                android:id="@+id/profile_main_frag_nic"
+                android:id="@+id/mark_attendance_act_nic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -235,7 +215,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/profile_main_frag_parking_name"
+                android:id="@+id/mark_attendance_act_parking_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -256,10 +236,10 @@
                 android:text="Company Name"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_main_frag_parking_name" />
+                app:layout_constraintTop_toBottomOf="@+id/mark_attendance_act_parking_name" />
 
             <TextView
-                android:id="@+id/profile_frag_company_name"
+                android:id="@+id/mark_attendance_act_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -279,7 +259,7 @@
                 android:text="Contact Company"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_frag_company_name" />
+                app:layout_constraintTop_toBottomOf="@+id/mark_attendance_act_company_name" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -295,6 +275,7 @@
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout20"
@@ -317,7 +298,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/profile_frag_time"
+                android:id="@+id/mark_attendance_act_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -341,14 +322,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/profile_frag_date"
+                android:id="@+id/mark_attendance_act_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="2024 FEB 03"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_frag_time"
+                app:layout_constraintBottom_toBottomOf="@+id/mark_attendance_act_time"
                 app:layout_constraintEnd_toEndOf="@+id/textView16"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
@@ -369,31 +350,39 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout20">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/duty_off_swipe_button"
+                android:id="@+id/material_button"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:background="@drawable/rounded_bg_detail_box_primary_col"
                 app:icon="@drawable/baseline_arrow_forward_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/swipe_bar_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="Swipe to mark work shift off"
+                android:text="Swipe to mark your attendance"
                 android:textColor="@color/textGrey"
                 android:textSize="16sp"
+                android:layout_marginLeft="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* Note that this action can be only done when you at the respective parking space"
+            android:textSize="14sp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout25"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout25"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout25" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
