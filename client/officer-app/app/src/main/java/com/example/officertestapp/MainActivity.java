@@ -19,6 +19,7 @@ import com.example.officertestapp.Home.ReleaseASlot06Fragment;
 import com.example.officertestapp.Profile.ProfileLogoutFragment;
 import com.example.officertestapp.Profile.ProfileMainFragment;
 import com.example.officertestapp.Profile.ProfilePaymentHistoryFragment;
+import com.example.officertestapp.ForceEnd.ForceEndMainFragment;
 import com.example.officertestapp.Status.StatusMainFragment;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -35,9 +36,11 @@ public class MainActivity extends AppCompatActivity{
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.bottom_nav_item_home){
                 replaceFragment(new HomeMainFragment());
-            }else if(item.getItemId() == R.id.bottom_nav_item_status){
+            }else if(item.getItemId() == R.id.bottom_nav_item_status) {
                 replaceFragment(new StatusMainFragment());
-            } else if (item.getItemId() == R.id.bottom_nav_item_profile) {
+            }else if(item.getItemId() == R.id.bottom_nav_item_force_end) {
+                replaceFragment(new ForceEndMainFragment());
+            }else if (item.getItemId() == R.id.bottom_nav_item_profile) {
                 replaceFragment(new ProfileMainFragment());
             }
             return true;
