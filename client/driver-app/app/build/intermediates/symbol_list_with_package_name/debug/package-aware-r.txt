@@ -1449,6 +1449,7 @@ color foreground_material_light
 color green
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color ic_launcher_background
 color inputFieldColor
 color loginSignupBtnColor
 color loginSignupInputFieldColor
@@ -2078,6 +2079,8 @@ color mtrl_textinput_hovered_box_stroke_color
 color navbar_item
 color notification_action_color_filter
 color notification_icon_bg_color
+color parking_background
+color parking_for_map_background
 color payment_item_back
 color primaryColor
 color primary_dark_material_dark
@@ -3075,6 +3078,10 @@ drawable m3_tabs_background
 drawable m3_tabs_line_indicator
 drawable m3_tabs_rounded_line_indicator
 drawable m3_tabs_transparent_background
+drawable map_blue
+drawable map_new
+drawable map_red
+drawable map_yellow
 drawable master
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
@@ -3139,6 +3146,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable parking_for_map_foreground
 drawable parking_space_sample
 drawable payhere_noback
 drawable payhere_secure_image
@@ -3599,7 +3607,6 @@ id login_otp_act_textView2
 id login_otp_act_textView3
 id m3_side_sheet
 id main_back
-id mapView
 id marquee
 id masked
 id match_constraint
@@ -3668,6 +3675,8 @@ id navbar_home
 id navbar_parking
 id navbar_profile
 id navbar_scan
+id navigate_frag_map
+id navigate_frag_vehicle_type
 id navigation_bar_item_active_indicator_view
 id navigation_bar_item_icon_container
 id navigation_bar_item_icon_view
@@ -4280,6 +4289,8 @@ layout support_simple_spinner_dropdown_item
 menu bottom_navigation_bar
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap parking_for_map
+mipmap parking_for_map_round
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description

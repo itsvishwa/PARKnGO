@@ -43,4 +43,5 @@ dependencies {
     implementation ("lk.payhere:androidsdk:3.0.4")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.google.code.gson:gson:2.8.0")
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
 }

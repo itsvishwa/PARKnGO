@@ -22,6 +22,7 @@ import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ErrorFragment;
 import com.example.parkngo.helpers.ErrorFragmentHelper;
+import com.example.parkngo.home.ViewMapFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -41,6 +42,7 @@ public class AvailableParkingSpaceHelper {
     View errorView;
     String vehicleType;
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
+    ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArrOriginal = new ArrayList<>();
 
     public AvailableParkingSpaceHelper(Context context, View availableParkingSpaceView, View loadingView, View errorView, String vehicleType, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr){
         this.context = context;
@@ -61,6 +63,23 @@ public class AvailableParkingSpaceHelper {
         initSearchBarListener();
         initChipGroupBtnListener();
         initRefreshBtnListener();
+        initViewOnMapBtnListener();
+    }
+
+
+    // initializing view on map btn listener
+    private void initViewOnMapBtnListener() {
+        Button button = availableParkingSpaceView.findViewById(R.id.available_parking_space_frag_view_map_btn);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity) context;
+                Bundle data = new Bundle();
+                data.putSerializable("availableParkingSpaceModelsArr", availableParkingSpaceModelsArrOriginal);
+                mainActivity.replaceFragment(new ViewMapFragment(), data);
+            }
+        });
     }
 
 
@@ -69,7 +88,7 @@ public class AvailableParkingSpaceHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_available/" + vehicleType;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_available/" + vehicleType + "/6.919875/79.854209";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
@@ -112,7 +131,8 @@ public class AvailableParkingSpaceHelper {
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
                 availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
             }
-
+            availableParkingSpaceModelsArrOriginal.clear();
+            availableParkingSpaceModelsArrOriginal.addAll(availableParkingSpaceModelsArr);
             // setting up the available parking spaces recycle view
             RecyclerView recyclerView = availableParkingSpaceView.findViewById(R.id.ava_recycle_view);
             APSRecycleViewAdapter adapter = new APSRecycleViewAdapter(context, availableParkingSpaceModelsArr);
