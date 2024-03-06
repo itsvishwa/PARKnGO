@@ -155,11 +155,14 @@
 }
 
 .review-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+ /* background-color: #f9f9f9;*/
+  background-color: #F9F3E9;
+  
 }
 
 .review-table tbody tr:hover {
-  background-color: #e2e2e2;
+  background-color: #FFFBF4;
+ 
 }
 
 
