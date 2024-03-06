@@ -187,7 +187,7 @@
 
   .company-card2-content {
     margin-top: -1px;
-    margin-left: 0px; 
+    margin-left: -35px; 
     padding:1px; 
     font-weight: 700;
     
@@ -195,7 +195,7 @@
 
   .company-card3-content {
     margin-top: 1px;
-    margin-left: 0px; 
+    margin-left: -35px; 
     padding:1px; 
     font-weight: 450;
     font-size: 0.8rem;  
@@ -238,7 +238,7 @@
 }
 
 .location-card2-content {
-  margin-top: -1px;
+  margin-top: -5px;
   margin-left: -10px; 
   padding:1px; 
   font-weight: 450;
@@ -257,7 +257,7 @@
 
   margin-top :-18px; 
  /* margin-bottom: -50px;*/
-  margin-left: -10px;
+  margin-left: -25px;
   left:96px;
   /*padding: 10px;*/
   border-radius: 50%;
@@ -297,7 +297,7 @@
   text-align: center;
   justify-content: center;
 
-  margin-top: 5px;
+  margin-top: -5px;
   
   /*margin-bottom: 2px;*/
   margin-left: 1.5px; 
@@ -307,7 +307,7 @@
 }
 
 .mail-card2-content {
-  margin-top: -5px;
+  margin-top: -7px;
   margin-left: -9px; 
   padding:1px; 
   font-weight: 450;
@@ -533,7 +533,7 @@
 
     margin-top :-18px; 
    /* margin-bottom: -50px;*/
-    margin-left: -10px;
+    margin-left: -25px;
     left:96px;
     /*padding: 10px;*/
     border-radius: 50%;
@@ -553,11 +553,11 @@
 .b-card-content .search-box {
   display: flex;
   align-items: center;
-  width: 956px; /* Adjust width as needed */
+  width: 950px; /* Adjust width as needed */
   height: 25px; /* Adjust height as needed */
   border: 1px solid #ccc; /* Add border */
   border-radius: 5px; /* Add border radius */
-  padding: 5px; /* Add padding */
+  padding: 8px; /* Add padding */
   margin-left: 16px;
   /*color: #ccc;*/
   color: #ccc;
