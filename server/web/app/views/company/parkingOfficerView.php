@@ -111,6 +111,30 @@
                                               } else {
                                                 echo htmlspecialchars($officer->parking_name);
                                               } ?></h3>
+                <?php
+                $today = strtotime('today'); // Get the Unix timestamp for the start of today
+
+                $status = "Not Arrived"; // Default status if not today
+
+                if (!empty($officer->last_duty_timestamp)) {
+                  $lastDutyTimestamp = strtotime($officer->last_duty_timestamp);
+
+                  if ($lastDutyTimestamp >= $today) {
+                    // It is today, check duty type
+                    if ($officer->duty_type === 'in') {
+                      $status = "Active";
+                    } elseif ($officer->duty_type === 'out') {
+                      $status = "Leave Today";
+                    }
+                  }
+                }
+
+                ?>
+                <h3 class="status"><?php if (empty($officer->parking_id)) {
+                                      echo "Not assigned";
+                                    } else {
+                                      echo htmlspecialchars($status);
+                                    } ?></h3>
               </div>
               <div class="officer-section-second">
                 <p class="text-gray">NIC <?php echo htmlspecialchars($officer->nic); ?></p>
