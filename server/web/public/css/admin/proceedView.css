@@ -361,20 +361,11 @@
    /* padding: 30px;*/
     margin-left: -28px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    /*display: block;*/
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
+    /*box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);*/
     width: 965px;
     height: 230px;
-
-    /************/
-    /* Add the vertical gradient background */
-    background-color:transparent;
-
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
+    background-color: none;
+   /* color: #000;  Change the text color as needed */
   }
 
   .b-card-ar {
