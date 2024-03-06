@@ -194,7 +194,7 @@
   }
 
   .company-card3-content {
-    margin-top: -5px;
+    margin-top: 1px;
     margin-left: 0px; 
     padding:1px; 
     font-weight: 450;
@@ -553,12 +553,12 @@
 .b-card-content .search-box {
   display: flex;
   align-items: center;
-  width: 950px; /* Adjust width as needed */
+  width: 956px; /* Adjust width as needed */
   height: 25px; /* Adjust height as needed */
   border: 1px solid #ccc; /* Add border */
   border-radius: 5px; /* Add border radius */
   padding: 5px; /* Add padding */
-  margin-left: 20px;
+  margin-left: 16px;
   /*color: #ccc;*/
   color: #ccc;
   
@@ -592,9 +592,10 @@
 }
 
 .bg-black-1 {
-  background-color: #4C4B49;
+  background-color: #7F7D7A;
+  
 }
 
 .material-symbols-outlined {
-  opacity: 0.7; /* Adjust the opacity value as needed */
+  opacity: 0.5; /* Adjust the opacity value as needed */
 }
