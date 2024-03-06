@@ -221,9 +221,19 @@ public class AssignAVehicleAddDetailsHelper {
 
 
     private String preprocessVehicleNumber(String originalVehicleNumber) {
-        // Replace "ශ්‍රී" with another symbol or character sequence
-        String processedVehicleNumber = originalVehicleNumber.replace("ශ්‍රී", "SRI"); // Replace with "SR" or any other suitable representation
-        return processedVehicleNumber;
+        // Replace "ශ්‍රී" with "SRI" if it exists
+        if (originalVehicleNumber.contains("ශ්‍රී")) {
+            originalVehicleNumber = originalVehicleNumber.replace("ශ්‍රී", "SRI");
+        }
+        // Replace "-" with "DH" if it exists
+        if (originalVehicleNumber.contains("-")) {
+            originalVehicleNumber = originalVehicleNumber.replace("-", "DH");
+        }
+        // Replace "NONE" with "NA" if it exists
+        if (originalVehicleNumber.contains("NONE")) {
+            originalVehicleNumber = originalVehicleNumber.replace("NONE", "NA");
+        }
+        return originalVehicleNumber;
     }
 
 

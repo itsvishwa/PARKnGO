@@ -62,9 +62,37 @@ public class AssignAVehicleConfirmationHelper {
 //        // Join the parts with a space
 //        String formattedVehicleNumber = String.join(" ", vehicleParts);
 
-        vehicleNumberTextView.setText(vehicleNumber);
+        String vehicleNumberToSplit = vehicleNumberProcessed;
+
+        String splittedVehicleNumber =  SplitVehicleNumber(vehicleNumberToSplit);
+
+        vehicleNumberTextView.setText(splittedVehicleNumber);
 
         vehicleTypeTextView.setText(vehicleType.toUpperCase());
+    }
+
+    private String SplitVehicleNumber(String vehicleNumberToSplit) {
+        // Split the vehicle number by "#"
+        String[] parts = vehicleNumberToSplit.split("#");
+
+        // Iterate over each part and perform the replacements
+        for (int i = 0; i < parts.length; i++) {
+            // Replace "NA" with ""
+            if (parts[i].contains("NA")) {
+                parts[i] = parts[i].replace("NA", "");
+            }
+            // Replace "SRI" with "ශ්‍රී"
+            if (parts[i].contains("SRI")) {
+                parts[i] = parts[i].replace("SRI", "ශ්‍රී");
+            }
+            // Replace "DH" with "-"
+            if (parts[i].contains("DH")) {
+                parts[i] = parts[i].replace("DH", "-");
+            }
+        }
+
+        // Join the parts back together with an empty space
+        return String.join(" ", parts);
     }
 
     public void initYesBtnListener() {

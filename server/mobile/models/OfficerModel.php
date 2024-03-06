@@ -42,7 +42,8 @@ class OfficerModel
             parking_officer.last_name, 
             parking_officer.company_id, 
             parking_officer.parking_id, 
-            parking_spaces.name, 
+            parking_spaces.name,
+            company.phone_number AS company_phone_number,
             company.name AS company_name
             FROM 
             parking_officer 
@@ -73,7 +74,8 @@ class OfficerModel
                 "company_id" => $result->company_id,
                 "parking_id" => $result->parking_id,
                 "parking_name" => $result->name,
-                "company_name" => $result->company_name
+                "company_name" => $result->company_name,
+                "company_phone_number" => $result->company_phone_number
             ];
         } else {
             return false;

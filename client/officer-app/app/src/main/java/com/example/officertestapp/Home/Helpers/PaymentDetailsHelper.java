@@ -128,8 +128,8 @@ public class PaymentDetailsHelper {
                 String formattedVehicleNumber = VehicleNumber.replaceAll("(\\D)(\\d+)", "$1 $2 ");
 
 
-//                 format the timestamp to date time according to the devices time zone
-//                 Convert the timestamp string to a long value
+            //format the timestamp to date time according to the devices time zone
+            //Convert the timestamp string to a long value
             long timestampStart = Long.parseLong(StartTime);
             // Create a Date object from the timestamp
             Date startDate = new Date(timestampStart * 1000);
