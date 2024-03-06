@@ -262,6 +262,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mark_attendance_act_company_name" />
 
             <Button
+                android:id="@+id/mark_attendance_act_call_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -338,40 +339,44 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout25"
+        <!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/material_button"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/rounded_bg_detail_box_primary_col"-->
+<!--                app:icon="@drawable/baseline_arrow_forward_24"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Swipe to mark your attendance"-->
+<!--                android:textColor="@color/textGrey"-->
+<!--                android:textSize="16sp"-->
+<!--                android:layout_marginLeft="50dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+
+        <com.ncorti.slidetoact.SlideToActView
+            android:id="@+id/duty_in_swipe_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background_detail_box"
-            android:padding="5dp"
+            android:layout_height="52dp"
             android:layout_marginTop="14dp"
+            app:border_radius="10dp"
+            app:icon_margin="@dimen/slidetoact_default_area_margin"
+            app:inner_color="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout20"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout20"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout20">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/material_button"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_bg_detail_box_primary_col"
-                app:icon="@drawable/baseline_arrow_forward_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Swipe to mark your attendance"
-                android:textColor="@color/textGrey"
-                android:textSize="16sp"
-                android:layout_marginLeft="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout20"
+            app:outer_color="@color/detailBoxBackground"
+            app:text="Swipe to mark your attendance"
+            app:text_color="@color/textGrey"
+            app:text_size="16sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -379,9 +384,9 @@
             android:text="* Note that this action can be only done when you at the respective parking space"
             android:textSize="14sp"
             android:layout_marginTop="14dp"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout25"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout25"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout25" />
+            app:layout_constraintEnd_toEndOf="@+id/duty_in_swipe_btn"
+            app:layout_constraintStart_toStartOf="@+id/duty_in_swipe_btn"
+            app:layout_constraintTop_toBottomOf="@+id/duty_in_swipe_btn" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

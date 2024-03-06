@@ -122,9 +122,10 @@ public class LoginOtpActivity extends AppCompatActivity {
                             String parking_id = userData.getString("parking_id");
                             String parking_name = userData.getString("parking_name");
                             String company_name = userData.getString("company_name");
+                            String company_phone_number = userData.getString("company_phone_number");
 
                             // structuring data inorder to store
-                            String dataArr[][] = {{"token", token}, {"firstName", Character.toUpperCase(firstName.charAt(0)) + firstName.substring(1)}, {"lastName", Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1)}, {"mobileNumber", mobileNumber}, {"nic", nic}, {"officerID", officer_id}, {"parkingID", parking_id}, {"parkingName", parking_name}, {"companyName", company_name}};
+                            String dataArr[][] = {{"token", token}, {"firstName", Character.toUpperCase(firstName.charAt(0)) + firstName.substring(1)}, {"lastName", Character.toUpperCase(lastName.charAt(0)) + lastName.substring(1)}, {"mobileNumber", mobileNumber}, {"nic", nic}, {"officerID", officer_id}, {"parkingID", parking_id}, {"parkingName", parking_name}, {"companyName", company_name}, {"companyPhoneNumber", company_phone_number}};
 
                             // store data in shared preference
                             ParkngoStorage parkngoStorage = new ParkngoStorage(LoginOtpActivity.this);
