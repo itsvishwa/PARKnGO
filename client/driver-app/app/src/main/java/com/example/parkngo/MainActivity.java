@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.parkngo.helpers.ParkngoStorage;
 import com.example.parkngo.home.AvailableParkingSpacesFragment;
 import com.example.parkngo.home.HomeFragment;
+import com.example.parkngo.home.ViewMapFragment;
 import com.example.parkngo.logout.LogoutFragment;
 import com.example.parkngo.parking.AddReviewFragment;
 import com.example.parkngo.parking.ParkingFragment;

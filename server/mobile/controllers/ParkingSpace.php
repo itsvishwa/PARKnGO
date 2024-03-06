@@ -16,7 +16,7 @@ class ParkingSpace extends Controller
 
 
     // show only available parking spaces related to the given vehicle type
-    public function view_available($vehicle_type)
+    public function view_available($vehicle_type, $latitude, $longitude)
     {
         $result = $this->parking_space_model->get_available_parking_spaces($vehicle_type);
 
@@ -41,12 +41,28 @@ class ParkingSpace extends Controller
                     "avg_star_count" => $space_data->avg_star_count,
                     "total_review_count" => $space_data->total_review_count
                 ];
+
+                $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
+
                 $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
             }
+
+            // sort ASC order of distances
+            usort($spaces_data, function ($a, $b) {
+                return $a['distance'] <=> $b['distance'];
+            });
 
             $this->send_json_200($spaces_data);
         }
     }
+
+
+    // calculate distance
+    private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
+    {
+        return 105;
+    }
+
 
 
     // show all parking spaces

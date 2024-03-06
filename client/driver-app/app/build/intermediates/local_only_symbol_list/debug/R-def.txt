@@ -7,10 +7,13 @@ color bottomNavUnselectedItemColor
 color chip_back
 color chip_text
 color green
+color ic_launcher_background
 color inputFieldColor
 color loginSignupBtnColor
 color loginSignupInputFieldColor
 color navbar_item
+color parking_background
+color parking_for_map_background
 color primaryColor
 color red
 color textPrimary
@@ -42,7 +45,12 @@ drawable home_icon_circle
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable logo_white
+drawable map_blue
+drawable map_new
+drawable map_red
+drawable map_yellow
 drawable not_available
+drawable parking_for_map_foreground
 drawable parking_space_sample
 drawable payment_successfull
 drawable progress_indicator_background
@@ -229,7 +237,6 @@ id login_otp_act_login_btn
 id login_otp_act_textView1
 id login_otp_act_textView2
 id login_otp_act_textView3
-id mapView
 id mobile_number_otp_act_mobile_number_text
 id mobile_number_otp_signup_act
 id name_title
@@ -238,6 +245,8 @@ id navbar_home
 id navbar_parking
 id navbar_profile
 id navbar_scan
+id navigate_frag_map
+id navigate_frag_vehicle_type
 id parking_Selected_frag_add_review_btn
 id parking_Selected_frag_address
 id parking_Selected_frag_delete_review_btn
@@ -440,6 +449,8 @@ layout review_item
 menu bottom_navigation_bar
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap parking_for_map
+mipmap parking_for_map_round
 string app_name
 string hello_blank_fragment
 style Base.Theme.Parkngo
