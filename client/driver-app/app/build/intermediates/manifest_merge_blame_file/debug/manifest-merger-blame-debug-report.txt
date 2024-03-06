@@ -49,7 +49,7 @@
 30-->[androidx.core:core:1.9.0] C:\Users\Vishwa\.gradle\caches\transforms-3\28a7af075d5af218c19b63a2f54b1523\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 31
 32    <application
-32-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:7:5-46:19
+32-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:7:5-52:19
 33        android:allowBackup="true"
 33-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:8:9-35
 34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -71,115 +71,121 @@
 43        android:testOnly="true"
 44        android:theme="@style/Theme.Parkngo" >
 44-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:15:9-45
-45        <activity
-45-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:17:9-19:40
-46            android:name="com.example.parkngo.signup.SignUpNameActivity"
-46-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:18:13-54
-47            android:exported="false" />
-47-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:19:13-37
-48        <activity
-48-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:20:9-22:40
-49            android:name="com.example.parkngo.signup.SignupOtpActivity"
-49-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:21:13-53
-50            android:exported="false" />
-50-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:22:13-37
-51        <activity
-51-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:23:9-25:40
-52            android:name="com.example.parkngo.signup.SignupMobileNumberActivity"
-52-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:24:13-62
-53            android:exported="false" />
-53-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:25:13-37
-54        <activity
-54-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:26:9-28:40
-55            android:name="com.example.parkngo.login.LoginOtpActivity"
-55-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:27:13-51
-56            android:exported="false" />
-56-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:28:13-37
-57        <activity
-57-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:29:9-31:40
-58            android:name="com.example.parkngo.login.LoginMobileNumberActivity"
-58-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:30:13-60
-59            android:exported="false" />
-59-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:31:13-37
-60        <activity
-60-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:32:9-39:20
-61            android:name="com.example.parkngo.HeroActivity"
-61-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:33:13-41
-62            android:exported="true" >
-62-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:34:13-36
-63            <intent-filter>
-63-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:35:13-38:29
-64                <action android:name="android.intent.action.MAIN" />
-64-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:36:17-69
-64-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:36:25-66
-65
-66                <category android:name="android.intent.category.LAUNCHER" />
-66-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:37:17-77
-66-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:37:27-74
-67            </intent-filter>
-68        </activity>
-69        <!-- TODO:: Check whether the "true" value is valid or not for main activity -->
-70        <activity
-70-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:41:9-45:20
-71            android:name="com.example.parkngo.MainActivity"
-71-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:42:13-41
-72            android:exported="true"
-72-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:44:13-36
-73            android:windowSoftInputMode="adjustPan" >
-73-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:43:13-52
-74        </activity>
-75        <activity
-75-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:16:9-19:65
-76            android:name="lk.payhere.androidsdk.PHMainActivity"
-76-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:17:13-64
-77            android:launchMode="singleTop"
-77-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:18:13-43
-78            android:theme="@style/ph_transparent.windowTitle" /> <!-- Needs to be explicitly declared on P+ -->
-78-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:19:13-62
-79        <uses-library
-79-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\395e3400e84817dd1048f752da36bd81\transformed\play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
-80            android:name="org.apache.http.legacy"
-80-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\395e3400e84817dd1048f752da36bd81\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
-81            android:required="false" />
-81-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\395e3400e84817dd1048f752da36bd81\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
-82
-83        <activity
-83-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
-84            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-84-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
-85            android:exported="false"
-85-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
-86            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-86-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
-87
-88        <meta-data
-88-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Vishwa\.gradle\caches\transforms-3\1c35a88fdc0bbfce04ef87a168885e00\transformed\play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
-89            android:name="com.google.android.gms.version"
-89-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Vishwa\.gradle\caches\transforms-3\1c35a88fdc0bbfce04ef87a168885e00\transformed\play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
-90            android:value="@integer/google_play_services_version" />
-90-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\Vishwa\.gradle\caches\transforms-3\1c35a88fdc0bbfce04ef87a168885e00\transformed\play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
-91
-92        <provider
-92-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-93            android:name="androidx.startup.InitializationProvider"
-93-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-94            android:authorities="com.example.parkngo.androidx-startup"
-94-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-95            android:exported="false" >
-95-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-96            <meta-data
-96-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-97                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-97-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-98                android:value="androidx.startup" />
-98-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+45        <meta-data
+45-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:17:9-19:69
+46            android:name="com.google.android.gms.version"
+46-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:18:13-58
+47            android:value="@integer/google_play_services_version" />
+47-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:19:13-66
+48        <meta-data
+48-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:20:9-22:71
+49            android:name="com.google.android.geo.API_KEY"
+49-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:21:13-58
+50            android:value="AIzaSyBWhETkAddp84ekkS0aJ9Wceg5LURUfJpo" />
+50-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:22:13-68
+51
+52        <activity
+52-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:23:9-25:40
+53            android:name="com.example.parkngo.signup.SignUpNameActivity"
+53-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:24:13-54
+54            android:exported="false" />
+54-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:25:13-37
+55        <activity
+55-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:26:9-28:40
+56            android:name="com.example.parkngo.signup.SignupOtpActivity"
+56-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:27:13-53
+57            android:exported="false" />
+57-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:28:13-37
+58        <activity
+58-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:29:9-31:40
+59            android:name="com.example.parkngo.signup.SignupMobileNumberActivity"
+59-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:30:13-62
+60            android:exported="false" />
+60-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:31:13-37
+61        <activity
+61-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:32:9-34:40
+62            android:name="com.example.parkngo.login.LoginOtpActivity"
+62-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:33:13-51
+63            android:exported="false" />
+63-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:34:13-37
+64        <activity
+64-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:35:9-37:40
+65            android:name="com.example.parkngo.login.LoginMobileNumberActivity"
+65-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:36:13-60
+66            android:exported="false" />
+66-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:37:13-37
+67        <activity
+67-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:38:9-45:20
+68            android:name="com.example.parkngo.HeroActivity"
+68-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:39:13-41
+69            android:exported="true" >
+69-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:40:13-36
+70            <intent-filter>
+70-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:41:13-44:29
+71                <action android:name="android.intent.action.MAIN" />
+71-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:42:17-69
+71-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:42:25-66
+72
+73                <category android:name="android.intent.category.LAUNCHER" />
+73-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:43:17-77
+73-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:43:27-74
+74            </intent-filter>
+75        </activity>
+76        <!-- TODO:: Check whether the "true" value is valid or not for main activity -->
+77        <activity
+77-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:47:9-51:20
+78            android:name="com.example.parkngo.MainActivity"
+78-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:48:13-41
+79            android:exported="true"
+79-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:50:13-36
+80            android:windowSoftInputMode="adjustPan" >
+80-->C:\wamp64\www\PARKnGO\client\driver-app\app\src\main\AndroidManifest.xml:49:13-52
+81        </activity>
+82        <activity
+82-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:16:9-19:65
+83            android:name="lk.payhere.androidsdk.PHMainActivity"
+83-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:17:13-64
+84            android:launchMode="singleTop"
+84-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:18:13-43
+85            android:theme="@style/ph_transparent.windowTitle" /> <!-- Needs to be explicitly declared on P+ -->
+85-->[lk.payhere:androidsdk:3.0.4] C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\AndroidManifest.xml:19:13-62
+86        <uses-library
+86-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\395e3400e84817dd1048f752da36bd81\transformed\play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+87            android:name="org.apache.http.legacy"
+87-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\395e3400e84817dd1048f752da36bd81\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+88            android:required="false" />
+88-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\395e3400e84817dd1048f752da36bd81\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
+89
+90        <activity
+90-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+91            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+91-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+92            android:exported="false"
+92-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+93            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+93-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+94
+95        <provider
+95-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+96            android:name="androidx.startup.InitializationProvider"
+96-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+97            android:authorities="com.example.parkngo.androidx-startup"
+97-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+98            android:exported="false" >
+98-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 99            <meta-data
-99-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Vishwa\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-100                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-100-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Vishwa\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+99-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+100                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+100-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 101                android:value="androidx.startup" />
-101-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Vishwa\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-102        </provider>
-103    </application>
-104
-105</manifest>
+101-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+102            <meta-data
+102-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Vishwa\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+103                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+103-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Vishwa\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+104                android:value="androidx.startup" />
+104-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Vishwa\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+105        </provider>
+106    </application>
+107
+108</manifest>

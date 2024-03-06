@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".home.NavigateFragment"
+    tools:context=".home.ViewMapFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="CMC CAR PARK 03"
+                    android:text="View On Map"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -48,11 +48,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="10 Free Slots"
+                    android:text="selected vehicle type: "
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+
+                <TextView
+                    android:id="@+id/navigate_frag_vehicle_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle Type"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="4dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appbar_secondary_text"
+                    app:layout_constraintStart_toEndOf="@+id/appbar_secondary_text"
+                    app:layout_constraintTop_toTopOf="@+id/appbar_secondary_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -89,19 +101,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="18dp"
         android:layout_weight="8">
 
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_marginVertical="18dp"
+        <fragment
+            android:id="@+id/navigate_frag_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
