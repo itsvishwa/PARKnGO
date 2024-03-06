@@ -447,31 +447,7 @@ class Admins extends Controller
   }
 }*/
 
-public function downloadDocument1($documentId) {
-  $this->adminModel = $this->model('Admin');
-  
-  // Log received document ID
-  error_log('Received document ID: ' . $documentId);
 
-  // Fetch the document from the model based on $documentId
-  $document = $this->adminModel->getDocument($documentId);
-
-   // Log the document content
-   error_log('Document content: ' . print_r($document, true));
-
-  // Check if the document exists
-  if ($document) {
-      // Set appropriate headers for PDF file
-      header('Content-Type: application/pdf');
-      header('Content-Disposition: attachment; filename="company_documents.pdf"');
-
-      // Output the document content after base64 decoding
-      echo base64_decode($document);
-  } else {
-      // Handle case when the document is not found
-      echo 'Document not found';
-  }
-}
 /********************************* */
 // In your Admins.php controller
 
@@ -527,7 +503,7 @@ public function approveApplication($companyId) {
   echo json_encode(['success' => $success]);
 }*/
 
-public function approveApplication($companyId) {
+/*public function approveApplication($companyId) {
   // Update the database to set is_approved to 1 and is_reviewed to 1
   // Implement this logic based on your database structure
   $this->adminModel->approveApplication($companyId);
@@ -546,7 +522,35 @@ public function rejectApplication($companyId) {
 
   // You can return a JSON response indicating success or failure
   echo json_encode(['success' => true]);
+}*/
+
+public function approveApplication() {
+  $companyId = $_GET['_id'] ?? '';
+  
+  // Update the database to set is_approved to 1 and is_reviewed to 1
+  // Implement this logic based on your database structure
+  $this->adminModel->approveApplication($companyId);
+
+  // You can return a JSON response indicating success or failure
+  echo json_encode(['success' => true]);
+  
 }
+
+
+
+public function rejectApplication() {
+  $companyId = $_GET['_id'] ?? '';
+  // Get reject reason from POST data
+  $rejectReason = $_POST['rejectReason'];
+
+  // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
+  // Implement this logic based on your database structure
+  $this->adminModel->rejectApplication($companyId, $rejectReason);
+
+  // You can return a JSON response indicating success or failure
+  echo json_encode(['success' => true]);
+}
+
 
 
 
