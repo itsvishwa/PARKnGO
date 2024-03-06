@@ -149,10 +149,6 @@
           </div>
           </button>
 
-
-
-
-
           <div class="b-card-ar-content text-black">
             <p>Approve or Reject?</p>
           </div>
@@ -166,14 +162,8 @@
           </form>
 
           <div class="b-card-apre">
-
             <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
-
             <button class="approve-button" onclick="approveApplication('<?php echo $_GET['_id'] ?? ''; ?>')">Approve Application</button>
-
-
-
-
           </div>
 
           <div class="b-card-content text-black">

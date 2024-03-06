@@ -306,6 +306,7 @@ class Admins extends Controller
 
     // Fetch pending company applications
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
+    
 
     // Prepare data for the view
     $data = [
