@@ -523,7 +523,6 @@
   /************/
   /* Add the vertical gradient background */
   background-color:#f6ead3;
-
   /* Ensure text is visible on the gradient background */
   color: #000; /* Change the text color as needed */
   display: flex;
