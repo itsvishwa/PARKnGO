@@ -543,9 +543,9 @@
 
 #rejectReason::placeholder {
 
-  text-indent: 10px; 
+  text-indent: 5px; 
   /*margin-top: 10px;*/
-  padding-top: 10px;
+  padding-top: 3px;
   color: #999; /* Placeholder text color */
   font-style: italic; /* Placeholder text style */
   /* Add any other styles you want to apply to the placeholder */

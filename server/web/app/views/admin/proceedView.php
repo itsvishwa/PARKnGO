@@ -159,14 +159,13 @@
 
           <form class="b-card3" id="rejectForm">
             <div class="card-content12 text-gray">
-              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...."></textarea>
+              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
               <!--<button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>-->
             </div>
+            
           </form>
 
           <div class="b-card-apre">
-
-            
 
             <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
 
