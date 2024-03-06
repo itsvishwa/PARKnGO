@@ -163,14 +163,31 @@ class Officer
   }
 
   //get officers details for parking officer view 
+  // public function getAllOfficersDetails($company_id)
+  // {
+  //   $this->db->query('SELECT po.*, ps.name AS parking_name, ps._id AS parking_id
+  //   FROM parking_officer po
+  //   LEFT JOIN parking_spaces ps ON po.parking_id = ps._id
+  //   WHERE po.company_id = :company_id;');
+  //   $this->db->bind(':company_id', $company_id);
+  //   $results = $this->db->resultSet();
+  //   return $results;
+  // }
   public function getAllOfficersDetails($company_id)
   {
-    $this->db->query('SELECT po.*, ps.name AS parking_name, ps._id AS parking_id
+    $this->db->query('SELECT po.*, ps.name AS parking_name, ps._id AS parking_id, dr.type AS duty_type, dr.last_duty_timestamp AS last_duty_timestamp
     FROM parking_officer po
     LEFT JOIN parking_spaces ps ON po.parking_id = ps._id
+    LEFT JOIN (
+        SELECT officer_id, MAX(time_stamp) AS last_duty_timestamp, type
+        FROM duty_record
+        GROUP BY officer_id
+    ) dr ON po._id = dr.officer_id
     WHERE po.company_id = :company_id;');
+
     $this->db->bind(':company_id', $company_id);
     $results = $this->db->resultSet();
+
     return $results;
   }
 
