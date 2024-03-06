@@ -547,7 +547,7 @@
   /*margin-top: 10px;*/
   padding-top: 3px;
   color: #999; /* Placeholder text color */
-  font-style: italic; /* Placeholder text style */
+  font-style: normal; /* Placeholder text style */
   /* Add any other styles you want to apply to the placeholder */
   
 }
