@@ -339,8 +339,62 @@ class Session extends Controller
         } else if ($token_data === 404) {
             $this->send_json_404("Token not found");
         } else {
-            $session_data = $this->session_model->get_ongoing_session_data($token_data["user_id"]);
-            // need to verify 
+            $parking_data = $this->session_model->get_ongoing_session_parking_data($token_data["user_id"]);
+
+            if ($parking_data == false) // no ongoing session for the driver
+            {
+                $this->send_json_400("No ongoing session");
+            } else // have on going session 
+            {
+                $distance = $this->calculate_distance($parking_data->latitude, $parking_data->longitude, $latitude, $longitude);
+
+                if ($distance > 0.2) // out of of the parking space range
+                {
+                    $this->session_model->end_session_by_force($parking_data->session_id);
+                    $this->parking_space_status_model->increase_free_slots($parking_data->vehicle_type, $parking_data->parking_id);
+
+                    $officer_mobile_number = $this->parking_space_model->get_officer_mobile_number($parking_data->parking_id);
+                    if ($officer_mobile_number === false) // no officer assigned to the parking
+                    {
+                    } else // officer has assigned to the parking space
+                    {
+                        $this->send_sms($officer_mobile_number);
+                        $this->send_json_200("Session ended by force sucessfully");
+                    }
+                } else // still in the parking space range
+                {
+                    $this->send_json_400("You are still in the designated parking space " . $distance);
+                }
+            }
         }
+    }
+
+    // calculate distance
+    private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
+    {
+        $source_coordinates = $source_lat . "," . $source_long;
+        $dest_coordinates = $dest_lat . "," . $dest_long;
+
+        $uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $source_coordinates . "&destinations=" . $dest_coordinates . "&units=imperial&key=" . G_API_KEY;
+
+        // Send request to Google Distance Matrix API
+        $response = file_get_contents($uri);
+
+        // Decode JSON response
+        $decoded_response = json_decode($response, true);
+
+        // distance in meters
+        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+
+        return $distance / 1000;
+    }
+
+    // send the otp sms
+    private function send_sms($mobile_number)
+    {
+        $text = "Your+OTP+code+for+PARKnGO%3A+Please+use+this+code+to+complete+your+authentication.+Thank+you%21";
+        $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=3865&to=0713072925&text=" . $text;
+
+        file_get_contents($url);
     }
 }
