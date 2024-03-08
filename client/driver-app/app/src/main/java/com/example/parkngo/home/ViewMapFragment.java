@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.parkngo.R;
@@ -18,17 +19,17 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+//GoogleMap.OnMarkerClickListener add this if u adding marker listener
 
-public class ViewMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
-
-
+public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
+    String vehicleType = "Car";
     private GoogleMap googleMap;
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
@@ -53,6 +54,11 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback, Goo
             mapFragment.getMapAsync(this);
         }
 
+        // changing the top bar text - vehicle type
+
+        TextView textView = viewMapView.findViewById(R.id.navigate_frag_vehicle_type);
+        textView.setText(vehicleType);
+
         return viewMapView;
     }
 
@@ -60,15 +66,15 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback, Goo
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         addMarker();
-        googleMap.setOnMarkerClickListener(this);
+//        googleMap.setOnMarkerClickListener(this);
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        // Show a toast message when a marker is clicked
-        Toast.makeText(getContext(), "Marker Clicked: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
-        return false;
-    }
+//    @Override
+//    public boolean onMarkerClick(Marker marker) {
+//        // Show a toast message when a marker is clicked
+//        Toast.makeText(getContext(), "Marker Clicked: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
+//        return false;
+//    }
 
     private void addMarker() {
         if (googleMap != null) {
@@ -76,11 +82,26 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback, Goo
             for(int i = 0; i<availableParkingSpaceModelsArr.size(); i++){
                 AvailableParkingSpaceModel availableParkingSpaceModel = availableParkingSpaceModelsArr.get(i);
                 LatLng pos = new LatLng( Double.valueOf(availableParkingSpaceModel.getLatitude()),  Double.valueOf(availableParkingSpaceModel.getLongitude()));
+
+                double slotRatio = (availableParkingSpaceModel.getFreeSlots() * 1.0) / Integer.parseInt(availableParkingSpaceModel.getTotalSlots()) ;
+                System.out.println("RATIOOOOOO " + slotRatio);
+                BitmapDescriptor markerIcon;
+
+                if(slotRatio <= 0.3){
+                    markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.map_red);
+                } else if (slotRatio <=0.7) {
+                    markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.map_yellow);
+                }else{
+                    markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.map_blue);
+                }
+
+                String snippetMsg = availableParkingSpaceModel.getFreeSlots() + " Free slots, out of " + availableParkingSpaceModel.getTotalSlots();
+
                 googleMap.addMarker(new MarkerOptions()
                         .position(pos)
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_red))
+                        .icon(markerIcon)
                         .title(availableParkingSpaceModel.getParkingName())
-                        .snippet(availableParkingSpaceModel.getFreeSlots() + " Free slots, From " + availableParkingSpaceModel.getTotalSlots())
+                        .snippet(snippetMsg)
                 );
             }
             LatLng posColombo = new LatLng(6.921587, 79.870966);

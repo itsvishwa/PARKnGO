@@ -159,4 +159,38 @@ class SessionModel
 
         $this->db->execute();
     }
+
+    // return session,parking data of a ongoing session for a given driver id
+    public function get_ongoing_session_parking_data($driver_id)
+    {
+        $this->db->query(
+            "SELECT 
+            p.latitude,
+            p.longitude,
+            p._id AS parking_id,
+            s._id AS session_id
+            s.vehicle_type
+            FROM 
+            parking_spaces AS p
+            JOIN
+            parking_session AS s
+            ON
+            p._id = s.parking_id
+            WHERE
+            s.driver_id = :driver_id
+            AND
+            s.end_time IS NULL
+        "
+        );
+
+        $this->db->bind(":driver_id", $driver_id);
+
+        $result = $this->db->single();
+
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

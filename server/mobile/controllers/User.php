@@ -134,7 +134,7 @@ class User extends Controller
                         $code = $this->generate_otp($mobile_number);
 
                         // send the sms
-                        // $this->send_sms($code, $mobile_number);
+                        $this->send_sms($code, $mobile_number);
 
                         $this->send_json_200("OTP is Sent " . $code);
                 } else // mobile number exist
@@ -149,7 +149,7 @@ class User extends Controller
                                 $code = $this->generate_otp($mobile_number);
 
                                 // send the sms
-                                // $this->send_sms($code, $mobile_number);
+                                $this->send_sms($code, $mobile_number);
 
                                 $this->send_json_200("OTP is Sent " . $code);
                         } else // has not expired
