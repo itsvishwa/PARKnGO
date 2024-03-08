@@ -31,3 +31,6 @@ define("ID_KEY", "1h3sh65");
 
 // session secret key
 define("SESSION_KEY", "21nbgfh");
+
+// google API KEY
+define("G_API_KEY", "");

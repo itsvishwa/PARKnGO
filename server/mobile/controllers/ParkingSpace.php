@@ -60,7 +60,21 @@ class ParkingSpace extends Controller
     // calculate distance
     private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
     {
-        return 105;
+        $source_coordinates = $source_lat . "," . $source_long;
+        $dest_coordinates = $dest_lat . "," . $dest_long;
+
+        $uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $source_coordinates . "&destinations=" . $dest_coordinates . "&units=imperial&key=" . G_API_KEY;
+
+        // Send request to Google Distance Matrix API
+        $response = file_get_contents($uri);
+
+        // Decode JSON response
+        $decoded_response = json_decode($response, true);
+
+        // distance in meters
+        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+
+        return $distance / 1000;
     }
 
 
@@ -201,7 +215,7 @@ class ParkingSpace extends Controller
 
 
     // show all available parking spaces respect to the given vehicle type and given keyword
-    public function search_available($vehicle_type, $keyword)
+    public function search_available($vehicle_type, $keyword, $latitude, $longitude)
     {
         $result = $this->parking_space_model->get_available_parking_spaces_by_search($vehicle_type, $keyword);
 
@@ -226,6 +240,9 @@ class ParkingSpace extends Controller
                     "avg_star_count" => $space_data->avg_star_count,
                     "total_review_count" => $space_data->total_review_count
                 ];
+
+                $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
+
                 $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
             }
 

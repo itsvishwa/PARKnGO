@@ -124,12 +124,13 @@ public class AvailableParkingSpaceHelper {
                 String latitude = dataObj.getString("latitude");
                 String longitude = dataObj.getString("longitude");
                 String publicOrPrivate = dataObj.getString("is_public").equals("1") ? "Public" : "Customer Only";
+                double distance = dataObj.getDouble("distance");
                 int free_slots = Integer.parseInt(dataObj.getString("free_slots"));
                 String total_slots = dataObj.getString("total_slots");
                 int rate = Integer.parseInt(dataObj.getString("rate"));
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, distance, latitude, longitude));
             }
             availableParkingSpaceModelsArrOriginal.clear();
             availableParkingSpaceModelsArrOriginal.addAll(availableParkingSpaceModelsArr);
@@ -211,7 +212,7 @@ public class AvailableParkingSpaceHelper {
     private void searchResultFetchData(String keyword){
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/search_available/" + vehicleType + "/" + keyword;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/search_available/" + vehicleType + "/" + keyword + "/6.919875/79.854209";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
@@ -269,8 +270,9 @@ public class AvailableParkingSpaceHelper {
                 String total_slots = dataObj.getString("total_slots");
                 int rate = Integer.parseInt(dataObj.getString("rate"));
                 int avg_star_count = Integer.parseInt(dataObj.getString("avg_star_count"));
+                double distance = dataObj.getDouble("distance");
                 String total_review_count = "( " + dataObj.getString("total_review_count") + " )";
-                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, 450.5, latitude, longitude));
+                availableParkingSpaceModelsArr.add(new AvailableParkingSpaceModel(parkingID, name, address, free_slots, total_slots, rate, publicOrPrivate, avg_star_count, total_review_count, distance, latitude, longitude));
             }
 
             // setting up the available parking spaces recycle view
