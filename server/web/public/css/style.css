@@ -671,6 +671,18 @@ body {
   margin-left: -20px;
 }
 
+.ml-110 {
+  margin-left: 110px;
+}
+
+.ml-100 {
+  margin-left: 100px;
+}
+
+.ml-80 {
+  margin-left: 80px;
+}
+
 .ml-60 {
   margin-left: 60px;
 }
@@ -871,6 +883,15 @@ body {
 
 .pt--10 {
   padding-top: -10px;
+}
+
+.p-5 {
+  padding: 5px;
+}
+
+.px-5 {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .px-10 {
@@ -1076,4 +1097,8 @@ body {
 
 .font-semibold {
   font-weight: 500;
+}
+
+.border-radius-3 {
+  border-radius: 3px;
 }

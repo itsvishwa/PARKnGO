@@ -98,7 +98,8 @@
       <div class="parking-space-section">
         <div id="officerCards" class="officerCards">
           <!-- Inside your HTML file where you want to display officer cards -->
-          <?php foreach ($data as $officer) : ?>
+          <?php $i = 0;
+          foreach ($data['officers'] as $officer) : ?>
             <div class="officer-card">
               <div class="officer-section-one">
                 <img src="data:<?php $encodedImage = base64_encode($officer->profile_photo);
@@ -111,16 +112,25 @@
                                               } else {
                                                 echo htmlspecialchars($officer->parking_name);
                                               } ?></h3>
-                <?php if (empty($officer->parking_id)) {
-                  echo "N/A";
-                } else {
-                  $today = strtotime('today');
-                  if (($today <= $officer->last_duty_timestamp) && ($officer->duty_type == 'in')) {
+                <?php
+                $today = strtotime('today') - 16200;
+                $duty_records = $data['duty_records'][$i];
+                if (count($duty_records) == 2) {
+                  if ($duty_records[0]->type == 'in' && $today < $duty_records[0]->time_stamp) {
                     echo '<p class="parking-type bg-green text-white font-semibold f-14">On Duty</p>';
-                  } else if (($today <= $officer->last_duty_timestamp) && ($officer->duty_type == 'out')) {
+                  } else if ($duty_records[0]->type == 'out') {
                     echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
                   }
-                } ?>
+                } else if (count($duty_records) == 1) {
+                  if ($duty_records[0]->type == 'in' && $today < $duty_records[0]->time_stamp) {
+                    echo '<p class="parking-type bg-green text-white font-semibold f-14">On Duty</p>';
+                  } else if ($duty_records[0]->type == 'out') {
+                    echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                  }
+                } else {
+                  echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                };
+                $i++; ?>
               </div>
               <div class="officer-section-second">
                 <p class="text-gray">NIC <?php echo htmlspecialchars($officer->nic); ?></p>

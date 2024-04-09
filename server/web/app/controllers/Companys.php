@@ -197,6 +197,10 @@ class Companys extends Controller
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
     $reviews = $this->parkingSpaceModel->getReviewDetails();
+    $dutyRecord = [];
+    foreach ($parkingSpaces as $parkingSpace) {
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($parkingSpace->officer_id);
+    }
 
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
@@ -207,6 +211,7 @@ class Companys extends Controller
       'parking_spaces_status' => $parkingSpacesStatus,
       'todayEarned' => $todayEarned,
       'reviews' => $reviews,
+      'duty_records' => $dutyRecord,
     ];
     $this->view('company/parkingSpaceView', $data);
   }
@@ -293,7 +298,16 @@ class Companys extends Controller
 
     // Inside your controller or wherever you're processing the request
     $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
-    $this->view('./company/parkingOfficerView', $officers);
+    $dutyRecord = [];
+    foreach ($officers as $officer) {
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($officer->_id);
+    }
+
+    $data = [
+      'officers' => $officers,
+      'duty_records' => $dutyRecord,
+    ];
+    $this->view('./company/parkingOfficerView', $data);
   }
 
   public function parkingOfficerFormView()
