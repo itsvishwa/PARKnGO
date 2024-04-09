@@ -224,18 +224,7 @@ class Admin
 
 
 
-  /*// Modify the function to accept the entry_id as a parameter
-public function deleteEntry($_id) {
-  $this->db->query('DELETE FROM company WHERE _id = :_id');
-  // Bind values
-  $this->db->bind(':_id', $_id);
-  // Execute
-  if ($this->db->execute()) {
-      return true;
-  } else {
-      return false;
-  }
-}*/
+  
 
   // Function to delete a company by ID
   /*public function deleteCompany($_id)
