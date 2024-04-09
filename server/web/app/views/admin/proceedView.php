@@ -359,6 +359,7 @@
       data: {
         rejectReason: rejectReason
       },
+      dataType: 'json',
       success: function(response) {
         // Handle the response if needed
         console.log('Reject reason submitted successfully.');
