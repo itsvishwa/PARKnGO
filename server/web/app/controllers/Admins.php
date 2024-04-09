@@ -401,8 +401,8 @@ public function reject($companyId)
 
 
 
-/********************************* */
-// In your Admins.php controller
+
+
 
 public function downloadDocument($documentId)
 {
