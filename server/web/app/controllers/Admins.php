@@ -488,7 +488,7 @@ public function approveApplication() {
  // echo json_encode(['success' => true]);
 
   // Return JSON response with redirect URL
-  echo json_encode(['success' => true, 'redirect' => 'requestView.php']);
+  echo json_encode(['success' => true, 'redirect' => 'requestsView']);
   
 }
 
@@ -504,7 +504,8 @@ public function rejectApplication() {
   $this->adminModel->rejectApplication($companyId, $rejectReason);
 
   // You can return a JSON response indicating success or failure
-  echo json_encode(['success' => true]);
+ // echo json_encode(['success' => true]);
+  echo json_encode(['success' => true, 'redirect' => 'requestsView']);
 }
 
 

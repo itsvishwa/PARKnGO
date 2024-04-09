@@ -333,6 +333,7 @@
       success: function(response) {
         if (response.success) {
           console.log('Application approved successfully.');
+          window.location.href = response.redirect;
           alert('Application approved successfully.');
         } else {
           console.error('Failed to approve application. Server response:', response);
