@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:text="View On Map"
+                    android:text="View Map"
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"

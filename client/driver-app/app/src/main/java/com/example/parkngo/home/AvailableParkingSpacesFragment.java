@@ -34,14 +34,13 @@ public class AvailableParkingSpacesFragment extends Fragment {
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
         errorView = inflater.inflate(R.layout.fragment_error, container, false);
 
-        // get the selected vehicle type from prev fragment
+        // store passed data
         if (getArguments() != null) {
             vehicleType = getArguments().getString("vehicleType", "none");
         }
 
         AvailableParkingSpaceHelper availableParkingSpaceHelper = new AvailableParkingSpaceHelper(getContext(), availableParkingSpaceView, loadingView, errorView, vehicleType, availableParkingSpaceModelsArr);
-        availableParkingSpaceHelper.initLayout();
-        availableParkingSpaceHelper.initAllBtnListeners();
+        availableParkingSpaceHelper.init();
 
         return loadingView;
     }
