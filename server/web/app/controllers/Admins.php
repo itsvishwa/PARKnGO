@@ -300,7 +300,13 @@ class Admins extends Controller
     $this->view('admin/driverReviews', $data);
   }
 
-  public function index()
+ /* public function index()
+  {
+    $this->dashboardView();
+  }
+*/
+
+ public function index()
   {
 
 
@@ -317,31 +323,58 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
-  /*public function downloadDocument($_id)
-  {
-    // Retrieve document content from the database based on an ID or any other identifier
-    $documentContent = ''; // Initialize the variable
-
-    // Fetch the document content from the database
-    // Example: Assuming you fetch the content from your model
-    $documentContent = $this->adminModel->getDocumentContentById($_id);
-
-    if ($documentContent !== false) {
-      // Set headers for PDF content
-      header('Content-Type: application/pdf');
-      header('Content-Disposition: attachment; filename="document.pdf"');
-
-      // Output the retrieved document content as a PDF file
-      echo $documentContent;
-
-      // Terminate script execution
-      exit();
+  /*public function approve($companyId)
+{
+    // Approve the application
+    if ($this->adminModel->approveApplication($companyId)) {
+        // If the update was successful, redirect to requestView.php
+        echo "Update successful";
+        header("Location: requestView.php");
+        exit(); // Terminate script execution after redirect
     } else {
-      // Handle the case when the document content retrieval fails
-      echo "Failed to retrieve document content.";
-      // Optionally, you can redirect or show an error message
+      echo "Update failed";
+        // If the update failed, handle the error
+        // Display an error message or redirect to an error page
+        // Example: redirect('/admins/error');
     }
+}
+
+public function reject($companyId)
+{
+    // Get the reject reason from the request
+    $rejectReason = $_POST['rejectReason']; // Assuming the reject reason is submitted via POST
+
+    // Reject the application
+    if ($this->adminModel->rejectApplication($companyId, $rejectReason)) {
+        // If the update was successful, redirect to requestView.php
+        header("Location: requestView.php");
+        exit(); // Terminate script execution after redirect
+    } else {
+        // If the update failed, handle the error
+        // Display an error message or redirect to an error page
+        // Example: redirect('/admins/error');
+    }
+}*/
+  
+
+ /* public function proceedView()
+  {
+
+
+    // Fetch pending company applications
+    $pendingApplications = $this->adminModel->getPendingCompanyApplications();
+    
+
+    // Prepare data for the view
+    $data = [
+      'pendingApplications' => $pendingApplications
+    ];
+
+
+    $this->view('admin/proceedView', $data);
   }*/
+
+
 
 
   public function delete($id)

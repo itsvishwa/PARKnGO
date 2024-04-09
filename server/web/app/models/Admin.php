@@ -510,8 +510,12 @@ public function updateApprovalStatus($companyId) {
 
   // Execute the update query
   return $this->db->execute();
+
 }*/
+
+
 public function approveApplication($companyId) {
+  
   // Prepare the SQL query
   $this->db->query('UPDATE company 
                     SET is_approved = 1, is_reviewd = 1
@@ -521,8 +525,19 @@ public function approveApplication($companyId) {
   $this->db->bind(':companyId', $companyId);
 
   // Execute the update query
-  return $this->db->execute();
+  if ($this->db->execute()) {
+    return true; // Update successful
+} else {
+    return false; // Update failed
 }
+
+  // Execute the update query
+/*return $this->db->execute();*/
+
+}
+
+
+
 
 public function rejectApplication($companyId, $rejectReason) {
   // Prepare the SQL query

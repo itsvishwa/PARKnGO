@@ -312,6 +312,8 @@
 <script>
   function approveApplication() {
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+    console.log('companyId:', companyId); // Add this line
+
 
     $.ajax({
       url: 'approveApplication/' + companyId,
