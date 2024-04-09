@@ -443,26 +443,7 @@ public function reject($companyId)
   }
 }*/
 
-/*public function downloadDocument($documentId) {
-  $this->adminModel = $this->model('Admin');
 
-  // Fetch the document from the model based on $documentId
-  $document = $this->adminModel->getDocument($documentId);
-
-  // Check if the document exists
-  if ($document) {
-      // Set appropriate headers for PDF file
-      header('Content-Type: application/pdf');
-      header('Content-Disposition: attachment; filename="document.pdf"');
-      header('Content-Length: ' . strlen($document));
-
-      // Output the document content
-      echo $document;
-  } else {
-      // Handle case when the document is not found
-      echo 'Document not found';
-  }
-}*/
 
 
 /********************************* */
