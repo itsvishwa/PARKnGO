@@ -401,51 +401,6 @@ public function reject($companyId)
 
 
 
-/*public function downloadDocument($documentId) {
-  // Load the Company model
- 
- // $adminModel = $this->model('Admin');
-  $this->adminModel = $this->model('Admin');
-
-  // Fetch the document from the model based on $documentId
-  $documents = $this->adminModel->getDocument($documentId);
-
-  var_dump($documents);
-
-  // Check if the document exists
-  if ($documents) {
-     // Set appropriate headers for PDF file
-     
-     header('Content-Type: application/pdf');
-     header('Content-Disposition: attachment; filename="document.pdf"');
-
-    // header('Content-Disposition: inline; filename="document.pdf"');
-    // header('Content-Length: ' . strlen($documents));
-    
-     // Encode binary data to base64
-     $base64Encoded = base64_encode($documents);
-
-     // Set Content-Length header to the length of base64 data
-    // header('Content-Length: ' . strlen($base64Encoded));
-     header('Content-Length: ' . strlen(base64_decode($base64Encoded)));
-
-     // Output the document content
-   //  echo $documents;
-     // Output the document content
-     //echo $base64Encoded;
-     echo base64_decode($base64Encoded);
-
-  } else {
-     // Handle case when the document is not found
-     
-     // You can redirect to an error page or show a message
-     echo 'Document not found';
-  }
-}*/
-
-
-
-
 /********************************* */
 // In your Admins.php controller
 
