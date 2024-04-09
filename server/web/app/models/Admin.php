@@ -224,28 +224,6 @@ class Admin
 
 
 
-  
-
-  // Function to delete a company by ID
-  /*public function deleteCompany($_id)
-{
-    try {
-        $query = "DELETE FROM company WHERE _id = :_id";
-        $this->db->query($query);
-        $this->db->bind(':_id', $_id);
-        $this->db->execute();
-
-        // Check if any row was affected
-        $rowCount = $this->db->rowCount();
-        if ($rowCount > 0) {
-            return "Company with ID $_id has been deleted successfully.";
-        } else {
-            return "No company found with ID _id.";
-        }
-    } catch (PDOException $e) {
-        return "Error: " . $e->getMessage();
-    }
-}*/
   public function getCompanyById($id)
   {
     $this->db->query('SELECT * FROM company WHERE _id = :id');
