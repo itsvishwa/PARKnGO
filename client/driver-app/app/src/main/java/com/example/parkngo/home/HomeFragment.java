@@ -23,17 +23,14 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 public class HomeFragment extends Fragment {
 
-    String vehicleType;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        View homeView =  inflater.inflate(R.layout.fragment_home, container, false);
 
-        HomeHelper homeHelper = new HomeHelper(view, getContext());
-        homeHelper.initLayout();
-        homeHelper.initAllBtnListeners();
+        HomeHelper homeHelper = new HomeHelper(homeView, getContext());
+        homeHelper.init();
 
-        return view;
+        return homeView;
     }
 }

@@ -160,6 +160,18 @@ class SessionModel
         $this->db->execute();
     }
 
+
+    // session end by force
+    public function end_session_by_force($session_id)
+    {
+        $current_time_stamp = time();
+
+        $this->db->query("UPDATE parking_session SET end_time = $current_time_stamp, is_force_end = 1  WHERE _id = :_id");
+        $this->db->bind(":_id", $session_id);
+
+        $this->db->execute();
+    }
+
     // return session,parking data of a ongoing session for a given driver id
     public function get_ongoing_session_parking_data($driver_id)
     {
@@ -168,8 +180,10 @@ class SessionModel
             p.latitude,
             p.longitude,
             p._id AS parking_id,
-            s._id AS session_id
-            s.vehicle_type
+            s._id AS session_id,
+            s.vehicle_type,
+            s.vehicle_number,
+            s.start_time
             FROM 
             parking_spaces AS p
             JOIN

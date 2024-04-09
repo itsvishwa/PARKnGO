@@ -21,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ErrorFragment;
-import com.example.parkngo.helpers.ErrorFragmentHelper;
 import com.example.parkngo.home.ViewMapFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -53,22 +52,19 @@ public class AvailableParkingSpaceHelper {
         this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
     }
 
-    // initializing all layout features and data
-    public void initLayout(){
-        layoutFetchData();
-    }
 
-    // initializing all the btn handlers
-    public void initAllBtnListeners(){
+    // initializing
+    public void init(){
+        layoutFetchData();
         initSearchBarListener();
         initChipGroupBtnListener();
         initRefreshBtnListener();
-        initViewOnMapBtnListener();
+        initViewMapBtnListener();
     }
 
 
-    // initializing view on map btn listener
-    private void initViewOnMapBtnListener() {
+    // initializing view-map btn listener
+    private void initViewMapBtnListener() {
         Button button = availableParkingSpaceView.findViewById(R.id.available_parking_space_frag_view_map_btn);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -161,21 +157,27 @@ public class AvailableParkingSpaceHelper {
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
                 String response = jsonResponse.getString("response");
-                if(response.equals("0")) // 0 => means no parking available
+
+                Bundle data = new Bundle();
+
+                if(response.equals("ERR_PS_VA")) // ERR_PS_VA => means no parking available
                 {
-                    Bundle data = new Bundle();
                     data.putString("MainText1", "No Available Parking Spaces");
                     data.putString("subText1", "Please try again later");
                     data.putInt("img", R.drawable.not_available);
                     data.putString("MainText2", "Parking spaces not available for selected vehicle type!");
                     data.putString("subText2", "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options");
-
-                    MainActivity mainActivity = (MainActivity) context;
-                    mainActivity.onBackPressed();
-                    mainActivity.replaceFragment(new ErrorFragment(), data);
                 }else{
-                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                    data.putString("MainText1", "Unknown Error");
+                    data.putString("subText1", "Please try again later");
+                    data.putInt("img", R.drawable.not_available);
+                    data.putString("MainText2", "Unknown error occurred! ");
+                    data.putString("subText2", "We sincerely apologize for the inconvenience this has caused.");
                 }
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.onBackPressed();
+                mainActivity.replaceFragment(new ErrorFragment(), data);
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
@@ -223,6 +225,7 @@ public class AvailableParkingSpaceHelper {
 
                 },
                 new Response.ErrorListener() {
+
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         errorResponseHandlerSRD(error);

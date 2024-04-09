@@ -170,4 +170,31 @@ class ParkingSpaceModel
 
                 $this->db->execute();
         }
+
+
+        public function get_officer_mobile_number($parking_id)
+        {
+                $this->db->query(
+                        "SELECT
+                        po.mobile_number AS mobile_number
+                        FROM 
+                        parking_spaces AS ps
+                        JOIN
+                        parking_officer AS po
+                        ON
+                        ps._id = po.parking_id
+                        WHERE 
+                        ps._id = :parking_id
+                        "
+                );
+                $this->db->bind(":parking_id", $parking_id);
+
+                $result = $this->db->single();
+
+                if ($this->db->rowCount() > 0) {
+                        return $result->mobile_number;
+                } else {
+                        return false;
+                }
+        }
 }
