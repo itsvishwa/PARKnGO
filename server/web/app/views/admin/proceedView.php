@@ -362,6 +362,7 @@
       success: function(response) {
         // Handle the response if needed
         console.log('Reject reason submitted successfully.');
+        window.location.href = response.redirect;
         console.log(response); // Log the response for debugging
         alert('Application rejected successfully.');
       },
