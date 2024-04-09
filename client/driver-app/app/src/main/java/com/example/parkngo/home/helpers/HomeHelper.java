@@ -19,6 +19,7 @@ import com.example.parkngo.home.AvailableParkingSpacesFragment;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HomeHelper {
 
@@ -31,28 +32,22 @@ public class HomeHelper {
         this.context = context;
     }
 
-    // initializing all layout features and data
-    public void initLayout(){
+
+    // initializing the layout and button listeners
+    public void init(){
         initVehicleSpinner();
         initPulseAnimation();
         initTopBarData();
-    }
-
-    // initializing all the btn handlers
-    public void initAllBtnListeners(){
         initVehicleSpinnerBtnListener();
         initMainBtnListener();
     }
+
 
     // initializing the vehicle spinner
     private void initVehicleSpinner(){
         Spinner spinner = homeFragmentView.findViewById(R.id.home_frag_spinner);
 
-        ArrayList<String> vehicleTypes = new ArrayList<>();
-        String[] vTypes = {"Car", "Bike", "Van", "Lorry", "Bus"};
-        for (int i=0; i<vTypes.length; i++){
-            vehicleTypes.add(vTypes[i]);
-        }
+        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Bike", "Van", "Lorry", "Bus"));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypes);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
@@ -76,7 +71,7 @@ public class HomeHelper {
 
     // initializing vehicle spinner btn handler
     private void initVehicleSpinnerBtnListener(){
-        Spinner spinner = homeFragmentView.findViewById(R.id.home_frag_spinner); // spinner
+        Spinner spinner = homeFragmentView.findViewById(R.id.home_frag_spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

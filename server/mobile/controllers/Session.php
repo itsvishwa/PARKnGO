@@ -347,18 +347,16 @@ class Session extends Controller
             } else // have on going session 
             {
                 $distance = $this->calculate_distance($parking_data->latitude, $parking_data->longitude, $latitude, $longitude);
-
-                if ($distance > 0.2) // out of of the parking space range
+                if ($distance > 0.2) // out of the parking space range
                 {
                     $this->session_model->end_session_by_force($parking_data->session_id);
                     $this->parking_space_status_model->increase_free_slots($parking_data->vehicle_type, $parking_data->parking_id);
 
                     $officer_mobile_number = $this->parking_space_model->get_officer_mobile_number($parking_data->parking_id);
-                    if ($officer_mobile_number === false) // no officer assigned to the parking
+
+                    if ($officer_mobile_number !== false) // no officer assigned to the parking
                     {
-                    } else // officer has assigned to the parking space
-                    {
-                        $this->send_sms($officer_mobile_number);
+                        $this->send_sms_force_end($officer_mobile_number, $parking_data->vehicle_type, $parking_data->vehicle_number, $this->convertUnixTime($parking_data->start_time));
                         $this->send_json_200("Session ended by force sucessfully");
                     }
                 } else // still in the parking space range
@@ -390,11 +388,17 @@ class Session extends Controller
     }
 
     // send the otp sms
-    private function send_sms($mobile_number)
+    private function send_sms_force_end($mobile_number, $vehicle_type, $vehicle_number, $start_time)
     {
-        $text = "Your+OTP+code+for+PARKnGO%3A+Please+use+this+code+to+complete+your+authentication.+Thank+you%21";
+        $text = "Alert%21+A+vehicle+has+been+left+the+premises+unattended+and+the+session+has+been+ended+forcibly.%0AVehicle+Number+-+" . $vehicle_number . "+%28" . $vehicle_type . "%29%0ASession+Started+Time+-+" . "07.05+AM";
         $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=3865&to=0713072925&text=" . $text;
-
         file_get_contents($url);
+    }
+
+    private function convertUnixTime($unixTime)
+    {
+        // Convert Unix timestamp to human-readable time format
+        $humanReadableTime = date("h.i+", $unixTime) . urlencode(date("A", $unixTime));
+        return $humanReadableTime;
     }
 }

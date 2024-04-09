@@ -22,7 +22,7 @@ class ParkingSpace extends Controller
 
         if ($result === false) // no open parking spaces available for selected vehicle type
         {
-            $this->send_json_400("0");
+            $this->send_json_400("ERR_PS_VA");
         } else // there are open parking spaces
         {
             $spaces_data = []; // final array to send as a response

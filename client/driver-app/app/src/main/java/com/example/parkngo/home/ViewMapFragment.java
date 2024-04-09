@@ -36,7 +36,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View viewMapView = inflater.inflate(R.layout.fragment_navigate, container, false);
 
         // get the selected vehicle type from prev fragment
@@ -44,8 +44,6 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
         if (bundle != null && bundle.containsKey("availableParkingSpaceModelsArr")) {
             availableParkingSpaceModelsArr = (ArrayList<AvailableParkingSpaceModel>) bundle.getSerializable("availableParkingSpaceModelsArr");
         }
-        System.out.println(availableParkingSpaceModelsArr.get(0).getParkingName());
-
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.navigate_frag_map);
@@ -84,7 +82,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
                 LatLng pos = new LatLng( Double.valueOf(availableParkingSpaceModel.getLatitude()),  Double.valueOf(availableParkingSpaceModel.getLongitude()));
 
                 double slotRatio = (availableParkingSpaceModel.getFreeSlots() * 1.0) / Integer.parseInt(availableParkingSpaceModel.getTotalSlots()) ;
-                System.out.println("RATIOOOOOO " + slotRatio);
+
                 BitmapDescriptor markerIcon;
 
                 if(slotRatio <= 0.3){
