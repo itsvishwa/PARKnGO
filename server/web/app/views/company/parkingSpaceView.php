@@ -98,7 +98,8 @@
       <div class="parking-space-section">
 
         <div id="parkingCards" class="parking-cards">
-          <?php foreach ($data['parking_spaces'] as $parking) : ?>
+          <?php $i = 0;
+          foreach ($data['parking_spaces'] as $parking) : ?>
             <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
                                             if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                                               echo "closed";
@@ -133,6 +134,35 @@
                                                                                             } else {
                                                                                               echo "Not Assigned";
                                                                                             } ?></span></p>
+                <div class="flex">
+                  <?php
+                  $today = strtotime('today') - 16200;
+                  $duty_records = $data['duty_records'][$i];
+                  if (count($duty_records) == 2) {
+                    $arrived_duty = $duty_records[1]->time_stamp;
+                    $left_duty = $duty_records[0]->time_stamp;
+                    if ($arrived_duty >= $today) {
+                      echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $arrived_duty), '</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $left_duty), '</span></p>';
+                    } else {
+                      echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    }
+                  } else if (count($duty_records) == 1) {
+                    $arrived_duty = $duty_records[0]->time_stamp;
+                    if ($arrived_duty >= $today) {
+                      echo '<p class="text-black">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $arrived_duty), '</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    } else {
+                      echo '<p class="text-black">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    }
+                  } else {
+                    echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                  };
+                  $i++; ?>
+                </div>
 
 
                 <table>

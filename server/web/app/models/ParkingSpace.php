@@ -206,6 +206,7 @@ class ParkingSpace
                         ps.avg_star_count AS parking_avg_star_count,
                         ps.total_review_count AS parking_total_review_count,
                         ps.company_id AS parking_space_company_id,
+                        po._id AS officer_id,
                         po.first_name AS officer_first_name,
                         po.last_name AS officer_last_name
                       FROM
@@ -222,6 +223,18 @@ class ParkingSpace
     }
     return $row;
   }
+
+  public function getDutyRecord($officer_id)
+  {
+    $this->db->query('SELECT * FROM duty_record dr
+                      WHERE dr.officer_id = :officer_id
+                      ORDER BY dr.time_stamp DESC
+                      LIMIT 2');
+    $this->db->bind(':officer_id', $officer_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
 
   public function getCardDetailsFromParkingSpaceStatus($company_id, $parking_id = null)
   {
