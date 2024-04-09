@@ -153,18 +153,29 @@
             <p>Approve or Reject?</p>
           </div>
 
-          <form class="b-card3" id="rejectForm">
+          <!--  <form class="b-card3" id="rejectForm">
             <div class="card-content12 text-gray">
-              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
-              <!--<button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>-->
-            </div>
+              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>-->
+          <!--<button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>-->
+          <!--  </div>
             
           </form>
 
           <div class="b-card-apre">
             <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
             <button class="approve-button" onclick="approveApplication('<?php echo $_GET['_id'] ?? ''; ?>')">Approve Application</button>
-          </div>
+          </div>-->
+
+          <form class="b-card3" id="rejectForm">
+            <div class="card-content12 text-gray">
+              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
+            </div>
+            <div class="b-card-apre">
+              <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
+              <button class="approve-button" onclick="approveApplication('<?php echo $_GET['_id'] ?? ''; ?>')">Approve Application</button>
+            </div>
+          </form>
+
 
           <div class="b-card-content text-black">
           </div>
@@ -312,7 +323,7 @@
 <script>
   function approveApplication() {
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
-    console.log('companyId:', companyId); // Add this line
+    console.log('companyId:', companyId);
 
 
     $.ajax({
@@ -337,6 +348,7 @@
 
   function submitRejectReason() {
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+    console.log('companyId:', companyId);
     var rejectReason = $('#rejectReason').val();
 
     // Perform AJAX request to submit the reject reason

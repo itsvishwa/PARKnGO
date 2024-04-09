@@ -485,7 +485,10 @@ public function approveApplication() {
   $this->adminModel->approveApplication($companyId);
 
   // You can return a JSON response indicating success or failure
-  echo json_encode(['success' => true]);
+ // echo json_encode(['success' => true]);
+
+  // Return JSON response with redirect URL
+  echo json_encode(['success' => true, 'redirect' => 'requestView.php']);
   
 }
 
