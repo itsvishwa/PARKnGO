@@ -119,7 +119,7 @@ class Admin
   public function getApprovedCompanyApplications()
   {
     $this->db->query('SELECT name, _id , email , phone_number , address FROM company WHERE is_approved = 1 AND is_reviewd = 1');
-    
+
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
     return $rows;
@@ -323,7 +323,7 @@ public function deleteEntry($_id) {
     return $row;
   }
 
-  public function getLatestReviews($driver_id)
+  public function getLatestReviews()
   {
     $this->db->query(
       'SELECT
@@ -331,7 +331,7 @@ public function deleteEntry($_id) {
       review.parking_id AS parking_id,
       parking_spaces.name AS parking_name,
       parking_spaces.address AS parking_address,
-      driver.first_name AS driver_first_name, 
+      driver.first_name AS driver_first_name,
       driver.last_name AS driver_last_name,
       review.content,
       review.time_stamp,
@@ -340,16 +340,10 @@ public function deleteEntry($_id) {
       review
     LEFT JOIN parking_spaces ON review.parking_id = parking_spaces._id
     LEFT JOIN driver ON review.driver_id = driver._id
-    WHERE parking_spaces.company_id = :company_id
     ORDER BY review.time_stamp DESC
     LIMIT 5'
     );
-
-    $this->db->bind(':company_id', $driver_id);
     $rows = $this->db->resultSet();
-
-
-
     return $rows;
   }
 
@@ -373,5 +367,83 @@ public function deleteEntry($_id) {
   }
 
 
+  public function parkingSession($company_id)
+  {
+    $this->db->query(
+      'SELECT parking_session._id,
+        parking_session.start_time,
+        parking_session.parking_id,
+        parking_spaces.company_id
+      FROM parking_session
+      LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id;
+      WHERE parking_spaces.company_id = :company_id'
+    );
 
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
+  public function getRevenue($company_id)
+  {
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    $this->db->query(
+      'SELECT payment._id, payment.time_stamp, payment.amount
+        FROM payment
+        LEFT JOIN parking_session ON payment.session_id = parking_session._id
+        LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id
+        WHERE parking_spaces.company_id = :company_id
+        AND payment.time_stamp >= :thirty_days_ago
+        ORDER BY payment.time_stamp DESC'
+    );
+
+    $this->db->bind(':company_id', $company_id);
+    $this->db->bind(':thirty_days_ago', $thirtyDaysAgo);
+
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
+  public function insertCompanySuspendDetails($data)
+  {
+    $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
+    $this->db->bind(':company_id', $data['company_id']);
+    $this->db->bind(':message', $data['message']);
+    $this->db->bind(':duration', $data['duration']);
+    $this->db->bind(':time_stamp', $data['time_stamp']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function updateRecoveryToken($data)
+  {
+    $this->db->query('UPDATE admin SET token = :token WHERE email = :email');
+    $this->db->bind(':token', $data['token']);
+    $this->db->bind(':email', $data['email']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function updatePassword($data)
+  {
+    $this->db->query('UPDATE admin SET password = :password WHERE token = :token AND email = :email');
+    $this->db->bind(':password', $data['password']);
+    $this->db->bind(':email', $data['email']);
+    $this->db->bind(':token', $data['token']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
