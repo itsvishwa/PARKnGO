@@ -27,6 +27,7 @@ if (file_exists($envFile)) {
 
 // Load Config
 require_once 'config/config.php';
+require_once 'vendor/autoload.php';
 
 // Load Helpers
 require_once 'helpers/url_helper.php';
