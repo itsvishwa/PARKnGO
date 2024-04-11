@@ -146,7 +146,7 @@
 /* Add this CSS to your existing CSS file or create a new one */
 
 .review-table {
-  width: 110%;
+  width: 105%;
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: -24px;
@@ -191,7 +191,7 @@
     align-items: center; /* Vertically aligns the content */
     justify-content: center;
 
-    margin-top: 14px;
+    margin-top: 18px;
 
     height: 6px; 
     width: 60px; 
@@ -212,7 +212,7 @@
     align-items: center; /* Vertically aligns the content */
     justify-content: center;
 
-    margin-top: 14px;
+    margin-top: 18px;
 
     height: 6px; 
     width: 60px; 

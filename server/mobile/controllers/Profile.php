@@ -12,6 +12,7 @@ class Profile extends Controller
     private $user_controller;
     private $officer_model;
     private $officer_activity_model;
+    private $parking_space_model;
 
 
 
@@ -23,8 +24,10 @@ class Profile extends Controller
         $this->officer_model = $this->model("OfficerModel");
         $this->payment_model = $this->model("PaymentModel");
         $this->officer_activity_model = $this->model("OfficerActivityModel");
+        $this->parking_space_model = $this->model("ParkingSpaceModel");
         $this->user_controller = new User;
     }
+
 
     // driver mob - update name
     public function update_name($first_name, $last_name)
@@ -136,8 +139,8 @@ class Profile extends Controller
     }
 
 
-    // send profile details of the driver
-    public function get_officer_details()
+    // get payment history of the officer
+    public function officer_payment_history($parking_id)
     {
         $token_data = $this->verify_token_for_officers();
 
@@ -145,25 +148,68 @@ class Profile extends Controller
             $this->send_json_400("Invalid Token");
         } elseif ($token_data === 404) {
             $this->send_json_404("Token Not Found");
-        } else {
-            $details = $this->officer_model->get_officer($token_data["user_id"]);
+        } else // token is valid
+        {
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if ($details) {
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
-                // Concatenate first name and last name
-                $full_name = $details["first_name"] . " " . $details["last_name"];
+                $payments_history_data = $this->payment_model->get_all_officer_payments_history_by_officer_id($token_data["user_id"]);
 
-                $officer_details = [
-                    "officer_id" => $details["officer_id"],
-                    "full_name" => $full_name,
-                    "mobile_number" => $details["mobile_number"],
-                    "nic" => $details["nic"],
-                    "parking_id" => $details["parking_id"]
-                ];
+                if ($payments_history_data === false) // not payments yet
+                {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "No Payments has been made yet"
+                    ];
 
-                $this->send_json_200($officer_details);
-            } else {
-                $this->send_json_404("Officer details not found");
+                    $this->send_json_400($result);
+                } else // there are payments data
+                {
+                    $result_data = [];
+
+                    foreach ($payments_history_data as $payment_history_data) {
+                        $timestamp = strtotime($payment_history_data->time_stamp);
+                        $formatted_date = date("h.i A | d F", $timestamp);
+
+                        $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
+
+                        $formatted_payment_method = strtoupper($payment_history_data->payment_method);
+
+                        $temp = [
+                            "response_code" => "800",
+                            "Date and Time" => $formatted_date,
+                            "Amount" => $formatted_amount,
+                            "Vehicle" => $payment_history_data->vehicle_number,
+                            "Payment Method" => $formatted_payment_method
+                        ];
+                        $result_data[] = $temp;
+                    }
+
+                    $this->send_json_200($result_data);
+                }
+            } else {    //parking_id is not similar to the assigned parking
+
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+
+                if ($assigned_parking_details) {
+                    $assigned_parking_name = $assigned_parking_details->name;
+
+                    $result = [
+                        "response_code" => "101",
+                        "updated parking_id" => $assigned_parking,
+                        "updated parking_name" => $assigned_parking_name,
+                    ];
+
+                    $this->send_json_200($result);
+                } else {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "parking details not found"
+                    ];
+
+                    $this->send_json_404($result);
+                }
             }
         }
     }

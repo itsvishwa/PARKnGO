@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/driverReviews.css" />
   <title>Driver Reviews</title>
- 
+
 </head>
 
 <body>
@@ -62,13 +62,13 @@
 
             <li class="active">
               <a href="./driverReviews">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+              </svg>
                 Driver Reviews
               </a>
             </li>
-            
+
           </ul>
         </div>
       </div>
@@ -82,132 +82,106 @@
           <h3>Driver Reviews</h3>
         </div>
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
+         <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
+          </svg>-->
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="business">
-               
-       <div class="card-section">
-       
-       <div class="b-card-content ">
-    <table class="review-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Parking Space</th>
-          <th>Date & Time</th>
-          <th>Review</th>
-          <th>Star Count</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Table rows will go here -->
-        <tr>
-          <td>Vishwa Sandaruwan</td>
-          <td>7 - CMC CAR PARK 01</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-          </td>
 
-        </tr>
-        <tr>
-          <td>Vishwa Sandaruwan</td>
-          <td>7 - CMC CAR PARK 01</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-          </td>
+        <div class="card-section">
 
-        </tr>
-        <tr>
-          <td>Dhanushika Nayomi</td>
-          <td>7 - CMC CAR PARK 04</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-          </td>
+          <div class="b-card-content ">
+            <table class="review-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Parking Space</th>
+                  <th>Date & Time</th>
+                  <th>Review</th>
+                  <th>Star Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table rows will go here -->
+                <?php foreach ($data['reviews'] as $review) : ?>
 
-        </tr>        
-        <tr>
-          <td>Janindu Kulathilaka</td>
-          <td>7 - CMC CAR PARK 03</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-          </td>
+                  <tr>
 
-        </tr>
-        <tr>
-          <td>Vishwa Sandaruwan</td>
-          <td>7 - CMC CAR PARK 04</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          </td>
+                    <td>
+                      <?php
+                      echo $review->first_name . ' ' . $review->last_name;
+                      ?>
+                    </td>
+                    <td><?php echo $review->parking_name; ?></td>
 
-        </tr>
-        <tr>
-          <td>Dhanushika Nayomi</td>
-          <td>7 - CMC CAR PARK 01</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-          </td>
+                    <td>
+                      <?php
+                      $timestamp = strtotime($review->time_stamp);
+                      $formattedDate = date("M d, Y", $timestamp);
+                      $formattedTime = date("h:i:s A", $timestamp);
 
-        </tr>
-        <tr>
-          <td>Janindu Kulathilaka</td>
-          <td>7 - CMC CAR PARK 04</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was dirty <br>  and contributing to a negative<br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-          </td>
+                      // Display date on the first line and time on the second line
+                      echo "<p>{$formattedDate}<br>{$formattedTime}</p>";
+                      ?>
+                    </td>
 
-        </tr>
-        <tr>
-          <td>Uththara Jayawardana</td>
-          <td>7 - CMC CAR PARK 01</td>
-          <td>Nov 23, 2023 <br> 05:20:32 PM</td>
-          <td>The parking area was clean <br>  and well-maintained,contributing to a positive <br>  overall experience.</td>
-          <!--<td>★★★★☆</td> -->
-          <td>
-          <span class="star-ratings" data-rating="4">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-          </td>
 
-        </tr>
-        <!-- More rows as needed -->
-      </tbody>
-    </table>
-  </div>
+                    <td>
+                      <?php
+                      $content = $review->content;
+                      $maxChars = 60; // Maximum characters to display (adjust as needed)
+
+                      // Check if the content length exceeds the maximum characters
+                      if (strlen($content) > $maxChars) {
+                        // Split the content into two lines
+                        $firstLine = htmlspecialchars(substr($content, 0, $maxChars));
+                        $secondLine = htmlspecialchars(substr($content, $maxChars));
+
+                        echo "<p>{$firstLine}<br>{$secondLine}</p>"; // Display two lines of content
+                      } else {
+                        echo htmlspecialchars($content); // Display the content in one line if it's short enough
+                      }
+                      ?>
+
+
+
+                    </td>
+                    <td><?php echo $review->no_of_stars; ?></td>
+
+                  </tr>
+
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
           <div class="b-card-content text-black">
-          </div>         
-        </div>        
+          </div>
+        </div>
       </div>
-      </div>      
-  </div>  
-  </div>  
-  </div>  
-  
-    
+    </div>
+  </div>
+  </div>
+  </div>
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const readMoreLinks = document.querySelectorAll('.read-more');
+
+        readMoreLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                            
+                const truncatedContent = this.previousElementSibling.previousElementSibling;
+                const fullContent = this.previousElementSibling;              
+                truncatedContent.style.display = 'none';
+                fullContent.style.display = 'inline'; // Change this to block if it's in a block-level element
+                this.style.display = 'none';
+            });
+        });
+    });
+</script>-->
+
 </body>
 
 </html>

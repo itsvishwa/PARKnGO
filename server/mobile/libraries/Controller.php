@@ -264,7 +264,7 @@ class Controller
         }
 
 
-        // return a encrypted string when pass the session id
+        // return a encrypted url safe string when pass the session id
         public function encrypt_session_id($session_id)
         {
                 // Create an initialization vector
@@ -277,16 +277,21 @@ class Controller
                 $encrypted_session_id = $iv . $encoded_session_id;
 
                 // Encode the binary data as a Base64 string
-                $encrypted_session_id = base64_encode($encrypted_session_id);
+                $base64_encoded = base64_encode($encrypted_session_id);
 
-                echo ($encrypted_session_id);
-                //return $encrypted_session_id;
+                // Make the Base64 string URL safe by replacing certain characters
+                $url_safe_encrypted_session_id = strtr($base64_encoded, '+/', '-_'); // Replace '+' with '-' and '/' with '_'
+
+                return $url_safe_encrypted_session_id;
         }
 
-        public function decrypt_session_id($encrypted_session_id)
+        public function decrypt_session_id($url_safe_encrypted_session_id)
         {
+                // Reverse the URL-safe character replacements to get the original Base64 string
+                $base64_encoded = strtr($url_safe_encrypted_session_id, '-_', '+/'); // Reverse replacements
+
                 // Decode the Base64 string back to binary data
-                $encrypted_session_id = base64_decode($encrypted_session_id);
+                $encrypted_session_id = base64_decode($base64_encoded);
 
                 // Extract the initialization vector (IV) from the beginning of the string
                 $iv = substr($encrypted_session_id, 0, 16);
@@ -303,7 +308,7 @@ class Controller
                         return false;
                 }
 
-                // Send the decrypted session_id as a JSON response
+                // Return the decrypted session_id
                 return $decrypted_session_id;
         }
 

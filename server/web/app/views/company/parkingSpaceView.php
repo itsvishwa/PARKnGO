@@ -36,6 +36,14 @@
                 Updates
               </a>
             </li>
+            <li>
+              <a href="./forceStoppedSessionView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+                Aborted Sessions
+              </a>
+            </li>
             <li class="active">
               <a href="./parkingSpaceView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
@@ -66,9 +74,6 @@
         </div>
 
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -82,12 +87,19 @@
             Add Parking Space
           </div>
         </a>
+        <div class="search-bar flex">
+          <input type="text" id="searchInput" placeholder="Search By Name." oninput="filterOfficers()" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-logo text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
 
       </div>
       <div class="parking-space-section">
 
         <div id="parkingCards" class="parking-cards">
-          <?php foreach ($data['parking_spaces'] as $parking) : ?>
+          <?php $i = 0;
+          foreach ($data['parking_spaces'] as $parking) : ?>
             <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
                                             if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                                               echo "closed";
@@ -122,6 +134,35 @@
                                                                                             } else {
                                                                                               echo "Not Assigned";
                                                                                             } ?></span></p>
+                <div class="flex">
+                  <?php
+                  $today = strtotime('today') - 16200;
+                  $duty_records = $data['duty_records'][$i];
+                  if (count($duty_records) == 2) {
+                    $arrived_duty = $duty_records[1]->time_stamp;
+                    $left_duty = $duty_records[0]->time_stamp;
+                    if ($arrived_duty >= $today) {
+                      echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $arrived_duty), '</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $left_duty), '</span></p>';
+                    } else {
+                      echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    }
+                  } else if (count($duty_records) == 1) {
+                    $arrived_duty = $duty_records[0]->time_stamp;
+                    if ($arrived_duty >= $today) {
+                      echo '<p class="text-black">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $arrived_duty), '</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    } else {
+                      echo '<p class="text-black">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    }
+                  } else {
+                    echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                    echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
+                  };
+                  $i++; ?>
+                </div>
 
 
                 <table>
@@ -222,6 +263,24 @@
     </div>
   </div>
   <script>
+    function filterOfficers() {
+      var input, filter, cards, card, officerName, i;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      cards = document.getElementById("parkingCards");
+      card = cards.getElementsByClassName("parking-space-card");
+
+      for (i = 0; i < card.length; i++) {
+        officerName = card[i].getElementsByClassName("parking-card-bold")[0];
+        if (officerName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          card[i].style.display = "";
+        } else {
+          card[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
 
       // Get all elements with the class 'review-btn'
@@ -232,15 +291,11 @@
       const popupContentBody = document.querySelector('.content-body');
       const parkingName = document.querySelector('.popup-parking-name');
       const parkingAddress = document.querySelector('.popup-parking-address');
-      const reviewsData = <?php echo json_encode($data['reviews']); ?>; // Assuming $data['reviews'] is a PHP variable containing the reviews data
+      const reviewsData = <?php echo json_encode($data['reviews']); ?>;
 
-      // Add event listener to each review button
       reviewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-          // Get the parking_id from the data attribute
           const parkingId = this.getAttribute('data-parking-id');
-
-          // Filter reviews based on parkingId
           const filteredReviews = reviewsData.filter(review => review.parking_id == parkingId);
 
           function generateStars(rating) {
@@ -262,42 +317,46 @@
             return stars.join('');
           }
 
-          parkingName.innerHTML = '';
           parkingName.innerHTML = `${filteredReviews[0].parking_name}`;
-
-          parkingAddress.innerHTML = '';
           parkingAddress.innerHTML = `${filteredReviews[0].parking_address}`;
-
-          // Clear the popup content body
           popupContentBody.innerHTML = '';
 
-
-          // Create cards for each review and append them to the popup
           filteredReviews.forEach(review => {
             const card = document.createElement('div');
             card.classList.add('review-card');
 
             const starsSVG = generateStars(review.no_of_stars);
-            // Customize the card content based on your review structure
             card.innerHTML = `
-            <div class="review-head">
-              <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
-              <p>${review.time_stamp}</p>
-            </div>
-            <div class="review-body">
-              ${review.content}
-            </div>
-            <div class="stars-container">
-              ${starsSVG}
-            </div>
-          `;
-
-            // Append the card to the popup
+                        <div class="review-head">
+                            <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
+                            <p>${review.time_stamp}</p>
+                        </div>
+                        <div class="review-body">
+                            ${review.content}
+                        </div>
+                        <div class="stars-container">
+                            ${starsSVG}
+                        </div>
+                    `;
             popupContentBody.appendChild(card);
           });
 
-          // Show the popup
           popupContainer.style.display = 'block';
+
+          if (filteredReviews.length > 5) {
+            popupContentBody.style.maxHeight = '300px';
+            popupContentBody.style.overflowY = 'auto';
+          } else {
+            popupContentBody.style.maxHeight = 'none';
+            popupContentBody.style.overflowY = 'hidden';
+          }
+
+          const popupContainerRect = popupContainer.getBoundingClientRect();
+          const closePopupButtonRect = closePopupButton.getBoundingClientRect();
+
+          closePopupButton.style.position = 'fixed';
+          closePopupButton.style.top = `${popupContainerRect.top + closePopupButtonRect.height}px`;
+          closePopupButton.style.right = `${popupContainerRect.right - closePopupButtonRect.width}px`;
         });
       });
 
@@ -305,7 +364,6 @@
         popupContainer.style.display = 'none';
       });
 
-      // Close the popup if the user clicks outside the content
       window.addEventListener('click', function(event) {
         if (event.target === popupContainer) {
           popupContainer.style.display = 'none';

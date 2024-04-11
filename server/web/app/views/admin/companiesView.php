@@ -62,7 +62,7 @@
             <li>
               <a href="./driverReviews">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                 </svg>
                 Driver Reviews
               </a>
@@ -80,9 +80,9 @@
           <h3>Companies</h3>
         </div>
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
+          <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
+          </svg>-->
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -163,10 +163,20 @@
                         </div>
                       </div>
                       <div class="park-card2-content text-black">
-                        <p>10 Parking Spaces</p>
+                      <!--  <p>10 Parking Spaces</p> -->
+                        <?php
+                        // Check if the property 'parkingSlotsCount' exists in the current application
+                        if (property_exists($application, 'parkingSlotsCount')) {
+                          $parkingSlotsCount = $application->parkingSlotsCount;
+                          $label = ($parkingSlotsCount == 1) ? 'Parking Space' : 'Parking Spaces';
+                          echo "<p>{$parkingSlotsCount} {$label}</p>";
+                        } else {
+                          echo "<p>No Parking Spaces</p>"; // Default value if count is not available
+                        }
+                        ?>
                       </div>
                     </div>
-                    
+
                     <div class="parking-ofi-card2-icon ">
                       <div class="parking-ofi-icon">
                         <span class="material-symbols-outlined">
@@ -174,11 +184,21 @@
                         </span>
                       </div>
                       <div class="parking-ofi-card2-content text-black">
-                        <p>5 Parking Officers</p>
-                        
+                        <!--  <p>5 Parking Officers</p>-->
+                        <?php
+                        // Check if the property 'parkingOfficersCount' exists in the current application
+                        if (property_exists($application, 'parkingOfficersCount')) {
+                          $parkingOfficersCount = $application->parkingOfficersCount;
+                            // Adjust the label based on the count
+                          $label = ($parkingOfficersCount == 1) ? 'Parking Officer' : 'Parking Officers';
+                          echo "<p>{$parkingOfficersCount} {$label}</p>";
+                        } else {
+                          echo "<p>No Parking Officers</p>"; // Default value if count is not available
+                        }
+                        ?>
                       </div>
                     </div>
-                    
+
                     <button class="b-view-more bg-black" type="button">
                       <div class="b-card_down-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="rd-menu-logo">
@@ -191,27 +211,27 @@
                     </button>
 
 
-                    
-                    
-                      
+
+
+
                     <button class="b-delete-more bg-black">
-                    
+
                       <div class="b-card_del-icon ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
                           <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      
+
                       <div class="b-delete-more-card2-content text-white">
                         <p>Delete</p>
                       </div>
-                     
-                     
-                    </button>
-                    
-                    
 
-                 </div>
+
+                    </button>
+
+
+
+                  </div>
                 </div>
               </div>
               <div>
@@ -256,9 +276,9 @@
           }
         });
       </script>
-      
 
-<!--      <script>
+
+      <!--      <script>
         document.addEventListener('DOMContentLoaded', function () {
   const deleteButtons = document.querySelectorAll('.b-delete-more');
 
@@ -297,7 +317,7 @@
 
       </script>-->
 
-   <!--   <script>
+      <!--   <script>
         // JavaScript code inside your HTML or in an external file
 document.querySelectorAll('.b-delete-more').forEach(button => {
   button.addEventListener('click', function() {
