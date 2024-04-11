@@ -15,14 +15,14 @@ class ParkingSpace extends Controller
     }
 
 
-    // show only available parking spaces related to the given vehicle type
+    // driver mob - show only available parking spaces related to the given vehicle type
     public function view_available($vehicle_type, $latitude, $longitude)
     {
-        $result = $this->parking_space_model->get_available_parking_spaces($vehicle_type);
+        $result = $this->parking_space_model->get_available_parking_spaces($this->convert_to_vehicle_category($vehicle_type));
 
         if ($result === false) // no open parking spaces available for selected vehicle type
         {
-            $this->send_json_400("ERR_PS_VA");
+            $this->send_json_400("PS_NOPS");
         } else // there are open parking spaces
         {
             $spaces_data = []; // final array to send as a response
@@ -57,47 +57,25 @@ class ParkingSpace extends Controller
     }
 
 
-    // calculate distance
-    private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
-    {
-        $source_coordinates = $source_lat . "," . $source_long;
-        $dest_coordinates = $dest_lat . "," . $dest_long;
-
-        $uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $source_coordinates . "&destinations=" . $dest_coordinates . "&units=imperial&key=" . G_API_KEY;
-
-        // Send request to Google Distance Matrix API
-        $response = file_get_contents($uri);
-
-        // Decode JSON response
-        $decoded_response = json_decode($response, true);
-
-        // distance in meters
-        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
-
-        return $distance / 1000;
-    }
-
-
-
-    // show all parking spaces
+    // driver mob - show all parking spaces
     public function view_all()
     {
         $result = $this->parking_space_model->get_all_parking_spaces();
 
         if ($result === false) // no parking spaces 
         {
-            $this->send_json_400("N/A");
+            $this->send_json_400("PS_NPS");
         } else // have parking spaces
         {
             $spaces_data = [];
-
+            $curr_time = time();
             foreach ($result as $space_data) {
                 $temp = [
                     "_id" => $space_data->_id,
                     "name" => $space_data->name,
                     "address" => $space_data->address,
                     "is_public" => $space_data->is_public,
-                    "is_closed" => $space_data->is_closed,
+                    "is_closed" => ($space_data->closed_end_time !== NULL && $curr_time < $space_data->closed_end_time) ? "1" : "0",
                     "avg_star_count" => $space_data->avg_star_count,
                     "total_review_count" => $space_data->total_review_count
                 ];
@@ -111,16 +89,16 @@ class ParkingSpace extends Controller
     }
 
 
-    // show all details of the selected parking space
+    // driver mob - show all details of the selected parking space
     public function view_one($_id)
     {
 
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_PS_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_PS_TNF");
         } else // token is valid
         {
             $parking_space_data = $this->parking_space_model->get_parking_space_details($_id);
@@ -130,9 +108,10 @@ class ParkingSpace extends Controller
 
             if ($parking_space_data === false || $parking_slot_data === false) // no parking space for a given _id
             {
-                $this->send_json_404("Parking Space Not Found");
+                $this->send_json_404("PS_IPSID");
             } else // parking space found
             {
+                $curr_time = time();
                 $result = [
                     "_id" => $parking_space_data->_id,
                     "name" => $parking_space_data->name,
@@ -140,7 +119,7 @@ class ParkingSpace extends Controller
                     "latitude" => $parking_space_data->latitude,
                     "longitude" => $parking_space_data->longitude,
                     "is_public" => $parking_space_data->is_public,
-                    "is_closed" => $parking_space_data->is_closed,
+                    "is_closed" => ($parking_space_data->closed_end_time !== NULL && $curr_time < $parking_space_data->closed_end_time) ? "1" : "0",
                     "avg_star_count" => $parking_space_data->avg_star_count,
                     "total_review_count" => $parking_space_data->total_review_count,
                     "slot_status" => null,
@@ -154,7 +133,7 @@ class ParkingSpace extends Controller
                 foreach ($parking_slot_data as $slot_data) {
                     // add a slot to the new assosiative array
                     $new_parking_slot_data[] = [
-                        "vehicle_type" => $slot_data->vehicle_type,
+                        "vehicle_type" => $this->convert_to_vehicle_type($slot_data->vehicle_type),
                         "free_slots" => $slot_data->free_slots,
                         "total_slots" => $slot_data->total_slots,
                         "rate" => $slot_data->rate
@@ -190,14 +169,14 @@ class ParkingSpace extends Controller
                                 "availability" => "AV",
                                 "_id" => $review_data->_id,
                                 "name" => $review_data->first_name . " " . $review_data->last_name,
-                                "time_stamp" => date("h:i A | d/m/y", $review_data->time_stamp),
+                                "time_stamp" => implode(" | ", $this->format_time($review_data->time_stamp)),
                                 "no_of_stars" => $review_data->no_of_stars,
                                 "content" => $review_data->content,
                             ];
                         } else {
                             $new_reviews_data["data"][] = [
                                 "name" => $review_data->first_name . " " . $review_data->last_name,
-                                "time_stamp" => date("h:i A | d/m/y", $review_data->time_stamp),
+                                "time_stamp" => implode(" | ", $this->format_time($review_data->time_stamp)),
                                 "no_of_stars" => $review_data->no_of_stars,
                                 "content" => $review_data->content,
                             ];
@@ -214,14 +193,14 @@ class ParkingSpace extends Controller
     }
 
 
-    // show all available parking spaces respect to the given vehicle type and given keyword
+    // driver mob - show all available parking spaces respect to the given vehicle type and given keyword
     public function search_available($vehicle_type, $keyword, $latitude, $longitude)
     {
-        $result = $this->parking_space_model->get_available_parking_spaces_by_search($vehicle_type, $keyword);
+        $result = $this->parking_space_model->get_available_parking_spaces_by_search($this->convert_to_vehicle_category($vehicle_type), $keyword);
 
         if ($result === false)  // no open parking spaces available for selected vehicle type 
         {
-            $this->send_json_400("0");
+            $this->send_json_400("PS_NOPS");
         } else // there are open parking spaces
         {
             $spaces_data = []; // final array to send as a response
@@ -248,5 +227,26 @@ class ParkingSpace extends Controller
 
             $this->send_json_200($spaces_data);
         }
+    }
+
+
+    // calculate distance
+    private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
+    {
+        $source_coordinates = $source_lat . "," . $source_long;
+        $dest_coordinates = $dest_lat . "," . $dest_long;
+
+        $uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $source_coordinates . "&destinations=" . $dest_coordinates . "&units=imperial&key=" . G_API_KEY;
+
+        // Send request to Google Distance Matrix API
+        $response = file_get_contents($uri);
+
+        // Decode JSON response
+        $decoded_response = json_decode($response, true);
+
+        // distance in meters
+        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+
+        return $distance / 1000;
     }
 }
