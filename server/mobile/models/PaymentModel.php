@@ -9,17 +9,50 @@ class PaymentModel
         $this->db = new Database;
     }
 
+    // retrun whether a open payment session exist for given driver id. if exist return payment_id else return false
+    public function is_open_payment_exist($driver_id)
+    {
+        $this->db->query(
+            "SELECT
+            payment._id 
+             FROM
+            payment
+            JOIN
+            parking_session
+            ON
+            parking_session._id = payment.session_id
+            WHERE 
+            parking_session.driver_id = :driver_id
+            AND
+            payment.is_complete = 0
+             "
+        );
+        $this->db->bind(":driver_id", $driver_id);
+        $result = $this->db->single();
+
+        if ($this->db->rowCount() > 0) {
+            return $result->_id;
+        } else {
+            return false;
+        }
+    }
+
     // get all data of a selected payment
     public function get_all_data($payment_id)
     {
         $this->db->query(
             "SELECT 
+            payment._id,
             payment.amount,  
             parking_session.start_time, 
             parking_session.end_time,
             parking_session.vehicle_number,
             parking_session.vehicle_type,
-            parking_spaces.name
+            parking_spaces.name,
+            parking_spaces._id AS pid,
+            parking_officer.officer_id,
+            parking_officer.first_name,
+            parking_officer.last_name
             FROM 
                 payment
             JOIN 
@@ -30,12 +63,24 @@ class PaymentModel
                 parking_spaces
             ON
                 parking_session.parking_id = parking_spaces._id 
+            JOIN
+                officer_activity
+            ON
+                parking_session._id = officer_activity.session_id
+            JOIN
+                parking_officer
+            ON
+                parking_officer._id = officer_activity.officer_id
             WHERE 
-                payment._id = :payment_id"
+                payment._id = :payment_id
+            AND
+                officer_activity.type = :_end
+
+        "
         );
 
         $this->db->bind(":payment_id", $payment_id);
-
+        $this->db->bind(":_end",  "end");
         return $this->db->single();
     }
 
@@ -99,7 +144,7 @@ class PaymentModel
          ON
              parking_session.parking_id = parking_spaces._id 
          WHERE 
-             payment.driver_id = :driver_id
+            parking_session.driver_id = :driver_id
              AND
              payment.is_complete = 1"
         );

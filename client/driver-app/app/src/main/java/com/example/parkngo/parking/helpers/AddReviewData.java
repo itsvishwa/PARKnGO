@@ -27,13 +27,13 @@ import java.util.Map;
 
 public class AddReviewData {
     View view;
-    int _id;
+    String parkingID;
     Context context;
     FragmentManager fragmentManager;
 
-    public AddReviewData(View view, int _id, Context context, FragmentManager fragmentManager ){
+    public AddReviewData(View view, String parkingID, Context context, FragmentManager fragmentManager ){
         this.view = view;
-        this._id = _id;
+        this.parkingID = parkingID;
         this.context = context;
         this.fragmentManager = fragmentManager;
         addReview();
@@ -87,7 +87,7 @@ public class AddReviewData {
                     params.put("time_stamp", "" + unixTimestamp);
                     params.put("no_of_stars", "" + starCount);
                     params.put("content", content);
-                    params.put("parking_id", "" + _id);
+                    params.put("parking_id", "" + parkingID);
                     return params;
                 }
             };

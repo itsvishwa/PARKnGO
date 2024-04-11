@@ -28,7 +28,8 @@ class Profile extends Controller
         $this->user_controller = new User;
     }
 
-    // update name
+
+    // driver mob - update name
     public function update_name($first_name, $last_name)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -44,7 +45,7 @@ class Profile extends Controller
     }
 
 
-    // check mobile number existancce
+    // driver mob - check mobile number existancce
     public function send_otp($mobile_number)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -64,7 +65,7 @@ class Profile extends Controller
         }
     }
 
-    // if otp correct this will update the mobile number
+    // driver mob - if otp correct this will update the mobile number
     public function update_mobile_number($mobile_number, $otp_code)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -91,22 +92,22 @@ class Profile extends Controller
     }
 
 
-    // send payment history of the driver
+    // driver mob - send payment history of the driver
     public function driver_payment_history()
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("PRF_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("PRF_TNF");
         } else // token is valid
         {
             $payments_data = $this->payment_model->get_all_driver_payments_by_id($token_data["user_id"]);
 
             if ($payments_data === false) // not payments yet
             {
-                $this->send_json_400("ERROR_6001"); // ERROR_6001 => No payments have been made yet
+                $this->send_json_400("PRF_NPY"); // No payments have been made yet
             } else // there are payments data
             {
                 $result_data = [];
@@ -125,9 +126,9 @@ class Profile extends Controller
                         "payment_method" => strtoupper($payment_data->payment_method),
                         "time_duration" =>  $time_duration,
                         "vehicle_type" => $payment_data->vehicle_type,
-                        "vehicle_number" => $payment_data->vehicle_number,
+                        "vehicle_number" => $this->format_vehicle_number($payment_data->vehicle_number),
                         "parking_space_name" => $payment_data->name,
-                        "payment_time_stamp" =>  date("h:i A | d/m/y", $payment_data->time_stamp)
+                        "payment_time_stamp" =>  implode(" | ", $this->format_time($payment_data->time_stamp)),
                     ];
                     $result_data[] = $temp;
                 }
@@ -136,42 +137,6 @@ class Profile extends Controller
             }
         }
     }
-
-
-    // profile details of officer
-    // public function get_officer_details()
-    // {
-    //     $token_data = $this->verify_token_for_officers();
-
-    //     if ($token_data === 400) {
-    //         $this->send_json_400("Invalid Token");
-    //     } elseif ($token_data === 404) {
-    //         $this->send_json_404("Token Not Found");
-    //     } else {
-    //         $details = $this->officer_model->get_officer($token_data["user_id"]);
-            
-    //         if ($details) {
-
-    //             // Concatenate first name and last name
-    //             $full_name = $details["first_name"] . " " . $details["last_name"]; 
-    
-    //             $officer_details = [
-    //                 "officer_id" => $details["officer_id"],
-    //                 "full_name" => $full_name,
-    //                 "mobile_number" => $details["mobile_number"],
-    //                 "nic" => $details["nic"],
-    //                 "parking_id" => $details["parking_id"]
-    //             ];
-    
-    //             $this->send_json_200($officer_details);
-    //         } else {
-    //             $this->send_json_404("Officer details not found");
-    //         }
-
-    //     }
-
-    // }
-
 
 
     // get payment history of the officer
@@ -187,7 +152,7 @@ class Profile extends Controller
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $payments_history_data = $this->payment_model->get_all_officer_payments_history_by_officer_id($token_data["user_id"]);
 
@@ -206,7 +171,7 @@ class Profile extends Controller
                     foreach ($payments_history_data as $payment_history_data) {
                         $timestamp = strtotime($payment_history_data->time_stamp);
                         $formatted_date = date("h.i A | d F", $timestamp);
-        
+
                         $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
 
                         $formatted_payment_method = strtoupper($payment_history_data->payment_method);
@@ -223,7 +188,6 @@ class Profile extends Controller
 
                     $this->send_json_200($result_data);
                 }
-            
             } else {    //parking_id is not similar to the assigned parking
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
@@ -238,7 +202,6 @@ class Profile extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
                     $result = [
                         "response_code" => "204",
