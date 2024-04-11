@@ -9,8 +9,11 @@ class Companys extends Controller
   public function __construct()
   {
     $this->companyModel = $this->model('company');
+    $suspend_data = $this->companyModel->getCompanySuspendDetails($_SESSION['user_id']);
     if (!isset($_SESSION['user_id'])) {
       redirect('users/login');
+    } else if ($suspend_data != null && date('Y-m-d H:i:s', $suspend_data->end_time) > date('Y-m-d H:i:s')) {
+      redirect('users/suspendView');
     }
 
     $this->officerModel = $this->model('Officer');
@@ -173,6 +176,11 @@ class Companys extends Controller
       // Decode the JSON data into an associative array
       $data = json_decode($json_data, true);
 
+      $data['parking_image'] = explode(',', $data['parking_image'])[1];
+      file_put_contents('received_data3.log', $data['parking_image']);
+
+      $data['parking_image'] = base64_decode($data['parking_image']);
+
       $result = $this->parkingSpaceModel->parkingSave($data);
 
       if ($result) {
@@ -189,6 +197,10 @@ class Companys extends Controller
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
     $reviews = $this->parkingSpaceModel->getReviewDetails();
+    $dutyRecord = [];
+    foreach ($parkingSpaces as $parkingSpace) {
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($parkingSpace->officer_id);
+    }
 
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
@@ -199,6 +211,7 @@ class Companys extends Controller
       'parking_spaces_status' => $parkingSpacesStatus,
       'todayEarned' => $todayEarned,
       'reviews' => $reviews,
+      'duty_records' => $dutyRecord,
     ];
     $this->view('company/parkingSpaceView', $data);
   }
@@ -285,7 +298,16 @@ class Companys extends Controller
 
     // Inside your controller or wherever you're processing the request
     $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
-    $this->view('./company/parkingOfficerView', $officers);
+    $dutyRecord = [];
+    foreach ($officers as $officer) {
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($officer->_id);
+    }
+
+    $data = [
+      'officers' => $officers,
+      'duty_records' => $dutyRecord,
+    ];
+    $this->view('./company/parkingOfficerView', $data);
   }
 
   public function parkingOfficerFormView()
@@ -345,7 +367,7 @@ class Companys extends Controller
         }
       } else {
         // Load view
-        $data['profiel_image'] = '';
+        $data['profile_image'] = '';
         $this->view('company/parkingOfficerFormView', $data);
       }
     } else {
@@ -513,5 +535,11 @@ class Companys extends Controller
     ];
 
     $this->view('company/parkingOfficerActivitiesView', $data);
+  }
+
+  public function forceStoppedSessionView()
+  {
+    $data = $this->parkingSpaceModel->getForceStoppedSessions($_SESSION['user_id']);
+    $this->view('company/forceStoppedSessionView', $data);
   }
 }
