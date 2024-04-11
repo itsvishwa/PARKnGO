@@ -19,7 +19,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.FragmentManager;
 
 
-import com.example.officertestapp.Home.AssignAVehicleAddDetailsFragment;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.Home.AssignAVehicleConfirmationFragment;
 import com.example.officertestapp.Home.CaptureAct;
 import com.example.officertestapp.MainActivity;
@@ -142,11 +142,12 @@ public class AssignAVehicleAddDetailsHelper {
                     String selectedSymbol = symbolsSpinnerView.getSelectedItem().toString();
                     String digits = digitsEditTextView.getText().toString();
                     String selectedProvince = provincesSpinnerView.getSelectedItem().toString();
+
                     String vehicleNumber = letters + selectedSymbol + digits + selectedProvince;
                     String originalVehicleNumber = letters + "#" + selectedSymbol + "#" +digits + "#" + selectedProvince;
 
-                    String preprocessVehicleNumber =  preprocessVehicleNumber(originalVehicleNumber);
-
+                    // Preprocess vehicle number
+                    String preprocessVehicleNumber = VehicleNumberHelper.preprocessVehicleNumber(originalVehicleNumber);
 
                     // Get vehicle type
                     String selectedVehicleType = vehicleTypesSpinnerView.getSelectedItem().toString();
@@ -217,23 +218,6 @@ public class AssignAVehicleAddDetailsHelper {
         }
 
         return calcStartTimeStamp;
-    }
-
-
-    private String preprocessVehicleNumber(String originalVehicleNumber) {
-        // Replace "ශ්‍රී" with "SRI" if it exists
-        if (originalVehicleNumber.contains("ශ්‍රී")) {
-            originalVehicleNumber = originalVehicleNumber.replace("ශ්‍රී", "SRI");
-        }
-        // Replace "-" with "DH" if it exists
-        if (originalVehicleNumber.contains("-")) {
-            originalVehicleNumber = originalVehicleNumber.replace("-", "DH");
-        }
-        // Replace "NONE" with "NA" if it exists
-        if (originalVehicleNumber.contains("NONE")) {
-            originalVehicleNumber = originalVehicleNumber.replace("NONE", "NA");
-        }
-        return originalVehicleNumber;
     }
 
 

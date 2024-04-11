@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.HeroActivity;
 import com.example.officertestapp.Home.AssignVehicle03Fragment;
 import com.example.officertestapp.MainActivity;
@@ -55,44 +56,15 @@ public class AssignAVehicleConfirmationHelper {
         TextView vehicleNumberTextView = assignAVehicleConfirmationView.findViewById(R.id.frag_assign_vehicle_01_vehicle_number_txt_view);
         TextView vehicleTypeTextView = assignAVehicleConfirmationView.findViewById(R.id.frag_assign_vehicle_01_vehicle_type_txt_view);
 
-        // Update TextViews with the retrieved values
-        // Split the vehicle number string
-//        String[] vehicleParts = vehicleNumber.split("#");
-//
-//        // Join the parts with a space
-//        String formattedVehicleNumber = String.join(" ", vehicleParts);
+        //String vehicleNumberToSplit = vehicleNumberProcessed;
 
-        String vehicleNumberToSplit = vehicleNumberProcessed;
+        String splittedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(vehicleNumberProcessed);
+        vehicleNumberTextView.setText(splittedVehicleNumber);
 
-        String splittedVehicleNumber =  SplitVehicleNumber(vehicleNumberToSplit);
 
         vehicleNumberTextView.setText(splittedVehicleNumber);
 
         vehicleTypeTextView.setText(vehicleType.toUpperCase());
-    }
-
-    private String SplitVehicleNumber(String vehicleNumberToSplit) {
-        // Split the vehicle number by "#"
-        String[] parts = vehicleNumberToSplit.split("#");
-
-        // Iterate over each part and perform the replacements
-        for (int i = 0; i < parts.length; i++) {
-            // Replace "NA" with ""
-            if (parts[i].contains("NA")) {
-                parts[i] = parts[i].replace("NA", "");
-            }
-            // Replace "SRI" with "ශ්‍රී"
-            if (parts[i].contains("SRI")) {
-                parts[i] = parts[i].replace("SRI", "ශ්‍රී");
-            }
-            // Replace "DH" with "-"
-            if (parts[i].contains("DH")) {
-                parts[i] = parts[i].replace("DH", "-");
-            }
-        }
-
-        // Join the parts back together with an empty space
-        return String.join(" ", parts);
     }
 
     public void initYesBtnListener() {

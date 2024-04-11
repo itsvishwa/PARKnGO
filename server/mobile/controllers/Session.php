@@ -614,4 +614,68 @@ class Session extends Controller
 
         return $final_arr;
     }
+
+    public function force_end_sessions_list() 
+    {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $encoded_parking_id = $_SERVER['HTTP_ENCODED_PARKING_ID'];
+            $parking_id = $this->decrypt_id($encoded_parking_id);
+
+             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+
+                $force_ended_session_data = $this->session_model->get_force_ended_sessions($parking_id);
+
+                if ($force_ended_session_data === false) // not payments yet
+                {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "No Force Ended Sessions"
+                    ];
+
+                    $this->send_json_400($result);
+                } else // there are force ended sessions
+                {
+                    $result_data = [];
+
+                    foreach ($force_ended_session_data as $force_ended_session_data) {
+                        $session_start_timestamp = $force_ended_session_data->start_time;
+                        $session_force_end_timestamp = $force_ended_session_data->end_time;
+
+                        $temp = [
+                            "response_code" => "800",
+                            "vehicle" => $force_ended_session_data->vehicle_number,
+                            "vehicle_type" => $force_ended_session_data->vehicle_type,
+                            "session_start_date_and_timestamp" => $session_start_timestamp,
+                            "session_force_end_date_and_timestamp" => $session_force_end_timestamp   
+                        ];
+                        $result_data[] = $temp;
+                    }
+
+                    $this->send_json_200($result_data);
+                }
+            
+            } else {    //parking_id is not similar to the assigned parking
+
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+                if ($assigned_parking_details) // new parking has been assigned to the officer
+                {
+                    // You have been reassigned to a new parking space
+                    $this->send_json_400("101");
+                } else // no parking has been assigned to the officer
+                {
+                    // parking details not found
+                    $this->send_json_404("204");
+                }
+            }
+        }
+    }
 }

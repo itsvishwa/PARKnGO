@@ -44,4 +44,7 @@ dependencies {
 
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation ("com.ncorti:slidetoact:0.11.0")
+
+    //Location
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
 }
