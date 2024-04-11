@@ -316,11 +316,12 @@
     console.log('Attempting to approve application with companyId:', companyId);
 
     $.ajax({
-      url: 'approveApplication/' + companyId,
+      url: '/PARKnGO/server/web/admins/approveApplication/' + companyId,
       method: 'POST',
       dataType: 'json',
       success: function(response) {
         if (response.success) {
+          console.log('Response:', response);
           console.log('Application approved successfully.');
           window.location.href = response.redirect;
           alert('Application approved successfully.');

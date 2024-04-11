@@ -504,8 +504,7 @@ public function updateApprovalStatus($companyId) {
 
 public function updateApproveApplication($companyId, $adminId)
 {
-
-  
+ 
     // Prepare the SQL query
     $this->db->query('UPDATE company 
                       SET is_approved = :is_approved, is_reviewd = :is_reviewd, admin_id = :admin_id
@@ -513,36 +512,36 @@ public function updateApproveApplication($companyId, $adminId)
     
     // Define values
     $isApproved = 1;
-    $isReviewed = 1;
+    $isReviewd = 1;
     
     // Bind values
     $this->db->bind(':is_approved', $isApproved);
-    $this->db->bind(':is_reviewd', $isReviewed);
+    $this->db->bind(':is_reviewd', $isReviewd);
     $this->db->bind(':admin_id', $adminId);
     $this->db->bind(':companyId', $companyId);
 
-     // Debugging: Output method parameters
-    // echo "Debugging: Company ID: " . $companyId . ", Admin ID: " . $adminId . "<br>";
+    
 
     // Execute the update query
     if ($this->db->execute()) {
         return true; // Update successful
     } else {
       
-        return false; // Update failed
+        return false; // Update faileds
     }
 }
 
 
 
-public function rejectApplication($companyId, $rejectReason) {
+public function rejectApplication($companyId, $rejectReason, $adminId) {
   // Prepare the SQL query
   $this->db->query('UPDATE company 
-                    SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason 
+                    SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason , admin_id = :admin_id
                     WHERE _id = :companyId');
 
   // Bind the parameters
   $this->db->bind(':rejectReason', $rejectReason);
+  $this->db->bind(':admin_id', $adminId);
   $this->db->bind(':companyId', $companyId);
 
   // Execute the update query
