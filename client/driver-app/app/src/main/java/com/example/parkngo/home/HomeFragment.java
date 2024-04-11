@@ -23,41 +23,14 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 public class HomeFragment extends Fragment {
 
-    String vehicleType;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        View homeView =  inflater.inflate(R.layout.fragment_home, container, false);
 
-        // initialize the helper
-        new HomeHelper(view, getContext());
+        HomeHelper homeHelper = new HomeHelper(homeView, getContext());
+        homeHelper.init();
 
-        // onclick listeners
-        Spinner spinner = view.findViewById(R.id.home_frag_spinner); // spinner
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                vehicleType = adapterView.getItemAtPosition(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        ShapeableImageView shapeableImageView = view.findViewById(R.id.home_frag_main_img); // main button in home fragment
-        shapeableImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle data = new Bundle();
-                data.putString("vehicleType", vehicleType);
-                MainActivity mainActivity = (MainActivity)requireContext();
-                mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
-            }
-        });
-
-
-        return view;
+        return homeView;
     }
 }
