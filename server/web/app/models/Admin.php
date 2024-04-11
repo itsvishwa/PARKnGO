@@ -454,7 +454,7 @@ public function updateApprovalStatus($companyId) {
 }*/
 
 
-public function approveApplication($companyId) {
+/*public function updateApproveApplication($companyId) {
   
   // Prepare the SQL query
   $this->db->query('UPDATE company 
@@ -472,10 +472,66 @@ public function approveApplication($companyId) {
 }
 
   // Execute the update query
-/*return $this->db->execute();*/
+/*return $this->db->execute();
 
+}*/
+
+/*public function updateApproveApplication($companyId)
+{
+    // Prepare the SQL query
+    $this->db->query('UPDATE company 
+                      SET is_approved = :is_approved, is_reviewd = :is_reviewd
+                      WHERE _id = :companyId');
+    
+    // Define values
+    $isApproved = 1;
+    $isReviewed = 1;
+
+    // Bind values
+    
+    $this->db->bind(':is_approved', $isApproved);
+    $this->db->bind(':is_reviewd', $isReviewed);
+    $this->db->bind(':companyId', $companyId);
+
+    // Execute the update query
+    if ($this->db->execute()) {
+        return true; // Update successful
+    } else {
+      
+        return false; // Update failed
+    }
+}*/
+
+public function updateApproveApplication($companyId, $adminId)
+{
+
+  
+    // Prepare the SQL query
+    $this->db->query('UPDATE company 
+                      SET is_approved = :is_approved, is_reviewd = :is_reviewd, admin_id = :admin_id
+                      WHERE _id = :companyId');
+    
+    // Define values
+    $isApproved = 1;
+    $isReviewed = 1;
+    
+    // Bind values
+    $this->db->bind(':is_approved', $isApproved);
+    $this->db->bind(':is_reviewd', $isReviewed);
+    $this->db->bind(':admin_id', $adminId);
+    $this->db->bind(':companyId', $companyId);
+
+     // Debugging: Output method parameters
+    // echo "Debugging: Company ID: " . $companyId . ", Admin ID: " . $adminId . "<br>";
+
+    // Execute the update query
+    if ($this->db->execute()) {
+        return true; // Update successful
+    } else {
+      
+        return false; // Update failed
+    }
 }
-
 
 
 
@@ -493,9 +549,9 @@ public function rejectApplication($companyId, $rejectReason) {
   return $this->db->execute();
 }
 
-// In your Admin.php model
 
-// In your Admin.php model
+
+
 
 public function getDocumentData($documentId)
 {
@@ -516,10 +572,5 @@ public function getDocumentData($documentId)
 
     return null; // or handle the case when the document is not found
 }
-
-
-
-
-
 
 }
