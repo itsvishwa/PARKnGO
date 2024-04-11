@@ -143,4 +143,20 @@ class SessionModel
             return false;
         }
     }
+
+    public function get_force_ended_sessions($parking_id) 
+    {
+        $this->db->query("SELECT * FROM parking_session WHERE parking_id = :parking_id AND is_force_end = 1");
+
+        $this->db->bind(":parking_id", $parking_id);
+
+        
+        $result = $this->db->resultSet();
+
+        if ($this->db->rowCount() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

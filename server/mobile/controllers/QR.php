@@ -71,9 +71,9 @@ class QR extends Controller
                     if((time() - $qr_data["auth_time_stamp"]) > 300) {
                         $result = [
                             "response_code" => "800",
-                            "Driver_id" => $qr_data["driver_id"],
-                            "Vehicle_Number" => $qr_data["vehicle_number"],
-                            "Vehicle_Type" => $qr_data["vehicle_type"]
+                            "driver_id" => $qr_data["driver_id"],
+                            "vehicle_number" => $qr_data["vehicle_number"],
+                            "vehicle_type" => $qr_data["vehicle_type"]
                         ];
 
                         $this->send_json_200($result);
@@ -82,7 +82,7 @@ class QR extends Controller
                     {
                         $result = [
                             "response_code" => "204",
-                            "message" => "qr expired"
+                            "message" => "QR Expired"
                         ];
 
                         $this->send_json_404($result);

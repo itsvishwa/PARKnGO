@@ -32,13 +32,26 @@
                     android:id="@+id/appbar_main_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hi Officer!"
+                    android:text="Hi, "
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="43dp"
+                    android:layout_marginTop="40dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mark_attendance_officer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Officer"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appbar_main_text"
+                    app:layout_constraintStart_toEndOf="@+id/appbar_main_text"
+                    app:layout_constraintTop_toTopOf="@+id/appbar_main_text" />
 
                 <TextView
                     android:id="@+id/appbar_secondary_text"
