@@ -1,308 +1,214 @@
-.business {
-    margin-top: 10px;
-  }
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
 
-  .menu {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 10px;
-  }
+.menu li {
+  margin: 15px 0;
+  margin-left: 30px;
+  width: 150px;
+  padding: 8px 10px 8px 15px;
+}
 
-  .menu li {
-    margin: 15px 0;
-    margin-left: 30px;
-    width: 150px;
-    padding: 8px 10px 8px 15px;
-  }
+.menu-logo {
+  height: 25px;
+  display: flex;
+}
 
-  .menu-logo {
-    height: 25px;
-    display: flex;
-  }
+.r-menu-logo {
+  height: 52px;
+  display: flex;
+}
 
-  .r-menu-logo {
-    height: 52px;
-    margin-left: 43px;
-    display: flex;
-  }
+.db-menu-logo {
+  height: 30px;
+  margin-bottom: 10px;
+}
 
-  .db-menu-logo {
-    margin-top: 20px;
-    height: 25px;
-    /*width:30px;*/
-    margin-left: 7px;
-   
-  }
-  .revenue-menu-logo {
-    height: 52px;
-    margin-left: 80px;
-    display: flex;
-  }
-  
-  .heading {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-  }
-  
-  .heading h4 {
-    font-size: 1rem;
-    margin-left: 20px;
-    font-weight: 500;
-  }
-  
-  .card-section {
-    display: flex;
-   /* justify-content: space-between;*/
-    margin-top: -10px;
-    padding-left: 30px;
-    height:55%;
-    width: 90%;
-    
-  }
+.heading {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
 
-  .card-section2 {
-    display: flex;
-   /* justify-content: space-between;*/
-    margin-top: -67px;
-    padding-left: 30px;
-    height:250%;
-    width: 90%;
-    
-  }
-  .card-section3 {
-    display: flex;
-   /* justify-content: space-between;*/
-    margin-top: 5px;
-    padding-left: 30px;
-    height:250%;
-    width: 90%;
-    
-  }
+.heading h4 {
+  font-size: 1rem;
+  margin-left: 20px;
+  font-weight: 500;
+}
 
-  
-  .b-card {
-    margin-top: 40px;
-    margin-bottom: 20px 40px; 
-   /* padding: 30px;*/
-    margin-left: 8px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 165px;
-    height: 165px;
+.card-section1 {
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 20px 20px;
+  width: 97%;
+  gap: 20px;
+  height: 20vh;
+}
 
-    /************/
-    /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+.card-section2 {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: 97%;
+  height: 45vh;
+  gap: 20px;
+}
 
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
-  }
+.card-section3 {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  width: 97%;
+  height: 45vh;
+  gap: 20px;
+  margin: 20px 0px 20px 20px;
+}
 
-  .b-card2 {
-    margin-top: 40px;
-    margin-bottom: 20px 40px; 
-   /* padding: 30px;*/
-    margin-left: 3px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 250px;
-    height: 165px;
+.section-left {
+  display: flex;
+  width: 70%;
+  gap: 20px;
+  height: 100%;
+}
 
-    /************/
-    /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+.section-right {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  gap: 20px;
+  height: 100%;
+}
 
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
-  }
+.b-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 33%;
+  background-color: #fff5e3;
+}
 
-  .b-card3 {
-    margin-top: 2px;
-    /*margin-bottom: 20px 40px;*/
-    margin-bottom: 2px;  
-   /* padding: 30px;*/
-    margin-left: 6px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 552px;
-    height: 300px;
+.b-card2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 100%;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: #fff5e3;
+}
 
-    /************/
-    /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+.b-card3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: #fff5e3;
+  color: #000;
+}
 
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
-  }
+.b-card4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 50%;
+  background-color: #fff5e3;
+  color: #000;
+  gap: 20px;
+}
 
-  .b-card4 {
-    margin-top: 2px;
-    margin-bottom: 20px 40px; 
-   /* padding: 30px;*/
-    margin-left: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 250px;
-    height: 140px;
+.b-card5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 50%;
+  background-color: #fff5e3;
+  color: #000;
+  gap: 20px;
+}
 
-    /************/
-    /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+.b-card6 {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  background-color: #fff5e3;
+  color: #000;
+}
 
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
-  }
-  .b-card5 {
-    margin-top: 160px;
-    margin-bottom: 2px; 
-   /* padding: 30px;*/
-    margin-left: -250px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 250px;
-    height: 140px;
+.b-card-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  height: 60%;
+  background-color: #363636;
+}
 
-    /************/
-    /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+.b-card-content {
+  text-align: center;
+}
 
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
-  }
-  .b-card6 {
-    margin-top: 2px;
-    margin-bottom:80px; 
-   /* padding: 30px;*/
-    margin-left: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 250px;
-    height: 300px;
+.b-card-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
 
-    /************/
-    /* Add the vertical gradient background */
-    background-color:#FFF5E3;
+.b-card-content p {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 
-    /* Ensure text is visible on the gradient background */
-    color: #000; /* Change the text color as needed */
-  }
+.b2-card-content {
+  font-weight: 500;
+  font-size: 1rem;
+}
 
-  .b-card-small {
-    margin-top: 20px;
-    margin-bottom: 20px 40px; 
-   /* padding: 30px;*/
-    margin-left: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    display: block;
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
-    width: 220px;
-    height: 60px;
+.b4-card-content {
+  font-weight: 500;
+  font-size: 1rem;
+}
 
-    /************/
-    background-color: #363636; 
+.b3-card-content {
+  font-weight: 500;
+  font-size: 0.8rem;
+  width: 70%;
+  text-align: center;
+}
 
-    /* Ensure text is visible on the gradient background */
-    /*color: #000; /* Change the text color as needed */
-  }
+.b-card-content2 p {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
 
-  .material-symbols-outlined {
-
-    color: red; /* Change the color to red */
-    margin-top: 20px;
-    margin-left: 7px;
-  }
-  
-
-
-  .b-card-content {
-    text-align: center;
-  }
-  
-  .b-card-icon {
-    padding: 17px;
-    border-radius: 10px;
-  }
-
-  
-  .b-card-content {
-    margin-left: 10px;
-    
-  }
-  
-  .b-card-content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-  
-  .b-card-content p {
-    margin-left: -5px;
-    margin-top: -8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .b2-card-content {
-    margin-left: 15px;
-    margin-top: 20px;
-    font-weight: 500;
-    font-size: 1.0rem;
-     
-  }
-
-  .b3-card-content {
-    margin-left: 40px;
-    margin-top: -30px;
-    font-weight: 500;
-    font-size: 0.8rem;
-     
-  }
-
-  .b-card-content2 p {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-
-  /* CSS file to change font sizes */
+.content-body {
+  overflow: auto;
+  margin-top: -20px;
+}
 
 /* Targeting the driver name */
 .dashboard-driver-name {
-
-  margin-top: 5px;
-  
-  margin-left: 25px;
+  margin-left: 20px;
   font-size: 0.9em; /* Adjust the font size as desired */
   font-weight: bold;
-  display: inline-block; 
+  display: inline-block;
 }
 
 /* Targeting the driver rating container */
@@ -315,180 +221,133 @@
 .review-parking-name {
   font-size: 0.9em; /* Adjust the font size as desired */
   font-weight: bold;
-  margin-left: 25px;
-  margin-top: -33px;
+  margin-left: 20px;
 }
 
 /* Targeting the star rating */
 .star-rating {
- 
   width: 90px; /* Adjust the width of the stars as desired */
-  height: 90px; /* Adjust the height of the stars as desired */
+  height: 20px; /* Adjust the height of the stars as desired */
   display: flex; /* Ensure inline display for alignment */
   vertical-align: middle; /* Align the stars vertically */
   gap: 3px;
-  margin-left: 25px;
+  margin-right: 10px;
 }
 .review-content {
-  
-  margin-left: 25px;
+  margin-left: 20px;
   font-size: 13px; /* Adjust the font size as desired */
 }
-
-/* Optionally, if you want to adjust the star rating size */
-/*.star-rating svg {
-
-  width: 80px;  Adjust the width of the stars as desired 
-  height: 80px;  Adjust the height of the stars as desired 
-}*/
 
 .custom-line {
   margin-top: 12px;
   margin-left: 7px;
   width: 95%;
-  height:5px; 
-      
+  height: 5px;
 }
 
-  
-  .dashboard-main-section {
-    display: flex;
-    flex: 1;
-    width: 98%;
-    margin-bottom: 40px;
-  }
-  
-   
-  .table-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0px;
-    width: 100%;
-  }
-   
-  .table-div {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  table {
-    margin-left: 20px;
-    width: 96%;
-    border-radius: 10px;
-    border-collapse: collapse;
-    background-color: #fffbf4;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  }
-  .text-bla {
-    color: #222831;;
-  }
-  
-  th,
-  td {
-    padding: 8px;
-    text-align: left;
-    font-size: 0.9rem;
-    text-align: center;
-    vertical-align: middle;
-  }
-  th {
-    background-color: #e7dbc7;
-  }
-  tr:nth-child(2n) {
-    background-color: #e7dbc742;
-  }
-  tr:nth-child(4n) {
-    background-color: #e7dbc742;
-  }
-  
-  .bg-grey {
-    background-color: #E3DED7;
-  }
-  
-  @media screen and (min-width: 768px) {
-    .right-container {
-      padding-left: 100px;
-    }
-  }
-  
-  @media screen and (min-width: 1200px) {
-    .right-container {
-      padding-left: 50px;
-    }
-  }
-  
-  @media screen and (min-width: 1400px) {
-    .right-container {
-      padding-left: 0px;
-    }
-  }
-  
-  @media screen and (min-width: 1700px) {
-    .right-container {
-      margin-left: 17%;
-    }
-  }
-  
+.dashboard-main-section {
+  display: flex;
+  flex: 1;
+  width: 98%;
+  margin-bottom: 40px;
+}
 
-  .section-two-right {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    background-color: #fff5e3;
-    padding: 0px 2px;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review-heading {
-    font-size: 20px;
-    font-weight: 500;
-    padding: 20px 20px 0px 20px;
-  }
-  
-  .content-body {
-    padding: 0px 20px;
-  }
+.text-black {
+  color: #222831;
+}
 
-  .dashboard-review-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+.bg-grey {
+  background-color: #e3ded7;
+}
+
+@media screen and (min-width: 768px) {
+  .right-container {
+    padding-left: 100px;
   }
-  
-  .dashboard-driver-name {
-    font-size: 16px;
-    font-weight: 500;
-    margin-top: 12px;
+}
+
+@media screen and (min-width: 1200px) {
+  .right-container {
+    padding-left: 50px;
   }
-  
-  .star-rating {
-    margin-top: 12px;
+}
+
+@media screen and (min-width: 1400px) {
+  .right-container {
+    padding-left: 0px;
   }
-  
-  .review-parking-name {
-    font-size: 13px;
-    font-weight: 600;
+}
+
+@media screen and (min-width: 1700px) {
+  .right-container {
+    margin-left: 17%;
   }
-  
-  .review-content {
-    font-size: 13px;
-    margin-top: 5px;
-  }
-  
-  .horizontal-line {
-    border: 0.5px solid #e7dbc7;
-    width: 100%;
-    margin-top: 10px;
-  }
-  
+}
+.parking-type {
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.parking-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-two {
+  display: flex;
+}
+
+.review-heading {
+  font-size: 17px;
+  font-weight: 500;
+  padding: 20px 20px 0px 20px;
+}
+
+.dashboard-review-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dashboard-driver-name {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.star-rating {
+  margin-top: 12px;
+}
+
+.review-parking-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.review-content {
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.horizontal-line {
+  border: 0.5px solid #e7dbc7;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/*********************************/
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}

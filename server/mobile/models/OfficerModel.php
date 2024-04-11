@@ -30,23 +30,44 @@ class OfficerModel
     }
 
     // get officer details
-    public function get_officer($_id)
+    public function get_officer($mobile_number)
     {
-        $this->db->query("SELECT * FROM parking_officer WHERE _id = :_id");
+        $this->db->query(
+            "SELECT 
+            parking_officer._id, 
+            parking_officer.officer_id, 
+            parking_officer.nic, 
+            parking_officer.mobile_number, 
+            parking_officer.first_name, 
+            parking_officer.last_name, 
+            parking_officer.company_id, 
+            parking_officer.parking_id, 
+            parking_spaces.name 
+            FROM 
+            parking_officer 
+            JOIN 
+            parking_spaces 
+            ON 
+            parking_officer.parking_id = parking_spaces._id 
+            WHERE 
+            parking_officer.mobile_number = :mobile_number"
+        );
 
-        $this->db->bind(":_id", $_id);
+        $this->db->bind(":mobile_number", $mobile_number);
 
         $result = $this->db->single();
 
         if ($result) {
             return [
+                "_id" => $result->_id,
                 "officer_id" => $result->officer_id,
                 "nic" => $result->nic,
                 "mobile_number" => $result->mobile_number,
                 "first_name" => $result->first_name,
                 "last_name" => $result->last_name,
                 "company_id" => $result->company_id,
-                "parking_id" => $result->parking_id
+                "parking_id" => $result->parking_id,
+                "parking_name" => $result->name
             ];
         } else {
             return false;

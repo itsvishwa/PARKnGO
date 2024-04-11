@@ -17,15 +17,14 @@
             $this->db->execute();
         }
 
-        public function end_officer_activity($_id, $token_data) {
-            $time_stamp = time();
+        public function end_officer_activity($_id, $token_data, $end_timestamp) {
             $session_id = $_id;
             $officer_id = $token_data["user_id"];
 
             $this->db->query("INSERT INTO officer_activity (type, time_stamp, session_id, officer_id) VALUES (:type, :time_stamp, :session_id, :officer_id)");
 
             $this->db->bind(":type", "end");
-            $this->db->bind(":time_stamp", $time_stamp);
+            $this->db->bind(":time_stamp", $end_timestamp);
             $this->db->bind(":session_id", $session_id);
             $this->db->bind(":officer_id", $officer_id);
 
@@ -39,7 +38,11 @@
 
             $results = $this->db->resultSet();
 
-            return $results;
+            if ($results === []) {
+                return false;
+            } else {
+                return $results;
+            }
         }
     }
 ?>
