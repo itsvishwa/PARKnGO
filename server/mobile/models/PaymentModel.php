@@ -49,10 +49,10 @@ class PaymentModel
             parking_session.vehicle_number,
             parking_session.vehicle_type,
             parking_spaces.name,
+            parking_spaces._id AS pid,
             parking_officer.officer_id,
             parking_officer.first_name,
-            parking_officer.last_name,
-            parking_space_status.rate
+            parking_officer.last_name
             FROM 
                 payment
             JOIN 
@@ -71,19 +71,16 @@ class PaymentModel
                 parking_officer
             ON
                 parking_officer._id = officer_activity.officer_id
-            JOIN 
-                parking_space_status
-            ON  
-                parking_space_status.parking_id = parking_spaces._id
             WHERE 
                 payment._id = :payment_id
             AND
-                parking_session.vehicle_type = parking_space_status.vehicle_type
+                officer_activity.type = :_end
+
         "
         );
 
         $this->db->bind(":payment_id", $payment_id);
-
+        $this->db->bind(":_end",  "end");
         return $this->db->single();
     }
 
