@@ -26,7 +26,7 @@ class Profile extends Controller
         $this->user_controller = new User;
     }
 
-    // update name
+    // driver mob - update name
     public function update_name($first_name, $last_name)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -42,7 +42,7 @@ class Profile extends Controller
     }
 
 
-    // check mobile number existancce
+    // driver mob - check mobile number existancce
     public function send_otp($mobile_number)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -62,7 +62,7 @@ class Profile extends Controller
         }
     }
 
-    // if otp correct this will update the mobile number
+    // driver mob - if otp correct this will update the mobile number
     public function update_mobile_number($mobile_number, $otp_code)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -89,22 +89,22 @@ class Profile extends Controller
     }
 
 
-    // send payment history of the driver
+    // driver mob - send payment history of the driver
     public function driver_payment_history()
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("PRF_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("PRF_TNF");
         } else // token is valid
         {
             $payments_data = $this->payment_model->get_all_driver_payments_by_id($token_data["user_id"]);
 
             if ($payments_data === false) // not payments yet
             {
-                $this->send_json_400("ERROR_6001"); // ERROR_6001 => No payments have been made yet
+                $this->send_json_400("PRF_NPY"); // No payments have been made yet
             } else // there are payments data
             {
                 $result_data = [];
@@ -123,9 +123,9 @@ class Profile extends Controller
                         "payment_method" => strtoupper($payment_data->payment_method),
                         "time_duration" =>  $time_duration,
                         "vehicle_type" => $payment_data->vehicle_type,
-                        "vehicle_number" => $payment_data->vehicle_number,
+                        "vehicle_number" => $this->format_vehicle_number($payment_data->vehicle_number),
                         "parking_space_name" => $payment_data->name,
-                        "payment_time_stamp" =>  date("h:i A | d/m/y", $payment_data->time_stamp)
+                        "payment_time_stamp" =>  implode(" | ", $this->format_time($payment_data->time_stamp)),
                     ];
                     $result_data[] = $temp;
                 }
@@ -147,12 +147,12 @@ class Profile extends Controller
             $this->send_json_404("Token Not Found");
         } else {
             $details = $this->officer_model->get_officer($token_data["user_id"]);
-            
+
             if ($details) {
 
                 // Concatenate first name and last name
-                $full_name = $details["first_name"] . " " . $details["last_name"]; 
-    
+                $full_name = $details["first_name"] . " " . $details["last_name"];
+
                 $officer_details = [
                     "officer_id" => $details["officer_id"],
                     "full_name" => $full_name,
@@ -160,51 +160,11 @@ class Profile extends Controller
                     "nic" => $details["nic"],
                     "parking_id" => $details["parking_id"]
                 ];
-    
+
                 $this->send_json_200($officer_details);
             } else {
                 $this->send_json_404("Officer details not found");
             }
-
         }
-
     }
-
-
-
-    // send payment history of the officer
-    // public function officer_payment_history()
-    // {
-    //     $token_data = $this->verify_token_for_officers();
-
-    //     if ($token_data === 400) {
-    //         $this->send_json_400("Invalid Token");
-    //     } elseif ($token_data === 404) {
-    //         $this->send_json_404("Token Not Found");
-    //     } else // token is valid
-    //     {
-    //         // fetch all session_ids for the given officer_id from officer_activity table where type is end
-    //         $sessionIds = $this->officer_activity_model->get_session_id($token_data["user_id"]);
-
-    //         if ($sessionIds === false) // not payments yet
-    //         {
-    //             $this->send_json_400("No ended sessions for this officer yet");
-    //         } else // there are ended sessions
-    //         {
-    //             echo"There are ended sessions";
-    //         }
-
-    //         // if ($sessionIds) {
-    //         //     foreach ($sessionIds as $session) {
-    //         //         echo $session->session_id . "<br>";
-    //         //         // get the payment details from the payment table where payment_method is cash and is_complete = 1 according to the fetched session_id s.
-    //         //         $this->payment_model->get_all_officer_payments_by_session_id($session->session_id);
-    //         //     }
-    //         //  } else {
-    //         //      echo "No session IDs found for this officer.";
-    //         //  }
-
-
-    //     }
-    // }
 }

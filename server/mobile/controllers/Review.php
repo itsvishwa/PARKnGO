@@ -14,17 +14,17 @@ class Review extends Controller
                 $this->parking_space_model = $this->model("ParkingSpaceModel");
         }
 
-        // add a new review
+        // driver mob - add a new review
         public function add()
         {
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) // invalid token
                 {
-                        $this->send_json_400("Invalid Token");
+                        $this->send_json_400("ERR_IT");
                 } elseif ($token_data === 404) // token not found
                 {
-                        $this->send_json_404("Token Not Found");
+                        $this->send_json_404("ERR_TNF");
                 } else // token is valid
                 {
 
@@ -39,7 +39,7 @@ class Review extends Controller
 
                         if ($this->review_model->is_driver_id_exist($review_data["driver_id"], $review_data["parking_id"])) // driver has already a review on the table
                         {
-                                $this->send_json_400("User has already a review on the parking space");
+                                $this->send_json_400("REV_UAHR");
                         } else {
                                 $this->review_model->add_review($review_data);
                                 $total_star_count = $this->review_model->get_total_star_count($review_data["parking_id"]);
@@ -49,7 +49,7 @@ class Review extends Controller
                                 $new_avg_star_count = intval($total_star_count / $new_review_count);
 
                                 $this->parking_space_model->update_review_details($new_avg_star_count, $new_review_count, $review_data["parking_id"]);
-                                $this->send_json_200("success");
+                                $this->send_json_200("SUCCESS");
                         }
                 }
         }
@@ -61,9 +61,9 @@ class Review extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("Invalid Token");
+                        $this->send_json_400("ERR_IT");
                 } elseif ($token_data === 404) {
-                        $this->send_json_404("Token Not Found");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         $review_data = [
                                 "time_stamp" => trim($_POST["time_stamp"]),
@@ -95,10 +95,10 @@ class Review extends Controller
                                 $this->parking_space_model->update_review_details($new_avg_star_count, $new_review_count, $parking_id);
 
 
-                                $this->send_json_200("Update Successfull!");
+                                $this->send_json_200("SUCCESS");
                         } else // they don't match
                         {
-                                $this->send_json_401("Update operation failed, Unauthrized access");
+                                $this->send_json_401("REV_UAUTH");
                         }
                 }
         }
@@ -111,9 +111,9 @@ class Review extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("Invalid Token");
+                        $this->send_json_400("ERR_IT");
                 } elseif ($token_data === 404) {
-                        $this->send_json_404("Token Not Found");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         if ($this->review_model->get_driver_id_by_review_id($review_id) == $token_data["user_id"]) // review id and driver id is matching
                         {
@@ -138,10 +138,10 @@ class Review extends Controller
 
                                 $this->parking_space_model->update_review_details($new_avg_star_count, $new_review_count, $parking_id);
 
-                                $this->send_json_200("Review is sucessfully deleted");
+                                $this->send_json_200("SUCCESS");
                         } else // they don't match
                         {
-                                $this->send_json_401("Delete operation failed, Unauthrized access");
+                                $this->send_json_401("REV_UAUTH");
                         }
                 }
         }

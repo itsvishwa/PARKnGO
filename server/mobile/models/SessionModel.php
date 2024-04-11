@@ -21,7 +21,7 @@ class SessionModel
             parking_officer.first_name,
             parking_officer.last_name,
             parking_spaces.name,
-            parking_space_status.rate
+            parking_spaces._id AS pid
             FROM
             parking_session 
             JOIN
@@ -36,18 +36,12 @@ class SessionModel
              parking_spaces
             ON
              parking_session.parking_id = parking_spaces._id 
-            JOIN 
-                parking_space_status
-            ON  
-                parking_space_status.parking_id = parking_spaces._id
             WHERE 
             parking_session.driver_id = :driver_id 
             AND 
             parking_session.end_time IS NULL
             AND 
             officer_activity.type = :_type
-            AND
-            parking_session.vehicle_type = parking_space_status.vehicle_type
             "
         );
         $this->db->bind(":driver_id", $driver_id);

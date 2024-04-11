@@ -12,14 +12,15 @@ class Payment extends Controller
     }
 
 
+    // driver mob - used to view open payment details for given payment id
     public function view_payment()
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_PAY_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_PAY_TNF");
         } else // valid token 
         {
             $encoded_string = $_SERVER['HTTP_X_ENCODED_DATA']; // encoded payment_id
@@ -27,7 +28,7 @@ class Payment extends Controller
 
             if ($payment_id === false) // invalid encoded_string
             {
-                $this->send_json_400("Invalid Encoded String");
+                $this->send_json_400("PAY_IDATA");
             } else // code decoded sucessfully
             {
                 if ($this->payment_model->is_payment_session_id_exist($payment_id)) // valid payment id
@@ -35,31 +36,32 @@ class Payment extends Controller
 
                     if ($this->payment_model->is_payment_session_ended($payment_id)) // payment session has been closed
                     {
-                        $this->send_json_200("Payment is successfully closed");
+                        $this->send_json_200("PAY_CL");
                     } else  // payment session still open
                     {
                         $result = $this->payment_model->get_all_data($payment_id);
                         $payment_data = [
                             "payment_id" => $encoded_string,
                             "amount" => $result->amount,
-                            "start_time" => $result->start_time,
-                            "end_time" => $result->end_time,
-                            "vehicle_number" => $result->vehicle_number,
+                            "start_time" => implode(" | ", $this->format_time($result->start_time)),
+                            "end_time" => implode(" | ", $this->format_time($result->end_time)),
+                            "vehicle_number" => $this->format_vehicle_number($result->vehicle_number),
                             "vehicle_type" => $result->vehicle_type,
                             "parking_space_name" => $result->name,
-                            "duration" => $result->end_time - $result->start_time
+                            "duration" => $this->calculate_time($result->end_time - $result->start_time)
                         ];
                         $this->send_json_200($payment_data);
                     }
                 } else // invalid payment id
                 {
-                    $this->send_json_400("Invalid payment ID");
+                    $this->send_json_400("PAY_IPID");
                 }
             }
         }
     }
 
 
+    // driver mob
     // close the payment if user payment is successfull 
     // will not return anything as a json
     // reason is this will call automatically by the payhere gateway
@@ -100,5 +102,20 @@ class Payment extends Controller
                 $this->payment_model->close_payment($payment_data);
             }
         }
+    }
+
+
+    // calculate time
+    private function calculate_time($time)
+    {
+        $hours = floor($time / 3600);
+        $minutes = floor(($time % 3600) / 60);
+
+        $result = [
+            "hours" => $hours . "",
+            "minutes" => $minutes . ""
+        ];
+
+        return $result;
     }
 }
