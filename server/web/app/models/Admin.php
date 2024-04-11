@@ -502,7 +502,9 @@ public function updateApprovalStatus($companyId) {
     }
 }*/
 
-public function updateApproveApplication($companyId, $adminId)
+
+/************************************************************************************* */
+/*public function updateApproveApplication($companyId, $adminId)
 {
  
     // Prepare the SQL query
@@ -546,11 +548,76 @@ public function rejectApplication($companyId, $rejectReason, $adminId) {
 
   // Execute the update query
   return $this->db->execute();
+}*/
+
+/********************************************************************* */
+
+
+public function updateApproveApplication($companyId, $adminId) {
+  // Begin a transaction
+  $this->db->beginTransaction();
+
+  // Prepare the SQL query
+  $this->db->query('UPDATE company 
+                    SET is_approved = :is_approved, is_reviewd = :is_reviewd, admin_id = :admin_id
+                    WHERE _id = :companyId');
+
+  // Define values
+  $isApproved = 1;
+  $isReviewd = 1;
+
+  // Bind values
+  $this->db->bind(':is_approved', $isApproved);
+  $this->db->bind(':is_reviewd', $isReviewd);
+  $this->db->bind(':admin_id', $adminId);
+  $this->db->bind(':companyId', $companyId);
+
+  // Execute the update query
+  $updateSuccess = $this->db->execute();
+
+  // Check if the update was successful
+  if ($updateSuccess) {
+      // Commit the transaction if successful
+      $this->db->commit();
+      return true; // Update successful
+  } else {
+      // Roll back the transaction if unsuccessful
+      $this->db->rollBack();
+      return false; // Update failed
+  }
+}
+
+public function rejectApplication($companyId, $rejectReason, $adminId) {
+  // Begin a transaction
+  $this->db->beginTransaction();
+
+  // Prepare the SQL query
+  $this->db->query('UPDATE company 
+                    SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason , admin_id = :admin_id
+                    WHERE _id = :companyId');
+
+  // Bind the parameters
+  $this->db->bind(':rejectReason', $rejectReason);
+  $this->db->bind(':admin_id', $adminId);
+  $this->db->bind(':companyId', $companyId);
+
+  // Execute the update query
+  $updateSuccess = $this->db->execute();
+
+  // Check if the update was successful
+  if ($updateSuccess) {
+      // Commit the transaction if successful
+      $this->db->commit();
+      return true; // Update successful
+  } else {
+      // Roll back the transaction if unsuccessful
+      $this->db->rollBack();
+      return false; // Update failed
+  }
 }
 
 
-
-
+/******************************************************************************** */
 
 public function getDocumentData($documentId)
 {
@@ -571,5 +638,10 @@ public function getDocumentData($documentId)
 
     return null; // or handle the case when the document is not found
 }
+
+
+
+
+
 
 }

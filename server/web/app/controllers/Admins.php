@@ -513,10 +513,11 @@ public function rejectApplication() {
   $companyId = $_GET['_id'] ?? '';
   // Get reject reason from POST data
   $rejectReason = $_POST['rejectReason'];
+  $adminId = $_SESSION['admin_id'] ?? ''; 
 
   // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
   // Implement this logic based on your database structure
-  $this->adminModel->rejectApplication($companyId, $rejectReason);
+  $this->adminModel->rejectApplication($companyId, $rejectReason ,$adminId );
 
   // You can return a JSON response indicating success or failure
  // echo json_encode(['success' => true]);
