@@ -477,21 +477,36 @@ public function rejectApplication($companyId) {
   echo json_encode(['success' => true]);
 }*/
 
-public function approveApplication() {
+/*public function approveApplication() {
   $companyId = $_GET['_id'] ?? '';
   
   // Update the database to set is_approved to 1 and is_reviewed to 1
-  // Implement this logic based on your database structure
-  $this->adminModel->approveApplication($companyId);
 
-  // You can return a JSON response indicating success or failure
+  $this->adminModel->updateApproveApplication($companyId);
+
+  
  // echo json_encode(['success' => true]);
 
   // Return JSON response with redirect URL
   echo json_encode(['success' => true, 'redirect' => 'requestsView']);
   
-}
+}*/
 
+public function approveApplication() {
+  $companyId = $_GET['_id'] ?? '';
+  $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
+  
+  // Update the database to set is_approved to 1 and is_reviewed to 1
+  $updateResult = $this->adminModel->updateApproveApplication($companyId, $adminId);
+  
+  if ($updateResult) {
+      // Return JSON response with success message and redirect URL
+      echo json_encode(['success' => true, 'redirect' => 'requestsView']);
+  } else {
+      // Return JSON response with error message
+      echo json_encode(['success' => false, 'error' => 'Failed to approve application']);
+  }
+}
 
 
 public function rejectApplication() {
@@ -507,8 +522,5 @@ public function rejectApplication() {
  // echo json_encode(['success' => true]);
   echo json_encode(['success' => true, 'redirect' => 'requestsView']);
 }
-
-
-
 
 }

@@ -153,20 +153,8 @@
             <p>Approve or Reject?</p>
           </div>
 
-          <!--  <form class="b-card3" id="rejectForm">
-            <div class="card-content12 text-gray">
-              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>-->
-          <!--<button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>-->
-          <!--  </div>
-            
-          </form>
 
-          <div class="b-card-apre">
-            <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
-            <button class="approve-button" onclick="approveApplication('<?php echo $_GET['_id'] ?? ''; ?>')">Approve Application</button>
-          </div>-->
-
-          <form class="b-card3" id="rejectForm">
+          <div class="b-card3">
             <div class="card-content12 text-gray">
               <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
             </div>
@@ -174,7 +162,8 @@
               <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
               <button class="approve-button" onclick="approveApplication('<?php echo $_GET['_id'] ?? ''; ?>')">Approve Application</button>
             </div>
-          </form>
+          </div>
+
 
 
           <div class="b-card-content text-black">
@@ -324,11 +313,11 @@
   function approveApplication() {
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
     console.log('companyId:', companyId);
-
+    console.log('Attempting to approve application with companyId:', companyId);
 
     $.ajax({
       url: 'approveApplication/' + companyId,
-      method: 'GET',
+      method: 'POST',
       dataType: 'json',
       success: function(response) {
         if (response.success) {
@@ -346,7 +335,8 @@
       }
     });
   }
-
+</script>
+<script>
   function submitRejectReason() {
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
     console.log('companyId:', companyId);
@@ -393,8 +383,5 @@
       .catch(error => console.error('Error downloading document:', error));
   }
 </script>
-
-
-
 
 </html>
