@@ -125,44 +125,26 @@
                   <?php if ($parking->parking_is_public) {
                     echo '<p class="parking-type bg-green text-white">Public</p>';
                   } else {
-                    echo '<p class="parking-type bg-green text-white">Private</p>';
+                    echo '<p class="parking-type bg-yellow text-white">Private</p>';
                   } ?>
 
                 </div>
-                <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?php if ($parking->officer_first_name != "") {
-                                                                                              echo htmlspecialchars($parking->officer_first_name . ' ' . $parking->officer_last_name);
-                                                                                            } else {
-                                                                                              echo "Not Assigned";
-                                                                                            } ?></span></p>
-                <div class="flex">
-                  <?php
-                  $today = strtotime('today') - 16200;
-                  $duty_records = $data['duty_records'][$i];
-                  if (count($duty_records) == 2) {
-                    $arrived_duty = $duty_records[1]->time_stamp;
-                    $left_duty = $duty_records[0]->time_stamp;
-                    if ($arrived_duty >= $today) {
-                      echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $arrived_duty), '</span></p>';
-                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $left_duty), '</span></p>';
-                    } else {
-                      echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                    }
-                  } else if (count($duty_records) == 1) {
-                    $arrived_duty = $duty_records[0]->time_stamp;
-                    if ($arrived_duty >= $today) {
-                      echo '<p class="text-black">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">', date('H:i:s', $arrived_duty), '</span></p>';
-                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                    } else {
-                      echo '<p class="text-black">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                      echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                    }
-                  } else {
-                    echo '<p class="text-black mr-20">Arrived Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                    echo '<p class="text-black">Left Duty: <span class="font-semibold bg-secondary p-5 border-radius-3">N/A</span></p>';
-                  };
-                  $i++; ?>
-                </div>
+                <p class="parking-officer">Number Of Parking Officers: <span class="parking-card-bold"><?php if ($parking->officer_count != 0) {
+                                                                                                          echo $parking->officer_count;
+                                                                                                        } else {
+                                                                                                          echo "Not Assigned";
+                                                                                                        } ?></span></p>
+                <p class="parking-officer">On Duty: <?php $is_available = 0;
+                                                    foreach ($data['duty_records'] as $duty_record) {
+                                                      if ($duty_record->parking_id == $parking->parking_id) {
+                                                        echo "<span class='parking-type bg-green text-white'>" . $duty_record->duty_count . "</span>";
+                                                        $is_available = 1;
+                                                        break;
+                                                      }
+                                                    }
+                                                    if ($is_available == 0) {
+                                                      echo "<span class='parking-type bg-red text-white'>N/A</span>";
+                                                    } ?></span></p>
 
 
                 <table>
@@ -179,7 +161,7 @@
                         <?php if ($parking_status->parking_space_id == $parking->parking_id) {
 
                           echo '<td>';
-                          echo htmlspecialchars($parking_status->vehicle_type);
+                          echo htmlspecialchars($this->convert_to_vehicle_type($parking_status->vehicle_type));
                           echo '</td>';
                           echo '<td>';
                           echo htmlspecialchars($parking_status->each_type_free_slots);
