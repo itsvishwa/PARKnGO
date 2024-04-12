@@ -31,9 +31,7 @@ class Companys extends Controller
     $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
     $numberOfUsers = $this->paymentModel->getNumberOfUsers($_SESSION['user_id']);
-    $latestUpdates = $this->companyModel->getLatestUpdates($_SESSION['user_id']);
     $parkingOfficers = $this->officerModel->getOfficerDetails($_SESSION['user_id']);
-    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
     $reviews = $this->parkingSpaceModel->getLatestReviews($_SESSION['user_id']);
@@ -143,9 +141,7 @@ class Companys extends Controller
       'monthlyEarned' => $monthlyEarned,
       'todayEarned' => $todayEarned,
       'numberOfUsers' => $numberOfUsers,
-      'latestUpdates' => $latestUpdates,
       'parkingOfficers' => $parkingOfficers,
-      'parking_spaces' => $parkingSpaces,
       'parking_spaces_status' => $parkingSpacesStatus,
       'reviews' => $reviews,
       'activities' => $activities,
@@ -193,14 +189,12 @@ class Companys extends Controller
       }
     }
 
-    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
+    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsForParkingSpaces($_SESSION['user_id']);
+    // $officerCount = $this->parkingSpaceModel->getParkingOfficerCount($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
     $reviews = $this->parkingSpaceModel->getReviewDetails();
-    $dutyRecord = [];
-    foreach ($parkingSpaces as $parkingSpace) {
-      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($parkingSpace->officer_id);
-    }
+    $dutyRecord = $this->parkingSpaceModel->getDutyRecord($_SESSION['user_id']);
 
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
@@ -210,6 +204,7 @@ class Companys extends Controller
       'parking_spaces' => $parkingSpaces,
       'parking_spaces_status' => $parkingSpacesStatus,
       'todayEarned' => $todayEarned,
+      // 'officer_count' => $officerCount,
       'reviews' => $reviews,
       'duty_records' => $dutyRecord,
     ];
@@ -300,7 +295,7 @@ class Companys extends Controller
     $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
     $dutyRecord = [];
     foreach ($officers as $officer) {
-      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($officer->_id);
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecordForParkingOfficer($officer->_id);
     }
 
     $data = [

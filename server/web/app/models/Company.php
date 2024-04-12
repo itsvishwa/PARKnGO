@@ -98,7 +98,6 @@ class Company
     ps.address,
     ps.no_of_slots,
     ps.is_public,
-    ps.is_closed,
     ps.closed_start_time,
     ps.closed_end_time,
     ps.latitude,

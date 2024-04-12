@@ -3,7 +3,7 @@
 // DB Params
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'J@nidu2001');
+define('DB_PASS', '');
 define('DB_NAME', 'parkngo');
 
 // Azure server
@@ -18,3 +18,5 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/PARKnGO/server/web/');
 // Site Name
 define('SITENAME', 'PARKnGO');
+// setting time zone
+date_default_timezone_set('Asia/Kolkata');
