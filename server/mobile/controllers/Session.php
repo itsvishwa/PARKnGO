@@ -541,7 +541,7 @@ class Session extends Controller
     }
 
 
-    // driver mob - used to force end the session 
+    // driver mobile - used to force end the session 
     public function force_end($latitude, $longitude)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -572,7 +572,7 @@ class Session extends Controller
                     if ($officer_mobile_number !== false) // no officer assigned to the parking
                     {
                         $dnt = $this->format_time($parking_data->start_time);
-                        // $this->send_sms_force_end($officer_mobile_number, $parking_data->vehicle_type, $parking_data->vehicle_number, $dnt[0] . "+" . $dnt[1]);
+                        $this->send_sms_force_end($officer_mobile_number, urlencode($parking_data->vehicle_type), urlencode($this->format_vehicle_number($parking_data->vehicle_number)), urlencode($dnt[0] . " " . $dnt[1]));
                         $this->send_json_200("SE_SUCCESS");
                     }
                 } else // still in the parking space range
@@ -608,8 +608,8 @@ class Session extends Controller
     // send the otp sms
     private function send_sms_force_end($mobile_number, $vehicle_type, $vehicle_number, $start_time)
     {
-        $text = "Alert%21+A+vehicle+has+been+left+the+premises+unattended+and+the+session+has+been+ended+forcibly.%0AVehicle+Number+-+" . $vehicle_number . "+%28" . $vehicle_type . "%29%0ASession+Started+Time+-+" . "07.05+AM";
-        $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=3865&to=0713072925&text=" . $text;
+        $text = "Alert%21+A+vehicle+has+been+left+the+premises+unattended+and+the+session+has+been+ended+forcibly.%0AVehicle+Number+-+" . $vehicle_number . "+%28" . $vehicle_type . "%29%0ASession+Started+Time+-+" . $start_time;
+        $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=" . TEXTIT_KEY . "&to=0713072925&text=" . $text;
         file_get_contents($url);
     }
 }
