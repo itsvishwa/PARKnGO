@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".parking.ParkingFragment"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@color/backgroundColor">
 
 <!--    Top app bar here-->
@@ -99,7 +101,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryBackground="@android:color/transparent"
-            app:queryHint="Search Here..." />
+            app:queryHint="Search parking name, location..." />
 
 
         <androidx.recyclerview.widget.RecyclerView

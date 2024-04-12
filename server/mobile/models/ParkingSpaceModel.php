@@ -12,6 +12,8 @@ class ParkingSpaceModel
         // get only available parking spaces
         public function get_available_parking_spaces($vehicle_type)
         {
+                $curr_time = time();
+
                 $this->db->query("SELECT
                 parking_spaces._id,
                 parking_spaces.name,
@@ -29,7 +31,7 @@ class ParkingSpaceModel
                 JOIN
                         parking_space_status ON parking_spaces._id = parking_space_status.parking_id
                 WHERE
-                        is_closed = 0
+                        (parking_spaces.closed_end_time IS NULL OR parking_spaces.closed_end_time < $curr_time) 
                         AND 
                         parking_space_status.vehicle_type = :vehicle_type");
 
@@ -37,7 +39,7 @@ class ParkingSpaceModel
 
                 $result = $this->db->resultSet();
 
-                if ($result) {
+                if ($this->db->rowCount() > 0) {
                         return $result;
                 } else // no open parking spaces
                 {
@@ -49,6 +51,8 @@ class ParkingSpaceModel
         // get only available parking spaces by search
         public function get_available_parking_spaces_by_search($vehicle_type, $keyword)
         {
+                $curr_time = time();
+
                 $this->db->query(
                         "SELECT
                 parking_spaces._id,
@@ -67,11 +71,16 @@ class ParkingSpaceModel
                 JOIN
                         parking_space_status ON parking_spaces._id = parking_space_status.parking_id
                 WHERE
-                        is_closed = 0
+                        (parking_spaces.closed_end_time IS NULL OR parking_spaces.closed_end_time < $curr_time) 
                         AND 
                         parking_space_status.vehicle_type = :vehicle_type
                         AND
-                        parking_spaces.name LIKE :keyword"
+                        (
+                                parking_spaces.name LIKE :keyword
+                                OR
+                                parking_spaces.address LIKE :keyword
+                        )
+                        "
                 );
 
                 $this->db->bind(":vehicle_type", $vehicle_type);
@@ -113,7 +122,7 @@ class ParkingSpaceModel
 
                 $result = $this->db->single();
 
-                if ($result) {
+                if ($this->db->rowCount() > 0) {
                         return $result;
                 } else // no parking space for given id
                 {
@@ -130,9 +139,9 @@ class ParkingSpaceModel
 
                 $result = $this->db->resultSet();
 
-                if ($result) {
+                if ($this->db->rowCount() > 0) {
                         return $result;
-                } else // no parking space for given id
+                } else // company dosen't have defined yet those details 
                 {
                         return false;
                 }
@@ -164,5 +173,32 @@ class ParkingSpaceModel
                 $this->db->bind(":_id", $parking_id);
 
                 $this->db->execute();
+        }
+
+
+        public function get_officer_mobile_number($parking_id)
+        {
+                $this->db->query(
+                        "SELECT
+                        po.mobile_number AS mobile_number
+                        FROM 
+                        parking_spaces AS ps
+                        JOIN
+                        parking_officer AS po
+                        ON
+                        ps._id = po.parking_id
+                        WHERE 
+                        ps._id = :parking_id
+                        "
+                );
+                $this->db->bind(":parking_id", $parking_id);
+
+                $result = $this->db->single();
+
+                if ($this->db->rowCount() > 0) {
+                        return $result->mobile_number;
+                } else {
+                        return false;
+                }
         }
 }
