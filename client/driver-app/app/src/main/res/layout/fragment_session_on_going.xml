@@ -7,8 +7,8 @@
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".session.SessionOnGoingFragment"
-    tools:layout_editor_absoluteX="-21dp"
-    tools:layout_editor_absoluteY="-103dp">
+    android:clickable="true"
+    android:focusable="true">
 
     <!--    Top App Bar Here-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,10 +59,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
-                        android:layout_marginTop="10dp"
                         android:text="Session details are listed below"
                         android:textColor="@color/textPrimary"
                         android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
@@ -180,9 +180,8 @@
             android:id="@+id/constraintLayout16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
-            android:background="@drawable/radius_6_solid"
-            android:elevation="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/radius_6_with_outline"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -192,13 +191,13 @@
 
             <TextView
 
-                android:id="@+id/textView48"
+                android:id="@+id/session_on_going_parking_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="CMC CAR PARK 03"
                 android:textColor="@color/primaryColor"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -211,7 +210,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView48">
+                app:layout_constraintTop_toBottomOf="@+id/session_on_going_parking_name">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
@@ -275,7 +274,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/textView60"
+                        android:id="@+id/session_on_going_officer_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -283,10 +282,10 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView56" />
+                        app:layout_constraintTop_toBottomOf="@+id/session_on_going_vehicle_type" />
 
                     <TextView
-                        android:id="@+id/textView55"
+                        android:id="@+id/session_on_going_vehicle_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -294,10 +293,10 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView54" />
+                        app:layout_constraintTop_toBottomOf="@+id/session_on_going_started_time" />
 
                     <TextView
-                        android:id="@+id/textView54"
+                        android:id="@+id/session_on_going_started_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10.30 AM/ DEC 23"
@@ -307,7 +306,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView56"
+                        android:id="@+id/session_on_going_vehicle_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -315,10 +314,10 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView55" />
+                        app:layout_constraintTop_toBottomOf="@+id/session_on_going_vehicle_number" />
 
                     <TextView
-                        android:id="@+id/textView58"
+                        android:id="@+id/session_on_going_officer_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -326,13 +325,13 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView60" />
+                        app:layout_constraintTop_toBottomOf="@+id/session_on_going_officer_name" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView49"
+                android:id="@+id/session_on_going_parking_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_blue_circle"
@@ -340,9 +339,9 @@
                 android:text="Rs.100/ 1H"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView48"
+                app:layout_constraintBottom_toBottomOf="@+id/session_on_going_parking_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView48" />
+                app:layout_constraintTop_toTopOf="@+id/session_on_going_parking_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -350,11 +349,10 @@
             android:id="@+id/constraintLayout17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/radius_6_solid"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/radius_6_with_outline"
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:translationZ="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
@@ -365,16 +363,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time Went So Far"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView63"
+                android:id="@+id/session_on_going_hours_went"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="38dp"
                 android:layout_marginTop="12dp"
                 android:text="03"
                 android:textColor="@color/primaryColor"
@@ -387,19 +385,19 @@
                 android:id="@+id/textView64"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16sp"
+                android:layout_marginStart="8dp"
                 android:text="H"
                 android:textSize="43sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView63"
-                app:layout_constraintStart_toEndOf="@+id/textView63"
-                app:layout_constraintTop_toTopOf="@+id/textView63" />
+                app:layout_constraintBottom_toBottomOf="@+id/session_on_going_hours_went"
+                app:layout_constraintStart_toEndOf="@+id/session_on_going_hours_went"
+                app:layout_constraintTop_toTopOf="@+id/session_on_going_hours_went" />
 
             <TextView
-                android:id="@+id/textView65"
+                android:id="@+id/session_on_going_minutes_went"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="30"
                 android:textColor="@color/primaryColor"
                 android:textSize="43sp"
@@ -413,7 +411,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="50dp"
+                android:layout_marginEnd="38dp"
                 android:text="M"
                 android:textSize="43sp"
                 android:textStyle="bold"
@@ -427,13 +425,33 @@
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="* As soon as the officer end the session you will redirect to payment section automatically"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            android:text="* If parking officer is not at the parking space, press “force stop” button to end the session after you leave the parking space."
+            android:textSize="14sp"
             android:textAlignment="center"
-            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout17" />
+
+        <Button
+            android:id="@+id/session_on_going_force_stop_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:backgroundTint="#949494"
+            android:text="Force Stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+        <Button
+            android:id="@+id/session_on_going_show_qr_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:text="Show QR"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/session_on_going_force_stop_btn" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

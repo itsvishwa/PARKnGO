@@ -4,9 +4,12 @@
     <color name="black">#FF000000</color>
     <color name="bottomNavUnselectedItemColor">#827E83</color>
     <color name="green">#00A372</color>
+    <color name="ic_launcher_background">#3D87DC</color>
     <color name="inputFieldColor">#FFF3DD</color>
     <color name="loginSignupBtnColor">#F8DAA7</color>
     <color name="loginSignupInputFieldColor">#F9D391</color>
+    <color name="parking_background">#3D87DC</color>
+    <color name="parking_for_map_background">#3D87DC</color>
     <color name="primaryColor">#FFA811</color>
     <color name="red">#FF4545</color>
     <color name="textPrimary">#FF000000</color>

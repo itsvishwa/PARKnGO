@@ -2,10 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="15dp"
-    android:padding="11dp"
-    android:background="@drawable/radius_6_solid"
-    android:elevation="3dp"
+    android:layout_marginBottom="12dp"
+    android:padding="12dp"
+    android:background="@drawable/radius_6_with_outline"
     android:clickable="true"
     android:focusable="true"
     android:layout_width="match_parent"
@@ -25,8 +24,12 @@
         android:id="@+id/ava_free_slots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/radius_6_primary"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
         android:text="10"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ava_parking_name" />
@@ -35,24 +38,34 @@
         android:id="@+id/ava_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:text="Rs.40/ 1H"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ava_free_slots" />
 
     <TextView
+        android:id="@+id/ava_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Location here"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ava_type" />
+
+    <TextView
         android:id="@+id/ava_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/round_green_circle"
         android:paddingHorizontal="10dp"
         android:paddingVertical="5dp"
         android:text="Public"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ava_rate" />
+        app:layout_constraintBottom_toBottomOf="@+id/ava_rate"
+        app:layout_constraintStart_toEndOf="@+id/ava_rate"
+        app:layout_constraintTop_toTopOf="@+id/ava_rate" />
 
     <TextView
         android:id="@+id/ava_distance"
@@ -101,21 +114,9 @@
         android:id="@+id/ava_rating_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
         android:text="(40)"
-        app:layout_constraintBottom_toBottomOf="@+id/textView26"
-        app:layout_constraintEnd_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toTopOf="@+id/textView26" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView23" />
 
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="See Review(s)"
-        android:clickable="true"
-        android:focusable="true"
-        android:textStyle="bold"
-        android:textColor="@color/primaryColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
