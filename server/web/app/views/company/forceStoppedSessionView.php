@@ -117,7 +117,7 @@
 
             foreach ($pagedData as $update) : ?>
               <tr>
-                <td><?php echo htmlspecialchars($update->vehicle_number) ?></td>
+                <td><?php echo htmlspecialchars($this->format_vehicle_number($update->vehicle_number)) ?></td>
                 <td><?php echo htmlspecialchars($update->parking_name) ?></td>
                 <td><?php echo htmlspecialchars($update->vehicle_type) ?></td>
                 <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', $update->start_time)) ?></td>
