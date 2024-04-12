@@ -1,5 +1,7 @@
 package com.example.parkngo.parking;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +19,7 @@ public class ParkingSelectedFragment extends Fragment {
 
     private View parkingSelectedView;
     private View loadingView;
-    private int _id;
+    private String parkingID;
     private String userReviewId;
 
     MainActivity mainActivity;
@@ -36,21 +38,21 @@ public class ParkingSelectedFragment extends Fragment {
 
         // Retrieve data from arguments
         if (getArguments() != null) {
-            _id = getArguments().getInt("_id", -1);
+            parkingID = getArguments().getString("parkingID");
         }
 
         // Perform data loading in the background
-        ParkingSelectedFetchData parkingSelectedFetchData = new ParkingSelectedFetchData(parkingSelectedView, loadingView, _id, getContext());
+        ParkingSelectedFetchData parkingSelectedFetchData = new ParkingSelectedFetchData(parkingSelectedView, loadingView, parkingID, getContext());
+
 
         // onclick listeners ......................................................................................................
-
         //set add review btn handler
         Button addReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
         addReviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle data = new Bundle();
-                data.putInt("_id", _id);
+                data.putString("parkingID", parkingID);
                 mainActivity.replaceFragment(new AddReviewFragment(), data);
             }
         }
@@ -79,6 +81,30 @@ public class ParkingSelectedFragment extends Fragment {
                 data.putInt("rating", parkingSelectedFetchData.getUserReviewRating());
 
                 mainActivity.replaceFragment(new EditReviewFragment(), data);
+            }
+        });
+
+
+        Button navigateBtn  = parkingSelectedView.findViewById(R.id.parking_selected_fragment_navigate_btn);
+        navigateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String latitude = parkingSelectedFetchData.getLatitude();
+                String longitude = parkingSelectedFetchData.getLongitude();
+
+                double sourceLatitude = 6.902727395785716;
+                double sourceLongitude = 79.86126018417747;
+                double destinationLatitude = Double.parseDouble(latitude);
+                double destinationLongitude = Double.parseDouble(longitude);
+
+                String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude +
+                        "&destination=" + destinationLatitude + "," + destinationLongitude;
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MainActivity mainActivity = (MainActivity) getContext();
+                mainActivity.startActivity(intent);
             }
         });
         // onclick listeners ......................................................................................................

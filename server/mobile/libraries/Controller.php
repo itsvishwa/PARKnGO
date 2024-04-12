@@ -228,13 +228,19 @@ class Controller
                 // Encode the binary data as a Base64 string
                 $encoded_string = base64_encode($encoded_string);
 
+                // Make the Base64 string URL safe by replacing certain characters
+                $url_safe_encrypted_id = strtr($encoded_string, '+/', '.~');
+
                 // Send the Base64-encoded string as a JSON response
-                return $encoded_string;
+                return $url_safe_encrypted_id;
         }
 
         // return the decrypted data when pass the encoded string
-        public function decrypt_id($encoded_string)
+        public function decrypt_id($url_safe_encrypted_id)
         {
+                // Reverse the URL-safe character replacements to get the original Base64 string
+                $encoded_string = strtr($url_safe_encrypted_id, '.~', '+/');
+
                 // Decode the Base64-encoded string to get the binary data
                 $binary_data = base64_decode($encoded_string);
 
@@ -259,7 +265,8 @@ class Controller
 
 
         // return a encrypted url safe string when pass the session id
-        public function encrypt_session_id($session_id) {
+        public function encrypt_session_id($session_id)
+        {
                 // Create an initialization vector
                 $iv = openssl_random_pseudo_bytes(16);
 
@@ -278,29 +285,103 @@ class Controller
                 return $url_safe_encrypted_session_id;
         }
 
-        public function decrypt_session_id($url_safe_encrypted_session_id) {
+        public function decrypt_session_id($url_safe_encrypted_session_id)
+        {
                 // Reverse the URL-safe character replacements to get the original Base64 string
                 $base64_encoded = strtr($url_safe_encrypted_session_id, '-_', '+/'); // Reverse replacements
-            
+
                 // Decode the Base64 string back to binary data
                 $encrypted_session_id = base64_decode($base64_encoded);
-            
-                 // Extract the initialization vector (IV) from the beginning of the string
+
+                // Extract the initialization vector (IV) from the beginning of the string
                 $iv = substr($encrypted_session_id, 0, 16);
-                
+
                 // Get the encrypted data (ciphertext) after the IV
                 $encoded_session_id = substr($encrypted_session_id, 16);
-            
+
                 // Decrypt the encoded session ID using the provided IV, cipher method, and decryption key
                 $decrypted_session_id = openssl_decrypt($encoded_session_id, 'aes-128-cbc', SESSION_KEY, 0, $iv);
-            
-                if($decrypted_session_id === false) {
-                    // Decryption error, send an error message as a JSON response
-                    $this->send_json_200("Decryption error: " . openssl_error_string());
-                    return false;
+
+                if ($decrypted_session_id === false) {
+                        // Decryption error, send an error message as a JSON response
+                        $this->send_json_200("Decryption error: " . openssl_error_string());
+                        return false;
                 }
-            
+
                 // Return the decrypted session_id
                 return $decrypted_session_id;
+        }
+
+
+        // format the vehicle number to human readable version
+        public function format_vehicle_number($vehicle_number)
+        {
+                $data = explode("#", $vehicle_number);
+
+                $temp1 = "";
+                if ($data[1] === "NA") {
+                        $temp1 = "";
+                } else if ($data[1] === "SRI") {
+                        $temp1 = "ශ්‍රී";
+                } else {
+                        $temp1 = "-";
+                }
+
+                $temp2 = "";
+                if ($data[3] === "NA") {
+                        $temp2 = "";
+                } else {
+                        $temp2 = $data[3];
+                }
+
+                $result = $data[0] . $temp1 . $data[2] . $temp2;
+
+                return $result;
+        }
+
+
+        // format the timestamp to human readable version
+        public function format_time($time_stamp)
+        {
+                // Format the time in IST with offset
+                $time = date("h:i A", $time_stamp);
+                $date = date("d/m/y", $time_stamp);
+                $result = [$time, $date];
+                return $result;
+        }
+
+        // Convert the vehicle type to its Category
+        public function convert_to_vehicle_category($vehicle_type)
+        {
+                $cat = "";
+                if ($vehicle_type === "car" or $vehicle_type === "tuktuk" or $vehicle_type === "mini_van") {
+                        $cat = "A";
+                } else if ($vehicle_type === "bicycle") {
+                        $cat = "B";
+                } else if ($vehicle_type === "van" or $vehicle_type === "lorry" or $vehicle_type === "mini_bus") {
+                        $cat = "C";
+                } else {
+                        $cat = "D";
+                }
+                return $cat;
+        }
+
+
+        // convert the category to vehicle types
+        public function convert_to_vehicle_type($category)
+        {
+                $result = "";
+
+                if ($category === "A") {
+                        $result = "Car|Tuktuk|Mini Van";
+                } else if ($category === "B") {
+                        $result = "Bicycle";
+                } else if ($category === "C") {
+                        $result = "Van|Lorry|Mini Bus";
+                } else {
+                        $result = "Long Vehicles";
+                }
+
+                return $result;
         }
 }

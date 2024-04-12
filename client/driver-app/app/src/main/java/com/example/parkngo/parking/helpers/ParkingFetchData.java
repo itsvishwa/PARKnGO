@@ -1,6 +1,7 @@
 package com.example.parkngo.parking.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -14,8 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ErrorFragmentHandler;
+import com.example.parkngo.helpers.ErrorFragment;
+import com.example.parkngo.helpers.ErrorFragmentHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,22 +110,15 @@ public class ParkingFetchData {
                 String response = jsonResponse.getString("response");
                 if(response.equals("N/A")) // "N/A" if there are no parking spaces
                 {
-                    // Replace the loading view with the parking view
-                    String appBarMainText = "No Available Parking Spaces";
-                    String appBarSubText = "Please try again later";
-                    int bodyImg = R.drawable.not_available;
-                    String bodyMainText = "Parking spaces not available for selected vehicle type!";
-                    String bodySubText = "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options";
+                    Bundle data = new Bundle();
+                    data.putString("MainText1", "No Available Parking Spaces");
+                    data.putString("subText1", "Please try again later");
+                    data.putInt("img", R.drawable.not_available);
+                    data.putString("MainText2", "Parking spaces not available for selected vehicle type!");
+                    data.putString("subText2", "Sorry, no parking slots are currently available. Please try again later or consider alternative parking options");
 
-                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
-                    View newErrorView = errorFragmentHandler.setupView();
-
-                    ViewGroup parent = (ViewGroup) loadingView.getParent();
-                    if (parent != null) {
-                        int index = parent.indexOfChild(loadingView);
-                        parent.removeView(loadingView);
-                        parent.addView(newErrorView, index);
-                    }
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.replaceFragment(new ErrorFragment(), data);
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }

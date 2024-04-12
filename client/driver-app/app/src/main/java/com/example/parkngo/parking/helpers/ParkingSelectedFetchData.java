@@ -31,6 +31,7 @@ import com.example.parkngo.helpers.ParkngoStorage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,24 +41,33 @@ public class ParkingSelectedFetchData {
 
     View parkingSelectedView;
     View loadingView;
-    int _id;
+    String parkingID;
     Context context;
     String userReviewId;
     String userReviewContent;
     int userReviewRating;
+    String latitude;
+    String longitude;
 
-    public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, int _id, Context context){
+    public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, String _id, Context context){
         this.parkingSelectedView = parkingSelectedView;
         this.loadingView = loadingView;
-        this._id = _id;
+        this.parkingID = _id;
         this.context = context;
         fetchData();
     }
 
+    public String getLatitude(){
+        return latitude;
+    }
+
+    public String getLongitude(){
+        return longitude;
+    }
 
     private void fetchData(){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_one/" + _id;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_one/" + parkingID;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
@@ -130,6 +140,7 @@ public class ParkingSelectedFetchData {
 
     // set parking details to the respective views
     private void setParkingDetails(JSONObject selectedParkingSpaceData) throws JSONException{
+        TextView topAppBarNameView = parkingSelectedView.findViewById(R.id.appbar_main_text);
         TextView nameView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_name);
         TextView addressView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_address);
         TextView isPublicView = parkingSelectedView.findViewById(R.id.parking_selected_frag_is_public);
@@ -139,6 +150,10 @@ public class ParkingSelectedFetchData {
         TextView reviewCount = parkingSelectedView.findViewById(R.id.parking_Selected_frag_review_count);
 
         // setting basic parking space details
+        latitude = selectedParkingSpaceData.getString("latitude");
+        longitude = selectedParkingSpaceData.getString("longitude");
+
+        topAppBarNameView.setText(selectedParkingSpaceData.getString("name"));
         nameView.setText(selectedParkingSpaceData.getString("name"));
         addressView.setText(selectedParkingSpaceData.getString("address"));
         isPublicView.setText(selectedParkingSpaceData.getString("is_public").equals("1") ? "Public" : "Customer Only");
