@@ -270,6 +270,17 @@ class ParkingSpace
     return $row;
   }
 
+  public function getDutyRecordForParkingOfficer($officer_id)
+  {
+    $this->db->query('SELECT * FROM duty_record dr
+                      WHERE dr.officer_id = :officer_id
+                      ORDER BY dr.time_stamp DESC
+                      LIMIT 2');
+    $this->db->bind(':officer_id', $officer_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
 
   public function getCardDetailsFromParkingSpaceStatus($company_id, $parking_id = null)
   {

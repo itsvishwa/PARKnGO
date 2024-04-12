@@ -113,7 +113,7 @@
                                                 echo htmlspecialchars($officer->parking_name);
                                               } ?></h3>
                 <?php
-                $today = strtotime('today') - 16200;
+                $today = $midnight_timestamp = strtotime('today midnight');
                 $duty_records = $data['duty_records'][$i];
                 if (count($duty_records) == 2) {
                   if ($duty_records[0]->type == 'in' && $today < $duty_records[0]->time_stamp) {

@@ -295,7 +295,7 @@ class Companys extends Controller
     $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
     $dutyRecord = [];
     foreach ($officers as $officer) {
-      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($officer->_id);
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecordForParkingOfficer($officer->_id);
     }
 
     $data = [
