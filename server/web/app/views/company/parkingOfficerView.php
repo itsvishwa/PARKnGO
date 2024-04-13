@@ -120,6 +120,8 @@
                     echo '<p class="parking-type bg-green text-white font-semibold f-14">On Duty</p>';
                   } else if ($duty_records[0]->type == 'out') {
                     echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                  } else if ($duty_records[0]->time_stamp < $today) {
+                    echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
                   }
                 } else if (count($duty_records) == 1) {
                   if ($duty_records[0]->type == 'in' && $today < $duty_records[0]->time_stamp) {
