@@ -217,13 +217,9 @@ class Admins extends Controller
   public function requestsHistoryView()
   {
 
-    // Fetch approved company applications
     $approvedApplications = $this->adminModel->getCompanyApplications(1, 1);
-
-    // Fetch rejected company applications
     $rejectedApplications = $this->adminModel->getCompanyApplications(0, 1);
 
-    // Prepare data for the view
     $data = [
       'approvedApplications' => $approvedApplications,
       'rejectedApplications' => $rejectedApplications
