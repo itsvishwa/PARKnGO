@@ -24,15 +24,15 @@ class Driver extends Controller
         {
                 $token_data = $this->verify_token_for_drivers();
                 if ($token_data === 400) {
-                        $this->send_json_400("ERR_DR_IT");
+                        $this->send_json_400("ERR_IT");
                 } elseif ($token_data === 404) {
-                        $this->send_json_404("ERR_DR_TNF");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         $result = $this->driver_qr_model->get_all($token_data["user_id"]);
                         if ($result === false) // no saved vahicle info
                         {
                                 $result = [
-                                        "status_code" => "ERR_DR_NSV"
+                                        "status_code" => "DR_NSV"
                                 ];
                                 $this->send_json_200($result);
                         } else // have saved vehicle info
@@ -48,7 +48,7 @@ class Driver extends Controller
                                         $result_arr[] = $temp;
                                 }
                                 $result = [
-                                        "status_code" => "SU_DR",
+                                        "status_code" => "SUCCESS",
                                         "data" => $result_arr
                                 ];
                                 $this->send_json_200($result);
@@ -68,9 +68,9 @@ class Driver extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("ERR_DR_IT");
+                        $this->send_json_400("ERR_IT");
                 } else if ($token_data === 404) {
-                        $this->send_json_404("ERR_DR_TNF");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         // get selected number for the new vehicle
                         $selected_vehicle = $this->driver_qr_model->get_selected_vehicle_number($token_data["user_id"]);
@@ -82,7 +82,7 @@ class Driver extends Controller
                                 $selected_vehicle,
                                 $token_data["user_id"]
                         );
-                        $this->send_json_200("SU_DR");
+                        $this->send_json_200("SUCCESS");
                 }
         }
 
@@ -163,16 +163,16 @@ class Driver extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("ERR_DR_IT");
+                        $this->send_json_400("ERR_IT");
                 } else if ($token_data === 404) {
-                        $this->send_json_404("ERR_DR_TNF");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         $result = $this->session_model->is_driver_session_exist($token_data["user_id"]);
                         if ($result) {
                                 $date_and_time = $this->format_time($result->start_time);
 
                                 $result_arr = [
-                                        "status_code" => "SU_DR", // means user has a open parking session
+                                        "status_code" => "SUCCESS", // means user has a open parking session
                                         "data" => [
                                                 "session_id" => $this->encrypt_id($result->_id),
                                                 "parking_name" => $result->name,
@@ -191,7 +191,7 @@ class Driver extends Controller
                         } else // no open parking session for driver
                         {
                                 $result_arr = [
-                                        "status_code" => "ERR_DR_NOPS" // means user has no open parking session
+                                        "status_code" => "DR_NOPS" // means user has no open parking session
                                 ];
                                 $this->send_json_200($result_arr);
                         }
@@ -204,9 +204,9 @@ class Driver extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("ERR_DR_IT");
+                        $this->send_json_400("ERR_IT");
                 } else if ($token_data === 404) {
-                        $this->send_json_404("ERR_DR_TNF");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         $payment_id = $this->payment_model->is_open_payment_exist($token_data["user_id"]);
                         if ($payment_id) {
@@ -233,14 +233,14 @@ class Driver extends Controller
 
                                 $this->send_json_200(
                                         [
-                                                "status_code" => "SU_DR", // means that the user has a open payemnt due session
+                                                "status_code" => "SUCCESS", // means that the user has a open payemnt due session
                                                 "data" => $result_arr
                                         ]
                                 );
                         } else {
                                 $this->send_json_200(
                                         [
-                                                "status_code" => "ERR_DR_NOPAYS", // means that the user has no open payemnt due session 
+                                                "status_code" => "DR_NOPAYS", // means that the user has no open payemnt due session 
                                                 "msg" => "Driver dosen't have open payemnt session"
                                         ]
                                 );
