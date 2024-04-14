@@ -128,9 +128,11 @@
                                             <td>N/A</td>
                                             <td>
                                                 <a href="#" class="download-document" data-document-id="<?php echo $approvedApplication->_id; ?>">
-                                                    <span class="material-symbols-outlined">
+                                               
+                                                    <span class="material-symbols-outlined" style="color: black;">
                                                         download
                                                     </span>
+
                                                 </a>
                                             </td>
                                         </tr>
@@ -172,7 +174,7 @@
                                             </td>
 
                                             <td>
-                                                <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">                                                
+                                                <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">
                                                     <span class="material-symbols-outlined" style="color: black;">
                                                         download
                                                     </span>
