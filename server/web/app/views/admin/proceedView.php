@@ -154,17 +154,18 @@
           </div>
 
 
+          
+
+
           <div class="b-card3">
             <div class="card-content12 text-gray">
               <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
             </div>
             <div class="b-card-apre">
-              <button class="reject-button" type="button" onclick="submitRejectReason('<?php echo $_GET['_id'] ?? ''; ?>')">Reject Application</button>
-              <button class="approve-button" onclick="approveApplication('<?php echo $_GET['_id'] ?? ''; ?>')">Approve Application</button>
+              <button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>
+              <button class="approve-button" onclick="approveApplication()">Approve Application</button>
             </div>
           </div>
-
-
 
           <div class="b-card-content text-black">
           </div>
@@ -367,18 +368,18 @@
   }
 </script>-->
 
-<script>
+<!--<script>
   function approveApplication() {
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
     console.log('companyId:', companyId);
     console.log('Attempting to approve application with companyId:', companyId);
-    
+
     // Display loading spinner
     $('#approveSpinner').show();
 
     $.ajax({
       url: '/PARKnGO/server/web/admins/approveApplication/' + companyId,
-      method: 'POST',
+      method: 'GET',
       dataType: 'json',
       success: function(response) {
         // Hide loading spinner
@@ -397,7 +398,7 @@
       error: function(xhr, status, error) {
         // Hide loading spinner
         $('#approveSpinner').hide();
-        
+
         console.error('Error:', error);
         alert('Error approving application. Please check the console for details.');
       }
@@ -408,14 +409,14 @@
     var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
     console.log('companyId:', companyId);
     var rejectReason = $('#rejectReason').val();
-    
+
     // Display loading spinner
     $('#rejectSpinner').show();
 
     // Perform AJAX request to submit the reject reason
     $.ajax({
       url: 'rejectApplication/' + companyId,
-      method: 'POST',
+      method: 'GET',
       data: {
         rejectReason: rejectReason
       },
@@ -439,8 +440,83 @@
       }
     });
   }
-</script>
+</script>-->
 
+<script>
+function approveApplication() {
+  var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+  console.log('companyId:', companyId);
+  console.log('Attempting to approve application with companyId:', companyId);
+
+  // Display loading spinner
+  $('#approveSpinner').show();
+
+  $.ajax({
+    url: '/PARKnGO/server/web/admins/approveApplication',
+    method: 'POST',
+    dataType: 'json',
+    data: {
+      _id: companyId
+    },
+    success: function(response) {
+      // Hide loading spinner
+      $('#approveSpinner').hide();
+
+      if (response.success) {
+        console.log('Response:', response);
+        console.log('Application approved successfully.');
+        window.location.href = response.redirect;
+        alert('Application approved successfully.');
+      } else {
+        console.error('Failed to approve application. Server response:', response);
+        alert('Failed to approve application. See console for details.');
+      }
+    },
+    error: function(xhr, status, error) {
+      // Hide loading spinner
+      $('#approveSpinner').hide();
+      
+      console.error('Error:', error);
+      alert('Error approving application. Please check the console for details.');
+    }
+  });
+}
+
+function submitRejectReason() {
+  var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+  console.log('companyId:', companyId);
+  var rejectReason = $('#rejectReason').val();
+
+  // Display loading spinner
+  $('#rejectSpinner').show();
+
+  $.ajax({
+    url: '/PARKnGO/server/web/admins/rejectApplication',
+    method: 'POST',
+    dataType: 'json',
+    data: {
+      _id: companyId,
+      rejectReason: rejectReason
+    },
+    success: function(response) {
+      // Hide loading spinner
+      $('#rejectSpinner').hide();
+
+      console.log('Reject reason submitted successfully.');
+      window.location.href = response.redirect;
+      console.log(response);
+      alert('Application rejected successfully.');
+    },
+    error: function(error) {
+      // Hide loading spinner
+      $('#rejectSpinner').hide();
+
+      console.error('Error:', error);
+      alert('Error submitting reject reason. Please check the console for details.');
+    }
+  });
+}
+</script>
 
 
 <script>

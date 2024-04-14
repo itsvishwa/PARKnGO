@@ -401,9 +401,6 @@ public function reject($companyId)
 
 
 
-
-
-
 public function downloadDocument($documentId)
 {
     // Fetch the PDF data from the database based on the $documentId
@@ -492,7 +489,7 @@ public function rejectApplication($companyId) {
   
 }*/
 
-public function approveApplication() {
+/*public function approveApplication() {
   $companyId = $_GET['_id'] ?? '';
   $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
   
@@ -522,6 +519,41 @@ public function rejectApplication() {
   // You can return a JSON response indicating success or failure
  // echo json_encode(['success' => true]);
   echo json_encode(['success' => true, 'redirect' => 'requestsView']);
+}*/
+
+public function approveApplication() {
+  $companyId = $_GET['_id'] ?? '';
+  $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
+
+  // Update the database to set is_approved to 1 and is_reviewed to 1
+  $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, true);
+
+  if ($updateResult) {
+      // Return JSON response with success message and redirect URL
+      echo json_encode(['success' => true, 'redirect' => 'requestsView']);
+  } else {
+      // Return JSON response with error message
+      echo json_encode(['success' => false, 'error' => 'Failed to approve application']);
+  }
 }
+
+public function rejectApplication() {
+  $companyId = $_GET['_id'] ?? '';
+  // Get reject reason from POST data
+  $rejectReason = $_POST['rejectReason'] ?? '';
+  $adminId = $_SESSION['admin_id'] ?? '';
+
+  // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
+  $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, false, $rejectReason);
+
+  if ($updateResult) {
+      // Return JSON response with success message and redirect URL
+      echo json_encode(['success' => true, 'redirect' => 'requestsView']);
+  } else {
+      // Return JSON response with error message
+      echo json_encode(['success' => false, 'error' => 'Failed to reject application']);
+  }
+}
+
 
 }
