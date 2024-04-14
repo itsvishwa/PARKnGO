@@ -230,17 +230,14 @@ class Admins extends Controller
 
   public function requestsView()
   {
-    // Fetch pending company applications
+    
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
     $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
 
-    // Prepare data for the view
     $data = [
       'pendingApplications' => $pendingApplications,
       'totalPendingApplications' => $totalPendingApplications,
     ];
-
-    // Pass the data to the view
 
     $this->view('admin/requestsView', $data);
   }
