@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/requestsHistoryView.css" />
     <title>Requests History View</title>
-
 </head>
 
 <body>
@@ -87,7 +86,6 @@
                 </div>
             </div>
             <div class="business">
-
                 <div class="card-section">
 
                     <div class="b-card-content ">
@@ -128,7 +126,7 @@
                                             <td>N/A</td>
                                             <td>
                                                 <a href="#" class="download-document" data-document-id="<?php echo $approvedApplication->_id; ?>">
-                                               
+
                                                     <span class="material-symbols-outlined" style="color: black;">
                                                         download
                                                     </span>
@@ -222,8 +220,6 @@
                     const truncatedText = this.previousElementSibling.previousElementSibling;
                     const fullText = this.previousElementSibling;
                     const readMoreLink = this.previousElementSibling.previousElementSibling.previousElementSibling;
-
-
                     truncatedText.style.display = 'inline';
                     fullText.style.display = 'none';
                     readMoreLink.style.display = 'inline';
