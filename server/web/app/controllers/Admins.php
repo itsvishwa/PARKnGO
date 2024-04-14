@@ -244,29 +244,15 @@ class Admins extends Controller
 
   public function driverReviews()
   {
-    // Instantiate the ReviewModel
-    // $adminModel = $this->model('Admin');
-
-
-    // Call the method to get all reviews
-    //$reviews = $adminModel->getAllReviews();
-
-    // Call the method to get all reviews using the existing model instance
+   
     $reviews = $this->adminModel->getAllReviews();
 
-    // Prepare data to pass to the view
     $data = [
       'reviews' => $reviews
     ];
 
     $this->view('admin/driverReviews', $data);
   }
-
- /* public function index()
-  {
-    $this->dashboardView();
-  }
-*/
 
  public function index()
   {
