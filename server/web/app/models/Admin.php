@@ -553,7 +553,7 @@ public function rejectApplication($companyId, $rejectReason, $adminId) {
 /********************************************************************* */
 
 
-public function updateApproveApplication($companyId, $adminId) {
+/*public function updateApproveApplication($companyId, $adminId) {
   // Begin a transaction
   $this->db->beginTransaction();
 
@@ -598,6 +598,51 @@ public function rejectApplication($companyId, $rejectReason, $adminId) {
 
   // Bind the parameters
   $this->db->bind(':rejectReason', $rejectReason);
+  $this->db->bind(':admin_id', $adminId);
+  $this->db->bind(':companyId', $companyId);
+
+  // Execute the update query
+  $updateSuccess = $this->db->execute();
+
+  // Check if the update was successful
+  if ($updateSuccess) {
+      // Commit the transaction if successful
+      $this->db->commit();
+      return true; // Update successful
+  } else {
+      // Roll back the transaction if unsuccessful
+      $this->db->rollBack();
+      return false; // Update failed
+  }
+}
+*/
+
+public function updateApproveOrRejectApplication($companyId, $adminId, $isApproved, $rejectReason = null) {
+  // Begin a transaction
+  $this->db->beginTransaction();
+
+  // Prepare the SQL query
+  if ($isApproved) {
+      // Update query for approval
+      $this->db->query('UPDATE company 
+                        SET is_approved = 1, is_reviewd = 1, admin_id = :admin_id
+                        WHERE _id = :companyId');
+  } else {
+      // Update query for rejection
+      $this->db->query('UPDATE company 
+                        SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason, admin_id = :admin_id
+                        WHERE _id = :companyId');
+      // Check if rejectReason is provided
+      if (!$rejectReason) {
+          // If rejectReason is not provided, rollback the transaction and return false
+          $this->db->rollBack();
+          return false;
+      }
+      // Bind rejectReason parameter
+      $this->db->bind(':rejectReason', $rejectReason);
+  }
+
+  // Bind common parameters
   $this->db->bind(':admin_id', $adminId);
   $this->db->bind(':companyId', $companyId);
 
