@@ -15,7 +15,7 @@ class Admins extends Controller
 
   public function dashboardView()
   {
-    
+
     $adminModel = $this->model('Admin');
     $topTwoReviews = $adminModel->getTopTwoReviewsData();
     $userCount = $this->adminModel->getUsersCount($_SESSION['user_id']);
@@ -177,10 +177,10 @@ class Admins extends Controller
       $result = $this->adminModel->insertCompanySuspendDetails($data);
 
       if ($result) {
-        
+
         echo json_encode(['message' => 'Company Suspended..']);
       } else {
-        
+
         http_response_code(500);
         echo json_encode(['message' => 'Error Occured...']);
       }
@@ -211,7 +211,6 @@ class Admins extends Controller
     ];
 
     $this->view('admin/deletionView', $data);
-
   }
 
   public function requestsHistoryView()
@@ -230,7 +229,7 @@ class Admins extends Controller
 
   public function requestsView()
   {
-    
+
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
     $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
 
@@ -244,7 +243,7 @@ class Admins extends Controller
 
   public function driverReviews()
   {
-   
+
     $reviews = $this->adminModel->getAllReviews();
 
     $data = [
@@ -254,7 +253,7 @@ class Admins extends Controller
     $this->view('admin/driverReviews', $data);
   }
 
- public function index()
+  public function index()
   {
 
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
@@ -298,11 +297,11 @@ public function reject($companyId)
         // Example: redirect('/admins/error');
     }
 }*/
-  
+
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-      
+
       $company = $this->adminModel->getCompanyById($id);
 
       if ($company->user_id != $_SESSION['user_id']) {
@@ -320,8 +319,8 @@ public function reject($companyId)
     }
   }
 
-public function downloadDocument($documentId)
-{
+  public function downloadDocument($documentId)
+  {
     $documentData = $this->adminModel->getDocumentData($documentId);
 
     header('Content-Type: application/pdf');
@@ -329,10 +328,10 @@ public function downloadDocument($documentId)
 
     echo $documentData;
     exit();
-}
+  }
 
 
-/*public function submitRejectReason()
+  /*public function submitRejectReason()
 {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Retrieve the reject reason from the POST data
@@ -369,7 +368,7 @@ public function approveApplication($companyId) {
   echo json_encode(['success' => $success]);
 }*/
 
-/*public function approveApplication($companyId) {
+  /*public function approveApplication($companyId) {
   // Update the database to set is_approved to 1 and is_reviewed to 1
   // Implement this logic based on your database structure
   $this->adminModel->approveApplication($companyId);
@@ -390,7 +389,7 @@ public function rejectApplication($companyId) {
   echo json_encode(['success' => true]);
 }*/
 
-/*public function approveApplication() {
+  /*public function approveApplication() {
   $companyId = $_GET['_id'] ?? '';
   
   // Update the database to set is_approved to 1 and is_reviewed to 1
@@ -405,7 +404,7 @@ public function rejectApplication($companyId) {
   
 }*/
 
-/*public function approveApplication() {
+  /*public function approveApplication() {
   $companyId = $_GET['_id'] ?? '';
   $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
   
@@ -437,39 +436,39 @@ public function rejectApplication() {
   echo json_encode(['success' => true, 'redirect' => 'requestsView']);
 }*/
 
-public function approveApplication() {
-  $companyId = $_GET['_id'] ?? '';
-  $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
+  public function approveApplication()
+  {
+    $companyId = $_GET['_id'] ?? '';
+    $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
 
-  // Update the database to set is_approved to 1 and is_reviewed to 1
-  $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, true);
+    // Update the database to set is_approved to 1 and is_reviewed to 1
+    $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, true);
 
-  if ($updateResult) {
+    if ($updateResult) {
       // Return JSON response with success message and redirect URL
       echo json_encode(['success' => true, 'redirect' => 'requestsView']);
-  } else {
+    } else {
       // Return JSON response with error message
       echo json_encode(['success' => false, 'error' => 'Failed to approve application']);
+    }
   }
-}
 
-public function rejectApplication() {
-  $companyId = $_GET['_id'] ?? '';
-  // Get reject reason from POST data
-  $rejectReason = $_POST['rejectReason'] ?? '';
-  $adminId = $_SESSION['admin_id'] ?? '';
+  public function rejectApplication()
+  {
+    $companyId = $_GET['_id'] ?? '';
+    // Get reject reason from POST data
+    $rejectReason = $_POST['rejectReason'] ?? '';
+    $adminId = $_SESSION['admin_id'] ?? '';
 
-  // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
-  $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, false, $rejectReason);
+    // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
+    $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, false, $rejectReason);
 
-  if ($updateResult) {
+    if ($updateResult) {
       // Return JSON response with success message and redirect URL
       echo json_encode(['success' => true, 'redirect' => 'requestsView']);
-  } else {
+    } else {
       // Return JSON response with error message
       echo json_encode(['success' => false, 'error' => 'Failed to reject application']);
+    }
   }
-}
-
-
 }
