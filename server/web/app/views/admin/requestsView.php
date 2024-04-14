@@ -8,9 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/requestsView.css" />
-
   <title>Requests</title>
- 
 </head>
 
 <body>
@@ -81,24 +79,19 @@
           <h3 class="ml-5">Pending Requests</h3>
         </div>
         <div class="profile">
-         <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>-->
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="business">
         <div class="heading">
-        <!--  <h4>You have 03 pending applications to review</h4>-->
           <?php if (isset($data['totalPendingApplications'])) : ?>
                   <?php if ($data['totalPendingApplications'] === 0) : ?>
                     <h4>You have no new company applications to review</h4>
                   <?php elseif ($data['totalPendingApplications'] === 1) : ?>
                     <h4>You have 1 new company application to review</h4>
                   <?php else : ?>
-                    <h4>You have <?php echo $data['totalPendingApplications']; ?> new company applications to review</h4>
-                    
+                    <h4>You have <?php echo $data['totalPendingApplications']; ?> new company applications to review</h4>                    
                   <?php endif; ?>
                 <?php endif; ?>
         </div>       
@@ -137,21 +130,8 @@
               $dateTime = date("M d, Y | h:i:s A", $timestamp);
               echo "<p>{$dateTime}</p>";
               ?></p>
-            </div>
-
-            
-          
-            
+            </div>          
             <button class="proceed-button" onclick="window.location.href='./proceedView.php?name=<?php echo urlencode($application->name); ?>&_id=<?php echo urlencode($application->_id); ?>&address=<?php echo urlencode($application->address); ?>&datetime=<?php echo urlencode($application->registered_time_stamp); ?>'">Proceed <span>&gt;</span></button>
-
-
-
-
-            
-         <!--<button class="proceed-button" onclick="window.location.href='./proceedView.php'">Proceed <span>&gt;</span></button> -->
-         
-         
-
           </div>      
           <?php endforeach; ?> 
           <div class="b-card-content text-black">
@@ -161,13 +141,7 @@
       </div>      
   </div>  
   </div>  
-  </div>  
-  
-
-
-
-
-    
+  </div>     
 </body>
 
 </html>
