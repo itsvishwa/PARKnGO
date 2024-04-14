@@ -115,7 +115,6 @@
                                 ?>
                                         <tr>
                                             <td><?php echo $approvedApplication->name; ?></td>
-                                            <!--  <td>Nov 23, 2023 <br> 05:20:32 PM</td> -->
                                             <td>
                                                 <?php
                                                 $timestamp = $approvedApplication->registered_time_stamp;
@@ -128,11 +127,11 @@
                                             <td class="status2-cell">Approved</td>
                                             <td>N/A</td>
                                             <td>
-                                            <a href="#" class="download-document" data-document-id="<?php echo $approvedApplication->_id; ?>">
-                                                <span class="material-symbols-outlined">
-                                                    download
-                                                </span>
-                                            </a>
+                                                <a href="#" class="download-document" data-document-id="<?php echo $approvedApplication->_id; ?>">
+                                                    <span class="material-symbols-outlined">
+                                                        download
+                                                    </span>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php
@@ -143,7 +142,6 @@
                                     ?>
                                         <tr>
                                             <td><?php echo $rejectedApplication->name; ?></td>
-                                            <!--<td>Nov 23, 2023 <br> 05:20:32 PM</td> -->
                                             <td>
                                                 <?php
                                                 $timestamp = $rejectedApplication->registered_time_stamp;
@@ -154,21 +152,19 @@
                                                 ?>
                                             </td>
                                             <td class="status1-cell">Rejected</td>
-                                            <!--<td>Incomplete documentation</td>-->
                                             <td>
                                                 <div class="truncate-text">
                                                     <?php
                                                     $reviewMessage = $rejectedApplication->review_message;
-                                                    $maxLength = 50; // Define the maximum length to display initially
+                                                    $maxLength = 50;
                                                     if (strlen($reviewMessage) > $maxLength) {
-                                                        // If the message length exceeds the maximum length, truncate and show a "Read More" link
-                                                        
+
                                                         echo '<span class="truncated-text">' . substr($reviewMessage, 0, $maxLength) . '... </span>';
                                                         echo '<a href="javascript:void(0);" class="read-more-link">Read More</a>';
                                                         echo '<span class="full-text" style="display: none;">' . $reviewMessage . '</span>';
                                                         echo '<a href="javascript:void(0);" class="show-less-link" style="display: none;">Show Less</a>';
                                                     } else {
-                                                        // If the message length is within the limit, display the whole message
+
                                                         echo $reviewMessage;
                                                     }
                                                     ?>
@@ -176,11 +172,11 @@
                                             </td>
 
                                             <td>
-                                            <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">
-                                                <span class="material-symbols-outlined">
-                                                    download
-                                                </span>
-                                            </a>
+                                                <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">
+                                                    <span class="material-symbols-outlined">
+                                                        download
+                                                    </span>
+                                                </a>
                                             </td>
                                         </tr>
                                 <?php
@@ -201,70 +197,66 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    const readMoreLinks = document.querySelectorAll('.read-more-link');
-    readMoreLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const truncatedText = this.previousElementSibling;
-            const fullText = this.nextElementSibling;
-            const showLessLink = this.nextElementSibling.nextElementSibling;
+            const readMoreLinks = document.querySelectorAll('.read-more-link');
+            readMoreLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const truncatedText = this.previousElementSibling;
+                    const fullText = this.nextElementSibling;
+                    const showLessLink = this.nextElementSibling.nextElementSibling;
 
-            // Toggle visibility of truncated text and full text, and show/hide links
-            truncatedText.style.display = 'none'; // Hide truncated text
-            fullText.style.display = 'inline'; // Show the full text
-            this.style.display = 'none'; // Hide "Read More" link
-            showLessLink.style.display = 'inline'; // Show "Show Less" link
+                    truncatedText.style.display = 'none';
+                    fullText.style.display = 'inline';
+                    this.style.display = 'none';
+                    showLessLink.style.display = 'inline';
+                });
+            });
+
+            const showLessLinks = document.querySelectorAll('.show-less-link');
+            showLessLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const truncatedText = this.previousElementSibling.previousElementSibling;
+                    const fullText = this.previousElementSibling;
+                    const readMoreLink = this.previousElementSibling.previousElementSibling.previousElementSibling;
+
+
+                    truncatedText.style.display = 'inline';
+                    fullText.style.display = 'none';
+                    readMoreLink.style.display = 'inline';
+                    this.style.display = 'none';
+                });
+            });
         });
-    });
+    </script>
 
-    const showLessLinks = document.querySelectorAll('.show-less-link');
-    showLessLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const truncatedText = this.previousElementSibling.previousElementSibling;
-            const fullText = this.previousElementSibling;
-            const readMoreLink = this.previousElementSibling.previousElementSibling.previousElementSibling;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadLinks = document.querySelectorAll('.download-document');
 
-            // Toggle visibility of truncated text and full text, and show/hide links
-            truncatedText.style.display = 'inline'; // Show truncated text
-            fullText.style.display = 'none'; // Hide the full text
-            readMoreLink.style.display = 'inline'; // Show "Read More" link
-            this.style.display = 'none'; // Hide "Show Less" link
+            downloadLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const documentId = this.dataset.documentId;
+
+                    // Make an AJAX request to the server to download the PDF
+                    fetch('<?php echo URLROOT; ?>/admins/downloadDocument/' + documentId)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'document.pdf';
+                            document.body.appendChild(a);
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                        })
+                        .catch(error => console.error('Error downloading document:', error));
+                });
+            });
+
         });
-    });
-});
-
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    const downloadLinks = document.querySelectorAll('.download-document');
-
-    downloadLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const documentId = this.dataset.documentId;
-
-            // Make an AJAX request to the server to download the PDF
-            fetch('<?php echo URLROOT; ?>/admins/downloadDocument/' + documentId)
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'document.pdf';
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                })
-                .catch(error => console.error('Error downloading document:', error));
-        });
-    });
-
-    // ... (existing code for Read More/Show Less functionality)
-});
-
-</script>
+    </script>
 
 </body>
 
