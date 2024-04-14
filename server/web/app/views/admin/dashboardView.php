@@ -288,7 +288,7 @@
       <!-- bar graph for number of parking sessions -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Replace this with your actual server response data
+
           const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
 
           // Extract dates and values from the response
@@ -327,7 +327,7 @@
       <!-- bar graph for revenue -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Replace the data variable with your actual data
+
           const rawData = <?php echo json_encode($data['revenues']); ?>;
 
           // Convert raw data to an array of objects
