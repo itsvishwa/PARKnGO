@@ -320,18 +320,13 @@ public function reject($companyId)
     }
   }
 
-
-
 public function downloadDocument($documentId)
 {
-    // Fetch the PDF data from the database based on the $documentId
     $documentData = $this->adminModel->getDocumentData($documentId);
 
-    // Set appropriate headers for PDF response
     header('Content-Type: application/pdf');
     header('Content-Disposition: attachment; filename="document.pdf"');
 
-    // Output the PDF data
     echo $documentData;
     exit();
 }
