@@ -15,8 +15,7 @@ class Admins extends Controller
 
   public function dashboardView()
   {
-    //*********************************************************** */
-    // Get counts of users, parking officers, and companies from the model
+    
     $adminModel = $this->model('Admin');
     $topTwoReviews = $adminModel->getTopTwoReviewsData();
     $userCount = $this->adminModel->getUsersCount($_SESSION['user_id']);
@@ -28,7 +27,6 @@ class Admins extends Controller
     $reviews = $this->adminModel->getLatestReviews();
     $parkingSessions = $this->adminModel->parkingSession($_SESSION['user_id']);
     $revenues = $this->adminModel->getRevenue($_SESSION['user_id']);
-
 
     foreach ($revenues as &$revenue) {
       $revenue->time_stamp = date('Y-m-d H:i:s', $revenue->time_stamp);
@@ -52,7 +50,6 @@ class Admins extends Controller
           if (!isset($dailyRevenues[$date])) {
             $dailyRevenues[$date] = 0;
           }
-
           $dailyRevenues[$date] += $revenue->amount;
         }
       }
@@ -68,12 +65,10 @@ class Admins extends Controller
 
       ksort($dailyRevenues);
 
-      // Return an associative array with daily revenues and total amount
       return $dailyRevenues;
     }
 
     $processedRevenues = processRevenues($revenues);
-
 
     foreach ($parkingSessions as &$parkingSession) {
       $parkingSession->start_time = date('Y-m-d H:i:s', $parkingSession->start_time);
@@ -113,11 +108,9 @@ class Admins extends Controller
         }
         $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
       }
-
       // Sort the array by keys
       ksort($sessionsPerDay);
 
-      // Return the result
       return $sessionsPerDay;
     }
 
@@ -127,7 +120,6 @@ class Admins extends Controller
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
     }
 
-    // Prepare data for the view
     $data = [
       'userCount' => $userCount !== false ? $userCount : 0,
       'parkingOfficersCount' => $parkingOfficersCount !== false ? $parkingOfficersCount : 0,
@@ -142,10 +134,6 @@ class Admins extends Controller
 
     ];
 
-    /* var_dump($data['reviews']);
-    var_dump($data['revenues']);*/
-
-    // Pass the data to the view
     $this->view('admin/dashboardView', $data);
   }
 
