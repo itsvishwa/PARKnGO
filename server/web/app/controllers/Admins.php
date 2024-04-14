@@ -302,10 +302,9 @@ public function reject($companyId)
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-      // Get existing post from model
+      
       $company = $this->adminModel->getCompanyById($id);
 
-      // Check for owner
       if ($company->user_id != $_SESSION['user_id']) {
         redirect('admins/companiesView');
       }
