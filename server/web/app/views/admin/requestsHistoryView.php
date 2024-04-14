@@ -172,10 +172,11 @@
                                             </td>
 
                                             <td>
-                                                <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">
-                                                    <span class="material-symbols-outlined">
+                                                <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">                                                
+                                                    <span class="material-symbols-outlined" style="color: black;">
                                                         download
                                                     </span>
+
                                                 </a>
                                             </td>
                                         </tr>
