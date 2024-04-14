@@ -257,17 +257,12 @@ class Admins extends Controller
  public function index()
   {
 
-
-    // Fetch pending company applications
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
-    
 
-    // Prepare data for the view
     $data = [
       'pendingApplications' => $pendingApplications
     ];
-
-
+    
     $this->view('admin/proceedView', $data);
   }
 
