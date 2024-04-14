@@ -81,9 +81,7 @@
                 </div>
 
                 <div class="profile">
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>-->
+
                     <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
                     <a href="../users/logout" class="logout">Log out</a>
                 </div>
@@ -117,8 +115,8 @@
             var selectedCompanyId = selectElement.value;
 
             // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
-            // For example, assuming you have a JavaScript object containing officer details:
-            var Companies = <?php echo json_encode($data['approvedApplications'] ); ?>;
+
+            var Companies = <?php echo json_encode($data['approvedApplications']); ?>;
 
 
             var selectedCompany = Companies.find(function(parking_space) {
@@ -229,14 +227,12 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
-                        // Optionally, you can handle success here, e.g., show a success message
 
-                        // Redirect to a success page or perform any other actions as needed
                         window.location.href = '<?php echo URLROOT; ?>/admins/deletionView';
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        // Optionally, you can handle errors here, e.g., show an error message
+
                     });
             }
         }
