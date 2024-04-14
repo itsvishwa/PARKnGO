@@ -153,7 +153,7 @@
                           $label = ($parkingSlotsCount == 1) ? 'Parking Space' : 'Parking Spaces';
                           echo "<p>{$parkingSlotsCount} {$label}</p>";
                         } else {
-                          echo "<p>No Parking Spaces</p>"; // Default value if count is not available
+                          echo "<p>No Parking Spaces</p>"; 
                         }
                         ?>
                       </div>
@@ -174,7 +174,7 @@
                           $label = ($parkingOfficersCount == 1) ? 'Parking Officer' : 'Parking Officers';
                           echo "<p>{$parkingOfficersCount} {$label}</p>";
                         } else {
-                          echo "<p>No Parking Officers</p>"; // Default value if count is not available
+                          echo "<p>No Parking Officers</p>"; 
                         }
                         ?>
                       </div>
