@@ -139,38 +139,24 @@ class Admins extends Controller
 
   public function companiesView()
   {
-   
-    
 
-    // Fetch approved company applications details
     $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
-    
 
-    // Get parking officers count for each approved company
     foreach ($approvedApplications as &$company) {
       $companyId = $company->_id;
       $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
       $company->parkingOfficersCount = $parkingOfficersCount;
     }
 
-    // Get parking officers count for each approved company
     foreach ($approvedApplications as &$company) {
       $companyId = $company->_id;
       $parkingSlotsCount = $this->adminModel->getParkingSlotsCountForCompany($companyId);
       $company->parkingSlotsCount = $parkingSlotsCount;
     }
 
-
-    // Prepare data for the view
     $data = [
       'approvedApplications' => $approvedApplications,
-
-
     ];
-    
-    
-
-    // Pass the data to the view
 
     $this->view('admin/companiesView', $data);
   }
