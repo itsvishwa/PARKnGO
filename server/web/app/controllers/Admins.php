@@ -262,7 +262,7 @@ class Admins extends Controller
     $data = [
       'pendingApplications' => $pendingApplications
     ];
-    
+
     $this->view('admin/proceedView', $data);
   }
 
@@ -299,27 +299,6 @@ public function reject($companyId)
     }
 }*/
   
-
- /* public function proceedView()
-  {
-
-
-    // Fetch pending company applications
-    $pendingApplications = $this->adminModel->getPendingCompanyApplications();
-    
-
-    // Prepare data for the view
-    $data = [
-      'pendingApplications' => $pendingApplications
-    ];
-
-
-    $this->view('admin/proceedView', $data);
-  }*/
-
-
-
-
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
