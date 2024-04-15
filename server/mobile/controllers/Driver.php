@@ -93,7 +93,7 @@ class Driver extends Controller
                 $vehicle_data = [
                         "vehicle_name" => trim($_POST["vehicle_name"]),
                         "vehicle_number" => trim($_POST["vehicle_number"]),
-                        "vehicle_type" => trim($_POST["vehicle_type"]),
+                        "vehicle_type" => strtolower(trim($_POST["vehicle_type"])),
                         "selected" => trim($_POST["selected"])
                 ];
 
