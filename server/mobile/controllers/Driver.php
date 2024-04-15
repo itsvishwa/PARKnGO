@@ -43,6 +43,7 @@ class Driver extends Controller
                                                 "selected" => $result_data->selected,
                                                 "vehicle_name" => $result_data->vehicle_name,
                                                 "vehicle_number" => $this->format_vehicle_number($result_data->vehicle_number),
+                                                "row_vehicle_number" => $result_data->vehicle_number,
                                                 "vehicle_type" => ucfirst($result_data->vehicle_type) // first letter to capital
                                         ];
                                         $result_arr[] = $temp;
@@ -99,9 +100,9 @@ class Driver extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("ERR_DR_IT");
+                        $this->send_json_400("ERR_IT");
                 } else if ($token_data === 404) {
-                        $this->send_json_404("ERR_DR_TNF");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], $vehicle_data["selected"]);
                         if ($result) {
@@ -112,9 +113,9 @@ class Driver extends Controller
                                         $vehicle_data["selected"],
                                         $token_data["user_id"]
                                 );
-                                $this->send_json_200("SU_DR");
+                                $this->send_json_200("SUCCESS");
                         } else {
-                                $this->send_json_400("ERR_DR_IUD");
+                                $this->send_json_400("DR_IUD");
                         }
                 }
         }
@@ -125,9 +126,9 @@ class Driver extends Controller
                 $token_data = $this->verify_token_for_drivers();
 
                 if ($token_data === 400) {
-                        $this->send_json_400("ERR_DR_IT");
+                        $this->send_json_400("ERR_IT");
                 } else if ($token_data === 404) {
-                        $this->send_json_404("ERR_DR_TNF");
+                        $this->send_json_404("ERR_TNF");
                 } else {
                         $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], $selected_vehicle);
                         if ($result) {
@@ -149,10 +150,10 @@ class Driver extends Controller
                                                 $this->driver_qr_model->update_driver_selected_vehicle_level($token_data["user_id"], 3, 2);
                                         }
                                 }
-                                $this->send_json_200("SU_DR");
+                                $this->send_json_200("SUCCESS");
                         } else {
                                 // driver don't have a vehicle information related to requested data
-                                $this->send_json_400("ERR_DR_IUD");
+                                $this->send_json_400("DR_IUD");
                         }
                 }
         }
