@@ -265,6 +265,7 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
+
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -296,112 +297,6 @@ class Admins extends Controller
     echo $documentData;
     exit();
   }
-
-
-  /*public function submitRejectReason()
-{
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Retrieve the reject reason from the POST data
-        $rejectReason = $_POST['rejectReason'];
-
-        // Perform validation on $rejectReason if necessary
-
-        // Get the company ID from your session or another source
-        $companyId = $_SESSION['user_id']; // Replace with your logic
-
-        // Update the company table with the reject reason
-        if ($this->adminModel->updateRejectReason($companyId, $rejectReason)) {
-            // Send a success response
-            echo 'Reject reason submitted successfully.';
-            
-        } else {
-            // Send an error response
-            echo 'Failed to submit reject reason.';
-        }
-    } else {
-        // Handle non-POST requests
-        echo 'Invalid request method.';
-    }
-}
-
-public function approveApplication($companyId) {
-  $this->adminModel = $this->model('Admin');
-
-  // Update the company table with approval status
-  $success = $this->adminModel->updateApprovalStatus($companyId);
-
-  // Send a JSON response indicating success or failure
-  header('Content-Type: application/json');
-  echo json_encode(['success' => $success]);
-}*/
-
-  /*public function approveApplication($companyId) {
-  // Update the database to set is_approved to 1 and is_reviewed to 1
-  // Implement this logic based on your database structure
-  $this->adminModel->approveApplication($companyId);
-
-  // You can return a JSON response indicating success or failure
-  echo json_encode(['success' => true]);
-}
-
-public function rejectApplication($companyId) {
-  // Get reject reason from POST data
-  $rejectReason = $_POST['rejectReason'];
-
-  // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
-  // Implement this logic based on your database structure
-  $this->adminModel->rejectApplication($companyId, $rejectReason);
-
-  // You can return a JSON response indicating success or failure
-  echo json_encode(['success' => true]);
-}*/
-
-  /*public function approveApplication() {
-  $companyId = $_GET['_id'] ?? '';
-  
-  // Update the database to set is_approved to 1 and is_reviewed to 1
-
-  $this->adminModel->updateApproveApplication($companyId);
-
-  
- // echo json_encode(['success' => true]);
-
-  // Return JSON response with redirect URL
-  echo json_encode(['success' => true, 'redirect' => 'requestsView']);
-  
-}*/
-
-  /*public function approveApplication() {
-  $companyId = $_GET['_id'] ?? '';
-  $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
-  
-  // Update the database to set is_approved to 1 and is_reviewed to 1
-  $updateResult = $this->adminModel->updateApproveApplication($companyId, $adminId);
-  
-  if ($updateResult) {
-      // Return JSON response with success message and redirect URL
-      echo json_encode(['success' => true, 'redirect' => 'requestsView']);
-  } else {
-      // Return JSON response with error message
-      echo json_encode(['success' => false, 'error' => 'Failed to approve application']);
-  }
-}
-
-
-public function rejectApplication() {
-  $companyId = $_GET['_id'] ?? '';
-  // Get reject reason from POST data
-  $rejectReason = $_POST['rejectReason'];
-  $adminId = $_SESSION['admin_id'] ?? ''; 
-
-  // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
-  // Implement this logic based on your database structure
-  $this->adminModel->rejectApplication($companyId, $rejectReason ,$adminId );
-
-  // You can return a JSON response indicating success or failure
- // echo json_encode(['success' => true]);
-  echo json_encode(['success' => true, 'redirect' => 'requestsView']);
-}*/
 
   public function approveApplication()
   {
