@@ -55,7 +55,7 @@ public class SessionPaymentFragment extends Fragment {
                 req.setMerchantId("1224851");       // Merchant ID
                 req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
                 req.setAmount(250);             // Final Amount to be charged
-                req.setOrderId("13265");        // Unique Reference ID
+                req.setOrderId("kRMOdoUV5l86f8UDQPiPt09TQTlPSzhPN1p3L3JHcmczWU9JT1E9PQ==");        // Unique Reference ID
                 req.setItemsDescription("CMC CAR PARK 01");  // Item description title
                 req.getCustomer().setFirstName("Saman");
                 req.getCustomer().setLastName("Pereira");
@@ -66,7 +66,7 @@ public class SessionPaymentFragment extends Fragment {
                 req.getCustomer().getAddress().setCountry("Sri Lanka");
 
                 //Optional Params
-                req.setNotifyUrl("http://192.168.56.1/PARKnGO/server/mobile/payment/notify");
+                req.setNotifyUrl("https://parkngo.azurewebsites.net/?url=payment/notify");
 
                 Intent intent = new Intent(getContext(), PHMainActivity.class);
                 intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);

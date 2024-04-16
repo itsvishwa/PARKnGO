@@ -157,7 +157,7 @@ public class SessionMainHelper {
             }
         }
     }
-    // open parking session check end
+    // open parking session check end.......................................
 
 
     // open payment session check start
