@@ -185,7 +185,7 @@ class ParkingSpace extends Controller
                 } else // reviews found
                 {
                     $new_reviews_data = [
-                        "availability" => "AV",
+                        "availability" => "N/A",
                         "data" => []
                     ];
                     $new_user_review_data = [
@@ -205,6 +205,7 @@ class ParkingSpace extends Controller
                                 "content" => $review_data->content,
                             ];
                         } else {
+                            $new_reviews_data["availability"] = "AV";
                             $new_reviews_data["data"][] = [
                                 "name" => $review_data->first_name . " " . $review_data->last_name,
                                 "time_stamp" => implode(" | ", $this->format_time($review_data->time_stamp)),

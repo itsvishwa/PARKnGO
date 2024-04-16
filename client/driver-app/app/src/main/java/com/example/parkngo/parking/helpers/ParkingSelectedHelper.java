@@ -318,10 +318,12 @@ public class ParkingSelectedHelper {
 
         RecyclerView recyclerView = parkingSelectedView.findViewById(R.id.ps_frag_recycle_view);
         TextView otherNoReviewView = parkingSelectedView.findViewById(R.id.parking_selected_frag_no_others_review_text);
+        ImageView noOtherReviewImageView = parkingSelectedView.findViewById(R.id.ps_frag_noreview_img);
 
         if(isReviewExist){
             recyclerView.setVisibility(View.VISIBLE);
             otherNoReviewView.setVisibility(View.INVISIBLE);
+            noOtherReviewImageView.setVisibility(View.INVISIBLE);
             ArrayList<ReviewModel> reviewModels = new ArrayList<>();
             JSONArray reviewDataArr = reviewObject.getJSONArray("data");
             for (int i = 0; i<reviewDataArr.length(); i++)
@@ -341,6 +343,7 @@ public class ParkingSelectedHelper {
         }else{
             recyclerView.setVisibility(GONE);
             otherNoReviewView.setVisibility(View.VISIBLE);
+            noOtherReviewImageView.setVisibility(View.VISIBLE);
         }
     }
 
