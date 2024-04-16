@@ -301,6 +301,7 @@ id profile_frag_mobile_number
 id profile_frag_name
 id profile_frag_name_text
 id progressBar2
+id ps_frag_noreview_img
 id ps_frag_recycle_view
 id ps_frag_vt1_name
 id ps_frag_vt1_rate

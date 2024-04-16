@@ -3,7 +3,7 @@ package com.example.parkngo.parking.helpers;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,36 +26,43 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditReviewData {
-    View editReviewView;
+public class AddReviewHelper {
+    View view;
+    String parkingID;
     Context context;
     FragmentManager fragmentManager;
 
-    public EditReviewData(View editReviewView, Context context, FragmentManager fragmentManager){
-        this.editReviewView = editReviewView;
+    public AddReviewHelper(View view, String parkingID, Context context, FragmentManager fragmentManager ){
+        this.view = view;
+        this.parkingID = parkingID;
         this.context = context;
         this.fragmentManager = fragmentManager;
     }
 
-    public void setupDefaultReview(String content, int rating){
-        // getting views
-        RatingBar ratingBarView = editReviewView.findViewById(R.id.edit_review_frag_rating_bar);
-        EditText contentView = editReviewView.findViewById(R.id.edit_review_frag_content);
-
-        contentView.setText(content);
-        ratingBarView.setRating(rating);
+    public void init(){
+        addReviewBtnListener();
     }
 
-    public void editReview(String userReviewID){
-        // getting reference to the views
-        RatingBar ratingBarView = editReviewView.findViewById(R.id.edit_review_frag_rating_bar);
-        EditText contentView = editReviewView.findViewById(R.id.edit_review_frag_content);
+    private void addReviewBtnListener(){
+        Button reviewAddBtn = view.findViewById(R.id.add_review_frag_add_review_btn);
+        reviewAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addReview();
+            }
+        });
+    }
 
-        if (TextUtils.isEmpty(contentView.getText())|| ratingBarView.getRating() == 0){
+    private void addReview(){
+        // getting reference to the views
+        TextView contentView = view.findViewById(R.id.add_review_frag_content);
+        RatingBar ratingBar = view.findViewById(R.id.add_review_frag_rating_bar);
+
+        if (TextUtils.isEmpty(contentView.getText())|| ratingBar.getRating() == 0){
             Toast.makeText(context, "Please fill the both fields !", Toast.LENGTH_SHORT).show();
         }else{
             String content = contentView.getText().toString();
-            int starCount = (int) ratingBarView.getRating();
+            int starCount = (int) ratingBar.getRating();
 
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -66,7 +73,7 @@ public class EditReviewData {
 
             // volley request
             RequestQueue queue = Volley.newRequestQueue(context);
-            String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/review/edit";
+            String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/review/add";
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
                     new Response.Listener<String>() {
@@ -91,10 +98,10 @@ public class EditReviewData {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
-                    params.put("_id", userReviewID);
                     params.put("time_stamp", "" + unixTimestamp);
                     params.put("no_of_stars", "" + starCount);
                     params.put("content", content);
+                    params.put("parking_id", "" + parkingID);
                     return params;
                 }
             };
@@ -105,7 +112,7 @@ public class EditReviewData {
     }
 
     private void successResponseHandler(){
-        Toast.makeText(context, "Review is Updated Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Review Added Successfully", Toast.LENGTH_SHORT).show();
 
         // Navigate back to the previous fragment
         fragmentManager.popBackStack();

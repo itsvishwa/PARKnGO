@@ -3,8 +3,9 @@ package com.example.parkngo.parking.helpers;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
@@ -25,30 +26,69 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddReviewData {
-    View view;
-    String parkingID;
+public class EditReviewHelper {
+    View editReviewView;
     Context context;
     FragmentManager fragmentManager;
+    String parkingID;
+    String content;
+    int rating;
 
-    public AddReviewData(View view, String parkingID, Context context, FragmentManager fragmentManager ){
-        this.view = view;
-        this.parkingID = parkingID;
+    public EditReviewHelper(View editReviewView, Context context, FragmentManager fragmentManager, String parkingID, String content, int rating){
+        this.editReviewView = editReviewView;
         this.context = context;
         this.fragmentManager = fragmentManager;
-        addReview();
+        this.content = content;
+        this.parkingID = parkingID;
+        this.rating = rating;
+        System.out.println("rating................" + rating);
     }
 
-    private void addReview(){
-        // getting reference to the views
-        TextView contentView = view.findViewById(R.id.add_review_frag_content);
-        RatingBar ratingBar = view.findViewById(R.id.add_review_frag_rating_bar);
+    public void init(){
+        setupDefaultReview(content, rating);
+        editReviewBtnListener();
+        discardReviewBtnListener();
+    }
 
-        if (TextUtils.isEmpty(contentView.getText())|| ratingBar.getRating() == 0){
+    public void setupDefaultReview(String content, int rating){
+        // getting views
+        RatingBar ratingBarView = editReviewView.findViewById(R.id.edit_review_frag_rating_bar);
+        EditText contentView = editReviewView.findViewById(R.id.edit_review_frag_content);
+
+        contentView.setText(content);
+        ratingBarView.setRating(rating);
+    }
+
+    public void editReviewBtnListener(){
+        Button confirmBtn = editReviewView.findViewById(R.id.edit_review_frag_confirm_btn);
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editReview(parkingID);
+            }
+        });
+    }
+
+    public void discardReviewBtnListener(){
+        Button confirmBtn = editReviewView.findViewById(R.id.edit_review_frag_discard_btn);
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setupDefaultReview(content, rating);
+            }
+        });
+    }
+
+    public void editReview(String userReviewID){
+        // getting reference to the views
+        RatingBar ratingBarView = editReviewView.findViewById(R.id.edit_review_frag_rating_bar);
+        EditText contentView = editReviewView.findViewById(R.id.edit_review_frag_content);
+
+        if (TextUtils.isEmpty(contentView.getText())|| ratingBarView.getRating() == 0){
             Toast.makeText(context, "Please fill the both fields !", Toast.LENGTH_SHORT).show();
         }else{
             String content = contentView.getText().toString();
-            int starCount = (int) ratingBar.getRating();
+            int starCount = (int) ratingBarView.getRating();
 
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -59,7 +99,7 @@ public class AddReviewData {
 
             // volley request
             RequestQueue queue = Volley.newRequestQueue(context);
-            String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/review/add";
+            String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/review/edit";
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
                     new Response.Listener<String>() {
@@ -84,10 +124,10 @@ public class AddReviewData {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
+                    params.put("_id", userReviewID);
                     params.put("time_stamp", "" + unixTimestamp);
                     params.put("no_of_stars", "" + starCount);
                     params.put("content", content);
-                    params.put("parking_id", "" + parkingID);
                     return params;
                 }
             };
@@ -98,7 +138,7 @@ public class AddReviewData {
     }
 
     private void successResponseHandler(){
-        Toast.makeText(context, "Review Added Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Review is Updated Successfully", Toast.LENGTH_SHORT).show();
 
         // Navigate back to the previous fragment
         fragmentManager.popBackStack();

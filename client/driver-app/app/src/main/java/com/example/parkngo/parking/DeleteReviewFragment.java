@@ -9,25 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ParkngoStorage;
-import com.example.parkngo.parking.helpers.DeleteReviewData;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.parkngo.parking.helpers.DeleteReviewHelper;
 
 public class DeleteReviewFragment extends Fragment {
 
@@ -44,29 +28,8 @@ public class DeleteReviewFragment extends Fragment {
             _id = getArguments().getString("_id", "-1");
         }
 
-        DeleteReviewData deleteReviewData = new DeleteReviewData(view, getContext(), requireActivity().getSupportFragmentManager());
-
-        // onclick listeners ......................................................................................................
-        // set button listeners - delete review btn
-        Button deleteBtn = view.findViewById(R.id.delete_review_frag_delete_btn);
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deleteReviewData.deleteReview(_id);
-            }
-        });
-
-
-        // set button listeners - discard button
-        Button discardBtn = view.findViewById(R.id.delete_review_frag_discard_btn);
-        discardBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack();
-            }
-        });
-        // onclick listeners ......................................................................................................
+        DeleteReviewHelper deleteReviewHelper = new DeleteReviewHelper(view, getContext(), requireActivity().getSupportFragmentManager(), _id);
+        deleteReviewHelper.init();
 
         return view;
     }

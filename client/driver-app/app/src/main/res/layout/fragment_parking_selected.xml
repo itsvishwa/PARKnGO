@@ -498,19 +498,28 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                <TextView
-                    android:id="@+id/parking_selected_frag_no_others_review_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:text="Parking space dosen't has any reviews yet !"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:visibility="visible"
+                <ImageView
+                    android:id="@+id/ps_frag_noreview_img"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/not_available"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+                <TextView
+                    android:id="@+id/parking_selected_frag_no_others_review_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Parking space dosen't has any reviews from others !"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ps_frag_noreview_img" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ps_frag_recycle_view"
