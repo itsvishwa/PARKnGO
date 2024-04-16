@@ -16,15 +16,13 @@ import android.widget.Toast;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.session.helpers.SessionMainButtonHandlers;
-import com.example.parkngo.session.helpers.SessionMainFetchData;
+import com.example.parkngo.session.helpers.SessionMainHelper;
 
 public class SessionMainFragment extends Fragment {
 
     View sessionMainView;
     View loadingView;
     View errorView;
-    SessionMainButtonHandlers sessionMainButtonHandlers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,15 +33,8 @@ public class SessionMainFragment extends Fragment {
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
         errorView = inflater.inflate(R.layout.fragment_error, container, false);
 
-        SessionMainFetchData sessionMainFetchData = new SessionMainFetchData(sessionMainView, loadingView, errorView, getContext());
-        sessionMainFetchData.fetchData();
-        sessionMainButtonHandlers = new SessionMainButtonHandlers(getContext(), sessionMainView, requireActivity().getSupportFragmentManager());
-
-        // onclick listeners.................................................................................
-        sessionMainButtonHandlers.initVehicleBtnHandlers();
-        sessionMainButtonHandlers.initTapToAddBtnHandlers();
-        sessionMainButtonHandlers.initContinueBtnHandler();
-        // onclick listeners.................................................................................
+        SessionMainHelper sessionMainHelper = new SessionMainHelper(sessionMainView, loadingView, errorView, getContext(), requireActivity().getSupportFragmentManager());
+        sessionMainHelper.init();
 
         return loadingView;
     }

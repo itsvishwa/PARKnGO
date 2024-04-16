@@ -19,7 +19,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ErrorFragment;
-import com.example.parkngo.helpers.ErrorFragmentHelper;
 import com.example.parkngo.helpers.ParkngoStorage;
 
 import org.json.JSONArray;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PHFetchData {
+public class PaymentHistoryHelper {
 
     View view;
     View loadingView;
@@ -38,12 +37,15 @@ public class PHFetchData {
     Context context;
     MainActivity mainActivity;
 
-    public PHFetchData(View view, View loadingView, View errorView, Context context, MainActivity mainActivity){
+    public PaymentHistoryHelper(View view, View loadingView, View errorView, Context context, MainActivity mainActivity){
         this.view = view;
         this.loadingView = loadingView;
         this.context = context;
         this.errorView = errorView;
         this.mainActivity = mainActivity;
+    }
+
+    public void init(){
         fetchData();
     }
 
@@ -128,7 +130,7 @@ public class PHFetchData {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
                 String response = jsonResponse.getString("response");
 
-                if (response.equals("ERROR_6001")){
+                if (response.equals("PRF_NPY")){
                     Bundle data = new Bundle();
                     data.putString("MainText1", "No Payments Yet!");
                     data.putString("subText1", "Please try again later");

@@ -105,6 +105,22 @@ class ParkingSpaceModel
                 }
         }
 
+        // get all parking spaces via search
+        public function get_all_parking_spaces_by_search($keyword)
+        {
+                $this->db->query("SELECT * FROM parking_spaces WHERE name LIKE :keyword OR address LIKE :keyword");
+                $this->db->bind(":keyword", "%$keyword%", PDO::PARAM_STR);
+
+                $result = $this->db->resultSet();
+
+                if ($result) {
+                        return $result;
+                } else // no open parking spaces
+                {
+                        return false;
+                }
+        }
+
         // get all open parking spaces for a given vehicle type
         public function get_all_parking_spaces_for_vehicle($vehicle_type)
         {

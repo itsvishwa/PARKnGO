@@ -1,4 +1,4 @@
-package com.example.parkngo.parking.helpers;
+package com.example.parkngo.session.helpers;
 
 import android.content.Context;
 import android.view.View;
@@ -21,7 +21,7 @@ public class SessionEndQrHelper {
             this.loadingView = loadingView;
     }
 
-    public void initQR(){
+    public void init(){
 
         // load the qr
         ImageView qrImageView = sessionEndQrView.findViewById(R.id.fragment_session_end_qr_imageView);
