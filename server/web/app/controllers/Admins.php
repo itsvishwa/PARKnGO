@@ -265,22 +265,7 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
-  /*public function approve($companyId)
-{
-    // Approve the application
-    if ($this->adminModel->approveApplication($companyId)) {
-        // If the update was successful, redirect to requestView.php
-        echo "Update successful";
-        header("Location: requestView.php");
-        exit(); // Terminate script execution after redirect
-    } else {
-      echo "Update failed";
-        // If the update failed, handle the error
-        // Display an error message or redirect to an error page
-        // Example: redirect('/admins/error');
-    }
-}
-
+  
 public function reject($companyId)
 {
     // Get the reject reason from the request
@@ -296,7 +281,7 @@ public function reject($companyId)
         // Display an error message or redirect to an error page
         // Example: redirect('/admins/error');
     }
-}*/
+}
 
   public function delete($id)
   {
