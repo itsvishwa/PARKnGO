@@ -230,4 +230,7 @@
   }
   
 
-  
+  .read-more-link,
+  .show-less-link {
+      color: #ffa811;
+  }
