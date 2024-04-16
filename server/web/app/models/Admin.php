@@ -457,7 +457,6 @@ public function updateApproveOrRejectApplication($companyId, $adminId, $isApprov
 }
 
 
-/******************************************************************************** */
 
 public function getDocumentData($documentId)
 {
