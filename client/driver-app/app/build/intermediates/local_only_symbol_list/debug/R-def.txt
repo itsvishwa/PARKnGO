@@ -24,6 +24,8 @@ drawable baseline_account_circle_24
 drawable baseline_add_24
 drawable baseline_arrow_back_24
 drawable baseline_arrow_drop_up_24
+drawable baseline_arrow_left_24
+drawable baseline_arrow_right_24
 drawable baseline_download_24
 drawable baseline_edit_24
 drawable baseline_home_24
@@ -93,8 +95,11 @@ id appbar_icon_home_act
 id appbar_main_text
 id appbar_secondary_text
 id aps_frag_max_free_slots_chip
-id aps_frag_min_dis_chip
 id aps_frag_min_rate_chip
+id aps_frag_next_btn
+id aps_frag_page_number
+id aps_frag_prev_btn
+id aps_frag_prev_next_btn_constraint
 id aps_frag_public_chip
 id ava_distance
 id ava_free_slots
@@ -138,6 +143,7 @@ id constraintLayout6
 id constraintLayout7
 id constraintLayout8
 id constraintLayout9
+id constraintLayout99
 id delete_review_frag_delete_btn
 id delete_review_frag_discard_btn
 id divider
@@ -296,6 +302,18 @@ id profile_frag_name
 id profile_frag_name_text
 id progressBar2
 id ps_frag_recycle_view
+id ps_frag_vt1_name
+id ps_frag_vt1_rate
+id ps_frag_vt1_slots
+id ps_frag_vt2_name
+id ps_frag_vt2_rate
+id ps_frag_vt2_slots
+id ps_frag_vt3_name
+id ps_frag_vt3_rate
+id ps_frag_vt3_slots
+id ps_frag_vt4_name
+id ps_frag_vt4_rate
+id ps_frag_vt4_slots
 id ri_date
 id ri_msg
 id ri_name
@@ -445,6 +463,7 @@ layout fragment_session_qr
 layout loading_frag
 layout parking_item
 layout payment_history_item
+layout prev_next_item
 layout review_item
 menu bottom_navigation_bar
 mipmap ic_launcher

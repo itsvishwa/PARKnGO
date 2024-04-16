@@ -2988,6 +2988,8 @@ drawable baseline_account_circle_24
 drawable baseline_add_24
 drawable baseline_arrow_back_24
 drawable baseline_arrow_drop_up_24
+drawable baseline_arrow_left_24
+drawable baseline_arrow_right_24
 drawable baseline_download_24
 drawable baseline_edit_24
 drawable baseline_home_24
@@ -3285,8 +3287,11 @@ id appbar_icon_home_act
 id appbar_main_text
 id appbar_secondary_text
 id aps_frag_max_free_slots_chip
-id aps_frag_min_dis_chip
 id aps_frag_min_rate_chip
+id aps_frag_next_btn
+id aps_frag_page_number
+id aps_frag_prev_btn
+id aps_frag_prev_next_btn_constraint
 id aps_frag_public_chip
 id arc
 id asConfigured
@@ -3380,6 +3385,7 @@ id constraintLayout6
 id constraintLayout7
 id constraintLayout8
 id constraintLayout9
+id constraintLayout99
 id container
 id content
 id contentPanel
@@ -3775,6 +3781,18 @@ id progress_circular
 id progress_horizontal
 id progress_view
 id ps_frag_recycle_view
+id ps_frag_vt1_name
+id ps_frag_vt1_rate
+id ps_frag_vt1_slots
+id ps_frag_vt2_name
+id ps_frag_vt2_rate
+id ps_frag_vt2_slots
+id ps_frag_vt3_name
+id ps_frag_vt3_rate
+id ps_frag_vt3_slots
+id ps_frag_vt4_name
+id ps_frag_vt4_rate
+id ps_frag_vt4_slots
 id radio
 id ratio
 id rectangles
@@ -4281,6 +4299,7 @@ layout ph_fragment_payment_details
 layout ph_fragment_payment_method
 layout ph_fragment_payment_result
 layout ph_fragment_pre_approval_result
+layout prev_next_item
 layout review_item
 layout select_dialog_item_material
 layout select_dialog_multichoice_material

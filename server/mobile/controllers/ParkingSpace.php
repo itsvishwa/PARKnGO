@@ -5,7 +5,7 @@ class ParkingSpace extends Controller
 
     private $parking_space_model;
     private $review_model;
-    private $driver_model;
+
 
     public function __construct()
     {
@@ -112,7 +112,6 @@ class ParkingSpace extends Controller
                     ];
 
                     $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
-
                 }
 
                 $this->send_json_200($spaces_data);
@@ -289,6 +288,47 @@ class ParkingSpace extends Controller
     }
 
 
+    // driver mob - show all parking spaces respect to the given vehicle type and given keyword
+    public function search_all($keyword)
+    {
+
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_IT");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("ERR_TNF");
+        } else // token is valid
+        {
+            $result = $this->parking_space_model->get_all_parking_spaces_by_search($keyword);
+
+            if ($result === false) // no parking spaces 
+            {
+                $this->send_json_400("PS_NPS");
+            } else // have parking spaces
+            {
+                $spaces_data = [];
+                $curr_time = time();
+                foreach ($result as $space_data) {
+                    $temp = [
+                        "_id" => $space_data->_id,
+                        "name" => $space_data->name,
+                        "address" => $space_data->address,
+                        "is_public" => $space_data->is_public,
+                        "is_closed" => ($space_data->closed_end_time !== NULL && $curr_time < $space_data->closed_end_time) ? "1" : "0",
+                        "avg_star_count" => $space_data->avg_star_count,
+                        "total_review_count" => $space_data->total_review_count
+                    ];
+
+                    $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+                }
+
+                $this->send_json_200($spaces_data);
+            }
+        }
+    }
+
+
     // driver mob - get data of all parking space for a given vehicle - for the map
     public function get_map_data($vehicle_type)
     {
@@ -327,6 +367,7 @@ class ParkingSpace extends Controller
             }
         }
     }
+
 
     // calculate distance
     private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
