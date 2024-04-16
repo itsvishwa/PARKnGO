@@ -414,27 +414,7 @@ class Admin
 
 
 
-/*public function updateApproveApplication($companyId) {
-  
-  // Prepare the SQL query
-  $this->db->query('UPDATE company 
-                    SET is_approved = 1, is_reviewd = 1
-                    WHERE _id = :companyId');
 
-  // Bind the parameters
-  $this->db->bind(':companyId', $companyId);
-
-  // Execute the update query
-  if ($this->db->execute()) {
-    return true; // Update successful
-} else {
-    return false; // Update failed
-}
-
-  // Execute the update query
-/*return $this->db->execute();
-
-}*/
 
 /*public function updateApproveApplication($companyId)
 {
