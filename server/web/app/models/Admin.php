@@ -99,10 +99,7 @@ class Admin
     return $rows;
   }
 
-  // Function to get approved and rejected applications
-
-  /***************************************************************************** */
-
+  
   // Function to get pending, approved, or rejected company applications
   public function getCompanyApplications($isApproved, $isReviewed)
   {
@@ -126,7 +123,6 @@ class Admin
   }
 
 
-  /******************************** */
 
   // Function to get the parking officers count for a specific company
   public function getParkingOfficersCountForCompany($companyId)
@@ -317,8 +313,6 @@ class Admin
   public function getAllReviews()
   {
 
-
-    //$this->db->query('SELECT _id , time_stamp , no_of_stars , content , driver_id , parking_id FROM review');
     $this->db->query('
   SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
          driver.first_name, driver.last_name , parking_spaces.name AS parking_name
