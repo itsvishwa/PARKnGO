@@ -210,6 +210,7 @@
                     fullText.style.display = 'inline';
                     this.style.display = 'none';
                     showLessLink.style.display = 'inline';
+                    
                 });
             });
 
@@ -224,6 +225,7 @@
                     fullText.style.display = 'none';
                     readMoreLink.style.display = 'inline';
                     this.style.display = 'none';
+                    
                 });
             });
         });

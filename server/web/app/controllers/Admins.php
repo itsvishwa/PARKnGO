@@ -438,8 +438,8 @@ public function rejectApplication() {
 
   public function approveApplication()
   {
-    $companyId = $_GET['_id'] ?? '';
-    $adminId = $_SESSION['admin_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
+    $companyId = $_POST['_id'] ?? '';
+    $adminId = $_SESSION['user_id'] ?? ''; // Assuming admin_id is retrieved from session, adjust as necessary
 
     // Update the database to set is_approved to 1 and is_reviewed to 1
     $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, true);
@@ -455,10 +455,10 @@ public function rejectApplication() {
 
   public function rejectApplication()
   {
-    $companyId = $_GET['_id'] ?? '';
+    $companyId = $_POST['_id'] ?? '';
     // Get reject reason from POST data
     $rejectReason = $_POST['rejectReason'] ?? '';
-    $adminId = $_SESSION['admin_id'] ?? '';
+    $adminId = $_SESSION['user_id'] ?? '';
 
     // Update the database to set is_approved to 0, is_reviewed to 1, and set the review_message
     $updateResult = $this->adminModel->updateApproveOrRejectApplication($companyId, $adminId, false, $rejectReason);
