@@ -42,7 +42,7 @@ class Admin
     }
   }
 
-  //********************************************************************* */
+
   // Function to get the number of users from the database
   public function getUsersCount()
   {
@@ -99,7 +99,7 @@ class Admin
     return $rows;
   }
 
-  
+
   // Function to get pending, approved, or rejected company applications
   public function getCompanyApplications($isApproved, $isReviewed)
   {
@@ -366,35 +366,35 @@ class Admin
     return $row;
   }
 
- 
 
-  public function getDocument($documentId) {
-    
+
+  public function getDocument($documentId)
+  {
+
     $params = [':id' => $documentId];
 
     try {
-        $result = $this->db->query('SELECT _id , documents FROM company WHERE _id = :id', $params);
+      $result = $this->db->query('SELECT _id , documents FROM company WHERE _id = :id', $params);
     } catch (Exception $e) {
-        // Log the exception message
-        error_log('Exception caught: ' . $e->getMessage());
-        return false;
-
+      // Log the exception message
+      error_log('Exception caught: ' . $e->getMessage());
+      return false;
     }
 
     var_dump($result);
 
     if ($result && !empty($result[0]['documents'])) {
-        $documentData = $result[0]['documents'];
+      $documentData = $result[0]['documents'];
 
-        // Log debugging information
-        error_log('Document retrieved successfully for _id: ' . $documentId);
-        return $documentData;
+      // Log debugging information
+      error_log('Document retrieved successfully for _id: ' . $documentId);
+      return $documentData;
     } else {
-        // Log a message indicating the issue
-        error_log('Document not found or empty result for _id: ' . $documentId);
-        return false; // Document not found
+      // Log a message indicating the issue
+      error_log('Document not found or empty result for _id: ' . $documentId);
+      return false; // Document not found
     }
-}
+  }
 
   public function insertCompanySuspendDetails($data)
   {
@@ -412,54 +412,53 @@ class Admin
   }
 
 
-public function updateApproveOrRejectApplication($companyId, $adminId, $isApproved, $rejectReason = null) {
-  // Begin a transaction
-  $this->db->beginTransaction();
+  public function updateApproveOrRejectApplication($companyId, $adminId, $isApproved, $rejectReason = null)
+  {
+    // Begin a transaction
+    $this->db->beginTransaction();
 
-  // Prepare the SQL query
-  if ($isApproved) {
+    // Prepare the SQL query
+    if ($isApproved) {
       // Update query for approval
       $this->db->query('UPDATE company 
                         SET is_approved = 1, is_reviewd = 1, admin_id = :admin_id
                         WHERE _id = :companyId');
-  } else {
+    } else {
       // Update query for rejection
       $this->db->query('UPDATE company 
                         SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason, admin_id = :admin_id
                         WHERE _id = :companyId');
       // Check if rejectReason is provided
       if (!$rejectReason) {
-          // If rejectReason is not provided, rollback the transaction and return false
-          $this->db->rollBack();
-          return false;
+        // If rejectReason is not provided, rollback the transaction and return false
+        $this->db->rollBack();
+        return false;
       }
       // Bind rejectReason parameter
       $this->db->bind(':rejectReason', $rejectReason);
-  }
+    }
 
-  // Bind common parameters
-  $this->db->bind(':admin_id', $adminId);
-  $this->db->bind(':companyId', $companyId);
+    // Bind common parameters
+    $this->db->bind(':admin_id', $adminId);
+    $this->db->bind(':companyId', $companyId);
 
-  // Execute the update query
-  $updateSuccess = $this->db->execute();
+    // Execute the update query
+    $updateSuccess = $this->db->execute();
 
-  // Check if the update was successful
-  if ($updateSuccess) {
+    // Check if the update was successful
+    if ($updateSuccess) {
       // Commit the transaction if successful
       $this->db->commit();
       return true; // Update successful
-  } else {
+    } else {
       // Roll back the transaction if unsuccessful
       $this->db->rollBack();
       return false; // Update failed
+    }
   }
-}
 
-
-
-public function getDocumentData($documentId)
-{
+  public function getDocumentData($documentId)
+  {
     // Assuming your document data is stored in the 'documents' field as a blob
     $sql = "SELECT documents FROM company WHERE _id = :documentId";
     $this->db->query($sql);
@@ -469,18 +468,12 @@ public function getDocumentData($documentId)
 
     // Check if the query was successful
     if ($row) {
-        // Access the 'documents' field
-        $documentData = $row->documents;
+      // Access the 'documents' field
+      $documentData = $row->documents;
 
-        return $documentData;
+      return $documentData;
     }
 
     return null; // or handle the case when the document is not found
-}
-
-
-
-
-
-
+  }
 }
