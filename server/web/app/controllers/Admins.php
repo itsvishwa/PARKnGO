@@ -265,24 +265,6 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
-  
-public function reject($companyId)
-{
-    // Get the reject reason from the request
-    $rejectReason = $_POST['rejectReason']; // Assuming the reject reason is submitted via POST
-
-    // Reject the application
-    if ($this->adminModel->rejectApplication($companyId, $rejectReason)) {
-        // If the update was successful, redirect to requestView.php
-        header("Location: requestView.php");
-        exit(); // Terminate script execution after redirect
-    } else {
-        // If the update failed, handle the error
-        // Display an error message or redirect to an error page
-        // Example: redirect('/admins/error');
-    }
-}
-
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
