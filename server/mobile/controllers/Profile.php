@@ -98,9 +98,9 @@ class Profile extends Controller
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("PRF_IT");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("PRF_TNF");
+            $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $payments_data = $this->payment_model->get_all_driver_payments_by_id($token_data["user_id"]);
