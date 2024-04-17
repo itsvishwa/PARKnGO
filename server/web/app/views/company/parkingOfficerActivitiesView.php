@@ -147,7 +147,7 @@
                     <td>' . htmlspecialchars($row->parking_space_name) . '</td>
                     <td>' . htmlspecialchars($row->first_name) . ' ' . htmlspecialchars($row->last_name) . '</td>
                     <td>' . htmlspecialchars($row->driver_mobile_number) . '</td>
-                    <td>' . htmlspecialchars($row->vehicle_number) . '</td>
+                    <td>' . htmlspecialchars($this->format_vehicle_number($row->vehicle_number)) . '</td>
                     <td>' . htmlspecialchars($row->vehicle_type) . '</td>
                   </tr>';
               }
