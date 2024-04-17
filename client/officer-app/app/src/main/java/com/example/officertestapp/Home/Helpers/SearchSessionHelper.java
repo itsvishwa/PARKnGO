@@ -24,7 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
-import com.example.officertestapp.Home.ReleaseASlot01Fragment;
+import com.example.officertestapp.Home.ReleaseASlotFragment;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
@@ -192,7 +192,7 @@ public class SearchSessionHelper {
 
 
                 // Set the session data bundle in the fragment
-                ((ReleaseASlot01Fragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
+                ((ReleaseASlotFragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
 
 
                 TextView parkedDateTimeView = view.findViewById(R.id.parked_Date_Time_txt);
