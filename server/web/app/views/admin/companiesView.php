@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/companiesView.css" />
   <title>Companies</title>
-
 </head>
 
 <body>
@@ -77,12 +76,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
           </svg>
-          <h3>Companies</h3>
+          <h3 class="ml-5">Companies</h3>
         </div>
         <div class="profile">
-          <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>-->
+
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -91,18 +88,6 @@
         <div class="heading">
         </div>
       </div>
-      <!--<div class="b-card">
-        <div class="b-card-content p text-grey">
-          <p> Search a company</p> 
-          <input type="text" id="companySearch" placeholder="Search a Company" />
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="search-logo">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg> 
-
-        </div>
-      </div>-->
-
-      <!--  <div class="b-card">-->
       <div class="b-card-content p text-grey">
         <div class="search-box">
           <input type="text" id="companySearch" placeholder="Search a Company" />
@@ -111,13 +96,11 @@
           </svg>
         </div>
       </div>
-      <!--   </div> -->
-
       <div class="card-section1" id="companyCards">
         <?php foreach ($data['approvedApplications'] as $application) : ?>
           <div class="b-card1">
             <div class="company-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo" opacity="0.7">
                 <path fillRule="evenodd" d="M3 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5H15v-18a.75.75 0 000-1.5H3zM6.75 19.5v-2.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75zM6 6.75A.75.75 0 016.75 6h.75a.75.75 0 010 1.5h-.75A.75.75 0 016 6.75zM6.75 9a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM6 12.75a.75.75 0 01.75-.75h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 6a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zm-.75 3.75A.75.75 0 0110.5 9h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 12a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM16.5 6.75v15h5.25a.75.75 0 000-1.5H21v-12a.75.75 0 000-1.5h-4.5zm1.5 4.5a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 2.25a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75v-.008a.75.75 0 00-.75-.75h-.008zM18 17.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clipRule="evenodd" />
               </svg>
             </div>
@@ -126,7 +109,7 @@
                 <p><?php echo $application->name; ?></p>
               </div>
               <div class="company-card3-content text-black">
-                <p>ID COMP<?php echo $application->_id; ?></p>
+                <p>ID COMP_<?php echo $application->_id; ?></p>
               </div>
               <div class="location-icon">
                 <span class="material-symbols-outlined">
@@ -138,7 +121,7 @@
                   <p><?php echo $application->address; ?></p>
                 </div>
                 <div class="mail-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="ur-menu-logo">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="ur-menu-logo" opacity="0.5">
                     <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
                     <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
                   </svg>
@@ -157,13 +140,12 @@
                       <p><?php echo $application->phone_number; ?></p>
                     </div>
                     <div class="park-card2-icon ">
-                      <div class="park-icon bg-black">
+                      <div class="park-icon bg-black-1">
                         <div class="park-card1-content text-white">
                           <p>P</p>
                         </div>
                       </div>
                       <div class="park-card2-content text-black">
-                      <!--  <p>10 Parking Spaces</p> -->
                         <?php
                         // Check if the property 'parkingSlotsCount' exists in the current application
                         if (property_exists($application, 'parkingSlotsCount')) {
@@ -171,7 +153,7 @@
                           $label = ($parkingSlotsCount == 1) ? 'Parking Space' : 'Parking Spaces';
                           echo "<p>{$parkingSlotsCount} {$label}</p>";
                         } else {
-                          echo "<p>No Parking Spaces</p>"; // Default value if count is not available
+                          echo "<p>No Parking Spaces</p>"; 
                         }
                         ?>
                       </div>
@@ -184,53 +166,39 @@
                         </span>
                       </div>
                       <div class="parking-ofi-card2-content text-black">
-                        <!--  <p>5 Parking Officers</p>-->
                         <?php
                         // Check if the property 'parkingOfficersCount' exists in the current application
                         if (property_exists($application, 'parkingOfficersCount')) {
                           $parkingOfficersCount = $application->parkingOfficersCount;
-                            // Adjust the label based on the count
+                          // Adjust the label based on the count
                           $label = ($parkingOfficersCount == 1) ? 'Parking Officer' : 'Parking Officers';
                           echo "<p>{$parkingOfficersCount} {$label}</p>";
                         } else {
-                          echo "<p>No Parking Officers</p>"; // Default value if count is not available
+                          echo "<p>No Parking Officers</p>"; 
                         }
                         ?>
                       </div>
                     </div>
-
-                    <button class="b-view-more bg-black" type="button">
-                      <div class="b-card_down-icon ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="rd-menu-logo">
+                    <button class="b-view-more bg-black" onclick="downloadDocument('<?php echo $application->_id; ?>')">
+                      <div class="b-card_down-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="black" class="rd-menu-logo">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                         </svg>
                       </div>
-                      <div class="b-view-more-card2-content text-white">
+                      <div class="b-view-more-card2-content text-black">
                         <p>Download the document</p>
                       </div>
                     </button>
-
-
-
-
-
-                    <button class="b-delete-more bg-black">
-
+                    <button class="b-delete-more bg-black" onclick="confirmDelete(<?php echo $application->_id; ?>)">
                       <div class="b-card_del-icon ">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="delete-logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="delete-logo">
                           <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
                         </svg>
                       </div>
-
-                      <div class="b-delete-more-card2-content text-white">
+                      <div class="b-delete-more-card2-content text-red">
                         <p>Delete</p>
                       </div>
-
-
                     </button>
-
-
-
                   </div>
                 </div>
               </div>
@@ -240,9 +208,7 @@
           </div>
         <?php endforeach; ?>
       </div>
-
     </div>
-
     <div class="dashboard-main-section">
       <div class="update-section">
         <div class="table-heading">
@@ -250,6 +216,7 @@
           </div>
         </div>
       </div>
+
       <script>
         // Get the input field and the container for company cards
         const searchInput = document.getElementById('companySearch');
@@ -277,75 +244,35 @@
         });
       </script>
 
+      <script>
+        function downloadDocument(documentId) {
+          // Make an AJAX request to the server to download the PDF
+          fetch('<?php echo URLROOT; ?>/admins/downloadDocument/' + documentId)
+            .then(response => response.blob())
+            .then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'document.pdf';
+              document.body.appendChild(a);
+              a.click();
+              window.URL.revokeObjectURL(url);
+            })
+            .catch(error => console.error('Error downloading document:', error));
+        }
+      </script>
 
-      <!--      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-  const deleteButtons = document.querySelectorAll('.b-delete-more');
+      <script>
+        function confirmDelete(companyId) {
+          if (confirm("Are you sure you want to delete this company?")) {
+            // User clicked "OK", proceed with the delete action
+            window.location.href = 'delete/' + companyId; // Adjust the URL as needed
+          } else {
+            // User clicked "Cancel", do nothing
+          }
+        }
+      </script>
 
-  deleteButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const companyId = this.dataset.companyId;
-
-      // Perform deletion action using the company ID via fetch or other methods
-      // Example: Call a function to handle the deletion
-      handleDelete(companyId);
-    });
-  });
-
-  // Function to handle deletion
-  function handleDelete(companyId) {
-    // Use fetch or other means to send a request to the server to delete the company with the given ID
-    // Example using fetch:
-    fetch(`/Admins/delete/${companyId}`, {
-      method: 'POST'
-      // Additional headers or data can be added if needed
-    })
-    .then(response => {
-      if (response.ok) {
-        // If deletion is successful, you might want to update the UI or remove the deleted company's card
-        console.log('Company deleted successfully');
-        // Perform necessary UI updates like removing the card or reloading the list
-      } else {
-        console.error('Failed to delete company');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
-});
-
-      </script>-->
-
-      <!--   <script>
-        // JavaScript code inside your HTML or in an external file
-document.querySelectorAll('.b-delete-more').forEach(button => {
-  button.addEventListener('click', function() {
-    const companyId = this.dataset.companyId; // Fetch the unique ID associated with the card
-
-    // Send an AJAX request to delete the card
-    fetch(`/admins/delete/${companyId}`, {
-      method: 'DELETE', // Use the appropriate HTTP method (e.g., DELETE)
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        // If deletion is successful, remove the card from the UI
-        this.closest('.b-card1').remove(); // Remove the deleted card from the UI
-        console.log('Company deleted successfully');
-      } else {
-        console.error('Failed to delete company');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  });
-});
-
-      </script>-->
 </body>
 
 </html>

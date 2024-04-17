@@ -79,13 +79,10 @@
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
           </svg>
 
-          <h3>Dashboard</h3>
+          <h3 class="ml-5">Dashboard</h3>
         </div>
 
         <div class="profile">
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>-->
 
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
@@ -212,7 +209,7 @@
                   <?php elseif ($data['totalSuspendApplications'] === 1) : ?>
                     <p>Currently, one company has been suspended</p>
                   <?php else : ?>
-                    <p>Currently<?php echo $data['totalSuspendApplications']; ?> companies have been suspended</p>
+                    <p>Currently <?php echo $data['totalSuspendApplications']; ?> companies have been suspended</p>
                   <?php endif; ?>
                 <?php endif; ?>
               </div>
@@ -291,7 +288,6 @@
       <!-- bar graph for number of parking sessions -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Replace this with your actual server response data
           const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
 
           // Extract dates and values from the response
@@ -330,7 +326,7 @@
       <!-- bar graph for revenue -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Replace the data variable with your actual data
+
           const rawData = <?php echo json_encode($data['revenues']); ?>;
 
           // Convert raw data to an array of objects
