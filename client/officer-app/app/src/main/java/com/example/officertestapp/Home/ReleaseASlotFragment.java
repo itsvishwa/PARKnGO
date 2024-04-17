@@ -3,8 +3,6 @@ package com.example.officertestapp.Home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +22,7 @@ import com.example.officertestapp.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ReleaseASlot01Fragment extends Fragment {
+public class ReleaseASlotFragment extends Fragment {
     private Spinner spinnerProvinces;
     private Button continueBtn;
     private Bundle searchSessionDataBundle;
@@ -33,7 +31,7 @@ public class ReleaseASlot01Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_release_a_slot01, container, false);
+        View view = inflater.inflate(R.layout.fragment_release_a_slot, container, false);
 
         // Find the view
         spinnerProvinces = view.findViewById(R.id.spinner_provinces);
