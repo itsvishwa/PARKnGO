@@ -367,6 +367,11 @@ class Admin
   }
 
 
+  public function updateRecoveryToken($data)
+  {
+    $this->db->query('UPDATE admin SET token = :token WHERE email = :email');
+    $this->db->bind(':token', $data['token']);
+    $this->db->bind(':email', $data['email']);
 
   public function getDocument($documentId)
   {
@@ -403,14 +408,12 @@ class Admin
     $this->db->bind(':message', $data['message']);
     $this->db->bind(':duration', $data['duration']);
     $this->db->bind(':time_stamp', $data['time_stamp']);
-
     if ($this->db->execute()) {
       return true;
     } else {
       return false;
     }
   }
-
 
   public function updateApproveOrRejectApplication($companyId, $adminId, $isApproved, $rejectReason = null)
   {

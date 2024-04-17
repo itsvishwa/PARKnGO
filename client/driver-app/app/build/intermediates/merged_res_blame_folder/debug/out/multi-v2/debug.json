@@ -5382,40 +5382,6 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\values-v16_values-v16.arsc.flat",
-            "map": [
-                {
-                    "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\28a7af075d5af218c19b63a2f54b1523\\transformed\\core-1.9.0\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\af575453595166fed38ef613cf3573b3\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "5",
-                        "endColumns": "12",
-                        "endOffsets": "223"
-                    },
-                    "to": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "121",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "289"
-                    }
-                }
-            ]
-        },
-        {
             "outputFile": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\values_values.arsc.flat",
             "map": [
                 {
@@ -5469,6 +5435,23 @@
                         "startOffsets": "123686",
                         "endColumns": "59",
                         "endOffsets": "123741"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\92acfbf49b5c550e596b4444f2540918\\transformed\\glide-4.16.0\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "57",
+                        "endOffsets": "108"
+                    },
+                    "to": {
+                        "startLines": "1815",
+                        "startColumns": "4",
+                        "startOffsets": "120376",
+                        "endColumns": "57",
+                        "endOffsets": "120429"
                     }
                 },
                 {
@@ -5747,23 +5730,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\6e9496505791171b8ecaa68b398e426b\\transformed\\glide-4.13.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "57",
-                        "endOffsets": "108"
-                    },
-                    "to": {
-                        "startLines": "1815",
-                        "startColumns": "4",
-                        "startOffsets": "120376",
-                        "endColumns": "57",
-                        "endOffsets": "120429"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\752f68e390483f1989f726856baf1dd5\\transformed\\startup-runtime-1.1.1\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
@@ -5890,6 +5856,40 @@
                         "endLines": "641,642,655,703,953,963,965,966,979,980,981,982,983,984,1070,1545,1757,1758,1759,1760,1761,1762,1985,1992,2015,2016,2026,2028,2030,2031,2032,2033,2034,2035,2073,2074,2148,2149,2150,2151,2152,2153,2154,2155,2156,2166,9139,9146,9153",
                         "endColumns": "53,57,43,49,51,48,62,68,59,59,61,57,56,50,48,47,60,58,49,58,54,46,59,58,63,102,107,61,79,51,43,67,44,58,55,67,56,53,50,61,113,64,60,59,117,97,12,12,12",
                         "endOffsets": "32863,32921,33855,37279,56042,56726,56827,56896,57749,57809,57871,57929,57986,58037,63763,102904,116899,116958,117008,117067,117122,117169,130964,132112,134886,134989,135948,136164,136303,136355,136399,136467,136512,136571,141489,141557,152896,152950,153001,153063,153177,153242,153303,153363,153481,154559,633347,633807,634271"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\values-v16_values-v16.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\28a7af075d5af218c19b63a2f54b1523\\transformed\\core-1.9.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Vishwa\\.gradle\\caches\\transforms-3\\af575453595166fed38ef613cf3573b3\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
                     }
                 }
             ]

@@ -177,17 +177,14 @@ class Admins extends Controller
       $result = $this->adminModel->insertCompanySuspendDetails($data);
 
       if ($result) {
-
         echo json_encode(['message' => 'Company Suspended..']);
       } else {
-
         http_response_code(500);
         echo json_encode(['message' => 'Error Occured...']);
       }
     }
 
     $approvedApplications = $this->adminModel->getApprovedCompanyApplications();
-
     foreach ($approvedApplications as &$company) {
       $companyId = $company->_id;
       $parkingOfficersCount = $this->adminModel->getParkingOfficersCountForCompany($companyId);
@@ -243,9 +240,7 @@ class Admins extends Controller
 
   public function driverReviews()
   {
-
     $reviews = $this->adminModel->getAllReviews();
-
     $data = [
       'reviews' => $reviews
     ];
@@ -255,7 +250,6 @@ class Admins extends Controller
 
   public function index()
   {
-
     $pendingApplications = $this->adminModel->getPendingCompanyApplications();
 
     $data = [
@@ -285,6 +279,7 @@ class Admins extends Controller
     } else {
       redirect('admins/companiesView');
     }
+
   }
 
   public function downloadDocument($documentId)
@@ -293,6 +288,7 @@ class Admins extends Controller
 
     header('Content-Type: application/pdf');
     header('Content-Disposition: attachment; filename="document.pdf"');
+
 
     echo $documentData;
     exit();
@@ -309,6 +305,7 @@ class Admins extends Controller
     if ($updateResult) {
       // Return JSON response with success message and redirect URL
       echo json_encode(['success' => true, 'redirect' => 'requestsView']);
+
     } else {
       // Return JSON response with error message
       echo json_encode(['success' => false, 'error' => 'Failed to approve application']);
