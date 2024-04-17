@@ -351,3 +351,7 @@
   align-items: center;
   margin-bottom: 10px;
 }
+
+.ml-5 {
+  margin-left: 5px;
+}
