@@ -1,9 +1,9 @@
 package com.example.parkngo.profile.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ErrorFragment;
-import com.example.parkngo.helpers.ErrorFragmentHandler;
+import com.example.parkngo.helpers.ErrorFragmentHelper;
 import com.example.parkngo.helpers.ParkngoStorage;
 
 import org.json.JSONArray;
@@ -119,7 +119,7 @@ public class PHFetchData {
         }
     }
 
-    // response-error handler
+
     private void errorResponseHandler(VolleyError error){
         String errorResponse;
         if (error.networkResponse != null && error.networkResponse.data != null) {
@@ -129,21 +129,16 @@ public class PHFetchData {
                 String response = jsonResponse.getString("response");
 
                 if (response.equals("ERROR_6001")){
-                    String appBarMainText = "No Payments Yet!";
-                    String appBarSubText = " ";
-                    int bodyImg = R.drawable.not_available;
-                    String bodyMainText = "You haven't made any payments yet";
-                    String bodySubText = "Once you made it, the payment details will display here";
+                    Bundle data = new Bundle();
+                    data.putString("MainText1", "No Payments Yet!");
+                    data.putString("subText1", "Please try again later");
+                    data.putInt("img", R.drawable.not_available);
+                    data.putString("MainText2", "You haven't made any payments yet");
+                    data.putString("subText2", "Once you made it, the payment details will display here");
 
-                    ErrorFragmentHandler errorFragmentHandler = new ErrorFragmentHandler(appBarMainText, appBarSubText, bodyImg, bodyMainText, bodySubText, errorView);
-                    View newErrorView = errorFragmentHandler.setupView();
-
-                    ViewGroup parent = (ViewGroup) loadingView.getParent();
-                    if (parent != null) {
-                        int index = parent.indexOfChild(loadingView);
-                        parent.removeView(loadingView);
-                        parent.addView(newErrorView, index);
-                    }
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.onBackPressed();
+                    mainActivity.replaceFragment(new ErrorFragment(), data);
                 }else{
                     Toast.makeText(context, response, Toast.LENGTH_LONG).show();
                 }
