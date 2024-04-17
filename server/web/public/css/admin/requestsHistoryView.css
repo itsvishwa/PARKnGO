@@ -146,7 +146,8 @@
 /* Add this CSS to your existing CSS file or create a new one */
 
 .review-table {
-  width: 105%;
+  /*width: 105%;*/
+  width: 994px;
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: -24px;
@@ -163,15 +164,18 @@
 }
 
 .review-table th {
-  background-color: #363636;
+  background-color: E7DBC7;
  /* background-color: #f2f2f2;*/
   font-weight: bold;
-  color: white;
+  color:black;
 
 }
 
 .review-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  /*background-color: #f9f9f9;*/
+  background-color: #F9F3E9;
+  
+  
 }
 
 .review-table tbody tr:hover {
@@ -212,7 +216,7 @@
     align-items: center; /* Vertically aligns the content */
     justify-content: center;
 
-    margin-top: 18px;
+    margin-top: 22px;
 
     height: 6px; 
     width: 60px; 
@@ -221,6 +225,11 @@
    
   }
 
-
-
+  .ml-5 {
+    margin-left: 5px;
+  }
   
+  .read-more-link,
+  .show-less-link {
+      color: #ffa811;
+  }

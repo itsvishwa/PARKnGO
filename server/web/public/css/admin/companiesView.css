@@ -134,7 +134,9 @@
 
   .b-card1{
     position: relative;
-    background-color: #FFFFFF;
+   /* background-color: #FFFFFF;*/
+   /* background-color: #FFF5E3;*/
+   background-color: #FFFBF4;
     /*margin-block-start: 1px;*/
     margin-left :-147px;
     padding: 45px;
@@ -164,7 +166,8 @@
 
   .b-card2{
     position: relative;
-    background-color: #FFFFFF;
+    /*background-color: #FFFFFF;*/
+    background-color: #FFFBF4;
     margin-block-start: 1px;
     margin-left: 30px;
     padding: 75px;
@@ -184,22 +187,22 @@
 
   .company-card2-content {
     margin-top: -1px;
-    margin-left: 0px; 
+    margin-left: -35px; 
     padding:1px; 
     font-weight: 700;
     
   }
 
   .company-card3-content {
-    margin-top: -5px;
-    margin-left: 0px; 
+    margin-top: 1px;
+    margin-left: -35px; 
     padding:1px; 
     font-weight: 450;
     font-size: 0.8rem;  
   }
 
   .company-icon {
-    background-color: #FFFFFF52;
+    /*background-color: #FFFFFF52;*/
     margin-top: -30px;
     margin-left: -40px;
     height:40px;
@@ -235,7 +238,7 @@
 }
 
 .location-card2-content {
-  margin-top: -1px;
+  margin-top: -5px;
   margin-left: -10px; 
   padding:1px; 
   font-weight: 450;
@@ -254,7 +257,7 @@
 
   margin-top :-18px; 
  /* margin-bottom: -50px;*/
-  margin-left: -10px;
+  margin-left: -25px;
   left:96px;
   /*padding: 10px;*/
   border-radius: 50%;
@@ -294,7 +297,7 @@
   text-align: center;
   justify-content: center;
 
-  margin-top: 5px;
+  margin-top: -5px;
   
   /*margin-bottom: 2px;*/
   margin-left: 1.5px; 
@@ -304,7 +307,7 @@
 }
 
 .mail-card2-content {
-  margin-top: -5px;
+  margin-top: -7px;
   margin-left: -9px; 
   padding:1px; 
   font-weight: 450;
@@ -334,34 +337,48 @@
   font-size: 0.8rem;
 }
 
+
+
 .b-view-more{
    
   position: absolute;
-  background-color:  #363636;
-  bottom: 0;
-  left: 0;
+  /*background-color:  #363636;
+  background-color: #FFF4E1;*/
+  background-color: #FFFBF4;
+  bottom: 10px;
+  left: 20px;
   right: 0;
-  border-radius:0px 0px 0px 10px;
+  border-radius:20px 20px 20px 20px;
   height: 40px;
-  width: 65%;
+  width: 54%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
+  outline: none;
+  border: none;
 }
+
+
 
 .b-delete-more{
    
   position: absolute;
-  background-color:  #FF4545;
-  bottom: 0;
-  left: 310px;
+  /*background-color:  #FF4545;
+  background-color: #FFF4E1;*/
+  background-color: #FFFBF4;
+  bottom: 10px;
+  left: 313px;
   right: 0;
-  border-radius:0px 0px 10px 0px;
+  border-radius:20px 20px 20px 20px;
   height: 40px;
-  width: 35%;
+  width: 27%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
+  outline: none;
+  border: none;
 }
 
 
 .b-view-more-card2-content {
   margin-top: 4px;
-  margin-left: -25px; 
+  margin-left: 35px; 
   padding:1px; 
   font-weight: 420;
   font-size: 0.9rem;
@@ -369,8 +386,8 @@
 }
 
 .b-delete-more-card2-content {
-  margin-top: 4px;
-  margin-left: -25px; 
+  margin-top: 2px;
+  margin-left: 25px; 
   padding:1px; 
   font-weight: 420;
   font-size: 0.9rem;
@@ -516,7 +533,7 @@
 
     margin-top :-18px; 
    /* margin-bottom: -50px;*/
-    margin-left: -10px;
+    margin-left: -25px;
     left:96px;
     /*padding: 10px;*/
     border-radius: 50%;
@@ -536,13 +553,18 @@
 .b-card-content .search-box {
   display: flex;
   align-items: center;
-  width: 960px; /* Adjust width as needed */
+  width: 950px; /* Adjust width as needed */
   height: 25px; /* Adjust height as needed */
   border: 1px solid #ccc; /* Add border */
   border-radius: 5px; /* Add border radius */
-  padding: 5px; /* Add padding */
-  margin-left: 20px;
+  padding: 8px; /* Add padding */
+  margin-left: 16px;
+  /*color: #ccc;*/
   color: #ccc;
+  
+  /*background-color: #FFF5E3;*/
+  background-color: #FFFBF4;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .b-card-content .search-box input[type="text"] {
@@ -551,6 +573,8 @@
   outline: none;
   font-weight: 415;
   font-size: 0.95rem;
+  /*background-color: #FFF5E3;*/
+  background-color: #FFFBF4;
   
 
 }
@@ -561,4 +585,17 @@
   height: 20px; /* Adjust SVG height */
   margin-left: 10px; /* Adjust margin as needed */
   stroke: #333; /* Change SVG color */
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.bg-black-1 {
+  background-color: #7F7D7A;
+  
+}
+
+.material-symbols-outlined {
+  opacity: 0.5; /* Adjust the opacity value as needed */
 }

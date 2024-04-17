@@ -68,7 +68,7 @@
     color: #000;
     margin-top: 1px;
     margin-left: -30px;
-    margin-bottom: 25px;
+    margin-bottom: -2px;
     padding:55px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
@@ -103,7 +103,7 @@
   
   
   .b-card2-content {
-    margin-left: 4px;
+    margin-left: -1px;
   }
   
   .b-card2-content h3 {
@@ -397,5 +397,8 @@
   background-color: #f1e2c6;;
 }
 
+.ml-5 {
+  margin-left: 5px;
+}
 
   
