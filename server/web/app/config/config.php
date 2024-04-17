@@ -18,3 +18,5 @@ define('APPROOT', dirname(dirname(__FILE__)));
 define('URLROOT', 'http://localhost/PARKnGO/server/web/');
 // Site Name
 define('SITENAME', 'PARKnGO');
+// setting time zone
+date_default_timezone_set('Asia/Kolkata');

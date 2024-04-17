@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -42,5 +41,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.android.volley:volley:1.2.1")
     implementation ("lk.payhere:androidsdk:3.0.4")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.google.code.gson:gson:2.8.0")
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
 }
