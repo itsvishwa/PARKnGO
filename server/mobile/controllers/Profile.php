@@ -268,8 +268,8 @@ class Profile extends Controller
                 // Check the Location
 
                 // Device location
-                $device_latitude = trim($_POST["latitude"]); // Get latitude from request
-                $device_longitude = trim($_POST["longitude"]); // Get longitude from request
+                $device_latitude = trim($_POST["latitude"]); 
+                $device_longitude = trim($_POST["longitude"]);
 
                 // Parking Location
                 $parking_space_details = $this->parking_space_model->get_parking_space_details($parking_id);
@@ -298,11 +298,11 @@ class Profile extends Controller
                 } else {
                     // Location is outside the threshold, consider it invalid
                     $result = [
-                        "response_code" => "400",
+                        "response_code" => "802",
                         "message" => "Location is too far from the assigned parking"
                     ];
 
-                    $this->send_json_400($result);
+                    $this->send_json_200($result);
                 }
 
             } else { //parking_id is not similar to the assigned parking of the parking officer
