@@ -95,19 +95,19 @@
         </div>
 
       </div>
-      <div class="parking-space-section">
+      <div class="parking-space-section mb-20">
 
         <div id="parkingCards" class="parking-cards">
           <?php $i = 0;
           foreach ($data['parking_spaces'] as $parking) : ?>
-            <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
+            <div class="parking-space-card <?php $currentUnixTime = time();
                                             if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                                               echo "closed";
                                             } ?>">
               <div class="parking-card-header">
                 <div class="parking-name">
                   <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
-                  <?php $currentUnixTime = time() + 16200;
+                  <?php $currentUnixTime = time();
                   if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                     echo '<p class="parking-type bg-red text-white">Closed</p>';
                   } else {
@@ -125,7 +125,7 @@
                   <?php if ($parking->parking_is_public) {
                     echo '<p class="parking-type bg-green text-white">Public</p>';
                   } else {
-                    echo '<p class="parking-type bg-yellow text-white">Private</p>';
+                    echo '<p class="parking-type bg-primary text-white">Private</p>';
                   } ?>
 
                 </div>
