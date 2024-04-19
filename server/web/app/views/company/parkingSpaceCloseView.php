@@ -83,7 +83,7 @@
       </div>
       <div class="center">
         <div id="card-container">
-          <div class="confirmation-card-image">
+          <div class="confirmation-card-image mb-10">
             <img src="data:<?php $encodedImage = base64_encode($data['parking_space']->parking_image);
                             $imageMimeType = "image/jpeg";
                             echo $imageMimeType; ?>;base64,<?php echo $encodedImage; ?>" alt="parking image" class="parking-image" />

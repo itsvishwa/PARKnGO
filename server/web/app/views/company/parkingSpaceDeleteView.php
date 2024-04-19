@@ -81,12 +81,12 @@
       </div>
 
       <div class="flex-column justify-content-center align-items-center">
-        <div class="confirmation-card-image">
+        <div class="confirmation-card-image mb-10">
           <img src="data:<?php $encodedImage = base64_encode($data['parking_space']->parking_image);
                           $imageMimeType = "image/jpeg";
                           echo $imageMimeType; ?>;base64,<?php echo $encodedImage; ?>" alt="parking image" class="parking-image" />
         </div>
-        <div class="parking-space-card">
+        <div class="parking-space-card mb-10">
           <div class="parking-card-header">
             <div class="parking-name">
               <h3 class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_name); ?></h3>
@@ -102,7 +102,7 @@
               <?php if ($data['parking_space']->parking_is_public) {
                 echo '<p class="parking-type bg-green text-white">Public</p>';
               } else {
-                echo '<p class="parking-type bg-green text-white">Private</p>';
+                echo '<p class="parking-type bg-primary text-white">Private</p>';
               } ?>
 
             </div>

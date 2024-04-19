@@ -94,10 +94,10 @@
                 <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
                 <select name="vehicleType[]" class="p-form-dropdown" required>
                   <option value="" disabled <?php if (empty($parking_slot->vehicle_type)) echo 'selected'; ?>>Vehicle Type</option>
-                  <option value="Car" <?php if ($parking_slot->vehicle_type == "Car") echo 'selected'; ?>>Car</option>
-                  <option value="Van" <?php if ($parking_slot->vehicle_type == "Van") echo 'selected'; ?>>Van</option>
-                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "Bus") echo 'selected'; ?>>Bus</option>
-                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "Motorcycle") echo 'selected'; ?>>Motorcycle</option>
+                  <option value="Car" <?php if ($parking_slot->vehicle_type == "A") echo 'selected'; ?>>Car|Tuktuk|Mini Van</option>
+                  <option value="Van" <?php if ($parking_slot->vehicle_type == "B") echo 'selected'; ?>>Bicycle</option>
+                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "C") echo 'selected'; ?>>Van|Lorry|Mini Bus</option>
+                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "D") echo 'selected'; ?>>Long Vehicles</option>
                 </select><br>
 
                 <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>

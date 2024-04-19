@@ -97,10 +97,10 @@
 							<label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
 							<select name="vehicleType[]" class="p-form-dropdown" required>
 								<option value="" disabled selected>Vehicle Type</option>
-								<option value="Car">Car</option>
-								<option value="Van">Van</option>
-								<option value="Bus">Bus</option>
-								<option value="Motorcycle">Motorcycle</option>
+								<option value="A">Car|Tuktuk|Mini Van</option>
+								<option value="B">Bicycle</option>
+								<option value="C">Van|Lorry|Mini Bus</option>
+								<option value="D">Long Vehicles</option>
 							</select><br>
 
 							<br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
