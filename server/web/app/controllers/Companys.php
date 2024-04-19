@@ -547,4 +547,9 @@ class Companys extends Controller
     $data = $this->parkingSpaceModel->getForceStoppedSessions($_SESSION['user_id']);
     $this->view('company/forceStoppedSessionView', $data);
   }
+
+  public function reportGenerateView()
+  {
+    $this->view('company/reportGenerateView');
+  }
 }
