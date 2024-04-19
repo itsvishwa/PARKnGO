@@ -313,10 +313,18 @@ class Companys extends Controller
 
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      ini_set('upload_max_filesize', '32M');
-      ini_set('post_max_size', '32M');
-      $fileData = $_FILES['profile_image'];
-      $fileContent = file_get_contents($fileData['tmp_name']);
+      if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+        // Set upload file size limits
+        ini_set('upload_max_filesize', '32M');
+        ini_set('post_max_size', '32M');
+
+        // Read the contents of the uploaded file
+        $fileData = $_FILES['profile_image'];
+        $fileContent = file_get_contents($fileData['tmp_name']);
+      } else {
+        // Handle file upload error here, for example:
+        $fileContent = ''; // Use the existing image or set a default value
+      }
 
       // Init data
       $data = [
@@ -356,10 +364,12 @@ class Companys extends Controller
       if (empty($data['mobile_number_err']) && empty($data['officer_id_err']) && empty($data['nic_err'])) {
         if ($this->officerModel->register($data)) {
           $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
-          $this->view('company/parkingOfficerView', $officers);
+          redirect('companys/parkingOfficerView');
         } else {
           die('Something went wrong');
         }
+        $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
+        $this->view('company/parkingOfficerView', $officers);
       } else {
         // Load view
         $data['profile_image'] = '';
