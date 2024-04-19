@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="30" />
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/dashboardView.css" />
-  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/updateView.css" />
-  <title>Aborted Sessions</title>
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/parkingSpaceView.css" />
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/reviewPopup.css" />
+  <title>Parking Spaces</title>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
                 Updates
               </a>
             </li>
-            <li class="active">
+            <li>
               <a href="./forceStoppedSessionView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
@@ -60,7 +60,7 @@
                 Parking Officer
               </a>
             </li>
-            <li>
+            <li class="active">
               <a href="./reportGenerateView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
@@ -78,77 +78,13 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <h3>Aborted Sessions</h3>
+          <h3>Report Generate</h3>
         </div>
-
         <div class="profile">
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <div class="text-center">
-        <p class="font-semibold mb-10">Forced Stopped Sessions by Driver</p>
-      </div>
-      <div class="table-div">
-        <table id="advancedUpdatesTable" class="advancedUpdatesTable table">
-          <tr class="tr-h">
-            <th class="th">Number Plate</th>
-            <th class="th">Parking Space</th>
-            <th class="th">Vehicle Type</th>
-            <th class="th">Arrived at</th>
-            <th class="th">Left at</th>
-            <th class="th">Parked Hours</th>
-            <th class="th">Officer ID</th>
-            <th class="th">Officer Name</th>
-          </tr>
-          <tbody>
-            <?php
-            $dummyData = [];
-            for ($i = 1; $i <= 50; $i++) {
-              $dummyData[] = (object) [
-                'vehicle_number' => 'ABC' . sprintf('%03d', $i),
-                'name' => 'Driver' . $i,
-                'vehicle_type' => 'Car',
-                'start_time' => strtotime('2024-02-02 08:00:00'),
-                'end_time' => strtotime('2024-02-02 18:00:00'),
-                'officer_id' => 'O' . sprintf('%03d', $i),
-                'first_name' => 'Officer' . $i,
-                'last_name' => 'Last' . $i,
-              ];
-            }
-
-            $itemsPerPage = 20; // Set the number of items per page
-            $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-            $startIndex = ($currentPage - 1) * $itemsPerPage;
-            $pagedData = array_slice($data, $startIndex, $itemsPerPage); // $dummyData is should be $data (only for check)
-
-            foreach ($pagedData as $update) : ?>
-              <tr>
-                <td><?php echo htmlspecialchars($this->format_vehicle_number($update->vehicle_number)) ?></td>
-                <td><?php echo htmlspecialchars($update->parking_name) ?></td>
-                <td><?php echo htmlspecialchars($update->vehicle_type) ?></td>
-                <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', $update->start_time)) ?></td>
-                <td><?php echo htmlspecialchars(date('Y-m-d H:i:s', $update->end_time)) ?></td>
-                <td><?php echo htmlspecialchars(ceil(($update->end_time - $update->start_time) / 3600)) . ' Hours' ?></td>
-                <td><?php echo htmlspecialchars($update->officer_id) ?></td>
-                <td><?php echo htmlspecialchars($update->officer_first_name . ' ' . $update->officer_last_name) ?></td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-
-        </table>
-        <div class="pagination">
-          <?php
-          $totalPages = ceil(count($data) / $itemsPerPage); // $dummyData is should be $data (only for check)
-          for ($i = 1; $i <= $totalPages; $i++) {
-            $activeClass = ($i === $currentPage) ? 'active' : '';
-            echo "<a href='?page=$i' class='pagination-link $activeClass'>$i</a>";
-          }
-          ?>
-        </div>
-      </div>
-
     </div>
   </div>
 </body>
