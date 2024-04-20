@@ -265,6 +265,18 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
+  public function reportGenerateView()
+  {
+
+    //$reviews = $this->adminModel->getAllReviews();
+
+    $data = [
+      //'reviews' => $reviews
+    ];
+
+    $this->view('admin/reportGenerateView');
+  }
+
 
   public function delete($id)
   {
