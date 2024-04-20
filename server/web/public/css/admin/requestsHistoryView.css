@@ -58,21 +58,14 @@
 
 }
   .card-section {
-   /* display: block;
-    margin-left: 20px;
-    justify-content: space-between;
-    padding-left: 50px;
-    width: 70%;
-    height:15%;*/
-
+  
     display: flex;
-    flex-wrap: wrap; /* Ensures cards wrap to the next line if needed */
+    flex-wrap: wrap; 
     justify-content: space-between;
     margin-top: 20px;
     padding-left: 50px;
     width: 90%;
-    height: auto; /* Set height to auto for flexibility */
-
+    height: auto; 
  
   }
    
@@ -139,14 +132,8 @@
   }
 
 
- 
-
-
-/**********************************/
-/* Add this CSS to your existing CSS file or create a new one */
-
 .review-table {
-  /*width: 105%;*/
+ 
   width: 994px;
   border-collapse: collapse;
   margin-top: 20px;
@@ -157,7 +144,7 @@
 
 .review-table th,
 .review-table td {
-  /*border: 1px solid #ccc;*/
+  
   padding: 12px;
   text-align: left;
   
@@ -165,62 +152,48 @@
 
 .review-table th {
   background-color: E7DBC7;
- /* background-color: #f2f2f2;*/
   font-weight: bold;
   color:black;
 
 }
 
 .review-table tbody tr:nth-child(even) {
-  /*background-color: #f9f9f9;*/
+
   background-color: #F9F3E9;
-  
-  
+    
 }
 
 .review-table tbody tr:hover {
   background-color: #e2e2e2;
 }
 
-/* Style for the status cell with 'Rejected' text */
 .status1-cell {
-    background-color: #FF4545;
-    
+    background-color: #FF4545;  
     color: white;
     padding: 5px;
-    border-radius: 5px; /* Optional: Adds rounded corners to the box */
-    /*display: inline-block;*/
-
-    display: flex; /* Changed to flex */
-    align-items: center; /* Vertically aligns the content */
+    border-radius: 5px; 
+    display: flex; 
+    align-items: center; 
     justify-content: center;
-
     margin-top: 18px;
-
     height: 6px; 
     width: 60px; 
-
     line-height: 30px; 
    
   }
   
   .status2-cell {
-    background-color: #00A372;
-    
+
+    background-color: #00A372;  
     color: white;
     padding: 5px;
-    border-radius: 5px; /* Optional: Adds rounded corners to the box */
-    /*display: inline-block;*/
-
-    display: flex; /* Changed to flex */
-    align-items: center; /* Vertically aligns the content */
+    border-radius: 5px;
+    display: flex; 
+    align-items: center; 
     justify-content: center;
-
     margin-top: 22px;
-
     height: 6px; 
     width: 60px; 
-
     line-height: 30px; 
    
   }
