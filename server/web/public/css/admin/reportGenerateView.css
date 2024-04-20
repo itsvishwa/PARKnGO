@@ -1,6 +1,29 @@
 .business {
     margin-top: 10px;
   }
+
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-top: -50px;
+  }
+  
+  .menu li {
+    margin: 15px 0;
+    margin-left: 30px;
+    width: 150px;
+    padding: 8px 10px 8px 15px;
+  }
+  
+  .menu-logo {
+    height: 25px;
+    display: flex;
+  }
+  
+  .r-menu-logo {
+    height: 52px;
+    display: flex;
+  }
   
   .heading {
     display: flex;
