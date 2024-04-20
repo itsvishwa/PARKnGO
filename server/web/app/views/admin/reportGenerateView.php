@@ -197,6 +197,46 @@
       <button id="downloadPDF">Download PDF</button>
     </div>
   </div>
+  <script>
+    $(document).ready(function() {
+      $('#downloadPDF').click(function() {
+        // Sample JSON data
+        var data = <?php echo $data ?>;
+
+        console.log(data);
+
+        var doc = new jsPDF();
+
+        // Extract columns from the keys of the first object
+        var columns = Object.keys(data[0]);
+
+        var rows = [];
+
+        // Populate table rows from JSON data
+        data.forEach(function(obj) {
+          var row = [];
+          columns.forEach(function(col) {
+            row.push(obj[col]);
+          });
+          rows.push(row);
+        });
+
+        var tableName = 'My Table';
+
+        // Add table name
+        doc.text(tableName, 14, 10);
+
+        // Add table to PDF
+        doc.autoTable({
+          head: [columns],
+          body: rows
+        });
+
+        // Save PDF
+        doc.save('table.pdf');
+      });
+    });
+  </script>
   
 </body>
 
