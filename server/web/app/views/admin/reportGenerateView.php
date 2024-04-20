@@ -107,6 +107,7 @@
                     Reviews
                   </div>
                 </a>
+                
               </div>
         </div>
         <img src="<?php echo URLROOT; ?>/css/assets/parking-officer.jpg" class="report-card-img" />
@@ -124,6 +125,7 @@
                     Reviews
                   </div>
                 </a>
+               
               </div>
         </div>
         <img src="<?php echo URLROOT; ?>/css/assets/parking-space.jpg" class="report-card-img" />
@@ -141,6 +143,7 @@
                     Reviews
                   </div>
                 </a>
+               
               </div>
         </div>
         <img src="<?php echo URLROOT; ?>/css/assets/calender.jpg" class="report-card-img" />

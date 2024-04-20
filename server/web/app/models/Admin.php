@@ -247,11 +247,7 @@ class Admin
   public function getTopTwoReviewsData()
   {
     $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
-    // return $this->db->resultSet(); // Assuming resultSet() fetches all rows
-
-    // $rows = $this->db->resultSet(); 
-
-    // return $rows;
+    
     try {
       $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
       return $rows;
@@ -476,4 +472,24 @@ class Admin
 
     return null; // or handle the case when the document is not found
   }
+
+  public function getReportReviews()
+{
+    $this->db->query('
+        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               CASE
+                   WHEN review.no_of_stars <= 2 THEN "Bad Review"
+                   ELSE "Good Review"
+               END AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+    ');
+
+    $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
+
+    return $rows;
+}
+
 }
