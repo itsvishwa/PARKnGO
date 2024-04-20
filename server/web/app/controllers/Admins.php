@@ -277,7 +277,7 @@ class Admins extends Controller
     $this->view('admin/reportGenerateView',$data);
   }*/
 
-  public function reportGenerateView()
+  /*public function reportGenerateView()
 {
     $reviews = $this->adminModel->getReportReviews();
 
@@ -296,7 +296,29 @@ class Admins extends Controller
     ];
 
     $this->view('admin/reportGenerateView', $data);
+}*/
+
+public function reportGenerateView()
+{
+    $reviews = $this->adminModel->getReportReviews();
+
+    // Filter bad and good reviews separately
+    $badReviews = array_filter($reviews, function($review) {
+        return $review->review_type === 'Bad Review'; // Use object notation -> instead of array notation []
+    });
+
+    $goodReviews = array_filter($reviews, function($review) {
+        return $review->review_type === 'Good Review'; // Use object notation -> instead of array notation []
+    });
+
+    $data = [
+        'badReviews' => $badReviews,
+        'goodReviews' => $goodReviews
+    ];
+
+    $this->view('admin/reportGenerateView', $data);
 }
+
 
 
 

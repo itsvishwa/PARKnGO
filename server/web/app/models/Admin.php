@@ -492,7 +492,7 @@ class Admin
     return $rows;
 }*/
 
-public function getReportReviews()
+/*public function getReportReviews()
 {
     $this->db->query('
         SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
@@ -509,7 +509,40 @@ public function getReportReviews()
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
     return $rows;
+}*/
+
+public function getReportReviews()
+{
+    // Fetch bad reviews
+    $this->db->query('
+        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Bad Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars <= 2
+    ');
+    $badReviews = $this->db->resultSet();
+
+    // Fetch good reviews
+    $this->db->query('
+        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Good Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars > 2
+    ');
+    $goodReviews = $this->db->resultSet();
+
+    return [
+        'badReviews' => $badReviews,
+        'goodReviews' => $goodReviews
+    ];
 }
+
 
 
 
