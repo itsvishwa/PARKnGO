@@ -268,13 +268,13 @@ class Admins extends Controller
   public function reportGenerateView()
   {
 
-    //$reviews = $this->adminModel->getAllReviews();
+    $reviews = $this->adminModel->getAllReviews();
 
     $data = [
-      //'reviews' => $reviews
+      'reviews' => $reviews
     ];
 
-    $this->view('admin/reportGenerateView');
+    $this->view('admin/reportGenerateView',$data);
   }
 
 
