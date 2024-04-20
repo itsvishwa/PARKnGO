@@ -473,7 +473,26 @@ class Admin
     return null; // or handle the case when the document is not found
   }
 
-  public function getReportReviews()
+ /* public function getReportReviews()
+{
+    $this->db->query('
+        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               CASE
+                   WHEN review.no_of_stars <= 2 THEN "Bad Review"
+                   ELSE "Good Review"
+               END AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+    ');
+
+    $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
+
+    return $rows;
+}*/
+
+public function getReportReviews()
 {
     $this->db->query('
         SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
@@ -491,5 +510,7 @@ class Admin
 
     return $rows;
 }
+
+
 
 }
