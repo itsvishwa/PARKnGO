@@ -5,6 +5,7 @@ class Companys extends Controller
   private $officerModel;
   private $paymentModel;
   private $parkingSpaceModel;
+  private $companyReport;
 
   public function __construct()
   {
@@ -19,6 +20,7 @@ class Companys extends Controller
     $this->officerModel = $this->model('Officer');
     $this->paymentModel = $this->model('Payment');
     $this->parkingSpaceModel = $this->model('ParkingSpace');
+    $this->companyReport = $this->model('CompanyReport');
   }
 
   public function index()

@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/dashboardView.css" />
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/parkingSpaceView.css" />
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/company/reviewPopup.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
   <title>Parking Spaces</title>
 </head>
 
@@ -85,8 +88,169 @@
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
+      <div class="report-card mb-20">
+        <div class="report-card-content">
+          <h2>Reports based on Parking Officer<h2>
+              <h3 class="mt-10">For last 30 Days</h3>
+              <div class="flex mt-20">
+                <button class="btn bg-off-white2" onclick="generatePDF('parkingOfficer', 'revenue')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  Revenue
+                </button>
+                <button class="btn bg-off-white2 flex" onclick="generatePDF('parkingOfficer', 'forceStopped')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-red">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                  </svg>
+                  Force Stopped Sessions
+                </button>
+                <button class="btn bg-off-white2" onclick="generatePDF('parkingOfficer', 'review')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-blue">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                  </svg>
+                  Reviews
+                </button>
+              </div>
+        </div>
+        <img src="<?php echo URLROOT; ?>/css/assets/parking-officer.jpg" class="report-card-img" />
+      </div>
+      <div class="report-card mb-20">
+        <div class="report-card-content">
+          <h2>Reports based on Parking Space<h2>
+              <h3 class="mt-10">For last 30 Days</h3>
+              <div class="flex mt-20">
+                <button class="btn bg-off-white2" onclick="generatePDF('parkingSpace', 'revenue')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  Revenue
+                </button>
+                <button class="btn bg-off-white2 flex" onclick="generatePDF('parkingSpace', 'forceStopped')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-red">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                  </svg>
+                  Force Stopped Sessions
+                </button>
+                <button class="btn bg-off-white2" onclick="generatePDF('parkingSpace', 'review')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-blue">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                  </svg>
+                  Reviews
+                </button>
+              </div>
+        </div>
+        <img src="<?php echo URLROOT; ?>/css/assets/parking-space.jpg" class="report-card-img" />
+      </div>
+      <div class="report-card mb-20">
+        <div class="report-card-content">
+          <h2>Reports based on Date<h2>
+              <h3 class="mt-10">For last 30 Days</h3>
+              <div class="flex mt-20">
+                <button class="btn bg-off-white2" onclick="generatePDF('date', 'revenue')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-green">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                  Revenue
+                </button>
+                <button class="btn bg-off-white2 flex" onclick="generatePDF('date', 'forceStopped')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-red">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                  </svg>
+                  Force Stopped Sessions
+                </button>
+                <button class="btn bg-off-white2" onclick="generatePDF('date', 'review')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-blue">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                  </svg>
+                  Reviews
+                </button>
+              </div>
+        </div>
+        <img src="<?php echo URLROOT; ?>/css/assets/calender.jpg" class="report-card-img" />
+      </div>
     </div>
   </div>
+  <script>
+    function generatePDF(basedOn = null, type = null) {
+
+      var data;
+      var tableName;
+      var fileName;
+      <?php $companyReport =  $this->model('CompanyReport');  ?>
+
+      if (basedOn === "parkingOfficer") {
+        if (type === "revenue") {
+          data = <?php echo json_encode($companyReport->parkingOfficerRevenue()); ?>;
+          tableName = 'Revenue Reports based on Parking Officer for Last 30 days.';
+          fileName = 'parking_officer_based_revenue';
+        } else if (type === "forceStopped") {
+          data = <?php echo json_encode($companyReport->parkingOfficerForceStoppedSession()); ?>;
+          tableName = 'Force Stopped Sessions Reports based on Parking Officer for Last 30 days.';
+          fileName = 'parking_officer_based_force_stopped_sessions';
+        } else if (type === "review") {
+          console.log("Generate PDF based on parking officer reviews");
+        }
+      } else if (basedOn === "parkingSpace") {
+        if (type === "revenue") {
+          data = <?php echo json_encode($companyReport->parkingSpaceRevenue($_SESSION['user_id'])); ?>;
+          tableName = 'Revenue Reports based on Parking Space for Last 30 days.';
+          fileName = 'parking_space_based_revenue';
+        } else if (type === "forceStopped") {
+          data = <?php echo json_encode($companyReport->parkingSpaceForceStoppedSession($_SESSION['user_id'])); ?>;
+          tableName = 'Force Stopped Sessions Reports based on Parking Space for Last 30 days.';
+          fileName = 'parking_space_based_force_stopped_sessions';
+        } else if (type === "review") {
+          console.log("Generate PDF based on parking space reviews");
+        }
+      } else if (basedOn === "date") {
+        if (type === "revenue") {
+          data = <?php echo json_encode($companyReport->dateWiseParkingSpaceRevenue($_SESSION['user_id'])); ?>;
+          tableName = 'Revenue Reports based on Date for Last 30 days.';
+          fileName = 'date_based_revenue';
+        } else if (type === "forceStopped") {
+          data = <?php echo json_encode($companyReport->dateWiseParkingSpaceForceStoppedSession($_SESSION['user_id'])); ?>;
+          tableName = 'Force Stopped Sessions Reports based on Date for Last 30 days.';
+          fileName = 'date_based_force_stopped_sessions';
+        } else if (type === "review") {
+          console.log("Generate PDF based on date reviews");
+        }
+      } else {
+        console.log("Generate PDF based on all data");
+      }
+
+      var doc = new jsPDF();
+
+      // Extract columns from the keys of the first object
+      var columns = Object.keys(data[0]);
+
+      var rows = [];
+
+      // Populate table rows from JSON data
+      data.forEach(function(obj) {
+        var row = [];
+        columns.forEach(function(col) {
+          row.push(obj[col]);
+        });
+        rows.push(row);
+      });
+
+      var tableName = tableName;
+
+      // Add table name
+      doc.text(tableName, 14, 10);
+
+      // Add table to PDF
+      doc.autoTable({
+        head: [columns],
+        body: rows
+      });
+
+      // Save PDF
+      doc.save(fileName + '.pdf');
+    }
+  </script>
+
 </body>
 
 </html>
