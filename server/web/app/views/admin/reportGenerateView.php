@@ -152,7 +152,7 @@
       <button id="downloadPDF">Download PDF</button>
     </div>
   </div>
-  <script>
+<!--  <script>
     $(document).ready(function() {
       $('#downloadPDF').click(function() {
         // Sample JSON data
@@ -191,6 +191,47 @@
         doc.save('table.pdf');
       });
     });
+  </script>-->
+
+  <script>
+    $(document).ready(function() {
+    $('#downloadPDF').click(function() {
+        // Sample JSON data
+        var badReviews = <?php echo json_encode($badReviews); ?>;
+        var goodReviews = <?php echo json_encode($goodReviews); ?>;
+        
+        var doc = new jsPDF();
+
+        // Function to generate table for reviews
+        function generateTable(reviews, title) {
+            var columns = Object.keys(reviews[0]);
+            var rows = [];
+
+            reviews.forEach(function(obj) {
+                var row = [];
+                columns.forEach(function(col) {
+                    row.push(obj[col]);
+                });
+                rows.push(row);
+            });
+
+            doc.text(title, 14, 10);
+            doc.autoTable({
+                head: [columns],
+                body: rows
+            });
+        }
+
+        // Generate tables for bad and good reviews
+        generateTable(badReviews, 'Bad Reviews');
+        doc.addPage(); // Add page for good reviews
+        generateTable(goodReviews, 'Good Reviews');
+
+        // Save PDF
+        doc.save('reviews_report.pdf');
+    });
+});
+
   </script>
   
 </body>
