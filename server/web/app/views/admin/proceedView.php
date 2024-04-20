@@ -181,81 +181,80 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-function approveApplication() {
-  var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
-  console.log('companyId:', companyId);
-  console.log('Attempting to approve application with companyId:', companyId);
+  function approveApplication() {
+    var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+    console.log('companyId:', companyId);
+    console.log('Attempting to approve application with companyId:', companyId);
 
-  // Display loading spinner
-  $('#approveSpinner').show();
+    // Display loading spinner
+    $('#approveSpinner').show();
 
-  $.ajax({
-    url: '/PARKnGO/server/web/admins/approveApplication',
-    method: 'POST',
-    dataType: 'json',
-    data: {
-      _id: companyId
-    },
-    success: function(response) {
-      // Hide loading spinner
-      $('#approveSpinner').hide();
+    $.ajax({
+      url: '/PARKnGO/server/web/admins/approveApplication',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        _id: companyId
+      },
+      success: function(response) {
+        // Hide loading spinner
+        $('#approveSpinner').hide();
 
-      if (response.success) {
-        console.log('Response:', response);
-        console.log('Application approved successfully.');
-        window.location.href = response.redirect;
-        alert('Application approved successfully.');
-      } else {
-        console.error('Failed to approve application. Server response:', response);
-        alert('Failed to approve application. See console for details.');
+        if (response.success) {
+          console.log('Response:', response);
+          console.log('Application approved successfully.');
+          window.location.href = response.redirect;
+          alert('Application approved successfully.');
+        } else {
+          console.error('Failed to approve application. Server response:', response);
+          alert('Failed to approve application. See console for details.');
+        }
+      },
+      error: function(xhr, status, error) {
+        // Hide loading spinner
+        $('#approveSpinner').hide();
+
+        console.error('Error:', error);
+        alert('Error approving application. Please check the console for details.');
       }
-    },
-    error: function(xhr, status, error) {
-      // Hide loading spinner
-      $('#approveSpinner').hide();
-      
-      console.error('Error:', error);
-      alert('Error approving application. Please check the console for details.');
-    }
-  });
-}
+    });
+  }
 
-function submitRejectReason() {
-  var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
-  console.log('companyId:', companyId);
-  var rejectReason = $('#rejectReason').val();
+  function submitRejectReason() {
+    var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+    console.log('companyId:', companyId);
+    var rejectReason = $('#rejectReason').val();
 
-  // Display loading spinner
-  $('#rejectSpinner').show();
+    // Display loading spinner
+    $('#rejectSpinner').show();
 
-  $.ajax({
-    url: '/PARKnGO/server/web/admins/rejectApplication',
-    method: 'POST',
-    dataType: 'json',
-    data: {
-      _id: companyId,
-      rejectReason: rejectReason
-    },
-    success: function(response) {
-      // Hide loading spinner
-      $('#rejectSpinner').hide();
+    $.ajax({
+      url: '/PARKnGO/server/web/admins/rejectApplication',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        _id: companyId,
+        rejectReason: rejectReason
+      },
+      success: function(response) {
+        // Hide loading spinner
+        $('#rejectSpinner').hide();
 
-      console.log('Reject reason submitted successfully.');
-      window.location.href = response.redirect;
-      console.log(response);
-      alert('Application rejected successfully.');
-    },
-    error: function(error) {
-      // Hide loading spinner
-      $('#rejectSpinner').hide();
+        console.log('Reject reason submitted successfully.');
+        window.location.href = response.redirect;
+        console.log(response);
+        alert('Application rejected successfully.');
+      },
+      error: function(error) {
+        // Hide loading spinner
+        $('#rejectSpinner').hide();
 
-      console.error('Error:', error);
-      alert('Error submitting reject reason. Please check the console for details.');
-    }
-  });
-}
+        console.error('Error:', error);
+        alert('Error submitting reject reason. Please check the console for details.');
+      }
+    });
+  }
 </script>
-
 
 <script>
   function downloadDocument(documentId) {
