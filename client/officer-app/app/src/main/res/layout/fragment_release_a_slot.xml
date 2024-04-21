@@ -126,6 +126,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/release_slot_scan_qr_btn">
 
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/driver_id_etxt"
+                android:layout_width="125dp"
+                android:layout_height="48dp"
+                android:background="@drawable/vehicle_details_input_feild_bg"
+                android:gravity="center"
+                android:text="-1"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
@@ -161,8 +174,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1.2"
                         android:background="@drawable/vehicle_num_details_inp_field_left"
-                        android:hint="AAA"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:hint="AAA" />
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -214,7 +227,7 @@
 
 
             <Button
-                android:id="@+id/release_vehicle_01_search_btn"
+                android:id="@+id/release_vehicle_search_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -232,10 +245,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="@+id/release_vehicle_01_search_btn"
+                app:layout_constraintEnd_toEndOf="@+id/release_vehicle_search_btn"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/release_vehicle_01_search_btn"
-                app:layout_constraintTop_toBottomOf="@+id/release_vehicle_01_search_btn">
+                app:layout_constraintStart_toStartOf="@+id/release_vehicle_search_btn"
+                app:layout_constraintTop_toBottomOf="@+id/release_vehicle_search_btn">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -338,7 +351,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/release_vehicle_01_continue_btn"
+            android:id="@+id/release_vehicle_continue_btn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:gravity="center"

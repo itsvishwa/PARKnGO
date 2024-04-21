@@ -72,7 +72,7 @@ class QR extends Controller
                         $result = [
                             "response_code" => "800",
                             "driver_id" => $qr_data["driver_id"],
-                            "vehicle_number" => $qr_data["vehicle_number"],
+                            "vehicle_number" =>$qr_data["vehicle_number"],
                             "vehicle_type" => $qr_data["vehicle_type"]
                         ];
 
@@ -88,9 +88,7 @@ class QR extends Controller
                         $this->send_json_404($result);
                     }
 
-                }
-
-                    
+                }     
             } 
             else {    //parking_id is not similar to the assigned parking
 

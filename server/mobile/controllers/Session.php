@@ -79,7 +79,10 @@ class Session extends Controller
                     $this->officer_activity_model->add_officer_activity($session_data);
 
                     // update the parking_space_status table
-                    $this->parking_space_status_model->decrease_free_slots($session_data["vehicle_type"], $session_data["parking_id"]);
+                    $vehicle_type = $session_data["vehicle_type"];
+                    $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
+                    
+                    $this->parking_space_status_model->decrease_free_slots($vehicle_type_letter, $session_data["parking_id"]);
 
 
                     $result = [
@@ -118,7 +121,7 @@ class Session extends Controller
 
 
     // Search parking session
-    public function search($vehicle_number)
+    public function search($url_safe_vehicle_number)
     {
         $token_data = $this->verify_token_for_officers();
 
@@ -133,11 +136,14 @@ class Session extends Controller
 
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
+            // Convert "~" to "#" in the vehicle number
+            $vehicle_number = str_replace('~', '#', $url_safe_vehicle_number);
+
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $open_session = $this->session_model->is_open_session_exists($vehicle_number);
 
-                    // check whether the given vehicle number has an open session
+                // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
                         "response_code" => "409",
@@ -147,8 +153,8 @@ class Session extends Controller
                     $this->send_json_404($result);
 
                 // An open session exists for the given vehicle number
-                } else {    
-                
+                } else {
+                        
                     // get the parking session details from the parking_session table
                     $parking_session_data = $this->session_model->search_session($vehicle_number);
 
@@ -188,9 +194,11 @@ class Session extends Controller
 
                             if (isset($parking_session_data->vehicle_type) && isset($parking_session_data->parking_id)) {
                                 $vehicle_type = $parking_session_data->vehicle_type;
+                                $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
+                                
                                 $parking_id = $parking_session_data->parking_id;
 
-                                $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type, $parking_id);
+                                $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type_letter, $parking_id);
                                 $hourly_rate = $hourly_rate_value->rate;
 
                                 $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
@@ -310,10 +318,12 @@ class Session extends Controller
                             $this->officer_activity_model->end_officer_activity($session_id, $token_data, $end_timestamp);
 
                             // update the parking_space_status
-                            $this->parking_space_status_model->increase_free_slots($session_details["vehicle_type"], $session_details["parking_id"]);
+                            $vehicle_type = $session_details["vehicle_type"];
+                            $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type); 
+                            $this->parking_space_status_model->increase_free_slots($vehicle_type_letter, $session_details["parking_id"]);
 
                             //Fetch the rate from the parking_space_status according to the parking_id and the vehicle_type
-                            $hourly_rate_value = $this->parking_space_status_model->get_rate($session_details["vehicle_type"], $session_details["parking_id"]);
+                            $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type_letter, $session_details["parking_id"]);
                             $hourly_rate = $hourly_rate_value->rate;
 
                             $start_timestamp = $session_details["start_time"];

@@ -171,7 +171,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                 <TextView
-                    android:id="@+id/frag_release_slot_02_vehicle_number_txt_view"
+                    android:id="@+id/frag_release_slot_confirm_vehicle_number_txt_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -181,14 +181,14 @@
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_release_slot_02_vehicle_type_txt_view"
-                    app:layout_constraintEnd_toStartOf="@+id/frag_release_slot_02_vehicle_type_txt_view"
+                    app:layout_constraintBottom_toBottomOf="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
+                    app:layout_constraintEnd_toStartOf="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
                     app:layout_constraintHorizontal_bias="0.863"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
-                    android:id="@+id/frag_release_slot_02_vehicle_type_txt_view"
+                    android:id="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -208,7 +208,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/release_slot_02_back_btn"
+            android:id="@+id/release_slot_confirmation_back_btn"
             android:layout_width="138dp"
             android:layout_height="53dp"
             android:layout_marginTop="44dp"
@@ -216,22 +216,22 @@
             android:text="Back"
             android:textSize="16sp"
             app:cornerRadius="11dp"
-            app:layout_constraintEnd_toStartOf="@+id/release_slot_02_yes_btn"
+            app:layout_constraintEnd_toStartOf="@+id/release_slot_confirmation_yes_btn"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/linearLayout"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <Button
-            android:id="@+id/release_slot_02_yes_btn"
+            android:id="@+id/release_slot_confirmation_yes_btn"
             android:layout_width="138dp"
             android:layout_height="53dp"
             android:backgroundTint="@color/primaryColor"
             android:text="Yes"
             android:textSize="16sp"
             app:cornerRadius="11dp"
-            app:layout_constraintBottom_toBottomOf="@+id/release_slot_02_back_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/release_slot_confirmation_back_btn"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="@+id/release_slot_02_back_btn" />
+            app:layout_constraintTop_toTopOf="@+id/release_slot_confirmation_back_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

@@ -57,7 +57,7 @@ public class AssignAVehicleAddDetailsHelper {
 
         // Vehicle type spinner
         Spinner spinnerVehicleTypes = assignAVehicleAddDetailsView.findViewById(R.id.spinner_vehicle_types);
-        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Bike", "Van", "Lorry", "Bus"));
+        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
         ArrayAdapter<String> vTypeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypes);
         vTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerVehicleTypes.setAdapter(vTypeAdapter);

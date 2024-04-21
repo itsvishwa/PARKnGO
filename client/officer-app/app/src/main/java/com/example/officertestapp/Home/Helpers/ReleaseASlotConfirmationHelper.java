@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
-import com.example.officertestapp.Home.ReleaseASlot03Fragment;
+import com.example.officertestapp.Home.PaymentDetailsFragment;
 import com.example.officertestapp.MainActivity;
 
 import org.json.JSONException;
@@ -28,13 +28,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReleaseASlotHelper {
+public class ReleaseASlotConfirmationHelper {
 
     Context context;
     View view;
     FragmentManager fragmentManager;
 
-    public ReleaseASlotHelper(View view, Context context, FragmentManager fragmentManager) {
+    public ReleaseASlotConfirmationHelper(View view, Context context, FragmentManager fragmentManager) {
         this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -115,14 +115,17 @@ public class ReleaseASlotHelper {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
                 // Extract values from the JSON response
-                String PaymentID = responseData.getString("payment_id");
+                String paymentID = responseData.getString("payment_id");
 
                 //parse the bundle to the PaymentDetailsHelper
                 // Create an instance of PaymentDetailsHelper and pass the bundle
                 Bundle data = new Bundle();
-                data.putString("_id", PaymentID);
+                data.putString("_id", paymentID);
+
+                Log.d("Bundle Values", "Payment ID: " + paymentID);
+
                 MainActivity mainActivity = (MainActivity) context;
-                mainActivity.replaceFragment(new ReleaseASlot03Fragment(), data, view);
+                mainActivity.replaceFragment(new PaymentDetailsFragment(), data, view);
 
             } else {
                 // Show a toast message with the response message
@@ -148,4 +151,3 @@ public class ReleaseASlotHelper {
         }
     }
 }
-
