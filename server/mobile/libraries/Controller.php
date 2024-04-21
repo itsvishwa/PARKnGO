@@ -262,4 +262,76 @@ class Controller
                 // Send the decrypted payment_id as a JSON response
                 return $decrypted_payment_id;
         }
+
+        // format the vehicle number to human readable version
+        public function format_vehicle_number($vehicle_number)
+        {
+                $data = explode("#", $vehicle_number);
+
+                $temp1 = "";
+                if ($data[1] === "NA") {
+                        $temp1 = "";
+                } else if ($data[1] === "SRI") {
+                        $temp1 = "ශ්‍රී";
+                } else {
+                        $temp1 = "-";
+                }
+
+                $temp2 = "";
+                if ($data[3] === "NA") {
+                        $temp2 = "";
+                } else {
+                        $temp2 = $data[3];
+                }
+
+                $result = $data[0] . $temp1 . $data[2] . $temp2;
+
+                return $result;
+        }
+
+
+        // format the timestamp to human readable version
+        public function format_time($time_stamp)
+        {
+                // Format the time in IST with offset
+                $time = date("h:i A", $time_stamp);
+                $date = date("d/m/y", $time_stamp);
+                $result = [$time, $date];
+                return $result;
+        }
+
+        // Convert the vehicle type to its Category
+        public function convert_to_vehicle_category($vehicle_type)
+        {
+                $cat = "";
+                if ($vehicle_type === "car" or $vehicle_type === "tuktuk" or $vehicle_type === "mini_van") {
+                        $cat = "A";
+                } else if ($vehicle_type === "bicycle") {
+                        $cat = "B";
+                } else if ($vehicle_type === "van" or $vehicle_type === "lorry" or $vehicle_type === "mini_bus") {
+                        $cat = "C";
+                } else {
+                        $cat = "D";
+                }
+                return $cat;
+        }
+
+
+        // convert the category to vehicle types
+        public function convert_to_vehicle_type($category)
+        {
+                $result = "";
+
+                if ($category === "A") {
+                        $result = "Cak|Tuktuk|Mini Van";
+                } else if ($category === "B") {
+                        $result = "Bicycle";
+                } else if ($category === "C") {
+                        $result = "Van|Lorry|Mini Bus";
+                } else {
+                        $result = "Long Vehicles";
+                }
+
+                return $result;
+        }
 }
