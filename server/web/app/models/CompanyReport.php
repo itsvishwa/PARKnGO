@@ -149,4 +149,81 @@ class CompanyReport
     $row = $this->db->resultSet();
     return $row;
   }
+
+  // public function getReviewsBasedOnParkingSpace($company_id)
+  // {
+  //   $this->db->query('SELECT
+  //                       rv.parking_id,
+  //                       ps.name AS parking_name,
+  //                       FROM_UNIXTIME(rv.time_stamp) AS time_stamp,
+  //                       rv.no_of_stars,
+  //                       rv.content
+  //                     FROM
+  //                       review rv
+  //                     INNER JOIN
+  //                       parking_spaces ps ON rv.parking_id = ps._id
+  //                     WHERE
+  //                       rv.time_stamp >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY))
+  //                       AND ps.company_id = :company_id;');
+  //   $this->db->bind(':company_id', $company_id);
+  //   $row = $this->db->resultSet();
+  //   return $row;
+  // }
+
+  public function getReviewsBasedOnParkingSpace()
+  {
+    $this->db->query('SELECT
+        rv.parking_id,
+        ps.name AS parking_name,
+        AVG(rv.no_of_stars) AS avg_no_of_stars
+    FROM
+        review rv
+    INNER JOIN
+        parking_spaces ps ON rv.parking_id = ps._id
+    WHERE
+        rv.time_stamp >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY))
+    GROUP BY
+        rv.parking_id, ps.name;');
+
+    $row = $this->db->resultSet();
+    return $row;
+  }
+
+  // public function getReviewsBasedOnDate($company_id)
+  // {
+  //   $this->db->query('SELECT
+  //                       DATE(FROM_UNIXTIME(rv.time_stamp)) AS date,
+  //                       COUNT(*) AS number_of_reviews,
+  //                       AVG(rv.no_of_stars) AS avg_rating
+  //                     FROM
+  //                       review rv
+  //                     WHERE
+  //                       rv.time_stamp >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY)) AND rv.company_id = :company_id
+  //                     GROUP BY
+  //                       date
+  //                     ORDER BY
+  //                       date;');
+  //   $row = $this->db->resultSet();
+  //   return $row;
+  // }
+
+  public function getReviewsBasedOnDate($company_id)
+  {
+    $this->db->query('SELECT
+                        FROM_UNIXTIME(rv.time_stamp) AS time_stamp,
+                        rv.parking_id,
+                        ps.name AS parking_name,
+                        rv.no_of_stars,
+                        rv.content
+                      FROM
+                        review rv
+                      INNER JOIN
+                        parking_spaces ps ON rv.parking_id = ps._id
+                      WHERE
+                        rv.time_stamp >= UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 30 DAY))
+                        AND ps.company_id = :company_id;');
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->resultSet();
+    return $row;
+  }
 }
