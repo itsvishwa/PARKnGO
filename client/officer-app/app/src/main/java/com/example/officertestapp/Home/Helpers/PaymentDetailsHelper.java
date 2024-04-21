@@ -2,13 +2,10 @@ package com.example.officertestapp.Home.Helpers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,8 +15,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.HeroActivity;
-import com.example.officertestapp.Home.ReleaseASlot03Fragment;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
@@ -125,34 +122,34 @@ public class PaymentDetailsHelper {
                 TextView amountTextView = view.findViewById(R.id.amount_txt_view);
 
                 // Insert space between letters and numbers in the vehicle number
-                String formattedVehicleNumber = VehicleNumber.replaceAll("(\\D)(\\d+)", "$1 $2 ");
+                String formattedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(VehicleNumber);
 
 
-            //format the timestamp to date time according to the devices time zone
-            //Convert the timestamp string to a long value
-            long timestampStart = Long.parseLong(StartTime);
-            // Create a Date object from the timestamp
-            Date startDate = new Date(timestampStart * 1000);
-            // Create a SimpleDateFormat object with your desired format
-            SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
-            // Set the timezone to the device's local timezone
-            sdf.setTimeZone(TimeZone.getDefault());
-            // Format the date object to a string
-            String formattedStartTime = sdf.format(startDate);
+                //format the timestamp to date time according to the devices time zone
+                //Convert the timestamp string to a long value
+                long timestampStart = Long.parseLong(StartTime);
+                // Create a Date object from the timestamp
+                Date startDate = new Date(timestampStart * 1000);
+                // Create a SimpleDateFormat object with your desired format
+                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
+                // Set the timezone to the device's local timezone
+                sdf.setTimeZone(TimeZone.getDefault());
+                // Format the date object to a string
+                String formattedStartTime = sdf.format(startDate);
 
 
-            long timestampEnd = Long.parseLong(EndTime);
-            Date EndDate = new Date(timestampEnd * 1000);
-            SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
-            edf.setTimeZone(TimeZone.getDefault());
-            String formattedEndTime = sdf.format(EndDate);
+                long timestampEnd = Long.parseLong(EndTime);
+                Date EndDate = new Date(timestampEnd * 1000);
+                SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
+                edf.setTimeZone(TimeZone.getDefault());
+                String formattedEndTime = sdf.format(EndDate);
 
-            vehicleNumberTextView.setText(formattedVehicleNumber);
-            vehicleTypeTextView.setText(VehicleType);
-            sessionStartedTimeTextView.setText(formattedStartTime);
-            sessionEndedTimeTextView.setText(formattedEndTime);
-            timeDurationTextView.setText(TimeWent);
-            amountTextView.setText(amount);
+                vehicleNumberTextView.setText(formattedVehicleNumber);
+                vehicleTypeTextView.setText(VehicleType);
+                sessionStartedTimeTextView.setText(formattedStartTime);
+                sessionEndedTimeTextView.setText(formattedEndTime);
+                timeDurationTextView.setText(TimeWent);
+                amountTextView.setText(amount);
 
             } else {
                 // Show a toast message with the response message

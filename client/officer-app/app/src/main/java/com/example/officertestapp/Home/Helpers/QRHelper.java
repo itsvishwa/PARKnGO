@@ -97,20 +97,18 @@ public class QRHelper {
             JSONObject responseData = jsonResponse.getJSONObject("response");
 
             // Extract values from the response
-            String vehicleNumber = responseData.getString("vehicle_number");
+            String vehicleNumber = responseData.getString("vehicle_number"); //3#SRI#2222#NA
             String vehicleType = responseData.getString("vehicle_type");
             String driverId = responseData.getString("driver_id");
 
             String vehicleTypeFCap = vehicleType.substring(0, 1).toUpperCase() + vehicleType.substring(1);
 
             // Split the vehicle number into letters, symbol, numbers, province using "#"
-            String[] parts = vehicleNumber.split("#");
-
-            // Extract individual parts of vehicle number
-            String vNumLetters = parts[0];
-            String vNUmSymbol = parts[1];
-            String vNumNumbers = parts[2];
-            String vNumProvince = parts[3];
+            String[] vehicleNumberParts = vehicleNumber.split("#");
+            String vNumLetters = vehicleNumberParts[0];
+            String vNumSymbol = vehicleNumberParts[1];
+            String vNumNumbers = vehicleNumberParts[2];
+            String vNumProvince = vehicleNumberParts[3];
 
             // Find the EditText fields in the fragment
             EditText vehicleNumLettersEditText = view.findViewById(R.id.vehicle_num_letters);
@@ -122,14 +120,25 @@ public class QRHelper {
             vehicleNumDigitsEditText.setText(vNumNumbers);
             driverIdEditText.setText(driverId);
 
+
+            // Handle special characters and set the selection in spinnerSymbols
+            if ("SRI".equals(vNumSymbol)) {
+                vNumSymbol = "ශ්\u200Dරී";
+            } else if ("DH".equals(vNumSymbol)) {
+                vNumSymbol = "-";
+            } else if ("NA".equals(vNumSymbol)) {
+                vNumSymbol = "NONE";
+            }
+
             // Find the Spinner for provinces
             Spinner spinnerProvinces = view.findViewById(R.id.spinner_provinces);
 
             // Get the array of province types
             ArrayList<String> provinceTypes = new ArrayList<>(Arrays.asList("WP", "SP", "CP", "EP", "NC", "NP", "NW", "SG", "UP", "NONE"));
 
-            // Find the index of vNumProvince in the provinceTypes array
+            // Find the index of province in the provinceTypes array
             int provinceIndex = provinceTypes.indexOf(vNumProvince);
+            Log.d("Province", "Index: " + provinceIndex + ", Province: " + vNumProvince);
 
             // Set the selection of the Spinner to the provinceIndex
             if (provinceIndex != -1) {
@@ -137,8 +146,20 @@ public class QRHelper {
             }
 
 
+            // Find the Spinner for provinces
             Spinner spinnerSymbols = view.findViewById(R.id.spinner_symbols);
+
+            // Get the array of province types
             ArrayList<String> symbols = new ArrayList<>(Arrays.asList("ශ්\u200Dරී", "-", "NONE"));
+
+            // Find the index of symbol in the symbolTypes array
+            int symbolIndex = symbols.indexOf(vNumSymbol);
+            Log.d("Symbol", "Index: " + symbolIndex + ", Symbol: " + vNumSymbol);
+
+            // Set the selection of the Spinner to the provinceIndex
+            if (symbolIndex != -1) {
+                spinnerSymbols.setSelection(symbolIndex);
+            }
 
 
 
@@ -146,7 +167,7 @@ public class QRHelper {
             Spinner spinnerVehicleTypes = view.findViewById(R.id.spinner_vehicle_types);
 
             // Get the array of vehicle types
-            ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Bike", "Van", "Lorry", "Bus"));
+            ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
 
             // Find the index of vehicleType in the vehicleTypes array
             int vehicleTypeIndex = vehicleTypes.indexOf(vehicleTypeFCap);

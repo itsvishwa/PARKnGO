@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.example.officertestapp.Home.Helpers.AssignAVehicleConfirmationHelper;
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
-import com.example.officertestapp.Home.Helpers.ReleaseASlotHelper;
 import com.example.officertestapp.R;
 
 
@@ -50,9 +49,6 @@ public class AssignAVehicleConfirmationFragment extends Fragment {
         } else {
             Log.e("AssignAVehicleConfirmationFragment", "AssignAVehicleAddDetailsHelper Arguments (Bundle) is null");
         }
-
-
-
 
         return assignAVehicleConfirmationView;
     }

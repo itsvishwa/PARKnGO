@@ -12,8 +12,8 @@ import com.example.officertestapp.Home.AssignAVehicleAddDetailsFragment;
 import com.example.officertestapp.Home.AssignAVehicleConfirmationFragment;
 import com.example.officertestapp.Home.HomeMainFragment;
 import com.example.officertestapp.Home.ReleaseASlotFragment;
-import com.example.officertestapp.Home.ReleaseASlot02Fragment;
-import com.example.officertestapp.Home.ReleaseASlot03Fragment;
+import com.example.officertestapp.Home.ReleaseASlotConfirmationFragment;
+import com.example.officertestapp.Home.PaymentDetailsFragment;
 import com.example.officertestapp.Home.ReleaseASlot04Fragment;
 import com.example.officertestapp.Home.ReleaseASlot06Fragment;
 import com.example.officertestapp.Profile.ProfileLogoutFragment;
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void release_vehicle_01_continue_btn_handler(View v) {
-        replaceFragment(new ReleaseASlot02Fragment());
+        replaceFragment(new ReleaseASlotConfirmationFragment());
     }
 
     public void release_vehicle_02_back_notify_btn_handler(View v) {
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void release_slot_02_yes_btn_handler(View v) {
-        replaceFragment(new ReleaseASlot03Fragment());
+        replaceFragment(new PaymentDetailsFragment());
     }
 
     public void release_slot_03_receive_cash_payment_btn_handler(View v) {
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void release_vehicle_04_payment_cancel_btn_handler(View v) {
-        replaceFragment(new ReleaseASlot03Fragment());
+        replaceFragment(new PaymentDetailsFragment());
     }
 
     public void frag_home_release_vehicle05_main_menu_btn_handler(View v) {

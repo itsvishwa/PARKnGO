@@ -3,7 +3,6 @@ package com.example.officertestapp.Home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,19 +16,14 @@ import com.example.officertestapp.Home.Helpers.PaymentDetailsHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
-
-public class ReleaseASlot03Fragment extends Fragment {
+public class PaymentDetailsFragment extends Fragment {
 
     String paymentID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_release_a_slot03, container, false);
+        View view = inflater.inflate(R.layout.fragment_payment_details, container, false);
 
 
         if (getArguments() != null) {
@@ -41,34 +35,10 @@ public class ReleaseASlot03Fragment extends Fragment {
         HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
 
 
-
         // CAll the paymentDetailsHelper here
         PaymentDetailsHelper paymentDetailsHelper = new PaymentDetailsHelper(view, getContext());
         paymentDetailsHelper.initLayout(paymentID);
 
-
-        // Find the TextViews
-//        TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
-//        TextView vehicleTypeTextView = view.findViewById(R.id.vehicle_type_txt_view);
-//        TextView sessionStartedTimeTextView = view.findViewById(R.id.session_started_time_txt_view);
-//        TextView sessionEndedTimeTextView = view.findViewById(R.id.session_ended_time_txt_view);
-//        TextView timeDurationTextView = view.findViewById(R.id.time_duration_txt_view);
-//        TextView amountTextView = view.findViewById(R.id.amount_txt_view);
-
-        // Retrieve values from the Bundle
-
-//            String vehicleNumber = args.getString("VehicleNumber");
-//            String VehicleType = args.getString("VehicleType");
-//            String StartTime = args.getString("StartTime");
-//            String EndTime = args.getString("EndTime");
-//            String TimeWent = args.getString("TimeWent");
-//            String Amount = args.getString("Amount");
-
-
-
-//
-//
-//            // Update TextViews with the retrieved values
 
 
             // Handle the Receive Cash Payment button
