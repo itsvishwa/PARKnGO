@@ -475,27 +475,6 @@ class Admin
 
 
 
-
-
-/*public function getReportBadReviews()
-{
-    // Fetch bad reviews
-    $this->db->query('
-        SELECT review._id, review.no_of_stars, review.content,
-               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
-               "Bad Review" AS review_type
-        FROM review
-        INNER JOIN driver ON review.driver_id = driver._id
-        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
-        WHERE review.no_of_stars <= 2
-    ');
-    $badReviews = $this->db->resultSet();
-
-    // Return bad reviews only
-    return $badReviews;
-}
-*/
-
 public function getReportReviews()
 {
     // Calculate the timestamp of 30 days ago
