@@ -32,8 +32,23 @@ function saveFormData() {
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,
     parkingType: document.querySelector('select[name="parkingType"]').value,
-    // parkingImage: document.querySelector('input[name="parkingImage"]').value,
   };
+
+  const parkingImageFile =
+    document.getElementById('parkingImageInput').files[0];
+  if (parkingImageFile) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const parkingImageBase64 = e.target.result;
+      localStorage.setItem('parkingImage', parkingImageBase64);
+
+      console.log(formData);
+
+      // Save the updated array back to localStorage
+      localStorage.setItem('formData', JSON.stringify(formData));
+    };
+    reader.readAsDataURL(parkingImageFile);
+  }
 
   console.log(formData);
 

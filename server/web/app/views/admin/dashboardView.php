@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="15" />
+  <!-- <meta http-equiv="refresh" content="15" /> -->
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -296,7 +296,6 @@
       <!-- bar graph for number of parking sessions -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-
           const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
 
           // Extract dates and values from the response

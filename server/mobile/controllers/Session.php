@@ -19,6 +19,7 @@ class Session extends Controller
         $this->parking_space_model = $this->model("ParkingSpaceModel");
     }
 
+
     public function start()
     {
 
@@ -219,6 +220,7 @@ class Session extends Controller
     }
 
 
+
     public function end()
     {
         $token_data = $this->verify_token_for_officers();
@@ -322,7 +324,6 @@ class Session extends Controller
     }
 
 
-
     // View payment details of the given session in the officer mobile app
     public function view_payment_details_of_session($payment_id)
     {
@@ -385,7 +386,6 @@ class Session extends Controller
         }
     }
 
-
     //calculate Amount
     public function calculate_amount($start_timestamp, $end_timestamp, $hourly_rate)
     {
@@ -405,7 +405,6 @@ class Session extends Controller
             return 'Invalid rate';
         }
     }
-
 
 
     // Officer - show all details of the parking sessions
@@ -539,5 +538,78 @@ class Session extends Controller
         }
 
         return $final_arr;
+    }
+
+
+    // driver mobile - used to force end the session 
+    public function force_end($latitude, $longitude)
+    {
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_SE_IT");
+        } else if ($token_data === 404) {
+            $this->send_json_404("ERR_SE_TNF");
+        } else {
+            $parking_data = $this->session_model->get_ongoing_session_parking_data($token_data["user_id"]);
+
+            if ($parking_data == false) // no ongoing session for the driver
+            {
+                $this->send_json_400("SE_NOPS");
+            } else // have on going session 
+            {
+
+                // distance in KM
+                $distance = $this->calculate_distance($parking_data->latitude, $parking_data->longitude, $latitude, $longitude);
+
+                if ($distance > 0.2) // out of the parking space range
+                {
+                    $this->session_model->end_session_by_force($parking_data->session_id);
+                    $this->parking_space_status_model->increase_free_slots($this->convert_to_vehicle_category($parking_data->vehicle_type), $parking_data->parking_id);
+
+                    $officer_mobile_number = $this->parking_space_model->get_officer_mobile_number($parking_data->parking_id);
+
+                    if ($officer_mobile_number !== false) // no officer assigned to the parking
+                    {
+                        $dnt = $this->format_time($parking_data->start_time);
+                        $this->send_sms_force_end($officer_mobile_number, urlencode($parking_data->vehicle_type), urlencode($this->format_vehicle_number($parking_data->vehicle_number)), urlencode($dnt[0] . " " . $dnt[1]));
+                        $this->send_json_200("SE_SUCCESS");
+                    }
+                } else // still in the parking space range
+                {
+                    $this->send_json_400("SE_SIDPA");
+                }
+            }
+        }
+    }
+
+
+    // calculate distance
+    private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
+    {
+        $source_coordinates = $source_lat . "," . $source_long;
+        $dest_coordinates = $dest_lat . "," . $dest_long;
+
+        $uri = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $source_coordinates . "&destinations=" . $dest_coordinates . "&units=imperial&key=" . G_API_KEY;
+
+        // Send request to Google Distance Matrix API
+        $response = file_get_contents($uri);
+
+        // Decode JSON response
+        $decoded_response = json_decode($response, true);
+
+        // distance in meters
+        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+
+        return $distance / 1000;
+    }
+
+
+    // send the otp sms
+    private function send_sms_force_end($mobile_number, $vehicle_type, $vehicle_number, $start_time)
+    {
+        $text = "Alert%21+A+vehicle+has+been+left+the+premises+unattended+and+the+session+has+been+ended+forcibly.%0AVehicle+Number+-+" . $vehicle_number . "+%28" . $vehicle_type . "%29%0ASession+Started+Time+-+" . $start_time;
+        $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=" . TEXTIT_KEY . "&to=0713072925&text=" . $text;
+        file_get_contents($url);
     }
 }

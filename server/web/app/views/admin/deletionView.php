@@ -89,7 +89,6 @@
                 </div>
 
                 <div class="profile">
-
                     <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
                     <a href="../users/logout" class="logout">Log out</a>
                 </div>
@@ -181,6 +180,7 @@
                     </div>
                     <form class="suspend-form" onsubmit="saveData()">
                         <textarea id="suspend-msg" name="suspend-msg" rows="5" cols="50" maxlength="500" class="suspend-msg" placeholder="Enter reason to suspend..."></textarea>
+
                         <div class="suspend-time">
                             <div class="suspend-dropdown">
                                 <p>Select the time duration for the suspend</p>
@@ -235,12 +235,10 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
-
                         window.location.href = '<?php echo URLROOT; ?>/admins/deletionView';
                     })
                     .catch(error => {
                         console.error('Error:', error);
-
                     });
             }
         }

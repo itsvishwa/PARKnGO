@@ -384,7 +384,6 @@ class Admin
     $this->db->bind(':message', $data['message']);
     $this->db->bind(':duration', $data['duration']);
     $this->db->bind(':time_stamp', $data['time_stamp']);
-
     if ($this->db->execute()) {
       return true;
     } else {

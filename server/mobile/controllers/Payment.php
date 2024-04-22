@@ -6,26 +6,25 @@ class Payment extends Controller
 
     private $payment_model;
     private $officer_model;
-    private $session_model;
     private $parking_space_model;
 
     public function __construct()
     {
         $this->payment_model = $this->model("PaymentModel");
         $this->officer_model = $this->model("OfficerModel");
-        $this->session_model = $this->model("SessionModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
     }
 
 
+    // driver mob - used to view open payment details for given payment id
     public function view_payment()
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_PAY_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_PAY_TNF");
         } else // valid token 
         {
             $encoded_string = $_SERVER['HTTP_X_ENCODED_DATA']; // encoded payment_id
@@ -33,7 +32,7 @@ class Payment extends Controller
 
             if ($payment_id === false) // invalid encoded_string
             {
-                $this->send_json_400("Invalid Encoded String");
+                $this->send_json_400("PAY_IDATA");
             } else // code decoded sucessfully
             {
                 if ($this->payment_model->is_payment_session_id_exist($payment_id)) // valid payment id
@@ -41,31 +40,32 @@ class Payment extends Controller
 
                     if ($this->payment_model->is_payment_session_ended($payment_id)) // payment session has been closed
                     {
-                        $this->send_json_200("Payment is successfully closed");
+                        $this->send_json_200("PAY_CL");
                     } else  // payment session still open
                     {
                         $result = $this->payment_model->get_all_data($payment_id);
                         $payment_data = [
                             "payment_id" => $encoded_string,
                             "amount" => $result->amount,
-                            "start_time" => $result->start_time,
-                            "end_time" => $result->end_time,
-                            "vehicle_number" => $result->vehicle_number,
+                            "start_time" => implode(" | ", $this->format_time($result->start_time)),
+                            "end_time" => implode(" | ", $this->format_time($result->end_time)),
+                            "vehicle_number" => $this->format_vehicle_number($result->vehicle_number),
                             "vehicle_type" => $result->vehicle_type,
                             "parking_space_name" => $result->name,
-                            "duration" => $result->end_time - $result->start_time
+                            "duration" => $this->calculate_time($result->end_time - $result->start_time)
                         ];
                         $this->send_json_200($payment_data);
                     }
                 } else // invalid payment id
                 {
-                    $this->send_json_400("Invalid payment ID");
+                    $this->send_json_400("PAY_IPID");
                 }
             }
         }
     }
 
 
+    // driver mob
     // close the payment if user payment is successfull 
     // will not return anything as a json
     // reason is this will call automatically by the payhere gateway
@@ -109,8 +109,8 @@ class Payment extends Controller
     }
 
 
-
-    public function cash() {
+    public function cash()
+    {
         $token_data = $this->verify_token_for_officers();
 
         if ($token_data === 400) {
@@ -120,17 +120,17 @@ class Payment extends Controller
         } else // token is valid
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
-            
+
             $parking_id = trim($_POST["parking_id"]);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
                 $encrypted_payment_id = trim($_POST["payment_id"]);
-                
+
                 $payment_id = $this->decrypt_id($encrypted_payment_id);
-               
+
                 $is_payment_session = $this->payment_model->is_payment_session_id_exist($payment_id);
 
-                if(!$is_payment_session) {
+                if (!$is_payment_session) {
                     $result = [
                         "response_code" => "204",
                         "message" => "No payment session found"
@@ -140,14 +140,13 @@ class Payment extends Controller
                 } else {
                     $is_ended_payment_session = $this->payment_model->is_payment_session_ended($payment_id);
 
-                    if($is_ended_payment_session) {
+                    if ($is_ended_payment_session) {
                         $result = [
                             "response_code" => "409",
                             "message" => "This payment session is already ended"
                         ];
 
                         $this->send_json_404($result);
-                        
                     } else {
                         $time_stamp = time();
 
@@ -168,9 +167,6 @@ class Payment extends Controller
                         $this->send_json_200($result);
                     }
                 }
-
-                
-
             } else {  //parking_id is not similar to the assigned parking
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
@@ -184,7 +180,6 @@ class Payment extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
 
                     $result = [
@@ -194,8 +189,23 @@ class Payment extends Controller
 
                     $this->send_json_404($result);
                 }
-    
             }
         }
+    }
+
+
+
+    // calculate time
+    private function calculate_time($time)
+    {
+        $hours = floor($time / 3600);
+        $minutes = floor(($time % 3600) / 60);
+
+        $result = [
+            "hours" => $hours . "",
+            "minutes" => $minutes . ""
+        ];
+
+        return $result;
     }
 }
