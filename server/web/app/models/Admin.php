@@ -94,11 +94,8 @@ class Admin
     $this->db->query('SELECT _id ,name, registered_time_stamp , address , documents FROM company WHERE is_approved = 0 AND is_reviewd = 0');
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
-
-
     return $rows;
   }
-
 
   // Function to get pending, approved, or rejected company applications
   public function getCompanyApplications($isApproved, $isReviewed)
@@ -122,8 +119,6 @@ class Admin
     return $rows;
   }
 
-
-
   // Function to get the parking officers count for a specific company
   public function getParkingOfficersCountForCompany($companyId)
   {
@@ -137,7 +132,6 @@ class Admin
 
     return $row->parking_officers_count;
   }
-
 
   // Function to get the parking slots count for a specific company
   public function getParkingSlotsCountForCompany($companyId)
@@ -169,8 +163,6 @@ class Admin
     // If there is at least one public parking space, return true; otherwise, return false
     return $row ? "Public" : "Private";
   }
-
-
 
   // Function to get pending company applications total count
   public function getPendingCompanyApplicationsWithCount()
@@ -218,8 +210,6 @@ class Admin
     }
   }
 
-
-
   public function getCompanyById($id)
   {
     $this->db->query('SELECT * FROM company WHERE _id = :id');
@@ -247,7 +237,7 @@ class Admin
   public function getTopTwoReviewsData()
   {
     $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
-    
+
     try {
       $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
       return $rows;
@@ -362,8 +352,6 @@ class Admin
     return $row;
   }
 
-
-
   public function getDocument($documentId)
   {
 
@@ -406,7 +394,6 @@ class Admin
       return false;
     }
   }
-
 
   public function updateApproveOrRejectApplication($companyId, $adminId, $isApproved, $rejectReason = null)
   {
@@ -473,10 +460,8 @@ class Admin
     return null; // or handle the case when the document is not found
   }
 
-
-
-public function getReportReviews()
-{
+  public function getReportReviews()
+  {
     // Calculate the timestamp of 30 days ago
     $thirtyDaysAgo = strtotime('-30 days');
 
@@ -500,11 +485,10 @@ public function getReportReviews()
 
     // Return good reviews from the past 30 days
     return $Reviews;
-}
+  }
 
-
-public function getReportBadReviews()
-{
+  public function getReportBadReviews()
+  {
     // Calculate the timestamp of 30 days ago
     $thirtyDaysAgo = strtotime('-30 days');
 
@@ -528,10 +512,10 @@ public function getReportBadReviews()
 
     // Return good reviews from the past 30 days
     return $goodReviews;
-}
+  }
 
-public function getReportGoodReviews()
-{
+  public function getReportGoodReviews()
+  {
     // Calculate the timestamp of 30 days ago
     $thirtyDaysAgo = strtotime('-30 days');
 
@@ -555,8 +539,5 @@ public function getReportGoodReviews()
 
     // Return good reviews from the past 30 days
     return $goodReviews;
-}
-
-
-
+  }
 }
