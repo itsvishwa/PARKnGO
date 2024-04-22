@@ -57,7 +57,7 @@ public class AssignAVehicleAddDetailsHelper {
 
         // Vehicle type spinner
         Spinner spinnerVehicleTypes = assignAVehicleAddDetailsView.findViewById(R.id.spinner_vehicle_types);
-        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
+        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Tuktuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
         ArrayAdapter<String> vTypeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypes);
         vTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerVehicleTypes.setAdapter(vTypeAdapter);
@@ -151,7 +151,7 @@ public class AssignAVehicleAddDetailsHelper {
 
                     // Get vehicle type
                     String selectedVehicleType = vehicleTypesSpinnerView.getSelectedItem().toString();
-                    String selectedVehicleTypeLowercase = selectedVehicleType.toLowerCase();
+                    String selectedVehicleTypeProcessed = VehicleNumberHelper.vehicleTypeToProcessed(selectedVehicleType);
 
                     // Get driverId
                     String driverId = driverIdEditTextView.getText().toString();
@@ -171,7 +171,7 @@ public class AssignAVehicleAddDetailsHelper {
                     Bundle bundle = new Bundle();
                     bundle.putString("vehicle_number", vehicleNumber);
                     bundle.putString("vehicle_number_processed", preprocessVehicleNumber);
-                    bundle.putString("vehicle_type", selectedVehicleTypeLowercase);
+                    bundle.putString("vehicle_type", selectedVehicleTypeProcessed);
                     bundle.putString("start_time", stTimeStamp);
                     bundle.putString("driver_id", driverId);
 
@@ -179,7 +179,7 @@ public class AssignAVehicleAddDetailsHelper {
                     // Log the values for debugging
                     Log.d("Bundle Values", "Vehicle Number: " + vehicleNumber);
                     Log.d("Bundle Values", "Vehicle Number Processed: " + preprocessVehicleNumber);
-                    Log.d("Bundle Values", "Vehicle Type: " + selectedVehicleTypeLowercase);
+                    Log.d("Bundle Values", "Vehicle Type: " + selectedVehicleTypeProcessed);
                     Log.d("Bundle Values", "Start Time Stamp: " + stTimeStamp);
                     Log.d("Bundle Values", "Driver ID: " + driverId);
 
@@ -193,7 +193,6 @@ public class AssignAVehicleAddDetailsHelper {
         });
 
     }
-
 
     private long calculateTimestamp(String dateTimeString) {
 
