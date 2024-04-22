@@ -122,9 +122,10 @@ class DriverQRModel
     }
 
 
-   
 
-    public function is_qr_exists($_id) {
+
+    public function is_qr_exists($_id)
+    {
         $this->db->query("SELECT * FROM driver_qr WHERE _id = :_id");
 
         $this->db->bind(":_id", $_id);
@@ -160,5 +161,4 @@ class DriverQRModel
             return false;
         }
     }
-
 }

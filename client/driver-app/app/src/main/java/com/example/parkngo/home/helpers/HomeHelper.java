@@ -1,42 +1,104 @@
 package com.example.parkngo.home.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.home.AvailableParkingSpacesFragment;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HomeHelper {
-    public HomeHelper(View view, Context context){
-        // set spinner
-        Spinner spinner = view.findViewById(R.id.home_frag_spinner);
-        ArrayList<String> vehicleTypes = new ArrayList<>();
-        String[] vTypes = {"Car", "Bike", "Van", "Lorry", "Bus"};
-        for (int i=0; i<vTypes.length; i++){
-            vehicleTypes.add(vTypes[i]);
-        }
+
+    View homeFragmentView;
+    Context context;
+    String vehicleType;
+
+    public HomeHelper(View homeFragmentView, Context context){
+        this.homeFragmentView = homeFragmentView;
+        this.context = context;
+    }
+
+
+    // initializing the layout and button listeners
+    public void init(){
+        initVehicleSpinner();
+        initPulseAnimation();
+        initTopBarData();
+        initVehicleSpinnerBtnListener();
+        initMainBtnListener();
+    }
+
+
+    // initializing the vehicle spinner
+    private void initVehicleSpinner(){
+        Spinner spinner = homeFragmentView.findViewById(R.id.home_frag_spinner);
+
+        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypes);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinner.setAdapter(adapter);
+    }
 
-        // set the pulse animation for constraint layout
-        ConstraintLayout constraintLayout = view.findViewById(R.id.home_frag_cons_layout);
+    // initializing the main button pulse-animation
+    private void initPulseAnimation(){
+        ConstraintLayout constraintLayout = homeFragmentView.findViewById(R.id.home_frag_cons_layout);
         Animation pulse = AnimationUtils.loadAnimation(context, R.anim.anim_pulse);
         constraintLayout.startAnimation(pulse);
+    }
 
-        // replace the user name
+    // initializing the top bar data values
+    private void initTopBarData(){
         ParkngoStorage parkngoStorage = new ParkngoStorage(context);
         String firstName = parkngoStorage.getData("firstName");
-        TextView nameView = view.findViewById(R.id.home_frag_user_name);
+        TextView nameView = homeFragmentView.findViewById(R.id.home_frag_user_name);
         nameView.setText(firstName);
+    }
+
+    // initializing vehicle spinner btn handler
+    private void initVehicleSpinnerBtnListener(){
+        Spinner spinner = homeFragmentView.findViewById(R.id.home_frag_spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String temp = adapterView.getItemAtPosition(i).toString();
+                temp = temp.toLowerCase();
+                temp = temp.replace(" ", "_");
+                vehicleType = temp;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+    // initializing main button handler
+    private void initMainBtnListener(){
+        ShapeableImageView shapeableImageView = homeFragmentView.findViewById(R.id.home_frag_main_img);
+        shapeableImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString("vehicleType", vehicleType);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
+            }
+        });
     }
 }
