@@ -15,7 +15,7 @@
         <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-black.png" alt="logo" width="100%" /></a>
       </div>
     </div>
-    <div class="right-container">
+    <div class="right-container mt-150">
       <div class="reg-submission">
         <h2 class="heading">PARK&apos;n GO Suspended<br />Your Company</h2>
         <p class="message">
