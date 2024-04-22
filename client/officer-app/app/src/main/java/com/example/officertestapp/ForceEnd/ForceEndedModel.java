@@ -5,8 +5,10 @@ public class ForceEndedModel {
     String vehicleType;
     String startDateTime;
     String endDateTime;
+    String _id;
 
-    public ForceEndedModel(String vehicleNumber, String vehicleType, String startDateTime, String endDateTime) {
+    public ForceEndedModel(String _id, String vehicleNumber, String vehicleType, String startDateTime, String endDateTime) {
+        this._id = _id;
         this.vehicleNumber = vehicleNumber;
         this.vehicleType = vehicleType;
         this.startDateTime = startDateTime;
@@ -27,6 +29,10 @@ public class ForceEndedModel {
 
     public String getEndDateTime() {
         return endDateTime;
+    }
+
+    public String getID(){
+        return _id;
     }
 
 }

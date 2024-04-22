@@ -23,7 +23,7 @@ public class ForceEndMainFragment extends Fragment {
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
 
         // fetching data
-        new ForceEndedFetchData(forceEndsessionsView, loadingView, getContext(), (MainActivity)requireContext());
+        new ForceEndedFetchData(forceEndsessionsView, loadingView, getContext());
 
         return loadingView;
     }
