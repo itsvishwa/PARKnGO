@@ -139,9 +139,7 @@
                 ?>
               </p>
             </div>
-
             <button class="b-card_d-icon" onclick="downloadDocument('<?php echo $_GET['_id'] ?? ''; ?>')">
-
               <div class="b-card_down-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="r-menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -152,11 +150,9 @@
               </div>
           </div>
           </button>
-
           <div class="b-card-ar-content text-black">
             <p>Approve or Reject?</p>
           </div>
-
           <div class="b-card3">
             <div class="card-content12 text-gray">
               <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
@@ -166,7 +162,6 @@
               <button class="approve-button" onclick="approveApplication()">Approve Application</button>
             </div>
           </div>
-
           <div class="b-card-content text-black">
           </div>
         </div>
@@ -175,7 +170,6 @@
   </div>
   </div>
   </div>
-
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
