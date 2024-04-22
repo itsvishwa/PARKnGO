@@ -56,15 +56,11 @@ public class AssignAVehicleConfirmationHelper {
         TextView vehicleNumberTextView = assignAVehicleConfirmationView.findViewById(R.id.frag_assign_vehicle_01_vehicle_number_txt_view);
         TextView vehicleTypeTextView = assignAVehicleConfirmationView.findViewById(R.id.frag_assign_vehicle_01_vehicle_type_txt_view);
 
-        //String vehicleNumberToSplit = vehicleNumberProcessed;
-
         String splittedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(vehicleNumberProcessed);
         vehicleNumberTextView.setText(splittedVehicleNumber);
 
-
-        vehicleNumberTextView.setText(splittedVehicleNumber);
-
-        vehicleTypeTextView.setText(vehicleType.toUpperCase());
+        String formattedType = VehicleNumberHelper.formatVehicleType(vehicleType);
+        vehicleTypeTextView.setText(formattedType);
     }
 
     public void initYesBtnListener() {
@@ -187,16 +183,16 @@ public class AssignAVehicleConfirmationHelper {
             }
         }
     }
-//    public void initBackBtnListener() {
-//        Button backButton = assignAVehicleConfirmationView.findViewById(R.id.assign_vehicle_02_back_btn);
-//
-//        backButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Navigate back to the previous fragment
-//                requireActivity().onBackPressed();
-//            }
-//        });
-//    }
+    public void initBackBtnListener() {
+        Button backButton = assignAVehicleConfirmationView.findViewById(R.id.assign_vehicle_02_back_btn);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate back to the previous fragment
+                fragmentManager.popBackStack();
+            }
+        });
+    }
 
 }

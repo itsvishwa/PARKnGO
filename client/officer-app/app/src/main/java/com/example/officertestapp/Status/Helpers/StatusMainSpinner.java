@@ -52,7 +52,7 @@ public class StatusMainSpinner {
         });
 
         ArrayList<String> vehicleTypes = new ArrayList<>();
-        String[] vTypes = {"All", "Car", "Bike", "Van", "Lorry", "Bus"};
+        String[] vTypes = {"All", "Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"};
 
         for (int i=0; i<vTypes.length; i++){
             vehicleTypes.add(vTypes[i]);

@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.HeroActivity;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
@@ -101,7 +102,8 @@ public class QRHelper {
             String vehicleType = responseData.getString("vehicle_type");
             String driverId = responseData.getString("driver_id");
 
-            String vehicleTypeFCap = vehicleType.substring(0, 1).toUpperCase() + vehicleType.substring(1);
+            //vehicle type
+            String vehicleTypeFCap = VehicleNumberHelper.capitalizeVehicleType(vehicleType);
 
             // Split the vehicle number into letters, symbol, numbers, province using "#"
             String[] vehicleNumberParts = vehicleNumber.split("#");
@@ -167,7 +169,7 @@ public class QRHelper {
             Spinner spinnerVehicleTypes = view.findViewById(R.id.spinner_vehicle_types);
 
             // Get the array of vehicle types
-            ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
+            ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Tuktuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
 
             // Find the index of vehicleType in the vehicleTypes array
             int vehicleTypeIndex = vehicleTypes.indexOf(vehicleTypeFCap);

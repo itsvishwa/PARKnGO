@@ -33,7 +33,7 @@
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/app_bar_info_box"
-                    android:text="CMC Car Park 01"
+                    android:text="Car Park Name"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:gravity="center"
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Dhanushika Nayomi"
+                android:text="First Name"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView10"
@@ -155,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="071 1234567"
+                android:text="000 0000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -178,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="PO_0001"
+                android:text="PO_0000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView4"
@@ -203,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="12345678910"
+                android:text="00000000000"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView5"
@@ -239,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="CMC CAR PARK"
+                android:text="CAR PARK"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView2"
@@ -263,7 +263,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Colombo Municipal Council"
+                android:text="Company"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView11"
@@ -282,6 +282,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/profile_frag_company_name" />
 
             <Button
+                android:id="@+id/profile_frag_call_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -321,7 +322,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="07.33 AM"
+                android:text="00.00 AM"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView15"
@@ -345,7 +346,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="2024 FEB 03"
+                android:text="0000 000 00"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_frag_time"
@@ -357,43 +358,21 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout25"
+        <com.ncorti.slidetoact.SlideToActView
+            android:id="@+id/duty_off_swipe_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_background_detail_box"
-            android:padding="5dp"
+            android:layout_height="52dp"
             android:layout_marginTop="14dp"
+            app:border_radius="10dp"
+            app:icon_margin="@dimen/slidetoact_default_area_margin"
+            app:inner_color="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout20"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout20"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout20">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/duty_off_swipe_button"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:background="@drawable/rounded_bg_detail_box_primary_col"
-                app:icon="@drawable/baseline_arrow_forward_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/swipe_bar_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="Swipe to mark work shift off"
-                android:textColor="@color/textGrey"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout20"
+            app:outer_color="@color/detailBoxBackground"
+            app:text="Swipe to mark your attendance"
+            app:text_color="@color/textGrey"
+            app:text_size="16sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
