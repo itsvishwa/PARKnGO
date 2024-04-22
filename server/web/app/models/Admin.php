@@ -8,11 +8,9 @@ class Admin
     $this->db = new Database;
   }
 
-
   // Login admin
   public function login($email, $password)
   {
-
 
     $this->db->query('SELECT * FROM admin WHERE email = :email');
     $this->db->bind(':email', $email);
@@ -41,7 +39,6 @@ class Admin
       return false;
     }
   }
-
 
   // Function to get the number of users from the database
   public function getUsersCount()
@@ -94,11 +91,8 @@ class Admin
     $this->db->query('SELECT _id ,name, registered_time_stamp , address , documents FROM company WHERE is_approved = 0 AND is_reviewd = 0');
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
-
-
     return $rows;
   }
-
 
   // Function to get pending, approved, or rejected company applications
   public function getCompanyApplications($isApproved, $isReviewed)
@@ -122,8 +116,6 @@ class Admin
     return $rows;
   }
 
-
-
   // Function to get the parking officers count for a specific company
   public function getParkingOfficersCountForCompany($companyId)
   {
@@ -137,7 +129,6 @@ class Admin
 
     return $row->parking_officers_count;
   }
-
 
   // Function to get the parking slots count for a specific company
   public function getParkingSlotsCountForCompany($companyId)
@@ -169,8 +160,6 @@ class Admin
     // If there is at least one public parking space, return true; otherwise, return false
     return $row ? "Public" : "Private";
   }
-
-
 
   // Function to get pending company applications total count
   public function getPendingCompanyApplicationsWithCount()
@@ -218,8 +207,6 @@ class Admin
     }
   }
 
-
-
   public function getCompanyById($id)
   {
     $this->db->query('SELECT * FROM company WHERE _id = :id');
@@ -247,11 +234,7 @@ class Admin
   public function getTopTwoReviewsData()
   {
     $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
-    // return $this->db->resultSet(); // Assuming resultSet() fetches all rows
 
-    // $rows = $this->db->resultSet(); 
-
-    // return $rows;
     try {
       $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
       return $rows;
@@ -366,13 +349,6 @@ class Admin
     return $row;
   }
 
-
-  public function updateRecoveryToken($data)
-  {
-    $this->db->query('UPDATE admin SET token = :token WHERE email = :email');
-    $this->db->bind(':token', $data['token']);
-    $this->db->bind(':email', $data['email']);
-
   public function getDocument($documentId)
   {
 
@@ -478,5 +454,86 @@ class Admin
     }
 
     return null; // or handle the case when the document is not found
+  }
+
+  public function getReportReviews()
+  {
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Reviews" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $Reviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $Reviews;
+  }
+
+  public function getReportBadReviews()
+  {
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Bad Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars <= 2
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $goodReviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $goodReviews;
+  }
+
+  public function getReportGoodReviews()
+  {
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Good Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars > 2
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $goodReviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $goodReviews;
   }
 }
