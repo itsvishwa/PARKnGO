@@ -265,61 +265,54 @@ class Admins extends Controller
     $this->view('admin/proceedView', $data);
   }
 
-  /*public function reportGenerateView()
+  public function reportGenerateView()
   {
 
-    $reviews = $this->adminModel->getReportReviews();
+    //$data = $this->adminModel->getReportBadReviews();
+    //print_r($data);
+    // Fetch reviews data from the model
+    /*$reviewsData = $this->adminModel->getReportReviews();*/
 
+     // Call the model method to fetch bad reviews
+     //$badReviews = $this->adminModel->getReportBadReviews();
+
+     // Pass the bad reviews data to the view
+     //$data['badReviews'] = $badReviews;
+
+    // Separate bad and good reviews
+    /*$badReviews = [];
+    $goodReviews = [];
+
+    foreach ($reviewsData as $review) {
+      if ($review->review_type === 'Bad Review') {
+        $badReviews[] = $review;
+      } else {
+        $goodReviews[] = $review;
+      }
+    }
+    // Pass the reviews data to the view
     $data = [
-      'reviews' => $reviews
-    ];
+      'badReviews' => $badReviews,
+      'goodReviews' => $goodReviews
+    ];*/
 
-    $this->view('admin/reportGenerateView',$data);
-  }*/
+    // Load the view with the reviews data
+    $this->view('admin/reportGenerateView');
+  }
 
-  /*public function reportGenerateView()
+// Controller method to handle fetching bad reviews
+/*public function getBadReviews()
 {
-    $reviews = $this->adminModel->getReportReviews();
+    
+    // Call the model method to fetch bad reviews
+    $badReviews = $this->adminModel->getReportBadReviews();
 
-    // Filter bad and good reviews separately
-    $badReviews = array_filter($reviews, function($review) {
-        return $review['review_type'] === 'Bad Review';
-    });
+    // Pass the bad reviews data to the view
+    $data['badReviews'] = $badReviews;
 
-    $goodReviews = array_filter($reviews, function($review) {
-        return $review['review_type'] === 'Good Review';
-    });
-
-    $data = [
-        'badReviews' => $badReviews,
-        'goodReviews' => $goodReviews
-    ];
-
+    // Load the view with bad reviews data
     $this->view('admin/reportGenerateView', $data);
 }*/
-
-public function reportGenerateView()
-{
-    $reviews = $this->adminModel->getReportReviews();
-
-    // Filter bad and good reviews separately
-    $badReviews = array_filter($reviews, function($review) {
-        return $review->review_type === 'Bad Review'; // Use object notation -> instead of array notation []
-    });
-
-    $goodReviews = array_filter($reviews, function($review) {
-        return $review->review_type === 'Good Review'; // Use object notation -> instead of array notation []
-    });
-
-    $data = [
-        'badReviews' => $badReviews,
-        'goodReviews' => $goodReviews
-    ];
-
-    $this->view('admin/reportGenerateView', $data);
-}
-
-
 
 
   public function delete($id)
@@ -353,6 +346,21 @@ public function reportGenerateView()
     echo $documentData;
     exit();
   }
+
+  
+  // Controller method to handle PDF generation
+public function downloadPDF()
+{
+    // Fetch bad and good reviews data from the model
+    $badReviews = $this->adminModel->getBadReviews();
+    $goodReviews = $this->adminModel->getGoodReviews();
+
+    // Load the view and pass the data
+    $this->view('reportGenerateView', [
+        'badReviews' => $badReviews,
+        'goodReviews' => $goodReviews
+    ]);
+}
 
   public function approveApplication()
   {
@@ -389,4 +397,5 @@ public function reportGenerateView()
       echo json_encode(['success' => false, 'error' => 'Failed to reject application']);
     }
   }
+ 
 }

@@ -1076,3 +1076,35 @@ body {
 .search-bar:focus {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
 }
+
+.font-semibold {
+  font-weight: 500;
+}
+
+.border-radius-3 {
+  border-radius: 3px;
+}
+
+.report-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  margin-left: 20px;
+  height: 20vh;
+  width: 77vw;
+  border-radius: 20px;
+  background-color: #fffbf4;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.report-card-content {
+  margin-left: 20px;
+  width: 50%;
+}
+
+.report-card-img {
+
+  width: 50%;
+
+}
