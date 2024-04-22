@@ -54,7 +54,11 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_signup_otp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_signup_otp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_mobile_number.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_mobile_number.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Driver.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Driver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/ParkingSpace.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/ParkingSpace.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/Session.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server/mobile/controllers/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/controllers/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../server/mobile/models/PaymentModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/mobile/models/PaymentModel.php" afterDir="false" />
     </list>
