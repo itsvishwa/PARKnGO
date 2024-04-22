@@ -269,7 +269,6 @@ class Admins extends Controller
   {
 
     $this->view('admin/reportGenerateView');
-
   }
 
   public function delete($id)
@@ -303,21 +302,6 @@ class Admins extends Controller
     echo $documentData;
     exit();
   }
-
-  
-  // Controller method to handle PDF generation
-public function downloadPDF()
-{
-    // Fetch bad and good reviews data from the model
-    $badReviews = $this->adminModel->getBadReviews();
-    $goodReviews = $this->adminModel->getGoodReviews();
-
-    // Load the view and pass the data
-    $this->view('reportGenerateView', [
-        'badReviews' => $badReviews,
-        'goodReviews' => $goodReviews
-    ]);
-}
 
   public function approveApplication()
   {
@@ -354,5 +338,4 @@ public function downloadPDF()
       echo json_encode(['success' => false, 'error' => 'Failed to reject application']);
     }
   }
- 
 }
