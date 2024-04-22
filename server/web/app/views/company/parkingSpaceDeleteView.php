@@ -61,6 +61,14 @@
                 Parking Officer
               </a>
             </li>
+            <li>
+              <a href="../reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -81,12 +89,12 @@
       </div>
 
       <div class="flex-column justify-content-center align-items-center">
-        <div class="confirmation-card-image">
+        <div class="confirmation-card-image mb-10">
           <img src="data:<?php $encodedImage = base64_encode($data['parking_space']->parking_image);
                           $imageMimeType = "image/jpeg";
                           echo $imageMimeType; ?>;base64,<?php echo $encodedImage; ?>" alt="parking image" class="parking-image" />
         </div>
-        <div class="parking-space-card">
+        <div class="parking-space-card mb-10">
           <div class="parking-card-header">
             <div class="parking-name">
               <h3 class="parking-card-bold"><?php echo htmlspecialchars($data['parking_space']->parking_name); ?></h3>
@@ -102,7 +110,7 @@
               <?php if ($data['parking_space']->parking_is_public) {
                 echo '<p class="parking-type bg-green text-white">Public</p>';
               } else {
-                echo '<p class="parking-type bg-green text-white">Private</p>';
+                echo '<p class="parking-type bg-primary text-white">Private</p>';
               } ?>
 
             </div>
