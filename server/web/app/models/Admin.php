@@ -473,49 +473,13 @@ class Admin
     return null; // or handle the case when the document is not found
   }
 
- /* public function getReportReviews()
-{
-    $this->db->query('
-        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
-               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
-               CASE
-                   WHEN review.no_of_stars <= 2 THEN "Bad Review"
-                   ELSE "Good Review"
-               END AS review_type
-        FROM review
-        INNER JOIN driver ON review.driver_id = driver._id
-        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
-    ');
 
-    $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
-
-    return $rows;
-}*/
 
 /*public function getReportReviews()
 {
-    $this->db->query('
-        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
-               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
-               CASE
-                   WHEN review.no_of_stars <= 2 THEN "Bad Review"
-                   ELSE "Good Review"
-               END AS review_type
-        FROM review
-        INNER JOIN driver ON review.driver_id = driver._id
-        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
-    ');
-
-    $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
-
-    return $rows;
-}*/
-
-public function getReportReviews()
-{
     // Fetch bad reviews
     $this->db->query('
-        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+        SELECT review._id, review.no_of_stars, review.content,
                driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
                "Bad Review" AS review_type
         FROM review
@@ -527,7 +491,7 @@ public function getReportReviews()
 
     // Fetch good reviews
     $this->db->query('
-        SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
+        SELECT review._id, review.no_of_stars, review.content,
                driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
                "Good Review" AS review_type
         FROM review
@@ -537,11 +501,128 @@ public function getReportReviews()
     ');
     $goodReviews = $this->db->resultSet();
 
-    return [
-        'badReviews' => $badReviews,
-        'goodReviews' => $goodReviews
-    ];
+  
+    return array_merge($badReviews, $goodReviews);
+}*/
+
+/*public function getReportBadReviews()
+{
+    // Fetch bad reviews
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Bad Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars <= 2
+    ');
+    $badReviews = $this->db->resultSet();
+
+    // Return bad reviews only
+    return $badReviews;
 }
+*/
+/*public function getReportGoodReviews()
+{R
+    // Fetch bad reviews
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Good Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars > 2
+    ');
+    $goodReviews = $this->db->resultSet();
+
+    // Return bad reviews only
+    return $goodReviews;
+}*/
+public function getReportReviews()
+{
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Reviews" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $Reviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $Reviews;
+}
+
+
+public function getReportBadReviews()
+{
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Bad Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars <= 2
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $goodReviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $goodReviews;
+}
+
+public function getReportGoodReviews()
+{
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Good Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars > 2
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $goodReviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $goodReviews;
+}
+
+
 
 
 
