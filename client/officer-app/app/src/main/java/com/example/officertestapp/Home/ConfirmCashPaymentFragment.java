@@ -16,11 +16,11 @@ import com.example.officertestapp.Home.Helpers.PaymentReceiveCashHelper;
 import com.example.officertestapp.R;
 
 
-public class ReleaseASlot04Fragment extends Fragment {
+public class ConfirmCashPaymentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_release_a_slot04, container, false);
+        View view = inflater.inflate(R.layout.fragment_confirm_cash_payment, container, false);
 
         // Use the helper class to set app bar details
         HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
