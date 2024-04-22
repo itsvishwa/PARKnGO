@@ -1,7 +1,5 @@
 package com.example.officertestapp.Status.Helpers;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -22,7 +20,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
-import com.example.officertestapp.Login.LoginOtpActivity;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.example.officertestapp.Status.PSRecycleViewAdapter;

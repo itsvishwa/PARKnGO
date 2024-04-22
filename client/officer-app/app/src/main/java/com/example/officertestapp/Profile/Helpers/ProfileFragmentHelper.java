@@ -2,13 +2,11 @@ package com.example.officertestapp.Profile.Helpers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.AuthFailureError;
@@ -18,14 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.officertestapp.Attendance.MarkAttendanceActivity;
 import com.example.officertestapp.Attendance.MarkAttendanceOffActivity;
-import com.example.officertestapp.Attendance.MarkedAttendanceFailActivity;
-import com.example.officertestapp.Attendance.MarkedAttendanceSuccessfulActivity;
 import com.example.officertestapp.Helpers.DateTimeHelper;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
-import com.example.officertestapp.Home.AssignVehicle03Fragment;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.ncorti.slidetoact.SlideToActView;

@@ -126,19 +126,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/release_slot_scan_qr_btn">
 
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/driver_id_etxt"
-                android:layout_width="125dp"
-                android:layout_height="48dp"
-                android:background="@drawable/vehicle_details_input_feild_bg"
-                android:gravity="center"
-                android:text="-1"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
