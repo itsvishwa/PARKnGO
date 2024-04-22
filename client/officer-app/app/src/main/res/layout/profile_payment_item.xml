@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
-        android:text="10.30 AM | 04 July"
+        android:text="00.00 ## | 00 ###"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Rs. 425.00"
+        android:text="Rs. 000.00"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/pph_frag_datetime"
         app:layout_constraintTop_toBottomOf="@+id/pph_frag_datetime" />
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="ABC 1050 WP"
+        android:text="### 0000 ##"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/pph_frag_amount"
         app:layout_constraintTop_toBottomOf="@+id/pph_frag_amount" />
@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="CASH"
+        android:text="METHOD"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/pph_frag_vehicleNum"
         app:layout_constraintTop_toBottomOf="@+id/pph_frag_vehicleNum" />

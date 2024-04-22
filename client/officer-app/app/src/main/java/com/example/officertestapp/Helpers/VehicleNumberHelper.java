@@ -43,4 +43,42 @@ public class VehicleNumberHelper {
         // Join the parts back together with an empty space
         return String.join(" ", parts);
     }
+
+    // Mini Van => mini_van
+    public static String vehicleTypeToProcessed(String vehicleType) {
+        // Convert to lowercase
+        String lowercaseType = vehicleType.toLowerCase();
+
+        // Replace spaces with underscores
+        String processedType = lowercaseType.replace(" ", "_");
+
+        return processedType;
+    }
+
+    //mini_van => MINI VAN
+    public static String formatVehicleType(String vehicleType) {
+        // Convert to uppercase
+        String uppercaseType = vehicleType.toUpperCase();
+
+        // Replace underscores with spaces
+        String formattedType = uppercaseType.replace("_", " ");
+
+        return formattedType;
+    }
+
+    //mini_van => Mini Van, car => Car
+    public static String capitalizeVehicleType(String vehicleType) {
+        // Split the vehicle type by underscores
+        String[] parts = vehicleType.split("_");
+
+        // Iterate over each part and capitalize the first letter
+        for (int i = 0; i < parts.length; i++) {
+            // Capitalize the first letter of each part
+            parts[i] = parts[i].substring(0, 1).toUpperCase() + parts[i].substring(1);
+        }
+
+        // Join the parts back together with a space
+        return String.join(" ", parts);
+    }
+
 }

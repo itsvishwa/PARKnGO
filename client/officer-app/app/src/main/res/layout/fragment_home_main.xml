@@ -35,7 +35,7 @@
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/app_bar_info_box"
-                    android:text="CMC Car Park 01"
+                    android:text="Car Park Name"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:gravity="center"

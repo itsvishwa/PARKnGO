@@ -1,5 +1,7 @@
 package com.example.officertestapp.Status;
 
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
+
 public class ParkingStatusModel {
     String vehicleNumber;
     String vehicleType;
@@ -16,7 +18,7 @@ public class ParkingStatusModel {
     }
 
     public String getVehicleNumber() {
-        return vehicleNumber;
+        return VehicleNumberHelper.splitVehicleNumber(vehicleNumber);
     }
 
     public String getVehicleType() {

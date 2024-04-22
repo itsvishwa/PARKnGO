@@ -44,7 +44,7 @@ public class AssignAVehicleConfirmationFragment extends Fragment {
             assignAVehicleConfirmationHelper.initYesBtnListener();
 
             // Handle Back button click
-            //assignAVehicleConfirmationHelper.initBackBtnListener();
+            assignAVehicleConfirmationHelper.initBackBtnListener();
 
         } else {
             Log.e("AssignAVehicleConfirmationFragment", "AssignAVehicleAddDetailsHelper Arguments (Bundle) is null");
