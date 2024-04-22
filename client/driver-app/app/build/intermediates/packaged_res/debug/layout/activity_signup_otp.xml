@@ -216,15 +216,16 @@
 
             <TextView
                 android:id="@+id/sign_up_act_resend"
-                android:onClick="sign_up_act_resend_btn_handler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Resend (59 s)"
+                android:layout_marginStart="24dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="sign_up_act_resend_btn_handler"
+                android:text="Resend"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 

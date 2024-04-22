@@ -1,13 +1,17 @@
 package com.example.parkngo.session.helpers;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,10 +22,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ErrorFragmentHelper;
+import com.example.parkngo.helpers.ErrorFragment;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.session.AddVehicle;
+import com.example.parkngo.session.EditVehicle;
 import com.example.parkngo.session.SessionOnGoingFragment;
 import com.example.parkngo.session.SessionPaymentFragment;
+import com.example.parkngo.session.SessionQRFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,20 +37,37 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SessionMainFetchData {
+public class SessionMainHelper {
 
     private View sessionMainView;
     private View loadingView;
     private View errorView;
     private Context context;
+    boolean is1Selected;
+    boolean is2Selected;
+    boolean is3Selected;
+    Button continueBtn;
+    FragmentManager fragmentManager;
+    String[] rowVehicleNumberArr = new String[3];
 
-    public SessionMainFetchData(View sessionMainView, View loadingView, View errorView, Context context){
+
+    public SessionMainHelper(View sessionMainView, View loadingView, View errorView, Context context, FragmentManager fragmentManager){
         this.sessionMainView = sessionMainView;
         this.loadingView = loadingView;
         this.errorView = errorView;
         this.context = context;
         this.checkOpenPaymentSessions();
         this.checkOpenParkingSessions();
+        continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);
+        this.fragmentManager = fragmentManager;
+    }
+
+
+    public void init(){
+        this.fetchData();
+        this.initVehicleBtnHandlers();
+        this.initTapToAddBtnHandlers();
+        this.initContinueBtnHandler();
     }
 
 
@@ -85,7 +109,7 @@ public class SessionMainFetchData {
             JSONObject jsonDataObject = mainJsonObject.getJSONObject("response");
 
             String statusCode = jsonDataObject.getString("status_code");
-            if(statusCode.equals("S_D010")){
+            if(statusCode.equals("SUCCESS")){
                 JSONObject jsonData = jsonDataObject.getJSONObject("data");
                 JSONObject timeDataObj = jsonData.getJSONObject("time_went");
                 MainActivity mainActivity = (MainActivity)context;
@@ -116,19 +140,24 @@ public class SessionMainFetchData {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                String response = jsonResponse.getString("response");
 
-                if (response.equals("ERROR_6001")){
-                    // TODO
-                }else{
-                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-                }
+                Bundle data = new Bundle();
+                data.putString("MainText1", "Unknown Error");
+                data.putString("subText1", "Please try again later");
+                data.putInt("img", R.drawable.not_available);
+                data.putString("MainText2", "Unknown error occurred! ");
+                data.putString("subText2", "We sincerely apologize for the inconvenience this has caused.");
+
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.onBackPressed();
+                mainActivity.replaceFragment(new ErrorFragment(), data);
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         }
     }
-    // open parking session check end
+    // open parking session check end.......................................
 
 
     // open payment session check start
@@ -162,12 +191,13 @@ public class SessionMainFetchData {
         };
         queue.add(stringRequest);
     }
+
     private void successResponseHandleOpenPayment(String response){
         try{
             JSONObject mainJsonObject = new JSONObject(response);
             JSONObject jsonDataObject = mainJsonObject.getJSONObject("response");
             String statusCode = jsonDataObject.getString("status_code");
-            if(statusCode.equals("S_D002")){
+            if(statusCode.equals("SUCCESS")){
                 JSONObject jsonData = jsonDataObject.getJSONObject("data");
                 JSONObject timeDataObj = jsonData.getJSONObject("time_went");
                 MainActivity mainActivity = (MainActivity)context;
@@ -188,6 +218,8 @@ public class SessionMainFetchData {
                 );
                 data.putSerializable("paymentOnGoingModelObj", paymentOnGoingModel);
                 mainActivity.replaceFragment(new SessionPaymentFragment(), data);
+            }else{
+                checkOpenParkingSessions();
             }
         }catch(JSONException e){
             throw new RuntimeException(e);
@@ -200,8 +232,17 @@ public class SessionMainFetchData {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                String response = jsonResponse.getString("response");
-                Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+
+                Bundle data = new Bundle();
+                data.putString("MainText1", "Unknown Error");
+                data.putString("subText1", "Please try again later");
+                data.putInt("img", R.drawable.not_available);
+                data.putString("MainText2", "Unknown error occurred! ");
+                data.putString("subText2", "We sincerely apologize for the inconvenience this has caused.");
+
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.onBackPressed();
+                mainActivity.replaceFragment(new ErrorFragment(), data);
 
             } catch (JSONException e) {
                 throw new RuntimeException(e);
@@ -210,6 +251,8 @@ public class SessionMainFetchData {
     }
 
     // open payment session check end
+
+
     public void fetchData(){
         RequestQueue queue = Volley.newRequestQueue(context);
         String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/driver/view_vehicle_info";
@@ -250,7 +293,7 @@ public class SessionMainFetchData {
             String statusCode = jsonDataObject.getString("status_code");
             int lenOfArr = 0;
 
-            if(statusCode.equals("S_DR_2031")) // has stored data
+            if(statusCode.equals("SUCCESS")) // has stored data
             {
                 // setting user data to corresponding views
                 JSONArray jsonDataArr = jsonDataObject.getJSONArray("data");
@@ -261,6 +304,7 @@ public class SessionMainFetchData {
                     String vehicleName = tempObj.getString("vehicle_name");
                     String vehicleNumber = tempObj.getString("vehicle_number");
                     String vehicleType = tempObj.getString("vehicle_type");
+                    rowVehicleNumberArr[i] = tempObj.getString("row_vehicle_number");
 
                     TextView vehicleNameView;
                     TextView vehicleNumberView;
@@ -344,16 +388,212 @@ public class SessionMainFetchData {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                String response = jsonResponse.getString("response");
 
-                if (response.equals("ERROR_6001")){
-                    // TODO
-                }else{
-                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
-                }
+                Bundle data = new Bundle();
+                data.putString("MainText1", "Unknown Error");
+                data.putString("subText1", "Please try again later");
+                data.putInt("img", R.drawable.not_available);
+                data.putString("MainText2", "Unknown error occurred! ");
+                data.putString("subText2", "We sincerely apologize for the inconvenience this has caused.");
+
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.onBackPressed();
+                mainActivity.replaceFragment(new ErrorFragment(), data);
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
+    // btn handlers ...............
+
+    public void initVehicleBtnHandlers(){
+        is1Selected = false;
+        is2Selected = false;
+        is3Selected = false;
+        Drawable selectedDrawable = ContextCompat.getDrawable(context, R.drawable.radius_6_primary);
+        Drawable unselectedDrawable = ContextCompat.getDrawable(context, R.drawable.radius_6_solid);
+
+        ConstraintLayout car1View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_1);
+        ConstraintLayout car2View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_2);
+        ConstraintLayout car3View = sessionMainView.findViewById(R.id.fragment_session_main_vehicle_3);
+        continueBtn.setEnabled(false);
+
+        car1View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(is1Selected){
+                    is1Selected = false;
+                    car1View.setBackground(unselectedDrawable);
+                    continueBtn.setEnabled(false);
+                }else{
+                    is1Selected = true;
+                    is2Selected = false;
+                    is3Selected = false;
+                    car1View.setBackground(selectedDrawable);
+                    car2View.setBackground(unselectedDrawable);
+                    car3View.setBackground(unselectedDrawable);
+                    continueBtn.setEnabled(true);
+                }
+            }
+        });
+        car2View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(is2Selected){
+                    is2Selected = false;
+                    car2View.setBackground(unselectedDrawable);
+                    continueBtn.setEnabled(false);
+                }else{
+                    is1Selected = false;
+                    is2Selected = true;
+                    is3Selected = false;
+                    car1View.setBackground(unselectedDrawable);
+                    car2View.setBackground(selectedDrawable);
+                    car3View.setBackground(unselectedDrawable);
+                    continueBtn.setEnabled(true);
+                }
+            }
+        });
+        car3View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(is3Selected){
+                    is3Selected = false;
+                    car3View.setBackground(unselectedDrawable);
+                    continueBtn.setEnabled(false);
+                }else{
+                    is1Selected = false;
+                    is2Selected = false;
+                    is3Selected = true;
+                    car1View.setBackground(unselectedDrawable);
+                    car2View.setBackground(unselectedDrawable);
+                    car3View.setBackground(selectedDrawable);
+                    continueBtn.setEnabled(true);
+                }
+            }
+        });
+
+        // long taps
+        car1View.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                TextView vehicleNameView = car1View.findViewById(R.id.fragment_session_main_1st_vehicle_name);
+                TextView vehicleNumberView = car1View.findViewById(R.id.fragment_session_main_1st_vehicle_number);
+                TextView vehicleTypeView = car1View.findViewById(R.id.fragment_session_main_1st_vehicle_type);
+                String vehicleName = vehicleNameView.getText().toString();
+                String vehicleNumber = vehicleNumberView.getText().toString();
+                String vehicleType = vehicleTypeView.getText().toString();
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 1);
+                data.putString("vehicleName", vehicleName);
+                data.putString("vehicleNumber", rowVehicleNumberArr[0]);
+                data.putString("vehicleType", vehicleType);
+                mainActivity.replaceFragment(new EditVehicle(), data);
+                return true;
+            }
+        });
+
+        car2View.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                TextView vehicleNameView = car2View.findViewById(R.id.fragment_session_main_2nd_vehicle_name);
+                TextView vehicleNumberView = car2View.findViewById(R.id.fragment_session_main_2nd_vehicle_number);
+                TextView vehicleTypeView = car2View.findViewById(R.id.fragment_session_main_2nd_vehicle_type);
+                String vehicleName = vehicleNameView.getText().toString();
+                String vehicleNumber = vehicleNumberView.getText().toString();
+                String vehicleType = vehicleTypeView.getText().toString();
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 2);
+                data.putString("vehicleName", vehicleName);
+                data.putString("vehicleNumber", rowVehicleNumberArr[1]);
+                data.putString("vehicleType", vehicleType);
+                mainActivity.replaceFragment(new EditVehicle(), data);
+                return true;
+            }
+        });
+
+        car3View.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                TextView vehicleNameView = car3View.findViewById(R.id.fragment_session_main_3rd_vehicle_name);
+                TextView vehicleNumberView = car3View.findViewById(R.id.fragment_session_main_3rd_vehicle_number);
+                TextView vehicleTypeView = car3View.findViewById(R.id.fragment_session_main_3rd_vehicle_type);
+                String vehicleName = vehicleNameView.getText().toString();
+                String vehicleNumber = vehicleNumberView.getText().toString();
+                String vehicleType = vehicleTypeView.getText().toString();
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 3);
+                data.putString("vehicleName", vehicleName);
+                data.putString("vehicleNumber", rowVehicleNumberArr[2]);
+                data.putString("vehicleType", vehicleType);
+                mainActivity.replaceFragment(new EditVehicle(), data);
+                return true;
+            }
+        });
+    }
+
+    public void initTapToAddBtnHandlers(){
+        View tapToAdd1View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_1);
+        View tapToAdd2View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_2);
+        View tapToAdd3View = sessionMainView.findViewById(R.id.fragment_session_main_tap_to_add_btn_3);
+
+        tapToAdd1View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 1);
+                mainActivity.replaceFragment(new AddVehicle(), data);
+            }
+        });
+
+        tapToAdd2View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 2);
+                mainActivity.replaceFragment(new AddVehicle(), data);
+            }
+        });
+        tapToAdd3View.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", 3);
+                mainActivity.replaceFragment(new AddVehicle(), data);
+            }
+        });
+
+    }
+
+    public void initContinueBtnHandler(){
+        Button continueBtn = sessionMainView.findViewById(R.id.fragment_session_main_continue_btn);
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity)context;
+                Bundle data = new Bundle();
+                data.putInt("selectedVehicle", getSelectedVehicle());
+                mainActivity.replaceFragment(new SessionQRFragment(), data);
+            }
+        });
+    }
+
+    public int getSelectedVehicle(){
+        if(is1Selected){
+            return 1;
+        }else if(is2Selected){
+            return 2;
+        }else{
+            return 3;
+        }
+    }
+
 }
