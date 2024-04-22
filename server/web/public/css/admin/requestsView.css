@@ -343,7 +343,6 @@
     border: none
   }
   
-
 .proceed-button {
   padding: 10px 20px;
   position: absolute;
@@ -361,7 +360,6 @@
 .proceed-button span {
   margin-left: 5px; 
 }
-
 
 .proceed-button:hover {
   background-color: #b8b5b5; 
