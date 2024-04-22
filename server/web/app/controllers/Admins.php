@@ -268,36 +268,8 @@ class Admins extends Controller
   public function reportGenerateView()
   {
 
-    //$data = $this->adminModel->getReportBadReviews();
-    //print_r($data);
-    // Fetch reviews data from the model
-    /*$reviewsData = $this->adminModel->getReportReviews();*/
-
-     // Call the model method to fetch bad reviews
-     //$badReviews = $this->adminModel->getReportBadReviews();
-
-     // Pass the bad reviews data to the view
-     //$data['badReviews'] = $badReviews;
-
-    // Separate bad and good reviews
-    /*$badReviews = [];
-    $goodReviews = [];
-
-    foreach ($reviewsData as $review) {
-      if ($review->review_type === 'Bad Review') {
-        $badReviews[] = $review;
-      } else {
-        $goodReviews[] = $review;
-      }
-    }
-    // Pass the reviews data to the view
-    $data = [
-      'badReviews' => $badReviews,
-      'goodReviews' => $goodReviews
-    ];*/
-
-    // Load the view with the reviews data
     $this->view('admin/reportGenerateView');
+    
   }
 
 // Controller method to handle fetching bad reviews
