@@ -7,10 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.parkngo.R;
-import com.example.parkngo.parking.helpers.SessionEndQrHelper;
+import com.example.parkngo.session.helpers.SessionEndQrHelper;
 
 public class SessionEndQRFragment extends Fragment {
 
@@ -28,7 +27,7 @@ public class SessionEndQRFragment extends Fragment {
         }
 
         SessionEndQrHelper sessionEndQrHelper = new SessionEndQrHelper(sessionID, getContext(), sessionEndQrView, loadingView);
-        sessionEndQrHelper.initQR();
+        sessionEndQrHelper.init();
 
         return sessionEndQrView;
     }

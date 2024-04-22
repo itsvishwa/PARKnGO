@@ -11,7 +11,6 @@ class Profile extends Controller
     private $payment_model;
     private $user_controller;
     private $officer_model;
-    private $officer_activity_model;
     private $parking_space_model;
 
 
@@ -23,37 +22,36 @@ class Profile extends Controller
         $this->otp_model = $this->model("OTPModel");
         $this->officer_model = $this->model("OfficerModel");
         $this->payment_model = $this->model("PaymentModel");
-        $this->officer_activity_model = $this->model("OfficerActivityModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
         $this->user_controller = new User;
     }
 
 
-    // driver mob - update name
+    // driver mobile - update name
     public function update_name($first_name, $last_name)
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_TNF");
         } else {
             $this->profile_model->update_name($token_data["user_id"], $first_name, $last_name);
-            $this->send_json_200("Your name updated successfully!");
+            $this->send_json_200("SUCCESS");
         }
     }
 
 
-    // driver mob - check mobile number existancce
+    // driver mobile - check mobile number existancce
     public function send_otp($mobile_number)
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_TNF");
         } else {
             if ($this->driver_model->is_mobile_number_exist($mobile_number)) // mobile number is a registered one
             {
@@ -65,21 +63,21 @@ class Profile extends Controller
         }
     }
 
-    // driver mob - if otp correct this will update the mobile number
+    // driver mobile - if otp correct this will update the mobile number
     public function update_mobile_number($mobile_number, $otp_code)
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_TNF");
         } else {
             switch ($this->user_controller->check_otp($otp_code, $mobile_number)) {
                 case 1: // otp is correct
                     $this->otp_model->delete_otp($mobile_number);
                     $this->profile_model->update_mobile_number($token_data["user_id"], $mobile_number);
-                    $this->send_json_200("Mobile Number sucessfully updated");
+                    $this->send_json_200("SUCCESS");
                     break;
                 case 2:
                     $this->send_json_400("OTP has been expired");
@@ -92,15 +90,15 @@ class Profile extends Controller
     }
 
 
-    // driver mob - send payment history of the driver
+    // driver mobile - send payment history of the driver
     public function driver_payment_history()
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("PRF_IT");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("PRF_TNF");
+            $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $payments_data = $this->payment_model->get_all_driver_payments_by_id($token_data["user_id"]);

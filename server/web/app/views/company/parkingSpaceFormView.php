@@ -59,6 +59,14 @@
 								Parking Officer
 							</a>
 						</li>
+						<li>
+							<a href="./reportGenerateView">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+								</svg>
+								Report Generate
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -97,10 +105,10 @@
 							<label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
 							<select name="vehicleType[]" class="p-form-dropdown" required>
 								<option value="" disabled selected>Vehicle Type</option>
-								<option value="Car">Car</option>
-								<option value="Van">Van</option>
-								<option value="Bus">Bus</option>
-								<option value="Motorcycle">Motorcycle</option>
+								<option value="A">Car|Tuktuk|Mini Van</option>
+								<option value="B">Bicycle</option>
+								<option value="C">Van|Lorry|Mini Bus</option>
+								<option value="D">Long Vehicles</option>
 							</select><br>
 
 							<br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>

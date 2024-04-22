@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -47,7 +48,7 @@ public class HomeHelper {
     private void initVehicleSpinner(){
         Spinner spinner = homeFragmentView.findViewById(R.id.home_frag_spinner);
 
-        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Bike", "Van", "Lorry", "Bus"));
+        ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypes);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
@@ -75,7 +76,10 @@ public class HomeHelper {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                vehicleType = adapterView.getItemAtPosition(i).toString();
+                String temp = adapterView.getItemAtPosition(i).toString();
+                temp = temp.toLowerCase();
+                temp = temp.replace(" ", "_");
+                vehicleType = temp;
             }
 
             @Override
