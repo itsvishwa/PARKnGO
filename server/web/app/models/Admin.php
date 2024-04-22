@@ -559,7 +559,4 @@ public function getReportGoodReviews()
 
 
 
-
-
-
 }
