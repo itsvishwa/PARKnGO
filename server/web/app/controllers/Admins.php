@@ -269,23 +269,8 @@ class Admins extends Controller
   {
 
     $this->view('admin/reportGenerateView');
-    
+
   }
-
-// Controller method to handle fetching bad reviews
-/*public function getBadReviews()
-{
-    
-    // Call the model method to fetch bad reviews
-    $badReviews = $this->adminModel->getReportBadReviews();
-
-    // Pass the bad reviews data to the view
-    $data['badReviews'] = $badReviews;
-
-    // Load the view with bad reviews data
-    $this->view('admin/reportGenerateView', $data);
-}*/
-
 
   public function delete($id)
   {
