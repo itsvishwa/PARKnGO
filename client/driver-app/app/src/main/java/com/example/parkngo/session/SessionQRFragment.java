@@ -1,8 +1,5 @@
 package com.example.parkngo.session;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,16 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.parkngo.R;
-import com.example.parkngo.session.helpers.SessionQRHandler;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import com.example.parkngo.session.helpers.SessionQRHelper;
 
 public class SessionQRFragment extends Fragment {
 
@@ -35,7 +25,9 @@ public class SessionQRFragment extends Fragment {
             selectedVehicle = getArguments().getInt("selectedVehicle", -1);
         }
 
-        SessionQRHandler sessionQRHandler = new SessionQRHandler(getContext(), selectedVehicle, sessionQRView, loadingView, errorView);
+        SessionQRHelper sessionQRHelper = new SessionQRHelper(getContext(), selectedVehicle, sessionQRView, loadingView, errorView);
+        sessionQRHelper.init();
+
         return loadingView;
     }
 }

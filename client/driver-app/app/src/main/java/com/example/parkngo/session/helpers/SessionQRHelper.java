@@ -1,6 +1,7 @@
 package com.example.parkngo.session.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,8 +15,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.ErrorFragmentHelper;
+import com.example.parkngo.helpers.ErrorFragment;
 import com.example.parkngo.helpers.ParkngoStorage;
 
 import org.json.JSONException;
@@ -24,7 +26,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SessionQRHandler {
+public class SessionQRHelper {
 
     Context context;
     int selected;
@@ -32,16 +34,15 @@ public class SessionQRHandler {
     View loadingView;
     View errorView;
 
-    public SessionQRHandler(Context context, int selected, View sessionQRView, View loadinView, View errorView){
+    public SessionQRHelper(Context context, int selected, View sessionQRView, View loadinView, View errorView){
         this.context = context;
         this.selected = selected;
         this.sessionQRView = sessionQRView;
         this.loadingView = loadinView;
         this.errorView = errorView;
-        initQR();
     }
 
-    public void initQR(){
+    public void init(){
         RequestQueue queue = Volley.newRequestQueue(context);
 
         String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/qr/get_qr_code/" + selected;
@@ -83,17 +84,18 @@ public class SessionQRHandler {
                             try {
                                 JSONObject jsonResponse = new JSONObject(errorResponse);
                                 String response = jsonResponse.getString("response");
-                                if(response.equals("E_QR_5023")) // E_QR_5023 => means invalid request
-                                {
-                                    String appBarMainText = "Something Went Wrong";
-                                    String appBarSubText = "Please try again later";
-                                    int bodyImg = R.drawable.not_available;
-                                    String bodyMainText = "Something went wrong";
-                                    String bodySubText = "";
 
-                                }else{
-                                    Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_LONG).show();
-                                }
+                                Bundle data = new Bundle();
+
+                                data.putString("MainText1", "Unknown Error");
+                                data.putString("subText1", "Please try again later");
+                                data.putInt("img", R.drawable.not_available);
+                                data.putString("MainText2", "Unknown error occurred! ");
+                                data.putString("subText2", "We sincerely apologize for the inconvenience this has caused.");
+
+                                MainActivity mainActivity = (MainActivity) context;
+                                mainActivity.replaceFragment(new ErrorFragment(), data);
+
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }

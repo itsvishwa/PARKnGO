@@ -1,9 +1,14 @@
 package com.example.parkngo.parking.helpers;
 
+import static android.view.View.GONE;
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,19 +30,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.parking.AddReviewFragment;
+import com.example.parkngo.parking.DeleteReviewFragment;
+import com.example.parkngo.parking.EditReviewFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingSelectedFetchData {
+public class ParkingSelectedHelper {
 
     View parkingSelectedView;
     View loadingView;
@@ -49,20 +57,19 @@ public class ParkingSelectedFetchData {
     String latitude;
     String longitude;
 
-    public ParkingSelectedFetchData(View parkingSelectedView, View loadingView, String _id, Context context){
+    public ParkingSelectedHelper(View parkingSelectedView, View loadingView, String _id, Context context){
         this.parkingSelectedView = parkingSelectedView;
         this.loadingView = loadingView;
         this.parkingID = _id;
         this.context = context;
+    }
+
+    public void init(){
         fetchData();
-    }
-
-    public String getLatitude(){
-        return latitude;
-    }
-
-    public String getLongitude(){
-        return longitude;
+        addReviewBtnHandler();
+        deleteReviewBtnHandler();
+        editReviewBtnHandler();
+        navigateBtnHandler();
     }
 
     private void fetchData(){
@@ -105,6 +112,7 @@ public class ParkingSelectedFetchData {
             JSONObject selectedParkingSpaceData = jsonObject.getJSONObject("response");
 
             setParkingDetails(selectedParkingSpaceData);
+            setVehicleTypesDetails(selectedParkingSpaceData);
             setUserOwnReviews(selectedParkingSpaceData);
             setOtherUsersReviews(selectedParkingSpaceData);
 
@@ -189,6 +197,74 @@ public class ParkingSelectedFetchData {
     }
 
 
+    // set vehicle types details
+    private void setVehicleTypesDetails(JSONObject selectedParkingSpaceData) throws JSONException{
+        JSONArray slotDetailsArr =selectedParkingSpaceData.getJSONArray("slot_status");
+
+        TextView vt1Name = parkingSelectedView.findViewById(R.id.ps_frag_vt1_name);
+        TextView vt1Slot = parkingSelectedView.findViewById(R.id.ps_frag_vt1_slots);
+        TextView vt1Rate = parkingSelectedView.findViewById(R.id.ps_frag_vt1_rate);
+        TextView vt2Name = parkingSelectedView.findViewById(R.id.ps_frag_vt2_name);
+        TextView vt2Slot = parkingSelectedView.findViewById(R.id.ps_frag_vt2_slots);
+        TextView vt2Rate = parkingSelectedView.findViewById(R.id.ps_frag_vt2_rate);
+        TextView vt3Name = parkingSelectedView.findViewById(R.id.ps_frag_vt3_name);
+        TextView vt3Slot = parkingSelectedView.findViewById(R.id.ps_frag_vt3_slots);
+        TextView vt3Rate = parkingSelectedView.findViewById(R.id.ps_frag_vt3_rate);
+        TextView vt4Name = parkingSelectedView.findViewById(R.id.ps_frag_vt4_name);
+        TextView vt4Slot = parkingSelectedView.findViewById(R.id.ps_frag_vt4_slots);
+        TextView vt4Rate = parkingSelectedView.findViewById(R.id.ps_frag_vt4_rate);
+
+        boolean isV1 = false;
+        boolean isV2 = false;
+        boolean isV3 = false;
+        boolean isV4 = false;
+
+        for(int i=0; i<slotDetailsArr.length(); i++){
+            JSONObject tempObj = slotDetailsArr.getJSONObject(i);
+            String tempVType = tempObj.getString("vehicle_type");
+            String tempFSlots = tempObj.getString("free_slots");
+            String tempTSlots = tempObj.getString("total_slots");
+            String tempRate = tempObj.getString("rate");
+
+            if(tempVType.equals("Car|Tuktuk|Mini Van")){
+                isV1 = true;
+                vt1Rate.setText("Rs. " + tempRate);
+                vt1Slot.setText(tempFSlots + " free out of " + tempTSlots);
+            } else if (tempVType.equals("Bicycle")) {
+                isV2 = true;
+                vt2Rate.setText("Rs. " + tempRate);
+                vt2Slot.setText(tempFSlots + " free out of " + tempTSlots);
+            } else if (tempVType.equals("Van|Lorry|Mini Bus")) {
+                isV3 = true;
+                vt3Rate.setText("Rs. " + tempRate);
+                vt3Slot.setText(tempFSlots + " free out of " + tempTSlots);
+            }else{
+                isV4 = true;
+                vt4Rate.setText("Rs. " + tempRate);
+                vt4Slot.setText(tempFSlots + " free out of " + tempTSlots);
+            }
+        }
+
+        if(!isV1){
+            vt1Name.setVisibility(GONE);
+            vt1Rate.setVisibility(GONE);
+            vt1Slot.setVisibility(GONE);
+        } else if (!isV2) {
+            vt2Name.setVisibility(GONE);
+            vt2Rate.setVisibility(GONE);
+            vt2Slot.setVisibility(GONE);
+        } else if (!isV3) {
+            vt3Name.setVisibility(GONE);
+            vt3Rate.setVisibility(GONE);
+            vt3Slot.setVisibility(GONE);
+        } else if (!isV4) {
+            vt4Name.setVisibility(GONE);
+            vt4Rate.setVisibility(GONE);
+            vt4Slot.setVisibility(GONE);
+        }
+    }
+
+
     // set user own reviews
     private  void setUserOwnReviews(JSONObject selectedParkingSpaceData) throws JSONException{
         // setting user own review details
@@ -203,8 +279,8 @@ public class ParkingSelectedFetchData {
         TextView noReviewTextView = parkingSelectedView.findViewById(R.id.parking_Selected_frag_no_review_text);
 
         if(isUserOwnReviewExist){
-            writeReviewBtn.setVisibility(View.GONE);
-            noReviewTextView.setVisibility(View.GONE);
+            writeReviewBtn.setVisibility(GONE);
+            noReviewTextView.setVisibility(GONE);
             editReviewBtn.setVisibility(View.VISIBLE);
             deleteReviewBtn.setVisibility(View.VISIBLE);
             reviewLayout.setVisibility(View.VISIBLE);
@@ -227,9 +303,9 @@ public class ParkingSelectedFetchData {
         }else{
             writeReviewBtn.setVisibility(View.VISIBLE);
             noReviewTextView.setVisibility(View.VISIBLE);
-            editReviewBtn.setVisibility(View.GONE);
-            deleteReviewBtn.setVisibility(View.GONE);
-            reviewLayout.setVisibility(View.GONE);
+            editReviewBtn.setVisibility(GONE);
+            deleteReviewBtn.setVisibility(GONE);
+            reviewLayout.setVisibility(GONE);
         }
     }
 
@@ -242,10 +318,12 @@ public class ParkingSelectedFetchData {
 
         RecyclerView recyclerView = parkingSelectedView.findViewById(R.id.ps_frag_recycle_view);
         TextView otherNoReviewView = parkingSelectedView.findViewById(R.id.parking_selected_frag_no_others_review_text);
+        ImageView noOtherReviewImageView = parkingSelectedView.findViewById(R.id.ps_frag_noreview_img);
 
         if(isReviewExist){
             recyclerView.setVisibility(View.VISIBLE);
             otherNoReviewView.setVisibility(View.INVISIBLE);
+            noOtherReviewImageView.setVisibility(View.INVISIBLE);
             ArrayList<ReviewModel> reviewModels = new ArrayList<>();
             JSONArray reviewDataArr = reviewObject.getJSONArray("data");
             for (int i = 0; i<reviewDataArr.length(); i++)
@@ -263,20 +341,76 @@ public class ParkingSelectedFetchData {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
         }else{
-            recyclerView.setVisibility(View.GONE);
+            recyclerView.setVisibility(GONE);
             otherNoReviewView.setVisibility(View.VISIBLE);
+            noOtherReviewImageView.setVisibility(View.VISIBLE);
         }
     }
 
 
-    // return user_review_id
-    public String getUserReviewId(){
-        return userReviewId;
+    public void addReviewBtnHandler(){
+        Button addReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
+        addReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString("parkingID", parkingID);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new AddReviewFragment(), data);
+            }
+        }
+        );
     }
 
-    // return user review content
-    public String getUserReviewContent(){return userReviewContent;}
+    public void deleteReviewBtnHandler(){
+        // set delete review btn handler
+        Button deleteReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_delete_review_btn);
+        deleteReviewBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Bundle data = new Bundle();
+                data.putString("_id", userReviewId);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new DeleteReviewFragment(), data);
+            }
+        });
+    }
 
-    // return user review rating
-    public int getUserReviewRating(){return userReviewRating;}
+    public void editReviewBtnHandler(){
+        // set edit review btn handler
+        Button editReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_edit_review_btn);
+        editReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString("_id", userReviewId);
+                data.putString("content", userReviewContent);
+                data.putInt("rating", userReviewRating);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new EditReviewFragment(), data);
+            }
+        });
+    }
+
+    public void navigateBtnHandler(){
+        Button navigateBtn  = parkingSelectedView.findViewById(R.id.parking_selected_fragment_navigate_btn);
+        navigateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                double sourceLatitude = 6.902727395785716;
+                double sourceLongitude = 79.86126018417747;
+                double destinationLatitude = Double.parseDouble(latitude);
+                double destinationLongitude = Double.parseDouble(longitude);
+
+                String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude +
+                        "&destination=" + destinationLatitude + "," + destinationLongitude;
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.startActivity(intent);
+            }
+        });
+    }
 }
