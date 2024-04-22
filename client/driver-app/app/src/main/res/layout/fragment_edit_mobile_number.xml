@@ -277,30 +277,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Didn’t reserve the code yet?"
-            android:textColor="@color/textSecondary"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
-        <TextView
-            android:id="@+id/edit_mobile_number_frag_resend_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Resend"
-            android:clickable="true"
-            android:focusable="true"
-            android:textColor="@color/primaryColor"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
 
         <Button
             android:id="@+id/edit_mobile_number_frag_change_mobile_number_btn"
