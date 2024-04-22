@@ -1,4 +1,4 @@
-package com.example.officertestapp.Home.Helpers;
+package com.example.officertestapp.ForceEnd.Helpers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,19 +30,19 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-public class PaymentDetailsHelper {
+public class ForceEndedPaymentDetailsHelper {
     Context context;
     View view;
     ParkngoStorage parkngoStorage;
     String amount;
 
-    public PaymentDetailsHelper (View view, Context context) {
+    public ForceEndedPaymentDetailsHelper (View view, Context context) {
         this.view = view;
         this.context = context;
         this.parkngoStorage = new ParkngoStorage(context);
     }
 
-    public void initLayout(String paymentId) {
+    public void initLayout(String sessionId) {
         String parkingId = parkngoStorage.getData("parkingID");
 
         // get the token
@@ -50,7 +50,7 @@ public class PaymentDetailsHelper {
 
         // volley request
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/view_payment_details_of_session/" + paymentId;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/view_payment_details_of_force_ended_session/" + sessionId;
         Log.d("Request URL", apiURL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
@@ -106,12 +106,11 @@ public class PaymentDetailsHelper {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
                 // Extract values from the JSON response
-                String PaymentID = responseData.getString("payment_id");
-                String VehicleNumber = responseData.getString("vehicle_number");
-                String VehicleType = responseData.getString("vehicle_type");
-                String StartTime = responseData.getString("start_time");
-                String EndTime = responseData.getString("end_time");
-                String TimeWent = responseData.getString("time_went");
+                String vehicleNumber = responseData.getString("vehicle_number");
+                String vehicleType = responseData.getString("vehicle_type");
+                String startTime = responseData.getString("start_time");
+                String endTime = responseData.getString("end_time");
+                String timeWent = responseData.getString("time_went");
                 amount = responseData.getString("amount");
 
                 TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
@@ -122,12 +121,12 @@ public class PaymentDetailsHelper {
                 TextView amountTextView = view.findViewById(R.id.amount_txt_view);
 
                 // Insert space between letters and numbers in the vehicle number
-                String formattedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(VehicleNumber);
+                String formattedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(vehicleNumber);
 
 
                 //format the timestamp to date time according to the devices time zone
                 //Convert the timestamp string to a long value
-                long timestampStart = Long.parseLong(StartTime);
+                long timestampStart = Long.parseLong(startTime);
                 // Create a Date object from the timestamp
                 Date startDate = new Date(timestampStart * 1000);
                 // Create a SimpleDateFormat object with your desired format
@@ -138,17 +137,17 @@ public class PaymentDetailsHelper {
                 String formattedStartTime = sdf.format(startDate);
 
 
-                long timestampEnd = Long.parseLong(EndTime);
+                long timestampEnd = Long.parseLong(endTime);
                 Date EndDate = new Date(timestampEnd * 1000);
                 SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
                 edf.setTimeZone(TimeZone.getDefault());
                 String formattedEndTime = sdf.format(EndDate);
 
                 vehicleNumberTextView.setText(formattedVehicleNumber);
-                vehicleTypeTextView.setText(VehicleType);
+                vehicleTypeTextView.setText(vehicleType);
                 sessionStartedTimeTextView.setText(formattedStartTime);
                 sessionEndedTimeTextView.setText(formattedEndTime);
-                timeDurationTextView.setText(TimeWent);
+                timeDurationTextView.setText(timeWent);
                 amountTextView.setText(amount);
 
             } else {
@@ -187,5 +186,4 @@ public class PaymentDetailsHelper {
             }
         }
     }
-
 }

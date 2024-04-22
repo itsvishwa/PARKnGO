@@ -261,9 +261,11 @@ class Profile extends Controller
                     // Location is outside the threshold, consider it invalid
                     $result = [
                         "response_code" => "802",
+                        "response_code" => "802",
                         "message" => "Location is too far from the assigned parking"
                     ];
 
+                    $this->send_json_200($result);
                     $this->send_json_200($result);
                 }
             } else { //parking_id is not similar to the assigned parking of the parking officer

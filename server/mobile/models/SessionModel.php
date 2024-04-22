@@ -67,7 +67,6 @@ class SessionModel
         }
     }
 
-
     public function get_open_session_data($_id)
     {
         $this->db->query("SELECT * FROM parking_session WHERE _id = :_id AND end_time IS NULL");

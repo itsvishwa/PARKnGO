@@ -18,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.ForceEnd.ForceEndedModel;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.Profile.Helpers.PPRecycleViewAdapter;
 import com.example.officertestapp.Profile.Helpers.PaymentProfileModel;
@@ -39,13 +40,13 @@ public class ForceEndedFetchData {
     View view;
     View loadingView;
     Context context;
-    MainActivity mainActivity;
+    ParkngoStorage parkngoStorage;
 
-    public ForceEndedFetchData(View view, View loadingView, Context context, MainActivity mainActivity) {
+    public ForceEndedFetchData(View view, View loadingView, Context context) {
         this.view = view;
         this.loadingView = loadingView;
         this.context = context;
-        this.mainActivity = mainActivity;
+        this.parkngoStorage = new ParkngoStorage(context);
         fetchData();
     }
 
@@ -104,11 +105,13 @@ public class ForceEndedFetchData {
 
             for(int i=0; i<resultDataArr.length(); i++) {
                 JSONObject resultData = resultDataArr.getJSONObject(i);
+                String sessionId = resultData.getString("session_id");
                 String vehicle = resultData.getString("vehicle");
                 String vehicleType = resultData.getString("vehicle_type");
                 String startDateTime = resultData.getString("session_start_date_and_timestamp");
                 String endDateTime = resultData.getString("session_force_end_date_and_timestamp");
 
+                String formattedVehicleNum = VehicleNumberHelper.splitVehicleNumber(vehicle);
 
                 // format the timestamp to date time according to the devices time zone
                 // Convert the timestamp string to a long value
@@ -136,7 +139,7 @@ public class ForceEndedFetchData {
                 String formattedEndDate = sdf1.format(endDate);
 
 
-                forceEndedModels.add(new ForceEndedModel(vehicle, vehicleType, formattedStartDate, formattedEndDate));
+                forceEndedModels.add(new ForceEndedModel(sessionId, formattedVehicleNum, vehicleType, formattedStartDate, formattedEndDate));
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.force_end_frag_recycle_view);

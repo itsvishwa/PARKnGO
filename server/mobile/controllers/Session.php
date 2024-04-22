@@ -82,7 +82,6 @@ class Session extends Controller
                     // update the parking_space_status table
                     $vehicle_type = $session_data["vehicle_type"];
                     $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
-
                     $this->parking_space_status_model->decrease_free_slots($vehicle_type_letter, $session_data["parking_id"]);
 
 
@@ -196,7 +195,6 @@ class Session extends Controller
                             if (isset($parking_session_data->vehicle_type) && isset($parking_session_data->parking_id)) {
                                 $vehicle_type = $parking_session_data->vehicle_type;
                                 $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
-
                                 $parking_id = $parking_session_data->parking_id;
 
                                 $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type_letter, $parking_id);
@@ -393,7 +391,6 @@ class Session extends Controller
 
 
             if ($assigned_parking === $parking_id) {    //parking_id is similar to the assigned parking of the officer
-
                 $payment_id = $this->decrypt_id($payment_id);
                 $payment_session_exists = $this->payment_model->is_payment_session_id_exist($payment_id);
 

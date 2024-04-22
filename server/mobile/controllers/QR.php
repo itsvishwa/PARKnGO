@@ -185,7 +185,6 @@ class QR extends Controller
 
                                 $vehicle_type = $parking_session_data->vehicle_type;
                                 $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
-
                                 $parking_id = $parking_session_data->parking_id;
 
                                 $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type_letter, $parking_id);
@@ -234,7 +233,6 @@ class QR extends Controller
             }
         }
     }
-
 
     //calculate Amount
     public function calculate_amount($start_timestamp, $end_timestamp, $hourly_rate)

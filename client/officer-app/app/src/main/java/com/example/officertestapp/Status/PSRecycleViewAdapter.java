@@ -7,14 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.officertestapp.Home.ReleaseASlot01Fragment;
-import com.example.officertestapp.Home.ReleaseASlot03Fragment;
+import com.example.officertestapp.Home.ReleaseASlotFragment;
+import com.example.officertestapp.Home.PaymentDetailsFragment;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
@@ -104,9 +103,9 @@ public class PSRecycleViewAdapter extends RecyclerView.Adapter<PSRecycleViewAdap
                 data.putString("_id", _id);
                 MainActivity mainActivity = (MainActivity) context;
                 if(clickedItem.getParkingStatus().equals("Payment Due")){
-                    mainActivity.replaceFragment(new ReleaseASlot03Fragment(), data, sessionMainView);
+                    mainActivity.replaceFragment(new PaymentDetailsFragment(), data, sessionMainView);
                 }else{
-                    mainActivity.replaceFragment(new ReleaseASlot01Fragment(), data, sessionMainView);
+                    mainActivity.replaceFragment(new ReleaseASlotFragment(), data, sessionMainView);
                 }
             }
         }

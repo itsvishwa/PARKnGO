@@ -1,13 +1,11 @@
 package com.example.officertestapp.Profile.Helpers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
-import com.example.officertestapp.HeroActivity;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
@@ -109,6 +107,8 @@ public class PPHFetchData {
                 String vehicle = resultData.getString("Vehicle");
                 String paymentMethod = resultData.getString("Payment_Method");
 
+                String formattedVehicleNum = VehicleNumberHelper.splitVehicleNumber(vehicle);
+
 
                 // format the timestamp to date time according to the devices time zone
                 // Convert the timestamp string to a long value
@@ -122,13 +122,10 @@ public class PPHFetchData {
                 // Format the date object to a string
                 String formattedDate = sdf.format(startDate);
 
-                // Insert space between letters and numbers in the vehicle number
-                String formattedVehicleNumber = vehicle.replaceAll("(\\D)(\\d+)", "$1 $2 ");
-
                 // Payment Method to uppercase
                 String formattedPaymentMethod = paymentMethod.toUpperCase();
 
-                paymentHistoryModels.add(new PaymentProfileModel(formattedDate, amount, formattedVehicleNumber, formattedPaymentMethod));
+                paymentHistoryModels.add(new PaymentProfileModel(formattedDate, amount, formattedVehicleNum, formattedPaymentMethod));
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.profile_payment_frag_recycle_view);

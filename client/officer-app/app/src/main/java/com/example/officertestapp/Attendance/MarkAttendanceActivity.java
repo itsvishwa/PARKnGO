@@ -71,6 +71,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
 
 
         //Retrieve data from shared preferences
+        parkngoStorage = new ParkngoStorage(this);
         String firstNameStr = parkngoStorage.getData("firstName");
         String lastNameStr = parkngoStorage.getData("lastName");
         String mobileNumberStr = parkngoStorage.getData("mobileNumber");
@@ -282,6 +283,17 @@ public class MarkAttendanceActivity extends AppCompatActivity {
                 i.putExtra("time_stamp", timestamp);
                 startActivity(i);
 
+            } else if ("802".equals(responseCode)) {
+                // Log that we are in the 400 case
+                Log.d("Response Code", "Handling 802 case");
+
+                // Show a toast message with the response message
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+                // Navigate to Another Activity
+                Intent i = new Intent(MarkAttendanceActivity.this, MarkedAttendanceFailActivity.class);
+                startActivity(i);
+
             } else {
                 // Show a toast message with the response message
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -306,5 +318,4 @@ public class MarkAttendanceActivity extends AppCompatActivity {
             }
         }
     }
-
 }

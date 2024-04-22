@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.officertestapp.R;
 
@@ -52,7 +51,7 @@ public class StatusMainSpinner {
         });
 
         ArrayList<String> vehicleTypes = new ArrayList<>();
-        String[] vTypes = {"All", "Car", "Bike", "Van", "Lorry", "Bus"};
+        String[] vTypes = {"All", "Car", "Tuktuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"};
 
         for (int i=0; i<vTypes.length; i++){
             vehicleTypes.add(vTypes[i]);

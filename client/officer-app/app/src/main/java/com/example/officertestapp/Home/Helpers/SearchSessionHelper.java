@@ -23,8 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
 import com.example.officertestapp.HeroActivity;
-import com.example.officertestapp.Home.ReleaseASlot01Fragment;
+import com.example.officertestapp.Home.ReleaseASlotFragment;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
@@ -57,24 +58,32 @@ public class SearchSessionHelper {
     public void searchSession() {
         Log.d("SearchSession", "This is searchSession");
         // getting reference to the views
-        EditText lettersEditText = view.findViewById(R.id.vehicle_num_letters);
-        EditText digitsEditText = view.findViewById(R.id.vehicle_num_digits);
-        Spinner provincesSpinner = view.findViewById(R.id.spinner_provinces);
+        EditText lettersEditTextView = view.findViewById(R.id.vehicle_num_letters);
+        EditText digitsEditTextView = view.findViewById(R.id.vehicle_num_digits);
+
+        Spinner symbolsSpinnerView = view.findViewById(R.id.spinner_symbols);
+        Spinner provincesSpinnerView = view.findViewById(R.id.spinner_provinces);
 
 
-        if (TextUtils.isEmpty(lettersEditText.getText()) || TextUtils.isEmpty(digitsEditText.getText()) || provincesSpinner.getSelectedItem() == null){
-            // Show a toast that input is incomplete
-            Toast.makeText(context, "Please fill all fields of Vehicle Number", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(lettersEditTextView.getText())
+                || TextUtils.isEmpty(digitsEditTextView.getText())
+                || provincesSpinnerView.getSelectedItem() == null) {
+            Toast.makeText(context, "Please fill all fields!", Toast.LENGTH_SHORT).show();
 
         }else {
-            // Get input data from UI
-            String letters = lettersEditText.getText().toString();
-            String digits = digitsEditText.getText().toString();
-            String province = provincesSpinner.getSelectedItem().toString();
+            // Extract user inputs
+            String letters = lettersEditTextView.getText().toString();
+            String selectedSymbol = symbolsSpinnerView.getSelectedItem().toString();
+            String digits = digitsEditTextView.getText().toString();
+            String selectedProvince = provincesSpinnerView.getSelectedItem().toString();
+
+            String urlSafeVehicleNumber = letters + "~" + selectedSymbol + "~" +digits + "~" + selectedProvince;
+
+            // Preprocess vehicle number
+            String processedUrlSafeVehicleNumber = VehicleNumberHelper.preprocessVehicleNumber(urlSafeVehicleNumber);
 
             // Concatenate the values to create the complete vehicle number
-            String completeVehicleNumber = letters + digits + province;
-            Log.d("Complete Vehicle Number", completeVehicleNumber);
+            Log.d("Final Vehicle Number", processedUrlSafeVehicleNumber);
 
             // get the token
             ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -85,7 +94,7 @@ public class SearchSessionHelper {
             // volley request
             RequestQueue queue = Volley.newRequestQueue(context);
 
-            String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/search/"+ completeVehicleNumber;
+            String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/search/"+ processedUrlSafeVehicleNumber;
             Log.d("Request URL", apiURL);
 
 
@@ -192,7 +201,7 @@ public class SearchSessionHelper {
 
 
                 // Set the session data bundle in the fragment
-                ((ReleaseASlot01Fragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
+                ((ReleaseASlotFragment) fragmentManager.findFragmentById(R.id.main_act_frame_layout)).setSearchSessionDataBundle(bundle);
 
 
                 TextView parkedDateTimeView = view.findViewById(R.id.parked_Date_Time_txt);

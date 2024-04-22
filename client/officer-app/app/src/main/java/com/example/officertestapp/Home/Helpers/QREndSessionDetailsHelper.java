@@ -31,13 +31,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class QRHelper {
+public class QREndSessionDetailsHelper {
     private View view;
     private Context context;
     private FragmentManager fragmentManager;
     ParkngoStorage parkngoStorage;
 
-    public QRHelper(View view, Context context, FragmentManager fragmentManager) {
+    public QREndSessionDetailsHelper(View view, Context context, FragmentManager fragmentManager) {
         this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
@@ -55,7 +55,7 @@ public class QRHelper {
         // volley request
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/qr/read_qr/"+ qrContent;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/qr/end_session_details/"+ qrContent;
         Log.d("Request URL", apiURL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
@@ -100,7 +100,6 @@ public class QRHelper {
             // Extract values from the response
             String vehicleNumber = responseData.getString("vehicle_number"); //3#SRI#2222#NA
             String vehicleType = responseData.getString("vehicle_type");
-            String driverId = responseData.getString("driver_id");
 
             //vehicle type
             String vehicleTypeFCap = VehicleNumberHelper.capitalizeVehicleType(vehicleType);
@@ -115,12 +114,10 @@ public class QRHelper {
             // Find the EditText fields in the fragment
             EditText vehicleNumLettersEditText = view.findViewById(R.id.vehicle_num_letters);
             EditText vehicleNumDigitsEditText = view.findViewById(R.id.vehicle_num_digits);
-            EditText driverIdEditText = view.findViewById(R.id.driver_id_etxt);
 
             // Set the text of the EditText fields
             vehicleNumLettersEditText.setText(vNumLetters);
             vehicleNumDigitsEditText.setText(vNumNumbers);
-            driverIdEditText.setText(driverId);
 
 
             // Handle special characters and set the selection in spinnerSymbols
@@ -162,24 +159,6 @@ public class QRHelper {
             if (symbolIndex != -1) {
                 spinnerSymbols.setSelection(symbolIndex);
             }
-
-
-
-            // Find the Spinner for vehicle types
-            Spinner spinnerVehicleTypes = view.findViewById(R.id.spinner_vehicle_types);
-
-            // Get the array of vehicle types
-            ArrayList<String> vehicleTypes = new ArrayList<>(Arrays.asList("Car", "Tuktuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
-
-            // Find the index of vehicleType in the vehicleTypes array
-            int vehicleTypeIndex = vehicleTypes.indexOf(vehicleTypeFCap);
-            Log.d("Vehicle Type", "Index: " + vehicleTypeIndex + ", Type: " + vehicleType);
-
-            // Set the selection of the Spinner to the vehicleTypeIndex
-            if (vehicleTypeIndex != -1) {
-                spinnerVehicleTypes.setSelection(vehicleTypeIndex);
-            }
-
 
         }catch (JSONException e){
             throw new RuntimeException(e);
