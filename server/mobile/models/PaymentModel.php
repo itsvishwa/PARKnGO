@@ -172,13 +172,14 @@ class PaymentModel
     }
 
 
-    public function get_payment_id($session_id) {
+    public function get_payment_id($session_id)
+    {
         $this->db->query("SELECT _id FROM payment WHERE session_id = :session_id");
-    
+
         $this->db->bind(":session_id", $session_id);
-    
+
         $result = $this->db->single();
-    
+
         if ($result) {
             return $result->_id;
         } else {
@@ -186,6 +187,17 @@ class PaymentModel
         }
     }
 
+    // close a card payment for a given id - from payehere
+    public function close_card_payment_by_id($payment_id)
+    {
+        $timestamp = time();
+        $this->db->query("UPDATE payment SET is_complete = 1, payment_method = :method, time_stamp = :timestamp WHERE _id = :payment_id");
+        $this->db->bind(":method", "card");
+        $this->db->bind(":timestamp", $timestamp);
+        $this->db->bind(":payment_id", $payment_id);
+
+        $this->db->execute();
+    }
 
     // close a payement for a given payment_id
     public function close_payment($payment_data)
@@ -207,7 +219,7 @@ class PaymentModel
         $this->db->bind(":payment_method", $payment_data["payment_method"]);
         $this->db->bind(":time_stamp", $payment_data["time_stamp"]);
         $this->db->bind(":payment_id", $payment_data["payment_id"]);
-        
+
         $this->db->execute();
     }
 
@@ -246,7 +258,8 @@ class PaymentModel
     }
 
     // get payment details by payment_id
-    public function get_payment_details($_id) {
+    public function get_payment_details($_id)
+    {
         $this->db->query(
             "SELECT  
             parking_session.vehicle_number,
@@ -330,5 +343,4 @@ class PaymentModel
             return false;
         }
     }
-
 }

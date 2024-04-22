@@ -584,7 +584,7 @@ class Session extends Controller
     }
 
 
-    // calculate distance
+    // calculate street distance between two points
     private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
     {
         $source_coordinates = $source_lat . "," . $source_long;
