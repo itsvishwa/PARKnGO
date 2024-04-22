@@ -5,7 +5,7 @@
   .menu {
     list-style-type: none;
     padding: 0;
-    margin-top: 10px;
+    margin-top: -50px;
   }
 
   .menu li {
@@ -41,30 +41,21 @@
   }
   
   .card-section {
-   /* display: block;
-    margin-left: 20px;
-    justify-content: space-between;
-    padding-left: 50px;
-    width: 70%;
-    height:15%;*/
-
+  
     display: flex;
-    flex-wrap: wrap; /* Ensures cards wrap to the next line if needed */
+    flex-wrap: wrap; 
     justify-content: space-between;
     margin-top: 20px;
     padding-left: 50px;
     width: 90%;
-    height: auto; /* Set height to auto for flexibility */
-
+    height: auto; 
  
   }
   
   .b-card {
-    position: relative;
-    /* Add the gradient background from left to right */
-    background-color:  #FFF5E3;
 
-    /* Ensure text is visible on the gradient background */
+    position: relative;
+    background-color:  #FFF5E3;
     color: #000;
     margin-top: 1px;
     margin-left: -30px;
@@ -78,9 +69,7 @@
     height:100%;
 
   }
-
-
-  
+ 
   .b-card1-icon {
     margin-top: -40px;
     margin-left: -10px;
@@ -99,8 +88,6 @@
     padding: 10px;
     border-radius: 10px;
   }
-
-  
   
   .b-card2-content {
     margin-left: -1px;
@@ -118,22 +105,19 @@
   
   .b-card3-icon{
 
-    background-color: black; /* Set the background color to black */
-    color: white; /* Set the text color to white */
-
-     position: absolute;
-     margin-top: -30px;
-     top: 5;
-     right: 38px;
-     padding: 8px;
-     border-radius: 10px;
-     display: flex;
-     align-items: center; 
-
-      
+    background-color: black; 
+    color: white; 
+    position: absolute;
+    margin-top: -30px;
+    top: 5;
+    right: 38px;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center; 
+    
   }
 
-  
   .b-card3-content{
     margin-left: 4px;
   }
@@ -188,11 +172,9 @@
     margin-left: 43px;
     padding: 8px;
     border-radius: 10px;
-    /*display: flex;
-   /* align-items: center; */
+   
 
  }
-
   
   .b-card4-content {
     margin-left: 4px;
@@ -292,7 +274,6 @@
 
   .buttons {
     display: flex;
-    /*justify-content: space-between;*/
     margin-top: 10px;
   }
   
@@ -303,8 +284,6 @@
     bottom:20px;
     right:50px;
     padding: 8px 16px;
-    /*margin-top: 100px;*/
-   /* margin-left: 35px;  */ 
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -320,8 +299,6 @@
     bottom:20px;
     right:150px;
     padding: 8px 16px;
-   /* margin-top: 100px;
-    margin-left: 320px;*/
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -359,38 +336,33 @@
   .download-statement {
     position: absolute;
     font-size: 14px;
-    top: 25px; /* Adjust the top position as needed */
-    right: 40px; /* Adjust the right position as needed */
-    background-color: #ffffff; /* Set background color */
-    padding: 5px 10px; /* Add padding for better readability */
-    border: none/* Add border for visibility */
+    top: 25px; 
+    right: 40px; 
+    background-color: #ffffff; 
+    padding: 5px 10px; 
+    border: none
   }
   
-  /* Style for the button */
 .proceed-button {
   padding: 10px 20px;
- /* margin-left: 400px;
-  margin-top: -30px;*/
   position: absolute;
   top: 20px;
   right:42px;
   font-size: 0.8rem;
   border: none;
   border-radius: 20px;
-  background-color: #363636; /* Change background color as needed */
-  color: white; /* Change text color as needed */
+  background-color: #363636; 
+  color: white; 
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-/* Styling for the ">" symbol */
 .proceed-button span {
-  margin-left: 5px; /* Adjust spacing between "Proceed" text and ">" symbol */
+  margin-left: 5px; 
 }
 
-/* Hover effect for the button */
 .proceed-button:hover {
-  background-color: #b8b5b5; /* Change hover background color as needed */
+  background-color: #b8b5b5; 
 }
 
 .bg-pink {
