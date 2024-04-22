@@ -150,6 +150,10 @@
   margin-bottom: 30px;
 }
 
+.popup-content {
+  min-width: 500px;
+}
+
 .review-card {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Users extends Controller
 {
   private $userModel;
@@ -204,6 +208,170 @@ class Users extends Controller
 
       // Load View
       $this->view('loginView', $data);
+    }
+  }
+
+
+
+  public function forgotPasswordView()
+  {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      function send_password_reset_email($email, $token)
+      {
+
+        $mail = new PHPMailer(true);
+
+        try {
+          //Server settings
+          $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+          $mail->isSMTP();                                            //Send using SMTP
+          $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+          $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+          $mail->Username   = 'janidusandeepa2020@gmail.com';                     //SMTP username
+          $mail->Password   = 'gsdl wnkh fdog ggcy';                               //SMTP password
+          $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
+          $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+          //Recipients
+          $mail->setFrom('janidusandeepa2020@gmail.com', 'Admin');
+          $mail->addAddress($email, "PARK'n Go User");
+
+          //Content
+          $mail->isHTML(true);
+          $mail->Subject = 'Reset Password Notification from PARK\'n GO';
+
+          $email_template = "<h2>Hello, From PARK'n GO</h2>
+                            <h4>You are receiving this email because we received a password reset request for your account.</h4>
+                            <p>If it is you, click the link to reset your password: <a href='http://localhost/PARKnGO/server/web/users/resetPasswordView?email=$email&token=$token'>Reset Password</a></p>";
+
+          $mail->Body    = $email_template;
+
+          $mail->send();
+        } catch (Exception $e) {
+          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+      }
+
+      // Init Data
+      $token = md5(rand());
+      $data = [
+        'email' => trim($_POST['email']),
+        'email_err' => '',
+        'token' => $token,
+      ];
+
+      // Validate email
+      if (empty($data['email'])) {
+        $data['email_err'] = 'Please enter email';
+      } else {
+        if ($this->userModelAdmin->findAdminByEmail($data['email'])) {
+          if (empty($data['email_err'])) {
+            $updateToken = $this->userModelAdmin->updateRecoveryToken($data);
+            if ($updateToken) {
+              send_password_reset_email($data['email'], $token);
+              redirect('users/loginView');
+            }
+          }
+        } else if ($this->userModel->findCompanyByEmail($data['email'])) {
+          if (empty($data['email_err'])) {
+            $updateToken = $this->userModel->updateRecoveryToken($data);
+            if ($updateToken) {
+              send_password_reset_email($data['email'], $token);
+              redirect('users/loginView');
+            }
+          }
+        } else {
+          $data['email_err'] = 'No user found';
+        }
+      }
+    } else {
+      // Init Data
+      $data = [
+        'email' => '',
+        'email_err' => '',
+      ];
+
+      // Load View
+      $this->view('ForgotPasswordView', $data);
+    }
+  }
+
+  public function resetPasswordView()
+  {
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init Data
+      $data = [
+        'email' => trim($_POST['email']),
+        'token' => trim($_POST['token']),
+        'password' => trim($_POST['password']),
+        'confirm_password' => trim($_POST['confirm_password']),
+        'password_err' => '',
+        'confirm_password_err' => '',
+      ];
+
+
+      // Validate password
+      if (strlen($data['password']) < 6) {
+        $data['password_err'] = 'Password must be at least 6 characters';
+      }
+
+      // Validate confirm password
+      if ($data['password'] != $data['confirm_password']) {
+        $data['confirm_password_err'] = 'Passwords does not match';
+      }
+
+      // Check errors are empty
+      if (empty($data['password_err']) && empty($data['confirm_password_err'])) {
+        // Hash Password
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        if ($this->userModelAdmin->findAdminByEmail($data['email'])) {
+          // Update Password
+          if ($this->userModelAdmin->updatePassword($data)) {
+            redirect('users/loginView');
+          } else {
+            die('Something went wrong');
+          }
+        } else if ($this->userModel->findCompanyByEmail($data['email'])) {
+          // Update Password
+          if ($this->userModel->updatePassword($data)) {
+            redirect('users/loginView');
+          } else {
+            die('Something went wrong');
+          }
+        }
+      } else {
+        // Load View with errors
+        $this->view('resetPasswordView', $data);
+      }
+    } else {
+
+      $email = '';
+      if (isset($_GET['email'])) {
+        $email = $_GET['email'];
+      };
+
+      $token = '';
+      if (isset($_GET['token'])) {
+        $token = $_GET['token'];
+      };
+      // Init Data
+      $data = [
+        'email' => $email,
+        'token' => $token,
+        'password' => '',
+        'confirm_password' => '',
+        'password_err' => '',
+        'confirm_password_err' => '',
+      ];
+
+      // Load View
+      $this->view('resetPasswordView', $data);
     }
   }
 
