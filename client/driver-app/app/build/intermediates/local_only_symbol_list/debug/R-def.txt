@@ -156,7 +156,6 @@ id edit_mobile_number_frag_digit_2
 id edit_mobile_number_frag_digit_3
 id edit_mobile_number_frag_digit_4
 id edit_mobile_number_frag_mobile_number
-id edit_mobile_number_frag_resend_btn
 id edit_mobile_number_frag_send_otp_btn
 id edit_prof_frag_change_mobile_btn
 id edit_prof_frag_discard_btn
