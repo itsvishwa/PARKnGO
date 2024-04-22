@@ -9,7 +9,7 @@ class QR extends Controller
     }
 
 
-    // driver mob - used to get encrypted code for the QRs
+    // driver mobile - used to get encrypted code for the QRs
     public function get_qr_code($selected_vehicle_number)
     {
         $token_data = $this->verify_token_for_drivers();
@@ -21,7 +21,7 @@ class QR extends Controller
             $qr_id = $this->driver_qr_model->get_qr_id($token_data["user_id"], $selected_vehicle_number);
             if ($qr_id === false) // no records for a giver driver id and selected vehicle number
             {
-                $this->send_json_400("E_QR_5023");
+                $this->send_json_400("QR_IDD"); //invalid driver data
             } else {
                 $time_stamp = time();
 
