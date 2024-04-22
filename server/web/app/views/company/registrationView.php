@@ -62,7 +62,7 @@
             <ol class="sub-link-label">
               <li>
                 Download the form (
-                <a href="#" class="sub-link"> Click here to download </a> )
+                <a href='<?php echo URLROOT; ?>/css/assets/registrationForm.pdf' class="sub-link" download> Click here to download </a> )
               </li>
               <li>Fill it (Attach necessary documents that are required)</li>
               <li>Upload the filled form</li>
