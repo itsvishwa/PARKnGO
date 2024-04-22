@@ -11,7 +11,6 @@ class ParkingSpace extends Controller
     {
         $this->parking_space_model = $this->model("ParkingSpaceModel");
         $this->review_model = $this->model("ReviewModel");
-        $this->driver_model = $this->model("DriverModel");
     }
 
 
@@ -225,7 +224,7 @@ class ParkingSpace extends Controller
     }
 
 
-    // driver mob - show all available parking spaces respect to the given vehicle type and given keyword
+    // driver mobile - show all available parking spaces respect to the given vehicle type and given keyword
     public function search_available($vehicle_type, $keyword, $latitude, $longitude, $page_number)
     {
 
@@ -289,7 +288,7 @@ class ParkingSpace extends Controller
     }
 
 
-    // driver mob - show all parking spaces respect to the given vehicle type and given keyword
+    // driver mobile - show all parking spaces respect to the given vehicle type and given keyword
     public function search_all($keyword)
     {
 
@@ -330,7 +329,7 @@ class ParkingSpace extends Controller
     }
 
 
-    // driver mob - get data of all parking space for a given vehicle - for the map
+    // driver mobile - get data of all parking space for a given vehicle - for the map
     public function get_map_data($vehicle_type)
     {
         $token_data = $this->verify_token_for_drivers();

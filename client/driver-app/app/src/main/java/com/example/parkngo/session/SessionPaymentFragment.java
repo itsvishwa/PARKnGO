@@ -52,17 +52,17 @@ public class SessionPaymentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 InitRequest req = new InitRequest();
-                req.setMerchantId("1224851");       // Merchant ID
-                req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
-                req.setAmount(250);             // Final Amount to be charged
-                req.setOrderId("kRMOdoUV5l86f8UDQPiPt09TQTlPSzhPN1p3L3JHcmczWU9JT1E9PQ==");        // Unique Reference ID
-                req.setItemsDescription("CMC CAR PARK 01");  // Item description title
+                req.setMerchantId("1224851");
+                req.setCurrency("LKR");
+                req.setAmount(250);
+                req.setOrderId(paymentOnGoingModel.getPaymentID());
+                req.setItemsDescription(paymentOnGoingModel.getParking_name());
                 req.getCustomer().setFirstName("Saman");
                 req.getCustomer().setLastName("Pereira");
-                req.getCustomer().setEmail("samanp@gmail.com");
+                req.getCustomer().setEmail("NA");
                 req.getCustomer().setPhone("+94771234567");
-                req.getCustomer().getAddress().setAddress("No.1, Galle Road");
-                req.getCustomer().getAddress().setCity("Colombo");
+                req.getCustomer().getAddress().setAddress("NA");
+                req.getCustomer().getAddress().setCity("NA");
                 req.getCustomer().getAddress().setCountry("Sri Lanka");
 
                 //Optional Params
