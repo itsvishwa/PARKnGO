@@ -8,11 +8,9 @@ class Admin
     $this->db = new Database;
   }
 
-
   // Login admin
   public function login($email, $password)
   {
-
 
     $this->db->query('SELECT * FROM admin WHERE email = :email');
     $this->db->bind(':email', $email);
@@ -41,7 +39,6 @@ class Admin
       return false;
     }
   }
-
 
   // Function to get the number of users from the database
   public function getUsersCount()
