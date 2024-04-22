@@ -14,7 +14,7 @@ import com.example.officertestapp.Home.HomeMainFragment;
 import com.example.officertestapp.Home.ReleaseASlotFragment;
 import com.example.officertestapp.Home.ReleaseASlotConfirmationFragment;
 import com.example.officertestapp.Home.PaymentDetailsFragment;
-import com.example.officertestapp.Home.ReleaseASlot04Fragment;
+import com.example.officertestapp.Home.ConfirmCashPaymentFragment;
 import com.example.officertestapp.Home.ReleaseASlot06Fragment;
 import com.example.officertestapp.Profile.ProfileLogoutFragment;
 import com.example.officertestapp.Profile.ProfileMainFragment;
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void release_slot_03_receive_cash_payment_btn_handler(View v) {
-        replaceFragment(new ReleaseASlot04Fragment());
+        replaceFragment(new ConfirmCashPaymentFragment());
     }
 
     public void release_slot_04_payment_confirm_btn_handler(View v) {

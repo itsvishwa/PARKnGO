@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.Home.Helpers.PaymentDetailsHelper;
@@ -60,7 +59,7 @@ public class PaymentDetailsFragment extends Fragment {
                     Log.d("Bundle Values", "Vehicle Number: " + paymentDetailsHelper.getAmount());
 
                     // Navigate to AssignVehicle02Fragment with the Bundle
-                    ReleaseASlot04Fragment releaseASlot04Fragment = new ReleaseASlot04Fragment();
+                    ConfirmCashPaymentFragment releaseASlot04Fragment = new ConfirmCashPaymentFragment();
 
                     ((MainActivity) requireActivity()).replaceFragment(releaseASlot04Fragment, paybundle, getView());
                 }

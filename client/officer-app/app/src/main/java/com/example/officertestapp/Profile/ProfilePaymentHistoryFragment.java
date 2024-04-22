@@ -3,9 +3,6 @@ package com.example.officertestapp.Profile;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +11,6 @@ import android.view.ViewGroup;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.Profile.Helpers.PPHFetchData;
 
-import com.example.officertestapp.Profile.Helpers.PPRecycleViewAdapter;
 import com.example.officertestapp.Profile.Helpers.PaymentProfileModel;
 import com.example.officertestapp.R;
 

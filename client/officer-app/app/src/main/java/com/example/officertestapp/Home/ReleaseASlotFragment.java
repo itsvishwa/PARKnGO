@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
-import com.example.officertestapp.Home.Helpers.QRHelper;
+import com.example.officertestapp.Home.Helpers.QREndSessionDetailsHelper;
 import com.example.officertestapp.Home.Helpers.SearchSessionHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
@@ -55,8 +55,8 @@ public class ReleaseASlotFragment extends Fragment {
         ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
             if (result.getContents() != null) {
                 // Process the scanned QR code content using QRHelper
-                QRHelper qRHelper = new QRHelper(getView(), requireContext(), requireActivity().getSupportFragmentManager());
-                qRHelper.processQRCode(result.getContents());
+                QREndSessionDetailsHelper qREndSessionDetailsHelper = new QREndSessionDetailsHelper(getView(), requireContext(), requireActivity().getSupportFragmentManager());
+                qREndSessionDetailsHelper.processQRCode(result.getContents());
             }
         });
 
