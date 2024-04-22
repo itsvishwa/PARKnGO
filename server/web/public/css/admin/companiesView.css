@@ -317,8 +317,6 @@
   font-size: 0.8rem;
 }
 
-
-
 .b-view-more{
    
   position: absolute;
@@ -334,8 +332,6 @@
   border: none;
 }
 
-
-
 .b-delete-more{
    
   position: absolute;
@@ -350,7 +346,6 @@
   outline: none;
   border: none;
 }
-
 
 .b-view-more-card2-content {
   margin-top: 4px;
@@ -492,7 +487,6 @@
     }
   }
 
-
   .parking-ofi-card2-icon {
     margin-top: 5px;
     margin-left: 225px;
@@ -502,7 +496,6 @@
     width: 120%;
   }
   
-
   .parking-ofi-icon {
 
     margin-top :-18px; 
