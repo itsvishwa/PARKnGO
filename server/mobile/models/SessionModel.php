@@ -130,6 +130,38 @@ class SessionModel
     }
 
 
+
+    public function is_force_ended_session($_id)
+    {
+        $this->db->query("SELECT * FROM parking_session WHERE _id = :_id AND is_force_end = 1");
+
+        $this->db->bind(":_id", $_id);
+
+        $this->db->execute();
+
+        $rowCount = $this->db->rowCount();
+
+        return $rowCount > 0;
+    }
+
+
+    public function get_force_ended_session_data($_id)
+    {
+        $this->db->query("SELECT * FROM parking_session WHERE _id = :_id AND is_force_end = 1");
+        $this->db->bind(":_id", $_id);
+
+        $result = $this->db->single();
+
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+
+
+
+
     public function end_session($_id, $end_timestamp)
     {
 
