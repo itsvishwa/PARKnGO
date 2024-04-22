@@ -7,9 +7,11 @@
   <link href="<?php echo URLROOT; ?>/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/driverReviews.css" />
-  <title>Driver Reviews</title>
-
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/reportGenerateView.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
+  <title>Generate Reports</title>
 </head>
 
 <body>
@@ -59,8 +61,7 @@
                 Suspend
               </a>
             </li>
-
-            <li class="active">
+            <li>
               <a href="./driverReviews">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
@@ -68,7 +69,7 @@
                 Driver Reviews
               </a>
             </li>
-            <li>
+            <li class="active">
               <a href="./reportGenerateView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
@@ -76,7 +77,6 @@
                 Report Generate
               </a>
             </li>
-
           </ul>
         </div>
       </div>
@@ -84,86 +84,105 @@
     <div class="right-container">
       <div class="header">
         <div class="pageName">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
-            <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-          <h3 class="ml-5">Driver Reviews</h3>
+          <h3>Report Generate</h3>
         </div>
         <div class="profile">
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <div class="business">
-
-        <div class="card-section">
-
-          <div class="b-card-content ">
-            <table class="review-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Parking Space</th>
-                  <th>Date & Time</th>
-                  <th>Review</th>
-                  <th>Star Count</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <?php foreach ($data['reviews'] as $review) : ?>
-
-                  <tr>
-
-                    <td>
-                      <?php
-                      echo $review->first_name . ' ' . $review->last_name;
-                      ?>
-                    </td>
-                    <td><?php echo $review->parking_name; ?></td>
-
-                    <td>
-                      <?php
-                      $timestamp = strtotime($review->time_stamp);
-                      $formattedDate = date("M d, Y", $timestamp);
-                      $formattedTime = date("h:i:s A", $timestamp);
-
-                      echo "<p>{$formattedDate}<br>{$formattedTime}</p>";
-                      ?>
-                    </td>
-
-                    <td>
-                      <?php
-                      $content = $review->content;
-                      $maxChars = 100;
-
-                      if (strlen($content) > $maxChars) {
-
-                        $firstLine = htmlspecialchars(substr($content, 0, $maxChars));
-                        $secondLine = htmlspecialchars(substr($content, $maxChars));
-
-                        echo "<p>{$firstLine}<br>{$secondLine}</p>";
-                      } else {
-                        echo htmlspecialchars($content);
-                      }
-                      ?>
-                    </td>
-                    <td><?php echo $review->no_of_stars; ?></td>
-
-                  </tr>
-
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-          <div class="b-card-content text-black">
-          </div>
+      <div class="report-card mb-20">
+        <div class="report-card-content">
+          <h4>Reports based on Driver Reviews<h4>
+              <h4 class="mt-10">For last 30 Days</h4>
+              <div class="flex mt-20">
+                <button class="btn bg-off-white2" onclick="PDF('Admin' , 'BadReview')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-red">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.01.05.027.1.05.148.593 1.2.925 2.55.925 3.977 0 1.487-.36 2.89-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398-.306.774-1.086 1.227-1.918 1.227h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 0 0 .303-.54" />
+                  </svg>
+                  Reviews
+                </button>
+                <button class="btn bg-off-white2" onclick="PDF('Admin' , 'GoodReview')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-blue">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z" />
+                  </svg>
+                  Reviews
+                </button>
+                <button class="btn bg-off-white2" onclick="PDF('Admin' , 'Review')">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-primary">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+                  </svg>
+                  Reviews
+                </button>
+              </div>
         </div>
+        <img src="<?php echo URLROOT; ?>/css/assets/parking-officer.jpg" class="report-card-img" />
       </div>
     </div>
   </div>
-  </div>
-  </div>
+  <script>
+    function PDF(basedOn, type) {
+      var data;
+      var tableName;
+      var fileName;
+      <?php $adminReport =  $this->model('Admin');  ?>
+      if (basedOn === "Admin") {
+        if (type === "BadReview") {
+          data = <?php echo json_encode($adminReport->getReportBadReviews()); ?>;
+          tableName = 'Bad Reviews Reports based on Driver for Last 30 days.';
+          fileName = 'driver_based_bad_reviews';
+        } else if (type === "GoodReview") {
+          data = <?php echo json_encode($adminReport->getReportGoodReviews()); ?>;
+          tableName = 'Good Reviews based on Driver for Last 30 days.';
+          fileName = 'driver_based_good_reviews';
+
+        } else if (type === "Review") {
+          data = <?php echo json_encode($adminReport->getReportReviews()); ?>;
+          tableName = 'All Reviews based on Driver for Last 30 days.';
+          fileName = 'driver_based_all_reviews';
+
+        }
+
+      } else {
+        console.log("Generate PDF based on all data");
+      }
+
+      var doc = new jsPDF();
+
+      // Extract columns from the keys of the first object
+      var columns = Object.keys(data[0]);
+
+      var rows = [];
+
+      // Populate table rows from JSON data
+      data.forEach(function(obj) {
+        var row = [];
+        columns.forEach(function(col) {
+          row.push(obj[col]);
+        });
+        rows.push(row);
+      });
+
+      var tableName = tableName;
+
+      // Add table name
+      doc.text(tableName, 14, 10);
+
+      // Add table to PDF
+      doc.autoTable({
+        head: [columns],
+        body: rows
+      });
+
+      // Save PDF
+      doc.save(fileName + '.pdf');
+
+    }
+  </script>
+
 </body>
 
 </html>

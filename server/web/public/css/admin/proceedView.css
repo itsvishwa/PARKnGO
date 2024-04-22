@@ -5,7 +5,7 @@
   .menu {
     list-style-type: none;
     padding: 0;
-    margin-top: 10px;
+    margin-top: -50px;
   }
 
   .menu li {
@@ -41,21 +41,14 @@
   }
   
   .card-section {
-   /* display: block;
-    margin-left: 20px;
-    justify-content: space-between;
-    padding-left: 50px;
-    width: 70%;
-    height:15%;*/
-
+  
     display: flex;
-    flex-wrap: wrap; /* Ensures cards wrap to the next line if needed */
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 20px;
     padding-left: 50px;
     width: 90%;
-    height: auto; /* Set height to auto for flexibility */
-
+    height: auto; 
  
   }
   
@@ -97,12 +90,6 @@
     border-radius: 10px;
   }
 
-  /*.b-card_d-icon {
-    margin-top: 5px;
-    margin-left: 350px;
-    padding: 10px;
-    border-radius: 10px;
-  }*/
  
   .b-card2-content {
     margin-left: -1px;
@@ -120,22 +107,19 @@
   
   .b-card3-icon{
 
-    background-color: black; /* Set the background color to black */
-    color: white; /* Set the text color to white */
-
-     position: absolute;
-     margin-top: -30px;
-     top: 5;
-     right: 38px;
-     padding: 8px;
-     border-radius: 10px;
-     display: flex;
-     align-items: center; 
-
-      
+    background-color: black; 
+    color: white; 
+    position: absolute;
+    margin-top: -30px;
+    top: 5;
+    right: 38px;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center; 
+    
   }
-
-  
+ 
   .b-card3-content{
     margin-left: 4px;
   }
@@ -195,7 +179,6 @@
     bottom: 1px;
     left:500px;
     top: 22px;
-    /*left:42px;*/
     margin-top:-25px;
     margin-left:-500px;
     padding: 10px;
@@ -223,12 +206,9 @@
     margin-left: 43px;
     padding: 8px;
     border-radius: 10px;
-    /*display: flex;
-   /* align-items: center; */
 
  }
-
-  
+ 
   .b-card4-content {
     margin-left: 4px;
   }
@@ -325,11 +305,8 @@
     }
   }
 
- 
-
   .buttons {
     display: flex;
-    /*justify-content: space-between;*/
     margin-top: 10px;
   }
   
@@ -356,37 +333,23 @@
 
   .b-card3 {
     margin-top: -5px;
-    /*margin-bottom: 20px 40px;*/
     margin-bottom: 5px;  
-   /* padding: 30px;*/
     margin-left: -28px;
     border-radius: 10px;
-    /*box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);*/
     width: 965px;
     height: 230px;
     background-color: none;
-   /* color: #000;  Change the text color as needed */
   }
 
   .b-card-ar {
+
     margin-top: -5px;
-    /*margin-bottom: 20px 40px;*/
     margin-bottom: 2px;  
-   /* padding: 30px;*/
     margin-left: -28px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    /*display: block;*/
-   /* align-items: center;*/
-   /* width: 70%;
-    height: 70%;*/
     width: 965px;
     height: 50px;
-
-    /************/
-    /* Add the vertical gradient background */
-    
-    /* Ensure text is visible on the gradient background */
      
   }
 
@@ -394,13 +357,9 @@
   .reject-button{
     
     position:absolute;
-   /* bottom:60px;*/
     margin-top: 5px;
-   /* right:558px;*/
     margin-left: 26px;
     padding: 10px 170px;
-    /*margin-top: 100px;*/
-   /* margin-left: 35px;  */ 
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -414,13 +373,9 @@
   .approve-button {
     
     position:absolute;
-    /*bottom:60px;*/
     margin-top: 5px;
-   /* right:58px;*/
     margin-left:514px ;
     padding: 10px 170px;
-   /* margin-top: 100px;
-    margin-left: 320px;*/
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -459,38 +414,34 @@
   .download-statement {
     position: absolute;
     font-size: 14px;
-    top: 25px; /* Adjust the top position as needed */
-    right: 40px; /* Adjust the right position as needed */
-    background-color: #ffffff; /* Set background color */
-    padding: 5px 10px; /* Add padding for better readability */
-    border: none/* Add border for visibility */
+    top: 25px; 
+    right: 40px; 
+    background-color: #ffffff; 
+    padding: 5px 10px; 
+    border: none
   }
   
-  /* Style for the button */
+  
 .proceed-button {
   padding: 10px 20px;
- /* margin-left: 400px;
-  margin-top: -30px;*/
   position: absolute;
   top: 20px;
   right:42px;
   font-size: 0.8rem;
   border: none;
   border-radius: 20px;
-  background-color: #363636; /* Change background color as needed */
-  color: white; /* Change text color as needed */
+  background-color: #363636; 
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-/* Styling for the ">" symbol */
 .proceed-button span {
-  margin-left: 5px; /* Adjust spacing between "Proceed" text and ">" symbol */
+  margin-left: 5px;
 }
 
-/* Hover effect for the button */
 .proceed-button:hover {
-  background-color: #dda131; /* Change hover background color as needed */
+  background-color: #dda131;
 }
 
 .bg-pink {
@@ -503,32 +454,20 @@
   
 }
 
-
 .b-card-apre{
   margin-top: -5px;
-  /*margin-bottom: 20px 40px;*/
   margin-bottom: 5px;  
- /* padding: 30px;*/
   margin-left: -28px;
   border-radius: 10px;
-  /*box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);*/
-  /*display: block;*/
- /* align-items: center;*/
- /* width: 70%;
-  height: 70%;*/
   width: 965px;
   height: 60px;
-  
-
-  /************/
-  /* Add the vertical gradient background */
   background-color:#f6ead3;
-  /* Ensure text is visible on the gradient background */
-  color: #000; /* Change the text color as needed */
+  color: #000; 
   display: flex;
 }
 
 #rejectReason {
+
   margin-top: -15px;
   margin-bottom: 5px;
   margin-left: -28px;
@@ -537,17 +476,15 @@
   width: 950px;
   height: 230px;
   background-color: #FFF5E3;
-  /* Add other styles as needed */
+ 
 }
 
 #rejectReason::placeholder {
 
   text-indent: 5px; 
-  /*margin-top: 10px;*/
   padding-top: 3px;
-  color: #999; /* Placeholder text color */
-  font-style: normal; /* Placeholder text style */
-  /* Add any other styles you want to apply to the placeholder */
+  color: #999; 
+  font-style: normal; 
   
 }
 
