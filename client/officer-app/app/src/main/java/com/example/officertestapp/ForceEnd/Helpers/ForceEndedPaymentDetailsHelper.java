@@ -109,7 +109,7 @@ public class ForceEndedPaymentDetailsHelper {
                 String vehicleNumber = responseData.getString("vehicle_number");
                 String vehicleType = responseData.getString("vehicle_type");
                 String startTime = responseData.getString("start_time");
-                String endTime = responseData.getString("end_time");
+                String endTime = responseData.getString("current_time");
                 String timeWent = responseData.getString("time_went");
                 amount = responseData.getString("amount");
 
