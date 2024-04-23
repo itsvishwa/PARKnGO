@@ -17,6 +17,9 @@
 // http://localhost/PARKnGO/server/mobile/user/login/713072925/3950 => login => for both drivers and officers
 
 
+
+use Twilio\Rest\Client;
+
 class User extends Controller
 {
 	private $driver_model;

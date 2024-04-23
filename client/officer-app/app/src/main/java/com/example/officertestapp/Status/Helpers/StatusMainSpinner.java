@@ -2,18 +2,31 @@ package com.example.officertestapp.Status.Helpers;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.officertestapp.R;
 
 import java.util.ArrayList;
 
 public class StatusMainSpinner {
-    public StatusMainSpinner(View view, Context context){
-        this.init(view, context);
+
+    String vehicleType;
+    String statusType;
+    Context context;
+    View loadingView;
+    View statusMainView;
+    StatusFetchData statusFetchData;
+    public StatusMainSpinner(View statusMainView, View loadingView, Context context, StatusFetchData statusFetchData){
+        this.statusMainView = statusMainView;
+        this.context = context;
+        this.vehicleType = "all";
+        this.statusType = "all";
+        this.statusFetchData = statusFetchData;
+        this.loadingView = loadingView;
+        this.init(statusMainView, context);
     }
 
     public void init(View view, Context context){
@@ -24,19 +37,21 @@ public class StatusMainSpinner {
         spinnerVehicleType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(context, item + "selected", Toast.LENGTH_LONG).show();
+                String item = adapterView.getItemAtPosition(i).toString().toLowerCase();
+                if(!item.equals(vehicleType)){
+                    vehicleType = item;
+                    spinnerBtnHandler();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
 
         });
 
         ArrayList<String> vehicleTypes = new ArrayList<>();
-        String[] vTypes = {"Vehicle Type", "Car", "Bike", "Van", "Lorry", "Bus"};
+        String[] vTypes = {"All", "Car", "Tuktuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"};
 
         for (int i=0; i<vTypes.length; i++){
             vehicleTypes.add(vTypes[i]);
@@ -53,8 +68,19 @@ public class StatusMainSpinner {
         spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(context, item + "selected", Toast.LENGTH_LONG).show();
+                String item = adapterView.getItemAtPosition(i).toString().toLowerCase();
+                String newItem;
+                if(item.equals("payment due")){
+                    newItem = "pd";
+                } else if(item.equals("in progress")) {
+                    newItem = "ip";
+                }else{
+                    newItem = item;
+                }
+                if(!newItem.equals(statusType)){
+                    statusType = newItem;
+                    spinnerBtnHandler();
+                }
             }
 
             @Override
@@ -65,7 +91,7 @@ public class StatusMainSpinner {
         });
 
         ArrayList<String> statusTypes = new ArrayList<>();
-        String[] sTypes = {"Status", "Payment Due", "In Progress"};
+        String[] sTypes = {"All", "Payment Due", "In Progress"};
 
         for (int i=0; i<sTypes.length; i++){
             statusTypes.add(sTypes[i]);
@@ -74,5 +100,15 @@ public class StatusMainSpinner {
         ArrayAdapter<String> sTypeAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, statusTypes);
         sTypeAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerStatus.setAdapter(sTypeAdapter);
+    }
+
+    private void spinnerBtnHandler(){
+        ViewGroup parent = (ViewGroup) statusMainView.getParent();
+        if (parent != null) {
+            int index = parent.indexOfChild(statusMainView);
+            parent.removeView(statusMainView);
+            parent.addView(loadingView, index);
+        }
+        statusFetchData.fetchData(vehicleType, statusType);
     }
 }

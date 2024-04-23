@@ -1,30 +1,39 @@
 package com.example.officertestapp.Status;
 
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
+
 public class ParkingStatusModel {
     String vehicleNumber;
     String vehicleType;
     String dateTime;
     String parkingStatus;
+    String _id;
 
-
-    public ParkingStatusModel(String vehicleNumber, String vehicleType, String dateTime, String parkingStatus) {
+    public ParkingStatusModel(String _id, String vehicleNumber, String vehicleType, String dateTime, String parkingStatus) {
         this.vehicleNumber = vehicleNumber;
         this.vehicleType = vehicleType;
         this.dateTime = dateTime;
         this.parkingStatus = parkingStatus;
+        this._id = _id;
     }
 
-    public String getVehicleNumber() {return vehicleNumber;}
+    public String getVehicleNumber() {
+        return VehicleNumberHelper.splitVehicleNumber(vehicleNumber);
+    }
 
     public String getVehicleType() {
-        return vehicleType;
+        return vehicleType.toUpperCase();
     }
 
-    public String getDateTime() {return dateTime;}
+    public String getDateTime() {
+        return dateTime;
+    }
 
     public String getParkingStatus() {
         return parkingStatus;
     }
 
-
+    public String getID(){
+        return _id;
+    }
 }
