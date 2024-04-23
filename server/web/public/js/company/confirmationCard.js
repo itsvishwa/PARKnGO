@@ -29,9 +29,11 @@ function createCard(data, image) {
 						  </div>
 						  <div class="confirmation-card-line mb-10">
 					 	  	<p class="f-14">Total Slots <span class="b-500">${totalSlots}</span></p>
-                 <p class="parking-type bg-green text-white">${
-                   data.parkingType == 'public' ? 'Public' : 'Private'
-                 }</p>
+                 ${
+                   data.parkingType == 'public'
+                     ? '<p class="parking-type bg-green text-white">Public</p>'
+                     : '<p class="parking-type bg-primary text-white">Private</p>'
+                 }
 					 	  </div>
 						  <div class="confirmation-card-line">
 						  	<h3 class="f-14">Parking Slots</h3>
