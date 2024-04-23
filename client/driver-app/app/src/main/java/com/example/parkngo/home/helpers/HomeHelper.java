@@ -34,8 +34,8 @@ public class HomeHelper {
     Context context;
     String vehicleType;
     private LocationManager locationManager;
-    Double latitude = 0.0;
-    Double longitude = 0.0;
+    Double latitude = 6.919875;
+    Double longitude = 79.854209;
 
     public HomeHelper(View homeFragmentView, Context context){
         this.homeFragmentView = homeFragmentView;
@@ -105,14 +105,6 @@ public class HomeHelper {
         return vehicleType;
     }
 
-    public Double getLatitude(){
-        return latitude;
-    }
-
-    public Double getLongitude(){
-        return longitude;
-    }
-
 
     public void getLocationAndContinue() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -120,7 +112,6 @@ public class HomeHelper {
             @Override
             public void onLocationChanged(Location location) {
                 // Get latitude and longitude from location object
-                System.out.println("hello worlds");
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
                 System.out.println(longitude  + "       " + latitude);
@@ -133,6 +124,14 @@ public class HomeHelper {
                 MainActivity mainActivity = (MainActivity) context;
                 mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
             }
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            @Override
+            public void onProviderEnabled(String provider) {}
+
+            @Override
+            public void onProviderDisabled(String provider) {}
         };
 
         // Register the listener with the Location Manager to receive location updates
