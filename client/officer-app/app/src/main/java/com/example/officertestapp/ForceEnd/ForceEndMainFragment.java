@@ -16,6 +16,11 @@ import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class ForceEndMainFragment extends Fragment {
     View loadingView;
 
@@ -37,7 +42,6 @@ public class ForceEndMainFragment extends Fragment {
 
         // Set the officer's name in the TextView
         parkingNameView.setText(parkingName);
-
 
 
         // fetching data
