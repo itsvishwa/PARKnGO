@@ -42,12 +42,15 @@ public class ForceEndConfirmHelper {
 
     private LocationManager locationManager;
     Context context;
+
+
     public ForceEndConfirmHelper(Context context, View forceEndConfirmView){
         this.context = context;
         this.forceEndConfirmView = forceEndConfirmView;
     }
 
-    public void getLocation() {
+
+    public void getLocationAndSendReq() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
             @Override
@@ -57,6 +60,8 @@ public class ForceEndConfirmHelper {
                 longitude = location.getLongitude();
                 System.out.println(longitude  + "       " + latitude);
                 locationManager.removeUpdates(this);
+
+                sendForceEndReq();
             }
 
             @Override
@@ -76,7 +81,7 @@ public class ForceEndConfirmHelper {
     }
 
 
-    public void sendForceEndReq(){
+    private void sendForceEndReq(){
         RequestQueue queue = Volley.newRequestQueue(context);
         String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/force_end/" + latitude + "/" +longitude;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
