@@ -32,8 +32,23 @@ function saveFormData() {
     latitude: document.querySelector('input[name="latitude"]').value,
     longitude: document.querySelector('input[name="longitude"]').value,
     parkingType: document.querySelector('select[name="parkingType"]').value,
-    // parkingImage: document.querySelector('input[name="parkingImage"]').value,
   };
+
+  const parkingImageFile =
+    document.getElementById('parkingImageInput').files[0];
+  if (parkingImageFile) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const parkingImageBase64 = e.target.result;
+      localStorage.setItem('parkingImage', parkingImageBase64);
+
+      console.log(formData);
+
+      // Save the updated array back to localStorage
+      localStorage.setItem('formData', JSON.stringify(formData));
+    };
+    reader.readAsDataURL(parkingImageFile);
+  }
 
   console.log(formData);
 
@@ -53,11 +68,11 @@ function addParkingSlotBatch() {
 
           <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
 					<select name="vehicleType[]" class="p-form-dropdown" required>
-						<option value="" disabled selected>Vehicle Type</option>
-						<option value="Car">Car</option>
-						<option value="Van">Van</option>
-						<option value="Bus">Bus</option>
-						<option value="Motorcycle">Motorcycle</option>
+            <option value="" disabled selected>Vehicle Type</option>
+            <option value="A">Car|Tuktuk|Mini Van</option>
+            <option value="B">Bicycle</option>
+            <option value="C">Van|Lorry|Mini Bus</option>
+            <option value="D">Long Vehicles</option>
 					</select><br>
 
           <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>

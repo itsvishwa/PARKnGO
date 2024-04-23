@@ -8,9 +8,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/requestsView.css" />
-
   <title>Requests</title>
- 
 </head>
 
 <body>
@@ -62,10 +60,18 @@
             </li>
             <li>
               <a href="./driverReviews">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+              </svg>
                 Driver Reviews
+              </a>
+            </li>
+            <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
               </a>
             </li>
           </ul>
@@ -78,26 +84,31 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
           </svg>
-          <h3>Pending Requests</h3>
+          <h3 class="ml-5">Pending Requests</h3>
         </div>
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="business">
         <div class="heading">
-          <h4>You have 03 pending applications to review</h4>
+          <?php if (isset($data['totalPendingApplications'])) : ?>
+                  <?php if ($data['totalPendingApplications'] === 0) : ?>
+                    <h4>You have no new company applications to review</h4>
+                  <?php elseif ($data['totalPendingApplications'] === 1) : ?>
+                    <h4>You have 1 new company application to review</h4>
+                  <?php else : ?>
+                    <h4>You have <?php echo $data['totalPendingApplications']; ?> new company applications to review</h4>                    
+                  <?php endif; ?>
+                <?php endif; ?>
         </div>       
        <div class="card-section">
        
        <?php foreach ($data['pendingApplications'] as $application) : ?>
-          <div class="b-card bg-red">         
+          <div class="b-card">         
             <div class="b-card1-icon ">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="r-menu-logo" opacity="0.9">
                 <path fillRule="evenodd" d="M3 2.25a.75.75 0 000 1.5v16.5h-.75a.75.75 0 000 1.5H15v-18a.75.75 0 000-1.5H3zM6.75 19.5v-2.25a.75.75 0 01.75-.75h3a.75.75 0 01.75.75v2.25a.75.75 0 01-.75.75h-3a.75.75 0 01-.75-.75zM6 6.75A.75.75 0 016.75 6h.75a.75.75 0 010 1.5h-.75A.75.75 0 016 6.75zM6.75 9a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM6 12.75a.75.75 0 01.75-.75h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 6a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zm-.75 3.75A.75.75 0 0110.5 9h.75a.75.75 0 010 1.5h-.75a.75.75 0 01-.75-.75zM10.5 12a.75.75 0 000 1.5h.75a.75.75 0 000-1.5h-.75zM16.5 6.75v15h5.25a.75.75 0 000-1.5H21v-12a.75.75 0 000-1.5h-4.5zm1.5 4.5a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008zm.75 2.25a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75v-.008a.75.75 0 00-.75-.75h-.008zM18 17.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clipRule="evenodd" />
               </svg>
             </div>
@@ -127,19 +138,8 @@
               $dateTime = date("M d, Y | h:i:s A", $timestamp);
               echo "<p>{$dateTime}</p>";
               ?></p>
-            </div>
-
-            <!-- Example button inside the foreach loop to handle each card -->
-          
-            <button class="proceed-button" onclick="window.location.href='./proceedView.php?name=<?php echo urlencode($application->name); ?>&address=<?php echo urlencode($application->address); ?>&datetime=<?php echo urlencode($application->registered_time_stamp); ?>'">Proceed <span>&gt;</span></button>
-
-
-
-            
-         <!--<button class="proceed-button" onclick="window.location.href='./proceedView.php'">Proceed <span>&gt;</span></button> -->
-         
-         
-
+            </div>          
+            <button class="proceed-button" onclick="window.location.href='./proceedView.php?name=<?php echo urlencode($application->name); ?>&_id=<?php echo urlencode($application->_id); ?>&address=<?php echo urlencode($application->address); ?>&datetime=<?php echo urlencode($application->registered_time_stamp); ?>'">Proceed <span>&gt;</span></button>
           </div>      
           <?php endforeach; ?> 
           <div class="b-card-content text-black">
@@ -149,13 +149,7 @@
       </div>      
   </div>  
   </div>  
-  </div>  
-  
-
-
-
-
-    
+  </div>     
 </body>
 
 </html>

@@ -163,14 +163,31 @@ class Officer
   }
 
   //get officers details for parking officer view 
+  // public function getAllOfficersDetails($company_id)
+  // {
+  //   $this->db->query('SELECT po.*, ps.name AS parking_name, ps._id AS parking_id
+  //   FROM parking_officer po
+  //   LEFT JOIN parking_spaces ps ON po.parking_id = ps._id
+  //   WHERE po.company_id = :company_id;');
+  //   $this->db->bind(':company_id', $company_id);
+  //   $results = $this->db->resultSet();
+  //   return $results;
+  // }
   public function getAllOfficersDetails($company_id)
   {
-    $this->db->query('SELECT po.*, ps.name AS parking_name, ps._id AS parking_id
+    $this->db->query('SELECT po.*, ps.name AS parking_name, ps._id AS parking_id, dr.type AS duty_type, dr.last_duty_timestamp AS last_duty_timestamp
     FROM parking_officer po
     LEFT JOIN parking_spaces ps ON po.parking_id = ps._id
+    LEFT JOIN (
+        SELECT officer_id, MAX(time_stamp) AS last_duty_timestamp, type
+        FROM duty_record
+        GROUP BY officer_id
+    ) dr ON po._id = dr.officer_id
     WHERE po.company_id = :company_id;');
+
     $this->db->bind(':company_id', $company_id);
     $results = $this->db->resultSet();
+
     return $results;
   }
 
@@ -210,40 +227,74 @@ class Officer
     return $results;
   }
 
+  //   public function getOfficerActivities($officer_id, $company_id)
+  //   {
+  //     $this->db->query("SELECT
+  //     oa.type AS activity_type,
+  //     po.first_name AS officer_first_name,
+  //     po.last_name AS officer_last_name,
+  //     ps.name AS parking_space_name,
+  //     sess.start_time AS session_start_time,
+  //     sess.end_time AS session_end_time,
+  //     sess.vehicle_number AS session_vehicle_number,
+  //     sess.parking_id AS session_parking_id,
+  //     pss.vehicle_type AS parking_space_status_vehicle_type,
+  //     pss.rate AS parking_space_status_rate,
+  //     pay.amount AS payment_amount,
+  //     pay.is_complete AS payment_is_complete,
+  //     pay.payment_method AS payment_method,
+  //     pay.time_stamp AS payment_time_stamp
+  // FROM
+  //     officer_activity oa
+  // JOIN
+  //     parking_officer po ON oa.officer_id = po._id
+
+  // LEFT JOIN
+  //     parking_session sess ON oa.session_id = sess._id
+  // LEFT JOIN
+  //     parking_spaces ps ON sess.parking_id = ps._id
+  // LEFT JOIN
+  //     parking_space_status pss ON sess.parking_id = pss.parking_id
+  // LEFT JOIN
+  //     payment pay ON sess._id = pay.session_id
+  // WHERE
+  //     po.company_id = :company_id AND po.officer_id = :officer_id
+  // ORDER BY
+  //     oa.time_stamp DESC;
+  // ");
+  //     $this->db->bind(':company_id', $company_id);
+  //     $this->db->bind(':officer_id', $officer_id);
+  //     $row = $this->db->resultSet();
+  //     return $row;
+  //   }
+
   public function getOfficerActivities($officer_id, $company_id)
   {
-    $this->db->query("SELECT 
-    oa.type AS activity_type,
-    po.first_name AS officer_first_name,
-    po.last_name AS officer_last_name,
-    ps.name AS parking_space_name, 
-    sess.start_time AS session_start_time,
-    sess.end_time AS session_end_time,
-    sess.vehicle_number AS session_vehicle_number,
-    sess.parking_id AS session_parking_id,
-    pss.vehicle_type AS parking_space_status_vehicle_type,
-    pss.rate AS parking_space_status_rate,
-    pay.amount AS payment_amount,
-    pay.is_complete AS payment_is_complete,
-    pay.payment_method AS payment_method,
-    pay.time_stamp AS payment_time_stamp
-FROM 
-    officer_activity oa
-JOIN 
-    parking_officer po ON oa.officer_id = po._id
-
-LEFT JOIN 
-    parking_session sess ON oa.session_id = sess._id
-LEFT JOIN
-    parking_spaces ps ON sess.parking_id = ps._id
-LEFT JOIN
-    parking_space_status pss ON sess.parking_id = pss.parking_id
-LEFT JOIN 
-    payment pay ON sess._id = pay.session_id
-WHERE 
-    po.company_id = :company_id AND po.officer_id = :officer_id
+    $this->db->query("SELECT
+  oa._id AS officer_activity_id,
+  oa.type AS activity_type,
+  oa.time_stamp AS activity_time_stamp,
+  oa.session_id,
+  oa.officer_id,
+  ps.vehicle_number AS vehicle_number,
+  ps.vehicle_type AS vehicle_type,
+  ps.driver_id,
+  ps.parking_id,
+  pspace.name AS parking_space_name,
+  pspace.company_id,
+  d.first_name AS first_name,
+  d.last_name AS last_name,
+  d.mobile_number AS driver_mobile_number
+FROM
+  officer_activity oa
+LEFT JOIN parking_session ps ON oa.session_id = ps._id
+LEFT JOIN parking_spaces pspace ON ps.parking_id = pspace._id
+LEFT JOIN driver d ON d._id = ps.driver_id
+LEFT JOIN parking_officer po ON oa.officer_id = po._id
+WHERE
+  po.officer_id = :officer_id AND pspace.company_id = :company_id
 ORDER BY
-    oa.time_stamp DESC;
+  oa._id DESC;
 ");
     $this->db->bind(':company_id', $company_id);
     $this->db->bind(':officer_id', $officer_id);
@@ -267,8 +318,7 @@ WHERE
 GROUP BY 
     po._id, po.first_name, po.last_name
 ORDER BY 
-    no_of_activities DESC
-LIMIT 5;
+    no_of_activities DESC;
 
 ");
     $this->db->bind(':company_id', $company_id);

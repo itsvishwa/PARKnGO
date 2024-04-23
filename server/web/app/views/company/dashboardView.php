@@ -39,6 +39,14 @@
               </a>
             </li>
             <li>
+              <a href="./forceStoppedSessionView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+                Aborted Sessions
+              </a>
+            </li>
+            <li>
               <a href="./parkingSpaceView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
@@ -55,6 +63,14 @@
                 Parking Officer
               </a>
             </li>
+            <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -69,86 +85,74 @@
         </div>
 
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
-
-
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
-      <div class="business">
-        <div class="heading">
-          <span class="material-symbols-outlined menu-icon ">
-            monitoring
-          </span>
-          <h4>Business Analysis</h4>
-        </div>
-        <div class="card-section">
-          <div class="b-card bg-dark-gray">
-            <div class="b-card-icon bg-light-gray">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+      <div class="flex right-section">
+        <div class="card-section-col-1">
+          <div class="card-section-row-1 flex ml-20">
+            <div class="b-card bg-dark-gray b-card-1 mr-20">
+              <div class="b-card-icon bg-light-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="b-card-content text-light-yellow">
+                <h3>Rs: <?php if ($data['monthlyEarned'] != 0) {
+                          echo $data['monthlyEarned'];
+                        } else {
+                          echo "0";
+                        } ?>.00</h3>
+                <p>Earned this month</p>
+              </div>
             </div>
-            <div class="b-card-content text-light-yellow">
-              <h3>Rs: <?php if ($data['monthlyEarned'] != 0) {
-                        echo $data['monthlyEarned'];
-                      } else {
-                        echo "0";
-                      } ?>.00</h3>
-              <p>Earned this month</p>
-            </div>
-          </div>
-          <div class="b-card bg-dark-gray">
-            <div class="b-card-icon bg-light-gray">
-              <span class="material-symbols-outlined menu-logo text-light-yellow">
-                group
-              </span>
-            </div>
-            <div class="b-card-content text-light-yellow">
-              <h3><?php echo $data['numberOfUsers'] ?></h3>
-              <p>Monthly Users</p>
+            <div class="b-card bg-dark-gray b-card-2">
+              <div class="b-card-icon bg-light-gray">
+                <span class="material-symbols-outlined menu-logo text-light-yellow">
+                  group
+                </span>
+              </div>
+              <div class="b-card-content text-light-yellow">
+                <h3><?php echo $data['numberOfUsers'] ?></h3>
+                <p>Monthly Users</p>
+              </div>
             </div>
           </div>
-          <div class="b-card bg-dark-gray">
-            <div class="b-card-icon bg-light-gray">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div class="b-card-content text-light-yellow">
-              <h3>Rs: <?php if ($data['todayEarned'] != 0) {
-                        echo $data['todayEarned'];
-                      } else {
-                        echo "0";
-                      } ?>.00</h3>
-              <p>Earned today</p>
-            </div>
+          <div class="card-section-row-2 section-one-left bar-graph mt-20">
+            <canvas id="parkingSessions"></canvas>
+          </div>
+          <div class="card-section-row-3 section-two-left bar-graph mt-20 mb-10">
+            <canvas id="revenue"></canvas>
           </div>
         </div>
-      </div>
-      <div class="section-one">
-        <div class="section-one-left bar-graph mt--30">
-          <canvas id="parkingSessions"></canvas>
-        </div>
-        <div class="section-one-right pie-chart mt--30">
-          <canvas id="myPieChart"></canvas>
-        </div>
-
-      </div>
-      <div class="section-two">
-        <div class="section-two-left bar-graph">
-          <canvas id="revenue"></canvas>
-        </div>
-        <div class="section-two-right latest-reviews">
-          <h1 class="review-heading">Recent Driver Reviews</h1>
-          <div class="content-body">
-
-
+        <div class="card-section-col-2">
+          <div class="card-section-row-1 ml-20">
+            <div class="b-card bg-dark-gray">
+              <div class="b-card-icon bg-light-gray">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo text-light-yellow">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="b-card-content text-light-yellow">
+                <h3>Rs: <?php if ($data['todayEarned'] != 0) {
+                          echo $data['todayEarned'];
+                        } else {
+                          echo "0";
+                        } ?>.00</h3>
+                <p>Earned today</p>
+              </div>
+            </div>
           </div>
 
+          <div class="card-section-row-2 section-one-right pie-chart mt-20">
+            <canvas id="myPieChart"></canvas>
+          </div>
+          <div class="card-section-row-3 section-two-right latest-reviews mt-20 mb-10">
+            <h1 class="review-heading mb-10">Recent Driver Reviews</h1>
+            <div class="content-body">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -217,7 +221,12 @@
       const values = Object.values(responseData);
 
       // Format dates to show only the day
-      const formattedDates = dates.map(date => new Date(date).getDate());
+      const formattedDates = dates.map(date => {
+        const formattedDate = new Date(date);
+        const month = formattedDate.getMonth() + 1; // Months are zero-based
+        const day = formattedDate.getDate();
+        return `${month}-${day}`;
+      });
 
       // Create a bar chart
       const ctx = document.getElementById('parkingSessions').getContext('2d');
@@ -260,7 +269,12 @@
       const dates = data.map(entry => entry.date);
       const values = data.map(entry => entry.value);
 
-      const formattedDates = dates.map(date => new Date(date).getDate());
+      const formattedDates = dates.map(date => {
+        const formattedDate = new Date(date);
+        const month = formattedDate.getMonth() + 1; // Months are zero-based
+        const day = formattedDate.getDate();
+        return `${month}-${day}`;
+      });
 
       // Create a bar chart
       const ctx = document.getElementById('revenue').getContext('2d');
@@ -288,7 +302,7 @@
   </script>
 
   <!-- pie chart for vehicle types -->
-  <script>
+  <!-- <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Fetch data for the pie chart (replace with your actual data fetching logic)
       const data = generateRandomData();
@@ -328,7 +342,123 @@
         };
       }
     });
+  </script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fetch data for the pie chart (replace with your actual data fetching logic)
+      const dummyData = [{
+          first_name: 'Officer1',
+          last_name: 'Last1',
+          no_of_activities: 20
+        },
+        {
+          first_name: 'Officer2',
+          last_name: 'Last2',
+          no_of_activities: 15
+        },
+        {
+          first_name: 'Officer3',
+          last_name: 'Last3',
+          no_of_activities: 12
+        },
+        {
+          first_name: 'Officer4',
+          last_name: 'Last4',
+          no_of_activities: 10
+        },
+        {
+          first_name: 'Officer5',
+          last_name: 'Last5',
+          no_of_activities: 8
+        },
+        {
+          first_name: 'Officer6',
+          last_name: 'Last6',
+          no_of_activities: 5
+        },
+        {
+          first_name: 'Officer7',
+          last_name: 'Last7',
+          no_of_activities: 3
+        },
+        {
+          first_name: 'Officer8',
+          last_name: 'Last8',
+          no_of_activities: 2
+        },
+      ];
+
+      const data = generateRandomData();
+
+      // Create a pie chart
+      const ctx = document.getElementById('myPieChart').getContext('2d');
+      const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: data.labels,
+          datasets: [{
+            data: data.values,
+            backgroundColor: [
+              '#cb99c9',
+              '#77dd77',
+              '#fdfd96',
+              '#ffb347',
+              '#ff6961',
+              '#4E4E4E' // color for "Others"
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+
+      // Function to generate data for the pie chart
+      function generateRandomData() {
+        //replace with in php tag echo json_encode($data['activities']);
+        const data = <?php echo json_encode($data['activities']); ?>;
+        // const data = dummyData;
+
+        // Sort the data by activity count in descending order
+        data.sort((a, b) => b.no_of_activities - a.no_of_activities);
+
+        // Extract top 5 officers
+        const top5Officers = data.slice(0, 5);
+
+        if (data.length > 5) {
+          const otherOfficers = data.slice(5);
+          const othersTotalCount = otherOfficers.reduce((sum, officer) => sum + officer.no_of_activities, 0);
+
+          // Combine top 5 officers and "Others"
+          const combinedData = [...top5Officers, {
+            first_name: 'Others',
+            last_name: '',
+            no_of_activities: othersTotalCount
+          }];
+
+          const labels = combinedData.map(officer => officer.first_name + ' ' + officer.last_name);
+          const values = combinedData.map(officer => officer.no_of_activities);
+
+          return {
+            labels,
+            values
+          };
+        } else {
+          // If there are 5 or fewer officers, use the original data
+          const labels = top5Officers.map(officer => officer.first_name + ' ' + officer.last_name);
+          const values = top5Officers.map(officer => officer.no_of_activities);
+
+          return {
+            labels,
+            values
+          };
+        }
+      }
+    });
   </script>
+
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="<?php echo URLROOT; ?>/js/company/dashboard.js"></script>
 </body>

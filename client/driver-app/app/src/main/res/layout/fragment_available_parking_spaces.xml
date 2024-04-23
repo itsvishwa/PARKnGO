@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/backgroundColor"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".home.AvailableParkingSpacesFragment">
 
 
@@ -27,11 +29,12 @@
             android:layout_height="match_parent">
 
             <!--            1st segment here-->
+
+            <!--            2nd segment here -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_weight="2.8"
                 android:layout_height="match_parent"
-                >
+                android:layout_weight="2.8">
 
                 <TextView
                     android:id="@+id/appbar_main_text"
@@ -45,20 +48,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/appbar_secondary_text"
+                <Button
+                    android:id="@+id/available_parking_space_frag_refresh_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Updated 1 minute ago pull down to refresh again"
-                    android:textColor="@color/textPrimary"
+                    android:backgroundTint="#BFFEF2DB"
+                    android:text="Refresh"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
 
+                <Button
+                    android:id="@+id/available_parking_space_frag_view_map_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#BFFEF2DB"
+                    android:text="View on Map"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/available_parking_space_frag_refresh_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            2nd segment here -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.8"
@@ -91,8 +108,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="18dp"
-        android:layout_weight="8">
+        android:layout_weight="8"
+        android:paddingHorizontal="18dp">
 
 
         <!--  Search Bar    -->
@@ -107,59 +124,104 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryBackground="@android:color/transparent"
-            app:queryHint="Search Here..." />
+            app:queryHint="Search parking name, location..." />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/available_parking_spaces_frag_chip_group"
             style="@style/Widget.MaterialComponents.ChipGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             app:chipSpacingVertical="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/available_parking_spaces_frag_search_bar">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/aps_frag_min_dis_chip"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Minimum Distance"
-                app:chipEndPadding="10dp"
-                app:chipStartPadding="10dp" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/aps_frag_max_free_slots_chip"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Maximum Free Slots" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/aps_frag_public_chip"
-                style="@style/testChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Public" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/aps_frag_min_rate_chip"
                 style="@style/testChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Minimum Rate" />
+                android:text="Rate: Low to High" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/aps_frag_max_free_slots_chip"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free Slots: High to Low" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/aps_frag_public_chip"
+                style="@style/testChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Public Parking Spaces" />
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ava_recycle_view"
-            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/aps_frag_prev_next_btn_constraint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/available_parking_spaces_frag_chip_group" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/aps_frag_prev_next_btn_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.542"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/aps_frag_prev_btn"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="80dp"
+                android:drawableLeft="@drawable/baseline_arrow_left_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/aps_frag_next_btn"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="80dp"
+                android:drawableRight="@drawable/baseline_arrow_right_24"
+                app:layout_constraintBottom_toBottomOf="@+id/aps_frag_page_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/aps_frag_page_number" />
+
+            <TextView
+                android:id="@+id/aps_frag_page_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/aps_frag_prev_btn"
+                app:layout_constraintEnd_toStartOf="@+id/aps_frag_next_btn"
+                app:layout_constraintStart_toEndOf="@+id/aps_frag_prev_btn"
+                app:layout_constraintTop_toTopOf="@+id/aps_frag_prev_btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

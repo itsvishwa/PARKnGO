@@ -36,6 +36,14 @@
                 Updates
               </a>
             </li>
+            <li>
+              <a href="./forceStoppedSessionView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+                Aborted Sessions
+              </a>
+            </li>
             <li class="active">
               <a href="./parkingSpaceView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
@@ -52,6 +60,14 @@
                 Parking Officer
               </a>
             </li>
+            <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -66,9 +82,6 @@
         </div>
 
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -82,20 +95,27 @@
             Add Parking Space
           </div>
         </a>
+        <div class="search-bar flex">
+          <input type="text" id="searchInput" placeholder="Search By Name." oninput="filterOfficers()" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-logo text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
 
       </div>
-      <div class="parking-space-section">
+      <div class="parking-space-section mb-20">
 
         <div id="parkingCards" class="parking-cards">
-          <?php foreach ($data['parking_spaces'] as $parking) : ?>
-            <div class="parking-space-card <?php $currentUnixTime = time() + 16200;
+          <?php $i = 0;
+          foreach ($data['parking_spaces'] as $parking) : ?>
+            <div class="parking-space-card <?php $currentUnixTime = time();
                                             if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                                               echo "closed";
                                             } ?>">
               <div class="parking-card-header">
                 <div class="parking-name">
                   <h3 class="parking-card-bold"><?php echo htmlspecialchars($parking->parking_name); ?></h3>
-                  <?php $currentUnixTime = time() + 16200;
+                  <?php $currentUnixTime = time();
                   if ($parking->parking_closed_start_time <= $currentUnixTime && $parking->parking_closed_end_time >= $currentUnixTime) {
                     echo '<p class="parking-type bg-red text-white">Closed</p>';
                   } else {
@@ -113,15 +133,26 @@
                   <?php if ($parking->parking_is_public) {
                     echo '<p class="parking-type bg-green text-white">Public</p>';
                   } else {
-                    echo '<p class="parking-type bg-green text-white">Private</p>';
+                    echo '<p class="parking-type bg-primary text-white">Private</p>';
                   } ?>
 
                 </div>
-                <p class="parking-officer">Parking Officer: <span class="parking-card-bold"><?php if ($parking->officer_first_name != "") {
-                                                                                              echo htmlspecialchars($parking->officer_first_name . ' ' . $parking->officer_last_name);
-                                                                                            } else {
-                                                                                              echo "Not Assigned";
-                                                                                            } ?></span></p>
+                <p class="parking-officer">Number Of Parking Officers: <span class="parking-card-bold"><?php if ($parking->officer_count != 0) {
+                                                                                                          echo $parking->officer_count;
+                                                                                                        } else {
+                                                                                                          echo "Not Assigned";
+                                                                                                        } ?></span></p>
+                <p class="parking-officer">On Duty: <?php $is_available = 0;
+                                                    foreach ($data['duty_records'] as $duty_record) {
+                                                      if ($duty_record->parking_id == $parking->parking_id) {
+                                                        echo "<span class='parking-type bg-green text-white'>" . $duty_record->duty_count . "</span>";
+                                                        $is_available = 1;
+                                                        break;
+                                                      }
+                                                    }
+                                                    if ($is_available == 0) {
+                                                      echo "<span class='parking-type bg-red text-white'>N/A</span>";
+                                                    } ?></span></p>
 
 
                 <table>
@@ -138,7 +169,7 @@
                         <?php if ($parking_status->parking_space_id == $parking->parking_id) {
 
                           echo '<td>';
-                          echo htmlspecialchars($parking_status->vehicle_type);
+                          echo htmlspecialchars($this->convert_to_vehicle_type($parking_status->vehicle_type));
                           echo '</td>';
                           echo '<td>';
                           echo htmlspecialchars($parking_status->each_type_free_slots);
@@ -222,6 +253,24 @@
     </div>
   </div>
   <script>
+    function filterOfficers() {
+      var input, filter, cards, card, officerName, i;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      cards = document.getElementById("parkingCards");
+      card = cards.getElementsByClassName("parking-space-card");
+
+      for (i = 0; i < card.length; i++) {
+        officerName = card[i].getElementsByClassName("parking-card-bold")[0];
+        if (officerName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          card[i].style.display = "";
+        } else {
+          card[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
 
       // Get all elements with the class 'review-btn'
@@ -232,15 +281,11 @@
       const popupContentBody = document.querySelector('.content-body');
       const parkingName = document.querySelector('.popup-parking-name');
       const parkingAddress = document.querySelector('.popup-parking-address');
-      const reviewsData = <?php echo json_encode($data['reviews']); ?>; // Assuming $data['reviews'] is a PHP variable containing the reviews data
+      const reviewsData = <?php echo json_encode($data['reviews']); ?>;
 
-      // Add event listener to each review button
       reviewButtons.forEach(function(button) {
         button.addEventListener('click', function() {
-          // Get the parking_id from the data attribute
           const parkingId = this.getAttribute('data-parking-id');
-
-          // Filter reviews based on parkingId
           const filteredReviews = reviewsData.filter(review => review.parking_id == parkingId);
 
           function generateStars(rating) {
@@ -262,42 +307,46 @@
             return stars.join('');
           }
 
-          parkingName.innerHTML = '';
           parkingName.innerHTML = `${filteredReviews[0].parking_name}`;
-
-          parkingAddress.innerHTML = '';
           parkingAddress.innerHTML = `${filteredReviews[0].parking_address}`;
-
-          // Clear the popup content body
           popupContentBody.innerHTML = '';
 
-
-          // Create cards for each review and append them to the popup
           filteredReviews.forEach(review => {
             const card = document.createElement('div');
             card.classList.add('review-card');
 
             const starsSVG = generateStars(review.no_of_stars);
-            // Customize the card content based on your review structure
             card.innerHTML = `
-            <div class="review-head">
-              <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
-              <p>${review.time_stamp}</p>
-            </div>
-            <div class="review-body">
-              ${review.content}
-            </div>
-            <div class="stars-container">
-              ${starsSVG}
-            </div>
-          `;
-
-            // Append the card to the popup
+                        <div class="review-head">
+                            <h3>${review.driver_first_name} ${review.driver_last_name}</h3>
+                            <p>${review.time_stamp}</p>
+                        </div>
+                        <div class="review-body">
+                            ${review.content}
+                        </div>
+                        <div class="stars-container">
+                            ${starsSVG}
+                        </div>
+                    `;
             popupContentBody.appendChild(card);
           });
 
-          // Show the popup
           popupContainer.style.display = 'block';
+
+          if (filteredReviews.length > 5) {
+            popupContentBody.style.maxHeight = '300px';
+            popupContentBody.style.overflowY = 'auto';
+          } else {
+            popupContentBody.style.maxHeight = 'none';
+            popupContentBody.style.overflowY = 'hidden';
+          }
+
+          const popupContainerRect = popupContainer.getBoundingClientRect();
+          const closePopupButtonRect = closePopupButton.getBoundingClientRect();
+
+          closePopupButton.style.position = 'fixed';
+          closePopupButton.style.top = `${popupContainerRect.top + closePopupButtonRect.height}px`;
+          closePopupButton.style.right = `${popupContainerRect.right - closePopupButtonRect.width}px`;
         });
       });
 
@@ -305,7 +354,6 @@
         popupContainer.style.display = 'none';
       });
 
-      // Close the popup if the user clicks outside the content
       window.addEventListener('click', function(event) {
         if (event.target === popupContainer) {
           popupContainer.style.display = 'none';
