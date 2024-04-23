@@ -495,6 +495,9 @@ class Session extends Controller
             $total_parked_time = $hours + ($minutes / 60);
             $amount = $hourly_rate * $total_parked_time;
 
+            // Round down to the nearest integer
+            $amount = floor($amount);
+
             return $amount;
         } else {
             return 'Invalid rate';
@@ -586,12 +589,14 @@ class Session extends Controller
                             $result = [
                                 "response_code" => "800",
                                 "message" => "Force ended session!",
+                                "session_id" =>$this->encrypt_id($session_id),
                                 "vehicle_number" => $force_ended_session_details->vehicle_number,
                                 "vehicle_type" => $uppercase_vehicle_type,
                                 "start_time" => $start_timestamp,
                                 "current_time" => $current_timestamp,
                                 "time_went" => $formatted_duration,
-                                "amount" => $formatted_amount
+                                "amount" => $formatted_amount,
+                                "amount_para" => $amount
                             ];
 
                             $this->send_json_200($result);

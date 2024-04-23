@@ -35,6 +35,8 @@ public class ForceEndedPaymentDetailsHelper {
     View view;
     ParkngoStorage parkngoStorage;
     String amount;
+    String amountPara;
+    String sessionId;
 
     public ForceEndedPaymentDetailsHelper (View view, Context context) {
         this.view = view;
@@ -112,6 +114,8 @@ public class ForceEndedPaymentDetailsHelper {
                 String endTime = responseData.getString("current_time");
                 String timeWent = responseData.getString("time_went");
                 amount = responseData.getString("amount");
+                amountPara = responseData.getString("amount_para");
+                sessionId = responseData.getString("session_id");
 
                 TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
                 TextView vehicleTypeTextView = view.findViewById(R.id.vehicle_type_txt_view);
@@ -164,6 +168,13 @@ public class ForceEndedPaymentDetailsHelper {
     public String getAmount(){
         return amount;
     }
+    public String getAmountPara(){
+        return amountPara;
+    }
+    public String getSessionId(){
+        return sessionId;
+    }
+
 
     private void errorResponseHandler(VolleyError error) {
         String errorResponse;
