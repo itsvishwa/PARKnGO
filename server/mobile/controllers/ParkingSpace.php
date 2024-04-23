@@ -236,6 +236,7 @@ class ParkingSpace extends Controller
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
+            $keyword = str_replace("_", " ", $keyword);
             $result = $this->parking_space_model->get_available_parking_spaces_by_search($this->convert_to_vehicle_category($vehicle_type), $keyword, $page_number);
             $is_next = true;
             if ($result === false)  // no open parking spaces available for selected vehicle type 
@@ -300,6 +301,7 @@ class ParkingSpace extends Controller
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
+            $keyword = str_replace("_", " ", $keyword);
             $result = $this->parking_space_model->get_all_parking_spaces_by_search($keyword);
 
             if ($result === false) // no parking spaces 
