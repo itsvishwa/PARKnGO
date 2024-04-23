@@ -1,6 +1,7 @@
 package com.example.parkngo.session.helpers;
 
 
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -45,12 +47,6 @@ public class ForceEndConfirmHelper {
         this.forceEndConfirmView = forceEndConfirmView;
     }
 
-    public void init(){
-        initConfirmBtnListener();
-    }
-
-
-
     public void getLocation() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new LocationListener() {
@@ -59,6 +55,7 @@ public class ForceEndConfirmHelper {
                 // Get latitude and longitude from location object
                 latitude = location.getLatitude();
                 longitude = location.getLongitude();
+                System.out.println(longitude  + "       " + latitude);
                 locationManager.removeUpdates(this);
             }
 
@@ -78,18 +75,8 @@ public class ForceEndConfirmHelper {
         }
     }
 
-    private void initConfirmBtnListener(){
-        Button button = forceEndConfirmView.findViewById(R.id.force_end_confirm_fragment_confirm_btn);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendForceEndReq();
-            }
-        });
-    }
-
-    private void sendForceEndReq(){
+    public void sendForceEndReq(){
         RequestQueue queue = Volley.newRequestQueue(context);
         String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/force_end/" + latitude + "/" +longitude;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
@@ -119,11 +106,13 @@ public class ForceEndConfirmHelper {
         queue.add(stringRequest);
     }
 
+
     private void successForceEndReq(String response){
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
         MainActivity mainActivity  = (MainActivity) context;
         mainActivity.replaceFragment(new ForceEndSucessfullFragment());
     }
+
 
     private void errorForceEndReq(VolleyError error){
         String errorResponse;

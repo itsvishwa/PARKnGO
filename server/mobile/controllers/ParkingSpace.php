@@ -385,8 +385,12 @@ class ParkingSpace extends Controller
         // Decode JSON response
         $decoded_response = json_decode($response, true);
 
+
         // distance in meters
-        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        $distance = 100000; // when google api can't find a root
+        if (isset($decoded_response["rows"][0]["elements"][0]["distance"])) {
+            $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        }
 
         return $distance / 1000;
     }
