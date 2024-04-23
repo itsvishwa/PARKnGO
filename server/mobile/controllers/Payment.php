@@ -12,6 +12,7 @@ class Payment extends Controller
     {
         $this->payment_model = $this->model("PaymentModel");
         $this->officer_model = $this->model("OfficerModel");
+        $this->session_model = $this->model("SessionModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
     }
 
@@ -82,6 +83,8 @@ class Payment extends Controller
     }
 
 
+
+
     public function cash()
     {
         $token_data = $this->verify_token_for_officers();
@@ -94,7 +97,9 @@ class Payment extends Controller
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            $parking_id = trim($_POST["parking_id"]);
+            $encrypted_parking_id = trim($_POST["parking_id"]);
+            // Decrypt the parking_id
+            $parking_id = $this->decrypt_id($encrypted_parking_id);
 
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
                 $encrypted_payment_id = trim($_POST["payment_id"]);
@@ -165,7 +170,6 @@ class Payment extends Controller
             }
         }
     }
-
 
     // calculate no of seconds to no of hours and minutes 
     private function calculate_time($time)

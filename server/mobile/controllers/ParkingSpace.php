@@ -6,7 +6,6 @@ class ParkingSpace extends Controller
     private $parking_space_model;
     private $review_model;
 
-
     public function __construct()
     {
         $this->parking_space_model = $this->model("ParkingSpaceModel");

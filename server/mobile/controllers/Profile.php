@@ -12,7 +12,7 @@ class Profile extends Controller
     private $user_controller;
     private $officer_model;
     private $parking_space_model;
-
+    private $duty_record_model;
 
 
     public function __construct()
@@ -23,9 +23,9 @@ class Profile extends Controller
         $this->officer_model = $this->model("OfficerModel");
         $this->payment_model = $this->model("PaymentModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
+        $this->duty_record_model = $this->model("DutyRecordModel");
         $this->user_controller = new User;
     }
-
 
     // driver mobile - update name
     public function update_name($first_name, $last_name)
@@ -138,7 +138,76 @@ class Profile extends Controller
 
 
     // get payment history of the officer
-    public function officer_payment_history($parking_id)
+    public function officer_payment_history()
+    {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $encoded_parking_id = $_SERVER['HTTP_ENCODED_PARKING_ID'];
+            $parking_id = $this->decrypt_id($encoded_parking_id);
+
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+
+                $payments_history_data = $this->payment_model->get_all_officer_payments_history_by_officer_id($token_data["user_id"]);
+
+                if ($payments_history_data === false) // not payments yet
+                {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "No Payment transactions has been made yet"
+                    ];
+
+                    $this->send_json_400($result);
+                } else // there are payments data
+                {
+                    $result_data = [];
+
+                    foreach ($payments_history_data as $payment_history_data) {
+                        $timestamp = $payment_history_data->time_stamp;
+                        // $formatted_date = date("h.i A | d M", $timestamp);
+
+                        $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
+
+
+                        $payment_method = ($payment_history_data->payment_method);
+
+                        $temp = [
+                            "response_code" => "800",
+                            "Date_and_Time" => $timestamp,
+                            "Amount" => $formatted_amount,
+                            "Vehicle" => $payment_history_data->vehicle_number,
+                            "Payment_Method" => $payment_method
+                        ];
+                        $result_data[] = $temp;
+                    }
+
+                    $this->send_json_200($result_data);
+                }
+            } else {    //parking_id is not similar to the assigned parking
+
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+                if ($assigned_parking_details) // new parking has been assigned to the officer
+                {
+                    // You have been reassigned to a new parking space
+                    $this->send_json_400("101");
+                } else // no parking has been assigned to the officer
+                {
+                    // parking details not found
+                    $this->send_json_404("204");
+                }
+            }
+        }
+    }
+
+
+    public function mark_work_shift_on()
     {
         $token_data = $this->verify_token_for_officers();
 
@@ -150,44 +219,126 @@ class Profile extends Controller
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            $encrypted_parking_id = trim($_POST["parking_id"]);
 
-                $payments_history_data = $this->payment_model->get_all_officer_payments_history_by_officer_id($token_data["user_id"]);
+            // Decrypt the parking_id
+            $parking_id = $this->decrypt_id($encrypted_parking_id);
 
-                if ($payments_history_data === false) // not payments yet
-                {
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
+
+                // Check the Location
+
+                // Device location
+                $device_latitude = trim($_POST["latitude"]);
+                $device_longitude = trim($_POST["longitude"]);
+
+                // Parking Location
+                $parking_space_details = $this->parking_space_model->get_parking_space_details($parking_id);
+                $parking_latitude = $parking_space_details->latitude;
+                $parking_longitude = $parking_space_details->longitude;
+
+                // Calculate distance between officer location and assigned parking location
+                $distance = $this->calculateDistance($device_latitude, $device_longitude, $parking_latitude, $parking_longitude);
+
+                // Define a distance threshold (in kilometers) within which the location is considered valid
+                $distanceThreshold = 0.2;
+
+                if ($distance <= $distanceThreshold) { // Location is within the threshold
+                    // If location is fine then update the database
+                    $time_stamp = trim($_POST["time_stamp"]);
+
+                    // Update the Duty_record table
+                    $this->duty_record_model->mark_duty_in($time_stamp, $token_data["user_id"]);
+
                     $result = [
-                        "response_code" => "204",
-                        "message" => "No Payments has been made yet"
+                        "response_code" => "800",
+                        "message" => "Duty record is marked as IN!"
                     ];
 
-                    $this->send_json_400($result);
-                } else // there are payments data
-                {
-                    $result_data = [];
+                    $this->send_json_200($result);
+                } else {
+                    // Location is outside the threshold, consider it invalid
+                    $result = [
+                        "response_code" => "802",
+                        "message" => "Location is too far from the assigned parking"
+                    ];
 
-                    foreach ($payments_history_data as $payment_history_data) {
-                        $timestamp = strtotime($payment_history_data->time_stamp);
-                        $formatted_date = date("h.i A | d F", $timestamp);
-
-                        $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
-
-                        $formatted_payment_method = strtoupper($payment_history_data->payment_method);
-
-                        $temp = [
-                            "response_code" => "800",
-                            "Date and Time" => $formatted_date,
-                            "Amount" => $formatted_amount,
-                            "Vehicle" => $payment_history_data->vehicle_number,
-                            "Payment Method" => $formatted_payment_method
-                        ];
-                        $result_data[] = $temp;
-                    }
-
-                    $this->send_json_200($result_data);
+                    $this->send_json_200($result);
                 }
-            } else {    //parking_id is not similar to the assigned parking
+            } else { //parking_id is not similar to the assigned parking of the parking officer
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
+                if ($assigned_parking_details) {
+                    $assigned_parking_name = $assigned_parking_details->name;
+
+                    $result = [
+                        "response_code" => "101",
+                        "updated parking_id" => $assigned_parking,
+                        "updated parking_name" => $assigned_parking_name,
+                    ];
+
+                    $this->send_json_200($result);
+                } else {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "parking details not found"
+                    ];
+
+                    $this->send_json_404($result);
+                }
+            }
+        }
+    }
+
+
+    // Calculate distance between two points using Haversine formula
+    private function calculateDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        $earthRadius = 6371; // Earth's radius in kilometers
+
+        $dLat = deg2rad($lat2 - $lat1);
+        $dLon = deg2rad($lon2 - $lon1);
+
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        $distance = $earthRadius * $c; // Distance in kilometers
+
+        return $distance;
+    }
+
+
+    public function mark_work_shift_off()
+    {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+            $encrypted_parking_id = trim($_POST["parking_id"]);
+
+            // Decrypt the parking_id
+            $parking_id = $this->decrypt_id($encrypted_parking_id);
+
+            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
+
+                $time_stamp = trim($_POST["time_stamp"]);
+
+                // Update the Duty_record table
+                $this->duty_record_model->mark_duty_off($time_stamp, $token_data["user_id"]);
+
+                $result = [
+                    "response_code" => "800",
+                    "message" => "Duty record is marked OFF!"
+                ];
+
+                $this->send_json_200($result);
+            } else { //parking_id is not similar to the assigned parking of the parking officer
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
                 if ($assigned_parking_details) {
