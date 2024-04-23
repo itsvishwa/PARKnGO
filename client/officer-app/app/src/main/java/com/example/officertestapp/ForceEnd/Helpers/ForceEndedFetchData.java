@@ -143,7 +143,7 @@ public class ForceEndedFetchData {
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.force_end_frag_recycle_view);
-                ForceEndedRecycleViewAdapter adapter = new ForceEndedRecycleViewAdapter(forceEndedModels ,context);
+                ForceEndedRecycleViewAdapter adapter = new ForceEndedRecycleViewAdapter(forceEndedModels ,context, view);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
