@@ -67,6 +67,14 @@
                                 Driver Reviews
                             </a>
                         </li>
+                        <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
                     </ul>
                 </div>
             </div>
@@ -81,9 +89,6 @@
                 </div>
 
                 <div class="profile">
-                    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>-->
                     <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
                     <a href="../users/logout" class="logout">Log out</a>
                 </div>
@@ -96,13 +101,12 @@
                     <p>Select the company you want to suspend</p>
                 </div>
                 <div class="ml-20">
-                    <div class="flex justify-content-left align-items-center">
-                        <input type="text" id="companySearch" class="company-search-bar" oninput="searchCompany()" placeholder="Search Company.">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="company-search-logo text-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                        </svg>
-                    </div>
-                    <ul id="searchResults" class="search-results" onclick="selectCompany(event)"></ul>
+                    <select id="companyDropdown" class="company-select" onchange="populateFormFields()">
+                        <option value="" disabled selected>Select Company</option>
+                        <?php foreach ($data['approvedApplications'] as $application) {
+                            echo "<option value='" . $application->_id . "'>" . $application->name . "</option>";
+                        } ?>
+                    </select>
                 </div>
             </div>
             <div id="card-container" class="parking-card mt-10">
@@ -112,55 +116,19 @@
         </div>
     </div>
     <script>
-        function searchCompany() {
-            var searchInput = document.getElementById("companySearch").value.toLowerCase();
-            var companies = <?php echo json_encode($data['approvedApplications']); ?>;
-            var resultsContainer = document.getElementById("searchResults");
-
-            // Clear previous search results
-            resultsContainer.innerHTML = "";
-
-            // Filter parking spaces based on the search input
-            var filteredCompany = companies.filter(function(company) {
-                return company.name.toLowerCase().includes(searchInput);
-            });
-
-
-            // Display search results
-            filteredCompany.forEach(function(result) {
-                var li = document.createElement("li");
-                li.textContent = result._id + "-" + result.name;
-                resultsContainer.appendChild(li);
-            });
-
-            // Show the results container
-            resultsContainer.style.display = filteredCompany.length > 0 ? "block" : "none";
-        }
-
-        function selectCompany(event) {
-            var selectedCompany = event.target.textContent;
-            var inputField = document.getElementById("companySearch");
-
-            // Populate the input field with the selected parking space name
-            selectCompanyID = parseInt(selectedCompany.split("-")[0]);
-            inputField.value = selectedCompany.split("-")[1];
-
-            // Hide the results container
-            document.getElementById("searchResults").style.display = "none";
-
-            // Find the selected space and perform additional actions if needed
-            var selectedCompany = <?php echo json_encode($data['approvedApplications']); ?>.find(function(company) {
-                return company._id === selectCompanyID;
-            });
-
-            if (selectedCompany) {
-                populateFormFields(selectedCompany);
-            }
-        }
-
-        function populateFormFields(selectedCompany) {
+        function populateFormFields() {
+            var selectElement = document.getElementById("companyDropdown");
             var confirmationCard = document.getElementById('confirmationCard');
-            var selectedCompanyId = selectedCompany._id;
+            var selectedCompanyId = selectElement.value;
+
+            // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
+
+            var Companies = <?php echo json_encode($data['approvedApplications']); ?>;
+
+
+            var selectedCompany = Companies.find(function(parking_space) {
+                return parking_space._id == selectedCompanyId;
+            });
 
             if (selectedCompany) {
                 // Update the confirmation card content dynamically
@@ -211,7 +179,8 @@
                         </div>
                     </div>
                     <form class="suspend-form" onsubmit="saveData()">
-                        <textarea id="suspend-msg" name="suspend-msg" rows="5" cols="50" maxlength="250" class="suspend-msg" placeholder="Enter reason to suspend..."></textarea>
+                        <textarea id="suspend-msg" name="suspend-msg" rows="5" cols="50" maxlength="500" class="suspend-msg" placeholder="Enter reason to suspend..."></textarea>
+
                         <div class="suspend-time">
                             <div class="suspend-dropdown">
                                 <p>Select the time duration for the suspend</p>
@@ -266,14 +235,10 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
-                        // Optionally, you can handle success here, e.g., show a success message
-
-                        // Redirect to a success page or perform any other actions as needed
                         window.location.href = '<?php echo URLROOT; ?>/admins/deletionView';
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        // Optionally, you can handle errors here, e.g., show an error message
                     });
             }
         }

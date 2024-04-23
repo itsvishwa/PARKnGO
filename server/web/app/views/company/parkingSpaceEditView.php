@@ -59,6 +59,14 @@
                 Parking Officer
               </a>
             </li>
+            <li>
+              <a href="../reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -94,10 +102,10 @@
                 <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
                 <select name="vehicleType[]" class="p-form-dropdown" required>
                   <option value="" disabled <?php if (empty($parking_slot->vehicle_type)) echo 'selected'; ?>>Vehicle Type</option>
-                  <option value="Car" <?php if ($parking_slot->vehicle_type == "Car") echo 'selected'; ?>>Car</option>
-                  <option value="Van" <?php if ($parking_slot->vehicle_type == "Van") echo 'selected'; ?>>Van</option>
-                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "Bus") echo 'selected'; ?>>Bus</option>
-                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "Motorcycle") echo 'selected'; ?>>Motorcycle</option>
+                  <option value="Car" <?php if ($parking_slot->vehicle_type == "A") echo 'selected'; ?>>Car|Tuktuk|Mini Van</option>
+                  <option value="Van" <?php if ($parking_slot->vehicle_type == "B") echo 'selected'; ?>>Bicycle</option>
+                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "C") echo 'selected'; ?>>Van|Lorry|Mini Bus</option>
+                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "D") echo 'selected'; ?>>Long Vehicles</option>
                 </select><br>
 
                 <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>

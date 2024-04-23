@@ -5,6 +5,7 @@ class Companys extends Controller
   private $officerModel;
   private $paymentModel;
   private $parkingSpaceModel;
+  private $companyReport;
 
   public function __construct()
   {
@@ -19,6 +20,7 @@ class Companys extends Controller
     $this->officerModel = $this->model('Officer');
     $this->paymentModel = $this->model('Payment');
     $this->parkingSpaceModel = $this->model('ParkingSpace');
+    $this->companyReport = $this->model('CompanyReport');
   }
 
   public function index()
@@ -31,9 +33,7 @@ class Companys extends Controller
     $monthlyEarned = $this->paymentModel->getMonthlyEarnedAmount($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
     $numberOfUsers = $this->paymentModel->getNumberOfUsers($_SESSION['user_id']);
-    $latestUpdates = $this->companyModel->getLatestUpdates($_SESSION['user_id']);
     $parkingOfficers = $this->officerModel->getOfficerDetails($_SESSION['user_id']);
-    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     //$parkingSpaces = $this->companyModel->getParkingSpacesDetails();
     $reviews = $this->parkingSpaceModel->getLatestReviews($_SESSION['user_id']);
@@ -143,9 +143,7 @@ class Companys extends Controller
       'monthlyEarned' => $monthlyEarned,
       'todayEarned' => $todayEarned,
       'numberOfUsers' => $numberOfUsers,
-      'latestUpdates' => $latestUpdates,
       'parkingOfficers' => $parkingOfficers,
-      'parking_spaces' => $parkingSpaces,
       'parking_spaces_status' => $parkingSpacesStatus,
       'reviews' => $reviews,
       'activities' => $activities,
@@ -193,14 +191,12 @@ class Companys extends Controller
       }
     }
 
-    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsFromParkingOfficer($_SESSION['user_id']);
+    $parkingSpaces = $this->parkingSpaceModel->getCardDetailsForParkingSpaces($_SESSION['user_id']);
+    // $officerCount = $this->parkingSpaceModel->getParkingOfficerCount($_SESSION['user_id']);
     $parkingSpacesStatus = $this->parkingSpaceModel->getCardDetailsFromParkingSpaceStatus($_SESSION['user_id']);
     $todayEarned = $this->paymentModel->getTodayEarnedAmount($_SESSION['user_id']);
     $reviews = $this->parkingSpaceModel->getReviewDetails();
-    $dutyRecord = [];
-    foreach ($parkingSpaces as $parkingSpace) {
-      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($parkingSpace->officer_id);
-    }
+    $dutyRecord = $this->parkingSpaceModel->getDutyRecord($_SESSION['user_id']);
 
     foreach ($reviews as &$review) {
       $review->time_stamp = date('Y-m-d H:i:s', $review->time_stamp);
@@ -210,6 +206,7 @@ class Companys extends Controller
       'parking_spaces' => $parkingSpaces,
       'parking_spaces_status' => $parkingSpacesStatus,
       'todayEarned' => $todayEarned,
+      // 'officer_count' => $officerCount,
       'reviews' => $reviews,
       'duty_records' => $dutyRecord,
     ];
@@ -300,7 +297,7 @@ class Companys extends Controller
     $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
     $dutyRecord = [];
     foreach ($officers as $officer) {
-      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecord($officer->_id);
+      $dutyRecord[] = $this->parkingSpaceModel->getDutyRecordForParkingOfficer($officer->_id);
     }
 
     $data = [
@@ -318,10 +315,18 @@ class Companys extends Controller
 
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-      ini_set('upload_max_filesize', '32M');
-      ini_set('post_max_size', '32M');
-      $fileData = $_FILES['profile_image'];
-      $fileContent = file_get_contents($fileData['tmp_name']);
+      if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+        // Set upload file size limits
+        ini_set('upload_max_filesize', '32M');
+        ini_set('post_max_size', '32M');
+
+        // Read the contents of the uploaded file
+        $fileData = $_FILES['profile_image'];
+        $fileContent = file_get_contents($fileData['tmp_name']);
+      } else {
+        // Handle file upload error here, for example:
+        $fileContent = ''; // Use the existing image or set a default value
+      }
 
       // Init data
       $data = [
@@ -361,10 +366,12 @@ class Companys extends Controller
       if (empty($data['mobile_number_err']) && empty($data['officer_id_err']) && empty($data['nic_err'])) {
         if ($this->officerModel->register($data)) {
           $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
-          $this->view('company/parkingOfficerView', $officers);
+          redirect('companys/parkingOfficerView');
         } else {
           die('Something went wrong');
         }
+        $officers = $this->officerModel->getAllOfficersDetails($_SESSION['user_id']);
+        $this->view('company/parkingOfficerView', $officers);
       } else {
         // Load view
         $data['profile_image'] = '';
@@ -541,5 +548,10 @@ class Companys extends Controller
   {
     $data = $this->parkingSpaceModel->getForceStoppedSessions($_SESSION['user_id']);
     $this->view('company/forceStoppedSessionView', $data);
+  }
+
+  public function reportGenerateView()
+  {
+    $this->view('company/reportGenerateView');
   }
 }
