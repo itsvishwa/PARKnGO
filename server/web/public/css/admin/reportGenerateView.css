@@ -1,0 +1,271 @@
+.business {
+    margin-top: 10px;
+  }
+
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-top: -50px;
+  }
+  
+  .menu li {
+    margin: 15px 0;
+    margin-left: 30px;
+    width: 150px;
+    padding: 8px 10px 8px 15px;
+  }
+  
+  .menu-logo {
+    height: 25px;
+    display: flex;
+  }
+  
+  .r-menu-logo {
+    height: 52px;
+    display: flex;
+  }
+  
+  .heading {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+  
+  .heading h4 {
+    font-size: 1rem;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+
+  .report-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    margin-left: 20px;
+    height: 150px;
+    width: 95%;
+    border-radius: 20px;
+    background-color: #fffbf4;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+   
+  }
+  
+  .report-card-content {
+    margin-left: 20px;
+    width: 50%;
+  }
+  
+  .report-card-img {
+  
+    width: 50%;
+  
+  }
+  
+  .card-section {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    width: 95%;
+  }
+  
+  .b-card {
+    margin-top: 20px;
+    margin-bottom: 20px 40px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .b-card-icon {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .b-card-content {
+    margin-left: 10px;
+  }
+  
+  .b-card-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .b-card-content p {
+    font-size: 0.8rem;
+  }
+    
+  .table-div {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .table {
+    margin-left: 20px;
+    width: 96%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    background-color: #fffbf4;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    font-size: 0.9rem;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .th {
+    background-color: #e7dbc7;
+  }
+  tr:nth-child(2n) {
+    background-color: #e7dbc742;
+  }
+  tr:nth-child(4n) {
+    background-color: #e7dbc742;
+  }
+  
+
+  .parking-card-bold {
+    font-weight: 700;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .right-container {
+      padding-left: 100px;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .right-container {
+      padding-left: 50px;
+    }
+  }
+  
+  @media screen and (min-width: 1400px) {
+    .right-container {
+      padding-left: 0px;
+    }
+  }
+  
+  @media screen and (min-width: 1700px) {
+    .right-container {
+      margin-left: 17%;
+    }
+  }
+  
+  .section-one {
+    display: flex;
+  }
+   
+  .right-section {
+    width: 100%;
+  }
+  
+  .b-card-1 {
+    width: 50%;
+  }
+  
+  .b-card-2 {
+    width: 50%;
+  }
+  
+  .review-heading {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px 20px 0px 20px;
+  }
+  
+  .content-body {
+    padding: 0px 20px;
+  }
+  
+
+  .review-parking-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .review-content {
+    font-size: 13px;
+    margin-top: 5px;
+  }
+  
+  .review-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    
+  }
+  
+  .review-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .review-body {
+    margin-bottom: 10px;
+    width: 75%;
+  }
+
+  .review-btn {
+    border: none;
+    background-color: transparent;
+    
+  }
+    
+  #downloadBadReviewsPDF {
+    background-color: #0a0a0a; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    max-width: 50%; 
+    margin-left: 26px;
+  }
+  
+  #downloadPDF:hover {
+    background-color: #53534e; 
+  }
+  
+  table {
+    border-collapse: collapse; 
+    width: 100%; 
+  }
+
+  th {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+  }
+
+  td {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2; 
+  }
+
+
+
+ 

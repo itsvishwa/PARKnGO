@@ -138,7 +138,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/login_mobile_number_act_mobile_number_input"
+                android:id="@+id/edit_mobile_number_frag_mobile_number"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -155,7 +155,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button10"
+            android:id="@+id/edit_mobile_number_frag_send_otp_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -175,7 +175,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button10" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_mobile_number_frag_send_otp_btn" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -188,7 +188,7 @@
             app:layout_constraintTop_toBottomOf="@+id/login_otp_act_textView3">
 
             <EditText
-                android:id="@+id/login_act_otp_digit_1"
+                android:id="@+id/edit_mobile_number_frag_digit_1"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@android:color/transparent"
@@ -213,7 +213,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
 
             <EditText
-                android:id="@+id/login_act_otp_digit_2"
+                android:id="@+id/edit_mobile_number_frag_digit_2"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:textAlignment="center"
@@ -238,7 +238,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraintLayout3">
 
             <EditText
-                android:id="@+id/login_act_otp_digit_3"
+                android:id="@+id/edit_mobile_number_frag_digit_3"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:textAlignment="center"
@@ -263,7 +263,7 @@
             app:layout_constraintTop_toTopOf="@+id/constraintLayout4">
 
             <EditText
-                android:id="@+id/login_act_otp_digit_4"
+                android:id="@+id/edit_mobile_number_frag_digit_4"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:textAlignment="center"
@@ -277,33 +277,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Didn’t reserve the code yet?"
-            android:textColor="@color/textSecondary"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Resend (59 s)"
-            android:clickable="true"
-            android:focusable="true"
-            android:textColor="@color/primaryColor"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
 
         <Button
-            android:id="@+id/button11"
+            android:id="@+id/edit_mobile_number_frag_change_mobile_number_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
