@@ -35,6 +35,14 @@
                 Updates
               </a>
             </li>
+            <li>
+              <a href="../forceStoppedSessionView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+                Aborted Sessions
+              </a>
+            </li>
             <li class="active">
               <a href="../parkingSpaceView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
@@ -51,6 +59,14 @@
                 Parking Officer
               </a>
             </li>
+            <li>
+              <a href="../reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -64,9 +80,6 @@
           <h3>Edit Parking Space</h3>
         </div>
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -89,10 +102,10 @@
                 <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
                 <select name="vehicleType[]" class="p-form-dropdown" required>
                   <option value="" disabled <?php if (empty($parking_slot->vehicle_type)) echo 'selected'; ?>>Vehicle Type</option>
-                  <option value="Car" <?php if ($parking_slot->vehicle_type == "Car") echo 'selected'; ?>>Car</option>
-                  <option value="Van" <?php if ($parking_slot->vehicle_type == "Van") echo 'selected'; ?>>Van</option>
-                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "Bus") echo 'selected'; ?>>Bus</option>
-                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "Motorcycle") echo 'selected'; ?>>Motorcycle</option>
+                  <option value="Car" <?php if ($parking_slot->vehicle_type == "A") echo 'selected'; ?>>Car|Tuktuk|Mini Van</option>
+                  <option value="Van" <?php if ($parking_slot->vehicle_type == "B") echo 'selected'; ?>>Bicycle</option>
+                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "C") echo 'selected'; ?>>Van|Lorry|Mini Bus</option>
+                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "D") echo 'selected'; ?>>Long Vehicles</option>
                 </select><br>
 
                 <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
@@ -122,7 +135,9 @@
             <option value="customers" <?php if (!$data['parking_space']->parking_is_public) echo 'selected'; ?>>Customers Only</option>
           </select>
 
-
+          <!-- image -->
+          <label for="parkingImage" class="p-form-label">Parking Image</label>
+          <input type="file" name="parkingImage[]" accept="image/*" class="p-form-input" id="parkingImageInput" />
 
 
 

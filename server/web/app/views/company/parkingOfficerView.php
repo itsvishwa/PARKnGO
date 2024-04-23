@@ -37,6 +37,14 @@
               </a>
             </li>
             <li>
+              <a href="./forceStoppedSessionView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+                Aborted Sessions
+              </a>
+            </li>
+            <li>
               <a href="./parkingSpaceView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
@@ -50,6 +58,14 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
                 Parking Officer
+              </a>
+            </li>
+            <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
               </a>
             </li>
           </ul>
@@ -66,11 +82,6 @@
         </div>
 
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
-
-
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -84,13 +95,19 @@
             Add Parking Officer
           </div>
         </a>
+        <div class="search-bar flex">
+          <input type="text" id="searchInput" placeholder="Search By Name." oninput="filterOfficers()" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="search-logo text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </div>
 
       </div>
       <div class="parking-space-section">
-
         <div id="officerCards" class="officerCards">
           <!-- Inside your HTML file where you want to display officer cards -->
-          <?php foreach ($data as $officer) : ?>
+          <?php $i = 0;
+          foreach ($data['officers'] as $officer) : ?>
             <div class="officer-card">
               <div class="officer-section-one">
                 <img src="data:<?php $encodedImage = base64_encode($officer->profile_photo);
@@ -103,6 +120,27 @@
                                               } else {
                                                 echo htmlspecialchars($officer->parking_name);
                                               } ?></h3>
+                <?php
+                $today = $midnight_timestamp = strtotime('today midnight');
+                $duty_records = $data['duty_records'][$i];
+                if (count($duty_records) == 2) {
+                  if ($duty_records[0]->type == 'in' && $today < $duty_records[0]->time_stamp) {
+                    echo '<p class="parking-type bg-green text-white font-semibold f-14">On Duty</p>';
+                  } else if ($duty_records[0]->type == 'out') {
+                    echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                  } else if ($duty_records[0]->time_stamp < $today) {
+                    echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                  }
+                } else if (count($duty_records) == 1) {
+                  if ($duty_records[0]->type == 'in' && $today < $duty_records[0]->time_stamp) {
+                    echo '<p class="parking-type bg-green text-white font-semibold f-14">On Duty</p>';
+                  } else if ($duty_records[0]->type == 'out') {
+                    echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                  }
+                } else {
+                  echo '<p class="parking-type bg-red text-white font-semibold f-14">Off Duty</p>';
+                };
+                $i++; ?>
               </div>
               <div class="officer-section-second">
                 <p class="text-gray">NIC <?php echo htmlspecialchars($officer->nic); ?></p>
@@ -147,6 +185,24 @@
       </div>
     </div>
   </div>
+  <script>
+    function filterOfficers() {
+      var input, filter, cards, card, officerName, i;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      cards = document.getElementById("officerCards");
+      card = cards.getElementsByClassName("officer-card");
+
+      for (i = 0; i < card.length; i++) {
+        officerName = card[i].getElementsByClassName("officer-name")[0];
+        if (officerName.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          card[i].style.display = "";
+        } else {
+          card[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@
   .menu {
     list-style-type: none;
     padding: 0;
-    margin-top: 10px;
+    margin-top: -50px;
   }
 
   .menu li {
@@ -41,21 +41,14 @@
   }
   
   .card-section {
-   /* display: block;
-    margin-left: 20px;
-    justify-content: space-between;
-    padding-left: 50px;
-    width: 70%;
-    height:15%;*/
-
+   
     display: flex;
-    flex-wrap: wrap; /* Ensures cards wrap to the next line if needed */
+    flex-wrap: wrap; 
     justify-content: space-between;
     margin-top: 20px;
     padding-left: 50px;
     width: 90%;
-    height: auto; /* Set height to auto for flexibility */
-
+    height: auto; 
  
   }
    
@@ -122,14 +115,9 @@
   }
 
 
- 
-
-
-/**********************************/
-/* Add this CSS to your existing CSS file or create a new one */
-
 .review-table {
-  width: 110%;
+
+  width: 994px;  
   border-collapse: collapse;
   margin-top: 20px;
   margin-left: -24px;
@@ -139,39 +127,37 @@
 
 .review-table th,
 .review-table td {
-  /*border: 1px solid #ccc;*/
+  
   padding: 12px;
   text-align: left;
   
 }
 
 .review-table th {
-  background-color: #363636;
- /* background-color: #f2f2f2;*/
+  background-color: E7DBC7;
   font-weight: bold;
-  color: white;
+  color: black;
 
 }
 
 .review-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+ 
+  background-color: #F9F3E9;
+  
 }
 
 .review-table tbody tr:hover {
-  background-color: #e2e2e2;
+  background-color: #FFFBF4;
+ 
 }
 
-/* Set the default color of stars */
-.star-ratings {
-  color: #ffa811; /* Yellow color for stars */
+.ml-5 {
+  margin-left: 5px;
 }
 
-/* Set color based on data-rating */
-.star-ratings[data-rating='1']::before { content: "\2605\2606\2606\2606\2606"; }
-/*.star-ratings[data-rating='2']::before { content: "\2605\2605\2606\2606\2606"; }
-.star-ratings[data-rating='3']::before { content: "\2605\2605\2605\2606\2606"; }
-.star-ratings[data-rating='4']::before { content: "\2605\2605\2605\2605\2606"; }
-.star-ratings[data-rating='5']::before { content: "\2605\2605\2605\2605\2605"; }
-*/
+
+
+
+
 
   

@@ -115,7 +115,7 @@ public class PMRecycleViewAdapter extends RecyclerView.Adapter<PMRecycleViewAdap
 
                 // Create a Bundle to pass data to the fragment
                 Bundle data = new Bundle();
-                data.putInt("_id", _id);
+                data.putString("parkingID", _id + "");
 
                 mainActivity.replaceFragment(new ParkingSelectedFragment(), data);
             }

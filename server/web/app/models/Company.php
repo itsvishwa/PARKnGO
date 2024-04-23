@@ -93,7 +93,18 @@ class Company
   //get all the parking spaces that related to that company
   public function getParkingSpaces($company_id)
   {
-    $this->db->query('SELECT * FROM parking_spaces WHERE company_id = :company_id');
+    $this->db->query('SELECT ps._id ,
+    ps.name ,
+    ps.address,
+    ps.no_of_slots,
+    ps.is_public,
+    ps.closed_start_time,
+    ps.closed_end_time,
+    ps.latitude,
+    ps.longitude,
+    ps.avg_star_count,
+    ps.total_review_count,
+    ps.company_id FROM parking_spaces ps WHERE company_id = :company_id');
     $this->db->bind(':company_id', $company_id);
     $row = $this->db->resultSet();
     return $row;
@@ -161,4 +172,49 @@ class Company
   //   $row = $this->db->resultSet();
   //   return $row;
   // }
+
+  public function getCompanySuspendDetails($company_id)
+  {
+    $this->db->query('SELECT 
+      cs.time_stamp AS start_time,
+      cs.time_stamp + cs.duration AS end_time,
+      cs.message
+    FROM 
+      company_suspend cs
+    WHERE 
+      cs.company_id = :company_id
+    ORDER BY
+      cs.time_stamp DESC
+    LIMIT 1;');
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->single();
+    return $row;
+  }
+
+  public function updateRecoveryToken($data)
+  {
+    $this->db->query('UPDATE company SET token = :token WHERE email = :email');
+    $this->db->bind(':token', $data['token']);
+    $this->db->bind(':email', $data['email']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function updatePassword($data)
+  {
+    $this->db->query('UPDATE company SET password = :password WHERE token = :token AND email = :email');
+    $this->db->bind(':password', $data['password']);
+    $this->db->bind(':token', $data['token']);
+    $this->db->bind(':email', $data['email']);
+
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

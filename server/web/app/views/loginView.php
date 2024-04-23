@@ -15,7 +15,7 @@
         <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-black.png" alt="logo" width="100%" /></a>
       </div>
     </div>
-    <div class="right-container">
+    <div class="right-container align-items-center mt-150">
       <form action="<?php echo URLROOT; ?>users/loginView" method="POST" enctype="multipart/form-data" class="login-form">
         <div>
           <?php flash('register_success') ?>
@@ -38,12 +38,12 @@
                 justify-content: space-between;
                 align-items: center;
               ">
-            <div>
+            <!-- <div>
               <input type="checkbox" id="remember" name="remember" />
               <label for="remember" class="sub-link-label" style="vertical-align: middle">Remember me</label>
-            </div>
+            </div>-->
 
-            <a href="#" class="sub-link">Forgot password?</a>
+            <a href="./ForgotPasswordView" class="sub-link">Forgot password?</a>
           </div>
 
           <input type="submit" value="Log in" class="primary-button" />

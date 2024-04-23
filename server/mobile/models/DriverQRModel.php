@@ -8,6 +8,7 @@ class DriverQRModel
         $this->db = new Database;
     }
 
+
     public function get_qr_id($driver_id, $selected)
     {
         $this->db->query("SELECT _id FROM driver_qr WHERE driver_id = :driver_id AND selected = :selected");
@@ -23,6 +24,7 @@ class DriverQRModel
         }
     }
 
+
     public function update_time_stamp($time_stamp, $qr_id)
     {
         $this->db->query("UPDATE driver_qr SET auth_time_stamp = :time_stamp WHERE _id = :_id");
@@ -31,6 +33,7 @@ class DriverQRModel
 
         $this->db->execute();
     }
+
 
     // get all saved vehicle information for a given driver id , return false if there non are there
     public function get_all($driver_id)
@@ -45,6 +48,7 @@ class DriverQRModel
             return false;
         }
     }
+
 
     // get the selected number count for the new record
     public function get_selected_vehicle_number($driver_id)
@@ -61,6 +65,7 @@ class DriverQRModel
         }
     }
 
+
     // add  a new record 
     public function add_new_vehicle($v_name, $v_number, $v_type, $selected, $driver_id)
     {
@@ -74,6 +79,7 @@ class DriverQRModel
         $this->db->execute();
     }
 
+
     // update vehicle informations
     public function update_vehicle_info($name, $number, $type, $selected, $driver_id)
     {
@@ -85,6 +91,7 @@ class DriverQRModel
         $this->db->bind(":driver_id", $driver_id);
         $this->db->execute();
     }
+
 
     // validating whether the vehicle record is exist or not for a given driver id and and the selected count
     public function is_exist_vehicle_record($driver_id, $selected)
@@ -102,6 +109,7 @@ class DriverQRModel
         }
     }
 
+
     // delete the vehicle record
     public function delete_driver_vehicle($selected_vehicle, $driver_id)
     {
@@ -110,6 +118,7 @@ class DriverQRModel
         $this->db->bind(":selected", $selected_vehicle);
         $this->db->execute();
     }
+
 
     // update selected count
     public function update_driver_selected_vehicle_level($driver_id, $old_selected, $new_selected)
@@ -122,9 +131,8 @@ class DriverQRModel
     }
 
 
-   
-
-    public function is_qr_exists($_id) {
+    public function is_qr_exists($_id)
+    {
         $this->db->query("SELECT * FROM driver_qr WHERE _id = :_id");
 
         $this->db->bind(":_id", $_id);
@@ -160,5 +168,4 @@ class DriverQRModel
             return false;
         }
     }
-
 }
