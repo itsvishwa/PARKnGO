@@ -1,29 +1,20 @@
 package com.example.parkngo.home;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.helpers.LocationHelper;
 import com.example.parkngo.home.helpers.AvailableParkingSpaceHelper;
 import com.example.parkngo.home.helpers.AvailableParkingSpaceModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AvailableParkingSpacesFragment extends Fragment {
 
@@ -31,6 +22,8 @@ public class AvailableParkingSpacesFragment extends Fragment {
     View loadingView;
     View errorView;
     String vehicleType;
+    Double latitude;
+    Double longitude;
     MainActivity mainActivity;
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr  = new ArrayList<>();
     Context context;
@@ -47,9 +40,12 @@ public class AvailableParkingSpacesFragment extends Fragment {
         // store passed data
         if (getArguments() != null) {
             vehicleType = getArguments().getString("vehicleType", "none");
+            latitude = getArguments().getDouble("lat", 6.919875);
+            longitude = getArguments().getDouble("long", 79.854209);
+
         }
 
-        AvailableParkingSpaceHelper availableParkingSpaceHelper = new AvailableParkingSpaceHelper(getContext(), availableParkingSpaceView, loadingView, errorView, vehicleType, availableParkingSpaceModelsArr);
+        AvailableParkingSpaceHelper availableParkingSpaceHelper = new AvailableParkingSpaceHelper(getContext(), availableParkingSpaceView, loadingView, errorView, vehicleType, availableParkingSpaceModelsArr, latitude, longitude);
         availableParkingSpaceHelper.init();
 
         return loadingView;
