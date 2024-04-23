@@ -274,7 +274,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/release_slot_03_receive_cash_payment_btn"
+            android:id="@+id/force_ended_session_receive_cash_payment_btn"
             android:layout_width="match_parent"
             android:layout_height="62dp"
             android:layout_marginTop="90dp"
