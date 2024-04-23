@@ -83,7 +83,7 @@ public class ForceEndedRecycleViewAdapter extends RecyclerView.Adapter<ForceEnde
                 // Create a Bundle to pass data to the fragment
                 Bundle data = new Bundle();
                 data.putString("session_id", _id);
-                MainActivity mainActivity = (MainActivity) context;
+                //MainActivity mainActivity = (MainActivity) context;
             }
         }
     }
