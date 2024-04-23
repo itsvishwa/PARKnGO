@@ -56,7 +56,9 @@ class ParkingSpace extends Controller
                     ];
 
                     $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
-
+                    if ($temp["distance"] === -1) {
+                        $temp["distance"] = 999;
+                    }
                     $spaces_data["data"][] = $temp; // add temp assosiative array to spaces_data[]
                 }
 
@@ -387,7 +389,7 @@ class ParkingSpace extends Controller
 
 
         // distance in meters
-        $distance = 100000; // when google api can't find a root
+        $distance = -1000; // when google api can't find a root
         if (isset($decoded_response["rows"][0]["elements"][0]["distance"])) {
             $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
         }

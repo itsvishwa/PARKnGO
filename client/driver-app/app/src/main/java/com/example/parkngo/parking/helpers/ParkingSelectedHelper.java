@@ -2,11 +2,16 @@ package com.example.parkngo.parking.helpers;
 
 import static android.view.View.GONE;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +39,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.home.AvailableParkingSpacesFragment;
 import com.example.parkngo.parking.AddReviewFragment;
 import com.example.parkngo.parking.DeleteReviewFragment;
 import com.example.parkngo.parking.EditReviewFragment;
@@ -56,6 +63,9 @@ public class ParkingSelectedHelper {
     int userReviewRating;
     String latitude;
     String longitude;
+    Double myLatitude;
+    Double myLongitude;
+    private LocationManager locationManager;
 
     public ParkingSelectedHelper(View parkingSelectedView, View loadingView, String _id, Context context){
         this.parkingSelectedView = parkingSelectedView;
@@ -64,13 +74,14 @@ public class ParkingSelectedHelper {
         this.context = context;
     }
 
+
     public void init(){
         fetchData();
         addReviewBtnHandler();
         deleteReviewBtnHandler();
         editReviewBtnHandler();
-        navigateBtnHandler();
     }
+
 
     private void fetchData(){
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -362,6 +373,7 @@ public class ParkingSelectedHelper {
         );
     }
 
+
     public void deleteReviewBtnHandler(){
         // set delete review btn handler
         Button deleteReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_delete_review_btn);
@@ -375,6 +387,7 @@ public class ParkingSelectedHelper {
             }
         });
     }
+
 
     public void editReviewBtnHandler(){
         // set edit review btn handler
@@ -392,25 +405,51 @@ public class ParkingSelectedHelper {
         });
     }
 
-    public void navigateBtnHandler(){
-        Button navigateBtn  = parkingSelectedView.findViewById(R.id.parking_selected_fragment_navigate_btn);
-        navigateBtn.setOnClickListener(new View.OnClickListener() {
+
+    private void navigateBtnProcess(){
+
+        double sourceLatitude = myLatitude;
+        double sourceLongitude = myLongitude;
+        double destinationLatitude = Double.parseDouble(latitude);
+        double destinationLongitude = Double.parseDouble(longitude);
+
+        String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude + "&destination=" + destinationLatitude + "," + destinationLongitude;
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        MainActivity mainActivity = (MainActivity) context;
+        mainActivity.startActivity(intent);
+
+    }
+
+
+    public void getLocationAndContinue() {
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
             @Override
-            public void onClick(View view) {
-                double sourceLatitude = 6.902727395785716;
-                double sourceLongitude = 79.86126018417747;
-                double destinationLatitude = Double.parseDouble(latitude);
-                double destinationLongitude = Double.parseDouble(longitude);
+            public void onLocationChanged(Location location) {
+                // Get latitude and longitude from location object
+                myLatitude = location.getLatitude();
+                myLongitude = location.getLongitude();
+                System.out.println(myLatitude  + "       " + myLongitude);
+                locationManager.removeUpdates(this);
 
-                String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude +
-                        "&destination=" + destinationLatitude + "," + destinationLongitude;
-
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                intent.setPackage("com.google.android.apps.maps");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                MainActivity mainActivity = (MainActivity) context;
-                mainActivity.startActivity(intent);
+                navigateBtnProcess();
             }
-        });
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            @Override
+            public void onProviderEnabled(String provider) {}
+
+            @Override
+            public void onProviderDisabled(String provider) {}
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
     }
 }

@@ -22,6 +22,8 @@ public class ForceEndConfirmFragment extends Fragment {
     private static final int PERMISSION_REQUEST_CODE = 1001;
     ForceEndConfirmHelper forceEndConfirmHelper;
     View forceEndConfirmView;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,9 +47,8 @@ public class ForceEndConfirmFragment extends Fragment {
                     // Request location permission if not granted
                     requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_CODE);
                 } else {
-                    // Request location permission if granted
-                    forceEndConfirmHelper.getLocation();
-                    forceEndConfirmHelper.sendForceEndReq();
+                    // fetch the location and send the request
+                    forceEndConfirmHelper.getLocationAndSendReq();
                 }
             }
         });
