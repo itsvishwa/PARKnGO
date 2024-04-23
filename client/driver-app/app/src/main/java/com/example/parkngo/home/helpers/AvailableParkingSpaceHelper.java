@@ -52,14 +52,18 @@ public class AvailableParkingSpaceHelper {
     int pageNumber = 1;
     boolean is_prev_searched = false;
     String prevKeyword;
+    Double latitude;
+    Double longitude;
 
-    public AvailableParkingSpaceHelper(Context context, View availableParkingSpaceView, View loadingView, View errorView, String vehicleType, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr){
+    public AvailableParkingSpaceHelper(Context context, View availableParkingSpaceView, View loadingView, View errorView, String vehicleType, ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr, Double latitude, Double longitude){
         this.context = context;
         this.availableParkingSpaceView = availableParkingSpaceView;
         this.loadingView = loadingView;
         this.errorView = errorView;
         this.vehicleType = vehicleType;
         this.availableParkingSpaceModelsArr = availableParkingSpaceModelsArr;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
@@ -217,7 +221,7 @@ public class AvailableParkingSpaceHelper {
     private void layoutFetchData(){
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_available/" + vehicleType + "/6.919875/79.854209/" + pageNumber;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/view_available/" + vehicleType + "/" + latitude + "/" + longitude +"/" + pageNumber;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
@@ -390,7 +394,7 @@ public class AvailableParkingSpaceHelper {
     private void searchResultFetchData(String keyword){
         RequestQueue queue = Volley.newRequestQueue(context);
         keyword = keyword.replace(" ", "_");
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/search_available/" + vehicleType + "/" + keyword + "/6.919875/79.854209/" + pageNumber;
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/search_available/" + vehicleType + "/" + keyword + "/" + latitude + "/" + longitude + "/" + pageNumber;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {

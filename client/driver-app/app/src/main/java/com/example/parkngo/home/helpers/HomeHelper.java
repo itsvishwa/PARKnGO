@@ -1,6 +1,11 @@
 package com.example.parkngo.home.helpers;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -12,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
@@ -27,6 +33,9 @@ public class HomeHelper {
     View homeFragmentView;
     Context context;
     String vehicleType;
+    private LocationManager locationManager;
+    Double latitude = 0.0;
+    Double longitude = 0.0;
 
     public HomeHelper(View homeFragmentView, Context context){
         this.homeFragmentView = homeFragmentView;
@@ -40,7 +49,6 @@ public class HomeHelper {
         initPulseAnimation();
         initTopBarData();
         initVehicleSpinnerBtnListener();
-        initMainBtnListener();
     }
 
 
@@ -55,12 +63,14 @@ public class HomeHelper {
         spinner.setAdapter(adapter);
     }
 
+
     // initializing the main button pulse-animation
     private void initPulseAnimation(){
         ConstraintLayout constraintLayout = homeFragmentView.findViewById(R.id.home_frag_cons_layout);
         Animation pulse = AnimationUtils.loadAnimation(context, R.anim.anim_pulse);
         constraintLayout.startAnimation(pulse);
     }
+
 
     // initializing the top bar data values
     private void initTopBarData(){
@@ -69,6 +79,7 @@ public class HomeHelper {
         TextView nameView = homeFragmentView.findViewById(R.id.home_frag_user_name);
         nameView.setText(firstName);
     }
+
 
     // initializing vehicle spinner btn handler
     private void initVehicleSpinnerBtnListener(){
@@ -88,17 +99,45 @@ public class HomeHelper {
         });
     }
 
-    // initializing main button handler
-    private void initMainBtnListener(){
-        ShapeableImageView shapeableImageView = homeFragmentView.findViewById(R.id.home_frag_main_img);
-        shapeableImageView.setOnClickListener(new View.OnClickListener() {
+
+    // getter for vehicle type
+    public String getVehicleType(){
+        return vehicleType;
+    }
+
+    public Double getLatitude(){
+        return latitude;
+    }
+
+    public Double getLongitude(){
+        return longitude;
+    }
+
+
+    public void getLocationAndContinue() {
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = new LocationListener() {
             @Override
-            public void onClick(View view) {
+            public void onLocationChanged(Location location) {
+                // Get latitude and longitude from location object
+                System.out.println("hello worlds");
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                System.out.println(longitude  + "       " + latitude);
+                locationManager.removeUpdates(this);
+
                 Bundle data = new Bundle();
                 data.putString("vehicleType", vehicleType);
+                data.putDouble("lat", latitude);
+                data.putDouble("long", longitude);
                 MainActivity mainActivity = (MainActivity) context;
                 mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
             }
-        });
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
     }
 }
