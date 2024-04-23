@@ -176,7 +176,7 @@
 
   <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceFormView.js"></script>
   <!-- Google Map API -->
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcYa9qDHqK5bpg0nJiZb7FkTOFCfRuuEE&callback=initMap">
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWhETkAddp84ekkS0aJ9Wceg5LURUfJpo&callback=initMap">
   </script>
   <script src="<?php echo URLROOT; ?>/js/company/googleMapApi.js"></script>
   <script>
