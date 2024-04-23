@@ -312,8 +312,8 @@ class PaymentModel
     }
 
 
-    // return the payment due session's details of a given parking - retrun false if there is no such session
-    public function get_payment_due_session_details($parking_id)
+    // return the payment due session's details of a given parking and vehicle type - retrun false if there is no such session
+    public function get_payment_due_session_details($parking_id, $vehicle_type)
     {
         $this->db->query(
             "SELECT 
@@ -330,10 +330,13 @@ class PaymentModel
             WHERE 
                 payment.is_complete = 0
             AND
-                parking_session.parking_id = :parking_id"
+                parking_session.parking_id = :parking_id
+            AND 
+                parking_session.vehicle_type LIKE :vehicle_type"
         );
 
         $this->db->bind(":parking_id", $parking_id);
+        $this->db->bind(":vehicle_type", $vehicle_type);
 
         $result = $this->db->resultSet();
 
