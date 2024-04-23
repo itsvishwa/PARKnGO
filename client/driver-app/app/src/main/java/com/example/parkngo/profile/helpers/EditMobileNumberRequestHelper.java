@@ -1,7 +1,11 @@
 package com.example.parkngo.profile.helpers;
 
 import android.content.Context;
-import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -12,9 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.parkngo.MainActivity;
+import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
-import com.example.parkngo.login.LoginMobileNumberActivity;
-import com.example.parkngo.login.LoginOtpActivity;
 import com.example.parkngo.profile.ProfileFragment;
 
 import org.json.JSONException;
@@ -23,14 +26,36 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditMobileNumberRequestHandler {
+public class EditMobileNumberRequestHelper {
 
     Context context;
-    public EditMobileNumberRequestHandler(Context context){
+    View editMobileNumberView;
+    EditText otpDigit1View;
+    EditText otpDigit2View;
+    EditText otpDigit3View;
+    EditText otpDigit4View;
+    String mobileNumber;
+    String otp;
+
+    public EditMobileNumberRequestHelper(Context context, View editMobileNumberView){
         this.context = context;
+        this.editMobileNumberView = editMobileNumberView;
+        EditText otpDigit1View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_1);
+        EditText otpDigit2View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_2);
+        EditText otpDigit3View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_3);
+        EditText otpDigit4View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_4);
     }
 
-    public void executeGetOTPRequest(String mobileNumber){
+    public void init(){
+        setEditTextListener(otpDigit1View, otpDigit2View);
+        setEditTextListener(otpDigit2View, otpDigit3View);
+        setEditTextListener(otpDigit3View, otpDigit4View);
+        setEditTextListener(otpDigit4View, null);
+        changeMobileNumberBtnHandler();
+        sendOtpBtnHandler();
+    }
+
+    private void executeGetOTPRequest(String mobileNumber){
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -83,7 +108,7 @@ public class EditMobileNumberRequestHandler {
         queue.add(stringRequest);
     }
 
-    public void executeChangeMobileNumberRequest(String mobileNumber, String otp){
+    private void executeChangeMobileNumberRequest(String mobileNumber, String otp){
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -140,5 +165,77 @@ public class EditMobileNumberRequestHandler {
         };
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    private void setEditTextListener (final EditText currentEditText, final EditText nextEditText) {
+        currentEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 1 && nextEditText != null) {
+                    nextEditText.requestFocus();
+                }
+            }
+        });
+    }
+
+    private int checkMobileNumberInput(String mobileNumber){
+        if (mobileNumber.equals("")){
+            return 1;
+        }else if(mobileNumber.length() != 9){
+            return 2;
+        }else{
+            return 3;
+        }
+    }
+
+    private void changeMobileNumberBtnHandler(){
+        Button changeMobileNumberBtn = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_change_mobile_number_btn);
+        changeMobileNumberBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int result = checkMobileNumberInput(mobileNumber);
+                // getting OTP
+                EditText digit1View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_1);
+                EditText digit2View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_2);
+                EditText digit3View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_3);
+                EditText digit4View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_4);
+
+                otp = digit1View.getText().toString() + digit2View.getText().toString() + digit3View.getText().toString() + digit4View.getText().toString();
+
+                executeChangeMobileNumberRequest(mobileNumber, otp);
+            }
+        });
+    }
+
+    private void sendOtpBtnHandler(){
+        // On click listeners ..............................................................................
+        Button sendOTPBtn = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_send_otp_btn);
+        sendOTPBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText mobileNumberView = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_mobile_number);
+                mobileNumber = mobileNumberView.getText().toString();
+
+                int result = checkMobileNumberInput(mobileNumber);
+
+                if (result == 1){
+                    Toast.makeText(context, "Mobile Number can't be empty!", Toast.LENGTH_LONG).show();
+                }else if(result == 2){
+                    Toast.makeText(context, "Invalid mobile number", Toast.LENGTH_LONG).show();
+                }else{
+                    executeGetOTPRequest(mobileNumber);
+                }
+            }
+        });
+
     }
 }
