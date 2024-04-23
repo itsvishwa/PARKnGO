@@ -547,9 +547,9 @@ class Session extends Controller
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("ERR_SE_IT");
+            $this->send_json_400("ERR_IT");
         } else if ($token_data === 404) {
-            $this->send_json_404("ERR_SE_TNF");
+            $this->send_json_404("ERR_TNF");
         } else {
             $parking_data = $this->session_model->get_ongoing_session_parking_data($token_data["user_id"]);
 
@@ -573,7 +573,7 @@ class Session extends Controller
                     {
                         $dnt = $this->format_time($parking_data->start_time);
                         $this->send_sms_force_end($officer_mobile_number, urlencode($parking_data->vehicle_type), urlencode($this->format_vehicle_number($parking_data->vehicle_number)), urlencode($dnt[0] . " " . $dnt[1]));
-                        $this->send_json_200("SE_SUCCESS");
+                        $this->send_json_200("SUCCESS");
                     }
                 } else // still in the parking space range
                 {
@@ -584,7 +584,7 @@ class Session extends Controller
     }
 
 
-    // calculate distance
+    // calculate street distance between two points
     private function calculate_distance($source_lat, $source_long, $dest_lat, $dest_long)
     {
         $source_coordinates = $source_lat . "," . $source_long;
@@ -597,9 +597,12 @@ class Session extends Controller
 
         // Decode JSON response
         $decoded_response = json_decode($response, true);
-
         // distance in meters
-        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        $distance = -1; // when google api can't find a root
+        if (isset($decoded_response["rows"][0]["elements"][0]["distance"])) {
+            $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        }
+
 
         return $distance / 1000;
     }

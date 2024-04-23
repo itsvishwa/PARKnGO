@@ -125,7 +125,7 @@
 
                 <TextView
                     android:id="@+id/parking_Selected_frag_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="CMC CAR PARK"
                     android:textColor="@color/textSecondary"
@@ -196,6 +196,168 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/parking_selected_frag_is_public" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout99"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:background="@drawable/radius_6_with_outline"
+                android:padding="17dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8">
+
+
+                <TextView
+                    android:id="@+id/ps_frag_vt1_name"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Car|Tuktuk|Mini Van"
+                    android:textColor="@color/textSecondary"
+
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt1_slots"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="15 free out of 20"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ps_frag_vt1_name" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt1_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_blue_circle"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="Rs. 500"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt2_name"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Bicycle"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ps_frag_vt1_slots" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt2_slots"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="15 free out of 20"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ps_frag_vt2_name" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt2_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_blue_circle"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="Rs. 500"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ps_frag_vt2_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ps_frag_vt2_name" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt3_name"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Van|Lorry|Mini Bus"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ps_frag_vt2_slots" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt3_slots"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="15 free out of 20"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ps_frag_vt3_name" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt3_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_blue_circle"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="Rs. 500"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ps_frag_vt3_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ps_frag_vt3_name" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt4_name"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Long Vehicles"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ps_frag_vt3_slots" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt4_slots"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="15 free out of 20"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ps_frag_vt4_name" />
+
+                <TextView
+                    android:id="@+id/ps_frag_vt4_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_blue_circle"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="Rs. 500"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ps_frag_vt4_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ps_frag_vt4_name" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -336,19 +498,28 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                <TextView
-                    android:id="@+id/parking_selected_frag_no_others_review_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:text="Parking space dosen't has any reviews yet !"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:visibility="visible"
+                <ImageView
+                    android:id="@+id/ps_frag_noreview_img"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/not_available"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+                <TextView
+                    android:id="@+id/parking_selected_frag_no_others_review_text"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Parking space dosen't has any reviews from others !"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ps_frag_noreview_img" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ps_frag_recycle_view"
@@ -378,10 +549,11 @@
                 android:id="@+id/parking_selected_fragment_navigate_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Navigate"
+                android:layout_marginTop="16dp"
+                android:text="Navigate to the Parking"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout99" />
 
             <View
                 android:id="@+id/divider3"

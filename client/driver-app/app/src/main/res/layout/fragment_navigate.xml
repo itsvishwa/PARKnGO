@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Selected vehicle type: "
+                    android:text="Selected vehicle type is"
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"

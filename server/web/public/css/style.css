@@ -541,6 +541,10 @@ body {
   background-color: #fff8ea;
 }
 
+.bg-off-white2 {
+  background-color: #fffbf4;
+}
+
 .bg-white {
   background-color: #ffffff;
 }
@@ -1122,7 +1126,5 @@ body {
 }
 
 .report-card-img {
-
   width: 50%;
-
 }

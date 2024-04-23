@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.parkngo.R;
-import com.example.parkngo.parking.helpers.ParkingFetchData;
+import com.example.parkngo.parking.helpers.ParkingHelper;
 
 public class ParkingFragment extends Fragment {
     private View loadingView;
@@ -25,7 +25,8 @@ public class ParkingFragment extends Fragment {
         errorView = inflater.inflate(R.layout.fragment_error, container, false);
 
         // Data fetching and processing
-        new ParkingFetchData(loadingView, parkingView, errorView, getContext());
+        ParkingHelper parkingHelper = new ParkingHelper(loadingView, parkingView, errorView, getContext());
+        parkingHelper.init();
 
         return loadingView;
     }

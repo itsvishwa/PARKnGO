@@ -3,8 +3,6 @@ package com.example.parkngo.profile;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.profile.helpers.PHFetchData;
-import com.example.parkngo.profile.helpers.PHRecycleViewAdapter;
+import com.example.parkngo.profile.helpers.PaymentHistoryHelper;
 import com.example.parkngo.profile.helpers.PaymentHistoryModel;
 
 import java.util.ArrayList;
@@ -34,7 +31,8 @@ public class PaymentHistoryFragment extends Fragment {
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
         errorView = inflater.inflate(R.layout.fragment_error, container, false);
 
-        new PHFetchData(paymentHistoryView, loadingView, errorView, getContext(), (MainActivity)requireContext());
+        PaymentHistoryHelper paymentHistoryHelper = new PaymentHistoryHelper(paymentHistoryView, loadingView, errorView, getContext(), (MainActivity)requireContext());
+        paymentHistoryHelper.init();
 
         return loadingView;
     }
