@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
+import com.example.officertestapp.ForceEnd.Helpers.ForceEndMainSearchHelper;
 import com.example.officertestapp.ForceEnd.Helpers.ForceEndedFetchData;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
@@ -25,6 +27,15 @@ public class ForceEndMainFragment extends Fragment {
         // fetching data
         new ForceEndedFetchData(forceEndsessionsView, loadingView, getContext());
 
+        // Helper Class
+        ForceEndMainSearchHelper forceEndMainSearchHelper = new ForceEndMainSearchHelper(forceEndsessionsView, getContext(),requireActivity().getSupportFragmentManager(), loadingView);
+
+        // Search bar
+        //forceEndMainSearchHelper.initSearchBarListener();
+
+
         return loadingView;
     }
+
+
 }
