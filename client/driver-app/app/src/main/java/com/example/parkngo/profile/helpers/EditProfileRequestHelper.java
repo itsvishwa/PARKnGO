@@ -2,7 +2,7 @@ package com.example.parkngo.profile.helpers;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,28 +24,55 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfileRequestHandler {
+public class EditProfileRequestHelper {
     View editProfileView;
     FragmentManager fragmentManager;
     Context context;
     ParkngoStorage parkngoStorage;
 
-    public EditProfileRequestHandler(View editProfileView, Context context, FragmentManager fragmentManager){
+    public EditProfileRequestHelper(View editProfileView, Context context, FragmentManager fragmentManager){
         this.editProfileView = editProfileView;
         this.context = context;
         this.fragmentManager = fragmentManager;
         this.parkngoStorage = new ParkngoStorage(context);
-        setUpDefaultValues();
     }
 
-    public void setUpDefaultValues(){
+    public void init(){
+        setUpDefaultValues();
+        updateBtnHandler();
+        discardBtnHandler();
+    }
+
+    private void setUpDefaultValues(){
         TextView firstNameView = editProfileView.findViewById(R.id.edit_prof_frag_first_name);
         TextView lastNameView = editProfileView.findViewById(R.id.edit_prof_frag_last_name);
         firstNameView.setText(parkngoStorage.getData("firstName"));
         lastNameView.setText(parkngoStorage.getData("lastName"));
     }
 
-    public void updateName(){
+
+    private void updateBtnHandler(){
+        Button saveChangesBtn = editProfileView.findViewById(R.id.edit_prof_frag_save_btn);
+        saveChangesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateName();
+            }
+        });
+    }
+
+
+    private void discardBtnHandler(){
+        Button discardBtn = editProfileView.findViewById(R.id.edit_prof_frag_discard_btn);
+        discardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setUpDefaultValues();
+            }
+        });
+    }
+
+    private void updateName(){
         TextView firstNameView = editProfileView.findViewById(R.id.edit_prof_frag_first_name);
         TextView lastNameView = editProfileView.findViewById(R.id.edit_prof_frag_last_name);
 

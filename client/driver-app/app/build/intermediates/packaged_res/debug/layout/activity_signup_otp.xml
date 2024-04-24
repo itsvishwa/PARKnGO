@@ -218,7 +218,6 @@
                 android:id="@+id/sign_up_act_resend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="sign_up_act_resend_btn_handler"
