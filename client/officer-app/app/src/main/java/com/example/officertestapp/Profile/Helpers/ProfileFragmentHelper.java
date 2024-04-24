@@ -16,7 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.officertestapp.Attendance.MarkAttendanceActivity;
 import com.example.officertestapp.Attendance.MarkAttendanceOffActivity;
+import com.example.officertestapp.Attendance.MarkedAttendanceSuccessfulActivity;
 import com.example.officertestapp.Helpers.DateTimeHelper;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
@@ -136,10 +138,12 @@ public class ProfileFragmentHelper {
             JSONObject innerResponse = jsonResponse.getJSONObject("response");
             String responseCode = innerResponse.getString("response_code");
             String message = innerResponse.getString("message");
+            String timestamp = innerResponse.getString("time_stamp");
 
             // Log the parsed response data
             Log.d("Response Code", responseCode);
             Log.d("Message", message);
+            Log.d("timestamp", timestamp);
 
             // Check if the response code is "800"
             if ("800".equals(responseCode)) {
@@ -148,6 +152,7 @@ public class ProfileFragmentHelper {
 
                 // Navigate to MarkAttendanceOffActivity
                 Intent intent = new Intent(context, MarkAttendanceOffActivity.class);
+                intent.putExtra("timestamp", timestamp);
                 context.startActivity(intent);
             } else {
                 // Show a toast message with the response message

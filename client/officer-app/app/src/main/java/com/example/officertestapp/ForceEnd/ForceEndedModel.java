@@ -1,11 +1,11 @@
 package com.example.officertestapp.ForceEnd;
 
 public class ForceEndedModel {
-    String vehicleNumber;
-    String vehicleType;
-    String startDateTime;
-    String endDateTime;
-    String _id;
+    private String vehicleNumber;
+    private String vehicleType;
+    private String startDateTime;
+    private String endDateTime;
+    private String _id;
 
     public ForceEndedModel(String _id, String vehicleNumber, String vehicleType, String startDateTime, String endDateTime) {
         this._id = _id;

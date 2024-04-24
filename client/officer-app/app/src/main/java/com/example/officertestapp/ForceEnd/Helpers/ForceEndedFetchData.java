@@ -40,16 +40,18 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class ForceEndedFetchData {
-    View view;
-    View loadingView;
-    Context context;
-    ParkngoStorage parkngoStorage;
+    private View view;
+    private View loadingView;
+    private Context context;
+    private ParkngoStorage parkngoStorage;
+    private ArrayList<ForceEndedModel> forceEndedModels;
 
-    public ForceEndedFetchData(View view, View loadingView, Context context) {
+    public ForceEndedFetchData(View view, View loadingView, Context context, ArrayList<ForceEndedModel> forceEndedModels) {
         this.view = view;
         this.loadingView = loadingView;
         this.context = context;
         this.parkngoStorage = new ParkngoStorage(context);
+        this.forceEndedModels = forceEndedModels;
         fetchData();
     }
 
