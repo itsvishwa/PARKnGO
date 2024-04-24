@@ -370,9 +370,11 @@ class Profile extends Controller
                 // Update the Duty_record table
                 $this->duty_record_model->mark_duty_off($time_stamp, $token_data["user_id"]);
 
+                // Retrieve the start time stamp
                 $result = [
                     "response_code" => "800",
-                    "message" => "Duty record is marked OFF!"
+                    "message" => "Duty record is marked OFF!",
+                    "time_stamp" => $time_stamp
                 ];
 
                 $this->send_json_200($result);

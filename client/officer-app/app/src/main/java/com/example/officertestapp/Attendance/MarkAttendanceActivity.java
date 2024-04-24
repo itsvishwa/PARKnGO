@@ -48,6 +48,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
     private String timestamp;
     private TextView currentTimeView;
     private TextView currentDateView;
+    private SlideToActView slideToActView;
 
 
     @Override
@@ -115,8 +116,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Find the SlideToActView by its ID
-        SlideToActView slideToActView = findViewById(R.id.duty_in_swipe_btn);
-
+        slideToActView = findViewById(R.id.duty_in_swipe_btn);
 
         // Set up event listener for slide completion
         slideToActView.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
@@ -143,6 +143,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationManager != null && !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             // Location services are disabled, prompt the user to enable them
+            slideToActView.resetSlider();
             Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -160,6 +161,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
 
                             markAttendance(location.getLatitude(), location.getLongitude());
                         } else {
+                            slideToActView.resetSlider();
                             Log.e("Location", "Last known location is null");
                         }
                     }
@@ -246,6 +248,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
                 // Permission granted, proceed with getting location
                 retrieveDeviceLocation();
             } else {
+                slideToActView.resetSlider();
                 // Permission denied, handle accordingly (e.g., show a message to the user)
                 Log.e("Location", "Permission denied");
             }

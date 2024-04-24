@@ -1,33 +1,36 @@
 package com.example.officertestapp.ForceEnd;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.officertestapp.ForceEnd.Helpers.ForceEndMainSearchHelper;
 import com.example.officertestapp.ForceEnd.Helpers.ForceEndedFetchData;
+import com.example.officertestapp.ForceEnd.Helpers.ForceEndedRecycleViewAdapter;
 import com.example.officertestapp.Helpers.ParkngoStorage;
-import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.ArrayList;
 
 public class ForceEndMainFragment extends Fragment {
-    View loadingView;
+    private View loadingView;
+    private View forceEndsessionsView;
+    private ForceEndedRecycleViewAdapter adapter;
+    private ArrayList<ForceEndedModel> forceEndedModels;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View forceEndsessionsView = inflater.inflate(R.layout.fragment_force_end_main, container, false);
+        forceEndsessionsView = inflater.inflate(R.layout.fragment_force_end_main, container, false);
 
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
 
@@ -43,18 +46,57 @@ public class ForceEndMainFragment extends Fragment {
         // Set the officer's name in the TextView
         parkingNameView.setText(parkingName);
 
+        // Initialize search bar listener
+        initSearchBarListener();
 
-        // fetching data
-        new ForceEndedFetchData(forceEndsessionsView, loadingView, getContext());
+        // Initialize ForceEndedFetchData and pass the empty ArrayList
+        new ForceEndedFetchData(forceEndsessionsView, loadingView, getContext(), forceEndedModels);
 
-        // Helper Class
-        ForceEndMainSearchHelper forceEndMainSearchHelper = new ForceEndMainSearchHelper(forceEndsessionsView, getContext(),requireActivity().getSupportFragmentManager(), loadingView);
+        if (forceEndedModels.size() > 0) {
+            // Array is successfully populated
+            Log.d(TAG, "Array is successfully populated with " + forceEndedModels.size() + " elements.");
+        } else {
+            // Array is empty, handle this case accordingly
+            Log.d(TAG, "Array is empty.");
+        }
 
-        // Search bar
-        //forceEndMainSearchHelper.initSearchBarListener();
-
+        adapter = new ForceEndedRecycleViewAdapter(forceEndedModels,getContext(), forceEndsessionsView);
 
         return loadingView;
+    }
+
+
+    public void initSearchBarListener(){
+        SearchView searchView = forceEndsessionsView.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "Query text changed: " + newText);
+                filterList(newText);
+                return true;
+            }
+        });
+    }
+
+    private void filterList(String text) {
+        ArrayList<ForceEndedModel> filteredList = new ArrayList<>();
+        for (ForceEndedModel item : forceEndedModels) {
+            if (item.getVehicleNumber().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        if (filteredList.isEmpty()){
+            Toast.makeText(getContext(), "No Data Found", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            adapter.setFilteredList(filteredList);
+        }
     }
 
 
