@@ -58,6 +58,11 @@ public class ForceEndedRecycleViewAdapter extends RecyclerView.Adapter<ForceEnde
         return forceEndedModels.size();
     }
 
+    public void setFilteredList(ArrayList<ForceEndedModel> filteredList) {
+        this.forceEndedModels = filteredList;
+        notifyDataSetChanged(); // Notify RecyclerView that the data set has changed
+    }
+
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView vehicleNumView;
         TextView vehicleTypeView;
