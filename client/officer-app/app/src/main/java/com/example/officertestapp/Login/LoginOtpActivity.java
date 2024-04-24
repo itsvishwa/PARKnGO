@@ -2,6 +2,7 @@ package com.example.officertestapp.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -26,8 +27,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginOtpActivity extends AppCompatActivity {
-
+    private TextView countDownTxtView;
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMillis = 60000;
     String mobileNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,16 @@ public class LoginOtpActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mobileNumber = intent.getStringExtra("MOBILE_NUMBER");
 
+        // Initialize countDownTxtView
+        countDownTxtView = findViewById(R.id.countDownTxtView);
+
+        // Start the countdown timer
+        startCountDown();
+
+        // Enable the resend button initially
+        TextView resendTextView = findViewById(R.id.textView6);
+        resendTextView.setEnabled(false);
+        
         TextView mobileNumberView = findViewById(R.id.mobile_number_otp_act_mobile_number_text);
         mobileNumberView.setText("(+94)" + mobileNumber);
 
@@ -50,6 +64,39 @@ public class LoginOtpActivity extends AppCompatActivity {
         setEditTextListener(otpDigit3View, otpDigit4View);
         setEditTextListener(otpDigit4View, null);
 
+    }
+
+    private void startCountDown() {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) { // Count every 1 second
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                updateCountDownText();
+            }
+
+            @Override
+            public void onFinish() {
+                countDownTxtView.setText("(0 s)"); // Update text to 0 seconds
+                // Enable the resend button when countdown finishes
+                TextView resendTextView = findViewById(R.id.textView6);
+                resendTextView.setEnabled(true); // Enable the resend button
+            }
+        }.start();
+    }
+
+    private void updateCountDownText() {
+        int seconds = (int) (timeLeftInMillis / 1000);
+        String timeLeftFormatted = String.format("(%02d s)", seconds);
+        countDownTxtView.setText(timeLeftFormatted);
+    }
+
+    // Override onDestroy to stop the countdown timer when the activity is destroyed
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (countDownTimer != null) {
+            countDownTimer.cancel(); // Cancel the countdown timer to prevent memory leaks
+        }
     }
 
     // cursor move to the next EditText
@@ -160,6 +207,51 @@ public class LoginOtpActivity extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
     }
+
+    // resend btn handler
+    // request the server to send the OTP again
+    public void login_otp_act_resend_btn(View view){
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/user/send_otp/"  + mobileNumber;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String responseData = jsonObject.getString("response");
+                            Toast.makeText(LoginOtpActivity.this, responseData, Toast.LENGTH_LONG).show();
+                        }catch (JSONException e){
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String errorResponse;
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            errorResponse = new String(error.networkResponse.data);
+                            try {
+                                JSONObject jsonObject = new JSONObject(errorResponse);
+                                String response = jsonObject.getString("response");
+                                Toast.makeText(LoginOtpActivity.this, response, Toast.LENGTH_LONG).show(); // print the error
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                }
+        );
+        queue.add(stringRequest);
+    }
+
+
+
+
 
     public void login_otp_act_back_btn_handler(View v) {
         Intent i = new Intent(this, LoginActivity.class);

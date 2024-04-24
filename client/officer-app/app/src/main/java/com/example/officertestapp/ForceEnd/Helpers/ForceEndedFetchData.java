@@ -168,7 +168,6 @@ public class ForceEndedFetchData {
 
     }
 
-
     private void errorResponseHandler(VolleyError error) {
         String errorResponse;
         if (error.networkResponse != null && error.networkResponse.data != null) {

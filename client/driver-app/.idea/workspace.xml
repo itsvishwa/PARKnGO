@@ -10,16 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/ForceEnd/ForceEndMainFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/baseline_back_hand_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/search_view_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/force_ended_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_force_end_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/baseline_search_24.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/drawable/baseline_search_24.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/ForceEnd/ForceEndMainFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/ForceEnd/ForceEndMainFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/ForceEnd/Helpers/ForceEndedFetchData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/ForceEnd/Helpers/ForceEndedFetchData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Login/LoginOtpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/java/com/example/officertestapp/Login/LoginOtpActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/activity_login_otp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/activity_login_otp.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +94,7 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "last_opened_file_path": "C:/wamp64/www/PARKnGO/client/officer-app",
+    "last_opened_file_path": "C:/wamp64/www/PARKnGO/client/driver-app",
     "settings.editor.selected.configurable": "AndroidSdkUpdater"
   }
 }]]></component>
