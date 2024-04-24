@@ -55,29 +55,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profile_frag_app_bar_parking_name" />
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Last Payment"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/appbar_main_text"
-                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView19"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Last Payment"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/appbar_main_text"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />-->
 
-                <TextView
-                    android:id="@+id/last_payment_date_time_txt_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="00.00 AM | 00 ###"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView19"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/textView19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+<!--                <TextView-->
+<!--                    android:id="@+id/last_payment_date_time_txt_view"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="00.00 AM | 00 ###"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/textView19"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/textView19"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView19" />-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
