@@ -55,7 +55,9 @@ class ParkingSpace extends Controller
                     ];
 
                     $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
-
+                    if ($temp["distance"] === -1) {
+                        $temp["distance"] = 999;
+                    }
                     $spaces_data["data"][] = $temp; // add temp assosiative array to spaces_data[]
                 }
 
@@ -235,6 +237,7 @@ class ParkingSpace extends Controller
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
+            $keyword = str_replace("_", " ", $keyword);
             $result = $this->parking_space_model->get_available_parking_spaces_by_search($this->convert_to_vehicle_category($vehicle_type), $keyword, $page_number);
             $is_next = true;
             if ($result === false)  // no open parking spaces available for selected vehicle type 
@@ -299,6 +302,7 @@ class ParkingSpace extends Controller
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
+            $keyword = str_replace("_", " ", $keyword);
             $result = $this->parking_space_model->get_all_parking_spaces_by_search($keyword);
 
             if ($result === false) // no parking spaces 
@@ -382,8 +386,12 @@ class ParkingSpace extends Controller
         // Decode JSON response
         $decoded_response = json_decode($response, true);
 
+
         // distance in meters
-        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        $distance = -1000; // when google api can't find a root
+        if (isset($decoded_response["rows"][0]["elements"][0]["distance"])) {
+            $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        }
 
         return $distance / 1000;
     }

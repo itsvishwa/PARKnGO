@@ -73,7 +73,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
 
             for(int i = 0; i<availableParkingSpaceModelsArr.size(); i++){
                 AvailableParkingSpaceModel availableParkingSpaceModel = availableParkingSpaceModelsArr.get(i);
-                LatLng pos = new LatLng( Double.valueOf(availableParkingSpaceModel.getLatitude()),  Double.valueOf(availableParkingSpaceModel.getLongitude()));
+                LatLng pos = new LatLng( Double.parseDouble(availableParkingSpaceModel.getLatitude()),  Double.parseDouble(availableParkingSpaceModel.getLongitude()));
 
                 double slotRatio = (availableParkingSpaceModel.getFreeSlots() * 1.0) / Integer.parseInt(availableParkingSpaceModel.getTotalSlots()) ;
 
