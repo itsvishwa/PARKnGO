@@ -188,6 +188,7 @@ public class ParkingHelper {
     // fetching search result data
     private void searchResultFetchData(String keyword){
         RequestQueue queue = Volley.newRequestQueue(context);
+        keyword = keyword.replace(" ", "_");
         String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/parkingSpace/search_all/" + keyword;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
