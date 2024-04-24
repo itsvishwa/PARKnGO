@@ -34,6 +34,9 @@ public class ForceEndMainFragment extends Fragment {
 
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
 
+        // Initialize forceEndedModels ArrayList
+        forceEndedModels = new ArrayList<>();
+
         //Create an instance of Parkngo Storage using the Fragment's context
         ParkngoStorage parkngoStorage = new ParkngoStorage(getContext());
 
@@ -52,13 +55,7 @@ public class ForceEndMainFragment extends Fragment {
         // Initialize ForceEndedFetchData and pass the empty ArrayList
         new ForceEndedFetchData(forceEndsessionsView, loadingView, getContext(), forceEndedModels);
 
-        if (forceEndedModels.size() > 0) {
-            // Array is successfully populated
-            Log.d(TAG, "Array is successfully populated with " + forceEndedModels.size() + " elements.");
-        } else {
-            // Array is empty, handle this case accordingly
-            Log.d(TAG, "Array is empty.");
-        }
+        logForceEndedModels();
 
         adapter = new ForceEndedRecycleViewAdapter(forceEndedModels,getContext(), forceEndsessionsView);
 
@@ -99,5 +96,16 @@ public class ForceEndMainFragment extends Fragment {
         }
     }
 
+    public void logForceEndedModels() {
+        if (forceEndedModels != null) {
+            for (ForceEndedModel item : forceEndedModels) {
+                Log.e(TAG, "forceEndedModels is not null");
+                Log.d(TAG, "Vehicle Number: " + item.getVehicleNumber());
+                // Add more log statements as needed for other properties of ForceEndedModel
+            }
+        } else {
+            Log.e(TAG, "forceEndedModels is null");
+        }
+    }
 
 }
