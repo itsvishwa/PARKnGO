@@ -24,7 +24,7 @@ public class ForceEndDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_payment_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_force_end_details, container, false);
 
         // Use the helper class to set app bar details
         HomeFragmentHelper.setTopAppBarDetailsInFragment(view, requireContext());
@@ -39,7 +39,7 @@ public class ForceEndDetailsFragment extends Fragment {
 
 
         // Handle the Receive Cash Payment button
-        Button receiveCashPaymentBtn = view.findViewById(R.id.release_slot_03_receive_cash_payment_btn);
+        Button receiveCashPaymentBtn = view.findViewById(R.id.force_ended_session_receive_cash_payment_btn);
         receiveCashPaymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
