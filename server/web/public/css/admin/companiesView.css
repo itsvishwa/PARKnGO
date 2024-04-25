@@ -129,7 +129,7 @@
 
   .b-card1{
     position: relative;
-    background-color: #FFFBF4;
+    background-color: #fffbf4;
     margin-left :-147px;
     padding: 45px;
     border-radius: 10px;
@@ -332,12 +332,16 @@
   border: none;
 }
 
+.b-view-more:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
 .b-delete-more{
    
   position: absolute;
   background-color: #FFFBF4;
   bottom: 10px;
-  left: 313px;
+  left: 450px;
   right: 0;
   border-radius:20px 20px 20px 20px;
   height: 40px;
@@ -345,6 +349,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
   outline: none;
   border: none;
+}
+.b-delete-more:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .b-view-more-card2-content {
@@ -517,7 +524,7 @@
 .b-card-content .search-box {
   display: flex;
   align-items: center;
-  width: 950px; 
+  width: 90%; 
   height: 25px; 
   border: 1px solid #ccc; 
   border-radius: 5px;
