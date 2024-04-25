@@ -120,7 +120,7 @@ public class ForceEndedPaymentDetailsHelper {
                 TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
                 TextView vehicleTypeTextView = view.findViewById(R.id.vehicle_type_txt_view);
                 TextView sessionStartedTimeTextView = view.findViewById(R.id.session_started_time_txt_view);
-                TextView sessionEndedTimeTextView = view.findViewById(R.id.session_ended_time_txt_view);
+                TextView sessionEndedTimeTextView = view.findViewById(R.id.session_force_ended_time_txt_view);
                 TextView timeDurationTextView = view.findViewById(R.id.time_duration_txt_view);
                 TextView amountTextView = view.findViewById(R.id.amount_txt_view);
 

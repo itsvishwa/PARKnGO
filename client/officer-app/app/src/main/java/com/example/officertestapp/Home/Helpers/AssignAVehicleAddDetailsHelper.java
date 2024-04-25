@@ -138,7 +138,7 @@ public class AssignAVehicleAddDetailsHelper {
                     Toast.makeText(context, "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Extract user inputs
-                    String letters = lettersEditTextView.getText().toString();
+                    String letters = lettersEditTextView.getText().toString().toUpperCase();
                     String selectedSymbol = symbolsSpinnerView.getSelectedItem().toString();
                     String digits = digitsEditTextView.getText().toString();
                     String selectedProvince = provincesSpinnerView.getSelectedItem().toString();
