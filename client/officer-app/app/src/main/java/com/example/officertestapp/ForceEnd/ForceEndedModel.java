@@ -1,5 +1,7 @@
 package com.example.officertestapp.ForceEnd;
 
+import com.example.officertestapp.Helpers.VehicleNumberHelper;
+
 public class ForceEndedModel {
     private String vehicleNumber;
     private String vehicleType;
@@ -20,7 +22,7 @@ public class ForceEndedModel {
     }
 
     public String getVehicleType() {
-        return vehicleType.toUpperCase();
+        return VehicleNumberHelper.formatVehicleType(vehicleType);
     }
 
     public String getStartDateTime() {

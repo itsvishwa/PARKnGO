@@ -127,6 +127,8 @@ public class ForceEndedPaymentDetailsHelper {
                 // Insert space between letters and numbers in the vehicle number
                 String formattedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(vehicleNumber);
 
+                String formattedVehicleType = VehicleNumberHelper.formatVehicleType(vehicleType);
+
 
                 //format the timestamp to date time according to the devices time zone
                 //Convert the timestamp string to a long value
@@ -148,7 +150,7 @@ public class ForceEndedPaymentDetailsHelper {
                 String formattedEndTime = sdf.format(EndDate);
 
                 vehicleNumberTextView.setText(formattedVehicleNumber);
-                vehicleTypeTextView.setText(vehicleType);
+                vehicleTypeTextView.setText(formattedVehicleType);
                 sessionStartedTimeTextView.setText(formattedStartTime);
                 sessionEndedTimeTextView.setText(formattedEndTime);
                 timeDurationTextView.setText(timeWent);
