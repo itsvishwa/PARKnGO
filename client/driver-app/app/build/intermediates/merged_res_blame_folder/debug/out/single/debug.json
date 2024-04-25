@@ -1,582 +1,538 @@
 [
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_round_outline.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\round_outline.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_on_going.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_on_going.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_error.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_error.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_6_upper_bar.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_6_upper_bar.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-mdpi_parking_for_map_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-mdpi/parking_for_map_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_edit_review.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_edit_review.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_qr.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/qr.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_available_parking_spaces.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_available_parking_spaces.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_edit_vehicle.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_edit_vehicle.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-anydpi-v26_parking.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-anydpi-v26\\parking.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_scan_qr.jpg.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/scan_qr.jpg"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-anydpi-v26_parking_for_map.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-anydpi-v26\\parking_for_map.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\menu_bottom_navigation_bar.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\menu\\bottom_navigation_bar.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxxhdpi_parking_for_map_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxxhdpi/parking_for_map_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_progress_indicator_circle_inactive.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\progress_indicator_circle_inactive.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_qr_code_scanner_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_qr_code_scanner_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_dash_border_radius_6.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\dash_border_radius_6.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_not_available.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/not_available.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_6_with_outline.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_6_with_outline.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_download_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_download_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_on_going.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_on_going.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_error.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_error.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_logout_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_logout_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_progress_indicator_circle_inactive.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/progress_indicator_circle_inactive.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_appbar_icon_bg.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\appbar_icon_bg.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_arrow_drop_up_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_arrow_drop_up_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_6_primary.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_6_primary.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_transaction_failed.jpg.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\transaction_failed.jpg"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_payment_history.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_payment_history.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-anydpi-v26_parking_for_map_round.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-anydpi-v26\\parking_for_map_round.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_arrow_back_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_arrow_back_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-hdpi_parking_for_map.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-hdpi/parking_for_map.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_edit_profile.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_edit_profile.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_edit_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_edit_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_parking_selected.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_parking_selected.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_signup_otp.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_signup_otp.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_payment_failed.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_payment_failed.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_map_red.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/map_red.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_payment.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_payment.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_progress_indicator_background.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\progress_indicator_background.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_23_with_stroke.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_23_with_stroke.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xhdpi_parking.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xhdpi\\parking.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_transaction_failed.jpg.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/transaction_failed.jpg"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_scan.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_scan.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_payment_history.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_payment_history.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_payment.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_payment.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_parking_item.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\parking_item.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_appbar_icon_bg.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/appbar_icon_bg.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_star_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_star_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/xml_backup_rules.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/xml/backup_rules.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_logout.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_logout.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_delete_review.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_delete_review.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_map_new.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\map_new.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_star_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_star_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_end_qr.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_end_qr.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_home_icon_circle.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/home_icon_circle.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_add_review.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_add_review.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_parking_selected.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_parking_selected.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_progress_indicator_background.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/progress_indicator_background.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_home_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_home_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_parking_item.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/parking_item.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_qr.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_qr.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/menu_bottom_navigation_bar.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/menu/bottom_navigation_bar.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_edit_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_edit_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_payment_history_item.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/payment_history_item.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-anydpi-v26_parking_round.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-anydpi-v26\\parking_round.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_add_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_add_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_scan_qr.jpg.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\scan_qr.jpg"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_payment_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_payment_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_available_parking_item.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\available_parking_item.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_6_white.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_6_white.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/color_chip_back.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/color/chip_back.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxhdpi_parking_for_map_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxhdpi\\parking_for_map_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_end_qr.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_end_qr.xml"
+    },
+    {
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_delete_img.jpg.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/delete_img.jpg"
+    },
+    {
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_11.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_11.xml"
     },
     {
         "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_navigate.xml.flat",
         "source": "com.example.parkngo.app-main-35:/layout/fragment_navigate.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_parking_foreground.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\parking_foreground.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_logo_white.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/logo_white.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-mdpi_parking_for_map.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-mdpi\\parking_for_map.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_edit_mobile_number.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_edit_mobile_number.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_review_item.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\review_item.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_home.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_home.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_dash_border_radius_6.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/dash_border_radius_6.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_home_find_parking_icon.jpg.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\home_find_parking_icon.jpg"
+        "merged": "com.example.parkngo.app-merged_res-33:/color_chip_text.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/color/chip_text.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_download_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_download_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_force_end_sucessfull.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_force_end_sucessfull.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_login_otp.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_login_otp.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_36_green.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_36_green.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_hero.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_hero.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xhdpi_parking_for_map.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xhdpi/parking_for_map.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_navigate.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_navigate.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_add_vehicle.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_add_vehicle.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_scan.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_scan.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_main.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xhdpi_parking_for_map.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xhdpi\\parking_for_map.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_round_blue_circle.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/round_blue_circle.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_parking_for_map_foreground.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\parking_for_map_foreground.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_progress_indicator_circle_active.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\progress_indicator_circle_active.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_hero.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_hero.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-hdpi_parking_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-hdpi\\parking_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_6_primary_yellow.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_6_primary_yellow.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\xml\\backup_rules.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-mdpi_parking_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-mdpi\\parking_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/anim_anim_pulse.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/anim/anim_pulse.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_map_blue.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\map_blue.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_home.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_home.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_payment_successfull.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_payment_successfull.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_round_outline.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/round_outline.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_map_red.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\map_red.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_6_with_outline.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_6_with_outline.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_account_circle_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_account_circle_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_round_green_circle.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/round_green_circle.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-mdpi_parking_for_map.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-mdpi/parking_for_map.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_6_primary_yellow.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_6_primary_yellow.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_qr.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\qr.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_loading_frag.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/loading_frag.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_payment_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_payment_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_profile.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_profile.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_main.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_progress_indicator_circle_active.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/progress_indicator_circle_active.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_search_view_bg.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\search_view_bg.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxhdpi_parking_for_map_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxhdpi/parking_for_map_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_question.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\question.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_map_blue.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/map_blue.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_parking_space_sample.jpeg.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\parking_space_sample.jpeg"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_top_app_bar.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/top_app_bar.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxxhdpi_parking_for_map.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxxhdpi\\parking_for_map.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_logout.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_logout.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_23_with_stroke.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_23_with_stroke.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_search_view_bg.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/search_view_bg.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_round_green_circle.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\round_green_circle.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\color_navbar_item.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\color\\navbar_item.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_sign_up_name.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_sign_up_name.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_payment_failed.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_payment_failed.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_map_new.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/map_new.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_payment_successfull.jpg.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/payment_successfull.jpg"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_top_app_bar.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\top_app_bar.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_map_yellow.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/map_yellow.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_map_yellow.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\map_yellow.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_local_parking_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_local_parking_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_force_end_sucessfull.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_force_end_sucessfull.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_home_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_home_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_sucess.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\sucess.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xhdpi_parking_for_map_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xhdpi/parking_for_map_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_6_solid.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_6_solid.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_local_phone_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_local_phone_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_keyboard_double_arrow_up_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_keyboard_double_arrow_up_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_prev_next_item.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/prev_next_item.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_question.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/question.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_9_solid.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_9_solid.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_add_review.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_add_review.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_payment_error.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_payment_error.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_force_end_confirm.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_force_end_confirm.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_login_mobile_number.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_login_mobile_number.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_9_solid.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_9_solid.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_delete_review.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_delete_review.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/color_navbar_item.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/color/navbar_item.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_notifications_none_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_notifications_none_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_payment_success.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_payment_success.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-anydpi-v26_parking_for_map.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-anydpi-v26/parking_for_map.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_parking.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_parking.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_6_solid.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_6_solid.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-hdpi_parking.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-hdpi\\parking.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_arrow_right_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_arrow_right_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxhdpi_parking_for_map.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxhdpi\\parking_for_map.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_payment.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_payment.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_not_available.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\not_available.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_edit_profile.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_edit_profile.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_home_icon_circle.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\home_icon_circle.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_6_primary.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_6_primary.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xhdpi_parking_for_map_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xhdpi\\parking_for_map_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_payment_successfull.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_payment_successfull.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_edit_vehicle.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_edit_vehicle.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_parking.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_parking.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_round_red_circle.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\round_red_circle.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_arrow_left_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_arrow_left_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_local_phone_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_local_phone_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_payment_success.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_payment_success.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_hero_background.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\hero_background.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_sucess.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/sucess.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_main.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_main.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_rate_review_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_rate_review_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_edit_mobile_number.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_edit_mobile_number.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_qr_code_scanner_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_qr_code_scanner_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_edit_review.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_edit_review.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_radius_6_white.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/radius_6_white.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxxhdpi_parking.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxxhdpi\\parking.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_review_item.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/review_item.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_payment_successfull.jpg.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\payment_successfull.jpg"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_login_mobile_number.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_login_mobile_number.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_session_payment.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_session_payment.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_hero_background.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/hero_background.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-hdpi_parking_for_map.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-hdpi\\parking_for_map.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_notifications_none_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_notifications_none_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_settings_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_settings_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_arrow_drop_up_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_arrow_drop_up_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-hdpi_parking_for_map_round.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-hdpi/parking_for_map_round.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_parking_for_map_foreground.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/parking_for_map_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxxhdpi_parking_for_map_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxxhdpi\\parking_for_map_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_available_parking_spaces.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_available_parking_spaces.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxhdpi_parking.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxhdpi\\parking.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxxhdpi_parking_for_map.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxxhdpi/parking_for_map.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_force_end_confirm.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_force_end_confirm.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_logout_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_logout_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_signup_mobile_number.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_signup_mobile_number.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_parking_space_sample.jpeg.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/parking_space_sample.jpeg"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xhdpi_parking_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xhdpi\\parking_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_arrow_back_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_arrow_back_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_profile.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_profile.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_available_parking_item.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/available_parking_item.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-mdpi_parking_for_map_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-mdpi\\parking_for_map_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_round_red_circle.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/round_red_circle.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_rate_review_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_rate_review_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_main.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_main.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxxhdpi_parking_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxxhdpi\\parking_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_sign_up_name.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_sign_up_name.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_round_blue_circle.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\round_blue_circle.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-anydpi-v26_parking_for_map_round.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-anydpi-v26/parking_for_map_round.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_payment_history_item.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\payment_history_item.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_home_find_parking_icon.jpg.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/home_find_parking_icon.jpg"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_activity_signup_otp.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\activity_signup_otp.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_qr.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_qr.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_logo_white.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\logo_white.png"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_account_circle_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_account_circle_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-xxhdpi_parking_for_map.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-xxhdpi/parking_for_map.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\color_chip_text.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\color\\chip_text.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_settings_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_settings_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_warning.png.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/warning.png"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_signup_mobile_number.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_signup_mobile_number.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\color_chip_back.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\color\\chip_back.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/drawable_baseline_keyboard_double_arrow_up_24.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/drawable/baseline_keyboard_double_arrow_up_24.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.example.parkngo.app-merged_res-33:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.parkngo.app-main-35:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_add_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_add_24.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_fragment_session_payment_error.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/fragment_session_payment_error.xml"
     },
     {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_delete_img.jpg.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\delete_img.jpg"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_warning.png.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\warning.png"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_baseline_local_parking_24.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\baseline_local_parking_24.xml"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-hdpi_parking_for_map_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-hdpi\\parking_for_map_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_6_upper_bar.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_6_upper_bar.xml"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\anim_anim_pulse.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\anim\\anim_pulse.xml"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_fragment_add_vehicle.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\fragment_add_vehicle.xml"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\layout_loading_frag.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\layout\\loading_frag.xml"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_11.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_11.xml"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-mdpi_parking.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-mdpi\\parking.webp"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-hdpi\\ic_launcher.webp"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\mipmap-xxhdpi_parking_round.webp.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\mipmap-xxhdpi\\parking_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-merged_res-33:\\drawable_radius_36_green.xml.flat",
-        "source": "C:\\Users\\Vishwa\\.gradle\\daemon\\8.0\\com.example.parkngo.app-main-35:\\drawable\\radius_36_green.xml"
+        "merged": "com.example.parkngo.app-merged_res-33:/layout_activity_login_otp.xml.flat",
+        "source": "com.example.parkngo.app-main-35:/layout/activity_login_otp.xml"
     }
 ]

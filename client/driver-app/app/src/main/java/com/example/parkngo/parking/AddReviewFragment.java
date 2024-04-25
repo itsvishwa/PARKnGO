@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.parkngo.R;
-import com.example.parkngo.parking.helpers.AddReviewData;
+import com.example.parkngo.parking.helpers.AddReviewHelper;
 
 public class AddReviewFragment extends Fragment {
     String parkingID;
@@ -24,16 +24,8 @@ public class AddReviewFragment extends Fragment {
             parkingID = getArguments().getString("parkingID");
         }
 
-        // onclick listeners ......................................................................................................
-        // getting references to the button
-        Button  reviewAddBtn = view.findViewById(R.id.add_review_frag_add_review_btn);
-        reviewAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AddReviewData(view, parkingID, getContext(), requireActivity().getSupportFragmentManager());
-            }
-        });
-        // onclick listeners ......................................................................................................
+        AddReviewHelper addReviewHelper = new AddReviewHelper(view, parkingID, getContext(), requireActivity().getSupportFragmentManager());
+        addReviewHelper.init();
 
         return view;
     }

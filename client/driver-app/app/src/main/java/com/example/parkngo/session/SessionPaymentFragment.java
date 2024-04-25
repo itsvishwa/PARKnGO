@@ -52,21 +52,21 @@ public class SessionPaymentFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 InitRequest req = new InitRequest();
-                req.setMerchantId("1224851");       // Merchant ID
-                req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
-                req.setAmount(250);             // Final Amount to be charged
-                req.setOrderId("13265");        // Unique Reference ID
-                req.setItemsDescription("CMC CAR PARK 01");  // Item description title
+                req.setMerchantId("1224851");
+                req.setCurrency("LKR");
+                req.setAmount(250);
+                req.setOrderId(paymentOnGoingModel.getPaymentID());
+                req.setItemsDescription(paymentOnGoingModel.getParking_name());
                 req.getCustomer().setFirstName("Saman");
                 req.getCustomer().setLastName("Pereira");
-                req.getCustomer().setEmail("samanp@gmail.com");
+                req.getCustomer().setEmail("NA");
                 req.getCustomer().setPhone("+94771234567");
-                req.getCustomer().getAddress().setAddress("No.1, Galle Road");
-                req.getCustomer().getAddress().setCity("Colombo");
+                req.getCustomer().getAddress().setAddress("NA");
+                req.getCustomer().getAddress().setCity("NA");
                 req.getCustomer().getAddress().setCountry("Sri Lanka");
 
                 //Optional Params
-                req.setNotifyUrl("http://192.168.56.1/PARKnGO/server/mobile/payment/notify");
+                req.setNotifyUrl("https://parkngo.azurewebsites.net/?url=payment/notify");
 
                 Intent intent = new Intent(getContext(), PHMainActivity.class);
                 intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);

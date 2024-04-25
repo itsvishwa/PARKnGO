@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,6 +46,15 @@ public class SignupOtpActivity extends AppCompatActivity {
         TextView mobileNumberView = findViewById(R.id.mobile_number_otp_signup_act);
         mobileNumberView.setText("(+94) " + mobileNumber);
 
+        EditText otpDigit1View = findViewById(R.id.sign_up_act_otp_digit_1);
+        EditText otpDigit2View = findViewById(R.id.sign_up_act_otp_digit_2);
+        EditText otpDigit3View = findViewById(R.id.sign_up_act_otp_digit_3);
+        EditText otpDigit4View = findViewById(R.id.sign_up_act_otp_digit_4);
+
+        setEditTextListener(otpDigit1View, otpDigit2View);
+        setEditTextListener(otpDigit2View, otpDigit3View);
+        setEditTextListener(otpDigit3View, otpDigit4View);
+        setEditTextListener(otpDigit4View, null);
     }
 
     // sign up button handler => user registration part
@@ -148,7 +159,7 @@ public class SignupOtpActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/driver/get_otp/" + mobileNumber;
+        String apiUrl = "http://192.168.56.1/PARKnGO/server/mobile/user/send_otp/" + mobileNumber;
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
@@ -184,7 +195,29 @@ public class SignupOtpActivity extends AppCompatActivity {
                     }
                 }
         );
+
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+
+    // cursor move to the next EditText
+    private void setEditTextListener (final EditText currentEditText, final EditText nextEditText) {
+        currentEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() == 1 && nextEditText != null) {
+                    nextEditText.requestFocus();
+                }
+            }
+        });
     }
 }

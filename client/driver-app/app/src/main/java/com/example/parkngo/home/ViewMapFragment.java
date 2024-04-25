@@ -29,7 +29,7 @@ import java.util.ArrayList;
 //GoogleMap.OnMarkerClickListener add this if u adding marker listener
 
 public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
-    String vehicleType = "Car";
+    String vehicleType = "";
     private GoogleMap googleMap;
     ArrayList<AvailableParkingSpaceModel> availableParkingSpaceModelsArr;
 
@@ -43,6 +43,7 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey("availableParkingSpaceModelsArr")) {
             availableParkingSpaceModelsArr = (ArrayList<AvailableParkingSpaceModel>) bundle.getSerializable("availableParkingSpaceModelsArr");
+            vehicleType = getArguments().getString("vehicleType", "none");
         }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -64,22 +65,15 @@ public class ViewMapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         addMarker();
-//        googleMap.setOnMarkerClickListener(this);
     }
 
-//    @Override
-//    public boolean onMarkerClick(Marker marker) {
-//        // Show a toast message when a marker is clicked
-//        Toast.makeText(getContext(), "Marker Clicked: " + marker.getTitle(), Toast.LENGTH_SHORT).show();
-//        return false;
-//    }
 
     private void addMarker() {
         if (googleMap != null) {
 
             for(int i = 0; i<availableParkingSpaceModelsArr.size(); i++){
                 AvailableParkingSpaceModel availableParkingSpaceModel = availableParkingSpaceModelsArr.get(i);
-                LatLng pos = new LatLng( Double.valueOf(availableParkingSpaceModel.getLatitude()),  Double.valueOf(availableParkingSpaceModel.getLongitude()));
+                LatLng pos = new LatLng( Double.parseDouble(availableParkingSpaceModel.getLatitude()),  Double.parseDouble(availableParkingSpaceModel.getLongitude()));
 
                 double slotRatio = (availableParkingSpaceModel.getFreeSlots() * 1.0) / Integer.parseInt(availableParkingSpaceModel.getTotalSlots()) ;
 
