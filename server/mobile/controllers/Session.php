@@ -284,7 +284,7 @@ class Session extends Controller
                 if ($open_session_data === false) 
                 {
                     $result = [
-                        "response_code" => "204",
+                        "response_code" => "801",
                         "message" => "No open Session Not Found"
                     ];
 
@@ -347,7 +347,7 @@ class Session extends Controller
                     } else 
                     {
                         $result = [
-                            "response_code" => "204",
+                            "response_code" => "802",
                             "message" => "This Parking Session is not belongs to your parking"
                         ];
                         $this->send_json_404($result);
@@ -463,6 +463,7 @@ class Session extends Controller
 
                             if (!empty($payment_id)) {
                                 $payment_id = $this->encrypt_id($payment_id);
+                                
                                 $result = [
                                     "response_code" => "800",
                                     "message" => "parking session is ended successfully!",
