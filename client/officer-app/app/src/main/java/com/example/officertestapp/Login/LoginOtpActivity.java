@@ -49,7 +49,7 @@ public class LoginOtpActivity extends AppCompatActivity {
         // Enable the resend button initially
         TextView resendTextView = findViewById(R.id.textView6);
         resendTextView.setEnabled(false);
-        
+
         TextView mobileNumberView = findViewById(R.id.mobile_number_otp_act_mobile_number_text);
         mobileNumberView.setText("(+94)" + mobileNumber);
 
