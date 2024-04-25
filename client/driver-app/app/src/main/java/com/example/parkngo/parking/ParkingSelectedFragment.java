@@ -1,37 +1,34 @@
 package com.example.parkngo.parking;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
-import com.example.parkngo.parking.helpers.ParkingSelectedFetchData;
+import com.example.parkngo.parking.helpers.ParkingSelectedHelper;
 
 public class ParkingSelectedFragment extends Fragment {
 
     private View parkingSelectedView;
     private View loadingView;
     private String parkingID;
-    private String userReviewId;
-
-    MainActivity mainActivity;
-
+    private static final int PERMISSION_REQUEST_CODE = 1003;
+    ParkingSelectedHelper parkingSelectedHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // get main activity context
-        mainActivity = (MainActivity)requireContext();
-
         // Inflate the layout for this fragment
         parkingSelectedView =  inflater.inflate(R.layout.fragment_parking_selected, container, false);
         loadingView = inflater.inflate(R.layout.loading_frag, container, false);
@@ -42,74 +39,33 @@ public class ParkingSelectedFragment extends Fragment {
         }
 
         // Perform data loading in the background
-        ParkingSelectedFetchData parkingSelectedFetchData = new ParkingSelectedFetchData(parkingSelectedView, loadingView, parkingID, getContext());
+        parkingSelectedHelper = new ParkingSelectedHelper(parkingSelectedView, loadingView, parkingID, getContext());
+        parkingSelectedHelper.init();
+        navigateBtnHandler();
+
+        return loadingView;
+    }
 
 
-        // onclick listeners ......................................................................................................
-        //set add review btn handler
-        Button addReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_add_review_btn);
-        addReviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle data = new Bundle();
-                data.putString("parkingID", parkingID);
-                mainActivity.replaceFragment(new AddReviewFragment(), data);
+    // Handle permission request result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                // Permission denied, show message or handle accordingly
+                Toast.makeText(getContext(), "Access to your location is required to proceed", Toast.LENGTH_SHORT).show();
             }
         }
-        );
-
-        // set delete review btn handler
-        Button deleteReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_delete_review_btn);
-        deleteReviewBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Bundle data = new Bundle();
-                data.putString("_id", parkingSelectedFetchData.getUserReviewId());
-
-                mainActivity.replaceFragment(new DeleteReviewFragment(), data);
-            }
-        });
-
-        // set edit review btn handler
-        Button editReviewBtn = parkingSelectedView.findViewById(R.id.parking_Selected_frag_edit_review_btn);
-        editReviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle data = new Bundle();
-                data.putString("_id", parkingSelectedFetchData.getUserReviewId());
-                data.putString("content", parkingSelectedFetchData.getUserReviewContent());
-                data.putInt("rating", parkingSelectedFetchData.getUserReviewRating());
-
-                mainActivity.replaceFragment(new EditReviewFragment(), data);
-            }
-        });
+    }
 
 
+    public void navigateBtnHandler(){
         Button navigateBtn  = parkingSelectedView.findViewById(R.id.parking_selected_fragment_navigate_btn);
         navigateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String latitude = parkingSelectedFetchData.getLatitude();
-                String longitude = parkingSelectedFetchData.getLongitude();
-
-                double sourceLatitude = 6.902727395785716;
-                double sourceLongitude = 79.86126018417747;
-                double destinationLatitude = Double.parseDouble(latitude);
-                double destinationLongitude = Double.parseDouble(longitude);
-
-                String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude +
-                        "&destination=" + destinationLatitude + "," + destinationLongitude;
-
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                intent.setPackage("com.google.android.apps.maps");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                MainActivity mainActivity = (MainActivity) getContext();
-                mainActivity.startActivity(intent);
+                parkingSelectedHelper.getLocationAndContinue();
             }
         });
-        // onclick listeners ......................................................................................................
-
-
-        return loadingView;
     }
 }

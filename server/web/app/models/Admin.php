@@ -8,11 +8,9 @@ class Admin
     $this->db = new Database;
   }
 
-
   // Login admin
   public function login($email, $password)
   {
-
 
     $this->db->query('SELECT * FROM admin WHERE email = :email');
     $this->db->bind(':email', $email);
@@ -42,7 +40,6 @@ class Admin
     }
   }
 
-  //********************************************************************* */
   // Function to get the number of users from the database
   public function getUsersCount()
   {
@@ -94,14 +91,8 @@ class Admin
     $this->db->query('SELECT _id ,name, registered_time_stamp , address , documents FROM company WHERE is_approved = 0 AND is_reviewd = 0');
     $rows = $this->db->resultSet(); // Assuming this function returns multiple rows
 
-
-
     return $rows;
   }
-
-  // Function to get approved and rejected applications
-
-  /***************************************************************************** */
 
   // Function to get pending, approved, or rejected company applications
   public function getCompanyApplications($isApproved, $isReviewed)
@@ -125,9 +116,6 @@ class Admin
     return $rows;
   }
 
-
-  /******************************** */
-
   // Function to get the parking officers count for a specific company
   public function getParkingOfficersCountForCompany($companyId)
   {
@@ -141,7 +129,6 @@ class Admin
 
     return $row->parking_officers_count;
   }
-
 
   // Function to get the parking slots count for a specific company
   public function getParkingSlotsCountForCompany($companyId)
@@ -173,8 +160,6 @@ class Admin
     // If there is at least one public parking space, return true; otherwise, return false
     return $row ? "Public" : "Private";
   }
-
-
 
   // Function to get pending company applications total count
   public function getPendingCompanyApplicationsWithCount()
@@ -222,41 +207,6 @@ class Admin
     }
   }
 
-
-
-  /*// Modify the function to accept the entry_id as a parameter
-public function deleteEntry($_id) {
-  $this->db->query('DELETE FROM company WHERE _id = :_id');
-  // Bind values
-  $this->db->bind(':_id', $_id);
-  // Execute
-  if ($this->db->execute()) {
-      return true;
-  } else {
-      return false;
-  }
-}*/
-
-  // Function to delete a company by ID
-  /*public function deleteCompany($_id)
-{
-    try {
-        $query = "DELETE FROM company WHERE _id = :_id";
-        $this->db->query($query);
-        $this->db->bind(':_id', $_id);
-        $this->db->execute();
-
-        // Check if any row was affected
-        $rowCount = $this->db->rowCount();
-        if ($rowCount > 0) {
-            return "Company with ID $_id has been deleted successfully.";
-        } else {
-            return "No company found with ID _id.";
-        }
-    } catch (PDOException $e) {
-        return "Error: " . $e->getMessage();
-    }
-}*/
   public function getCompanyById($id)
   {
     $this->db->query('SELECT * FROM company WHERE _id = :id');
@@ -284,11 +234,7 @@ public function deleteEntry($_id) {
   public function getTopTwoReviewsData()
   {
     $this->db->query('SELECT driver_id, parking_id, content FROM review ORDER BY time_stamp DESC LIMIT 2');
-    // return $this->db->resultSet(); // Assuming resultSet() fetches all rows
 
-    // $rows = $this->db->resultSet(); 
-
-    // return $rows;
     try {
       $rows = $this->db->resultSet(); // Assuming resultSet() fetches all rows
       return $rows;
@@ -350,8 +296,6 @@ public function deleteEntry($_id) {
   public function getAllReviews()
   {
 
-
-    //$this->db->query('SELECT _id , time_stamp , no_of_stars , content , driver_id , parking_id FROM review');
     $this->db->query('
   SELECT review._id, review.time_stamp, review.no_of_stars, review.content,
          driver.first_name, driver.last_name , parking_spaces.name AS parking_name
@@ -405,6 +349,34 @@ public function deleteEntry($_id) {
     return $row;
   }
 
+  public function getDocument($documentId)
+  {
+
+    $params = [':id' => $documentId];
+
+    try {
+      $result = $this->db->query('SELECT _id , documents FROM company WHERE _id = :id', $params);
+    } catch (Exception $e) {
+      // Log the exception message
+      error_log('Exception caught: ' . $e->getMessage());
+      return false;
+    }
+
+    var_dump($result);
+
+    if ($result && !empty($result[0]['documents'])) {
+      $documentData = $result[0]['documents'];
+
+      // Log debugging information
+      error_log('Document retrieved successfully for _id: ' . $documentId);
+      return $documentData;
+    } else {
+      // Log a message indicating the issue
+      error_log('Document not found or empty result for _id: ' . $documentId);
+      return false; // Document not found
+    }
+  }
+
   public function insertCompanySuspendDetails($data)
   {
     $this->db->query('INSERT INTO company_suspend (company_id, message, duration, time_stamp) VALUES (:company_id, :message, :duration, :time_stamp)');
@@ -412,7 +384,6 @@ public function deleteEntry($_id) {
     $this->db->bind(':message', $data['message']);
     $this->db->bind(':duration', $data['duration']);
     $this->db->bind(':time_stamp', $data['time_stamp']);
-
     if ($this->db->execute()) {
       return true;
     } else {
@@ -420,30 +391,149 @@ public function deleteEntry($_id) {
     }
   }
 
-  public function updateRecoveryToken($data)
+  public function updateApproveOrRejectApplication($companyId, $adminId, $isApproved, $rejectReason = null)
   {
-    $this->db->query('UPDATE admin SET token = :token WHERE email = :email');
-    $this->db->bind(':token', $data['token']);
-    $this->db->bind(':email', $data['email']);
+    // Begin a transaction
+    $this->db->beginTransaction();
 
-    if ($this->db->execute()) {
-      return true;
+    // Prepare the SQL query
+    if ($isApproved) {
+      // Update query for approval
+      $this->db->query('UPDATE company 
+                        SET is_approved = 1, is_reviewd = 1, admin_id = :admin_id
+                        WHERE _id = :companyId');
     } else {
-      return false;
+      // Update query for rejection
+      $this->db->query('UPDATE company 
+                        SET is_approved = 0, is_reviewd = 1, review_message = :rejectReason, admin_id = :admin_id
+                        WHERE _id = :companyId');
+      // Check if rejectReason is provided
+      if (!$rejectReason) {
+        // If rejectReason is not provided, rollback the transaction and return false
+        $this->db->rollBack();
+        return false;
+      }
+      // Bind rejectReason parameter
+      $this->db->bind(':rejectReason', $rejectReason);
+    }
+
+    // Bind common parameters
+    $this->db->bind(':admin_id', $adminId);
+    $this->db->bind(':companyId', $companyId);
+
+    // Execute the update query
+    $updateSuccess = $this->db->execute();
+
+    // Check if the update was successful
+    if ($updateSuccess) {
+      // Commit the transaction if successful
+      $this->db->commit();
+      return true; // Update successful
+    } else {
+      // Roll back the transaction if unsuccessful
+      $this->db->rollBack();
+      return false; // Update failed
     }
   }
 
-  public function updatePassword($data)
+  public function getDocumentData($documentId)
   {
-    $this->db->query('UPDATE admin SET password = :password WHERE token = :token AND email = :email');
-    $this->db->bind(':password', $data['password']);
-    $this->db->bind(':email', $data['email']);
-    $this->db->bind(':token', $data['token']);
+    // Assuming your document data is stored in the 'documents' field as a blob
+    $sql = "SELECT documents FROM company WHERE _id = :documentId";
+    $this->db->query($sql);
+    $this->db->bind(':documentId', $documentId);
 
-    if ($this->db->execute()) {
-      return true;
-    } else {
-      return false;
+    $row = $this->db->single();
+
+    // Check if the query was successful
+    if ($row) {
+      // Access the 'documents' field
+      $documentData = $row->documents;
+
+      return $documentData;
     }
+
+    return null; // or handle the case when the document is not found
+  }
+
+  public function getReportReviews()
+  {
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Reviews" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $Reviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $Reviews;
+  }
+
+  public function getReportBadReviews()
+  {
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Bad Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars <= 2
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $goodReviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $goodReviews;
+  }
+
+  public function getReportGoodReviews()
+  {
+    // Calculate the timestamp of 30 days ago
+    $thirtyDaysAgo = strtotime('-30 days');
+
+    // Fetch good reviews from the past 30 days
+    $this->db->query('
+        SELECT review._id, review.no_of_stars, review.content,
+               driver.first_name, driver.last_name , parking_spaces.name AS parking_name,
+               "Good Review" AS review_type
+        FROM review
+        INNER JOIN driver ON review.driver_id = driver._id
+        INNER JOIN parking_spaces ON review.parking_id = parking_spaces._id
+        WHERE review.no_of_stars > 2
+        AND review.time_stamp >= :thirtyDaysAgo
+    ');
+
+    // Bind parameter
+    $this->db->bind(':thirtyDaysAgo', $thirtyDaysAgo);
+
+    // Execute query
+    $goodReviews = $this->db->resultSet();
+
+    // Return good reviews from the past 30 days
+    return $goodReviews;
   }
 }
