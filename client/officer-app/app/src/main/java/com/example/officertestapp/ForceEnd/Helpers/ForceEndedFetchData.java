@@ -44,14 +44,19 @@ public class ForceEndedFetchData {
     private View loadingView;
     private Context context;
     private ParkngoStorage parkngoStorage;
-    private ArrayList<ForceEndedModel> forceEndedModels;
 
-    public ForceEndedFetchData(View view, View loadingView, Context context, ArrayList<ForceEndedModel> forceEndedModels) {
+    private DataFetchListener dataFetchListener;
+
+    public interface DataFetchListener {
+        void onDataFetchComplete(ArrayList<ForceEndedModel> forceEndedModels);
+    }
+
+    public ForceEndedFetchData(View view, View loadingView, Context context, DataFetchListener listener) {
         this.view = view;
         this.loadingView = loadingView;
         this.context = context;
         this.parkngoStorage = new ParkngoStorage(context);
-        this.forceEndedModels = forceEndedModels;
+        this.dataFetchListener = listener;
         fetchData();
     }
 
@@ -145,6 +150,9 @@ public class ForceEndedFetchData {
 
 
                 forceEndedModels.add(new ForceEndedModel(sessionId, formattedVehicleNum, vehicleType, formattedStartDate, formattedEndDate));
+                // Log the ArrayList after adding each item
+                Log.d("ForceEndedFetchData", "Added item to forceEndedModels: " + forceEndedModels.get(i).toString());
+                Log.d("ForceEndedFetchData", "Size of forceEndedModels: " + forceEndedModels.size());
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.force_end_frag_recycle_view);
@@ -160,6 +168,15 @@ public class ForceEndedFetchData {
                     parent.removeView(loadingView);
                     parent.addView(view, index);
                 }
+
+                // Notify the listener with the completed ArrayList
+                if (dataFetchListener != null) {
+                    dataFetchListener.onDataFetchComplete(forceEndedModels);
+                }
+            }
+            // Notify the listener with the completed ArrayList
+            if (dataFetchListener != null) {
+                dataFetchListener.onDataFetchComplete(forceEndedModels);
             }
 
         }catch (JSONException e){
