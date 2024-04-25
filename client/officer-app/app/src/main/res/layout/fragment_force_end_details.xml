@@ -115,7 +115,7 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Payment Details"
@@ -128,8 +128,9 @@
 
             <TextView
                 android:id="@+id/textView29"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
+                android:paddingStart="10dp"
                 android:padding="10dp"
                 android:text="Vehicle Number"
                 android:textSize="17sp"
@@ -138,21 +139,23 @@
 
             <TextView
                 android:id="@+id/vehicle_num_txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
                 android:paddingVertical="10dp"
+                android:layout_marginStart="25dp"
+                android:paddingStart="5dp"
                 android:text="### 0000 00"
                 android:textSize="17sp"
                 android:textStyle="bold"
+                android:layout_marginEnd="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView29"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView29"
-                app:layout_constraintTop_toTopOf="@+id/textView29"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="@+id/textView29" />
 
             <TextView
                 android:id="@+id/textView31"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Vehicle Type"
@@ -162,21 +165,22 @@
 
             <TextView
                 android:id="@+id/vehicle_type_txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="77dp"
                 android:paddingVertical="10dp"
+                android:layout_marginStart="25dp"
+                android:paddingStart="5dp"
                 android:text="TYPE"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView31"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView31"
-                app:layout_constraintTop_toTopOf="@+id/textView31"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="@+id/textView31" />
 
             <TextView
                 android:id="@+id/textView33"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Session Started at"
@@ -186,45 +190,47 @@
 
             <TextView
                 android:id="@+id/session_started_time_txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="33dp"
                 android:paddingVertical="10dp"
+                android:layout_marginStart="25dp"
+                android:paddingStart="5dp"
                 android:text="00.00 ##"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView33"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView33"
-                app:layout_constraintTop_toTopOf="@+id/textView33"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="@+id/textView33" />
 
             <TextView
                 android:id="@+id/textView35"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Session ended at\n(current time)"
+                android:text="Session Ended at\n(current time)"
                 android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
             <TextView
                 android:id="@+id/session_force_ended_time_txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
                 android:paddingVertical="10dp"
+                android:layout_marginStart="25dp"
+                android:paddingStart="5dp"
                 android:text="00.00 ##"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView35"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView35"
-                app:layout_constraintTop_toTopOf="@+id/textView35"
-                app:layout_constraintVertical_bias="0.4" />
+                app:layout_constraintTop_toTopOf="@+id/textView35" />
 
             <TextView
                 android:id="@+id/textView37"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Time Went"
@@ -235,21 +241,22 @@
 
             <TextView
                 android:id="@+id/time_duration_txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="90dp"
                 android:paddingVertical="10dp"
+                android:layout_marginStart="25dp"
+                android:paddingStart="5dp"
                 android:text="00 H 00 Min"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView37"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView37"
-                app:layout_constraintTop_toTopOf="@+id/textView37"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="@+id/textView37"/>
 
             <TextView
                 android:id="@+id/textView39"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="Amount"
@@ -259,17 +266,18 @@
 
             <TextView
                 android:id="@+id/amount_txt_view"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="112dp"
+                android:layout_marginStart="25dp"
                 android:paddingVertical="10dp"
+                android:paddingStart="5dp"
                 android:text="Rs. 000.00"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textView39"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView39"
-                app:layout_constraintTop_toTopOf="@+id/textView39"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="@+id/textView39" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

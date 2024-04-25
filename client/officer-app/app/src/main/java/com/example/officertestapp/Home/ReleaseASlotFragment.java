@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
+import com.example.officertestapp.Home.Helpers.InProgressDetailsHelper;
+import com.example.officertestapp.Home.Helpers.PaymentDetailsHelper;
 import com.example.officertestapp.Home.Helpers.QREndSessionDetailsHelper;
 import com.example.officertestapp.Home.Helpers.SearchSessionHelper;
 import com.example.officertestapp.MainActivity;
@@ -31,19 +33,35 @@ public class ReleaseASlotFragment extends Fragment {
     private Spinner spinnerSymbols;
     private Button continueBtn;
     private Bundle searchSessionDataBundle;
-
+    String sessionID;
+    ArrayList<String> provinceTypes;
+    ArrayList<String> symbols;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_release_a_slot, container, false);
 
+        continueBtn = view.findViewById(R.id.release_vehicle_continue_btn);
+        continueBtn.setEnabled(false);
+
         // Find the view
         spinnerProvinces = view.findViewById(R.id.spinner_provinces);
         spinnerSymbols = view.findViewById(R.id.spinner_symbols);
 
-        continueBtn = view.findViewById(R.id.release_vehicle_continue_btn);
-        continueBtn.setEnabled(false);
+        provinceTypes = new ArrayList<>(Arrays.asList("WP", "SP", "CP", "EP", "NC", "NP", "NW", "SG", "UP", "NONE"));
+
+        symbols = new ArrayList<>(Arrays.asList("ශ්\u200Dරී", "-", "NONE"));
+
+        if (getArguments() != null) {
+            sessionID = getArguments().getString("_id", "-1");
+        }
+
+        // Call the InProgressDetailsHelper here
+        InProgressDetailsHelper inProgressDetailsHelper = new InProgressDetailsHelper(view, getContext(), continueBtn, spinnerProvinces, spinnerSymbols, provinceTypes, symbols);
+        inProgressDetailsHelper.initLayout(sessionID);
+
+
 
         //Initialize spinner
         initializeSpinners();
@@ -118,7 +136,7 @@ public class ReleaseASlotFragment extends Fragment {
 
 
         // Symbols spinner
-        ArrayList<String> symbols = new ArrayList<>(Arrays.asList("ශ්\u200Dරී", "-", "NONE"));
+
         ArrayAdapter<String> symbolsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, symbols);
         symbolsAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerSymbols.setAdapter(symbolsAdapter);
