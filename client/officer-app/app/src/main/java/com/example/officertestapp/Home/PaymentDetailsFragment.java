@@ -39,31 +39,27 @@ public class PaymentDetailsFragment extends Fragment {
         paymentDetailsHelper.initLayout(paymentID);
 
 
+        // Handle the Receive Cash Payment button
+        Button receiveCashPaymentBtn = view.findViewById(R.id.release_slot_03_receive_cash_payment_btn);
+        receiveCashPaymentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            // Handle the Receive Cash Payment button
-            Button receiveCashPaymentBtn = view.findViewById(R.id.release_slot_03_receive_cash_payment_btn);
-            receiveCashPaymentBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // replace the fragment to 04
-                    // amount text view should update
-                    // contain payment_id
+                // Bundle values
+                Bundle paybundle = new Bundle();
+                paybundle.putString("PaymentID", paymentID);
+                paybundle.putString("Amount", paymentDetailsHelper.getAmount());
 
-                    // Bundle values
-                    Bundle paybundle = new Bundle();
-                    paybundle.putString("PaymentID", paymentID);
-                    paybundle.putString("Amount", paymentDetailsHelper.getAmount());
+                // Log the values for debugging
+                Log.d("Bundle Values", "Payment ID: " + paymentID);
+                Log.d("Bundle Values", "Vehicle Number: " + paymentDetailsHelper.getAmount());
 
-                    // Log the values for debugging
-                    Log.d("Bundle Values", "Payment ID: " + paymentID);
-                    Log.d("Bundle Values", "Vehicle Number: " + paymentDetailsHelper.getAmount());
+                // Navigate to AssignVehicle02Fragment with the Bundle
+                ConfirmCashPaymentFragment releaseASlot04Fragment = new ConfirmCashPaymentFragment();
 
-                    // Navigate to AssignVehicle02Fragment with the Bundle
-                    ConfirmCashPaymentFragment releaseASlot04Fragment = new ConfirmCashPaymentFragment();
-
-                    ((MainActivity) requireActivity()).replaceFragment(releaseASlot04Fragment, paybundle, getView());
-                }
-            });
+                ((MainActivity) requireActivity()).replaceFragment(releaseASlot04Fragment, paybundle, getView());
+            }
+        });
 
         return view;
     }
