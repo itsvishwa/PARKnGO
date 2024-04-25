@@ -12,19 +12,20 @@ class Payment extends Controller
     {
         $this->payment_model = $this->model("PaymentModel");
         $this->officer_model = $this->model("OfficerModel");
+        $this->session_model = $this->model("SessionModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
     }
 
 
-    // driver mob - used to view open payment details for given payment id
+    // driver mobile - used to view open payment details for given payment id
     public function view_payment()
     {
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("ERR_PAY_IT");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("ERR_PAY_TNF");
+            $this->send_json_404("ERR_TNF");
         } else // valid token 
         {
             $encoded_string = $_SERVER['HTTP_X_ENCODED_DATA']; // encoded payment_id
@@ -65,48 +66,23 @@ class Payment extends Controller
     }
 
 
-    // driver mob
+    // driver mobile
     // close the payment if user payment is successfull 
     // will not return anything as a json
     // reason is this will call automatically by the payhere gateway
     // this will only update the database if the payment is successfull => so call again payment/view after this 
     public function notify()
     {
-        $merchant_id         = $_POST['merchant_id'];
         $order_id            = $_POST['order_id'];
-        $payhere_amount      = $_POST['payhere_amount'];
-        $payhere_currency    = $_POST['payhere_currency'];
         $status_code         = $_POST['status_code'];
-        $md5sig              = $_POST['md5sig'];
-        $time_stamp          = time();
-        $merchant_secret = 'XXXXXXXXXXXXX'; // Replace with your Merchant Secret
-        $local_md5sig = strtoupper(
-            md5(
-                $merchant_id .
-                    $order_id .
-                    $payhere_amount .
-                    $payhere_currency .
-                    $status_code .
-                    strtoupper(md5($merchant_secret))
-            )
-        );
 
-        if (($local_md5sig === $md5sig) and ($status_code == 2)) {
-
-            $token_data  = $this->verify_token_for_driver_from_para($merchant_id);
-
-            if ($token_data !== 400 and $token_data !== 404) {
-                $payment_data = [
-                    "payment_id" => $this->decrypt_id($order_id),
-                    "driver_id" => $token_data["user_id"],
-                    "payment_method" => "Card",
-                    "time_stamp" => $time_stamp
-                ];
-
-                $this->payment_model->close_payment($payment_data);
-            }
+        if (($status_code == 2)) // means success payment 
+        {
+            $this->payment_model->close_card_payment_by_id($this->decrypt_id($order_id));
         }
     }
+
+
 
 
     public function cash()
@@ -121,7 +97,9 @@ class Payment extends Controller
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            $parking_id = trim($_POST["parking_id"]);
+            $encrypted_parking_id = trim($_POST["parking_id"]);
+            // Decrypt the parking_id
+            $parking_id = $this->decrypt_id($encrypted_parking_id);
 
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
                 $encrypted_payment_id = trim($_POST["payment_id"]);
@@ -193,9 +171,7 @@ class Payment extends Controller
         }
     }
 
-
-
-    // calculate time
+    // calculate no of seconds to no of hours and minutes 
     private function calculate_time($time)
     {
         $hours = floor($time / 3600);

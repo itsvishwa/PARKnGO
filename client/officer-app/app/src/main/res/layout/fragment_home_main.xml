@@ -6,7 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home.HomeMainFragment"
     android:orientation="vertical"
-    android:background="@color/backgroundColor">
+    android:background="@color/backgroundColor"
+    android:clickable="true"
+    android:focusable="true">
 
     <!--    Top App Bar Here-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +16,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:background="@drawable/top_app_bar"
-        android:paddingHorizontal="18dp">
+        android:paddingHorizontal="25dp">
 
         <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
@@ -28,12 +30,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/home_frag_parking_name"
                     android:layout_width="138dp"
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/app_bar_info_box"
-                    android:text="CMC Car Park 01"
+                    android:text="Car Park Name"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:gravity="center"
@@ -45,25 +47,48 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Hi, Dhanushika"
+                    android:text="Hi, "
                     android:textColor="@color/textPrimary"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintEnd_toEndOf="@+id/home_frag_parking_name"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                    app:layout_constraintTop_toBottomOf="@+id/home_frag_parking_name" />
+
+                <TextView
+                    android:id="@+id/home_frag_officer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Officer"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appbar_main_text"
+                    app:layout_constraintStart_toEndOf="@+id/appbar_main_text"
+                    app:layout_constraintTop_toTopOf="@+id/appbar_main_text" />
 
                 <TextView
                     android:id="@+id/appbar_secondary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Parking Officer - CMC"
+                    android:text="Parking Officer - "
                     android:textColor="@color/textPrimary"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+
+                <TextView
+                    android:id="@+id/home_frag_company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Company_name"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appbar_secondary_text"
+                    app:layout_constraintStart_toEndOf="@+id/appbar_secondary_text" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

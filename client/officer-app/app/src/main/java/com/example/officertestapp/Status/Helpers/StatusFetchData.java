@@ -1,11 +1,13 @@
 package com.example.officertestapp.Status.Helpers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.HeroActivity;
+import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.example.officertestapp.Status.PSRecycleViewAdapter;
 import com.example.officertestapp.Status.ParkingStatusModel;
@@ -33,16 +38,20 @@ public class StatusFetchData {
     Context context;
     View view;
     View loadingView;
+    ParkngoStorage parkngoStorage;
+
     public StatusFetchData(Context context, View view, View loadingView){
         this.context = context;
         this.view = view;
         this.loadingView = loadingView;
-        this.fetchData();
+        this.parkngoStorage = new ParkngoStorage(context);
+        this.fetchData("all", "all");
     }
 
-    public void fetchData(){
+    public void fetchData(String vehicleType, String statusType){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/view_status/7";
+
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/view_status/" + vehicleType + "/" + statusType;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
@@ -60,10 +69,11 @@ public class StatusFetchData {
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-//                ParkngoStorage parkngoStorage = new ParkngoStorage(context);
-//                String token = parkngoStorage.getData("token");
+                String token = parkngoStorage.getData("token");
+                String parkingID = parkngoStorage.getData("parkingID");
                 Map<String, String> headers = new HashMap<>();
-                headers.put("token", "uO3gH9H98UiD5b29ILy7A1YzMDlXZlczZ29jOU5EV216K1B4L1hRYzZZN3pOcjJtdzUxbFk2ZC9LL0FtOTgvTk1sNXkwRjRlRFllMDVTc3d4SDJ3UkVHNTN5ejJXZTVuUHpVTzFBPT0=");
+                headers.put("token", token);
+                headers.put("X-Encoded-Data", parkingID);
                 return headers;
             }
         };
@@ -77,6 +87,9 @@ public class StatusFetchData {
         try {
             JSONObject jsonObject = new JSONObject(response);
             jsonObject = jsonObject.getJSONObject("response");
+
+            String responseCode = jsonObject.getString("response_code");
+
             JSONObject sessionStatObj = jsonObject.getJSONObject("session_stat");
 
             TextView freeSlotsView = view.findViewById(R.id.status_main_farg_free_slots);
@@ -95,25 +108,43 @@ public class StatusFetchData {
 
 
             if(paymentDueObj.getString("is_available").equals("1")){
+                RecyclerView recyclerView = view.findViewById(R.id.status_frag_recycle_view);
+                recyclerView.setVisibility(View.VISIBLE);
+                ConstraintLayout constraintLayout = view.findViewById(R.id.status_frag_empty_list_view);
+                constraintLayout.setVisibility(View.GONE);
                 JSONArray paymentDueArr = paymentDueObj.getJSONArray("data");
 
                 for(int i=0; i<paymentDueArr.length(); i++){
                     JSONObject tempObj = paymentDueArr.getJSONObject(i);
-                    parkingStatusModels.add(new ParkingStatusModel(tempObj.getString("vehicle_number"), tempObj.getString("vehicle_type"), tempObj.getString("session_end_time"), "Payment Due"));
+                    parkingStatusModels.add(new ParkingStatusModel(tempObj.getString("_id"), tempObj.getString("vehicle_number"), tempObj.getString("vehicle_type"), tempObj.getString("session_end_time"), "Payment Due"));
                 }
             }
 
+
             if(inProgressObj.getString("is_available").equals("1")){
+                RecyclerView recyclerView = view.findViewById(R.id.status_frag_recycle_view);
+                recyclerView.setVisibility(View.VISIBLE);
+                ConstraintLayout constraintLayout = view.findViewById(R.id.status_frag_empty_list_view);
+                constraintLayout.setVisibility(View.GONE);
                 JSONArray inProgressArr = inProgressObj.getJSONArray("data");
 
                 for(int i=0; i<inProgressArr.length(); i++){
                     JSONObject tempObj = inProgressArr.getJSONObject(i);
-                    parkingStatusModels.add(new ParkingStatusModel(tempObj.getString("vehicle_number"), tempObj.getString("vehicle_type"), tempObj.getString("session_start_time"), "In Progress"));
+                    parkingStatusModels.add(new ParkingStatusModel(tempObj.getString("_id"), tempObj.getString("vehicle_number"), tempObj.getString("vehicle_type"), tempObj.getString("session_start_time"), "In Progress"));
                 }
             }
 
+            // empty list
+            if(paymentDueObj.getString("is_available").equals("0") && inProgressObj.getString("is_available").equals("0")){
+                RecyclerView recyclerView = view.findViewById(R.id.status_frag_recycle_view);
+                recyclerView.setVisibility(View.GONE);
+                ConstraintLayout constraintLayout = view.findViewById(R.id.status_frag_empty_list_view);
+                constraintLayout.setVisibility(View.VISIBLE);
+            }
+
+
             RecyclerView recyclerView = view.findViewById(R.id.status_frag_recycle_view);
-            PSRecycleViewAdapter adapter = new PSRecycleViewAdapter(parkingStatusModels, context);
+            PSRecycleViewAdapter adapter = new PSRecycleViewAdapter(parkingStatusModels, context, view);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -134,32 +165,19 @@ public class StatusFetchData {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                Toast.makeText(context, "error", Toast.LENGTH_LONG).show();
+                String response = jsonResponse.getString("response");
+                if(response.equals("101") || response.equals("204")) // the officer's parking space has been changed
+                {
+                    parkngoStorage.clearData();
+                    Intent i = new Intent(context, HeroActivity.class);
+                    MainActivity mainActivity = (MainActivity) context;
+                    mainActivity.logout_immediately();
+                }else{
+                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         }
     }
 }
-
-
-//    public void setupParkingStatusModels(){
-//        String[] vehicleNumbers = {"CAF 6565 WP", "CAF 6565 WP", "CAF 6565 WP", "CAF 6565 WP", "CAF 6565 WP"};
-//        String[] vehicleTypes = {"CAR", "CAR", "CAR", "CAR", "CAR"};
-//        String[] dateAndTime = {"07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM", "07 JUNE 2023 | 10 AM"};
-//        String[] parkingStatus = {"Payment Due", "In Progress", "Payment Due", "Payment Due", "Payment Due"};
-//
-//
-//        for(int i=0; i<vehicleNumbers.length; i++){
-//            parkingStatusModels.add(new ParkingStatusModel(vehicleNumbers[i], vehicleTypes[i], dateAndTime[i], parkingStatus[i]));
-//        }
-//    }
-
-    // call the setupParkingStatusModels function
-//    setupParkingStatusModels();
-//
-//    // make a reference to the recycleView
-//    RecyclerView recyclerView = view.findViewById(R.id.status_frag_recycle_view);
-//    PSRecycleViewAdapter adapter = new PSRecycleViewAdapter(parkingStatusModels, getContext());
-//        recyclerView.setAdapter(adapter);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

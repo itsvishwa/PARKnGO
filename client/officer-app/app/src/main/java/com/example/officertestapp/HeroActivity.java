@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.officertestapp.Helpers.ParkngoStorage;
+import com.example.officertestapp.Login.LoginActivity;
 
 import java.util.Objects;
 
@@ -28,7 +29,8 @@ public class HeroActivity extends AppCompatActivity {
     }
 
     public void hero_act_login_btn_handler(View v){
-        Intent i = new Intent(this,LoginActivity.class);
+        // transition to the current activity to another activity
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 }
