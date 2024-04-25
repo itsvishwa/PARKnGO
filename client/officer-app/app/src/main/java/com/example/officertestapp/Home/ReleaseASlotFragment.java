@@ -17,8 +17,6 @@ import android.widget.Toast;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
 import com.example.officertestapp.Home.Helpers.InProgressDetailsHelper;
-import com.example.officertestapp.Home.Helpers.PaymentDetailsHelper;
-import com.example.officertestapp.Home.Helpers.QREndSessionDetailsHelper;
 import com.example.officertestapp.Home.Helpers.SearchSessionHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
@@ -55,13 +53,10 @@ public class ReleaseASlotFragment extends Fragment {
 
         if (getArguments() != null) {
             sessionID = getArguments().getString("_id", "-1");
+            // Call the InProgressDetailsHelper here
+            InProgressDetailsHelper inProgressDetailsHelper = new InProgressDetailsHelper(view, getContext(), continueBtn, spinnerProvinces, spinnerSymbols, provinceTypes, symbols);
+            inProgressDetailsHelper.initLayout(sessionID);
         }
-
-        // Call the InProgressDetailsHelper here
-        InProgressDetailsHelper inProgressDetailsHelper = new InProgressDetailsHelper(view, getContext(), continueBtn, spinnerProvinces, spinnerSymbols, provinceTypes, symbols);
-        inProgressDetailsHelper.initLayout(sessionID);
-
-
 
         //Initialize spinner
         initializeSpinners();
@@ -72,9 +67,10 @@ public class ReleaseASlotFragment extends Fragment {
         // Initialize barLauncher
         ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
             if (result.getContents() != null) {
+                Log.d("QR Content", "qr content " + result.getContents());
                 // Process the scanned QR code content using QRHelper
-                QREndSessionDetailsHelper qREndSessionDetailsHelper = new QREndSessionDetailsHelper(getView(), requireContext(), requireActivity().getSupportFragmentManager());
-                qREndSessionDetailsHelper.processQRCode(result.getContents());
+                InProgressDetailsHelper inProgressDetailsHelper = new InProgressDetailsHelper(view, getContext(), continueBtn, spinnerProvinces, spinnerSymbols, provinceTypes, symbols);
+                inProgressDetailsHelper.initLayout(result.getContents());
             }
         });
 
