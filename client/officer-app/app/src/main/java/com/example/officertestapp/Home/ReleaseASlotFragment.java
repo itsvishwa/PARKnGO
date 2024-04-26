@@ -30,7 +30,6 @@ public class ReleaseASlotFragment extends Fragment {
     private Spinner spinnerProvinces;
     private Spinner spinnerSymbols;
     private Button continueBtn;
-    private Bundle searchSessionDataBundle;
     String sessionID;
     ArrayList<String> provinceTypes;
     ArrayList<String> symbols;
@@ -94,29 +93,10 @@ public class ReleaseASlotFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("SearchButtonClicked", "Search button is clicked");
+                SearchSessionHelper searchSessionHelper = new SearchSessionHelper(view, getContext(), requireActivity().getSupportFragmentManager(), continueBtn);
+                searchSessionHelper.searchSession();
+
                 new SearchSessionHelper(view, getContext(), requireActivity().getSupportFragmentManager(), continueBtn);
-            }
-        });
-
-        // Handle continue button click
-        continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Check if the button is enabled before processing
-                if (continueBtn.isEnabled()) {
-                    // Continue button is enabled
-
-                    // Check if the Bundle is not empty
-                    if (!searchSessionDataBundle.isEmpty()) {
-                        // Navigate to ReleaseASlot02Fragment with the Bundle
-                        ReleaseASlotConfirmationFragment releaseASlotConfirmationFragment = new ReleaseASlotConfirmationFragment();
-                        ((MainActivity) requireActivity()).replaceFragment(releaseASlotConfirmationFragment, searchSessionDataBundle, getView());
-                    }
-
-                } else {
-                    // Continue button is disabled, show a message indicating it's disabled
-                    Toast.makeText(getContext(), "Continue button is disabled", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -125,14 +105,12 @@ public class ReleaseASlotFragment extends Fragment {
 
     private void initializeSpinners() {
         // Province spinner
-        ArrayList<String> provinceTypes = new ArrayList<>(Arrays.asList("WP", "SP", "CP", "EP", "NC", "NP", "NW", "SG", "UP", "NONE"));
         ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
         provinceAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerProvinces.setAdapter(provinceAdapter);
 
 
         // Symbols spinner
-
         ArrayAdapter<String> symbolsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, symbols);
         symbolsAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerSymbols.setAdapter(symbolsAdapter);
@@ -142,7 +120,6 @@ public class ReleaseASlotFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -154,7 +131,6 @@ public class ReleaseASlotFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -163,10 +139,4 @@ public class ReleaseASlotFragment extends Fragment {
         });
 
     }
-
-    // Method to set the session data bundle
-    public void setSearchSessionDataBundle(Bundle bundle) {
-        searchSessionDataBundle = bundle;
-    }
-
 }
