@@ -25,8 +25,8 @@ class Admins extends Controller
     $totalPendingApplications = $this->adminModel->getPendingCompanyApplicationsWithCount()['totalPendingApplications'];
     $totalSuspendApplications = $this->adminModel->getSuspendCompanyCount()['totalSuspendApplications'];
     $reviews = $this->adminModel->getLatestReviews();
-    $parkingSessions = $this->adminModel->parkingSession($_SESSION['user_id']);
-    $revenues = $this->adminModel->getRevenue($_SESSION['user_id']);
+    $parkingSessions = $this->adminModel->parkingSession();
+    $revenues = $this->adminModel->getRevenue();
 
     foreach ($revenues as &$revenue) {
       $revenue->time_stamp = date('Y-m-d H:i:s', $revenue->time_stamp);
@@ -284,7 +284,6 @@ class Admins extends Controller
     } else {
       redirect('admins/companiesView');
     }
-
   }
 
   public function downloadDocument($documentId)
@@ -310,7 +309,6 @@ class Admins extends Controller
     if ($updateResult) {
       // Return JSON response with success message and redirect URL
       echo json_encode(['success' => true, 'redirect' => 'requestsView']);
-
     } else {
       // Return JSON response with error message
       echo json_encode(['success' => false, 'error' => 'Failed to approve application']);

@@ -243,9 +243,6 @@
       <script>
         document.addEventListener('DOMContentLoaded', function() {
           const popupContentBody = document.querySelector('.content-body');
-
-          console.log(<?php echo json_encode($data['reviews']); ?>);
-
           const reviewsData = <?php echo json_encode($data['reviews']); ?>;
 
           function generateStars(rating) {
@@ -296,6 +293,7 @@
       <!-- bar graph for number of parking sessions -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
+          // Replace this with your actual server response data
           const responseData = <?php echo json_encode($data['parkingSessions']); ?>;
 
           // Extract dates and values from the response
@@ -303,7 +301,12 @@
           const values = Object.values(responseData);
 
           // Format dates to show only the day
-          const formattedDates = dates.map(date => new Date(date).getDate());
+          const formattedDates = dates.map(date => {
+            const formattedDate = new Date(date);
+            const month = formattedDate.getMonth() + 1; // Months are zero-based
+            const day = formattedDate.getDate();
+            return `${month}-${day}`;
+          });
 
           // Create a bar chart
           const ctx = document.getElementById('parkingSessions').getContext('2d');
@@ -334,7 +337,7 @@
       <!-- bar graph for revenue -->
       <script>
         document.addEventListener('DOMContentLoaded', function() {
-
+          // Replace the data variable with your actual data
           const rawData = <?php echo json_encode($data['revenues']); ?>;
 
           // Convert raw data to an array of objects
@@ -347,7 +350,12 @@
           const dates = data.map(entry => entry.date);
           const values = data.map(entry => entry.value);
 
-          const formattedDates = dates.map(date => new Date(date).getDate());
+          const formattedDates = dates.map(date => {
+            const formattedDate = new Date(date);
+            const month = formattedDate.getMonth() + 1; // Months are zero-based
+            const day = formattedDate.getDate();
+            return `${month}-${day}`;
+          });
 
           // Create a bar chart
           const ctx = document.getElementById('revenue').getContext('2d');
