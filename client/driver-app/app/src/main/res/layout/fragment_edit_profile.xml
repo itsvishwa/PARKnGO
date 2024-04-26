@@ -209,7 +209,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dp"
-                        android:onClick="edit_profile_frag_change_mobile_number_btn_handler"
                         android:text="Change Mobile Number"
                         app:cornerRadius="50dp"
                         app:icon="@drawable/baseline_edit_24"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.parkngo.R;
+import com.example.parkngo.helpers.ParkngoStorage;
 import com.example.parkngo.session.helpers.PaymentOnGoingModel;
 import com.example.parkngo.session.helpers.PaymentOngoingHelper;
 import com.example.parkngo.session.helpers.SessionOnGoingModel;
@@ -51,35 +53,43 @@ public class SessionPaymentFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ParkngoStorage parkngoStorage = new ParkngoStorage(requireContext());
+                String fName = parkngoStorage.getData("firstName");
+                String lName = parkngoStorage.getData("lastName");
+                String mobileNumber = parkngoStorage.getData("mobileNumber");
+
                 InitRequest req = new InitRequest();
-                req.setMerchantId("1224851");
-                req.setCurrency("LKR");
-                req.setAmount(250);
-                req.setOrderId(paymentOnGoingModel.getPaymentID());
-                req.setItemsDescription(paymentOnGoingModel.getParking_name());
-                req.getCustomer().setFirstName("Saman");
-                req.getCustomer().setLastName("Pereira");
-                req.getCustomer().setEmail("NA");
-                req.getCustomer().setPhone("+94771234567");
-                req.getCustomer().getAddress().setAddress("NA");
-                req.getCustomer().getAddress().setCity("NA");
+                req.setMerchantId("1224851");       // Merchant ID
+                req.setCurrency("LKR");             // Currency code LKR/USD/GBP/EUR/AUD
+                req.setAmount(Double.parseDouble(paymentOnGoingModel.getAmount()));             // Final Amount to be charged
+                req.setOrderId(paymentOnGoingModel.getPaymentID());        // Unique Reference ID
+                req.setItemsDescription(paymentOnGoingModel.getParking_name());  // Item description title
+                req.setCustom1("Parking session ended at : " + paymentOnGoingModel.getEnd_time());
+                req.setCustom2("Parking officer" + paymentOnGoingModel.getOfficer_name());
+                req.getCustomer().setFirstName(fName);
+                req.getCustomer().setLastName(lName);
+                req.getCustomer().setEmail("N/A");
+                req.getCustomer().setPhone("+94" + mobileNumber);
+                req.getCustomer().getAddress().setAddress("N/A");
+                req.getCustomer().getAddress().setCity("N/A");
                 req.getCustomer().getAddress().setCountry("Sri Lanka");
 
                 //Optional Params
-                req.setNotifyUrl("https://parkngo.azurewebsites.net/?url=payment/notify");
+                req.setNotifyUrl("http://parkngo.tech/mobile/payment/notify");
 
-                Intent intent = new Intent(getContext(), PHMainActivity.class);
+                Intent intent = new Intent(requireContext(), PHMainActivity.class);
                 intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
                 PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
-                startActivityForResult(intent, PAYHERE_REQUEST); //unique request ID e.g. "11001"
+                startActivityForResult(intent, PAYHERE_REQUEST);
             }
         });
-
+//        4916217501611292
         return paymentOnGoingView;
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PAYHERE_REQUEST && data != null && data.hasExtra(PHConstants.INTENT_EXTRA_RESULT)) {
             PHResponse<StatusResponse> response = (PHResponse<StatusResponse>) data.getSerializableExtra(PHConstants.INTENT_EXTRA_RESULT);
@@ -92,6 +102,7 @@ public class SessionPaymentFragment extends Fragment {
                         msg = "Result:" + response.toString();
                 else
                     msg = "Result: no response";
+                Log.d("payhere:", msg);
                 Toast.makeText(requireContext(), "msg 01: " +  msg, Toast.LENGTH_LONG).show();
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 if (response != null)
