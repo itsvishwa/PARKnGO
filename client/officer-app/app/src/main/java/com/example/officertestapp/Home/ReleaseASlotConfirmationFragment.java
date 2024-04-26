@@ -64,11 +64,10 @@ public class ReleaseASlotConfirmationFragment extends Fragment {
                 Bundle args = getArguments();
                 if (args != null) {
                     String sessionId = args.getString("sessionId");
-                    String timestamp = args.getString("endTimeStamp");
 
                     // Invoke the ReleaseASlotHelper helper to release the slot
                     ReleaseASlotConfirmationHelper releaseASlotConfirmationHelper = new ReleaseASlotConfirmationHelper(view, requireContext(), getFragmentManager());
-                    releaseASlotConfirmationHelper.releaseSlot(sessionId, timestamp);
+                    releaseASlotConfirmationHelper.releaseSlot(sessionId);
 
                 } else {
                     Log.e("ReleaseASlotConfirmationFragment", "Arguments (Bundle) is null");

@@ -95,7 +95,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="frag_profile_payment_history_back_btn_handler"
+                    android:onClick="backBtnHandler"
                     android:background="@drawable/notification_icon_background"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"

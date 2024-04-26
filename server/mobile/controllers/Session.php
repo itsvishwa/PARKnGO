@@ -33,7 +33,7 @@ class Session extends Controller
             $session_data = [
                 "vehicle_number" => trim($_POST["vehicle_number"]),
                 "vehicle_type" => trim($_POST["vehicle_type"]),
-                "start_time" => trim($_POST["start_time"]),
+                "start_time" => time(),
                 "officer_id" => $token_data["user_id"],
                 "parking_id" => trim($_POST["parking_id"]),
                 "driver_id" => trim($_POST["driver_id"])
@@ -205,6 +205,10 @@ class Session extends Controller
 
                                 $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
 
+                                $formattedSDateTime = $this->format_time($start_timestamp);
+                                $formatted_sTime = $formattedSDateTime[0];
+                                $formatted_sDate = $formattedSDateTime[1];
+
 
                                 $result = [
                                     "response_code" => "800",
@@ -212,6 +216,8 @@ class Session extends Controller
                                     "session_id" => $encrypted_session_id,
                                     "end_Time_Stamp" => $end_timestamp,
                                     "start_Time_Stamp" => $start_timestamp,
+                                    "formatted_SDate" => $formatted_sDate,
+                                    "formatted_STime" => $formatted_sTime,
                                     "duration" => $formatted_duration,
                                     "amount" => $formatted_amount,
                                     "vehicle_Number" => $vehicle_number,
@@ -328,6 +334,10 @@ class Session extends Controller
 
                             $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
 
+                            $formattedSDateTime = $this->format_time($start_timestamp);
+                            $formatted_sTime = $formattedSDateTime[0];
+                            $formatted_sDate = $formattedSDateTime[1];
+
 
                             $result = [
                                 "response_code" => "800",
@@ -335,6 +345,8 @@ class Session extends Controller
                                 "session_id" => $encrypted_session_id,
                                 "end_Time_Stamp" => $end_timestamp,
                                 "start_Time_Stamp" => $start_timestamp,
+                                "formatted_SDate" => $formatted_sDate,
+                                "formatted_STime" => $formatted_sTime,
                                 "duration" => $formatted_duration,
                                 "amount" => $formatted_amount,
                                 "vehicle_Number" => $open_session_data->vehicle_number,
@@ -435,7 +447,7 @@ class Session extends Controller
 
                             $this->send_json_404($result);
                         } else {
-                            $end_timestamp = trim($_POST["timestamp"]);
+                            $end_timestamp = time();
 
                             //end time is update in the parking_session
                             $this->session_model->end_session($session_id, $end_timestamp);
@@ -563,6 +575,13 @@ class Session extends Controller
 
                     $encrypted_payment_id = $this->encrypt_id($payment_id);
 
+                    $formattedSDateTime = $this->format_time($start_timestamp);
+            
+                    $formattedEDateTime = $this->format_time($end_timestamp);
+                
+                    $formatted_SDateTime = implode(" ", $formattedSDateTime);
+                    $formatted_EDateTime = implode(" ", $formattedEDateTime);
+
                     if ($payment_details) {
                         $result = [
                             "response_code" => "800",
@@ -572,6 +591,8 @@ class Session extends Controller
                             "vehicle_type" => $uppercase_vehicle_type,
                             "start_time" => $start_timestamp,
                             "end_time" => $end_timestamp,
+                            "formatted_start_time" => $formatted_SDateTime,
+                            "formatted_end_time" => $formatted_EDateTime,
                             "time_went" => $formatted_duration,
                             "amount" => $formatted_amount
                         ];
@@ -718,6 +739,13 @@ class Session extends Controller
                         $amount = $this->calculate_amount($start_timestamp, $current_timestamp, $hourly_rate);
                         $formatted_amount = 'Rs. ' . number_format($amount, 2);
 
+                        $formattedSDateTime = $this->format_time($start_timestamp);
+            
+                        $formattedEDateTime = $this->format_time($current_timestamp);
+                
+                        $formatted_SDateTime = implode(" ", $formattedSDateTime);
+                        $formatted_EDateTime = implode(" ", $formattedEDateTime);
+
 
                         if ($force_ended_session_details) {
                             $result = [
@@ -728,6 +756,8 @@ class Session extends Controller
                                 "vehicle_type" => $uppercase_vehicle_type,
                                 "start_time" => $start_timestamp,
                                 "current_time" => $current_timestamp,
+                                "formatted_start_time" => $formatted_SDateTime,
+                                "formatted_end_time" => $formatted_EDateTime,
                                 "time_went" => $formatted_duration,
                                 "amount" => $formatted_amount,
                                 "amount_para" => $amount
@@ -881,7 +911,7 @@ class Session extends Controller
             foreach ($result_data as $data) {
                 $temp_arr = [
                     "_id" => $this->encrypt_id($data->_id),
-                    "session_end_time" => date("h:i A | d/m/y", $data->end_time),
+                    "session_end_time" => implode(" | ", $this->format_time($data->end_time)),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
                 ];
@@ -920,7 +950,7 @@ class Session extends Controller
             foreach ($result_data as $data) {
                 $temp_arr = [
                     "_id" => $this->encrypt_id($data->_id),
-                    "session_start_time" => date("h:i A | d/m/y", $data->start_time),
+                    "session_start_time" => implode(" | ", $this->format_time($data->start_time)),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
                 ];
@@ -966,13 +996,22 @@ class Session extends Controller
                         $session_start_timestamp = $session_data->start_time;
                         $session_force_end_timestamp = $session_data->end_time;
 
+                        $formattedSDateTime = $this->format_time($session_start_timestamp);
+            
+                        $formattedEDateTime = $this->format_time($session_force_end_timestamp);
+                
+                        $formatted_SDateTime = implode(" - ", $formattedSDateTime);
+                        $formatted_EDateTime = implode(" - ", $formattedEDateTime);
+
                         $temp = [
                             "response_code" => "800",
                             "session_id" => $this->encrypt_id($session_data->_id),
                             "vehicle" => $session_data->vehicle_number,
                             "vehicle_type" => $session_data->vehicle_type,
-                            "session_start_date_and_timestamp" => $session_start_timestamp,
-                            "session_force_end_date_and_timestamp" => $session_force_end_timestamp   
+                            "session_start_date_and_timestamp" => implode(" | ", $this->format_time($session_start_timestamp)),
+                            "session_end_date_and_timestamp" => implode(" | ", $this->format_time($session_force_end_timestamp)),
+                            "formatted_SDateTime" => $formatted_SDateTime,
+                            "formatted_EDateTime" => $formatted_EDateTime
                         ];
                         $result_data[] = $temp;
                     }

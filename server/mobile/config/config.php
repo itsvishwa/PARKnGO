@@ -28,3 +28,5 @@ define("TOKEN_KEY", "81g135w");
 
 // Payment secret key
 define("ID_KEY", "1h3sh65");
+
+date_default_timezone_set('Asia/Kolkata');

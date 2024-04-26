@@ -182,7 +182,8 @@ public class QRHelper {
 
 
         }catch (JSONException e){
-            throw new RuntimeException(e);
+            Log.e("JSON Parsing Error", "Error parsing response: " + e.getMessage());
+            Toast.makeText(context, "Error parsing response", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -193,15 +194,21 @@ public class QRHelper {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                String response = jsonResponse.getString("response");
-                if(response.equals("101") || response.equals("204")) // the officer's parking space has been changed
+                JSONObject responseData = jsonResponse.getJSONObject("response");
+
+                // Extract values from the JSON response
+                String responseCode = responseData.getString("response_code");
+                String message = responseData.getString("message");
+
+                if(responseCode.equals("101") || responseCode.equals("204")) // the officer's parking space has been changed
                 {
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     parkngoStorage.clearData();
                     Intent i = new Intent(context, HeroActivity.class);
                     MainActivity mainActivity = (MainActivity) context;
                     mainActivity.logout_immediately();
                 }else{
-                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);

@@ -64,7 +64,7 @@ class QR extends Controller
                 
                 if(!$is_qr_exists) {
                     $result = [
-                        "response_code" => "204",
+                        "response_code" => "801",
                         "message" => "No qr_id found"
                     ];
 
@@ -85,7 +85,7 @@ class QR extends Controller
                     else    // qr expired
                     {
                         $result = [
-                            "response_code" => "204",
+                            "response_code" => "802",
                             "message" => "QR Expired"
                         ];
 

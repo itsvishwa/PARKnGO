@@ -26,6 +26,7 @@ import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.ncorti.slidetoact.SlideToActView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,19 +52,15 @@ public class ProfileFragmentHelper {
         slideToActView.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
             @Override
             public void onSlideComplete(SlideToActView slideToActView) {
-                markDutyOff(currentTimeView.getText().toString(), currentDateView.getText().toString());
+                markDutyOff();
             }
         });
     }
 
 
 
-    private void markDutyOff(String currentTime, String currentDate) {
+    private void markDutyOff() {
         Log.d("ProfileFragment", "Duty Off Button Swiped");
-
-        // Convert current date and time strings to timestamp
-        long timestampLong = DateTimeHelper.getTimestampFromDateTimeString(currentDate, currentTime);
-        String timestamp = String.valueOf(timestampLong);
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -114,11 +111,9 @@ public class ProfileFragmentHelper {
                 String parkingId = parkngoStorage.getData("parkingID");
 
                 params.put("parking_id", parkingId);
-                params.put("time_stamp", timestamp);
 
                 // Log the values
                 Log.d("RequestParameters", "Parking ID: " + parkingId);
-                Log.d("RequestParameters", "Timestamp: " + timestamp);
 
                 return params;
 
@@ -136,14 +131,15 @@ public class ProfileFragmentHelper {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             JSONObject innerResponse = jsonResponse.getJSONObject("response");
+            JSONObject timeDataObj = innerResponse.getJSONObject("time_stamp");
             String responseCode = innerResponse.getString("response_code");
             String message = innerResponse.getString("message");
-            String timestamp = innerResponse.getString("time_stamp");
+            String time = timeDataObj.getString("time");
+            String date = timeDataObj.getString("date");
 
             // Log the parsed response data
             Log.d("Response Code", responseCode);
             Log.d("Message", message);
-            Log.d("timestamp", timestamp);
 
             // Check if the response code is "800"
             if ("800".equals(responseCode)) {
@@ -152,7 +148,9 @@ public class ProfileFragmentHelper {
 
                 // Navigate to MarkAttendanceOffActivity
                 Intent intent = new Intent(context, MarkAttendanceOffActivity.class);
-                intent.putExtra("timestamp", timestamp);
+                intent.putExtra("time", time);
+                intent.putExtra("date", date);
+
                 context.startActivity(intent);
             } else {
                 // Show a toast message with the response message
