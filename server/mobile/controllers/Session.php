@@ -146,7 +146,7 @@ class Session extends Controller
                 // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
-                        "response_code" => "409",
+                        "response_code" => "801",
                         "message" => "No open session found for the vehicle number $vehicle_number"
                     ];
 
@@ -161,7 +161,7 @@ class Session extends Controller
                     if ($parking_session_data === false) // no parking session for a given vehicle number
                     {
                         $result = [
-                            "response_code" => "204",
+                            "response_code" => "802",
                             "message" => "Parking Session Not Found"
                         ];
 
@@ -212,10 +212,10 @@ class Session extends Controller
                                     "session_id" => $encrypted_session_id,
                                     "end_Time_Stamp" => $end_timestamp,
                                     "start_Time_Stamp" => $start_timestamp,
-                                    "Duration" => $formatted_duration,
-                                    "Amount" => $formatted_amount,
-                                    "Vehicle_Number" => $vehicle_number,
-                                    "Vehicle_Type" => $vehicle_type
+                                    "duration" => $formatted_duration,
+                                    "amount" => $formatted_amount,
+                                    "vehicle_Number" => $vehicle_number,
+                                    "vehicle_Type" => $vehicle_type
                                 ];
 
                                 $this->send_json_200($result);
@@ -223,7 +223,7 @@ class Session extends Controller
 
                         } else {
                             $result = [
-                                "response_code" => "204",
+                                "response_code" => "803",
                                 "message" => "Searched Parking Session is not belongs to your parking"
                             ];
                             $this->send_json_404($result);
