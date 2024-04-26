@@ -5,7 +5,7 @@
   .menu {
     list-style-type: none;
     padding: 0;
-    margin-top: 10px;
+    margin-top: -50px;
   }
 
   .menu li {
@@ -28,7 +28,6 @@
     width: 25px;
     height: 25px;
   }
-
 
   .r-menu-logo {
 
@@ -61,16 +60,14 @@
   }
   
   .card-section1 {
-    flex-wrap: wrap; /********* Allow items to wrap to the next line */
+    flex-wrap: wrap; 
     display: flex;
     justify-content: space-between;
     padding-left: 150px;
     margin-top: 20px;
     margin-left: 25px;
     width: 81%;
-    
-    /*height: 200psx;*/
-    
+        
   }
 
   .card-section2 {
@@ -97,8 +94,7 @@
   }
   
   .b-card {
-    
-    
+       
     margin-top: 1px;
     margin-left: 25px;
     padding: 25px;
@@ -124,30 +120,25 @@
   
   .b-card-content p {
     margin-top:-12px;
-    white-space: nowrap; /* Prevents wrapping */
-    overflow: hidden; /* Hides overflow */
-    text-overflow: ellipsis; /* Displays an ellipsis (...) to indicate overflow */
-   /* margin: 0; /* Removes default margin */ 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
     font-size: 1.0rem;
     font-weight: 415;
   }
 
   .b-card1{
     position: relative;
-    background-color: #FFFFFF;
-    /*margin-block-start: 1px;*/
+    background-color: #fffbf4;
     margin-left :-147px;
     padding: 45px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     align-items: center;
-   /* width: 60%;*/
     height:150px;
     margin-bottom: 20px;
-
-
-    width: calc(50% - 25px); /* Set width to 50% minus some margin */
-    max-width: calc(50% - 25px); /* Set max-width for responsiveness */
+    width: calc(50% - 25px);
+    max-width: calc(50% - 25px); 
    
   }
 
@@ -164,7 +155,7 @@
 
   .b-card2{
     position: relative;
-    background-color: #FFFFFF;
+    background-color: #FFFBF4;
     margin-block-start: 1px;
     margin-left: 30px;
     padding: 75px;
@@ -172,8 +163,7 @@
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     align-items: center;
     width: 90%;
-    height:95px;
-    
+    height:95px;    
   }
 
   .b-card2-content {
@@ -184,32 +174,32 @@
 
   .company-card2-content {
     margin-top: -1px;
-    margin-left: 0px; 
+    margin-left: -35px; 
     padding:1px; 
     font-weight: 700;
     
   }
 
   .company-card3-content {
-    margin-top: -5px;
-    margin-left: 0px; 
+    margin-top: 1px;
+    margin-left: -35px; 
     padding:1px; 
     font-weight: 450;
     font-size: 0.8rem;  
   }
 
   .company-icon {
-    background-color: #FFFFFF52;
     margin-top: -30px;
     margin-left: -40px;
     height:40px;
     width:40px;
     padding: 10px;
     border-radius: 10px;
-}
+  }
 .company-content {
   margin-left: 4px;
-}
+ }
+
 .company-card2-icon {
   margin-top: -58px;
   margin-left: 40px;
@@ -235,7 +225,7 @@
 }
 
 .location-card2-content {
-  margin-top: -1px;
+  margin-top: -5px;
   margin-left: -10px; 
   padding:1px; 
   font-weight: 450;
@@ -253,10 +243,8 @@
 .park-icon {
 
   margin-top :-18px; 
- /* margin-bottom: -50px;*/
-  margin-left: -10px;
+  margin-left: -25px;
   left:96px;
-  /*padding: 10px;*/
   border-radius: 50%;
   width: 25px;
   height: 25px;
@@ -289,14 +277,9 @@
 }
 
 .park-card1-content {
- /* display: flex;*/
- /* align-items: center; */
   text-align: center;
   justify-content: center;
-
-  margin-top: 5px;
-  
-  /*margin-bottom: 2px;*/
+  margin-top: -5px;
   margin-left: 1.5px; 
   padding:3px; 
   font-weight: 550;
@@ -304,7 +287,7 @@
 }
 
 .mail-card2-content {
-  margin-top: -5px;
+  margin-top: -7px;
   margin-left: -9px; 
   padding:1px; 
   font-weight: 450;
@@ -337,31 +320,43 @@
 .b-view-more{
    
   position: absolute;
-  background-color:  #363636;
-  bottom: 0;
-  left: 0;
+  background-color: #FFFBF4;
+  bottom: 10px;
+  left: 20px;
   right: 0;
-  border-radius:0px 0px 0px 10px;
+  border-radius:20px 20px 20px 20px;
   height: 40px;
-  width: 65%;
+  width: 54%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  outline: none;
+  border: none;
+}
+
+.b-view-more:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .b-delete-more{
    
   position: absolute;
-  background-color:  #FF4545;
-  bottom: 0;
-  left: 310px;
+  background-color: #FFFBF4;
+  bottom: 10px;
+  left: 450px;
   right: 0;
-  border-radius:0px 0px 10px 0px;
+  border-radius:20px 20px 20px 20px;
   height: 40px;
-  width: 35%;
+  width: 27%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  outline: none;
+  border: none;
 }
-
+.b-delete-more:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
 .b-view-more-card2-content {
   margin-top: 4px;
-  margin-left: -25px; 
+  margin-left: 35px; 
   padding:1px; 
   font-weight: 420;
   font-size: 0.9rem;
@@ -369,8 +364,8 @@
 }
 
 .b-delete-more-card2-content {
-  margin-top: 4px;
-  margin-left: -25px; 
+  margin-top: 2px;
+  margin-left: 25px; 
   padding:1px; 
   font-weight: 420;
   font-size: 0.9rem;
@@ -390,7 +385,6 @@
   bottom: 4px;
   left:507px;
   top: 20px;
-  /*left:42px;*/
   margin-top:-25px;
   margin-left:-500px;
   padding: 10px;
@@ -405,7 +399,6 @@
   bottom: 4px;
   left:507px;
   top: 23px;
-  /*left:42px;*/
   margin-top:-25px;
   margin-left:-500px;
   padding: 10px;
@@ -501,7 +494,6 @@
     }
   }
 
-
   .parking-ofi-card2-icon {
     margin-top: 5px;
     margin-left: 225px;
@@ -511,14 +503,11 @@
     width: 120%;
   }
   
-
   .parking-ofi-icon {
 
     margin-top :-18px; 
-   /* margin-bottom: -50px;*/
-    margin-left: -10px;
+    margin-left: -25px;
     left:96px;
-    /*padding: 10px;*/
     border-radius: 50%;
     width: 25px;
     height: 25px;
@@ -532,17 +521,18 @@
     font-size: 0.8rem;
   }
 
-/* CSS for the search box */
 .b-card-content .search-box {
   display: flex;
   align-items: center;
-  width: 960px; /* Adjust width as needed */
-  height: 25px; /* Adjust height as needed */
-  border: 1px solid #ccc; /* Add border */
-  border-radius: 5px; /* Add border radius */
-  padding: 5px; /* Add padding */
-  margin-left: 20px;
+  width: 90%; 
+  height: 25px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  padding: 8px; 
+  margin-left: 16px;
   color: #ccc;
+  background-color: #FFFBF4;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .b-card-content .search-box input[type="text"] {
@@ -551,14 +541,27 @@
   outline: none;
   font-weight: 415;
   font-size: 0.95rem;
+  background-color: #FFFBF4;
   
-
 }
 
 .b-card-content .search-box svg {
   margin-top: 2px;
-  width: 20px; /* Adjust SVG width */
-  height: 20px; /* Adjust SVG height */
-  margin-left: 10px; /* Adjust margin as needed */
-  stroke: #333; /* Change SVG color */
+  width: 20px; 
+  height: 20px; 
+  margin-left: 10px; 
+  stroke: #333; 
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.bg-black-1 {
+  background-color: #7F7D7A;
+  
+}
+
+.material-symbols-outlined {
+  opacity: 0.5; 
 }

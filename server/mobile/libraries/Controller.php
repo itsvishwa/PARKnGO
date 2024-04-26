@@ -15,6 +15,7 @@ class Controller
                 return new $model();
         }
 
+
         // sucess response
         public function send_json_200($msg)
         {
@@ -23,6 +24,7 @@ class Controller
                 header('Content-Type: application/json');
                 echo $response;
         }
+
 
         // bad request response
         public function send_json_400($msg)
@@ -88,7 +90,6 @@ class Controller
 
                 return $token;
         }
-
 
 
         // decode a token
@@ -235,6 +236,7 @@ class Controller
                 return $url_safe_encrypted_id;
         }
 
+
         // return the decrypted data when pass the encoded string
         public function decrypt_id($url_safe_encrypted_id)
         {
@@ -284,6 +286,7 @@ class Controller
 
                 return $url_safe_encrypted_session_id;
         }
+
 
         public function decrypt_session_id($url_safe_encrypted_session_id)
         {
@@ -349,6 +352,7 @@ class Controller
                 $result = [$time, $date];
                 return $result;
         }
+
 
         // Convert the vehicle type to its Category
         public function convert_to_vehicle_category($vehicle_type)
