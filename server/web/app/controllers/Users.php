@@ -216,6 +216,7 @@ class Users extends Controller
   public function forgotPasswordView()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
       function send_password_reset_email($email, $token)
@@ -284,6 +285,7 @@ class Users extends Controller
           }
         } else {
           $data['email_err'] = 'No user found';
+          $this->view('ForgotPasswordView', $data);
         }
       }
     } else {
