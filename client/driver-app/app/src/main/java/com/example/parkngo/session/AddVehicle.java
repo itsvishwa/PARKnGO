@@ -20,15 +20,7 @@ public class AddVehicle extends Fragment {
         View addVehicleView = inflater.inflate(R.layout.fragment_add_vehicle, container, false);
 
         AddVehicleHelper addVehicleHelper = new AddVehicleHelper(addVehicleView, getContext(),requireActivity().getSupportFragmentManager());
-
-        // initialize spinners
-        addVehicleHelper.initSpinners();
-
-        // onclick listeners...............................
-        addVehicleHelper.initVehicleProvinceSpinnerBtnListener();
-        addVehicleHelper.initVehicleTypeSpinnerBtnListener();
-        addVehicleHelper.initAddVehicleBtnListener();
-        // onclick listeners...............................
+        addVehicleHelper.init();
 
         return addVehicleView;
     }

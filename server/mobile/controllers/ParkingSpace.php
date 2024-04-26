@@ -5,100 +5,131 @@ class ParkingSpace extends Controller
 
     private $parking_space_model;
     private $review_model;
-    private $driver_model;
 
     public function __construct()
     {
         $this->parking_space_model = $this->model("ParkingSpaceModel");
         $this->review_model = $this->model("ReviewModel");
-        $this->driver_model = $this->model("DriverModel");
     }
 
 
-    // driver mob - show only available parking spaces related to the given vehicle type
-    public function view_available($vehicle_type, $latitude, $longitude)
+    // driver mobile - show only available parking spaces related to the given vehicle type
+    public function view_available($vehicle_type, $latitude, $longitude, $page_number)
     {
-        $result = $this->parking_space_model->get_available_parking_spaces($this->convert_to_vehicle_category($vehicle_type));
 
-        if ($result === false) // no open parking spaces available for selected vehicle type
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_IT");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("ERR_TNF");
+        } else // token is valid
         {
-            $this->send_json_400("PS_NOPS");
-        } else // there are open parking spaces
-        {
-            $spaces_data = []; // final array to send as a response
+            $result = $this->parking_space_model->get_available_parking_spaces($this->convert_to_vehicle_category($vehicle_type), $page_number);
+            $is_next = true;
+            if ($result === false) // no open parking spaces available for selected vehicle type
+            {
+                $this->send_json_400("PS_NOPS");
+            } else // there are open parking spaces
+            {
+                if (count($result) < 6) {
+                    $is_next = false;
+                } else {
+                    array_pop($result);
+                }
+                $spaces_data = []; // final array to send as a response
 
-            foreach ($result as $space_data) {
-                $temp = [
-                    "_id" => $space_data->_id,
-                    "name" => $space_data->name,
-                    "address" => $space_data->address,
-                    "latitude" => $space_data->latitude,
-                    "longitude" => $space_data->longitude,
-                    "is_public" => $space_data->is_public,
-                    "free_slots" => $space_data->free_slots,
-                    "total_slots" => $space_data->total_slots,
-                    "rate" => $space_data->rate,
-                    "avg_star_count" => $space_data->avg_star_count,
-                    "total_review_count" => $space_data->total_review_count
-                ];
+                foreach ($result as $space_data) {
+                    $temp = [
+                        "_id" => $space_data->_id,
+                        "name" => $space_data->name,
+                        "address" => $space_data->address,
+                        "latitude" => $space_data->latitude,
+                        "longitude" => $space_data->longitude,
+                        "is_public" => $space_data->is_public,
+                        "free_slots" => $space_data->free_slots,
+                        "total_slots" => $space_data->total_slots,
+                        "rate" => $space_data->rate,
+                        "avg_star_count" => $space_data->avg_star_count,
+                        "total_review_count" => $space_data->total_review_count
+                    ];
 
-                $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
+                    $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
+                    if ($temp["distance"] === -1) {
+                        $temp["distance"] = 999;
+                    }
+                    $spaces_data["data"][] = $temp; // add temp assosiative array to spaces_data[]
+                }
 
-                $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+                if ($is_next === false) {
+                    $spaces_data["is_next_available"] = "0";
+                } else {
+                    $spaces_data["is_next_available"] = "1";
+                }
+
+                // sort ASC order of distances
+                usort($spaces_data["data"], function ($a, $b) {
+                    return $a['distance'] <=> $b['distance'];
+                });
+
+                $this->send_json_200($spaces_data);
             }
-
-            // sort ASC order of distances
-            usort($spaces_data, function ($a, $b) {
-                return $a['distance'] <=> $b['distance'];
-            });
-
-            $this->send_json_200($spaces_data);
         }
     }
 
 
-    // driver mob - show all parking spaces
+    // driver mobile - show all parking spaces
     public function view_all()
     {
-        $result = $this->parking_space_model->get_all_parking_spaces();
 
-        if ($result === false) // no parking spaces 
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_IT");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("ERR_TNF");
+        } else // token is valid
         {
-            $this->send_json_400("PS_NPS");
-        } else // have parking spaces
-        {
-            $spaces_data = [];
-            $curr_time = time();
-            foreach ($result as $space_data) {
-                $temp = [
-                    "_id" => $space_data->_id,
-                    "name" => $space_data->name,
-                    "address" => $space_data->address,
-                    "is_public" => $space_data->is_public,
-                    "is_closed" => ($space_data->closed_end_time !== NULL && $curr_time < $space_data->closed_end_time) ? "1" : "0",
-                    "avg_star_count" => $space_data->avg_star_count,
-                    "total_review_count" => $space_data->total_review_count
-                ];
 
-                $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+            $result = $this->parking_space_model->get_all_parking_spaces();
 
+            if ($result === false) // no parking spaces 
+            {
+                $this->send_json_400("PS_NPS");
+            } else // have parking spaces
+            {
+                $spaces_data = [];
+                $curr_time = time();
+                foreach ($result as $space_data) {
+                    $temp = [
+                        "_id" => $space_data->_id,
+                        "name" => $space_data->name,
+                        "address" => $space_data->address,
+                        "is_public" => $space_data->is_public,
+                        "is_closed" => ($space_data->closed_end_time !== NULL && $curr_time < $space_data->closed_end_time) ? "1" : "0",
+                        "avg_star_count" => $space_data->avg_star_count,
+                        "total_review_count" => $space_data->total_review_count
+                    ];
+
+                    $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+                }
+
+                $this->send_json_200($spaces_data);
             }
-
-            $this->send_json_200($spaces_data);
         }
     }
 
 
-    // driver mob - show all details of the selected parking space
+    // driver mobile - show all details of the selected parking space
     public function view_one($_id)
     {
 
         $token_data = $this->verify_token_for_drivers();
 
         if ($token_data === 400) {
-            $this->send_json_400("ERR_PS_IT");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("ERR_PS_TNF");
+            $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $parking_space_data = $this->parking_space_model->get_parking_space_details($_id);
@@ -154,7 +185,7 @@ class ParkingSpace extends Controller
                 } else // reviews found
                 {
                     $new_reviews_data = [
-                        "availability" => "AV",
+                        "availability" => "N/A",
                         "data" => []
                     ];
                     $new_user_review_data = [
@@ -174,6 +205,7 @@ class ParkingSpace extends Controller
                                 "content" => $review_data->content,
                             ];
                         } else {
+                            $new_reviews_data["availability"] = "AV";
                             $new_reviews_data["data"][] = [
                                 "name" => $review_data->first_name . " " . $review_data->last_name,
                                 "time_stamp" => implode(" | ", $this->format_time($review_data->time_stamp)),
@@ -193,39 +225,149 @@ class ParkingSpace extends Controller
     }
 
 
-    // driver mob - show all available parking spaces respect to the given vehicle type and given keyword
-    public function search_available($vehicle_type, $keyword, $latitude, $longitude)
+    // driver mobile - show all available parking spaces respect to the given vehicle type and given keyword
+    public function search_available($vehicle_type, $keyword, $latitude, $longitude, $page_number)
     {
-        $result = $this->parking_space_model->get_available_parking_spaces_by_search($this->convert_to_vehicle_category($vehicle_type), $keyword);
 
-        if ($result === false)  // no open parking spaces available for selected vehicle type 
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_IT");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("ERR_TNF");
+        } else // token is valid
         {
-            $this->send_json_400("PS_NOPS");
-        } else // there are open parking spaces
-        {
-            $spaces_data = []; // final array to send as a response
+            $keyword = str_replace("_", " ", $keyword);
+            $result = $this->parking_space_model->get_available_parking_spaces_by_search($this->convert_to_vehicle_category($vehicle_type), $keyword, $page_number);
+            $is_next = true;
+            if ($result === false)  // no open parking spaces available for selected vehicle type 
+            {
+                $this->send_json_400("PS_NOPS");
+            } else // there are open parking spaces
+            {
 
-            foreach ($result as $space_data) {
-                $temp = [
-                    "_id" => $space_data->_id,
-                    "name" => $space_data->name,
-                    "address" => $space_data->address,
-                    "latitude" => $space_data->latitude,
-                    "longitude" => $space_data->longitude,
-                    "is_public" => $space_data->is_public,
-                    "free_slots" => $space_data->free_slots,
-                    "total_slots" => $space_data->total_slots,
-                    "rate" => $space_data->rate,
-                    "avg_star_count" => $space_data->avg_star_count,
-                    "total_review_count" => $space_data->total_review_count
-                ];
+                if (count($result) < 6) {
+                    $is_next = false;
+                } else {
+                    array_pop($result);
+                }
 
-                $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
+                $spaces_data = []; // final array to send as a response
 
-                $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+                foreach ($result as $space_data) {
+                    $temp = [
+                        "_id" => $space_data->_id,
+                        "name" => $space_data->name,
+                        "address" => $space_data->address,
+                        "latitude" => $space_data->latitude,
+                        "longitude" => $space_data->longitude,
+                        "is_public" => $space_data->is_public,
+                        "free_slots" => $space_data->free_slots,
+                        "total_slots" => $space_data->total_slots,
+                        "rate" => $space_data->rate,
+                        "avg_star_count" => $space_data->avg_star_count,
+                        "total_review_count" => $space_data->total_review_count
+                    ];
+
+                    $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
+
+                    $spaces_data["data"][] = $temp; // add temp assosiative array to spaces_data[]
+                }
+                if ($is_next === false) {
+                    $spaces_data["is_next_available"] = "0";
+                } else {
+                    $spaces_data["is_next_available"] = "1";
+                }
+
+                // sort ASC order of distances
+                usort($spaces_data["data"], function ($a, $b) {
+                    return $a['distance'] <=> $b['distance'];
+                });
+
+                $this->send_json_200($spaces_data);
             }
+        }
+    }
 
-            $this->send_json_200($spaces_data);
+
+    // driver mobile - show all parking spaces respect to the given vehicle type and given keyword
+    public function search_all($keyword)
+    {
+
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_IT");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("ERR_TNF");
+        } else // token is valid
+        {
+            $keyword = str_replace("_", " ", $keyword);
+            $result = $this->parking_space_model->get_all_parking_spaces_by_search($keyword);
+
+            if ($result === false) // no parking spaces 
+            {
+                $this->send_json_400("PS_NPS");
+            } else // have parking spaces
+            {
+                $spaces_data = [];
+                $curr_time = time();
+                foreach ($result as $space_data) {
+                    $temp = [
+                        "_id" => $space_data->_id,
+                        "name" => $space_data->name,
+                        "address" => $space_data->address,
+                        "is_public" => $space_data->is_public,
+                        "is_closed" => ($space_data->closed_end_time !== NULL && $curr_time < $space_data->closed_end_time) ? "1" : "0",
+                        "avg_star_count" => $space_data->avg_star_count,
+                        "total_review_count" => $space_data->total_review_count
+                    ];
+
+                    $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+                }
+
+                $this->send_json_200($spaces_data);
+            }
+        }
+    }
+
+
+    // driver mobile - get data of all parking space for a given vehicle - for the map
+    public function get_map_data($vehicle_type)
+    {
+        $token_data = $this->verify_token_for_drivers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("ERR_IT");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("ERR_TNF");
+        } else // token is valid
+        {
+            $result = $this->parking_space_model->get_all_parking_spaces_for_vehicle($this->convert_to_vehicle_category($vehicle_type));
+            if ($result === false)  // no open parking spaces available for selected vehicle type 
+            {
+                $this->send_json_400("PS_NOPS");
+            } else // there are open parking spaces
+            {
+                $spaces_data = []; // final array to send as a response
+
+                foreach ($result as $space_data) {
+                    $temp = [
+                        "_id" => $space_data->_id,
+                        "name" => $space_data->name,
+                        "address" => $space_data->address,
+                        "latitude" => $space_data->latitude,
+                        "longitude" => $space_data->longitude,
+                        "is_public" => $space_data->is_public,
+                        "free_slots" => $space_data->free_slots,
+                        "total_slots" => $space_data->total_slots,
+                        "rate" => $space_data->rate
+                    ];
+                    $spaces_data[] = $temp; // add temp assosiative array to spaces_data[]
+                }
+
+                $this->send_json_200($spaces_data);
+            }
         }
     }
 
@@ -244,8 +386,12 @@ class ParkingSpace extends Controller
         // Decode JSON response
         $decoded_response = json_decode($response, true);
 
+
         // distance in meters
-        $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        $distance = -1000; // when google api can't find a root
+        if (isset($decoded_response["rows"][0]["elements"][0]["distance"])) {
+            $distance = $decoded_response["rows"][0]["elements"][0]["distance"]["value"];
+        }
 
         return $distance / 1000;
     }
