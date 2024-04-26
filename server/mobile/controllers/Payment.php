@@ -157,7 +157,7 @@ class Payment extends Controller
 
                         $payment_data = [
                             "payment_id" => $payment_id,
-                            "payment_method" => "Cash",
+                            "payment_method" => "cash",
                             "time_stamp" => $time_stamp
                         ];
 
