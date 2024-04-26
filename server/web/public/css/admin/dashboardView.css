@@ -1,7 +1,7 @@
 .menu {
   list-style-type: none;
   padding: 0;
-  margin-top: 10px;
+  margin-top: -50px;
 }
 
 .menu li {
@@ -203,39 +203,37 @@
   margin-top: -20px;
 }
 
-/* Targeting the driver name */
 .dashboard-driver-name {
   margin-left: 20px;
-  font-size: 0.9em; /* Adjust the font size as desired */
+  font-size: 0.9em; 
   font-weight: bold;
   display: inline-block;
 }
 
-/* Targeting the driver rating container */
 .driver-rating {
-  display: inline-block; /* Ensure inline display for alignment */
-  vertical-align: middle; /* Align the container vertically */
+  display: inline-block; 
+  vertical-align: middle; 
 }
 
-/* Targeting the parking name */
+
 .review-parking-name {
-  font-size: 0.9em; /* Adjust the font size as desired */
+  font-size: 0.9em; 
   font-weight: bold;
   margin-left: 20px;
 }
 
-/* Targeting the star rating */
+
 .star-rating {
-  width: 90px; /* Adjust the width of the stars as desired */
-  height: 20px; /* Adjust the height of the stars as desired */
-  display: flex; /* Ensure inline display for alignment */
-  vertical-align: middle; /* Align the stars vertically */
+  width: 90px; 
+  height: 20px; 
+  display: flex; 
+  vertical-align: middle; 
   gap: 3px;
   margin-right: 10px;
 }
 .review-content {
   margin-left: 20px;
-  font-size: 13px; /* Adjust the font size as desired */
+  font-size: 13px;
 }
 
 .custom-line {
@@ -337,8 +335,6 @@
   margin-top: 10px;
 }
 
-/*********************************/
-
 .review-card {
   display: flex;
   flex-direction: column;
@@ -350,4 +346,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.ml-5 {
+  margin-left: 5px;
 }

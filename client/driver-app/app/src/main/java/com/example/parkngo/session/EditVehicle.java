@@ -26,22 +26,13 @@ public class EditVehicle extends Fragment {
         // Retrieve data from arguments
         if (getArguments() != null) {
             selected = getArguments().getInt("selectedVehicle", -1);
-            vehicleName = getArguments().getString("vehicleName", "test");
-            vehicleNumber = getArguments().getString("vehicleNumber", "test");
-            vehicleType = getArguments().getString("vehicleType", "test");
-            // TODO :: has to fix default values
+            vehicleName = getArguments().getString("vehicleName", "");
+            vehicleNumber = getArguments().getString("vehicleNumber", "");
+            vehicleType = getArguments().getString("vehicleType", "");
         }
 
         EditVehicleHelper editVehicleHelper = new EditVehicleHelper(selected, vehicleName, vehicleNumber, vehicleType, editVehicleView, getContext(), requireActivity().getSupportFragmentManager());
-        editVehicleHelper.initLayout();
-
-        // btn listeners ...............................................
-        editVehicleHelper.initVehicleProvinceSpinnerBtnListener();
-        editVehicleHelper.initVehicleTypeSpinnerBtnListener();
-        editVehicleHelper.initEditBtnHandler();
-        editVehicleHelper.initDiscardBtnHandler();
-        editVehicleHelper.initDeleteBtnHandler();
-        // btn listeners ...............................................
+        editVehicleHelper.init();
 
         return editVehicleView;
     }

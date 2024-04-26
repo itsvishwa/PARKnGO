@@ -69,26 +69,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!--            2nd segment here -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8">
-
-                    <ImageView
-                        android:id="@+id/appbar_icon_home_act"
-                        android:layout_width="51dp"
-                        android:layout_height="51dp"
-                        android:layout_marginTop="27dp"
-                        android:background="@drawable/appbar_icon_bg"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/baseline_notifications_none_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/backgroundColor" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
@@ -206,11 +186,11 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/session_on_going_parking_name">
+                app:layout_constraintTop_toBottomOf="@+id/session_on_going_parking_rate">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
@@ -337,11 +317,11 @@
                 android:background="@drawable/round_blue_circle"
                 android:padding="10dp"
                 android:text="Rs.100/ 1H"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/session_on_going_parking_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/session_on_going_parking_name" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/session_on_going_parking_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

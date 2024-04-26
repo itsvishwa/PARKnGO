@@ -1,12 +1,19 @@
 package com.example.parkngo.session.helpers;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
@@ -24,6 +31,12 @@ public class SessionOnGoingHelper {
         this.context = context;
         this.sessionOnGoingView = sessionOnGoingView;
         this.sessionOnGoingModel = sessionOnGoingModel;
+    }
+
+    public void init(){
+        initLayout();
+        showQRBtnHandler();
+        forceStopBtnHandler();
     }
 
     public void initLayout(){

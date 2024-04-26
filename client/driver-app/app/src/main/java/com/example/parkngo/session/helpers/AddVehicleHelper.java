@@ -1,6 +1,7 @@
 package com.example.parkngo.session.helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
+import com.example.parkngo.helpers.ErrorFragment;
 import com.example.parkngo.helpers.ParkngoStorage;
 
 import org.json.JSONException;
@@ -34,6 +37,7 @@ public class AddVehicleHelper {
     View addVehicleView;
     Context context;
     String vehicleProvince;
+    String optionalDigit;
     String vehicleType;
     FragmentManager fragmentManager;
 
@@ -43,7 +47,16 @@ public class AddVehicleHelper {
         this.fragmentManager = fragmentManager;
     }
 
-    public void initSpinners(){
+    public void init(){
+        initSpinners();
+        initVehicleProvinceSpinnerBtnListener();
+        initVehicleTypeSpinnerBtnListener();
+        initAddVehicleBtnListener();
+        initOptionalSpinnerBtnListener();
+    }
+
+
+    private void initSpinners(){
         setVehicleProvinceSpinner();
         setVehicleTypeSpinner();
         setVehicleOptionalSpinner();
@@ -61,7 +74,7 @@ public class AddVehicleHelper {
 
     private void setVehicleTypeSpinner(){
         Spinner spinner = addVehicleView.findViewById(R.id.add_vehicle_frag_type_spinner);
-        ArrayList<String> vehicleTypeList = new ArrayList<>(Arrays.asList("Car", "Bike", "3 Wheel", "Van", "Bus"));
+        ArrayList<String> vehicleTypeList = new ArrayList<>(Arrays.asList("Car", "TukTuk", "Bicycle", "Mini Van", "Van", "Lorry", "Mini Bus", "Long Vehicles"));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, vehicleTypeList);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
@@ -85,6 +98,27 @@ public class AddVehicleHelper {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 vehicleProvince = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+    public void initOptionalSpinnerBtnListener(){
+        Spinner spinner = addVehicleView.findViewById(R.id.add_vehicle_frag_optional_spinner); // spinner
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String temp = adapterView.getItemAtPosition(i).toString();
+                if(temp.equals("ශ්\u200Dරී")){
+                    optionalDigit = "SRI";
+                } else if (temp.equals("-")) {
+                    optionalDigit = "DH";
+                } else{
+                    optionalDigit = "NA";
+                }
             }
 
             @Override
@@ -121,7 +155,7 @@ public class AddVehicleHelper {
 
                     // add other views as well
                     String vehicleName = vehicleNameView.getText().toString();
-                    String vehicleNumber = vehicleNumberLettersView.getText().toString() + vehicleNumberDigitsView.getText().toString() + vehicleProvince;
+                    String vehicleNumber = vehicleNumberLettersView.getText().toString() +  "#" + optionalDigit + "#" +  vehicleNumberDigitsView.getText().toString() + "#" + vehicleProvince;
 
                     // sending request
                     sendVehicleAddRequest(vehicleName, vehicleNumber, vehicleType);
@@ -186,7 +220,18 @@ public class AddVehicleHelper {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
+
+                Bundle data = new Bundle();
+
+                    data.putString("MainText1", "Operation Failed");
+                    data.putString("subText1", "Please try again later");
+                    data.putInt("img", R.drawable.not_available);
+                    data.putString("MainText2", "Unknown error occurred! ");
+                    data.putString("subText2", "We sincerely apologize for the inconvenience this has caused.");
+
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new ErrorFragment(), data);
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }

@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/requestsHistoryView.css" />
     <title>Requests History View</title>
-
 </head>
 
 <body>
@@ -69,6 +68,15 @@
                             </a>
                         </li>
 
+                        <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
+
                     </ul>
                 </div>
             </div>
@@ -79,18 +87,14 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
                         <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
                     </svg>
-                    <h3>Requests History</h3>
+                    <h3 class="ml-5">Requests History</h3>
                 </div>
                 <div class="profile">
-                  <!--  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>-->
                     <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
                     <a href="../users/logout" class="logout">Log out</a>
                 </div>
             </div>
             <div class="business">
-
                 <div class="card-section">
 
                     <div class="b-card-content ">
@@ -118,7 +122,6 @@
                                 ?>
                                         <tr>
                                             <td><?php echo $approvedApplication->name; ?></td>
-                                            <!--  <td>Nov 23, 2023 <br> 05:20:32 PM</td> -->
                                             <td>
                                                 <?php
                                                 $timestamp = $approvedApplication->registered_time_stamp;
@@ -131,9 +134,13 @@
                                             <td class="status2-cell">Approved</td>
                                             <td>N/A</td>
                                             <td>
-                                                <span class="material-symbols-outlined">
-                                                    download
-                                                </span>
+                                                <a href="#" class="download-document" data-document-id="<?php echo $approvedApplication->_id; ?>">
+
+                                                    <span class="material-symbols-outlined" style="color: black;">
+                                                        download
+                                                    </span>
+
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php
@@ -144,7 +151,6 @@
                                     ?>
                                         <tr>
                                             <td><?php echo $rejectedApplication->name; ?></td>
-                                            <!--<td>Nov 23, 2023 <br> 05:20:32 PM</td> -->
                                             <td>
                                                 <?php
                                                 $timestamp = $rejectedApplication->registered_time_stamp;
@@ -155,19 +161,19 @@
                                                 ?>
                                             </td>
                                             <td class="status1-cell">Rejected</td>
-                                            <!--<td>Incomplete documentation</td>-->
                                             <td>
                                                 <div class="truncate-text">
                                                     <?php
                                                     $reviewMessage = $rejectedApplication->review_message;
-                                                    $maxLength = 50; // Define the maximum length to display initially
+                                                    $maxLength = 50;
                                                     if (strlen($reviewMessage) > $maxLength) {
-                                                        // If the message length exceeds the maximum length, truncate and show a "Read More" link
-                                                        echo substr($reviewMessage, 0, $maxLength) . '... ';
+
+                                                        echo '<span class="truncated-text">' . substr($reviewMessage, 0, $maxLength) . '... </span>';
                                                         echo '<a href="javascript:void(0);" class="read-more-link">Read More</a>';
                                                         echo '<span class="full-text" style="display: none;">' . $reviewMessage . '</span>';
+                                                        echo '<a href="javascript:void(0);" class="show-less-link" style="display: none;">Show Less</a>';
                                                     } else {
-                                                        // If the message length is within the limit, display the whole message
+
                                                         echo $reviewMessage;
                                                     }
                                                     ?>
@@ -175,9 +181,12 @@
                                             </td>
 
                                             <td>
-                                                <span class="material-symbols-outlined">
-                                                    download
-                                                </span>
+                                                <a href="#" class="download-document" data-document-id="<?php echo $rejectedApplication->_id; ?>">
+                                                    <span class="material-symbols-outlined" style="color: black;">
+                                                        download
+                                                    </span>
+
+                                                </a>
                                             </td>
                                         </tr>
                                 <?php
@@ -202,11 +211,60 @@
             readMoreLinks.forEach(function(link) {
                 link.addEventListener('click', function(event) {
                     event.preventDefault();
+                    const truncatedText = this.previousElementSibling;
                     const fullText = this.nextElementSibling;
-                    fullText.style.display = 'inline'; // Show the full text when clicked
-                    this.style.display = 'none'; // Hide the "Read More" link
+                    const showLessLink = this.nextElementSibling.nextElementSibling;
+
+                    truncatedText.style.display = 'none';
+                    fullText.style.display = 'inline';
+                    this.style.display = 'none';
+                    showLessLink.style.display = 'inline';
+                    
                 });
             });
+
+            const showLessLinks = document.querySelectorAll('.show-less-link');
+            showLessLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const truncatedText = this.previousElementSibling.previousElementSibling;
+                    const fullText = this.previousElementSibling;
+                    const readMoreLink = this.previousElementSibling.previousElementSibling.previousElementSibling;
+                    truncatedText.style.display = 'inline';
+                    fullText.style.display = 'none';
+                    readMoreLink.style.display = 'inline';
+                    this.style.display = 'none';
+                    
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadLinks = document.querySelectorAll('.download-document');
+
+            downloadLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const documentId = this.dataset.documentId;
+
+                    // Make an AJAX request to the server to download the PDF
+                    fetch('<?php echo URLROOT; ?>/admins/downloadDocument/' + documentId)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'document.pdf';
+                            document.body.appendChild(a);
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                        })
+                        .catch(error => console.error('Error downloading document:', error));
+                });
+            });
+
         });
     </script>
 
