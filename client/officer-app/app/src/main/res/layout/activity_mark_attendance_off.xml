@@ -54,27 +54,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.8"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/appbar_icon_home_act"
-                    app:tint="@color/backgroundColor"
-                    android:layout_width="51dp"
-                    android:layout_height="51dp"
-                    android:scaleType="centerInside"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/notification_icon_background"
-                    android:src="@drawable/baseline_notifications_none_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

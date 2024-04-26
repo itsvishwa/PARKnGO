@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.officertestapp.ForceEnd.ForceEndDetailsFragment;
 import com.example.officertestapp.Home.AssignAVehicleAddDetailsFragment;
 import com.example.officertestapp.Home.AssignAVehicleConfirmationFragment;
 import com.example.officertestapp.Home.HomeMainFragment;
@@ -80,61 +82,16 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new ReleaseASlotFragment());
     }
 
-    public void assign_vehicle_01_back_btn_handler(View v) {
-        replaceFragment(new HomeMainFragment());
-    }
-
     public void frag_home_assign_vehicle01_scan_QR_btn_handler(View v) {
 
     }
-
-    public void frag_home_assign_vehicle01_reserve_slot_btn_handler(View v) {
-        replaceFragment(new AssignAVehicleConfirmationFragment());
-    }
-
 
     public void frag_home_assign_vehicle03_main_menu_btn_handler(View v) {
         replaceFragment(new HomeMainFragment());
     }
 
 
-    public void assign_vehicle_02_back_btn_handler(View v) {
-        replaceFragment(new AssignAVehicleAddDetailsFragment());
-    }
 
-
-
-    public void release_vehicle_01_back_btn_handler(View v) {
-        replaceFragment(new HomeMainFragment());
-    }
-
-    public void release_vehicle_01_continue_btn_handler(View v) {
-        replaceFragment(new ReleaseASlotConfirmationFragment());
-    }
-
-    public void release_vehicle_02_back_notify_btn_handler(View v) {
-        replaceFragment(new ReleaseASlotFragment());
-    }
-
-    public void release_slot_02_back_btn_handler(View v) {
-        replaceFragment(new ReleaseASlotFragment());
-    }
-
-    public void release_slot_02_yes_btn_handler(View v) {
-        replaceFragment(new PaymentDetailsFragment());
-    }
-
-    public void release_slot_03_receive_cash_payment_btn_handler(View v) {
-        replaceFragment(new ConfirmCashPaymentFragment());
-    }
-
-    public void release_slot_04_payment_confirm_btn_handler(View v) {
-        replaceFragment(new ReleaseASlot06Fragment());
-    }
-
-    public void release_vehicle_04_payment_cancel_btn_handler(View v) {
-        replaceFragment(new PaymentDetailsFragment());
-    }
 
     public void frag_home_release_vehicle05_main_menu_btn_handler(View v) {
         replaceFragment(new HomeMainFragment());
@@ -148,23 +105,10 @@ public class MainActivity extends AppCompatActivity{
         replaceFragment(new ProfilePaymentHistoryFragment());
     }
 
-    public void frag_profile_payment_history_back_btn_handler(View v) {
-        replaceFragment(new ProfileMainFragment());
-    }
-
-
-
     public void frag_profile_main_logout_btn_handler(View v) {
         replaceFragment(new ProfileLogoutFragment());
     }
 
-
-
-
-
-    public void frag_profile_logout_back_btn_handler(View v) {
-        replaceFragment(new ProfileMainFragment());
-    }
 
     public void frag_profile_logout_no_btn_handler(View v) {
         replaceFragment(new ProfileMainFragment());

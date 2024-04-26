@@ -123,10 +123,14 @@ public class InProgressDetailsHelper {
                 String sessionId = responseData.getString("session_id");
                 String endTimeStamp = responseData.getString("end_Time_Stamp");
                 String startTimeStamp = responseData.getString("start_Time_Stamp");
+                String formattedSTime = responseData.getString("formatted_STime");
+                String formattedSDate = responseData.getString("formatted_SDate");
                 String duration = responseData.getString("duration");
                 String amount = responseData.getString("amount");
                 String vehicleNumber = responseData.getString("vehicle_Number");
                 String vehicleType = responseData.getString("vehicle_Type");
+
+                String formattedSDateTime = formattedSTime + "\n" + formattedSDate;
 
 
                 // Split the vehicle number into letters, symbol, numbers, province using "#"
@@ -174,24 +178,11 @@ public class InProgressDetailsHelper {
                     spinnerSymbols.setSelection(symbolIndex);
                 }
 
-                // format the timestamp to date time according to the devices time zone
-                // Convert the timestamp string to a long value
-                long timestamp = Long.parseLong(startTimeStamp);
-                // Create a Date object from the timestamp
-                Date startDate = new Date(timestamp * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a\ndd MMM yyyy", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedDate = sdf.format(startDate);
-
-
                 TextView parkedDateTimeTextView = view.findViewById(R.id.parked_Date_Time_txt);
                 TextView durationTextView = view.findViewById(R.id.duration_txt);
                 TextView amountTextView = view.findViewById(R.id.amount_txt);
 
-                parkedDateTimeTextView.setText(formattedDate);
+                parkedDateTimeTextView.setText(formattedSDateTime);
                 durationTextView.setText(duration);
                 amountTextView.setText(amount);
 

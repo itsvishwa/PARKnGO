@@ -109,14 +109,14 @@ public class AssignAVehicleConfirmationHelper {
                         Map<String, String> params = new HashMap<>();
                         params.put("vehicle_number", vehicleNumberProcessed);
                         params.put("vehicle_type", vehicleType);
-                        params.put("start_time", startTimeStamp);
+                        //params.put("start_time", startTimeStamp);
                         params.put("parking_id", parkingId);
                         params.put("driver_id", driverId);
 
                         // Log the values
                         Log.d("RequestParameters", "Vehicle Number: " + vehicleNumberProcessed);
                         Log.d("RequestParameters", "Vehicle Type: " + vehicleType);
-                        Log.d("RequestParameters", "Start Time: " + startTimeStamp);
+//                        Log.d("RequestParameters", "Start Time: " + startTimeStamp);
                         Log.d("RequestParameters", "Parking ID: " + parkingId);
                         Log.d("RequestParameters", "Driver ID: " + driverId);
 
@@ -168,21 +168,28 @@ public class AssignAVehicleConfirmationHelper {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                String response = jsonResponse.getString("response");
-                if(response.equals("101") || response.equals("204")) // the officer's parking space has been changed
+                JSONObject responseData = jsonResponse.getJSONObject("response");
+
+                // Extract values from the JSON response
+                String responseCode = responseData.getString("response_code");
+                String message = responseData.getString("message");
+
+                if(responseCode.equals("101") || responseCode.equals("204")) // the officer's parking space has been changed
                 {
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                     parkngoStorage.clearData();
                     Intent i = new Intent(context, HeroActivity.class);
                     MainActivity mainActivity = (MainActivity) context;
                     mainActivity.logout_immediately();
                 }else{
-                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
     public void initBackBtnListener() {
         Button backButton = assignAVehicleConfirmationView.findViewById(R.id.assign_vehicle_02_back_btn);
 
