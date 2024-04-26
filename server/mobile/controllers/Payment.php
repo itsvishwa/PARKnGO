@@ -12,7 +12,6 @@ class Payment extends Controller
     {
         $this->payment_model = $this->model("PaymentModel");
         $this->officer_model = $this->model("OfficerModel");
-        $this->session_model = $this->model("SessionModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
     }
 
