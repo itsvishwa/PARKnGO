@@ -119,8 +119,11 @@ public class HomeHelper {
 
                 Bundle data = new Bundle();
                 data.putString("vehicleType", vehicleType);
-                data.putDouble("lat", latitude);
-                data.putDouble("long", longitude);
+                // data.putDouble("lat", latitude); // uncomment when GPS is working
+                // data.putDouble("long", longitude); // uncomment when GPS is working
+                data.putDouble("lat", 6.900662);
+                data.putDouble("long", 79.8617228);
+
                 MainActivity mainActivity = (MainActivity) context;
                 mainActivity.replaceFragment(new AvailableParkingSpacesFragment(), data);
             }
