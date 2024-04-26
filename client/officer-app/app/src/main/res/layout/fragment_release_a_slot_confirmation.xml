@@ -82,7 +82,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="release_vehicle_02_back_notify_btn_handler"
+                    android:onClick="backBtnHandler"
                     android:background="@drawable/notification_icon_background"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -104,7 +104,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="250dp"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -135,7 +135,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:background="@drawable/rounded_background_detail_box">
 
                 <TextView
@@ -177,34 +177,46 @@
                     android:id="@+id/frag_release_slot_confirm_vehicle_number_txt_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/red_rounded_bg"
-                    android:paddingHorizontal="5dp"
-                    android:text="### 0000"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:text="000 0000 00"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
-                    app:layout_constraintEnd_toStartOf="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
-                    app:layout_constraintHorizontal_bias="0.629"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintEnd_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
                     android:id="@+id/frag_release_slot_confirm_vehicle_type_txt_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="100dp"
                     android:background="@drawable/blue_rounded_bg"
-                    android:paddingHorizontal="5dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
                     android:text="TYPE"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                    app:layout_constraintEnd_toEndOf="@+id/frag_release_slot_confirm_vehicle_number_txt_view"
+                    app:layout_constraintHorizontal_bias="0.557"
+                    app:layout_constraintStart_toStartOf="@+id/frag_release_slot_confirm_vehicle_number_txt_view"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_release_slot_confirm_vehicle_number_txt_view" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="frag_release_slot_confirm_vehicle_number_txt_view" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="frag_release_slot_confirm_vehicle_number_txt_view,frag_release_slot_confirm_vehicle_type_txt_view" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

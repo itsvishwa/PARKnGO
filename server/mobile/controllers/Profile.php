@@ -139,42 +139,6 @@ class Profile extends Controller
     }
 
 
-    // profile details of officer
-    // public function get_officer_details()
-    // {
-    //     $token_data = $this->verify_token_for_officers();
-
-    //     if ($token_data === 400) {
-    //         $this->send_json_400("Invalid Token");
-    //     } elseif ($token_data === 404) {
-    //         $this->send_json_404("Token Not Found");
-    //     } else {
-    //         $details = $this->officer_model->get_officer($token_data["user_id"]);
-            
-    //         if ($details) {
-
-    //             // Concatenate first name and last name
-    //             $full_name = $details["first_name"] . " " . $details["last_name"]; 
-    
-    //             $officer_details = [
-    //                 "officer_id" => $details["officer_id"],
-    //                 "full_name" => $full_name,
-    //                 "mobile_number" => $details["mobile_number"],
-    //                 "nic" => $details["nic"],
-    //                 "parking_id" => $details["parking_id"]
-    //             ];
-    
-    //             $this->send_json_200($officer_details);
-    //         } else {
-    //             $this->send_json_404("Officer details not found");
-    //         }
-
-    //     }
-
-    // }
-
-
-
     // get payment history of the officer
     public function officer_payment_history()
     {
@@ -208,9 +172,7 @@ class Profile extends Controller
                     $result_data = [];
 
                     foreach ($payments_history_data as $payment_history_data) {
-                        $timestamp = $payment_history_data->time_stamp;
-                        // $formatted_date = date("h.i A | d M", $timestamp);
-        
+                    
                         $formatted_amount = 'Rs. ' . number_format($payment_history_data->amount, 2);
 
 
@@ -218,7 +180,7 @@ class Profile extends Controller
 
                         $temp = [
                             "response_code" => "800",
-                            "Date_and_Time" => $timestamp,
+                            "Date_and_Time" => implode(" | ", $this->format_time($payment_history_data->time_stamp)),
                             "Amount" => $formatted_amount,
                             "Vehicle" => $payment_history_data->vehicle_number,
                             "Payment_Method" => $payment_method
@@ -284,7 +246,7 @@ class Profile extends Controller
 
                 if ($distance <= $distanceThreshold) { // Location is within the threshold
                     // If location is fine then update the database
-                    $time_stamp = trim($_POST["time_stamp"]);
+                    $time_stamp = time();
                     
                     // Update the Duty_record table
                     $this->duty_record_model->mark_duty_in($time_stamp, $token_data["user_id"]);
@@ -365,16 +327,20 @@ class Profile extends Controller
 
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
                 
-                $time_stamp = trim($_POST["time_stamp"]);
+                $time_stamp = time();
                     
                 // Update the Duty_record table
                 $this->duty_record_model->mark_duty_off($time_stamp, $token_data["user_id"]);
 
                 // Retrieve the start time stamp
+                $time_data = $this->format_time($time_stamp);
                 $result = [
                     "response_code" => "800",
                     "message" => "Duty record is marked OFF!",
-                    "time_stamp" => $time_stamp
+                    "time_stamp" => [
+                        "date" => $time_data[1],
+                        "time" => $time_data[0]
+                    ]
                 ];
 
                 $this->send_json_200($result);

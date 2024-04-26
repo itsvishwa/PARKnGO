@@ -119,37 +119,14 @@ public class ForceEndedFetchData {
                 String vehicle = resultData.getString("vehicle");
                 String vehicleType = resultData.getString("vehicle_type");
                 String startDateTime = resultData.getString("session_start_date_and_timestamp");
-                String endDateTime = resultData.getString("session_force_end_date_and_timestamp");
+                String endDateTime = resultData.getString("session_end_date_and_timestamp");
+                String formattedSDateTime = resultData.getString("formatted_SDateTime");
+                String formattedEDateTime = resultData.getString("formatted_EDateTime");
 
                 String formattedVehicleNum = VehicleNumberHelper.splitVehicleNumber(vehicle);
 
-                // format the timestamp to date time according to the devices time zone
-                // Convert the timestamp string to a long value
-                long startTimestamp = Long.parseLong(startDateTime);
-                // Create a Date object from the timestamp
-                Date startDate = new Date(startTimestamp * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a - dd MMM YYYY", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedStartDate = sdf.format(startDate);
 
-
-                // format the timestamp to date time according to the devices time zone
-                // Convert the timestamp string to a long value
-                long endTimestamp = Long.parseLong(endDateTime);
-                // Create a Date object from the timestamp
-                Date endDate = new Date(endTimestamp * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf1 = new SimpleDateFormat("hh.mm a - dd MMM YYYY", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf1.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedEndDate = sdf1.format(endDate);
-
-
-                forceEndedModels.add(new ForceEndedModel(sessionId, formattedVehicleNum, vehicleType, formattedStartDate, formattedEndDate));
+                forceEndedModels.add(new ForceEndedModel(sessionId, formattedVehicleNum, vehicleType, formattedSDateTime, formattedEDateTime));
                 // Log the ArrayList after adding each item
                 Log.d("ForceEndedFetchData", "Added item to forceEndedModels: " + forceEndedModels.get(i).toString());
                 Log.d("ForceEndedFetchData", "Size of forceEndedModels: " + forceEndedModels.size());
