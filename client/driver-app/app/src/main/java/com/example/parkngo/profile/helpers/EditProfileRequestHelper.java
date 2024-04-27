@@ -15,8 +15,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.parkngo.MainActivity;
 import com.example.parkngo.R;
 import com.example.parkngo.helpers.ParkngoStorage;
+import com.example.parkngo.profile.EditMobileNumberFragment;
+import com.example.parkngo.profile.EditProfileFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +44,7 @@ public class EditProfileRequestHelper {
         setUpDefaultValues();
         updateBtnHandler();
         discardBtnHandler();
+        editMobileNumberBtnHandler();
     }
 
     private void setUpDefaultValues(){
@@ -138,5 +142,18 @@ public class EditProfileRequestHelper {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+
+    private void editMobileNumberBtnHandler(){
+        Button button = editProfileView.findViewById(R.id.edit_prof_frag_change_mobile_btn);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new EditMobileNumberFragment());
+            }
+        });
     }
 }

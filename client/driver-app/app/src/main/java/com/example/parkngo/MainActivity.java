@@ -128,10 +128,6 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new PaymentHistoryFragment());
     }
 
-    // edit mobile number
-    public void edit_profile_frag_change_mobile_number_btn_handler(View view){
-        replaceFragment(new EditMobileNumberFragment());
-    }
 
     // scan qr
     public void scan_frag_qr_btn_handler(View view){

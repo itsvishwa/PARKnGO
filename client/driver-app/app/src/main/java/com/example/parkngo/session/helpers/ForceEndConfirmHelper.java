@@ -83,7 +83,9 @@ public class ForceEndConfirmHelper {
 
     private void sendForceEndReq(){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/force_end/" + latitude + "/" +longitude;
+        // String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/force_end/" + latitude + "/" +longitude; // uncomment for true GPS
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/session/force_end/" + "6.900662" + "/" + "79.8617228";
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, apiURL,
                 new Response.Listener<String>() {
                     @Override
