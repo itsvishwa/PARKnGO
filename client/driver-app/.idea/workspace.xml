@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_assign_a_vehicle_add_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_assign_a_vehicle_add_details.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../officer-app/app/src/main/res/layout/fragment_release_a_slot.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8b19cc79-c8a5-46fe-840d-23c7ef99d8eb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
