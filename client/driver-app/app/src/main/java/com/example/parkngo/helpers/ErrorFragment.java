@@ -13,12 +13,28 @@ import android.widget.TextView;
 import com.example.parkngo.R;
 
 public class ErrorFragment extends Fragment {
-
+    String appBarMainText;
+    String appBarSubText;
+    int bodyImg;
+    String bodyMainText;
+    String bodySubText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_error, container, false);
+        View errorFragmentView = inflater.inflate(R.layout.fragment_error, container, false);
+
+        if (getArguments() != null) {
+            appBarMainText = getArguments().getString("MainText1");
+            appBarSubText = getArguments().getString("subText1");
+            bodyImg = getArguments().getInt("img");
+            bodyMainText = getArguments().getString("MainText2");
+            bodySubText = getArguments().getString("subText2");
+        }
+
+        ErrorFragmentHelper errorFragmentHelper =  new ErrorFragmentHelper(appBarMainText, appBarSubText,  bodyImg, bodyMainText, bodySubText, errorFragmentView);
+        errorFragmentHelper.initLayout();
+
+        return errorFragmentView;
     }
 }

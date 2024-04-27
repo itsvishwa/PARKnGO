@@ -15,6 +15,7 @@ class Controller
                 return new $model();
         }
 
+
         // sucess response
         public function send_json_200($msg)
         {
@@ -23,6 +24,7 @@ class Controller
                 header('Content-Type: application/json');
                 echo $response;
         }
+
 
         // bad request response
         public function send_json_400($msg)
@@ -88,7 +90,6 @@ class Controller
 
                 return $token;
         }
-
 
 
         // decode a token
@@ -235,6 +236,7 @@ class Controller
                 return $url_safe_encrypted_id;
         }
 
+
         // return the decrypted data when pass the encoded string
         public function decrypt_id($url_safe_encrypted_id)
         {
@@ -262,6 +264,57 @@ class Controller
                 // Send the decrypted payment_id as a JSON response
                 return $decrypted_payment_id;
         }
+
+
+        // return a encrypted url safe string when pass the session id
+        public function encrypt_session_id($session_id)
+        {
+                // Create an initialization vector
+                $iv = openssl_random_pseudo_bytes(16);
+
+                // Encrypt the session ID using the chosen cipher method and encryption key
+                $encoded_session_id = openssl_encrypt($session_id, 'aes-128-cbc', SESSION_KEY, 0, $iv);
+
+                // Combine the IV and modified ciphertext to create the final encoded string
+                $encrypted_session_id = $iv . $encoded_session_id;
+
+                // Encode the binary data as a Base64 string
+                $base64_encoded = base64_encode($encrypted_session_id);
+
+                // Make the Base64 string URL safe by replacing certain characters
+                $url_safe_encrypted_session_id = strtr($base64_encoded, '+/', '-_'); // Replace '+' with '-' and '/' with '_'
+
+                return $url_safe_encrypted_session_id;
+        }
+
+
+        public function decrypt_session_id($url_safe_encrypted_session_id)
+        {
+                // Reverse the URL-safe character replacements to get the original Base64 string
+                $base64_encoded = strtr($url_safe_encrypted_session_id, '-_', '+/'); // Reverse replacements
+
+                // Decode the Base64 string back to binary data
+                $encrypted_session_id = base64_decode($base64_encoded);
+
+                // Extract the initialization vector (IV) from the beginning of the string
+                $iv = substr($encrypted_session_id, 0, 16);
+
+                // Get the encrypted data (ciphertext) after the IV
+                $encoded_session_id = substr($encrypted_session_id, 16);
+
+                // Decrypt the encoded session ID using the provided IV, cipher method, and decryption key
+                $decrypted_session_id = openssl_decrypt($encoded_session_id, 'aes-128-cbc', SESSION_KEY, 0, $iv);
+
+                if ($decrypted_session_id === false) {
+                        // Decryption error, send an error message as a JSON response
+                        $this->send_json_200("Decryption error: " . openssl_error_string());
+                        return false;
+                }
+
+                // Return the decrypted session_id
+                return $decrypted_session_id;
+        }
+
 
         // format the vehicle number to human readable version
         public function format_vehicle_number($vehicle_number)
@@ -300,6 +353,7 @@ class Controller
                 return $result;
         }
 
+
         // Convert the vehicle type to its Category
         public function convert_to_vehicle_category($vehicle_type)
         {
@@ -323,7 +377,7 @@ class Controller
                 $result = "";
 
                 if ($category === "A") {
-                        $result = "Cak|Tuktuk|Mini Van";
+                        $result = "Car|Tuktuk|Mini Van";
                 } else if ($category === "B") {
                         $result = "Bicycle";
                 } else if ($category === "C") {

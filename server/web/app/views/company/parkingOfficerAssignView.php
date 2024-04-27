@@ -50,6 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               </a>
             </li>
             <li>
+              <a href="../forceStoppedSessionView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+                Aborted Sessions
+              </a>
+            </li>
+            <li>
               <a href="../parkingSpaceView">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
@@ -65,6 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Parking Officer
               </a>
             </li>
+            <li>
+              <a href="../reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -78,24 +94,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <h3>Assign Parking Officer</h3>
         </div>
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <div class="filter-parking">
         <div class="header text-md">
-          <p>Select the parking space you want to delete</p>
+          <p>Search and Select the parking space you want to assgin.</p>
         </div>
         <div class="ml-20">
-          <select id="parkingDropdown" class="p-form-dropdown" onchange="populateFormFields()">
-            <option value="" disabled selected>Select Parking Space</option>
-            <?php foreach ($data['parking_spaces'] as $parking_space) {
-              echo "<option value='" . $parking_space->_id . "'>" . $parking_space->name . "</option>";
-            } ?>
-          </select>
+          <div class="flex justify-content-left align-items-center">
+            <input type="text" id="parkingSearch" class="parking-search-bar" oninput="searchParking()" placeholder="Search Parking Space.">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="parking-search-logo text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </div>
+          <ul id="searchResults" class="search-results" onclick="selectParkingSpace(event)"></ul>
         </div>
       </div>
 
@@ -122,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
           <div id="card-container" class="parking-card mt-20">
 
-            <div id="confirmationCard"></div>
+            <div id="confirmationCard" class="ml-40"></div>
 
             <div>
 
@@ -131,58 +145,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </div>
         <script>
-          function populateFormFields() {
-            var selectElement = document.getElementById("parkingDropdown");
+          function searchParking() {
+            var searchInput = document.getElementById("parkingSearch").value.toLowerCase();
+            var parkingSpaces = <?php echo json_encode($data['parking_spaces']); ?>;
+            var resultsContainer = document.getElementById("searchResults");
+
+            // Clear previous search results
+            resultsContainer.innerHTML = "";
+
+            // Filter parking spaces based on the search input
+            var filteredSpaces = parkingSpaces.filter(function(parking_space) {
+              return parking_space.name.toLowerCase().includes(searchInput);
+            });
+
+            // Display search results
+            filteredSpaces.forEach(function(result) {
+              var li = document.createElement("li");
+              li.textContent = result._id + "-" + result.name;
+              resultsContainer.appendChild(li);
+            });
+
+            // Show the results container
+            resultsContainer.style.display = filteredSpaces.length > 0 ? "block" : "none";
+          }
+
+          function selectParkingSpace(event) {
+            var selectedParkingSpace = event.target.textContent;
+            var inputField = document.getElementById("parkingSearch");
+
+            // Populate the input field with the selected parking space name
+
+            selectedParkingSpaceID = parseInt(selectedParkingSpace.split("-")[0]);
+            inputField.value = selectedParkingSpace.split("-")[1];
+
+
+
+
+            // Hide the results container
+            document.getElementById("searchResults").style.display = "none";
+
+            // Find the selected space and perform additional actions if needed
+            var selectedSpace = <?php echo json_encode($data['parking_spaces']); ?>.find(function(parking_space) {
+              return parking_space._id === selectedParkingSpaceID;
+            });
+
+            if (selectedSpace) {
+              populateFormFields(selectedSpace);
+            }
+          }
+
+          function populateFormFields(selectedParkingSpace) {
             var confirmationCard = document.getElementById('confirmationCard');
-            var selectedParkingSpaceId = selectElement.value;
+            var selectedParkingSpaceId = selectedParkingSpace._id;
 
             // Fetch officer details based on selected ID using AJAX or use a predefined JavaScript object
             // For example, assuming you have a JavaScript object containing officer details:
-            var parking_spaces = <?php echo json_encode($data['parking_spaces']); ?>;
             var parking_spaces_status = <?php echo json_encode($data['parking_spaces_status']); ?>;
 
-            // console.table(parking_spaces)
-            // console.table(parking_spaces_status)
-
-            // Find the selected officer in the officersData array
-            var selectedParkingSpace = parking_spaces.find(function(parking_space) {
-              return parking_space._id == selectedParkingSpaceId;
-            });
 
             var selectedParkingSpaceStatus = parking_spaces_status.filter(function(parking_space_status) {
               return parking_space_status.parking_id == selectedParkingSpaceId;
             });
-            console.log(selectedParkingSpace);
-            console.log(selectedParkingSpaceStatus);
+            // console.log(selectedParkingSpace);
+            // console.log(selectedParkingSpaceStatus);
             // Populate form fields with officer details
 
             if (selectedParkingSpace) {
               // Update the confirmation card content dynamically
               confirmationCard.innerHTML = `
-              <div class="confirmation-card">
-                <div class='confirmation-card-line mb-10'>
-                    <h3 class='b-600'>${selectedParkingSpace.name}</h3>
-                    <p class='b-600'>${selectedParkingSpace.address}</p>
+              <div class="parking-space-card mb-20">
+                <div class="parking-card-header">
+                  <div class="parking-name">
+                    <h3 class="parking-card-bold ml-20">${selectedParkingSpace.name}</h3>
+                  </div>
+                  <p class="parking-card-bold">${selectedParkingSpace.address}</p>
                 </div>
                 <div class='confirmation-card-line mb-10'>
-                    <p class='f-14'>Total Slots <span class='b-500'>${selectedParkingSpace.no_of_slots}</span></p>
-                    ${
-                      selectedParkingSpaceStatus && selectedParkingSpaceStatus.length > 0
-                        ? selectedParkingSpaceStatus[0].rate == 0
-                          ? '<p class="parking-type bg-blue text-white">Free</p>'
-                          : `<p class="b-500 f-14">For ${selectedParkingSpaceStatus[0].vehicle_type} Rs.${selectedParkingSpaceStatus[0].rate}/ 1H</p>`
-                        : ''
-                    }
+                  <div class="parking-card-info">
+                    <p>Total Slots: <span class="parking-card-bold">${selectedParkingSpace.no_of_slots}</span></p>
+                    <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
+                  </div>
                 </div>
                 <div class='confirmation-card-line'>
                     <h3 class='f-14'>Parking Slots</h3>
-                    <p class='parking-type bg-green text-white'>${selectedParkingSpace.is_public ? 'Public' : 'Private'}</p>
                 </div>
                 <table class='confirmation-card-table'>
                     <thead>
                         <tr>
-                            <th>Type</th>
-                            <th>Count</th>
+                            <th>Vehicle Type</th>
+                            <th>Slots</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -200,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </tbody>
                 </table>
               </div>
-              <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>/${selectedParkingSpace._id}" class=" c-btn-section" method="POST" enctype="multipart/form-data">
+              <form action="<?php echo URLROOT; ?>companys/parkingOfficerAssignView/<?php echo $data['officer_id'] ?>/${selectedParkingSpace._id}" class="c-btn-section2" method="POST" enctype="multipart/form-data">
                 <input type="button" value="Cancel" class="c-btn bg-black40" onclick="window.history.back()">
                 <input type="submit" value="Assign Parking Officer" class="c-btn bg-green">
               </form>
@@ -210,6 +261,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               confirmationCard.innerHTML = "<p>No data available for the selected parking space.</p>";
             }
           }
+
+          window.onclick = function(event) {
+            if (!event.target.matches('#parkingSearch')) {
+              var resultsContainer = document.getElementById("searchResults");
+              if (resultsContainer.style.display === 'block') {
+                resultsContainer.style.display = 'none';
+              }
+            }
+          };
         </script>
 
         <script>
