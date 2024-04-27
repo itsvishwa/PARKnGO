@@ -3175,6 +3175,7 @@ drawable round_blue_circle
 drawable round_green_circle
 drawable round_outline
 drawable round_red_circle
+drawable sandbox_background
 drawable scan_qr
 drawable search_view_bg
 drawable spinner_circle
@@ -3401,6 +3402,7 @@ id customPanel
 id cut
 id dark
 id date_picker_actions
+id debug_value
 id decelerate
 id decelerateAndComplete
 id decor_content_parent
