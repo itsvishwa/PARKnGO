@@ -6,6 +6,8 @@
     tools:context=".session.SessionPaymentFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@color/backgroundColor">
 
     <!--    Top App Bar Here-->
@@ -43,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="18dp"
-                        android:layout_marginTop="35dp"
+                        android:layout_marginTop="27dp"
                         android:text="Payment Details"
                         android:textColor="@color/textPrimary"
                         android:textSize="18sp"
@@ -75,7 +77,7 @@
                         android:id="@+id/appbar_icon_home_act"
                         android:layout_width="51dp"
                         android:layout_height="51dp"
-                        android:layout_marginTop="35dp"
+                        android:layout_marginTop="27dp"
                         android:background="@drawable/appbar_icon_bg"
                         android:clickable="true"
                         android:focusable="true"
@@ -176,9 +178,8 @@
             android:id="@+id/constraintLayout16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="41dp"
-            android:background="@drawable/radius_6_solid"
-            android:elevation="5dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/radius_6_with_outline"
             android:paddingHorizontal="20dp"
             android:paddingVertical="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -188,8 +189,8 @@
 
             <TextView
 
-                android:id="@+id/textView48"
-                android:layout_width="wrap_content"
+                android:id="@+id/payment_on_going_frag_parking_name"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="CMC CAR PARK 03"
@@ -203,11 +204,11 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView48">
+                app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_parking_name">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
@@ -291,7 +292,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/textView60"
+                        android:id="@+id/payment_on_going_frag_vehicle_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -299,10 +300,10 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView56" />
+                        app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_end_time" />
 
                     <TextView
-                        android:id="@+id/textView55"
+                        android:id="@+id/payment_on_going_frag_start_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -310,10 +311,10 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView54" />
+                        app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_time_went" />
 
                     <TextView
-                        android:id="@+id/textView54"
+                        android:id="@+id/payment_on_going_frag_time_went"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="02 Hours 10 Minutes"
@@ -323,7 +324,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView56"
+                        android:id="@+id/payment_on_going_frag_end_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -331,10 +332,10 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView55" />
+                        app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_start_time" />
 
                     <TextView
-                        android:id="@+id/textView58"
+                        android:id="@+id/payment_on_going_frag_vehicle_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -342,11 +343,11 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView60" />
+                        app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_vehicle_number" />
 
 
                     <TextView
-                        android:id="@+id/textView80"
+                        android:id="@+id/payment_on_going_frag_officer_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -354,11 +355,11 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView58" />
+                        app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_vehicle_type" />
 
 
                     <TextView
-                        android:id="@+id/textView81"
+                        android:id="@+id/payment_on_going_frag_officer_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="14dp"
@@ -366,13 +367,13 @@
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView80" />
+                        app:layout_constraintTop_toBottomOf="@+id/payment_on_going_frag_officer_name" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView49"
+                android:id="@+id/payment_on_going_frag_parking_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_blue_circle"
@@ -380,9 +381,9 @@
                 android:text="Rs.100/ 1H"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView48"
+                app:layout_constraintBottom_toBottomOf="@+id/payment_on_going_frag_parking_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView48" />
+                app:layout_constraintTop_toTopOf="@+id/payment_on_going_frag_parking_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -391,10 +392,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/radius_6_solid"
+            android:background="@drawable/radius_6_with_outline"
             android:paddingHorizontal="20dp"
             android:paddingVertical="16dp"
-            android:translationZ="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
@@ -411,7 +411,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/payment_on_going_frag_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rs. 425.00"
@@ -428,11 +428,11 @@
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="*If you wish to pay by credit/debit car press on “Pay” button"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:text="*If you wish to pay by credit/debit card press on “Pay” button"
             android:textAlignment="center"
             android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout17" />
 
