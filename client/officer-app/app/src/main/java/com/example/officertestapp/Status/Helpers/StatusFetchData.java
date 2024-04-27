@@ -100,6 +100,16 @@ public class StatusFetchData {
             filledSlotsView.setText(sessionStatObj.getString("in_progress"));
             paymentDueSlotsView.setText(sessionStatObj.getString("payment_due"));
 
+            JSONObject slotData = sessionStatObj.getJSONObject("slot_status");
+            JSONObject typeAData = slotData.getJSONObject("A");
+            JSONObject typeBData = slotData.getJSONObject("B");
+            JSONObject typeCData = slotData.getJSONObject("C");
+            JSONObject typeDData = slotData.getJSONObject("D");
+
+
+
+
+
             JSONObject paymentDueObj = jsonObject.getJSONObject("payment_due_sessions");
             JSONObject inProgressObj = jsonObject.getJSONObject("in_progress_sessions");
 
