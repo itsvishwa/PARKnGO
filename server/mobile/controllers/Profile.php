@@ -54,7 +54,7 @@ class Profile extends Controller
         } else {
             if ($this->driver_model->is_mobile_number_exist($mobile_number)) // mobile number is a registered one
             {
-                $this->send_json_400("Mobile number you entered is already registered one");
+                $this->send_json_400("PROF_MNAE");
             } else // new mobile number
             {
                 $this->user_controller->send_otp($mobile_number);

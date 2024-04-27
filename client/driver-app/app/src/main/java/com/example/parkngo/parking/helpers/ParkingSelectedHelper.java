@@ -413,7 +413,8 @@ public class ParkingSelectedHelper {
         double destinationLatitude = Double.parseDouble(latitude);
         double destinationLongitude = Double.parseDouble(longitude);
 
-        String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude + "&destination=" + destinationLatitude + "," + destinationLongitude;
+      //   String uri = "https://www.google.com/maps/dir/?api=1&origin=" + sourceLatitude + "," + sourceLongitude + "&destination=" + destinationLatitude + "," + destinationLongitude; // uncomment for TRUE GPS
+        String uri = "https://www.google.com/maps/dir/?api=1&origin=" + 6.900662 + "," + 79.8617228 + "&destination=" + destinationLatitude + "," + destinationLongitude;
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         intent.setPackage("com.google.android.apps.maps");
@@ -432,7 +433,6 @@ public class ParkingSelectedHelper {
                 // Get latitude and longitude from location object
                 myLatitude = location.getLatitude();
                 myLongitude = location.getLongitude();
-                System.out.println(myLatitude  + "       " + myLongitude);
                 locationManager.removeUpdates(this);
 
                 navigateBtnProcess();
