@@ -72,7 +72,7 @@ class QR extends Controller
                 } else {
                     $qr_data = $this->driver_qr_model->get_vehicle_info($qr_id);
 
-                    if((time() - $qr_data["auth_time_stamp"]) > 300) {
+                    if((time() - $qr_data["auth_time_stamp"]) < 300) {
                         $result = [
                             "response_code" => "800",
                             "driver_id" => $qr_data["driver_id"],
