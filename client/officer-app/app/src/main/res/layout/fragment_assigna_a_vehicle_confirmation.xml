@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Home.HomeMainFragment"
+    tools:context=".Home.AssignAVehicleConfirmationFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -29,14 +29,15 @@
 
                 <TextView
                     android:id="@+id/home_frag_parking_name"
-                    android:layout_width="138dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/app_bar_info_box"
                     android:text="Car Park Name"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="6dp"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,7 +82,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="assign_vehicle_02_back_btn_handler"
+                    android:onClick="backBtnHandler"
                     android:background="@drawable/notification_icon_background"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +104,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="250dp"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,19 +121,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:text="Confirm the Reservation"
                     android:textSize="17sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.514" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:background="@drawable/rounded_background_detail_box">
 
                 <TextView
@@ -163,7 +168,7 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="12dp"
                     android:text="for the Vehicle"
                     android:textSize="17sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView16"
@@ -175,33 +180,33 @@
                     android:id="@+id/frag_assign_vehicle_01_vehicle_number_txt_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
                     android:background="@drawable/red_rounded_bg"
-                    android:paddingHorizontal="5dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginTop="12dp"
                     android:text="### 0000"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/frag_assign_vehicle_01_vehicle_type_txt_view"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toTopOf="@+id/frag_assign_vehicle_01_vehicle_type_txt_view"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintEnd_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                 <TextView
                     android:id="@+id/frag_assign_vehicle_01_vehicle_type_txt_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:background="@drawable/blue_rounded_bg"
-                    android:paddingHorizontal="5dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:layout_marginTop="12dp"
                     android:text="Type"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintHorizontal_bias="0.36"
-                    app:layout_constraintStart_toEndOf="@+id/frag_assign_vehicle_01_vehicle_number_txt_view"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                    app:layout_constraintEnd_toEndOf="@+id/frag_assign_vehicle_01_vehicle_number_txt_view"
+                    app:layout_constraintStart_toStartOf="@+id/frag_assign_vehicle_01_vehicle_number_txt_view"
+                    app:layout_constraintTop_toBottomOf="@+id/frag_assign_vehicle_01_vehicle_number_txt_view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
