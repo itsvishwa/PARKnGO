@@ -110,6 +110,8 @@ public class PaymentDetailsHelper {
                 String VehicleNumber = responseData.getString("vehicle_number");
                 String VehicleType = responseData.getString("vehicle_type");
                 String StartTime = responseData.getString("start_time");
+                String formattedSDateTime = responseData.getString("formatted_start_time");
+                String formattedEDateTime = responseData.getString("formatted_end_time");
                 String EndTime = responseData.getString("end_time");
                 String TimeWent = responseData.getString("time_went");
                 amount = responseData.getString("amount");
@@ -124,30 +126,10 @@ public class PaymentDetailsHelper {
                 // Insert space between letters and numbers in the vehicle number
                 String formattedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(VehicleNumber);
 
-
-                //format the timestamp to date time according to the devices time zone
-                //Convert the timestamp string to a long value
-                long timestampStart = Long.parseLong(StartTime);
-                // Create a Date object from the timestamp
-                Date startDate = new Date(timestampStart * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedStartTime = sdf.format(startDate);
-
-
-                long timestampEnd = Long.parseLong(EndTime);
-                Date EndDate = new Date(timestampEnd * 1000);
-                SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
-                edf.setTimeZone(TimeZone.getDefault());
-                String formattedEndTime = sdf.format(EndDate);
-
                 vehicleNumberTextView.setText(formattedVehicleNumber);
                 vehicleTypeTextView.setText(VehicleType);
-                sessionStartedTimeTextView.setText(formattedStartTime);
-                sessionEndedTimeTextView.setText(formattedEndTime);
+                sessionStartedTimeTextView.setText(formattedSDateTime);
+                sessionEndedTimeTextView.setText(formattedEDateTime);
                 timeDurationTextView.setText(TimeWent);
                 amountTextView.setText(amount);
 
@@ -172,15 +154,20 @@ public class PaymentDetailsHelper {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                String response = jsonResponse.getString("response");
-                if(response.equals("101") || response.equals("204")) // the officer's parking space has been changed
+                JSONObject responseData = jsonResponse.getJSONObject("response");
+
+                // Extract values from the JSON response
+                String responseCode = responseData.getString("response_code");
+                String message = responseData.getString("message");
+
+                if(responseCode.equals("101") || responseCode.equals("204")) // the officer's parking space has been changed
                 {
                     parkngoStorage.clearData();
                     Intent i = new Intent(context, HeroActivity.class);
                     MainActivity mainActivity = (MainActivity) context;
                     mainActivity.logout_immediately();
                 }else{
-                    Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
