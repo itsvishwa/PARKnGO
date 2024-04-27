@@ -1,6 +1,7 @@
 package com.example.officertestapp.ForceEnd.Helpers;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.officertestapp.ForceEnd.ForceEndDetailsFragment;
+import com.example.officertestapp.ForceEnd.ForceEndMainFragment;
 import com.example.officertestapp.ForceEnd.ForceEndedModel;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.Helpers.VehicleNumberHelper;
@@ -37,16 +40,23 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class ForceEndedFetchData {
-    View view;
-    View loadingView;
-    Context context;
-    ParkngoStorage parkngoStorage;
+    private View view;
+    private View loadingView;
+    private Context context;
+    private ParkngoStorage parkngoStorage;
 
-    public ForceEndedFetchData(View view, View loadingView, Context context) {
+    private DataFetchListener dataFetchListener;
+
+    public interface DataFetchListener {
+        void onDataFetchComplete(ArrayList<ForceEndedModel> forceEndedModels);
+    }
+
+    public ForceEndedFetchData(View view, View loadingView, Context context, DataFetchListener listener) {
         this.view = view;
         this.loadingView = loadingView;
         this.context = context;
         this.parkngoStorage = new ParkngoStorage(context);
+        this.dataFetchListener = listener;
         fetchData();
     }
 
@@ -109,41 +119,21 @@ public class ForceEndedFetchData {
                 String vehicle = resultData.getString("vehicle");
                 String vehicleType = resultData.getString("vehicle_type");
                 String startDateTime = resultData.getString("session_start_date_and_timestamp");
-                String endDateTime = resultData.getString("session_force_end_date_and_timestamp");
+                String endDateTime = resultData.getString("session_end_date_and_timestamp");
+                String formattedSDateTime = resultData.getString("formatted_SDateTime");
+                String formattedEDateTime = resultData.getString("formatted_EDateTime");
 
                 String formattedVehicleNum = VehicleNumberHelper.splitVehicleNumber(vehicle);
 
-                // format the timestamp to date time according to the devices time zone
-                // Convert the timestamp string to a long value
-                long startTimestamp = Long.parseLong(startDateTime);
-                // Create a Date object from the timestamp
-                Date startDate = new Date(startTimestamp * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a - dd MMM YYYY", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedStartDate = sdf.format(startDate);
 
-
-                // format the timestamp to date time according to the devices time zone
-                // Convert the timestamp string to a long value
-                long endTimestamp = Long.parseLong(endDateTime);
-                // Create a Date object from the timestamp
-                Date endDate = new Date(endTimestamp * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf1 = new SimpleDateFormat("hh.mm a - dd MMM YYYY", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf1.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedEndDate = sdf1.format(endDate);
-
-
-                forceEndedModels.add(new ForceEndedModel(sessionId, formattedVehicleNum, vehicleType, formattedStartDate, formattedEndDate));
+                forceEndedModels.add(new ForceEndedModel(sessionId, formattedVehicleNum, vehicleType, formattedSDateTime, formattedEDateTime));
+                // Log the ArrayList after adding each item
+                Log.d("ForceEndedFetchData", "Added item to forceEndedModels: " + forceEndedModels.get(i).toString());
+                Log.d("ForceEndedFetchData", "Size of forceEndedModels: " + forceEndedModels.size());
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.force_end_frag_recycle_view);
-                ForceEndedRecycleViewAdapter adapter = new ForceEndedRecycleViewAdapter(forceEndedModels ,context);
+                ForceEndedRecycleViewAdapter adapter = new ForceEndedRecycleViewAdapter(forceEndedModels ,context, view);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
@@ -155,6 +145,15 @@ public class ForceEndedFetchData {
                     parent.removeView(loadingView);
                     parent.addView(view, index);
                 }
+
+                // Notify the listener with the completed ArrayList
+                if (dataFetchListener != null) {
+                    dataFetchListener.onDataFetchComplete(forceEndedModels);
+                }
+            }
+            // Notify the listener with the completed ArrayList
+            if (dataFetchListener != null) {
+                dataFetchListener.onDataFetchComplete(forceEndedModels);
             }
 
         }catch (JSONException e){
@@ -162,7 +161,6 @@ public class ForceEndedFetchData {
         }
 
     }
-
 
     private void errorResponseHandler(VolleyError error) {
         String errorResponse;

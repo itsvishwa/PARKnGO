@@ -40,7 +40,7 @@ public class ReleaseASlotConfirmationHelper {
         this.fragmentManager = fragmentManager;
     }
 
-    public void releaseSlot(String sessionId, String timestamp) {
+    public void releaseSlot(String sessionId) {
 
         // Get the parkingId
         ParkngoStorage parkngoStorage = new ParkngoStorage(context);
@@ -79,13 +79,11 @@ public class ReleaseASlotConfirmationHelper {
                 Map<String, String> params = new HashMap<>();
                 params.put("parking_id", parkingId);
                 params.put("session_id", sessionId);
-                params.put("timestamp", timestamp);
 
 
                 // Log the values
                 Log.d("RequestParameters", "Parking ID: " + parkingId);
                 Log.d("RequestParameters", "Session ID: " + sessionId);
-                Log.d("RequestParameters", "Timestamp: " + timestamp);
 
                 return params;
 
