@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/proceedView.css" />
-
   <title>proceedView</title>
 
 </head>
@@ -63,9 +62,17 @@
             <li>
               <a href="./driverReviews">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="menu-logo">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                 </svg>
                 Driver Reviews
+              </a>
+            </li>
+            <li>
+              <a href="./reportGenerateView">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                </svg>
+                Report Generate
               </a>
             </li>
           </ul>
@@ -78,12 +85,9 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="menu-logo">
             <path fillRule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clipRule="evenodd" />
           </svg>
-          <h3>Verify Application</h3>
+          <h3 class="ml-5">Verify Application</h3>
         </div>
         <div class="profile">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="menu-logo mr">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
           <a href="../users/logout" class="logout">Log out</a>
         </div>
@@ -135,7 +139,7 @@
                 ?>
               </p>
             </div>
-            <button class="b-card_d-icon">
+            <button class="b-card_d-icon" onclick="downloadDocument('<?php echo $_GET['_id'] ?? ''; ?>')">
               <div class="b-card_down-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" class="r-menu-logo">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -143,41 +147,21 @@
               </div>
               <div class="b-card_d-content text-white">
                 <p>Download the Document</p>
-</div>
+              </div>
+          </div>
+          </button>
+          <div class="b-card-ar-content text-black">
+            <p>Approve or Reject?</p>
+          </div>
+          <div class="b-card3">
+            <div class="card-content12 text-gray">
+              <textarea id="rejectReason" name="rejectReason" rows="10" cols="70" placeholder="Write the reason to reject...." style="padding: 6px;"></textarea>
             </div>
-</button>
-
-        <div class="b-card-ar-content text-black">              
-        <p>Approve or Reject?<p>
-        
-        </div>
-       <div class="b-card3 ">
-        <div class="card-content12 text-gray">
-        <p>Write the reason to reject....</p>
-        </div>
-        </div>
-      <!--   <textarea class="b-card3">
-   <div class="card-content12 text-gray">
-        
-            <textarea name="rejection_reason" placeholder="Write the reason to reject..." required></textarea>
-            
-       
-    </div>
-</textarea>-->
-
-
-        
-              
-        <div class="b-card-apre">       
-    <button class="reject-button" type="button">Reject Application</button> 
-    <!--<button class="approve-button" type="button">-->
-    <button class="approve-button" data-application-id="<?php echo $application['id']; ?>">Approve Application</button>
-        </div>
-
-        
-       
-        
-
+            <div class="b-card-apre">
+              <button class="reject-button" type="button" onclick="submitRejectReason()">Reject Application</button>
+              <button class="approve-button" onclick="approveApplication()">Approve Application</button>
+            </div>
+          </div>
           <div class="b-card-content text-black">
           </div>
         </div>
@@ -186,44 +170,102 @@
   </div>
   </div>
   </div>
-  <script>
-    
-document.addEventListener('DOMContentLoaded', function () {
-    const approveButtons = document.querySelectorAll('.approve-button');
-
-    approveButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const applicationId = this.dataset.applicationId;
-
-            fetch('app/conrollers/Admins.php?action=approveApplication', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    application_id: applicationId,
-                }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.success) {
-                        // Update UI or show success message
-                        console.log('Application approved successfully');
-                        // Reload the page or perform necessary UI updates
-                        window.location.reload();
-                    } else {
-                        // Handle error scenario
-                        console.error('Failed to approve application');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-        });
-    });
-});
-
-  </script>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+  function approveApplication() {
+    var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+    console.log('companyId:', companyId);
+    console.log('Attempting to approve application with companyId:', companyId);
+
+    // Display loading spinner
+    $('#approveSpinner').show();
+
+    $.ajax({
+      url: '/PARKnGO/server/web/admins/approveApplication',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        _id: companyId
+      },
+      success: function(response) {
+        // Hide loading spinner
+        $('#approveSpinner').hide();
+
+        if (response.success) {
+          console.log('Response:', response);
+          console.log('Application approved successfully.');
+          window.location.href = response.redirect;
+          alert('Application approved successfully.');
+        } else {
+          console.error('Failed to approve application. Server response:', response);
+          alert('Failed to approve application. See console for details.');
+        }
+      },
+      error: function(xhr, status, error) {
+        // Hide loading spinner
+        $('#approveSpinner').hide();
+
+        console.error('Error:', error);
+        alert('Error approving application. Please check the console for details.');
+      }
+    });
+  }
+
+  function submitRejectReason() {
+    var companyId = '<?php echo $_GET['_id'] ?? ''; ?>';
+    console.log('companyId:', companyId);
+    var rejectReason = $('#rejectReason').val();
+
+    // Display loading spinner
+    $('#rejectSpinner').show();
+
+    $.ajax({
+      url: '/PARKnGO/server/web/admins/rejectApplication',
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        _id: companyId,
+        rejectReason: rejectReason
+      },
+      success: function(response) {
+        // Hide loading spinner
+        $('#rejectSpinner').hide();
+
+        console.log('Reject reason submitted successfully.');
+        window.location.href = response.redirect;
+        console.log(response);
+        alert('Application rejected successfully.');
+      },
+      error: function(error) {
+        // Hide loading spinner
+        $('#rejectSpinner').hide();
+
+        console.error('Error:', error);
+        alert('Error submitting reject reason. Please check the console for details.');
+      }
+    });
+  }
+</script>
+
+<script>
+  function downloadDocument(documentId) {
+    // Make an AJAX request to the server to download the PDF
+    fetch('<?php echo URLROOT; ?>admins/downloadDocument/' + documentId)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'document.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => console.error('Error downloading document:', error));
+  }
+</script>
 
 </html>

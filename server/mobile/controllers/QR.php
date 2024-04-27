@@ -16,18 +16,19 @@ class QR extends Controller
         $this->parking_space_status_model = $this->model("ParkingSpaceStatusModel");
     }
 
+    // driver mobile - used to get encrypted code for the QRs
     public function get_qr_code($selected_vehicle_number)
     {
         $token_data = $this->verify_token_for_drivers();
         if ($token_data === 400) {
-            $this->send_json_400("Invalid Token");
+            $this->send_json_400("ERR_IT");
         } elseif ($token_data === 404) {
-            $this->send_json_404("Token Not Found");
+            $this->send_json_404("ERR_TNF");
         } else {
             $qr_id = $this->driver_qr_model->get_qr_id($token_data["user_id"], $selected_vehicle_number);
             if ($qr_id === false) // no records for a giver driver id and selected vehicle number
             {
-                $this->send_json_400("E_QR_5023");
+                $this->send_json_400("QR_IDD"); //invalid driver data
             } else {
                 $time_stamp = time();
 
@@ -42,7 +43,9 @@ class QR extends Controller
         }
     }
 
-    public function read_qr($encoded_qr_id) {
+
+    public function read_qr($encoded_qr_id)
+    {
         $token_data = $this->verify_token_for_officers();
 
         if ($token_data === 400) {
@@ -61,8 +64,8 @@ class QR extends Controller
 
                 //check whether the qr_id exists
                 $is_qr_exists = $this->driver_qr_model->is_qr_exists($qr_id);
-                
-                if(!$is_qr_exists) {
+
+                if (!$is_qr_exists) {
                     $result = [
                         "response_code" => "801",
                         "message" => "No qr_id found"
@@ -76,13 +79,12 @@ class QR extends Controller
                         $result = [
                             "response_code" => "800",
                             "driver_id" => $qr_data["driver_id"],
-                            "vehicle_number" =>$qr_data["vehicle_number"],
+                            "vehicle_number" => $qr_data["vehicle_number"],
                             "vehicle_type" => $qr_data["vehicle_type"]
                         ];
 
                         $this->send_json_200($result);
-                    }
-                    else    // qr expired
+                    } else    // qr expired
                     {
                         $result = [
                             "response_code" => "802",
@@ -91,10 +93,8 @@ class QR extends Controller
 
                         $this->send_json_404($result);
                     }
-
-                }     
-            } 
-            else {    //parking_id is not similar to the assigned parking
+                }
+            } else {    //parking_id is not similar to the assigned parking
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
                 if ($assigned_parking_details) // new parking has been assigned to the officer
