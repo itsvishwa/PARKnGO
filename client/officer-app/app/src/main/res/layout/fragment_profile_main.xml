@@ -373,7 +373,7 @@
             app:layout_constraintStart_toStartOf="@+id/constraintLayout20"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout20"
             app:outer_color="@color/detailBoxBackground"
-            app:text="Swipe to mark your attendance"
+            app:text="Swipe to mark work shift off"
             app:text_color="@color/textGrey"
             app:text_size="16sp" />
 

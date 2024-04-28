@@ -58,7 +58,7 @@ class Session extends Controller
                 if ($open_session) {
                     $result = [
                         "response_code" => "409",
-                        "message" => "This vehicle number is already having a ongoing parking session"
+                        "message" => "This vehicle is already having a ongoing parking session"
                     ];
 
                     $this->send_json_404($result);
@@ -111,7 +111,7 @@ class Session extends Controller
 
                     $result = [
                         "response_code" => "204",
-                        "message" => "parking details not found"
+                        "message" => "Parking details not found"
                     ];
 
                     $this->send_json_404($result);
@@ -143,12 +143,13 @@ class Session extends Controller
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $open_session = $this->session_model->is_open_session_exists($vehicle_number);
+                $formatted_vehicle_number = $this->format_vehicle_number($vehicle_number);
 
                 // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
                         "response_code" => "801",
-                        "message" => "No open session found for the vehicle number $vehicle_number"
+                        "message" => "No open session found for the vehicle number $formatted_vehicle_number"
                     ];
 
                     $this->send_json_404($result);
