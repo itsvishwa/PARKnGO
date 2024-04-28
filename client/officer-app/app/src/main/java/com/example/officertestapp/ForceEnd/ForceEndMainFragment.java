@@ -69,7 +69,7 @@ public class ForceEndMainFragment extends Fragment implements ForceEndedFetchDat
 
 
     public void initSearchBarListener(){
-        SearchView searchView = forceEndsessionsView.findViewById(R.id.searchView);
+        SearchView searchView = forceEndsessionsView.findViewById(R.id.force_end_search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

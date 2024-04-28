@@ -57,26 +57,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/force_end_frag_parking_name" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/appbar_secondary_text"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    android:text="Last force-end at"-->
-<!--                    android:textColor="@color/textPrimary"-->
-<!--                    android:textSize="16sp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/appbar_secondary_text"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:text="Last force-end at"-->
+                <!--                    android:textColor="@color/textPrimary"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/appbar_last_time_text"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="00.00 ## - 00 ### 0000"-->
-<!--                    android:textColor="@color/textPrimary"-->
-<!--                    android:textSize="16sp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/appbar_secondary_text" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/appbar_last_time_text"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="00.00 ## - 00 ### 0000"-->
+                <!--                    android:textColor="@color/textPrimary"-->
+                <!--                    android:textSize="16sp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/appbar_secondary_text" />-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -84,24 +84,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_weight="0.8"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/appbar_icon_home_act"
-                    app:tint="@color/backgroundColor"
-                    android:layout_width="51dp"
-                    android:layout_height="51dp"
-                    android:scaleType="centerInside"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="backBtnHandler"
-                    android:background="@drawable/notification_icon_background"
-                    android:src="@drawable/baseline_arrow_back_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
@@ -114,7 +97,7 @@
         android:paddingHorizontal="25dp">
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/force_end_frag_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
@@ -125,14 +108,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/force_end_search_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/search_view_bg"
             app:iconifiedByDefault="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/force_end_frag_desc"
             app:queryBackground="@android:color/transparent"
             app:queryHint="Search"
             android:layout_marginTop="16dp"
@@ -146,7 +129,30 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView" />
+            app:layout_constraintTop_toBottomOf="@+id/force_end_search_view" />
+
+        <ImageView
+            android:id="@+id/force_end_frag_na_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/not_available"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/force_end_frag_na_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:text="No forced end sessions to display !"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/force_end_frag_na_img" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
