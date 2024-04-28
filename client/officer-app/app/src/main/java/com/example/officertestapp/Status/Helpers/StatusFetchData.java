@@ -92,22 +92,116 @@ public class StatusFetchData {
 
             JSONObject sessionStatObj = jsonObject.getJSONObject("session_stat");
 
-            TextView freeSlotsView = view.findViewById(R.id.status_main_farg_free_slots);
-            TextView filledSlotsView = view.findViewById(R.id.status_main_farg_filled_slots);
             TextView paymentDueSlotsView = view.findViewById(R.id.status_main_farg_payment_due);
 
-            freeSlotsView.setText(sessionStatObj.getString("free_slots"));
-            filledSlotsView.setText(sessionStatObj.getString("in_progress"));
             paymentDueSlotsView.setText(sessionStatObj.getString("payment_due"));
 
+            // setting vehicle slot data
             JSONObject slotData = sessionStatObj.getJSONObject("slot_status");
             JSONObject typeAData = slotData.getJSONObject("A");
             JSONObject typeBData = slotData.getJSONObject("B");
             JSONObject typeCData = slotData.getJSONObject("C");
             JSONObject typeDData = slotData.getJSONObject("D");
 
+            if (typeAData.getString("availability").equals("1")) // means data are available for this vehicle type
+            {
+                JSONObject dataObj = typeAData.getJSONObject("data");
 
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_A_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_A_filed_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_A_vehicle_rate);
 
+                freeSlotView.setText(dataObj.getString("free_slots"));
+                filledSlotView.setText(dataObj.getString("total_slots"));
+                rateView.setText("Rs. " + dataObj.getString("rate") + ".00");
+            }else {
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_A_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_A_filed_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_A_vehicle_rate);
+                TextView textView = view.findViewById(R.id.sm_frag_A_text); // "free out of" text
+                TextView titleView = view.findViewById(R.id.sm_frag_A_vehicle_type); // vehicle type text
+
+                freeSlotView.setVisibility(View.GONE);
+                filledSlotView.setVisibility(View.GONE);
+                rateView.setVisibility(View.GONE);
+                textView.setVisibility(View.GONE);
+                titleView.setVisibility(View.GONE);
+            }
+
+            if (typeBData.getString("availability").equals("1")) // means data are available for this vehicle type
+            {
+                JSONObject dataObj = typeBData.getJSONObject("data");
+
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_B_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_B_filled_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_B_vehicle_rate);
+
+                freeSlotView.setText(dataObj.getString("free_slots"));
+                filledSlotView.setText(dataObj.getString("total_slots"));
+                rateView.setText("Rs. " + dataObj.getString("rate") + ".00");
+            }else {
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_B_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_B_filled_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_B_vehicle_rate);
+                TextView textView = view.findViewById(R.id.sm_frag_B_text); // "free out of" text
+                TextView titleView = view.findViewById(R.id.sm_frag_B_vehicle_type); // vehicle type text
+
+                freeSlotView.setVisibility(View.GONE);
+                filledSlotView.setVisibility(View.GONE);
+                rateView.setVisibility(View.GONE);
+                textView.setVisibility(View.GONE);
+                titleView.setVisibility(View.GONE);
+            }
+
+            if (typeCData.getString("availability").equals("1")) // means data are available for this vehicle type
+            {
+                JSONObject dataObj = typeCData.getJSONObject("data");
+
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_C_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_C_filled_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_C_vehicle_rate);
+
+                freeSlotView.setText(dataObj.getString("free_slots"));
+                filledSlotView.setText(dataObj.getString("total_slots"));
+                rateView.setText("Rs. " + dataObj.getString("rate") + ".00");
+            }else {
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_C_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_C_filled_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_C_vehicle_rate);
+                TextView textView = view.findViewById(R.id.sm_frag_C_text); // "free out of" text
+                TextView titleView = view.findViewById(R.id.sm_frag_C_vehicle_type); // vehicle type text
+
+                freeSlotView.setVisibility(View.GONE);
+                filledSlotView.setVisibility(View.GONE);
+                rateView.setVisibility(View.GONE);
+                textView.setVisibility(View.GONE);
+                titleView.setVisibility(View.GONE);
+            }
+
+            if (typeDData.getString("availability").equals("1")) // means data are available for this vehicle type
+            {
+                JSONObject dataObj = typeDData.getJSONObject("data");
+
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_D_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_D_filled_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_D_vehicle_rate);
+
+                freeSlotView.setText(dataObj.getString("free_slots"));
+                filledSlotView.setText(dataObj.getString("total_slots"));
+                rateView.setText("Rs. " + dataObj.getString("rate") + ".00");
+            }else {
+                TextView freeSlotView = view.findViewById(R.id.sm_frag_D_free_slots);
+                TextView filledSlotView = view.findViewById(R.id.sm_frag_D_filled_slots);
+                TextView rateView = view.findViewById(R.id.sm_frag_D_vehicle_rate);
+                TextView textView = view.findViewById(R.id.sm_frag_D_text); // "free out of" text
+                TextView titleView = view.findViewById(R.id.sm_frag_D_vehicle_type); // vehicle type text
+
+                freeSlotView.setVisibility(View.GONE);
+                filledSlotView.setVisibility(View.GONE);
+                rateView.setVisibility(View.GONE);
+                textView.setVisibility(View.GONE);
+                titleView.setVisibility(View.GONE);
+            }
 
 
             JSONObject paymentDueObj = jsonObject.getJSONObject("payment_due_sessions");

@@ -74,7 +74,7 @@ public class AssignAVehicleAddDetailsHelper {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(context, item + " selected", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -86,7 +86,7 @@ public class AssignAVehicleAddDetailsHelper {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(context, item + " selected", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -98,7 +98,7 @@ public class AssignAVehicleAddDetailsHelper {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(context, item + " selected", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
