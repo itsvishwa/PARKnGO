@@ -204,10 +204,6 @@
         </div>
       </div>
       <div class="footer-right">
-        <a href="">About Us</a>
-        <a href="">Contact Us</a>
-        <a href="">Customer Care</a>
-        <a href="">Privacy Policy</a>
       </div>
     </div>
     <div class="footer-bottom">
