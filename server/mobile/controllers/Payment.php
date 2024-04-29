@@ -7,16 +7,21 @@ class Payment extends Controller
     private $payment_model;
     private $officer_model;
     private $parking_space_model;
+    private $officer_activity_model;
+    private $session_model;
+
 
     public function __construct()
     {
         $this->payment_model = $this->model("PaymentModel");
         $this->officer_model = $this->model("OfficerModel");
-        $this->session_model = $this->model("SessionModel");
         $this->parking_space_model = $this->model("ParkingSpaceModel");
+        $this->officer_activity_model = $this->model("OfficerActivityModel");
+        $this->session_model = $this->model("SessionModel");
     }
 
 
+    
     // driver mobile - used to view open payment details for given payment id
     public function view_payment()
     {
@@ -83,8 +88,6 @@ class Payment extends Controller
     }
 
 
-
-
     public function cash()
     {
         $token_data = $this->verify_token_for_officers();
@@ -130,7 +133,7 @@ class Payment extends Controller
 
                         $payment_data = [
                             "payment_id" => $payment_id,
-                            "payment_method" => "Cash",
+                            "payment_method" => "cash",
                             "time_stamp" => $time_stamp
                         ];
 
@@ -170,6 +173,106 @@ class Payment extends Controller
             }
         }
     }
+
+
+    public function force_ended_payment_accept() {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+            
+            $encrypted_parking_id = trim($_POST["parking_id"]);
+            // Decrypt the parking_id
+            $parking_id = $this->decrypt_id($encrypted_parking_id);
+
+            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+                $encrypted_session_id = trim($_POST["session_id"]);
+                $amount = trim($_POST["amount"]);
+                
+                $session_id = $this->decrypt_id($encrypted_session_id);
+
+                $session_exists = $this->session_model->is_session_exists($session_id);
+
+                if (!$session_exists) {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "This parking session does not exist"
+                    ];
+
+                    $this->send_json_404($result);
+
+                } else {
+                    // Fetch session data using session_id from parking_session table
+                    $session_details = $this->session_model->get_session_data($session_id);
+
+                    //The parking that the vehicle is assigned currently
+                    $current_vehicle_assigned_parking = $session_details["parking_id"];
+
+                    if($current_vehicle_assigned_parking  == $assigned_parking) {
+                        $end_timestamp = time();
+
+                        //end time is update in the parking_session
+                        $this->session_model->end_session($session_id, $end_timestamp);
+
+                        //update is_force_end in the parking_session
+                        $this->session_model->update_force_ended_session($session_id);
+
+                        // add new officer activity to the officer_activity (type as end)
+                        $this->officer_activity_model->end_officer_activity($session_id, $token_data, $end_timestamp);
+
+                        // payment session table update
+                        $this->payment_model->close_force_ended_payment($session_id, $amount, $end_timestamp);
+
+                        
+                        $result = [
+                            "response_code" => "800",
+                            "message" => "force ended payment closed successfully!"
+                        ];
+
+                        $this->send_json_200($result);
+
+                    } else {
+                        $result = [
+                            "response_code" => "204",
+                            "message" => "This Parking Session is not belongs to this parking"
+                        ];
+                        $this->send_json_404($result);
+                    }
+                }
+
+            } else {  //parking_id is not similar to the assigned parking
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+
+                if ($assigned_parking_details) {
+                    $assigned_parking_name = $assigned_parking_details->name;
+
+                    $result = [
+                        "response_code" => "101",
+                        "updated parking_id" => $assigned_parking,
+                        "updated parking_name" => $assigned_parking_name,
+                    ];
+
+                    $this->send_json_200($result);
+                    
+                } else {
+
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "parking details not found"
+                    ];
+
+                    $this->send_json_404($result);
+                }
+    
+            }
+        }
+    }
+
 
     // calculate no of seconds to no of hours and minutes 
     private function calculate_time($time)

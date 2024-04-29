@@ -35,6 +35,8 @@ public class ForceEndedPaymentDetailsHelper {
     View view;
     ParkngoStorage parkngoStorage;
     String amount;
+    String amountPara;
+    String sessionId;
 
     public ForceEndedPaymentDetailsHelper (View view, Context context) {
         this.view = view;
@@ -109,44 +111,30 @@ public class ForceEndedPaymentDetailsHelper {
                 String vehicleNumber = responseData.getString("vehicle_number");
                 String vehicleType = responseData.getString("vehicle_type");
                 String startTime = responseData.getString("start_time");
-                String endTime = responseData.getString("end_time");
+                String endTime = responseData.getString("current_time");
                 String timeWent = responseData.getString("time_went");
+                String formattedSDateTime = responseData.getString("formatted_start_time");
+                String formattedEDateTime = responseData.getString("formatted_end_time");
                 amount = responseData.getString("amount");
+                amountPara = responseData.getString("amount_para");
+                sessionId = responseData.getString("session_id");
 
                 TextView vehicleNumberTextView = view.findViewById(R.id.vehicle_num_txt_view);
                 TextView vehicleTypeTextView = view.findViewById(R.id.vehicle_type_txt_view);
                 TextView sessionStartedTimeTextView = view.findViewById(R.id.session_started_time_txt_view);
-                TextView sessionEndedTimeTextView = view.findViewById(R.id.session_ended_time_txt_view);
+                TextView sessionEndedTimeTextView = view.findViewById(R.id.session_force_ended_time_txt_view);
                 TextView timeDurationTextView = view.findViewById(R.id.time_duration_txt_view);
                 TextView amountTextView = view.findViewById(R.id.amount_txt_view);
 
                 // Insert space between letters and numbers in the vehicle number
                 String formattedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(vehicleNumber);
 
-
-                //format the timestamp to date time according to the devices time zone
-                //Convert the timestamp string to a long value
-                long timestampStart = Long.parseLong(startTime);
-                // Create a Date object from the timestamp
-                Date startDate = new Date(timestampStart * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedStartTime = sdf.format(startDate);
-
-
-                long timestampEnd = Long.parseLong(endTime);
-                Date EndDate = new Date(timestampEnd * 1000);
-                SimpleDateFormat edf = new SimpleDateFormat("hh.mm a", Locale.ENGLISH);
-                edf.setTimeZone(TimeZone.getDefault());
-                String formattedEndTime = sdf.format(EndDate);
+                String formattedVehicleType = VehicleNumberHelper.formatVehicleType(vehicleType);
 
                 vehicleNumberTextView.setText(formattedVehicleNumber);
-                vehicleTypeTextView.setText(vehicleType);
-                sessionStartedTimeTextView.setText(formattedStartTime);
-                sessionEndedTimeTextView.setText(formattedEndTime);
+                vehicleTypeTextView.setText(formattedVehicleType);
+                sessionStartedTimeTextView.setText(formattedSDateTime);
+                sessionEndedTimeTextView.setText(formattedEDateTime);
                 timeDurationTextView.setText(timeWent);
                 amountTextView.setText(amount);
 
@@ -164,6 +152,13 @@ public class ForceEndedPaymentDetailsHelper {
     public String getAmount(){
         return amount;
     }
+    public String getAmountPara(){
+        return amountPara;
+    }
+    public String getSessionId(){
+        return sessionId;
+    }
+
 
     private void errorResponseHandler(VolleyError error) {
         String errorResponse;

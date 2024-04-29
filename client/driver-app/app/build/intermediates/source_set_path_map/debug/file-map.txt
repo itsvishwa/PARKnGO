@@ -14,11 +14,11 @@ com.example.parkngo.app-viewpager2-1.0.0-12 C:\Users\Vishwa\.gradle\caches\trans
 com.example.parkngo.app-constraintlayout-2.1.4-13 C:\Users\Vishwa\.gradle\caches\transforms-3\5acf9a84f6874f66961cd7fc314b86a2\transformed\constraintlayout-2.1.4\res
 com.example.parkngo.app-startup-runtime-1.1.1-14 C:\Users\Vishwa\.gradle\caches\transforms-3\752f68e390483f1989f726856baf1dd5\transformed\startup-runtime-1.1.1\res
 com.example.parkngo.app-savedstate-1.2.0-15 C:\Users\Vishwa\.gradle\caches\transforms-3\8112259a8539b511a3e61491affd27ea\transformed\savedstate-1.2.0\res
-com.example.parkngo.app-androidsdk-3.0.4-16 C:\Users\Vishwa\.gradle\caches\transforms-3\8a18f075476b69953102624246af0761\transformed\androidsdk-3.0.4\res
-com.example.parkngo.app-glide-4.16.0-17 C:\Users\Vishwa\.gradle\caches\transforms-3\92acfbf49b5c550e596b4444f2540918\transformed\glide-4.16.0\res
-com.example.parkngo.app-core-ktx-1.9.0-18 C:\Users\Vishwa\.gradle\caches\transforms-3\96ab275d1a8424a226346d6acd77490d\transformed\core-ktx-1.9.0\res
-com.example.parkngo.app-emoji2-1.2.0-19 C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\res
-com.example.parkngo.app-fragment-1.3.6-20 C:\Users\Vishwa\.gradle\caches\transforms-3\a43d178abaa1b1b6bf236e0f0cca0e16\transformed\fragment-1.3.6\res
+com.example.parkngo.app-glide-4.16.0-16 C:\Users\Vishwa\.gradle\caches\transforms-3\92acfbf49b5c550e596b4444f2540918\transformed\glide-4.16.0\res
+com.example.parkngo.app-core-ktx-1.9.0-17 C:\Users\Vishwa\.gradle\caches\transforms-3\96ab275d1a8424a226346d6acd77490d\transformed\core-ktx-1.9.0\res
+com.example.parkngo.app-emoji2-1.2.0-18 C:\Users\Vishwa\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\res
+com.example.parkngo.app-fragment-1.3.6-19 C:\Users\Vishwa\.gradle\caches\transforms-3\a43d178abaa1b1b6bf236e0f0cca0e16\transformed\fragment-1.3.6\res
+com.example.parkngo.app-androidsdk-3.0.12-20 C:\Users\Vishwa\.gradle\caches\transforms-3\a7e49d5a4e199b2fe9966bdced83da70\transformed\androidsdk-3.0.12\res
 com.example.parkngo.app-lifecycle-livedata-core-2.5.1-21 C:\Users\Vishwa\.gradle\caches\transforms-3\ad37f4a2d2342618b948888069029519\transformed\lifecycle-livedata-core-2.5.1\res
 com.example.parkngo.app-appcompat-1.6.1-22 C:\Users\Vishwa\.gradle\caches\transforms-3\af575453595166fed38ef613cf3573b3\transformed\appcompat-1.6.1\res
 com.example.parkngo.app-play-services-base-18.0.1-23 C:\Users\Vishwa\.gradle\caches\transforms-3\ba71a0ad72a133a4deadced8c7891fda\transformed\play-services-base-18.0.1\res

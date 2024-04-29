@@ -16,7 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.officertestapp.Attendance.MarkAttendanceActivity;
 import com.example.officertestapp.Attendance.MarkAttendanceOffActivity;
+import com.example.officertestapp.Attendance.MarkedAttendanceSuccessfulActivity;
 import com.example.officertestapp.Helpers.DateTimeHelper;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
@@ -24,6 +26,7 @@ import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
 import com.ncorti.slidetoact.SlideToActView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,19 +52,15 @@ public class ProfileFragmentHelper {
         slideToActView.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
             @Override
             public void onSlideComplete(SlideToActView slideToActView) {
-                markDutyOff(currentTimeView.getText().toString(), currentDateView.getText().toString());
+                markDutyOff();
             }
         });
     }
 
 
 
-    private void markDutyOff(String currentTime, String currentDate) {
+    private void markDutyOff() {
         Log.d("ProfileFragment", "Duty Off Button Swiped");
-
-        // Convert current date and time strings to timestamp
-        long timestampLong = DateTimeHelper.getTimestampFromDateTimeString(currentDate, currentTime);
-        String timestamp = String.valueOf(timestampLong);
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
@@ -112,11 +111,9 @@ public class ProfileFragmentHelper {
                 String parkingId = parkngoStorage.getData("parkingID");
 
                 params.put("parking_id", parkingId);
-                params.put("time_stamp", timestamp);
 
                 // Log the values
                 Log.d("RequestParameters", "Parking ID: " + parkingId);
-                Log.d("RequestParameters", "Timestamp: " + timestamp);
 
                 return params;
 
@@ -134,8 +131,11 @@ public class ProfileFragmentHelper {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             JSONObject innerResponse = jsonResponse.getJSONObject("response");
+            JSONObject timeDataObj = innerResponse.getJSONObject("time_stamp");
             String responseCode = innerResponse.getString("response_code");
             String message = innerResponse.getString("message");
+            String time = timeDataObj.getString("time");
+            String date = timeDataObj.getString("date");
 
             // Log the parsed response data
             Log.d("Response Code", responseCode);
@@ -148,6 +148,9 @@ public class ProfileFragmentHelper {
 
                 // Navigate to MarkAttendanceOffActivity
                 Intent intent = new Intent(context, MarkAttendanceOffActivity.class);
+                intent.putExtra("time", time);
+                intent.putExtra("date", date);
+
                 context.startActivity(intent);
             } else {
                 // Show a toast message with the response message

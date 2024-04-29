@@ -138,7 +138,7 @@ public class AssignAVehicleAddDetailsHelper {
                     Toast.makeText(context, "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Extract user inputs
-                    String letters = lettersEditTextView.getText().toString();
+                    String letters = lettersEditTextView.getText().toString().toUpperCase();
                     String selectedSymbol = symbolsSpinnerView.getSelectedItem().toString();
                     String digits = digitsEditTextView.getText().toString();
                     String selectedProvince = provincesSpinnerView.getSelectedItem().toString();
@@ -156,23 +156,12 @@ public class AssignAVehicleAddDetailsHelper {
                     // Get driverId
                     String driverId = driverIdEditTextView.getText().toString();
 
-                    // Get the timestamp
-                    String reserveDate = reserveDateTextView.getText().toString();
-                    String reserveTime = reserveTimeTextView.getText().toString();
-                    // Combine date and time into a single string in the expected format
-                    String dateTimeString = reserveDate + " " + reserveTime;
-
-                    // Calculate timestamp
-                    long startTimeStamp = calculateTimestamp(dateTimeString);
-                    String stTimeStamp = String.valueOf(startTimeStamp);
-
 
                     // Bundle the values
                     Bundle bundle = new Bundle();
                     bundle.putString("vehicle_number", vehicleNumber);
                     bundle.putString("vehicle_number_processed", preprocessVehicleNumber);
                     bundle.putString("vehicle_type", selectedVehicleTypeProcessed);
-                    bundle.putString("start_time", stTimeStamp);
                     bundle.putString("driver_id", driverId);
 
 
@@ -180,7 +169,6 @@ public class AssignAVehicleAddDetailsHelper {
                     Log.d("Bundle Values", "Vehicle Number: " + vehicleNumber);
                     Log.d("Bundle Values", "Vehicle Number Processed: " + preprocessVehicleNumber);
                     Log.d("Bundle Values", "Vehicle Type: " + selectedVehicleTypeProcessed);
-                    Log.d("Bundle Values", "Start Time Stamp: " + stTimeStamp);
                     Log.d("Bundle Values", "Driver ID: " + driverId);
 
 
@@ -192,31 +180,6 @@ public class AssignAVehicleAddDetailsHelper {
             }
         });
 
-    }
-
-    private long calculateTimestamp(String dateTimeString) {
-
-        long calcStartTimeStamp = 0;
-
-        try {
-            // Parse the original dateTimeString with the current format
-            SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MMM/yyyy hh:mm a", Locale.getDefault());
-            Date date = originalFormat.parse(dateTimeString);
-
-            // Format the date back to the expected format "yyyy-MM-dd HH:mm"
-            SimpleDateFormat expectedFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
-            String formattedDateTimeString = expectedFormat.format(date);
-
-            // Convert the formatted date and time to timestamp
-            calcStartTimeStamp = date.getTime() / 1000L; // Convert to seconds
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            // Handle the case where parsing fails (invalid date or time format)
-            Toast.makeText(context, "Invalid date or time format", Toast.LENGTH_SHORT).show();
-        }
-
-        return calcStartTimeStamp;
     }
 
 

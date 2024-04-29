@@ -82,7 +82,7 @@
                 android:id="@+id/mobile_number_otp_act_mobile_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" (+94)710001000"
+                android:text=" (+94) 710001000"
                 android:textColor="@color/textPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -219,12 +219,28 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Resend (59 s)"
+                android:text="Resend OTP"
+                android:onClick="login_otp_act_resend_btn"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <TextView
+                android:id="@+id/countDownTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="(59 s)"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginStart="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/textView6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
