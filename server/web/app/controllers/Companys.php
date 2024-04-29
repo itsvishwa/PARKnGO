@@ -11,6 +11,7 @@ class Companys extends Controller
   {
     $this->companyModel = $this->model('company');
     $suspend_data = $this->companyModel->getCompanySuspendDetails($_SESSION['user_id']);
+    $approved_data = $this->companyModel->isApproved($_SESSION['user_id']);
     if (!isset($_SESSION['user_id'])) {
       redirect('users/login');
     } else if ($suspend_data != null && date('Y-m-d H:i:s', $suspend_data->end_time) > date('Y-m-d H:i:s')) {
@@ -325,7 +326,9 @@ class Companys extends Controller
         $fileContent = file_get_contents($fileData['tmp_name']);
       } else {
         // Handle file upload error here, for example:
-        $fileContent = ''; // Use the existing image or set a default value
+        // i want to add default image as profile image it is in <?php echo URLROOT; how to do that
+        $defaultImage = file_get_contents(URLROOT . '/css/assets/default-dp.jpg');
+        $fileContent = $defaultImage; // Use the existing image or set a default value
       }
 
       // Init data
@@ -356,6 +359,10 @@ class Companys extends Controller
       //check officer nic is valid
       if ($this->officerModel->findOfficerByNic($data['nic'])) {
         $data['nic_err'] = 'NIC is already taken';
+      }
+
+      if (strlen($data['nic']) != 12) {
+        $data['nic_err'] = 'NIC should be 10 numbers';
       }
 
       //check officer id is valid
@@ -433,6 +440,10 @@ class Companys extends Controller
 
       if (strlen($data['mobile_number']) != 9) {
         $data['mobile_number_err'] = 'Mobile Number should be 9 numbers';
+      }
+
+      if (strlen($data['nic']) != 12) {
+        $data['nic_err'] = 'NIC should be 10 numbers';
       }
 
       if (empty($data['mobile_number_err'])) {

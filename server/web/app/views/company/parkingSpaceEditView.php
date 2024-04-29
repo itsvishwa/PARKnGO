@@ -102,10 +102,10 @@
                 <label for="vehicleType" class="p-form-label ml-10">Vehicle Type* </label>
                 <select name="vehicleType[]" class="p-form-dropdown" required>
                   <option value="" disabled <?php if (empty($parking_slot->vehicle_type)) echo 'selected'; ?>>Vehicle Type</option>
-                  <option value="Car" <?php if ($parking_slot->vehicle_type == "A") echo 'selected'; ?>>Car|Tuktuk|Mini Van</option>
-                  <option value="Van" <?php if ($parking_slot->vehicle_type == "B") echo 'selected'; ?>>Bicycle</option>
-                  <option value="Bus" <?php if ($parking_slot->vehicle_type == "C") echo 'selected'; ?>>Van|Lorry|Mini Bus</option>
-                  <option value="Motorcycle" <?php if ($parking_slot->vehicle_type == "D") echo 'selected'; ?>>Long Vehicles</option>
+                  <option value="A" <?php if ($parking_slot->vehicle_type == "A") echo 'selected'; ?>>Car|Tuktuk|Mini Van</option>
+                  <option value="B" <?php if ($parking_slot->vehicle_type == "B") echo 'selected'; ?>>Bicycle</option>
+                  <option value="C" <?php if ($parking_slot->vehicle_type == "C") echo 'selected'; ?>>Van|Lorry|Mini Bus</option>
+                  <option value="D" <?php if ($parking_slot->vehicle_type == "D") echo 'selected'; ?>>Long Vehicles</option>
                 </select><br>
 
                 <br><label for="parkingRate" class="p-form-label">Parking Rate *</label><br>
@@ -137,7 +137,7 @@
 
           <!-- image -->
           <label for="parkingImage" class="p-form-label">Parking Image</label>
-          <input type="file" name="parkingImage[]" accept="image/*" class="p-form-input" id="parkingImageInput" />
+          <input type="file" name="parkingImage[]" accept="image/*" class="mt-10" id="parkingImageInput" />
 
 
 
@@ -153,12 +153,12 @@
               <input type="text" id="longitude" name="longitude" class="p-form-input width-90" placeholder="Longitude" readonly value="<?php echo $data['parking_space']->parking_longitude ?>">
             </div>
           </div>
-          <button type="button" onclick="autoMarkLocation()" class="p-form-btn mb-10 ">
+          <!-- <button type="button" onclick="autoMarkLocation()" class="p-form-btn mb-10 ">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="button-icon mr-5">
               <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
             </svg>
             Auto Mark Location
-          </button>
+          </button> -->
           <div>
             <div id="map" class="map">
 
@@ -176,7 +176,7 @@
 
   <script src="<?php echo URLROOT; ?>/js/company/parkingSpaceFormView.js"></script>
   <!-- Google Map API -->
-  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcYa9qDHqK5bpg0nJiZb7FkTOFCfRuuEE&callback=initMap">
+  <script async src="https://maps.googleapis.com/maps/api/js?key=<?php echo G_API_KEY ?>&callback=initMap">
   </script>
   <script src="<?php echo URLROOT; ?>/js/company/googleMapApi.js"></script>
   <script>

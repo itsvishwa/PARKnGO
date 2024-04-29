@@ -32,6 +32,12 @@ class Users extends Controller
     $this->view('company/suspendView', $data);
   }
 
+  public function notApprovedView() {
+    $data =  $this->userModel->isApproved($_SESSION['user_id']);
+    print_r($data);
+    $this->view('company/notApprovedView', $data);
+  }
+
   public function registrationView()
   {
     // Check for POST
@@ -166,8 +172,11 @@ class Users extends Controller
             // Create Session
             if ($loggedInUser->is_approved) {
               $this->createUserSession($loggedInUser);
-            } else {
+            } else if ($loggedInUser->is_approved == 0 && $loggedInUser->is_reviewd == 0) {
               redirect('users/registrationSuccussfulView');
+            } 
+            else if ($loggedInUser->is_approved == 0 && $loggedInUser->is_reviewd == 1) {
+              $this->view('company/notApprovedView', $loggedInUser->review_message);
             }
           } else {
             $data['password_err'] = 'Password incorrect';
@@ -216,6 +225,7 @@ class Users extends Controller
   public function forgotPasswordView()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
       function send_password_reset_email($email, $token)
@@ -284,6 +294,7 @@ class Users extends Controller
           }
         } else {
           $data['email_err'] = 'No user found';
+          $this->view('ForgotPasswordView', $data);
         }
       }
     } else {
