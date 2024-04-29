@@ -311,7 +311,7 @@ class Admin
   }
 
 
-  public function parkingSession($company_id)
+  public function parkingSession()
   {
     $this->db->query(
       'SELECT parking_session._id,
@@ -319,16 +319,14 @@ class Admin
         parking_session.parking_id,
         parking_spaces.company_id
       FROM parking_session
-      LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id;
-      WHERE parking_spaces.company_id = :company_id'
+      LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id;'
     );
 
-    $this->db->bind(':company_id', $company_id);
     $row = $this->db->resultSet();
     return $row;
   }
 
-  public function getRevenue($company_id)
+  public function getRevenue()
   {
     $thirtyDaysAgo = strtotime('-30 days');
 
@@ -337,12 +335,10 @@ class Admin
         FROM payment
         LEFT JOIN parking_session ON payment.session_id = parking_session._id
         LEFT JOIN parking_spaces ON parking_session.parking_id = parking_spaces._id
-        WHERE parking_spaces.company_id = :company_id
-        AND payment.time_stamp >= :thirty_days_ago
+        WHERE payment.time_stamp >= :thirty_days_ago
         ORDER BY payment.time_stamp DESC'
     );
 
-    $this->db->bind(':company_id', $company_id);
     $this->db->bind(':thirty_days_ago', $thirtyDaysAgo);
 
     $row = $this->db->resultSet();
