@@ -68,7 +68,7 @@ class QR extends Controller
                 if (!$is_qr_exists) {
                     $result = [
                         "response_code" => "801",
-                        "message" => "No qr_id found"
+                        "message" => "Invalid QR"
                     ];
 
                     $this->send_json_404($result);
