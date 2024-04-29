@@ -170,7 +170,7 @@ public class SignupOtpActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             String responseJSON = jsonResponse.getString("response");
-                            Toast.makeText(SignupOtpActivity.this, responseJSON, Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupOtpActivity.this, "OTP Sent", Toast.LENGTH_LONG).show();
                             // otp resending successful
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
