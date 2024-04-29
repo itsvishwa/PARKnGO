@@ -1,6 +1,7 @@
 package com.example.parkngo.profile.helpers;
 
 import android.content.Context;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -34,16 +35,16 @@ public class EditMobileNumberRequestHelper {
     EditText otpDigit2View;
     EditText otpDigit3View;
     EditText otpDigit4View;
-    String mobileNumber;
-    String otp;
+    String mobileNumber = "";
+    String otp = "";
 
     public EditMobileNumberRequestHelper(Context context, View editMobileNumberView){
         this.context = context;
         this.editMobileNumberView = editMobileNumberView;
-        EditText otpDigit1View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_1);
-        EditText otpDigit2View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_2);
-        EditText otpDigit3View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_3);
-        EditText otpDigit4View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_4);
+        otpDigit1View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_1);
+        otpDigit2View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_2);
+        otpDigit3View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_3);
+        otpDigit4View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_4);
     }
 
     public void init(){
@@ -70,7 +71,16 @@ public class EditMobileNumberRequestHelper {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             String responseJSON = jsonResponse.getString("response");
-                            Toast.makeText(context, responseJSON, Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "OTP Sent", Toast.LENGTH_LONG).show();
+                            // Disable button temporarily
+                            setButtonClickable(false);
+                            // Re-enable button after 1 minute
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    setButtonClickable(true);
+                                }
+                            }, 60000); // 1 minute (60,000 milliseconds)
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -86,7 +96,11 @@ public class EditMobileNumberRequestHelper {
                             try {
                                 JSONObject jsonResponse = new JSONObject(errorResponse);
                                 String response = jsonResponse.getString("response");
-                                Toast.makeText(context, response, Toast.LENGTH_LONG).show(); // print the error
+                                if (response.equals("PROF_MNAE")){
+                                    Toast.makeText(context, "Entered mobile number is already registered!", Toast.LENGTH_LONG).show(); // print the error
+                                }else{
+                                    Toast.makeText(context, response, Toast.LENGTH_LONG).show(); // print the error
+                                }
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
@@ -203,15 +217,25 @@ public class EditMobileNumberRequestHelper {
             public void onClick(View view) {
 
                 int result = checkMobileNumberInput(mobileNumber);
-                // getting OTP
-                EditText digit1View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_1);
-                EditText digit2View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_2);
-                EditText digit3View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_3);
-                EditText digit4View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_4);
+                if (result == 1){
+                    Toast.makeText(context, "Mobile Number can't be empty!", Toast.LENGTH_LONG).show();
+                }else if(result == 2){
+                    Toast.makeText(context, "Invalid mobile number", Toast.LENGTH_LONG).show();
+                }else{
+                    // getting OTP
+                    EditText digit1View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_1);
+                    EditText digit2View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_2);
+                    EditText digit3View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_3);
+                    EditText digit4View = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_digit_4);
 
-                otp = digit1View.getText().toString() + digit2View.getText().toString() + digit3View.getText().toString() + digit4View.getText().toString();
-
-                executeChangeMobileNumberRequest(mobileNumber, otp);
+                    otp = "";
+                    otp = digit1View.getText().toString() + digit2View.getText().toString() + digit3View.getText().toString() + digit4View.getText().toString();
+                    if(otp.equals("")){
+                        Toast.makeText(context, "OTP is required", Toast.LENGTH_LONG).show();
+                    }else{
+                        executeChangeMobileNumberRequest(mobileNumber, otp);
+                    }
+                }
             }
         });
     }
@@ -222,20 +246,37 @@ public class EditMobileNumberRequestHelper {
         sendOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText mobileNumberView = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_mobile_number);
-                mobileNumber = mobileNumberView.getText().toString();
 
-                int result = checkMobileNumberInput(mobileNumber);
+                if (isButtonClickable()) {
+                    // the action
+                    EditText mobileNumberView = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_mobile_number);
+                    mobileNumber = "";
+                    mobileNumber = mobileNumberView.getText().toString();
 
-                if (result == 1){
-                    Toast.makeText(context, "Mobile Number can't be empty!", Toast.LENGTH_LONG).show();
-                }else if(result == 2){
-                    Toast.makeText(context, "Invalid mobile number", Toast.LENGTH_LONG).show();
-                }else{
-                    executeGetOTPRequest(mobileNumber);
+                    int result = checkMobileNumberInput(mobileNumber);
+
+                    if (result == 1){
+                        Toast.makeText(context, "Mobile Number can't be empty!", Toast.LENGTH_LONG).show();
+                    }else if(result == 2){
+                        Toast.makeText(context, "Invalid mobile number", Toast.LENGTH_LONG).show();
+                    }else{
+                        executeGetOTPRequest(mobileNumber);
+                    }
+                } else {
+                    // Button is not clickable
+                    Toast.makeText(context, "Please wait", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
 
+    private boolean isButtonClickable() {
+        Button sendOTPBtn = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_send_otp_btn);
+        return sendOTPBtn.isEnabled();
+    }
+
+    private void setButtonClickable(boolean clickable) {
+        Button sendOTPBtn = editMobileNumberView.findViewById(R.id.edit_mobile_number_frag_send_otp_btn);
+        sendOTPBtn.setEnabled(clickable);
     }
 }

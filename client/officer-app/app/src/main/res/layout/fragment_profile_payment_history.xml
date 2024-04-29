@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Home.HomeMainFragment"
+    tools:context=".Profile.ProfilePaymentHistoryFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -29,14 +29,15 @@
 
                 <TextView
                     android:id="@+id/profile_frag_app_bar_parking_name"
-                    android:layout_width="138dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/app_bar_info_box"
                     android:text="CMC Car Park 01"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="6dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,29 +55,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profile_frag_app_bar_parking_name" />
 
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Last Payment"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/appbar_main_text"
-                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />
+<!--                <TextView-->
+<!--                    android:id="@+id/textView19"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Last Payment"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/appbar_main_text"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/appbar_main_text"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/appbar_main_text" />-->
 
-                <TextView
-                    android:id="@+id/last_payment_date_time_txt_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="00.00 AM | 00 ###"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView19"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/textView19"
-                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+<!--                <TextView-->
+<!--                    android:id="@+id/last_payment_date_time_txt_view"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    android:text="00.00 AM | 00 ###"-->
+<!--                    android:textSize="16sp"-->
+<!--                    app:layout_constraintEnd_toEndOf="@+id/textView19"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="@+id/textView19"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/textView19" />-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -94,7 +95,7 @@
                     android:scaleType="centerInside"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="frag_profile_payment_history_back_btn_handler"
+                    android:onClick="backBtnHandler"
                     android:background="@drawable/notification_icon_background"
                     android:src="@drawable/baseline_arrow_back_24"
                     app:layout_constraintBottom_toBottomOf="parent"
