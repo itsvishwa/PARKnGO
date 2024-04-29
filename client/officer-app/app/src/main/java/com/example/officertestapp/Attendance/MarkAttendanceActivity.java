@@ -218,13 +218,13 @@ public class MarkAttendanceActivity extends AppCompatActivity {
                 String parkingId = parkngoStorage.getData("parkingID");
 
                 params.put("parking_id", parkingId);
-                params.put("time_stamp", timestamp);
+//                params.put("time_stamp", timestamp);
                 params.put("latitude", String.valueOf(latitude));
                 params.put("longitude", String.valueOf(longitude));
 
                 // Log the values
                 Log.d("RequestParameters", "Parking ID: " + parkingId);
-                Log.d("RequestParameters", "Timestamp: " + timestamp);
+//                Log.d("RequestParameters", "Timestamp: " + timestamp);
                 Log.d("RequestParameters", "Latitude: " + String.valueOf(latitude));
                 Log.d("RequestParameters", "Longitude: " + String.valueOf(longitude));
 
@@ -249,8 +249,9 @@ public class MarkAttendanceActivity extends AppCompatActivity {
                 retrieveDeviceLocation();
             } else {
                 slideToActView.resetSlider();
+                Toast.makeText(this, "Please enable location services for this app", Toast.LENGTH_SHORT).show();
                 // Permission denied, handle accordingly (e.g., show a message to the user)
-                Log.e("Location", "Permission denied");
+                Log.e("Location", "Location Permission denied");
             }
         }
     }
@@ -271,6 +272,10 @@ public class MarkAttendanceActivity extends AppCompatActivity {
             JSONObject innerResponse = jsonResponse.getJSONObject("response");
             String responseCode = innerResponse.getString("response_code");
             String message = innerResponse.getString("message");
+            JSONObject timeDataObj = innerResponse.getJSONObject("time_stamp");
+            String time = timeDataObj.getString("time");
+            String date = timeDataObj.getString("date");
+
 
             // Log the parsed response data
             Log.d("Response Code", responseCode);
@@ -283,7 +288,8 @@ public class MarkAttendanceActivity extends AppCompatActivity {
 
                 // Navigate to Next Activity with Intent Extras
                 Intent i = new Intent(MarkAttendanceActivity.this, MarkedAttendanceSuccessfulActivity.class);
-                i.putExtra("time_stamp", timestamp);
+                i.putExtra("time", time);
+                i.putExtra("date", date);
                 startActivity(i);
 
             } else if ("802".equals(responseCode)) {

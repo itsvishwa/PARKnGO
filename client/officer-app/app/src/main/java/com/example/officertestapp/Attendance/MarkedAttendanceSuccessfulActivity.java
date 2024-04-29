@@ -25,12 +25,10 @@ public class MarkedAttendanceSuccessfulActivity extends AppCompatActivity {
 
         // Retrieve the timestamp value from intent extras
         Bundle extras = getIntent().getExtras();
-        if (extras != null && extras.containsKey("time_stamp")) {
-            String timestamp = extras.getString("time_stamp");
+        if (extras != null) {
 
-            // Convert timestamp to formatted date and time strings
-            String recordedTime = DateTimeHelper.convertTimeStampToTime(timestamp);
-            String recordedDate = DateTimeHelper.convertTimeStampToDate(timestamp);
+            String recordedTime = extras.getString("time");
+            String recordedDate = extras.getString("date");
 
             // Set the formatted date and time strings to TextViews
             recordedTimeView.setText(recordedTime);

@@ -128,6 +128,8 @@ public class AssignAVehicleAddDetailsHelper {
                 TextView reserveTimeTextView = assignAVehicleAddDetailsView.findViewById(R.id.reserve_time_txt);
                 TextView reserveDateTextView = assignAVehicleAddDetailsView.findViewById(R.id.reserve_date_txt);
 
+                String digits = digitsEditTextView.getText().toString();
+
                 // Validate views
                 if (TextUtils.isEmpty(lettersEditTextView.getText())
                         || TextUtils.isEmpty(digitsEditTextView.getText())
@@ -135,12 +137,18 @@ public class AssignAVehicleAddDetailsHelper {
                         || vehicleTypesSpinnerView.getSelectedItem() == null
                         || TextUtils.isEmpty(reserveTimeTextView.getText())
                         || TextUtils.isEmpty(reserveDateTextView.getText())) {
-                    Toast.makeText(context, "Please fill all fields!", Toast.LENGTH_SHORT).show();
-                } else {
+                    Toast.makeText(context, "Please fill all fields!", Toast.LENGTH_SHORT).show();// Check if digitsEditTextView contains exactly 4 values
+
+
+                }
+                else if (digits.length() != 4) {
+                        Toast.makeText(context, "Digits must be exactly 4 characters long!", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     // Extract user inputs
                     String letters = lettersEditTextView.getText().toString().toUpperCase();
                     String selectedSymbol = symbolsSpinnerView.getSelectedItem().toString();
-                    String digits = digitsEditTextView.getText().toString();
+                    digits = digitsEditTextView.getText().toString();
                     String selectedProvince = provincesSpinnerView.getSelectedItem().toString();
 
                     String vehicleNumber = letters + selectedSymbol + digits + selectedProvince;
