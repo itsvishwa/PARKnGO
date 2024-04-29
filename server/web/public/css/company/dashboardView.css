@@ -292,6 +292,12 @@ tr:nth-child(4n) {
   padding: 20px 20px 0px 20px;
 }
 
+.officer-activity-heading {
+  display: absolute;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .content-body {
   padding: 0px 20px;
 }
