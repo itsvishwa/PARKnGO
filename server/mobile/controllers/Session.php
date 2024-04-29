@@ -58,7 +58,7 @@ class Session extends Controller
                 if ($open_session) {
                     $result = [
                         "response_code" => "409",
-                        "message" => "This vehicle number is already having a ongoing parking session"
+                        "message" => "This vehicle is already having a ongoing parking session"
                     ];
 
                     $this->send_json_404($result);
@@ -111,7 +111,7 @@ class Session extends Controller
 
                     $result = [
                         "response_code" => "204",
-                        "message" => "parking details not found"
+                        "message" => "Parking details not found"
                     ];
 
                     $this->send_json_404($result);
@@ -143,12 +143,13 @@ class Session extends Controller
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
 
                 $open_session = $this->session_model->is_open_session_exists($vehicle_number);
+                $formatted_vehicle_number = $this->format_vehicle_number($vehicle_number);
 
                 // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
                         "response_code" => "801",
-                        "message" => "No open session found for the vehicle number $vehicle_number"
+                        "message" => "No open session found for the vehicle number $formatted_vehicle_number"
                     ];
 
                     $this->send_json_404($result);
@@ -817,13 +818,48 @@ class Session extends Controller
                 $total_no_of_slots = $this->parking_space_status_model->get_no_of_total_slots($parking_id);
                 $no_of_free_slots = $this->parking_space_status_model->get_no_of_free_slots($parking_id);
                 $no_of_payment_due_sessions = $this->payment_model->get_no_of_payment_due_sessions($parking_id);
+                $parking_slot_data = $this->parking_space_model->get_parking_space_status_details($parking_id);
                 $no_of_ongoing_sessions = $total_no_of_slots - $no_of_free_slots;
 
                 $final_session_stat_arr = [
                     "free_slots" => $no_of_free_slots,
                     "in_progress" => strval($no_of_ongoing_sessions),
-                    "payment_due" => $no_of_payment_due_sessions
+                    "payment_due" => $no_of_payment_due_sessions,
+                    "slot_status" => null 
                 ];
+
+                $new_parking_slot_data = [
+                    "A" => [
+                        "availability" => "0",
+                        "data" => null
+                    ],
+                    "B" => [
+                        "availability" => "0",
+                        "data" => null
+                    ],
+                    "C" => [
+                        "availability" => "0",
+                        "data" => null
+                    ],
+                    "D" => [
+                        "availability" => "0",
+                        "data" => null
+                    ],
+                ];
+
+                foreach ($parking_slot_data as $slot_data) {
+                    // add a slot to the new assosiative array
+                    $new_parking_slot_data[$slot_data->vehicle_type]["data"] = [
+                        "vehicle_type" => $this->convert_to_vehicle_type($slot_data->vehicle_type),
+                        "free_slots" => $slot_data->free_slots,
+                        "total_slots" => $slot_data->total_slots,
+                        "rate" => $slot_data->rate
+                    ];
+                    $new_parking_slot_data[$slot_data->vehicle_type]["availability"] = "1";
+                }
+
+                // add new parking slot data array to final result array
+                $final_session_stat_arr["slot_status"] = $new_parking_slot_data;
 
                 // filterring for $vehicle_type, $status_type
                 // status_type - {all => all, ip=>in progress, pd=>"payment due"}

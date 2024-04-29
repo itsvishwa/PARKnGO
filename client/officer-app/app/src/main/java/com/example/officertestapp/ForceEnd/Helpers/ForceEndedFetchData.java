@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +33,7 @@ import com.example.officertestapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -168,7 +172,30 @@ public class ForceEndedFetchData {
             errorResponse = new String(error.networkResponse.data);
             try {
                 JSONObject jsonResponse = new JSONObject(errorResponse);
-                Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
+                jsonResponse = jsonResponse.getJSONObject("response");
+                if(jsonResponse.getString("response_code").equals("204")){
+                    RecyclerView recyclerView = view.findViewById(R.id.force_end_frag_recycle_view);
+                    ImageView naImgView = view.findViewById(R.id.force_end_frag_na_img);
+                    TextView naTextView = view.findViewById(R.id.force_end_frag_na_text);
+                    androidx.appcompat.widget.SearchView searchView =  view.findViewById(R.id.force_end_search_view);
+                    TextView descTextView = view.findViewById(R.id.force_end_frag_desc);
+
+                    recyclerView.setVisibility(View.GONE);
+                    searchView.setVisibility(View.GONE);
+                    descTextView.setVisibility(View.GONE);
+                    naImgView.setVisibility(View.VISIBLE);
+                    naTextView.setVisibility(View.VISIBLE);
+
+                    // Replace the loading view with the parking view
+                    ViewGroup parent = (ViewGroup) loadingView.getParent();
+                    if (parent != null) {
+                        int index = parent.indexOfChild(loadingView);
+                        parent.removeView(loadingView);
+                        parent.addView(view, index);
+                    }
+                }else{
+                    Toast.makeText(context, jsonResponse.getString("response"), Toast.LENGTH_SHORT).show();
+                }
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }

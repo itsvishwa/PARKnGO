@@ -116,7 +116,6 @@ public class AssignAVehicleConfirmationHelper {
                         // Log the values
                         Log.d("RequestParameters", "Vehicle Number: " + vehicleNumberProcessed);
                         Log.d("RequestParameters", "Vehicle Type: " + vehicleType);
-//                        Log.d("RequestParameters", "Start Time: " + startTimeStamp);
                         Log.d("RequestParameters", "Parking ID: " + parkingId);
                         Log.d("RequestParameters", "Driver ID: " + driverId);
 
