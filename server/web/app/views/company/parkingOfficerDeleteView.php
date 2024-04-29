@@ -83,7 +83,7 @@
         </div>
         <div class="profile">
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
-          <a href="../users/logout" class="logout">Log out</a>
+          <a href="../../users/logout" class="logout">Log out</a>
         </div>
       </div>
       <form action="<?php echo URLROOT; ?>companys/parkingOfficerDeleteView/<?php echo $data['officer_id'] ?>" method="POST" enctype="multipart/form-data">

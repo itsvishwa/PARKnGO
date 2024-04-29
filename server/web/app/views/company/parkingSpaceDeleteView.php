@@ -84,7 +84,7 @@
 
         <div class="profile">
           <a href="./dashboardView" class="company-name"><?php echo $_SESSION['user_name']; ?></a>
-          <a href="../users/logout" class="logout">Log out</a>
+          <a href="../../users/logout" class="logout">Log out</a>
         </div>
       </div>
 
