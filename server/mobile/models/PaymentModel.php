@@ -346,4 +346,19 @@ class PaymentModel
             return false;
         }
     }
+
+    public function close_force_ended_payment($session_id, $amount, $time_stamp) {
+        $payment_method = 'cash';
+        $is_complete = 1; 
+
+        $this->db->query("INSERT INTO payment (amount, is_complete, payment_method, time_stamp, session_id) VALUES (:amount, :is_complete, :payment_method, :time_stamp, :session_id)");
+
+        $this->db->bind(":amount", $amount);
+        $this->db->bind(":is_complete", $is_complete);
+        $this->db->bind(":payment_method", $payment_method);
+        $this->db->bind(":time_stamp", $time_stamp);
+        $this->db->bind(":session_id", $session_id);
+        
+        $this->db->execute();
+    }
 }

@@ -36,6 +36,5 @@ define("G_API_KEY", $_ENV['G_API_KEY']);
 // textit KEY
 define("TEXTIT_KEY", $_ENV['TEXTIT_KEY']);
 
-
 // setting time zone
 date_default_timezone_set('Asia/Kolkata');

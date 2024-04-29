@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Home.ConfirmCashPaymentFragment"
+    tools:context=".ForceEnd.ConfirmForceEndedCashPaymentFragment"
     android:orientation="vertical"
     android:background="@color/backgroundColor">
 
@@ -122,9 +122,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Confirm the Cash Payment"
+                    android:textStyle="bold"
                     android:textSize="17sp"
                     android:padding="10dp"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -151,15 +151,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
                 <TextView
                     android:id="@+id/amount_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/red_rounded_bg"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="2dp"
+                    android:paddingHorizontal="5dp"
                     android:layout_marginTop="12dp"
-                    android:text="000.00"
+                    android:text="Rs 000.00"
                     android:textColor="@color/white"
                     android:textSize="17sp"
                     android:textStyle="bold"
@@ -174,8 +174,8 @@
                     android:text="from the customer"
                     android:layout_marginTop="12dp"
                     android:textSize="17sp"
-                    app:layout_constraintEnd_toEndOf="@+id/amount_txt"
-                    app:layout_constraintStart_toStartOf="@+id/amount_txt"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
                     app:layout_constraintTop_toBottomOf="@+id/amount_txt" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

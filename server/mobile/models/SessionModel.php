@@ -300,4 +300,13 @@ class SessionModel
             return false;
         }
     }
+
+    
+    public function update_force_ended_session($_id) {
+        $this->db->query("UPDATE parking_session SET is_force_end = 0 WHERE _id = :_id");
+
+        $this->db->bind(":_id", $_id);
+
+        $this->db->execute();
+    }
 }
