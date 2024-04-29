@@ -110,6 +110,7 @@ class Users extends Controller
         }
       } else {
         // Load View with errors
+        $data['file_upload'] = '';
         $this->view('company/registrationView', $data);
       }
     } else {
