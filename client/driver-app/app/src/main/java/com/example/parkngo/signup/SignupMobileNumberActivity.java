@@ -68,7 +68,7 @@ public class SignupMobileNumberActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             String responseJSON = jsonResponse.getString("response");
-                            Toast.makeText(SignupMobileNumberActivity.this, responseJSON, Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupMobileNumberActivity.this, "OTP sent", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(SignupMobileNumberActivity.this, SignupOtpActivity.class);
                             i.putExtra("FIRST_NAME", firstName);
                             i.putExtra("LAST_NAME", lastName);
