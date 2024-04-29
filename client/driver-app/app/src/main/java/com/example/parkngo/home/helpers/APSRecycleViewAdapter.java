@@ -56,7 +56,7 @@ public class APSRecycleViewAdapter extends RecyclerView.Adapter<APSRecycleViewAd
             Drawable drawable = ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.round_green_circle);
             holder.parkingTypeView.setBackground(drawable);
         }
-        holder.distanceView.setText(availableParkingSpaceModelsArr.get(position).getDistance() + " KM");
+        holder.distanceView.setText(availableParkingSpaceModelsArr.get(position).getDistance() + " Km");
         holder.ratingBarView.setRating(availableParkingSpaceModelsArr.get(position).getNoOfStars());
         holder.noOfReviewsView.setText(availableParkingSpaceModelsArr.get(position).getNoOfReviews());
         holder.locationView.setText(availableParkingSpaceModelsArr.get(position).getLocation());

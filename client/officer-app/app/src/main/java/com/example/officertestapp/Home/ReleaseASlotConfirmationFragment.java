@@ -18,7 +18,6 @@ import com.example.officertestapp.R;
 
 
 public class ReleaseASlotConfirmationFragment extends Fragment {
-    private Bundle paymentSessionDataBundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,16 +33,12 @@ public class ReleaseASlotConfirmationFragment extends Fragment {
         // Retrieve values from the Bundle
         Bundle args = getArguments();
         if (args != null) {
-            String vehicleNumber = args.getString("vehicleNumberWithoutProvince");
-            String vehicleType = args.getString("vehicleTypeCaps");
+            String vehicleNumber = args.getString("vehicleNumber");
+            String vehicleType = args.getString("vehicleType");
 
-            // Set the retrieved values to TextViews
-            String splittedVehicleNumber = VehicleNumberHelper.splitVehicleNumber(vehicleNumber);
-            vehicleNumberTextView.setText(splittedVehicleNumber);
+            vehicleNumberTextView.setText(VehicleNumberHelper.splitVehicleNumber(vehicleNumber));
 
-            vehicleNumberTextView.setText(splittedVehicleNumber);
-
-            vehicleTypeTextView.setText(vehicleType.toUpperCase());
+            vehicleTypeTextView.setText(VehicleNumberHelper.formatVehicleType(vehicleType));
         } else {
             Log.e("ReleaseASlot02Fragment", "Arguments (Bundle) is null");
         }
@@ -68,12 +63,11 @@ public class ReleaseASlotConfirmationFragment extends Fragment {
                 // Retrieve values from the Bundle
                 Bundle args = getArguments();
                 if (args != null) {
-                    String sessionId = args.getString("SessionID");
-                    String timestamp = args.getString("EndTimeStamp");
+                    String sessionId = args.getString("sessionId");
 
                     // Invoke the ReleaseASlotHelper helper to release the slot
                     ReleaseASlotConfirmationHelper releaseASlotConfirmationHelper = new ReleaseASlotConfirmationHelper(view, requireContext(), getFragmentManager());
-                    releaseASlotConfirmationHelper.releaseSlot(sessionId, timestamp);
+                    releaseASlotConfirmationHelper.releaseSlot(sessionId);
 
                 } else {
                     Log.e("ReleaseASlotConfirmationFragment", "Arguments (Bundle) is null");
@@ -85,8 +79,4 @@ public class ReleaseASlotConfirmationFragment extends Fragment {
         return view;
     }
 
-    // Method to set the session data bundle
-    public void setPaymentSessionDataBundle(Bundle bundle) {
-        paymentSessionDataBundle = bundle;
-    }
 }

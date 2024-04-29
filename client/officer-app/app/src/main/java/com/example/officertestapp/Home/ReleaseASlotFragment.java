@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.officertestapp.Home.Helpers.HomeFragmentHelper;
-import com.example.officertestapp.Home.Helpers.QREndSessionDetailsHelper;
+import com.example.officertestapp.Home.Helpers.InProgressDetailsHelper;
 import com.example.officertestapp.Home.Helpers.SearchSessionHelper;
 import com.example.officertestapp.MainActivity;
 import com.example.officertestapp.R;
@@ -30,20 +30,32 @@ public class ReleaseASlotFragment extends Fragment {
     private Spinner spinnerProvinces;
     private Spinner spinnerSymbols;
     private Button continueBtn;
-    private Bundle searchSessionDataBundle;
-
+    String sessionID;
+    ArrayList<String> provinceTypes;
+    ArrayList<String> symbols;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_release_a_slot, container, false);
 
+        continueBtn = view.findViewById(R.id.release_vehicle_continue_btn);
+        continueBtn.setEnabled(false);
+
         // Find the view
         spinnerProvinces = view.findViewById(R.id.spinner_provinces);
         spinnerSymbols = view.findViewById(R.id.spinner_symbols);
 
-        continueBtn = view.findViewById(R.id.release_vehicle_continue_btn);
-        continueBtn.setEnabled(false);
+        provinceTypes = new ArrayList<>(Arrays.asList("WP", "SP", "CP", "EP", "NC", "NP", "NW", "SG", "UP", "NONE"));
+
+        symbols = new ArrayList<>(Arrays.asList("ශ්\u200Dරී", "-", "NONE"));
+
+        if (getArguments() != null) {
+            sessionID = getArguments().getString("_id", "-1");
+            // Call the InProgressDetailsHelper here
+            InProgressDetailsHelper inProgressDetailsHelper = new InProgressDetailsHelper(view, getContext(), continueBtn, spinnerProvinces, spinnerSymbols, provinceTypes, symbols);
+            inProgressDetailsHelper.initLayout(sessionID);
+        }
 
         //Initialize spinner
         initializeSpinners();
@@ -54,9 +66,10 @@ public class ReleaseASlotFragment extends Fragment {
         // Initialize barLauncher
         ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
             if (result.getContents() != null) {
+                Log.d("QR Content", "qr content " + result.getContents());
                 // Process the scanned QR code content using QRHelper
-                QREndSessionDetailsHelper qREndSessionDetailsHelper = new QREndSessionDetailsHelper(getView(), requireContext(), requireActivity().getSupportFragmentManager());
-                qREndSessionDetailsHelper.processQRCode(result.getContents());
+                InProgressDetailsHelper inProgressDetailsHelper = new InProgressDetailsHelper(view, getContext(), continueBtn, spinnerProvinces, spinnerSymbols, provinceTypes, symbols);
+                inProgressDetailsHelper.initLayout(result.getContents());
             }
         });
 
@@ -80,29 +93,10 @@ public class ReleaseASlotFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d("SearchButtonClicked", "Search button is clicked");
+                SearchSessionHelper searchSessionHelper = new SearchSessionHelper(view, getContext(), requireActivity().getSupportFragmentManager(), continueBtn);
+                searchSessionHelper.searchSession();
+
                 new SearchSessionHelper(view, getContext(), requireActivity().getSupportFragmentManager(), continueBtn);
-            }
-        });
-
-        // Handle continue button click
-        continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Check if the button is enabled before processing
-                if (continueBtn.isEnabled()) {
-                    // Continue button is enabled
-
-                    // Check if the Bundle is not empty
-                    if (!searchSessionDataBundle.isEmpty()) {
-                        // Navigate to ReleaseASlot02Fragment with the Bundle
-                        ReleaseASlotConfirmationFragment releaseASlotConfirmationFragment = new ReleaseASlotConfirmationFragment();
-                        ((MainActivity) requireActivity()).replaceFragment(releaseASlotConfirmationFragment, searchSessionDataBundle, getView());
-                    }
-
-                } else {
-                    // Continue button is disabled, show a message indicating it's disabled
-                    Toast.makeText(getContext(), "Continue button is disabled", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -111,14 +105,12 @@ public class ReleaseASlotFragment extends Fragment {
 
     private void initializeSpinners() {
         // Province spinner
-        ArrayList<String> provinceTypes = new ArrayList<>(Arrays.asList("WP", "SP", "CP", "EP", "NC", "NP", "NW", "SG", "UP", "NONE"));
         ArrayAdapter<String> provinceAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, provinceTypes);
         provinceAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerProvinces.setAdapter(provinceAdapter);
 
 
         // Symbols spinner
-        ArrayList<String> symbols = new ArrayList<>(Arrays.asList("ශ්\u200Dරී", "-", "NONE"));
         ArrayAdapter<String> symbolsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, symbols);
         symbolsAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerSymbols.setAdapter(symbolsAdapter);
@@ -128,7 +120,6 @@ public class ReleaseASlotFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -140,7 +131,6 @@ public class ReleaseASlotFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(getContext(), item + " selected", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -149,10 +139,4 @@ public class ReleaseASlotFragment extends Fragment {
         });
 
     }
-
-    // Method to set the session data bundle
-    public void setSearchSessionDataBundle(Bundle bundle) {
-        searchSessionDataBundle = bundle;
-    }
-
 }

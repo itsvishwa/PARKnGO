@@ -1,10 +1,9 @@
-package com.example.officertestapp.Profile.Helpers;
+package com.example.officertestapp.ForceEnd.Helpers;
 
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
@@ -16,65 +15,45 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.officertestapp.Attendance.MarkAttendanceActivity;
-import com.example.officertestapp.Attendance.MarkAttendanceOffActivity;
-import com.example.officertestapp.Attendance.MarkedAttendanceSuccessfulActivity;
-import com.example.officertestapp.Helpers.DateTimeHelper;
 import com.example.officertestapp.Helpers.ParkngoStorage;
 import com.example.officertestapp.HeroActivity;
+import com.example.officertestapp.Home.ReleaseASlot06Fragment;
 import com.example.officertestapp.MainActivity;
-import com.example.officertestapp.R;
-import com.ncorti.slidetoact.SlideToActView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProfileFragmentHelper {
-    View profileMainView;
+public class ForceEndedPaymentReceiveHelper {
     Context context;
+    View view;
     FragmentManager fragmentManager;
     ParkngoStorage parkngoStorage;
 
-    public ProfileFragmentHelper(View profileMainView, Context context, FragmentManager fragmentManager) {
-        this.profileMainView = profileMainView;
+    public ForceEndedPaymentReceiveHelper(View view, Context context, FragmentManager fragmentManager) {
+        this.view = view;
         this.context = context;
         this.fragmentManager = fragmentManager;
+        this.parkngoStorage = new ParkngoStorage(context);
     }
 
-    public void initDutyOffSwipeButton(TextView currentTimeView, TextView currentDateView) {
-        //Initialize swipe button to mark duty off
-        SlideToActView slideToActView = profileMainView.findViewById(R.id.duty_off_swipe_btn);
-        // Set up event listener for slide completion
-        slideToActView.setOnSlideCompleteListener(new SlideToActView.OnSlideCompleteListener() {
-            @Override
-            public void onSlideComplete(SlideToActView slideToActView) {
-                markDutyOff();
-            }
-        });
-    }
-
-
-
-    private void markDutyOff() {
-        Log.d("ProfileFragment", "Duty Off Button Swiped");
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-
-
-        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/profile/mark_work_shift_off";
-        Log.d("Request URL", apiURL);
-
-        ParkngoStorage parkngoStorage = new ParkngoStorage(context);
+    public void paymentReceivedCash(String sessionId, String amount) {
+        Log.d("paymentReceivedCash", "sessionId : " + sessionId);
+        Log.d("paymentReceivedCash", "amount : " + amount);
 
         // Get the parkingId
+        ParkngoStorage parkngoStorage = new ParkngoStorage(context);
         String parkingId = parkngoStorage.getData("parkingID");
 
         // get the token
         String token = parkngoStorage.getData("token");
+
+        // volley request
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String apiURL = "http://192.168.56.1/PARKnGO/server/mobile/payment/force_ended_payment_accept";
+        Log.d("Request URL", apiURL);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, apiURL,
                 new Response.Listener<String>() {
@@ -89,40 +68,31 @@ public class ProfileFragmentHelper {
                         errorResponseHandler(error);
                     }
                 }
-        ) {
+        ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                String token = parkngoStorage.getData("token");
-
-
                 Map<String, String> headers = new HashMap<>();
                 headers.put("token", token);
-
-                // Logging header values
-                Log.d("Header Values", "Token: " + token);
-
                 return headers;
             }
-
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
-                String parkingId = parkngoStorage.getData("parkingID");
-
                 params.put("parking_id", parkingId);
+                params.put("session_id", sessionId);
+                params.put("amount", amount);
 
                 // Log the values
                 Log.d("RequestParameters", "Parking ID: " + parkingId);
+                Log.d("RequestParameters", "Session ID: " + sessionId);
+                Log.d("RequestParameters", "Amount: " + amount);
 
                 return params;
 
             }
         };
-
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
     }
 
     private void successResponseHandler(String response){
@@ -130,12 +100,10 @@ public class ProfileFragmentHelper {
 
         try {
             JSONObject jsonResponse = new JSONObject(response);
-            JSONObject innerResponse = jsonResponse.getJSONObject("response");
-            JSONObject timeDataObj = innerResponse.getJSONObject("time_stamp");
-            String responseCode = innerResponse.getString("response_code");
-            String message = innerResponse.getString("message");
-            String time = timeDataObj.getString("time");
-            String date = timeDataObj.getString("date");
+            JSONObject responseData = jsonResponse.getJSONObject("response");
+
+            String responseCode = responseData.getString("response_code");
+            String message = responseData.getString("message");
 
             // Log the parsed response data
             Log.d("Response Code", responseCode);
@@ -146,15 +114,14 @@ public class ProfileFragmentHelper {
                 // Show a toast message with the response message
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-                // Navigate to MarkAttendanceOffActivity
-                Intent intent = new Intent(context, MarkAttendanceOffActivity.class);
-                intent.putExtra("time", time);
-                intent.putExtra("date", date);
+                // Navigate to AssignVehicle03Fragment
+                MainActivity mainActivity = (MainActivity) context;
+                mainActivity.replaceFragment(new ReleaseASlot06Fragment());
 
-                context.startActivity(intent);
             } else {
                 // Show a toast message with the response message
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
             }
 
         } catch (JSONException e) {
