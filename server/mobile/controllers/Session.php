@@ -34,7 +34,7 @@ class Session extends Controller
             $session_data = [
                 "vehicle_number" => trim($_POST["vehicle_number"]),
                 "vehicle_type" => trim($_POST["vehicle_type"]),
-                "start_time" => trim($_POST["start_time"]),
+                "start_time" => time(),
                 "officer_id" => $token_data["user_id"],
                 "parking_id" => trim($_POST["parking_id"]),
                 "driver_id" => trim($_POST["driver_id"])
@@ -147,7 +147,7 @@ class Session extends Controller
                 // check whether the given vehicle number has an open session
                 if (!$open_session) {
                     $result = [
-                        "response_code" => "409",
+                        "response_code" => "801",
                         "message" => "No open session found for the vehicle number $vehicle_number"
                     ];
 
@@ -162,7 +162,7 @@ class Session extends Controller
                     if ($parking_session_data === false) // no parking session for a given vehicle number
                     {
                         $result = [
-                            "response_code" => "204",
+                            "response_code" => "802",
                             "message" => "Parking Session Not Found"
                         ];
 
@@ -206,6 +206,10 @@ class Session extends Controller
 
                                 $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
 
+                                $formattedSDateTime = $this->format_time($start_timestamp);
+                                $formatted_sTime = $formattedSDateTime[0];
+                                $formatted_sDate = $formattedSDateTime[1];
+
 
                                 $result = [
                                     "response_code" => "800",
@@ -213,17 +217,19 @@ class Session extends Controller
                                     "session_id" => $encrypted_session_id,
                                     "end_Time_Stamp" => $end_timestamp,
                                     "start_Time_Stamp" => $start_timestamp,
-                                    "Duration" => $formatted_duration,
-                                    "Amount" => $formatted_amount,
-                                    "Vehicle_Number" => $vehicle_number,
-                                    "Vehicle_Type" => $vehicle_type
+                                    "formatted_SDate" => $formatted_sDate,
+                                    "formatted_STime" => $formatted_sTime,
+                                    "duration" => $formatted_duration,
+                                    "amount" => $formatted_amount,
+                                    "vehicle_Number" => $vehicle_number,
+                                    "vehicle_Type" => $vehicle_type
                                 ];
 
                                 $this->send_json_200($result);
                             }
                         } else {
                             $result = [
-                                "response_code" => "204",
+                                "response_code" => "803",
                                 "message" => "Searched Parking Session is not belongs to your parking"
                             ];
                             $this->send_json_404($result);
@@ -245,6 +251,138 @@ class Session extends Controller
 
                     $this->send_json_200($result);
                 } else {
+                    $result = [
+                        "response_code" => "204",
+                        "message" => "parking details not found"
+                    ];
+
+                    $this->send_json_404($result);
+                }
+            }
+        }
+    }
+
+
+    // Search parking session
+    public function get_in_progress_session_details($encrypted_session_id)
+    {
+        $token_data = $this->verify_token_for_officers();
+
+        if ($token_data === 400) {
+            $this->send_json_400("Invalid Token");
+        } elseif ($token_data === 404) {
+            $this->send_json_404("Token Not Found");
+        } else // token is valid
+        {
+            $encoded_parking_id = $_SERVER['HTTP_ENCODED_PARKING_ID'];
+            $parking_id = $this->decrypt_id($encoded_parking_id);
+
+            $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
+
+    
+            if ($assigned_parking === $parking_id) 
+            { 
+                //parking_id is similar to the assigned parking
+                $session_id = $this->decrypt_id($encrypted_session_id);
+
+                $open_session_data = $this->session_model->get_open_session_data($session_id);
+
+                if ($open_session_data === false) 
+                {
+                    $result = [
+                        "response_code" => "801",
+                        "message" => "No open Session Not Found"
+                    ];
+
+                    $this->send_json_404($result);
+                } else 
+                {
+                    //The parking that the vehicle is assigned currently
+                    $current_vehicle_assigned_parking = $open_session_data->parking_id;
+
+                    if($current_vehicle_assigned_parking  == $parking_id) 
+                    { 
+                        // Check whether the founded open session is belong to this parking
+                
+                        $start_timestamp = $open_session_data->start_time;
+                            
+                        $end_timestamp = time();
+                            
+                        $duration = $end_timestamp - $start_timestamp;
+                            
+                        // Convert duration to hours and minutes
+                        $hours = floor($duration / 3600);
+                        $minutes = floor(($duration % 3600) / 60);
+
+                        // Format the duration
+                        $formatted_duration = sprintf('%02d H %02d Min', $hours, $minutes);
+
+
+                        // calculate amount
+
+                        if (isset($open_session_data->vehicle_type) && isset($open_session_data->parking_id)) 
+                        {
+                            $vehicle_type = $open_session_data->vehicle_type;
+                            $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
+                                
+                            $parking_id = $open_session_data->parking_id;
+
+                            $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type_letter, $parking_id);
+                            $hourly_rate = $hourly_rate_value->rate;
+
+                            $amount = $this->calculate_amount($start_timestamp, $end_timestamp, $hourly_rate);
+
+                            $formatted_amount = 'Rs. ' . number_format($amount, 0) . '.00';
+
+                            $formattedSDateTime = $this->format_time($start_timestamp);
+                            $formatted_sTime = $formattedSDateTime[0];
+                            $formatted_sDate = $formattedSDateTime[1];
+
+
+                            $result = [
+                                "response_code" => "800",
+                                "message" => "In progress session is details",
+                                "session_id" => $encrypted_session_id,
+                                "end_Time_Stamp" => $end_timestamp,
+                                "start_Time_Stamp" => $start_timestamp,
+                                "formatted_SDate" => $formatted_sDate,
+                                "formatted_STime" => $formatted_sTime,
+                                "duration" => $formatted_duration,
+                                "amount" => $formatted_amount,
+                                "vehicle_Number" => $open_session_data->vehicle_number,
+                                "vehicle_Type" => $vehicle_type
+                            ];
+
+                            $this->send_json_200($result);
+                        }
+
+                    } else 
+                    {
+                        $result = [
+                            "response_code" => "802",
+                            "message" => "This Parking Session is not belongs to your parking"
+                        ];
+                        $this->send_json_404($result);
+                    }
+                }
+
+            } else 
+            {    //parking_id is not similar to the assigned parking
+
+                $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
+
+                if ($assigned_parking_details) {
+                    $assigned_parking_name = $assigned_parking_details->name;
+
+                    $result = [
+                        "response_code" => "101",
+                        "updated parking_id" => $assigned_parking,
+                        "updated parking_name" => $assigned_parking_name,
+                    ];
+
+                    $this->send_json_200($result);
+                } else 
+                {
                     $result = [
                         "response_code" => "204",
                         "message" => "parking details not found"
@@ -309,7 +447,7 @@ class Session extends Controller
 
                             $this->send_json_404($result);
                         } else {
-                            $end_timestamp = trim($_POST["timestamp"]);
+                            $end_timestamp = time();
 
                             //end time is update in the parking_session
                             $this->session_model->end_session($session_id, $end_timestamp);
@@ -335,10 +473,18 @@ class Session extends Controller
                             // Fetch payment id
                             $payment_id = $this->payment_model->get_payment_id($session_id);
 
-                            $payment_id = $this->encrypt_id($payment_id);
-
-                            //view payment details
-                            $this->view_payment_details_of_session($payment_id);
+                            if (!empty($payment_id)) {
+                                $payment_id = $this->encrypt_id($payment_id);
+                                
+                                $result = [
+                                    "response_code" => "800",
+                                    "message" => "parking session is ended successfully!",
+                                    "payment_id" => $payment_id
+                                ];
+        
+                                $this->send_json_200($result);
+                            }
+                            
                         }
                     } else {
                         $result = [
@@ -427,6 +573,13 @@ class Session extends Controller
 
                     $encrypted_payment_id = $this->encrypt_id($payment_id);
 
+                    $formattedSDateTime = $this->format_time($start_timestamp);
+            
+                    $formattedEDateTime = $this->format_time($end_timestamp);
+                
+                    $formatted_SDateTime = implode(" ", $formattedSDateTime);
+                    $formatted_EDateTime = implode(" ", $formattedEDateTime);
+
                     if ($payment_details) {
                         $result = [
                             "response_code" => "800",
@@ -436,6 +589,8 @@ class Session extends Controller
                             "vehicle_type" => $uppercase_vehicle_type,
                             "start_time" => $start_timestamp,
                             "end_time" => $end_timestamp,
+                            "formatted_start_time" => $formatted_SDateTime,
+                            "formatted_end_time" => $formatted_EDateTime,
                             "time_went" => $formatted_duration,
                             "amount" => $formatted_amount
                         ];
@@ -490,6 +645,9 @@ class Session extends Controller
 
             $total_parked_time = $hours + ($minutes / 60);
             $amount = $hourly_rate * $total_parked_time;
+
+            // Round down to the nearest integer
+            $amount = floor($amount);
 
             return $amount;
         } else {
@@ -574,17 +732,28 @@ class Session extends Controller
                         $amount = $this->calculate_amount($start_timestamp, $current_timestamp, $hourly_rate);
                         $formatted_amount = 'Rs. ' . number_format($amount, 2);
 
+                        $formattedSDateTime = $this->format_time($start_timestamp);
+            
+                        $formattedEDateTime = $this->format_time($current_timestamp);
+                
+                        $formatted_SDateTime = implode(" ", $formattedSDateTime);
+                        $formatted_EDateTime = implode(" ", $formattedEDateTime);
+
 
                         if ($force_ended_session_details) {
                             $result = [
                                 "response_code" => "800",
                                 "message" => "Force ended session!",
+                                "session_id" =>$this->encrypt_id($session_id),
                                 "vehicle_number" => $force_ended_session_details->vehicle_number,
                                 "vehicle_type" => $uppercase_vehicle_type,
                                 "start_time" => $start_timestamp,
                                 "current_time" => $current_timestamp,
+                                "formatted_start_time" => $formatted_SDateTime,
+                                "formatted_end_time" => $formatted_EDateTime,
                                 "time_went" => $formatted_duration,
-                                "amount" => $formatted_amount
+                                "amount" => $formatted_amount,
+                                "amount_para" => $amount
                             ];
 
                             $this->send_json_200($result);
@@ -733,7 +902,7 @@ class Session extends Controller
             foreach ($result_data as $data) {
                 $temp_arr = [
                     "_id" => $this->encrypt_id($data->_id),
-                    "session_end_time" => date("h:i A | d/m/y", $data->end_time),
+                    "session_end_time" => implode(" | ", $this->format_time($data->end_time)),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
                 ];
@@ -772,7 +941,7 @@ class Session extends Controller
             foreach ($result_data as $data) {
                 $temp_arr = [
                     "_id" => $this->encrypt_id($data->_id),
-                    "session_start_time" => date("h:i A | d/m/y", $data->start_time),
+                    "session_start_time" => implode(" | ", $this->format_time($data->start_time)),
                     "vehicle_number" => $data->vehicle_number,
                     "vehicle_type" => $data->vehicle_type
                 ];
@@ -819,13 +988,22 @@ class Session extends Controller
                         $session_start_timestamp = $session_data->start_time;
                         $session_force_end_timestamp = $session_data->end_time;
 
+                        $formattedSDateTime = $this->format_time($session_start_timestamp);
+            
+                        $formattedEDateTime = $this->format_time($session_force_end_timestamp);
+                
+                        $formatted_SDateTime = implode(" - ", $formattedSDateTime);
+                        $formatted_EDateTime = implode(" - ", $formattedEDateTime);
+
                         $temp = [
                             "response_code" => "800",
                             "session_id" => $this->encrypt_id($session_data->_id),
                             "vehicle" => $session_data->vehicle_number,
                             "vehicle_type" => $session_data->vehicle_type,
-                            "session_start_date_and_timestamp" => $session_start_timestamp,
-                            "session_force_end_date_and_timestamp" => $session_force_end_timestamp
+                            "session_start_date_and_timestamp" => implode(" | ", $this->format_time($session_start_timestamp)),
+                            "session_end_date_and_timestamp" => implode(" | ", $this->format_time($session_force_end_timestamp)),
+                            "formatted_SDateTime" => $formatted_SDateTime,
+                            "formatted_EDateTime" => $formatted_EDateTime
                         ];
                         $result_data[] = $temp;
                     }

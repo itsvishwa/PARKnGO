@@ -110,22 +110,10 @@ public class PPHFetchData {
                 String formattedVehicleNum = VehicleNumberHelper.splitVehicleNumber(vehicle);
 
 
-                // format the timestamp to date time according to the devices time zone
-                // Convert the timestamp string to a long value
-                long timestamp = Long.parseLong(dateTime);
-                // Create a Date object from the timestamp
-                Date startDate = new Date(timestamp * 1000);
-                // Create a SimpleDateFormat object with your desired format
-                SimpleDateFormat sdf = new SimpleDateFormat("hh.mm a | dd MMM", Locale.ENGLISH);
-                // Set the timezone to the device's local timezone
-                sdf.setTimeZone(TimeZone.getDefault());
-                // Format the date object to a string
-                String formattedDate = sdf.format(startDate);
-
                 // Payment Method to uppercase
                 String formattedPaymentMethod = paymentMethod.toUpperCase();
 
-                paymentHistoryModels.add(new PaymentProfileModel(formattedDate, amount, formattedVehicleNum, formattedPaymentMethod));
+                paymentHistoryModels.add(new PaymentProfileModel(dateTime, amount, formattedVehicleNum, formattedPaymentMethod));
 
                 // setting up the available parking spaces recycle view
                 RecyclerView recyclerView = view.findViewById(R.id.profile_payment_frag_recycle_view);

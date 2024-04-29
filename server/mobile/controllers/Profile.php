@@ -4,7 +4,6 @@ require_once "User.php";
 
 class Profile extends Controller
 {
-
     private $profile_model;
     private $driver_model;
     private $otp_model;
@@ -180,7 +179,7 @@ class Profile extends Controller
 
                         $temp = [
                             "response_code" => "800",
-                            "Date_and_Time" => $timestamp,
+                            "Date_and_Time" => implode(" | ", $this->format_time($payment_history_data->time_stamp)),
                             "Amount" => $formatted_amount,
                             "Vehicle" => $payment_history_data->vehicle_number,
                             "Payment_Method" => $payment_method
@@ -245,8 +244,8 @@ class Profile extends Controller
 
                 if ($distance <= $distanceThreshold) { // Location is within the threshold
                     // If location is fine then update the database
-                    $time_stamp = trim($_POST["time_stamp"]);
-
+                    $time_stamp = time();
+                    
                     // Update the Duty_record table
                     $this->duty_record_model->mark_duty_in($time_stamp, $token_data["user_id"]);
 
@@ -326,15 +325,21 @@ class Profile extends Controller
             $parking_id = $this->decrypt_id($encrypted_parking_id);
 
             if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
-
-                $time_stamp = trim($_POST["time_stamp"]);
-
+                
+                $time_stamp = time();
+                    
                 // Update the Duty_record table
                 $this->duty_record_model->mark_duty_off($time_stamp, $token_data["user_id"]);
 
+                // Retrieve the start time stamp
+                $time_data = $this->format_time($time_stamp);
                 $result = [
                     "response_code" => "800",
-                    "message" => "Duty record is marked OFF!"
+                    "message" => "Duty record is marked OFF!",
+                    "time_stamp" => [
+                        "date" => $time_data[1],
+                        "time" => $time_data[0]
+                    ]
                 ];
 
                 $this->send_json_200($result);
