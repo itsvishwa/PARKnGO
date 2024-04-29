@@ -217,4 +217,12 @@ class Company
       return false;
     }
   }
+
+  public function isApproved($company_id)
+  {
+    $this->db->query('SELECT is_approved, is_reviewd, review_message FROM company WHERE _id = :company_id LIMIT 1');
+    $this->db->bind(':company_id', $company_id);
+    $row = $this->db->single();
+    return $row;
+  }
 }

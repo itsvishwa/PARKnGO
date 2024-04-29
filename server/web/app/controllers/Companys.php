@@ -11,6 +11,7 @@ class Companys extends Controller
   {
     $this->companyModel = $this->model('company');
     $suspend_data = $this->companyModel->getCompanySuspendDetails($_SESSION['user_id']);
+    $approved_data = $this->companyModel->isApproved($_SESSION['user_id']);
     if (!isset($_SESSION['user_id'])) {
       redirect('users/login');
     } else if ($suspend_data != null && date('Y-m-d H:i:s', $suspend_data->end_time) > date('Y-m-d H:i:s')) {
