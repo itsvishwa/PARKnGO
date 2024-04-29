@@ -115,7 +115,7 @@ public class ForceEndConfirmHelper {
 
 
     private void successForceEndReq(String response){
-        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
         MainActivity mainActivity  = (MainActivity) context;
         mainActivity.replaceFragment(new ForceEndSucessfullFragment());
     }
