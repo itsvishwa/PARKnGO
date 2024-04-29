@@ -109,7 +109,7 @@
             $dummyData = [];
             for ($i = 1; $i <= 50; $i++) {
               $dummyData[] = (object) [
-                'vehicle_number' => 'ABC' . sprintf('%03d', $i),
+                'vehicle_number' => 'CAF#NA#6562#WP',
                 'name' => 'Driver' . $i,
                 'vehicle_type' => 'Car',
                 'start_time' => strtotime('2024-02-02 08:00:00'),
