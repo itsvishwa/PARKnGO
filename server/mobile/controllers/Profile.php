@@ -249,9 +249,15 @@ class Profile extends Controller
                     // Update the Duty_record table
                     $this->duty_record_model->mark_duty_in($time_stamp, $token_data["user_id"]);
 
+                    // Retrieve the start time stamp
+                    $time_data = $this->format_time($time_stamp);
                     $result = [
                         "response_code" => "800",
-                        "message" => "Duty record is marked as IN!"
+                        "message" => "Duty record is marked IN!",
+                        "time_stamp" => [
+                            "date" => $time_data[1],
+                            "time" => $time_data[0]
+                        ]
                     ];
 
                     $this->send_json_200($result);
