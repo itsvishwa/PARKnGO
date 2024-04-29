@@ -70,7 +70,7 @@ class User extends Controller
 	{
 		// mobile number is always exist for this function call, thus data will be returned
 		$otp_data = $this->otp_model->is_mobile_number_exist($mobile_number);
-		if ($otp_data !== false && ($otp_data["code"] === hash('sha256', (string)$code))) {
+		if ($otp_data !== false && ($otp_data["code"] == hash('sha256', (string)$code))) {
 			if (time() - $otp_data["time_stamp"] > 60) {
 				return 2; // expired otp
 			} else {
@@ -86,7 +86,7 @@ class User extends Controller
 	// send otp in login process
 	public function send_otp_login($user_type, $mobile_number)
 	{
-		if ($user_type === "driver") // if user is a driver
+		if ($user_type == "driver") // if user is a driver
 		{
 			if ($this->driver_model->is_mobile_number_exist($mobile_number)) // if exist
 			{
@@ -128,7 +128,7 @@ class User extends Controller
 	{
 		$otp_data = $this->otp_model->is_mobile_number_exist($mobile_number);
 
-		if ($otp_data === false) // mobile number not exist
+		if ($otp_data == false) // mobile number not exist
 		{
 			// generate and add the new otp to db
 			$code = $this->generate_otp($mobile_number);
@@ -222,7 +222,7 @@ class User extends Controller
 		$token_data = null;
 		$user_data = null;
 
-		if ($user_type === "driver") // user is a driver
+		if ($user_type == "driver") // user is a driver
 		{
 			// fetch driver data
 			$driver_data = $this->driver_model->get_driver($mobile_number);
@@ -289,10 +289,10 @@ class User extends Controller
 				$this->send_json_400("Invalid Token");
 			} else // token has correct keys
 			{
-				if ($token_data["user_type"] === "driver" and $this->driver_model->is_driver_id_exist($token_data["user_id"])) // token valid => user id valid
+				if ($token_data["user_type"] == "driver" and $this->driver_model->is_driver_id_exist($token_data["user_id"])) // token valid => user id valid
 				{
 					$this->token_life_time_handler($token_data);
-				} elseif ($token_data["user_type"] === "officer" and $this->officer_model->is_officer_id_exist($token_data["user_id"])) // token valid => user id valid
+				} elseif ($token_data["user_type"] == "officer" and $this->officer_model->is_officer_id_exist($token_data["user_id"])) // token valid => user id valid
 				{
 					$this->token_life_time_handler($token_data);
 				} else // token invalid

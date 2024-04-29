@@ -19,15 +19,15 @@ class ParkingSpace extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $result = $this->parking_space_model->get_available_parking_spaces($this->convert_to_vehicle_category($vehicle_type), $page_number);
             $is_next = true;
-            if ($result === false) // no open parking spaces available for selected vehicle type
+            if ($result == false) // no open parking spaces available for selected vehicle type
             {
                 $this->send_json_400("PS_NOPS");
             } else // there are open parking spaces
@@ -55,13 +55,13 @@ class ParkingSpace extends Controller
                     ];
 
                     $temp["distance"] = $this->calculate_distance($latitude, $longitude, $space_data->latitude, $space_data->longitude);
-                    if ($temp["distance"] === -1) {
+                    if ($temp["distance"] == -1) {
                         $temp["distance"] = 999;
                     }
                     $spaces_data["data"][] = $temp; // add temp assosiative array to spaces_data[]
                 }
 
-                if ($is_next === false) {
+                if ($is_next == false) {
                     $spaces_data["is_next_available"] = "0";
                 } else {
                     $spaces_data["is_next_available"] = "1";
@@ -84,16 +84,16 @@ class ParkingSpace extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
 
             $result = $this->parking_space_model->get_all_parking_spaces();
 
-            if ($result === false) // no parking spaces 
+            if ($result == false) // no parking spaces 
             {
                 $this->send_json_400("PS_NPS");
             } else // have parking spaces
@@ -126,9 +126,9 @@ class ParkingSpace extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
@@ -137,7 +137,7 @@ class ParkingSpace extends Controller
             $reviews_data = $this->review_model->get_reviews_of_a_parking_space($_id);
 
 
-            if ($parking_space_data === false || $parking_slot_data === false) // no parking space for a given _id
+            if ($parking_space_data == false || $parking_slot_data == false) // no parking space for a given _id
             {
                 $this->send_json_404("PS_IPSID");
             } else // parking space found
@@ -174,7 +174,7 @@ class ParkingSpace extends Controller
                 // add new parking slot data array to final result array
                 $result["slot_status"] = $new_parking_slot_data;
 
-                if ($reviews_data === false) // no reviews yet
+                if ($reviews_data == false) // no reviews yet
                 {
                     $result["reviews"] = [
                         "availability" => "N/A"
@@ -194,7 +194,7 @@ class ParkingSpace extends Controller
 
                     foreach ($reviews_data as $review_data) {
                         // add a review to the new assosiative array
-                        if ($review_data->driver_id === $token_data["user_id"]) // user's review
+                        if ($review_data->driver_id == $token_data["user_id"]) // user's review
                         {
                             $new_user_review_data = [
                                 "availability" => "AV",
@@ -231,16 +231,16 @@ class ParkingSpace extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $keyword = str_replace("_", " ", $keyword);
             $result = $this->parking_space_model->get_available_parking_spaces_by_search($this->convert_to_vehicle_category($vehicle_type), $keyword, $page_number);
             $is_next = true;
-            if ($result === false)  // no open parking spaces available for selected vehicle type 
+            if ($result == false)  // no open parking spaces available for selected vehicle type 
             {
                 $this->send_json_400("PS_NOPS");
             } else // there are open parking spaces
@@ -273,7 +273,7 @@ class ParkingSpace extends Controller
 
                     $spaces_data["data"][] = $temp; // add temp assosiative array to spaces_data[]
                 }
-                if ($is_next === false) {
+                if ($is_next == false) {
                     $spaces_data["is_next_available"] = "0";
                 } else {
                     $spaces_data["is_next_available"] = "1";
@@ -296,16 +296,16 @@ class ParkingSpace extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $keyword = str_replace("_", " ", $keyword);
             $result = $this->parking_space_model->get_all_parking_spaces_by_search($keyword);
 
-            if ($result === false) // no parking spaces 
+            if ($result == false) // no parking spaces 
             {
                 $this->send_json_400("PS_NPS");
             } else // have parking spaces
@@ -337,14 +337,14 @@ class ParkingSpace extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $result = $this->parking_space_model->get_all_parking_spaces_for_vehicle($this->convert_to_vehicle_category($vehicle_type));
-            if ($result === false)  // no open parking spaces available for selected vehicle type 
+            if ($result == false)  // no open parking spaces available for selected vehicle type 
             {
                 $this->send_json_400("PS_NOPS");
             } else // there are open parking spaces

@@ -31,9 +31,9 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $this->profile_model->update_name($token_data["user_id"], $first_name, $last_name);
@@ -47,9 +47,9 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             if ($this->driver_model->is_mobile_number_exist($mobile_number)) // mobile number is a registered one
@@ -67,9 +67,9 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             switch ($this->user_controller->check_otp($otp_code, $mobile_number)) {
@@ -94,15 +94,15 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
         {
             $payments_data = $this->payment_model->get_all_driver_payments_by_id($token_data["user_id"]);
 
-            if ($payments_data === false) // not payments yet
+            if ($payments_data == false) // not payments yet
             {
                 $this->send_json_400("PRF_NPY"); // No payments have been made yet
             } else // there are payments data
@@ -141,9 +141,9 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -152,11 +152,11 @@ class Profile extends Controller
 
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking
 
                 $payments_history_data = $this->payment_model->get_all_officer_payments_history_by_officer_id($token_data["user_id"]);
 
-                if ($payments_history_data === false) // not payments yet
+                if ($payments_history_data == false) // not payments yet
                 {
                     $result = [
                         "response_code" => "204",
@@ -210,9 +210,9 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -223,7 +223,7 @@ class Profile extends Controller
             // Decrypt the parking_id
             $parking_id = $this->decrypt_id($encrypted_parking_id);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking of the officer
 
                 // Check the Location
 
@@ -245,7 +245,7 @@ class Profile extends Controller
                 if ($distance <= $distanceThreshold) { // Location is within the threshold
                     // If location is fine then update the database
                     $time_stamp = time();
-                    
+
                     // Update the Duty_record table
                     $this->duty_record_model->mark_duty_in($time_stamp, $token_data["user_id"]);
 
@@ -317,9 +317,9 @@ class Profile extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -330,10 +330,10 @@ class Profile extends Controller
             // Decrypt the parking_id
             $parking_id = $this->decrypt_id($encrypted_parking_id);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
-                
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking of the officer
+
                 $time_stamp = time();
-                    
+
                 // Update the Duty_record table
                 $this->duty_record_model->mark_duty_off($time_stamp, $token_data["user_id"]);
 

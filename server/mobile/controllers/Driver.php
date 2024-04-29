@@ -23,13 +23,13 @@ class Driver extends Controller
     public function view_vehicle_info()
     {
         $token_data = $this->verify_token_for_drivers();
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $result = $this->driver_qr_model->get_all($token_data["user_id"]);
-            if ($result === false) // no saved vahicle info
+            if ($result == false) // no saved vahicle info
             {
                 $result = [
                     "status_code" => "DR_NSV"
@@ -68,9 +68,9 @@ class Driver extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } else if ($token_data === 404) {
+        } else if ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             // get selected number for the new vehicle
@@ -99,9 +99,9 @@ class Driver extends Controller
 
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } else if ($token_data === 404) {
+        } else if ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], $vehicle_data["selected"]);
@@ -125,9 +125,9 @@ class Driver extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } else if ($token_data === 404) {
+        } else if ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $result = $this->driver_qr_model->is_exist_vehicle_record($token_data["user_id"], $selected_vehicle);
@@ -163,9 +163,9 @@ class Driver extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } else if ($token_data === 404) {
+        } else if ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $result = $this->session_model->is_driver_session_exist($token_data["user_id"]);
@@ -204,9 +204,9 @@ class Driver extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } else if ($token_data === 404) {
+        } else if ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $payment_id = $this->payment_model->is_open_payment_exist($token_data["user_id"]);

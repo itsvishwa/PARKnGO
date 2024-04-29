@@ -17,10 +17,10 @@ class Review extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) // invalid token
+        if ($token_data == 400) // invalid token
         {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) // token not found
+        } elseif ($token_data == 404) // token not found
         {
             $this->send_json_404("ERR_TNF");
         } else // token is valid
@@ -58,9 +58,9 @@ class Review extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $review_data = [
@@ -108,9 +108,9 @@ class Review extends Controller
         // verifing the token
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             if ($this->review_model->get_driver_id_by_review_id($review_id) == $token_data["user_id"]) // review id and driver id is matching

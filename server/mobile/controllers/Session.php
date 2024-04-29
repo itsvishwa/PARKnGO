@@ -25,9 +25,9 @@ class Session extends Controller
 
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -50,7 +50,7 @@ class Session extends Controller
             $session_data["parking_id"] = $decrypted_parking_id;
 
 
-            if ($assigned_parking === $session_data["parking_id"]) { //parking_id is similar to the assigned parking 
+            if ($assigned_parking == $session_data["parking_id"]) { //parking_id is similar to the assigned parking 
 
                 $open_session = $this->session_model->is_open_session_exists($session_data["vehicle_number"]);
 
@@ -65,7 +65,7 @@ class Session extends Controller
 
                     // No open session exists for the vehicle number
                 } else {    // No open session exists for the vehicle number
-                    if ($session_data["driver_id"] === "-1") {
+                    if ($session_data["driver_id"] == "-1") {
                         // If driver_id is -1, set it to null before adding session data
                         $session_data["driver_id"] = null;
                     }
@@ -126,9 +126,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -140,7 +140,7 @@ class Session extends Controller
             // Convert "~" to "#" in the vehicle number
             $vehicle_number = str_replace('~', '#', $url_safe_vehicle_number);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking
 
                 $open_session = $this->session_model->is_open_session_exists($vehicle_number);
                 $formatted_vehicle_number = $this->format_vehicle_number($vehicle_number);
@@ -160,7 +160,7 @@ class Session extends Controller
                     // get the parking session details from the parking_session table
                     $parking_session_data = $this->session_model->search_session($vehicle_number);
 
-                    if ($parking_session_data === false) // no parking session for a given vehicle number
+                    if ($parking_session_data == false) // no parking session for a given vehicle number
                     {
                         $result = [
                             "response_code" => "802",
@@ -269,9 +269,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -280,37 +280,33 @@ class Session extends Controller
 
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-    
-            if ($assigned_parking === $parking_id) 
-            { 
+
+            if ($assigned_parking == $parking_id) {
                 //parking_id is similar to the assigned parking
                 $session_id = $this->decrypt_id($encrypted_session_id);
 
                 $open_session_data = $this->session_model->get_open_session_data($session_id);
 
-                if ($open_session_data === false) 
-                {
+                if ($open_session_data == false) {
                     $result = [
                         "response_code" => "801",
                         "message" => "No open Session Not Found"
                     ];
 
                     $this->send_json_404($result);
-                } else 
-                {
+                } else {
                     //The parking that the vehicle is assigned currently
                     $current_vehicle_assigned_parking = $open_session_data->parking_id;
 
-                    if($current_vehicle_assigned_parking  == $parking_id) 
-                    { 
+                    if ($current_vehicle_assigned_parking  == $parking_id) {
                         // Check whether the founded open session is belong to this parking
-                
+
                         $start_timestamp = $open_session_data->start_time;
-                            
+
                         $end_timestamp = time();
-                            
+
                         $duration = $end_timestamp - $start_timestamp;
-                            
+
                         // Convert duration to hours and minutes
                         $hours = floor($duration / 3600);
                         $minutes = floor(($duration % 3600) / 60);
@@ -321,11 +317,10 @@ class Session extends Controller
 
                         // calculate amount
 
-                        if (isset($open_session_data->vehicle_type) && isset($open_session_data->parking_id)) 
-                        {
+                        if (isset($open_session_data->vehicle_type) && isset($open_session_data->parking_id)) {
                             $vehicle_type = $open_session_data->vehicle_type;
                             $vehicle_type_letter = $this->convert_to_vehicle_category($vehicle_type);
-                                
+
                             $parking_id = $open_session_data->parking_id;
 
                             $hourly_rate_value = $this->parking_space_status_model->get_rate($vehicle_type_letter, $parking_id);
@@ -356,9 +351,7 @@ class Session extends Controller
 
                             $this->send_json_200($result);
                         }
-
-                    } else 
-                    {
+                    } else {
                         $result = [
                             "response_code" => "802",
                             "message" => "This Parking Session is not belongs to your parking"
@@ -366,9 +359,7 @@ class Session extends Controller
                         $this->send_json_404($result);
                     }
                 }
-
-            } else 
-            {    //parking_id is not similar to the assigned parking
+            } else {    //parking_id is not similar to the assigned parking
 
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
@@ -382,8 +373,7 @@ class Session extends Controller
                     ];
 
                     $this->send_json_200($result);
-                } else 
-                {
+                } else {
                     $result = [
                         "response_code" => "204",
                         "message" => "parking details not found"
@@ -400,9 +390,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -413,7 +403,7 @@ class Session extends Controller
             // Decrypt the parking_id
             $parking_id = $this->decrypt_id($encrypted_parking_id);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking of the officer
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking of the officer
 
                 $encrypted_session_id = trim($_POST["session_id"]);
 
@@ -476,16 +466,15 @@ class Session extends Controller
 
                             if (!empty($payment_id)) {
                                 $payment_id = $this->encrypt_id($payment_id);
-                                
+
                                 $result = [
                                     "response_code" => "800",
                                     "message" => "parking session is ended successfully!",
                                     "payment_id" => $payment_id
                                 ];
-        
+
                                 $this->send_json_200($result);
                             }
-                            
                         }
                     } else {
                         $result = [
@@ -527,9 +516,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -539,7 +528,7 @@ class Session extends Controller
             $parking_id = $this->decrypt_id($encoded_parking_id);
 
 
-            if ($assigned_parking === $parking_id) {    //parking_id is similar to the assigned parking of the officer
+            if ($assigned_parking == $parking_id) {    //parking_id is similar to the assigned parking of the officer
 
                 $payment_id = $this->decrypt_id($payment_id);
                 $payment_session_exists = $this->payment_model->is_payment_session_id_exist($payment_id);
@@ -575,9 +564,9 @@ class Session extends Controller
                     $encrypted_payment_id = $this->encrypt_id($payment_id);
 
                     $formattedSDateTime = $this->format_time($start_timestamp);
-            
+
                     $formattedEDateTime = $this->format_time($end_timestamp);
-                
+
                     $formatted_SDateTime = implode(" ", $formattedSDateTime);
                     $formatted_EDateTime = implode(" ", $formattedEDateTime);
 
@@ -662,9 +651,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -674,7 +663,7 @@ class Session extends Controller
             $parking_id = $this->decrypt_id($encoded_parking_id);
 
 
-            if ($assigned_parking === $parking_id) {    //parking_id is similar to the assigned parking of the officer
+            if ($assigned_parking == $parking_id) {    //parking_id is similar to the assigned parking of the officer
 
                 $session_id = $this->decrypt_id($session_id);
 
@@ -734,9 +723,9 @@ class Session extends Controller
                         $formatted_amount = 'Rs. ' . number_format($amount, 2);
 
                         $formattedSDateTime = $this->format_time($start_timestamp);
-            
+
                         $formattedEDateTime = $this->format_time($current_timestamp);
-                
+
                         $formatted_SDateTime = implode(" ", $formattedSDateTime);
                         $formatted_EDateTime = implode(" ", $formattedEDateTime);
 
@@ -745,7 +734,7 @@ class Session extends Controller
                             $result = [
                                 "response_code" => "800",
                                 "message" => "Force ended session!",
-                                "session_id" =>$this->encrypt_id($session_id),
+                                "session_id" => $this->encrypt_id($session_id),
                                 "vehicle_number" => $force_ended_session_details->vehicle_number,
                                 "vehicle_type" => $uppercase_vehicle_type,
                                 "start_time" => $start_timestamp,
@@ -800,9 +789,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -812,7 +801,7 @@ class Session extends Controller
             // decrypting the parking id
             $parking_id = $this->decrypt_id($parking_id);
 
-            if ($assigned_parking === $parking_id) //parking_id is similar to the assigned parking
+            if ($assigned_parking == $parking_id) //parking_id is similar to the assigned parking
             {
                 // get status of parking session 
                 $total_no_of_slots = $this->parking_space_status_model->get_no_of_total_slots($parking_id);
@@ -825,7 +814,7 @@ class Session extends Controller
                     "free_slots" => $no_of_free_slots,
                     "in_progress" => strval($no_of_ongoing_sessions),
                     "payment_due" => $no_of_payment_due_sessions,
-                    "slot_status" => null 
+                    "slot_status" => null
                 ];
 
                 $new_parking_slot_data = [
@@ -867,11 +856,11 @@ class Session extends Controller
                 $final_payment_due_session_arr = null;
                 $final_in_progress_session_arr = null;
 
-                if ($status_type === "all") // all status type
+                if ($status_type == "all") // all status type
                 {
                     $final_payment_due_session_arr = $this->get_payment_due_session_data($parking_id, $vehicle_type);
                     $final_in_progress_session_arr = $this->get_in_progress_session_data($parking_id, $vehicle_type);
-                } else if ($status_type === "ip") // only in progree
+                } else if ($status_type == "ip") // only in progree
                 {
                     $final_in_progress_session_arr = $this->get_in_progress_session_data($parking_id, $vehicle_type);
                     $final_payment_due_session_arr = [
@@ -915,7 +904,7 @@ class Session extends Controller
     private function get_payment_due_session_data($parking_id, $vehicle_type)
     {
         // vehicle_type code meanings - {all => all, car => car, bus=>bus, bike=>bike, lorry=>lorry, van=>van}
-        if ($vehicle_type === "all") {
+        if ($vehicle_type == "all") {
             $vehicle_type = "%";
         }
 
@@ -923,7 +912,7 @@ class Session extends Controller
 
         $final_arr = [];
 
-        if ($result_data === false) // 0 payment due sessions
+        if ($result_data == false) // 0 payment due sessions
         {
             $final_arr = [
                 "is_available" => "0"
@@ -954,7 +943,7 @@ class Session extends Controller
     private function get_in_progress_session_data($parking_id, $vehicle_type)
     {
         // vehicle_type code meanings - {all => all, car => car, bus=>bus, bike=>bike, lorry=>lorry, van=>van}
-        if ($vehicle_type === "all") {
+        if ($vehicle_type == "all") {
             $vehicle_type = "%";
         }
 
@@ -962,7 +951,7 @@ class Session extends Controller
 
         $final_arr = [];
 
-        if ($result_data === false) // 0 in progress sessions
+        if ($result_data == false) // 0 in progress sessions
         {
             $final_arr = [
                 "is_available" => "0"
@@ -993,9 +982,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -1004,11 +993,11 @@ class Session extends Controller
 
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking
 
                 $force_ended_session_data = $this->session_model->get_force_ended_sessions($parking_id);
 
-                if ($force_ended_session_data === false) // not payments yet
+                if ($force_ended_session_data == false) // not payments yet
                 {
                     $result = [
                         "response_code" => "204",
@@ -1025,9 +1014,9 @@ class Session extends Controller
                         $session_force_end_timestamp = $session_data->end_time;
 
                         $formattedSDateTime = $this->format_time($session_start_timestamp);
-            
+
                         $formattedEDateTime = $this->format_time($session_force_end_timestamp);
-                
+
                         $formatted_SDateTime = implode(" - ", $formattedSDateTime);
                         $formatted_EDateTime = implode(" - ", $formattedEDateTime);
 
@@ -1068,9 +1057,9 @@ class Session extends Controller
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } else if ($token_data === 404) {
+        } else if ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else {
             $parking_data = $this->session_model->get_ongoing_session_parking_data($token_data["user_id"]);

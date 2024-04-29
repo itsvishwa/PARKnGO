@@ -21,22 +21,22 @@ class Payment extends Controller
     }
 
 
-    
+
     // driver mobile - used to view open payment details for given payment id
     public function view_payment()
     {
         $token_data = $this->verify_token_for_drivers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("ERR_IT");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("ERR_TNF");
         } else // valid token 
         {
             $encoded_string = $_SERVER['HTTP_X_ENCODED_DATA']; // encoded payment_id
             $payment_id = $this->decrypt_id($encoded_string); // decode the string 
 
-            if ($payment_id === false) // invalid encoded_string
+            if ($payment_id == false) // invalid encoded_string
             {
                 $this->send_json_400("PAY_IDATA");
             } else // code decoded sucessfully
@@ -92,9 +92,9 @@ class Payment extends Controller
     {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
@@ -104,7 +104,7 @@ class Payment extends Controller
             // Decrypt the parking_id
             $parking_id = $this->decrypt_id($encrypted_parking_id);
 
-            if ($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking
                 $encrypted_payment_id = trim($_POST["payment_id"]);
 
                 $payment_id = $this->decrypt_id($encrypted_payment_id);
@@ -175,25 +175,26 @@ class Payment extends Controller
     }
 
 
-    public function force_ended_payment_accept() {
+    public function force_ended_payment_accept()
+    {
         $token_data = $this->verify_token_for_officers();
 
-        if ($token_data === 400) {
+        if ($token_data == 400) {
             $this->send_json_400("Invalid Token");
-        } elseif ($token_data === 404) {
+        } elseif ($token_data == 404) {
             $this->send_json_404("Token Not Found");
         } else // token is valid
         {
             $assigned_parking = $this->officer_model->get_parking_id($token_data["user_id"]);
-            
+
             $encrypted_parking_id = trim($_POST["parking_id"]);
             // Decrypt the parking_id
             $parking_id = $this->decrypt_id($encrypted_parking_id);
 
-            if($assigned_parking === $parking_id) { //parking_id is similar to the assigned parking
+            if ($assigned_parking == $parking_id) { //parking_id is similar to the assigned parking
                 $encrypted_session_id = trim($_POST["session_id"]);
                 $amount = trim($_POST["amount"]);
-                
+
                 $session_id = $this->decrypt_id($encrypted_session_id);
 
                 $session_exists = $this->session_model->is_session_exists($session_id);
@@ -205,7 +206,6 @@ class Payment extends Controller
                     ];
 
                     $this->send_json_404($result);
-
                 } else {
                     // Fetch session data using session_id from parking_session table
                     $session_details = $this->session_model->get_session_data($session_id);
@@ -213,7 +213,7 @@ class Payment extends Controller
                     //The parking that the vehicle is assigned currently
                     $current_vehicle_assigned_parking = $session_details["parking_id"];
 
-                    if($current_vehicle_assigned_parking  == $assigned_parking) {
+                    if ($current_vehicle_assigned_parking  == $assigned_parking) {
                         $end_timestamp = time();
 
                         //end time is update in the parking_session
@@ -228,14 +228,13 @@ class Payment extends Controller
                         // payment session table update
                         $this->payment_model->close_force_ended_payment($session_id, $amount, $end_timestamp);
 
-                        
+
                         $result = [
                             "response_code" => "800",
                             "message" => "force ended payment closed successfully!"
                         ];
 
                         $this->send_json_200($result);
-
                     } else {
                         $result = [
                             "response_code" => "204",
@@ -244,7 +243,6 @@ class Payment extends Controller
                         $this->send_json_404($result);
                     }
                 }
-
             } else {  //parking_id is not similar to the assigned parking
                 $assigned_parking_details = $this->parking_space_model->get_parking_space_details($assigned_parking);
 
@@ -258,7 +256,6 @@ class Payment extends Controller
                     ];
 
                     $this->send_json_200($result);
-                    
                 } else {
 
                     $result = [
@@ -268,7 +265,6 @@ class Payment extends Controller
 
                     $this->send_json_404($result);
                 }
-    
             }
         }
     }
