@@ -1,6 +1,8 @@
 package com.example.parkngo.home.helpers;
 
-public class AvailableParkingSpaceModel {
+import java.io.Serializable;
+
+public class AvailableParkingSpaceModel implements Serializable {
     String parkingName;
     int freeSlots;
     String totalSlots;
