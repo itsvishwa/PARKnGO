@@ -106,14 +106,14 @@
             $dummyData = [];
             for ($i = 1; $i <= 50; $i++) {
               $dummyData[] = (object) [
-                'vehicle_number' => 'ABC' . sprintf('%03d', $i),
-                'name' => 'Driver' . $i,
+                'vehicle_number' => 'CAF#NA#6562#WP',
+                'parking_name' => 'Parking' . $i,
                 'vehicle_type' => 'Car',
                 'start_time' => strtotime('2024-02-02 08:00:00'),
                 'end_time' => strtotime('2024-02-02 18:00:00'),
                 'officer_id' => 'O' . sprintf('%03d', $i),
-                'first_name' => 'Officer' . $i,
-                'last_name' => 'Last' . $i,
+                'officer_first_name' => 'Officer' . $i,
+                'officer_last_name' => 'Last' . $i,
               ];
             }
 
