@@ -3,7 +3,7 @@
 // DB Params
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'J@nidu2001');
+define('DB_PASS', '');
 define('DB_NAME', 'parkngo');
 
 // define('DB_HOST', $_ENV['DB_HOST']);
@@ -19,3 +19,5 @@ define('URLROOT', 'http://localhost/PARKnGO/server/web/');
 define('SITENAME', 'PARKnGO');
 // setting time zone
 date_default_timezone_set('Asia/Kolkata');
+
+define('G_API_KEY', 'AIzaSyBWhETkAddp84ekkS0aJ9Wceg5LURUfJpo');

@@ -134,7 +134,7 @@
                   'first_name' => 'Driver',
                   'last_name' => 'Last' . $i,
                   'driver_mobile_number' => '077123456' . sprintf('%02d', $i),
-                  'vehicle_number' => 'ABC' . sprintf('%03d', $i),
+                  'vehicle_number' => 'CAF#NA#6562#WP',
                   'vehicle_type' => 'Car',
                 ];
               }

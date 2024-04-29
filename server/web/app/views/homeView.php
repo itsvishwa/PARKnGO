@@ -12,7 +12,7 @@
 <body>
   <div class="hero-section">
     <div class="hero-header">
-      <a href="../"><img src="<?php echo URLROOT; ?>/css/assets/logo-white.png" alt="logo" width="200px" /></a>
+      <a href="./"><img src="<?php echo URLROOT; ?>/css/assets/logo-white.png" alt="logo" width="200px" /></a>
       <a href="./users/loginView">
         <button class="login-btn btn2">
           Login
@@ -32,7 +32,7 @@
       <p class="hero-p text-white">
         Welcome to the future of parking management in Sri Lanka! Experience a new era of efficiency and control with PARK'N GO. Unleash the power to effortlessly manage your parking spaces, supercharge your operations, and elevate the parking experience for your clients.
       </p>
-      <a href="./users/loginView">
+      <a href="./users/registrationView">
         <button class="hero-btn">
           Get Started
         </button>
@@ -204,10 +204,6 @@
         </div>
       </div>
       <div class="footer-right">
-        <a href="">About Us</a>
-        <a href="">Contact Us</a>
-        <a href="">Customer Care</a>
-        <a href="">Privacy Policy</a>
       </div>
     </div>
     <div class="footer-bottom">
