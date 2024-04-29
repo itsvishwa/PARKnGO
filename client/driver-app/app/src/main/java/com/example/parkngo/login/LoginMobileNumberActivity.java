@@ -61,7 +61,7 @@ public class LoginMobileNumberActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             String responseJSON = jsonResponse.getString("response");
-                            Toast.makeText(LoginMobileNumberActivity.this, responseJSON, Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginMobileNumberActivity.this, "OTP Sent", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(LoginMobileNumberActivity.this, LoginOtpActivity.class);
                             i.putExtra("MOBILE_NUMBER", mobileNumber);
                             startActivity(i);
