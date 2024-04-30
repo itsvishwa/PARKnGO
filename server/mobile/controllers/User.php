@@ -58,8 +58,7 @@ class User extends Controller
 	private function send_sms($code, $mobile_number)
 	{
 		$text = "Your+OTP+code+for+PARKnGO%3A+" . $code . ".+Please+use+this+code+to+complete+your+authentication.+Thank+you%21";
-		$url = "https://www.textit.biz/sendmsg?id=94713072925&pw=" . TEXTIT_KEY . "&to=0713072925&text=" . $text;
-
+		$url = "https://www.textit.biz/sendmsg?id=94713072925&pw=" . TEXTIT_KEY . "&to=0" . $mobile_number . "&text=" . $text;
 		file_get_contents($url);
 	}
 

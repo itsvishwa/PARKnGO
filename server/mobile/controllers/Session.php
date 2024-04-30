@@ -1123,7 +1123,7 @@ class Session extends Controller
     private function send_sms_force_end($mobile_number, $vehicle_type, $vehicle_number, $start_time)
     {
         $text = "Alert%21+A+vehicle+has+been+left+the+premises+unattended+and+the+session+has+been+ended+forcibly.%0AVehicle+Number+-+" . $vehicle_number . "+%28" . $vehicle_type . "%29%0ASession+Started+Time+-+" . $start_time;
-        $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=" . TEXTIT_KEY . "&to=0713072925&text=" . $text;
+        $url = "https://www.textit.biz/sendmsg?id=94713072925&pw=" . TEXTIT_KEY . "&to=0" . $mobile_number . "&text=" . $text;
         file_get_contents($url);
     }
 }
