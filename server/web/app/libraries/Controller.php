@@ -59,7 +59,7 @@ class Controller
     $result = "";
 
     if ($category === "A") {
-      $result = "Cak|Tuktuk|Mini Van";
+      $result = "Car|Tuktuk|Mini Van";
     } else if ($category === "B") {
       $result = "Bicycle";
     } else if ($category === "C") {
